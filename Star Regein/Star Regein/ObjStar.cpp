@@ -22,7 +22,7 @@ void CObjStar::Init()
 	m_GetStar = false;	//星を取得変数の初期化
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py,64, 64., ELEMENT_STAR, OBJ_STAR, 1);
+	Hits::SetHitBox(this, m_px, m_py,64, 64, ELEMENT_STAR, OBJ_STAR, 1);
 }
 
 //アクション
