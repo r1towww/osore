@@ -25,34 +25,10 @@
     <ClCompile Include="GameL\MultiThread.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBlock.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjStageChoice.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneEarth.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="GameL\SceneManager.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="SceneStageChoice.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameL\SetWindow.cpp">
@@ -73,17 +49,41 @@
     <ClCompile Include="GameL\SceneObjManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMessage.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMiniMap.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="UtilityModule.cpp">
       <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\ビームサーベル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソースファイル\ブロック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMessage.cpp">
+      <Filter>ソースファイル\メッセージ</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMiniMap.cpp">
+      <Filter>ソースファイル\ミニマップ</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageChoice.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStar.cpp">
+      <Filter>ソースファイル\星</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEarth.cpp">
+      <Filter>ソースファイル\地球</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソースファイル\シーンメイン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,34 +114,10 @@
     <ClInclude Include="GameL\MultiThread.h">
       <Filter>リソースファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlock.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStageChoice.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneEarth.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameL\SceneManager.h">
       <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="SceneStageChoice.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameL\SetWindow.h">
@@ -162,17 +138,41 @@
     <ClInclude Include="GameL\SceneObjManager.h">
       <Filter>リソースファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStar.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMessage.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMiniMap.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="UtilityModule.h">
       <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBeamSaber.h">
+      <Filter>ソースファイル\ビームサーベル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソースファイル\ブロック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMessage.h">
+      <Filter>ソースファイル\メッセージ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMiniMap.h">
+      <Filter>ソースファイル\ミニマップ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStageChoice.h">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStar.h">
+      <Filter>ソースファイル\星</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEarth.h">
+      <Filter>ソースファイル\地球</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ソースファイル\シーンメイン</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +190,36 @@
     </Filter>
     <Filter Include="ソースファイル\敵\牛">
       <UniqueIdentifier>{b085b3c8-f0bf-4e57-b704-b420c2603a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ビームサーベル">
+      <UniqueIdentifier>{79667aae-1ee4-4f8a-90db-a814461d4963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ブロック">
+      <UniqueIdentifier>{36a430a3-63af-4782-a675-153483bbc4e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\主人公">
+      <UniqueIdentifier>{686373cc-c6ea-47a5-aefb-f545028ae0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\メッセージ">
+      <UniqueIdentifier>{c3e2da64-d0fe-4f98-8132-7ed1defc1aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ミニマップ">
+      <UniqueIdentifier>{e5ee27a9-92e9-4183-92ff-bdbbabe0ba88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ステージ選択">
+      <UniqueIdentifier>{33eea826-ad90-463c-8507-004ba3be5f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\星">
+      <UniqueIdentifier>{c4737c24-2a17-44b8-92c4-ac8a35593959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\タイトル">
+      <UniqueIdentifier>{b924196c-e126-4b40-9129-3d18cdcb7c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\地球">
+      <UniqueIdentifier>{2ff0182a-dfe7-4912-aed3-d822c5a08e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\シーンメイン">
+      <UniqueIdentifier>{7f0c672c-3b8b-4910-8731-09805aaf6fe3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
