@@ -53,7 +53,7 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 2)
 			{
 				//星オブジェクト作成
-				CObjStar* objstar = new CObjStar(j*64.0f, i*64.0f);//オブジェクト作成
+				CObjStar* objstar = new CObjStar(j*64.0f, i*64.0f,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
 
 			}

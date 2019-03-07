@@ -20,20 +20,6 @@ CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjMiniMap::Init()
 {
-	int k = 0;
-	//星の数、位置の情報を取得する
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			if (m_map[i][j] == 2)	//２番（星）があれば
-			{
-				//星に番号を付ける処理
-				//m_star[k] = m_map[i][j];	//配列のk番目にk番をいれ、kの値を1増やす
-				//k++;
-			}
-		}
-	}
 	
 }
 
@@ -42,7 +28,16 @@ void CObjMiniMap::Action()
 {
 	//星の情報を持ってくる
 	CObjStar* objstar = (CObjStar*)Objs::GetObj(OBJ_STAR);
-
+	if (objstar != nullptr) {
+		m_i = objstar->GetI();
+		m_j = objstar->GetJ();
+		m_flag = objstar->GetF();
+	}
+	if (m_flag == true)
+	{
+		m_map[m_i][m_j] = 4;
+		objstar->SetF(false);
+	}
 }
 
 //ドロー
@@ -93,19 +88,17 @@ void CObjMiniMap::Draw()
 					//描画
 					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-				if (g_StarCount > 0)//取得カウントが0以上なら星を表示
+				if (m_map[i][j] == 4 )//星
 				{
-					if (m_map[i][j] == 2 )//星
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 640.0f;
-						src.m_bottom = 608.0f;
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 0.0f;
+					src.m_right = 640.0f;
+					src.m_bottom = 608.0f;
 
-						Draw::Draw(6, &src, &dst, c, 0.0f);
-					}
+					Draw::Draw(6, &src, &dst, c, 0.0f);
 				}
+				
 
 				else
 				{

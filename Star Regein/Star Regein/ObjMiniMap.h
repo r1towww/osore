@@ -29,6 +29,9 @@ class CObjMiniMap : public CObj
 
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報
+		
+		int m_i, m_j;
+		bool m_flag;
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用
