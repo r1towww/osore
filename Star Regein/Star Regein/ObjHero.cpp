@@ -11,6 +11,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+float g_posture;
+
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
 	m_px = x;
@@ -23,7 +25,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	m_posture = 0;
+	g_posture = 0;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
@@ -60,25 +62,25 @@ void CObjHero::Action()
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
 		m_vy -= m_speed_power;
-		m_posture = 3;
+		g_posture = 3;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_vy += m_speed_power;
-		m_posture = 0;
+		g_posture = 0;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_vx -= m_speed_power;
-		m_posture = 2;
+		g_posture = 2;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_vx += m_speed_power;
-		m_posture = 1;
+		g_posture = 1;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -89,7 +91,7 @@ void CObjHero::Action()
 	if (Input::GetVKey('Z'))
 	{
 		//ビームサーベルオブジェクト作成
-		CObjBeamSaber* objb = new CObjBeamSaber(m_px + 14, m_py + 50);
+		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
@@ -138,7 +140,7 @@ void CObjHero::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
+	src.m_top = 64.0f * g_posture;
 	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;

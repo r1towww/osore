@@ -22,18 +22,18 @@ void CObjBlock::Init()
 {
 
 	//敵出現
-	//for (int i = 0; i < MAPSIZE; i++)
-	//{
-	//	for (int j = 0; j < MAPSIZE; j++)
-	//	{
-	//		if (m_map[i][j] == 5)
-	//		{
-	//			//牛オブジェクト作成
-	//			CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
-	//			Objs::InsertObj(cow, OBJ_COW, 10);
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < MAPSIZE; i++)
+	{
+		for (int j = 0; j < MAPSIZE; j++)
+		{
+			if (m_map[i][j] == 5)
+			{
+				//牛オブジェクト作成
+				CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+				Objs::InsertObj(cow, OBJ_COW, 10);
+			}
+		}
+	}
 
 	//出現
 	for (int i = 0; i < MAPSIZE; i++)

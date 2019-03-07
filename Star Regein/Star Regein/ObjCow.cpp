@@ -37,7 +37,7 @@ void CObjCow::Init()
 	m_movey = true; //true=背面　false=正面
 	m_movex = true;	//true=右　false=左
 
-					//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -55,7 +55,7 @@ void CObjCow::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 9, m_py + 7, 30, 40, ELEMENT_ENEMY, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px + 9, m_py + 7, 80, 80, ELEMENT_ENEMY, OBJ_COW, 1);
 }
 
 //アクション
@@ -131,18 +131,18 @@ void CObjCow::Action()
 	hit->SetPos(m_px + 9 + block->GetScrollx(), m_py + 7 + block->GetScrolly());
 
 	//ELEMENT_MAGICを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_MAGIC) == true)
+	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_MAGIC);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//攻撃の左右に当たったら
 			if (hit_data[i] == nullptr)
 				continue;
-
+		
 			float r = hit_data[i]->r;
 			if ((r < 45 && r >= 0) || r > 315)
 			{
@@ -161,6 +161,7 @@ void CObjCow::Action()
 				m_vy = -10.0f;//したに移動させる
 			}
 		}
+
 		m_hp -= 1;
 		m_f = true;
 		m_key_f = true;
@@ -171,7 +172,7 @@ void CObjCow::Action()
 	m_py += m_vy*1.0;
 
 	//HPが0になったら破棄
-	if (m_hp <= 0)
+	if (m_hp == 0)
 	{
 		//敵削除
 		this->SetStatus(false);
