@@ -62,6 +62,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 
 	
 	//blockオブジェクト作成

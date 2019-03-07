@@ -34,5 +34,6 @@ class CObjMiniMap : public CObj
 		float m_scrolly;		//上下スクロール用
 
 		int m_f;//主人公消滅時のエラー回避用
-
+		
+		int m_star[20];	//マップ上の星の数を数える変数(要素数は星の最大)
 };
