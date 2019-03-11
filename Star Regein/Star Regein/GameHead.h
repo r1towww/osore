@@ -55,8 +55,14 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
+//定数
+#define MAPSIZE 29
+
+
+
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
+extern int g_map[29][29]; //ミニマップ情報
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------

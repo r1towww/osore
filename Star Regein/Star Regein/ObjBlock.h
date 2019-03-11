@@ -5,9 +5,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//定数
-#define MAPSIZE 29
-
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
 {
@@ -34,7 +31,7 @@ class CObjBlock : public CObj
 			float*vx, float*vy, int*bt
 		);
 	private:
-		int m_map[MAPSIZE][MAPSIZE];	//マップ情報
+		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用

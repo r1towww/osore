@@ -25,9 +25,6 @@
     <ClCompile Include="GameL\MultiThread.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameL\SceneManager.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneStageChoice.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -85,6 +82,9 @@
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソースファイル\シーンメイン</Filter>
     </ClCompile>
+    <ClCompile Include="GameL\SceneManager.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -113,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="GameL\MultiThread.h">
       <Filter>リソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameL\SceneManager.h">
-      <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="SceneStageChoice.h">
       <Filter>ソースファイル</Filter>
@@ -173,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソースファイル\シーンメイン</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneManager.h">
+      <Filter>リソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

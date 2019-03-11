@@ -63,6 +63,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
+	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 
 	
 	//blockオブジェクト作成
@@ -71,7 +72,7 @@ void CSceneEarth::InitScene()
 	
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	Objs::InsertObj(objminimap, OBJ_MINIMAP, 5);
+	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
