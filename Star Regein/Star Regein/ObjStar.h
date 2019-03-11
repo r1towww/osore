@@ -9,15 +9,15 @@ using namespace GameL;
 class CObjStar : public CObj
 {
 	public:
-		CObjStar(float x, float y);
+		CObjStar(float x, float y, int i, int j);
 		~CObjStar() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-
 	private:
-
+		int m_i;	//星の位置i番の変数
+		int m_j;	//星の位置j番の変数
 
 		float m_px;			//位置
 		float m_py;
