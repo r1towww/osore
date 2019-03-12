@@ -128,6 +128,7 @@
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
+    <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjCow.h" />
     <ClInclude Include="ObjMessage.h" />
+    <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />

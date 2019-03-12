@@ -59,6 +59,7 @@ struct UserData
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 //定数
 #define MAPSIZE 50
+#define ALLSIZE 64.0f
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
@@ -78,6 +79,7 @@ extern int g_stage;		//今いるステージの値
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
+#include "ObjMeteo.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
