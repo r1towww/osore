@@ -20,7 +20,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-
+	m_key_flag = true;
 }
 
 //アクション
@@ -31,13 +31,21 @@ void CObjStageChoice::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
-	//指定の場所で
+	//指定の場所でZキー
 	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
 	{
-		if (Input::GetVKey('Z') == true)
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true&&m_key_flag==false)
 		{
 			Scene::SetScene(new CSceneEarth());
 		}
+
+	}
+	else
+	{
+		m_key_flag = false;
 	}
 
 }

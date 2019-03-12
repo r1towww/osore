@@ -73,9 +73,6 @@
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneEarth.cpp">
-      <Filter>ソースファイル\地球</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソースファイル\シーンメイン</Filter>
     </ClCompile>
@@ -87,6 +84,15 @@
     </ClCompile>
     <ClCompile Include="SceneStageChoice.cpp">
       <Filter>ソースファイル\ステージ選択</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStageClear.cpp">
+      <Filter>ソースファイル\ステージクリア・GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageClear.cpp">
+      <Filter>ソースファイル\ステージクリア・GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEarth.cpp">
+      <Filter>ソースファイル\地球</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +186,12 @@
     <ClInclude Include="SceneStageChoice.h">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
+    <ClInclude Include="SceneStageClear.h">
+      <Filter>ソースファイル\ステージクリア・GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStageClear.h">
+      <Filter>ソースファイル\ステージクリア・GameOver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ソースファイル">
@@ -226,6 +238,9 @@
     </Filter>
     <Filter Include="ソースファイル\シーンメイン">
       <UniqueIdentifier>{7f0c672c-3b8b-4910-8731-09805aaf6fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ステージクリア・GameOver">
+      <UniqueIdentifier>{e802b323-b54f-4848-a2a7-5f219eff240e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
