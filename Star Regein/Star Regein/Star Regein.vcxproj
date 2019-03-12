@@ -131,10 +131,13 @@
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
+    <ClCompile Include="ObjStageChoiceHero.cpp" />
+    <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
+    <ClCompile Include="SceneStageClear.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -163,10 +166,13 @@
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMiniMap.h" />
     <ClInclude Include="ObjStageChoice.h" />
+    <ClInclude Include="ObjStageChoiceHero.h" />
+    <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneStageChoice.h" />
+    <ClInclude Include="SceneStageClear.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="SceneMain.h" />

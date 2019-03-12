@@ -13,6 +13,8 @@ enum OBJ_NAME
 	OBJ_MINIMAP,
 
 	OBJ_HERO,
+	OBJ_STAGECHOICEHERO,
+	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
 
@@ -83,6 +85,8 @@ extern float g_max_hp; //最大HP
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
+#include "ObjStageChoiceHero.h"
+#include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
@@ -97,9 +101,10 @@ extern float g_max_hp; //最大HP
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStageClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneEarth
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

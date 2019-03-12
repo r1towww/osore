@@ -29,6 +29,7 @@ void CObjMiniMap::Init()
 	m_alpha = 0.7f;	//アルファ値初期化
 }
 
+
 //アクション
 void CObjMiniMap::Action()
 {
@@ -123,6 +124,45 @@ void CObjMiniMap::Draw()
 				else
 				{
 
+				}
+			}
+		}
+	}
+
+	//主人公の情報を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//主人公の位置を取得
+	float hx = hero->GetX();
+	float hy = hero->GetY();
+
+	//ブロック情報を持ってくる
+	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	float sx = block->GetScrollx();
+	float sy = block->GetScrolly();
+
+
+	for (int i = 0; i < MAPSIZE; i++)
+	{
+		for (int j = 0; j < MAPSIZE; j++)
+		{
+			if (g_map[i][j] >= 0)
+			{
+				//表示位置の設定
+				dst.m_top = m_uisize_y + (hy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)))-((block->GetScrolly())/((MAPSIZE * 64.0f)/ (MAPSIZE * m_blocksize)));
+				dst.m_left = m_uisize_x + (hx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)))-((block->GetScrollx())/((MAPSIZE*64.0f)/ (MAPSIZE*m_blocksize)));
+				dst.m_right = dst.m_left + m_blocksize;
+				dst.m_bottom = dst.m_top + m_blocksize;
+
+				if (g_map[i][j] ==3)//主人公
+				{
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 150.0f;
+					src.m_right = 200.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 			}
 		}
