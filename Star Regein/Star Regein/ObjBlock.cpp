@@ -66,9 +66,9 @@ void CObjBlock::Action()
 {
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//主人公の位置を取得
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	////主人公の位置を取得
+	//float hx = hero->GetX();
+	//float hy = hero->GetY();
 
 	//スクロール
 	hero->SetX(375);
