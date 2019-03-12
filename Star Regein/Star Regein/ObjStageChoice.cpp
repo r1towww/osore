@@ -8,8 +8,10 @@
 #include "GameHead.h"
 #include "ObjStageChoice.h"
 
-#define Earthx 300
-#define Earthy 400
+#define Earthx 0
+#define Earthy 380
+#define Earthxx 100
+#define Earthyy 800
 
 //使用するネームスペース
 using namespace GameL;
@@ -24,25 +26,45 @@ void CObjStageChoice::Init()
 //アクション
 void CObjStageChoice::Action()
 {
-	////主人公位置取得
-	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//float hx = hero->GetX();
-	//float hy = hero->GetY();
+	//主人公位置取得
+	ObjStageChoiceHero* hero = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
 
-	////指定の場所で
-	//if (hx >= Earthx && hy <= Earthy)
-	//{
-	//	if (Input::GetVKey('Z') == true)
-	//	{
-	//		Scene::SetScene(new CSceneEarth());
-	//	}
-	//}
+	//指定の場所で
+	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
+	{
+		if (Input::GetVKey('Z') == true)
+		{
+			Scene::SetScene(new CSceneEarth());
+		}
+	}
 
 }
 
 //ドロー
 void CObjStageChoice::Draw()
 {
+	//描画カラー情報
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	RECT_F src; //描画元切り取り位置
+	RECT_F dst; //描画先表示位置
+
+				//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 1920.0f;
+	src.m_bottom = 1080.0f;
+
+	//表示位置の設定
+	dst.m_top = 0.0f ;
+	dst.m_left = 0.0f ;
+	dst.m_right = 800.0f ;
+	dst.m_bottom = 600.0f ;
+
+	//表示
+	Draw::Draw(2, &src, &dst, c, 0.0f);
 
 
 }
