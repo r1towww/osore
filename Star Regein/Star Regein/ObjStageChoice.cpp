@@ -20,7 +20,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-	m_key_flag = true;
+	m_key_flag = false;
 }
 
 //アクション
@@ -32,12 +32,12 @@ void CObjStageChoice::Action()
 	float hy = hero->GetY();
 
 	//指定の場所でZキー
-	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
+	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy||m_key_flag==true)
 	{
 		//▼前シーンからZキー押し続けでこれを押さないように、
 		//このシーンに入って一度も押してない状態に移行しないと
 		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true&&m_key_flag==false)
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
 			Scene::SetScene(new CSceneEarth());
 		}
@@ -45,7 +45,7 @@ void CObjStageChoice::Action()
 	}
 	else
 	{
-		m_key_flag = false;
+		m_key_flag = true;
 	}
 
 }
@@ -59,7 +59,7 @@ void CObjStageChoice::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-				//切り取り位置の設定
+	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 1920.0f;
