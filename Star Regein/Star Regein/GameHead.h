@@ -100,5 +100,5 @@ extern int g_map[29][29]; //ミニマップ情報
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneEarth
 //-----------------------------------------------
