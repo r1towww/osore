@@ -29,6 +29,7 @@ void CObjMiniMap::Init()
 	m_alpha = 0.7f;	//アルファ値初期化
 }
 
+
 //アクション
 void CObjMiniMap::Action()
 {
