@@ -85,6 +85,9 @@
     <ClCompile Include="GameL\SceneManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SceneVenus.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="GameL\SceneManager.h">
       <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenus.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

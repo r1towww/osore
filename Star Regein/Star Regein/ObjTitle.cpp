@@ -11,6 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+int g_stage = 0;	//ステージの値の初期化
 
 //イニシャライズ
 void CObjTitle::Init()

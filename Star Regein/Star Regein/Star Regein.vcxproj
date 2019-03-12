@@ -137,6 +137,7 @@
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneVenus.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneVenus.h" />
     <ClInclude Include="UtilityModule.h" />
   </ItemGroup>
   <ItemGroup>

@@ -17,10 +17,10 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 	memcpy(m_map, map, sizeof(int)*(MAPSIZE * MAPSIZE));
 }
 
+
 //イニシャライズ
 void CObjBlock::Init()
 {
-
 	//敵出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{

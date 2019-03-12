@@ -95,6 +95,10 @@ void CObjMiniMap::Draw()
 		{
 			if (g_map[i][j] >= 0)
 			{
+				if (g_map[i][j] == 98)//マップ描画外なのでブレイク
+				{
+					break;
+				}
 				//表示位置の設定
 				dst.m_top    = i*m_blocksize + m_uisize_y;
 				dst.m_left   = j*m_blocksize + m_uisize_x;
