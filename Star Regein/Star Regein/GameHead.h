@@ -21,6 +21,8 @@ enum OBJ_NAME
 	OBJ_COW,
 
 	OBJ_BEAMSABER,
+
+	OBJ_HEART,
 };
 //------------------------------------------------
 
@@ -65,6 +67,9 @@ struct UserData
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern int g_map[29][29]; //ミニマップ情報
+extern float g_hp;     //今のHP
+extern float g_max_hp; //最大HP
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -85,6 +90,7 @@ extern int g_map[29][29]; //ミニマップ情報
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
+#include "ObjHeart.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
 //------------------------------------------------
