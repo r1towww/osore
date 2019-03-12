@@ -40,7 +40,8 @@ private:
 	float m_py;
 	float m_vx;  //移動ベクトル
 	float m_vy;
-	//float g_posture; //姿勢
+	
+	
 
 	float m_speed_power; //スピードパワー
 
@@ -48,6 +49,8 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	int m_f;//攻撃制御用
+	int m_key_f;
+
 
 	int m_time;
 

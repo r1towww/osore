@@ -57,8 +57,8 @@ void CObjCow::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 9, m_py + 7, 80, 80, ELEMENT_ENEMY, OBJ_COW, 1);
-//	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_ENEMY, OBJ_COW, 1);
+//	Hits::SetHitBox(this, m_px + 9, m_py + 7, 80, 80, ELEMENT_ENEMY, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_ENEMY, OBJ_COW, 1);
 }
 
 //アクション
@@ -135,8 +135,7 @@ void CObjCow::Action()
 
 	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 	bool check;
-	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-
+	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), -10.0f, -10.0f, 810.0f, 610.0f);
 	if (check == true)
 	{
 		//主人公機が存在する場合、誘導角度の計算する
@@ -215,8 +214,8 @@ void CObjCow::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 9 + pb->GetScrollx(), m_py + 7 + pb->GetScrolly());
-//	hit->SetPos(m_px + 2 + block->GetScrollx(), m_py + 4 + block->GetScrolly());
+//	hit->SetPos(m_px + 9 + pb->GetScrollx(), m_py + 7 + pb->GetScrolly());
+	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
 
 	//ELEMENT_MAGICを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)

@@ -7,6 +7,7 @@
 
 #include "GameHead.h"
 #include "ObjMiniMap.h"
+#include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -150,7 +151,6 @@ void CObjMiniMap::Draw()
 
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	float sx = block->GetScrollx();
 	float sy = block->GetScrolly();
 
@@ -180,4 +180,52 @@ void CObjMiniMap::Draw()
 			}
 		}
 	}
+
+	//主人公の情報を取得
+	CObjCow* cow = (CObjCow*)Objs::GetObj(OBJ_COW);
+	if (cow != nullptr) 
+	{
+		//主人公の位置を取得
+		float cx = cow->GetX();
+		float cy = cow->GetY();
+
+		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+		bool check;
+		check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+
+		if (check == true)
+		{
+			//敵が存在する場合、ミニマップに敵の位置を表示する
+			if (cow != nullptr)
+			{
+				for (int i = 0; i < MAPSIZE; i++)
+				{
+					for (int j = 0; j < MAPSIZE; j++)
+					{
+						if (g_map[i][j] >= 0)
+						{
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							if (g_map[i][j] == 5)//敵
+							{
+								//切り取り位置の設定
+								src.m_top = 0.0f;
+								src.m_left = 50.0f;
+								src.m_right = 100.0f;
+								src.m_bottom = 50.0f;
+								//描画
+								Draw::Draw(9, &src, &dst, c, 0.0f);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
 }

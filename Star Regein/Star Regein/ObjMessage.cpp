@@ -29,9 +29,15 @@ void CObjMessage::Action()
 //ドロー
 void CObjMessage::Draw()
 {
+
 	float c[4] = { 1.0f,1.0f,0.4f,1.0f };	//メッセージフォントカラー
+	float b[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	wchar_t STAR[128];	//星の数を数えるメッセージ用
+	wchar_t hp[128];
+
+	swprintf_s(hp,L"HP");
+	Font::StrDraw(hp, 0, 0, 25, b);
 
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)

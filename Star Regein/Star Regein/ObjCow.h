@@ -14,7 +14,14 @@ public:
 	void Action();	//アクション
 	void Draw();	//ドロー
 
-	float GetVx() { return m_vx; }
+	float GetX() { return m_px; }
+	float GetY() { return m_py; }
+	float GetVY() { return m_vy; }
+	float GetVX() { return m_vx; }
+	void SetX(float x) { m_px = x; }
+	void SetY(float y) { m_py = y; }
+	void SetVY(float vy) { m_vy = vy; }
+	void SetVX(float vx) { m_vx = vx; }
 
 private:
 	float m_px;		//位置

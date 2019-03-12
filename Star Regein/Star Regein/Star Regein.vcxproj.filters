@@ -85,6 +85,11 @@
     <ClCompile Include="GameL\SceneManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjHeart.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageChoiceHero.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
     <ClCompile Include="SceneVenus.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -191,6 +196,9 @@
     <ClInclude Include="SceneStageClear.h" />
     <ClInclude Include="ObjMeteo.h">
       <Filter>ソースファイル\ブロック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHeart.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
