@@ -13,6 +13,8 @@ enum OBJ_NAME
 	OBJ_MINIMAP,
 
 	OBJ_HERO,
+	OBJ_STAGECHOICEHERO,
+	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
 
@@ -78,6 +80,8 @@ extern int g_map[29][29]; //ミニマップ情報
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
+#include "ObjStageChoiceHero.h"
+#include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
@@ -91,9 +95,10 @@ extern int g_map[29][29]; //ミニマップ情報
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStageClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneEarth
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------
