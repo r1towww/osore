@@ -139,6 +139,12 @@ void CObjMiniMap::Draw()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
+	//ブロック情報を持ってくる
+	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	float sx = block->GetScrollx();
+	float sy = block->GetScrolly();
+
 
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -147,8 +153,8 @@ void CObjMiniMap::Draw()
 			if (g_map[i][j] >= 0)
 			{
 				//表示位置の設定
-				dst.m_top = i*m_blocksize + m_uisize_y;
-				dst.m_left = j*m_blocksize + m_uisize_x;
+				dst.m_top = m_uisize_y + (hy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)))-((block->GetScrolly())/((MAPSIZE * 64.0f)/ (MAPSIZE * m_blocksize)));
+				dst.m_left = m_uisize_x + (hx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)))-((block->GetScrollx())/((MAPSIZE*64.0f)/ (MAPSIZE*m_blocksize)));
 				dst.m_right = dst.m_left + m_blocksize;
 				dst.m_bottom = dst.m_top + m_blocksize;
 
