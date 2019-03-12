@@ -35,7 +35,7 @@ private:
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
 
-	int m_ftime;//階層突入後の時間測定
+	int m_btime;//一定行動のための時間測定
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
@@ -46,11 +46,16 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 
+	//踏んでいるblockの種類を確認用
+	int m_block_type;
+
 	//移動用の向き制御用
 	bool m_movex;//左右
 	bool m_movey;//上下
 
 	bool m_do_f;//敵攻撃フラグ
+
+	
 
 	
 };
