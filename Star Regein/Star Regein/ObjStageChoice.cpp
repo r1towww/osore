@@ -32,7 +32,7 @@ void CObjStageChoice::Action()
 	float hy = hero->GetY();
 
 	//指定の場所でZキー
-	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy||m_key_flag==true)
+	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
 	{
 		//▼前シーンからZキー押し続けでこれを押さないように、
 		//このシーンに入って一度も押してない状態に移行しないと
@@ -73,6 +73,71 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(2, &src, &dst, c, 0.0f);
+
+
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 300.0f;
+	src.m_bottom = 283.0f;
+
+	//表示位置の設定
+	dst.m_top =	450.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 150.0f;
+	dst.m_bottom = 600.0f;
+
+	//表示
+	Draw::Draw(3, &src, &dst, c, 0.0f);
+
+
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 303.0f;
+	src.m_bottom =303.0f;
+
+	//表示位置の設定
+	dst.m_top = 350.0f;
+	dst.m_left = 200.0f;
+	dst.m_right = 350.0f;
+	dst.m_bottom = 500.0f;
+
+	//表示
+	Draw::Draw(4, &src, &dst, c, 0.0f);
+
+
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 325.0f;
+	src.m_bottom =325.0f;
+
+	//表示位置の設定
+	dst.m_top = 180.0f;
+	dst.m_left = 450.0f;
+	dst.m_right = 600.0f;
+	dst.m_bottom =330.0f;
+
+	//表示
+	Draw::Draw(5, &src, &dst, c, 0.0f);
+
+
+
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 335.0f;
+	src.m_bottom = 350.0f;
+
+	//表示位置の設定
+	dst.m_top = 0.0f;
+	dst.m_left = 650.0f;
+	dst.m_right = 800.0f;
+	dst.m_bottom = 150.0f;
+
+	//表示
+	Draw::Draw(6, &src, &dst, c, 0.0f);
 
 
 }
