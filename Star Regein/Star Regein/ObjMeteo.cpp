@@ -30,7 +30,6 @@ void CObjMeteo::Action()
 {
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	key = hero->GetKEY();
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
@@ -43,19 +42,12 @@ void CObjMeteo::Action()
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
 	}
-	//摩擦
-	m_vx += -(m_vx * 0.098);
-	m_vy += -(m_vy * 0.098);
-
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollX() + 10, m_py + block->GetScrollY());
+	hit->SetPos(m_px + block->GetScrollx() + 10, m_py + block->GetScrolly());
 
 }
 
@@ -77,13 +69,13 @@ void CObjMeteo::Draw()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrollY();	//描画に対してスクロールの影響を加える
-	dst.m_left = 0.0f + m_px + block->GetScrollX();
-	dst.m_right = ALL_SIZE + m_px + block->GetScrollX();
-	dst.m_bottom = ALL_SIZE + m_py + block->GetScrollY();
+	dst.m_top = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
+	dst.m_left = 0.0f + m_px + block->GetScrollx();
+	dst.m_right = ALLSIZE + m_px + block->GetScrollx();
+	dst.m_bottom = ALLSIZE + m_py + block->GetScrolly();
 
 	//描画
-	Draw::Draw(HEALKEY, &src, &dst, c, 0.0f);
+	Draw::Draw(1, &src, &dst, c, 0.0f);
 }
 
 

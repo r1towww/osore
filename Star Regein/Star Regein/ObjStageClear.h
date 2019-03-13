@@ -7,12 +7,12 @@ using namespace GameL;
 //オブジェクト：タイトル
 class CObjStageClear :public CObj
 {
-public:
-	CObjStageClear() {};
-	~CObjStageClear() {};
-	void Init();		//イニシャライズ
-	void Action();		//アクション
-	void Draw();		//ドロー
-private:
-	bool m_key_flag;
+	public:
+		CObjStageClear() {};
+		~CObjStageClear() {};
+		void Init();		//イニシャライズ
+		void Action();		//アクション
+		void Draw();		//ドロー
+	private:
+		bool m_key_flag;
 };
