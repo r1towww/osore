@@ -65,6 +65,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 
 	
 	//blockオブジェクト作成
@@ -82,6 +83,10 @@ void CSceneEarth::InitScene()
 	//HPゲージオブジェクト作成
 	CObjHeart* objheart = new CObjHeart();
 	Objs::InsertObj(objheart, OBJ_HEART, 130);
+
+	//MPゲージオブジェクト作成
+	CObjMP* objMP = new CObjMP();
+	Objs::InsertObj(objMP, OBJ_MP, 140);
 }
 
 

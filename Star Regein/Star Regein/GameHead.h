@@ -23,6 +23,7 @@ enum OBJ_NAME
 	OBJ_BEAMSABER,
 
 	OBJ_HEART,
+	OBJ_MP,
 };
 //------------------------------------------------
 
@@ -91,6 +92,7 @@ extern float g_max_hp; //最大HP
 #include "ObjMiniMap.h"
 
 #include "ObjHeart.h"
+#include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
 //------------------------------------------------
@@ -106,5 +108,5 @@ extern float g_max_hp; //最大HP
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneEarth
 //-----------------------------------------------
