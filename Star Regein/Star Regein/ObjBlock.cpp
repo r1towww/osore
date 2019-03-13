@@ -48,15 +48,20 @@ void CObjBlock::Init()
 
 				m_scrollx = -j * MAPSIZE;
 				m_scrolly = -i * MAPSIZE;
-
 			}
 			if (m_map[i][j] == 2)
 			{
 				//星オブジェクト作成
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
-
 			}
+			if (m_map[i][j] == 6)
+			{
+				//小惑星オブジェクト作成
+				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
+			}
+
 		}
 	}
 }
@@ -117,7 +122,7 @@ void CObjBlock::Draw()
 				dst.m_left   = j*ALLSIZE + m_scrollx;
 				dst.m_right  = dst.m_left + ALLSIZE;
 				dst.m_bottom = dst.m_top  + ALLSIZE;
-				if (m_map[i][j] == 1)
+				if (m_map[i][j] == 1)//隕石
 				{
 					//切り取り位置の設定
 					src.m_top    = 0.0f;

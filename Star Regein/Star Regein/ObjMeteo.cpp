@@ -22,7 +22,7 @@ CObjMeteo::CObjMeteo(float x, float y)
 void CObjMeteo::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALLSIZE, ELEMENT_FIELD, OBJ_KEY, 1);
+	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALLSIZE, ELEMENT_FIELD, OBJ_METEO, 1);
 }
 
 //アクション
@@ -60,12 +60,13 @@ void CObjMeteo::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-				//切り取り位置の設定
+	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 50.0f;
 	src.m_right = 100.0f;
 	src.m_bottom = 50.0f;
-
+	
+	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定

@@ -10,8 +10,14 @@
 
 //使用するネームスペース
 using namespace GameL;
-
-int g_stage = 1;	//ステージの値の初期化	地球：0　金星：1　水星：2　太陽：3
+/*		Planet列挙型
+	Earth			地球			0
+	VenusCow		金星（牡牛座）	1
+	MercuryGemini	水星（双子座）	2
+	MercuryVirgo	水星（乙女座）	3
+	SunLeo			太陽（獅子座）	4
+*/
+int g_stage = VenusCow;	//ステージの値の初期化
 
 //イニシャライズ
 void CObjTitle::Init()
@@ -27,6 +33,7 @@ void CObjTitle::Init()
 //アクション
 void CObjTitle::Action()
 {
+
 }
 
 //ドロー

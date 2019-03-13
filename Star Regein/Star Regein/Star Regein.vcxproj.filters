@@ -103,6 +103,9 @@
     <ClCompile Include="ObjMessage.cpp">
       <Filter>ソースファイル\メッセージ</Filter>
     </ClCompile>
+    <ClCompile Include="ObjAsteroid.cpp">
+      <Filter>ソースファイル\ステージオブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="ObjMessage.h">
       <Filter>ソースファイル\メッセージ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjAsteroid.h">
+      <Filter>ソースファイル\ステージオブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

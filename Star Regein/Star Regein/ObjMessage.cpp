@@ -16,8 +16,12 @@ void CObjMessage::Init()
 {
 	m_memory = 0;	//星の数を計る変数の初期化
 	m_time = 0;		//メッセージ時間用の変数の初期化
+	//星の最大の数の初期化（星座を集める場所によって変化）
+	if (g_stage == Earth)
+		m_MaxStar = 5;	//地球
+	else if (g_stage == VenusCow)
+		m_MaxStar = 18;	//金星（牡牛座）
 
-	m_MaxStar = 5;	//星の最大の数の初期化（星座を集める場所によって変化）
 }
 
 //アクション

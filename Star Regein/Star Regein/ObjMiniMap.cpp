@@ -23,13 +23,13 @@ CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjMiniMap::Init()
 {
-	if (g_stage == 0) {	//地球の場合
+	if (g_stage == Earth) {	//地球の場合
 		m_smallsize = 7.0f;	//スモールサイズを7.0fで初期化
 		m_bigsize = 14.0f;	//ビッグサイズを14.0fで初期化
 	}
-	else if (g_stage == 1) {	//金星の場合
-		m_smallsize = 5.8f;	//ステージサイズを5.8fで初期化
-		m_bigsize = 11.6f;	//ビッグサイズを14.0fで初期化
+	else if (g_stage == VenusCow) {	//金星の場合
+		m_smallsize = 4.0f;	//ステージサイズを5.8fで初期化
+		m_bigsize = 8.0f;	//ビッグサイズを14.0fで初期化
 	}
 	m_blocksize = m_smallsize;	//ブロックサイズとスモールサイズを合わせる
 
@@ -120,7 +120,7 @@ void CObjMiniMap::Draw()
 					//切り取り位置の設定
 					src.m_top    = 0.0f;
 					src.m_left   = 0.0f;
-					src.m_right  = 50.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -129,11 +129,28 @@ void CObjMiniMap::Draw()
 				{
 					//切り取り位置の設定
 					src.m_top    = 0.0f;
-					src.m_left   = 0.0f;
-					src.m_right  = 640.0f;
-					src.m_bottom = 608.0f;
+					src.m_left   = 110.0f;
+					src.m_right  = 140.0f;
+					src.m_bottom = 50.0f;
 
-					Draw::Draw(6, &src, &dst, c, 0.0f);
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 6)//小惑星
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
+					src.m_bottom = 50.0f;
+
+					//表示位置の設定
+					dst.m_top = i*m_blocksize + m_uisize_y;
+					dst.m_left = j*m_blocksize + m_uisize_x;
+					dst.m_right = dst.m_left + m_blocksize * 3;
+					dst.m_bottom = dst.m_top + m_blocksize * 3;
+
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 				else
 				{
@@ -171,8 +188,8 @@ void CObjMiniMap::Draw()
 				{
 					//切り取り位置の設定
 					src.m_top = 0.0f;
-					src.m_left = 150.0f;
-					src.m_right = 200.0f;
+					src.m_left = 160.0f;
+					src.m_right = 190.0f;
 					src.m_bottom = 50.0f;
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -229,36 +246,5 @@ void CObjMiniMap::Draw()
 
 
 
-	//主人公の情報を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//主人公の位置を取得
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
-
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			if (g_map[i][j] >= 0)
-			{
-				//表示位置の設定
-				dst.m_top = i*m_blocksize + m_uisize_y;
-				dst.m_left = j*m_blocksize + m_uisize_x;
-				dst.m_right = dst.m_left + m_blocksize;
-				dst.m_bottom = dst.m_top + m_blocksize;
-
-				if (g_map[i][j] ==3)//主人公
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 150.0f;
-					src.m_right = 200.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-			}
-		}
-	}
+	
 }
