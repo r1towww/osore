@@ -129,5 +129,5 @@ extern int g_stage;		//今いるステージの値
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneEarth
+#define SET_GAME_START  CSceneVenus
 //-----------------------------------------------
