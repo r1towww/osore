@@ -5,11 +5,11 @@
 using namespace GameL;
 
 //オブジェクト：タイトル
-class CObjStageChoice :public CObj
+class CObjStageClear :public CObj
 {
 public:
-	CObjStageChoice() {};
-	~CObjStageChoice() {};
+	CObjStageClear() {};
+	~CObjStageClear() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー

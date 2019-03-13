@@ -13,12 +13,16 @@ enum OBJ_NAME
 	OBJ_MINIMAP,
 
 	OBJ_HERO,
+	OBJ_STAGECHOICEHERO,
+	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
 
 	OBJ_COW,
 
 	OBJ_BEAMSABER,
+
+	OBJ_HEART,
 };
 //------------------------------------------------
 
@@ -56,13 +60,19 @@ struct UserData
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 //定数
-#define MAPSIZE 29
-
-
+#define MAPSIZE 50
+#define ALLSIZE 64.0f
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
-extern int g_map[29][29]; //ミニマップ情報
+
+extern float g_hp;     //今のHP
+extern float g_max_hp; //最大HP
+extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
+extern int g_mapsize;	//マップのサイズ
+extern int g_stage;		//今いるステージの値
+
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -75,12 +85,16 @@ extern int g_map[29][29]; //ミニマップ情報
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
+#include "ObjMeteo.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
+#include "ObjStageChoiceHero.h"
+#include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
+#include "ObjHeart.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
 //------------------------------------------------
@@ -88,12 +102,15 @@ extern int g_map[29][29]; //ミニマップ情報
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
+#include "SceneVenus.h"
+
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStageClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneEarth
+#define SET_GAME_START  CSceneVenus
 //-----------------------------------------------

@@ -11,6 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+int g_stage = 1;	//ステージの値の初期化	地球：0　金星：1　水星：2　太陽：3
 
 //イニシャライズ
 void CObjTitle::Init()

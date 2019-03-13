@@ -85,6 +85,20 @@
     <ClCompile Include="GameL\SceneManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjHeart.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageChoiceHero.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    <ClCompile Include="SceneVenus.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageChoiceHero.cpp" />
+    <ClCompile Include="ObjStageClear.cpp" />
+    <ClCompile Include="SceneStageClear.cpp" />
+    <ClCompile Include="ObjMeteo.cpp">
+      <Filter>ソースファイル\ブロック</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -173,6 +187,18 @@
     </ClInclude>
     <ClInclude Include="GameL\SceneManager.h">
       <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenus.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStageChoiceHero.h" />
+    <ClInclude Include="ObjStageClear.h" />
+    <ClInclude Include="SceneStageClear.h" />
+    <ClInclude Include="ObjMeteo.h">
+      <Filter>ソースファイル\ブロック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHeart.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
