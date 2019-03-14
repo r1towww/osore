@@ -61,7 +61,7 @@ void CObjBlock::Init()
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
-
+			
 		}
 	}
 }
@@ -71,9 +71,7 @@ void CObjBlock::Action()
 {
 	//主人公の情報を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	////主人公の位置を取得
-	//float hx = hero->GetX();
-	//float hy = hero->GetY();
+	
 
 	//スクロール
 	hero->SetX(375);

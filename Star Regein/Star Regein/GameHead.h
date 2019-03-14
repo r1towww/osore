@@ -19,6 +19,7 @@ enum OBJ_NAME
 	OBJ_STAR,
 	OBJ_METEO,
 	OBJ_ASTEROID,
+	
 
 	OBJ_COW,
 
@@ -113,6 +114,7 @@ extern int g_stage;		//今いるステージの値
 #include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
+
 
 #include "ObjHeart.h"
 #include "ObjMP.h"
