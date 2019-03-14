@@ -14,6 +14,8 @@ public:
 	void Action();	//アクション
 	void Draw();	//ドロー
 
+	float* GetPX() { return &m_px; }
+	float* GetPY() { return &m_py; }
 	float GetX() { return m_px; }
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
@@ -22,6 +24,7 @@ public:
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
+
 
 private:
 	float m_px;		//位置
@@ -62,7 +65,7 @@ private:
 
 	bool m_do_f;//敵攻撃フラグ
 
-	
+	bool m_df;//ミニマップからの削除フラグ
 
 	
 };
