@@ -71,7 +71,7 @@ struct UserData
 typedef enum Planet
 {
 	Earth,			//地球			0
-	VenusCow,		//金星（牛座）	1
+	VenusCow,		//金星（牡牛座）1
 	MercuryGemini,	//水星（双子座）2
 	MercuryVirgo,	//水星（乙女座）3
 	SunLeo,			//太陽（獅子座）4
@@ -129,5 +129,10 @@ extern int g_stage;		//今いるステージの値
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
+/*
+	CSceneEarth		地球
+	CSceneVenus		金星
+
+*/
 #define SET_GAME_START  CSceneVenus
 //-----------------------------------------------

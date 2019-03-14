@@ -198,7 +198,7 @@ void CObjMiniMap::Draw()
 		}
 	}
 
-	//ålŒö‚Ìî•ñ‚ğæ“¾
+	//“G‚Ìî•ñ‚ğæ“¾
 	CObjCow* cow = (CObjCow*)Objs::GetObj(OBJ_COW);
 	if (cow != nullptr) 
 	{

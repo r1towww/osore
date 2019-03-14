@@ -16,6 +16,7 @@ using namespace GameL;
 	MercuryGemini	水星（双子座）	2
 	MercuryVirgo	水星（乙女座）	3
 	SunLeo			太陽（獅子座）	4
+	* ステージ選択の際変更する *
 */
 int g_stage = VenusCow;	//ステージの値の初期化
 
@@ -26,8 +27,6 @@ void CObjTitle::Init()
 	m_down=false;
 	m_start=false;
 	m_end=false;
-
-
 }
 
 //アクション

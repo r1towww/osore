@@ -41,7 +41,6 @@ void CObjStageChoice::Action()
 		{
 			Scene::SetScene(new CSceneEarth());
 		}
-
 	}
 	else
 	{
