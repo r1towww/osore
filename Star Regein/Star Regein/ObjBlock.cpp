@@ -61,7 +61,18 @@ void CObjBlock::Init()
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
-
+			if (m_map[i][j] == 7)
+			{
+				//ブラックホールオブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 8)
+			{
+				//ホワイトホールオブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
+			}
 		}
 	}
 }
@@ -75,6 +86,12 @@ void CObjBlock::Action()
 	//float hx = hero->GetX();
 	//float hy = hero->GetY();
 
+	//てすと
+	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
+	float hx = blackhole->Getx();
+	float hy = blackhole->Gety();
+
+
 	//スクロール
 	hero->SetX(375);
 	m_scrollx -= hero->GetVX() * 4;
@@ -84,8 +101,8 @@ void CObjBlock::Action()
 
 	if (Input::GetVKey(VK_SPACE))//てすと
 	{
-		m_scrollx = 100;
-		m_scrolly = 100;
+		m_scrollx = hx;
+		m_scrolly = hy;
 	}
 
 }

@@ -19,6 +19,8 @@ enum OBJ_NAME
 	OBJ_STAR,
 	OBJ_METEO,
 	OBJ_ASTEROID,
+	OBJ_BLACKHOLE,
+	OBJ_WHITEHOLE,
 
 	OBJ_COW,
 
@@ -105,6 +107,8 @@ extern int g_stage;		//今いるステージの値
 #include "ObjStar.h"
 #include "ObjMeteo.h"
 #include "ObjAsteroid.h"
+#include "ObjBlackhole.h"
+#include "ObjWhitehole.h"
 
 
 #include "ObjTitle.h"
