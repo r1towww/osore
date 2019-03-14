@@ -80,6 +80,8 @@ typedef enum Planet
 
 extern int g_StarCount;	//¯‚ğ”‚¦‚é•Ï”
 extern float g_posture; //ålŒö‚ÌŒü‚«
+extern float* g_cow_x[20];//‘S‚Ä‚Ì‹‚ÌXˆÊ’u‚ğ”cˆ¬‚·‚é
+extern float* g_cow_y[20];//‘S‚Ä‚Ì‹‚ÌYˆÊ’u‚ğ”cˆ¬‚·‚é
 
 extern float g_hp;     //¡‚Ì‚g‚o
 extern float g_max_hp; //Å‘å‚g‚o

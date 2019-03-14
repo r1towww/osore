@@ -12,12 +12,22 @@
 //使用するネームスペース
 using namespace GameL;
 
+extern float* g_cow_x[20];//全ての牛のX位置を把握する
+extern float* g_cow_y[20];//全ての牛のY位置を把握する
 int g_map[MAPSIZE][MAPSIZE];
 
 CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
 	memcpy(g_map, map, sizeof(int)*(MAPSIZE * MAPSIZE));
+}
+
+void CObjMiniMap::Setdcow(bool d_flag)
+{
+	if (d_flag == true)
+	{
+		m_df = true;
+	}
 }
 
 //イニシャライズ
@@ -37,6 +47,8 @@ void CObjMiniMap::Init()
 	m_backsize = 200.0f;	//背景のサイズの初期化
 	m_f = false;	//キー入力制御の初期化
 	m_alpha = 0.7f;	//アルファ値初期化
+
+	m_df = false;
 }
 
 
@@ -198,53 +210,33 @@ void CObjMiniMap::Draw()
 		}
 	}
 
-	//敵の情報を取得
-	CObjCow* cow = (CObjCow*)Objs::GetObj(OBJ_COW);
-	if (cow != nullptr) 
+	for (int i = 0; i < 13; i++)
 	{
-		//主人公の位置を取得
-		float cx = cow->GetX();
-		float cy = cow->GetY();
+		float cx = *g_cow_x[i];
+		float cy = *g_cow_y[i];
 
-		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-		bool check;
-		check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-
-		if (check == true)
+		if (m_df == false)
 		{
-			//敵が存在する場合、ミニマップに敵の位置を表示する
-			if (cow != nullptr)
+			//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+			bool check;
+			check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+			if (check == true)
 			{
-				for (int i = 0; i < MAPSIZE; i++)
-				{
-					for (int j = 0; j < MAPSIZE; j++)
-					{
-						if (g_map[i][j] >= 0)
-						{
-							//表示位置の設定
-							dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-							dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-							dst.m_right = dst.m_left + m_blocksize;
-							dst.m_bottom = dst.m_top + m_blocksize;
+				//ミニマップに敵の位置を表示する
+				//表示位置の設定
+				dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+				dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+				dst.m_right = dst.m_left + m_blocksize;
+				dst.m_bottom = dst.m_top + m_blocksize;
 
-							if (g_map[i][j] == 5)//敵
-							{
-								//切り取り位置の設定
-								src.m_top = 0.0f;
-								src.m_left = 50.0f;
-								src.m_right = 100.0f;
-								src.m_bottom = 50.0f;
-								//描画
-								Draw::Draw(9, &src, &dst, c, 0.0f);
-							}
-						}
-					}
-				}
+				//切り取り位置の設定
+				src.m_top = 0.0f;
+				src.m_left = 50.0f;
+				src.m_right = 100.0f;
+				src.m_bottom = 50.0f;
+				//描画
+				Draw::Draw(9, &src, &dst, c, 0.0f);
 			}
 		}
 	}
-
-
-
-	
 }
