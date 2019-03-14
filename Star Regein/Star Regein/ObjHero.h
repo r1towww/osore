@@ -51,8 +51,13 @@ private:
 	int m_f;//攻撃制御用
 	int m_key_f;
 
+	
+	int m_time;//無敵時間カウント
+	int m_MP_time;//ＭＰ減少カウント
+	int m_regene_time;//ＭＰリジェネカウント
 
-	int m_time;
+	bool m_dash_flag;  //ダッシュフラグ
+	bool m_move_flag;  //移動フラグ
 
 	//blockとの衝突状態確認用
 	bool m_hit_up;
