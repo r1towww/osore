@@ -7,10 +7,8 @@
 #include "GameHead.h"
 #include "ObjAsteroid.h"
 
-
 //使用するネームスペース
 using namespace GameL;
-
 
 CObjAsteroid::CObjAsteroid(float x, float y)
 {

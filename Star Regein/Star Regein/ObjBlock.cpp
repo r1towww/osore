@@ -21,6 +21,8 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	c = 0;
+
 	//敵出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -30,6 +32,15 @@ void CObjBlock::Init()
 			{
 				//牛オブジェクト作成
 				CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+				//敵の位置を取得
+				float* cx = cow->GetPX();
+				float* cy = cow->GetPY();
+
+				g_cow_x[c] = cow->GetPX();
+				g_cow_y[c] = cow->GetPY();
+
+				c++;
+
 				Objs::InsertObj(cow, OBJ_COW, 10);
 			}
 		}

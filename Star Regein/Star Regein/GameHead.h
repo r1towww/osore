@@ -79,6 +79,8 @@ typedef enum Planet
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
+extern float* g_cow_x[20];//全ての牛のX位置を把握する
+extern float* g_cow_y[20];//全ての牛のY位置を把握する
 
 extern float g_hp;     //今のHP
 extern float g_max_hp; //最大HP
