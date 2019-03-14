@@ -17,11 +17,11 @@ using namespace GameL;
 
 //-------------------------------------
 //オブジェクト:主人公
-class CObjHero :public CObj
+class ObjStageChoiceHero :public CObj
 {
 public:
-	CObjHero(float x, float y) ;
-	~CObjHero() {};
+	ObjStageChoiceHero(float x, float y);
+	~ObjStageChoiceHero() {};
 	void Init();    //イニシャライズ
 	void Action();  //アクション
 	void Draw();    //ドロー
@@ -40,8 +40,7 @@ private:
 	float m_py;
 	float m_vx;  //移動ベクトル
 	float m_vy;
-	
-	
+	//float g_posture; //姿勢
 
 	float m_speed_power; //スピードパワー
 
@@ -49,8 +48,6 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	int m_f;//攻撃制御用
-	int m_key_f;
-
 
 	int m_time;
 

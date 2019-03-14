@@ -27,13 +27,19 @@ void CObjHero::Init()
 	//初期姿勢
 	g_posture = 0;
 
+	//最大HPの初期化
+	g_max_hp = 5;
+
+	//HPの初期化
+	g_hp = 5;
+
 	m_ani_time = 0;
 	m_ani_frame = 1;
 
 	//blockとの衝突状態確認
-	m_hit_up    = false;
-	m_hit_down  = false;
-	m_hit_left  = false;
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
 	m_hit_right = false;
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
@@ -95,6 +101,96 @@ void CObjHero::Action()
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r > 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r > 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
+
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_ENEMY);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] == nullptr)
+				continue;
+
+			float r = hit_data[i]->r;
+
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -10.0f;//左に移動させる
+			}
+			if (r >= 45 && r < 135)
+			{
+				m_vy = 10.0f;//上に移動させる
+			}
+			if (r >= 135 && r < 225)
+			{
+				m_vx = 10.0f;//右に移動させる
+			}
+			if (r >= 225 && r < 315)
+			{
+				m_vy = -10.0f;//したに移動させる
+			}
+		}
+
+		g_hp--;
+		m_f = true;
+		m_key_f = true;
+		hit->SetInvincibility(true);
+
+	}
+
+	if (m_f == true)
+	{
+		m_time--;
+
+	}
+	if (m_time <= 0)
+	{
+		m_f = false;
+		hit->SetInvincibility(false);
+
+		m_time = 30;
+
+	}
 
 	//アニメーション用
 	if (m_ani_time > 4)
@@ -119,7 +215,19 @@ void CObjHero::Action()
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
+
+	//作成したHitBox更新用の入り口を取り出す
+	hit->SetPos(392, 277);//入り口から新しい位置（主人公の位置）情報に置き換える
+
+	//HPが０になったら削除
+	if (g_hp <= 0)
+	{
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		Scene::SetScene(new CSceneMain());
+	}
 }
+
 
 //ドロー
 void CObjHero::Draw()
