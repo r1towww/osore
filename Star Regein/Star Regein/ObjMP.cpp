@@ -11,6 +11,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+float g_mp;
+float g_max_mp;
 
 CObjMP::CObjMP()
 {
@@ -48,7 +50,7 @@ void CObjMP::Draw()
 	//表示位置の設定
 	dst.m_top = 80.0f;
 	dst.m_left = 0.0f;
-	dst.m_right = 128.0f;
+	dst.m_right = (g_mp / g_max_mp)*128.0f;;
 	dst.m_bottom = 105.0f;
 
 	//描画

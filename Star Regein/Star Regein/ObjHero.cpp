@@ -13,6 +13,7 @@ using namespace GameL;
 
 float g_posture;
 
+
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
 	m_px = x;
@@ -29,9 +30,13 @@ void CObjHero::Init()
 
 	//最大HPの初期化
 	g_max_hp = 5;
-
 	//HPの初期化
 	g_hp = 5;
+
+	//最大ＭＰの初期化
+	g_max_mp = 50;
+	//ＭＰの初期化
+	g_mp = 50;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
@@ -44,6 +49,17 @@ void CObjHero::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
+	//ＭＰのタイムカウント用初期化
+	m_MP_time = 0;
+
+	//ＭＰリジェネカウント用初期化
+	m_regene_time = 0;
+
+	//ダッシュフラグ初期化
+	m_dash_flag = false;
+	//移動フラグ初期化
+	m_dash_flag = false;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, 392, 277, 31, 64, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
@@ -55,36 +71,58 @@ void CObjHero::Action()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
+	
 	//Shiftキーが入力されたらダッシュ
 	if ((Input::GetVKey(VK_SHIFT)))
 	{
+		//ダッシュフラグをオン
+		m_dash_flag = true;
+
+		if (m_move_flag == true)
+		{
+			m_MP_time++;
+
+			if (m_MP_time > 60)
+			{
+				m_MP_time = 0;
+				g_mp -= 5;
+			}
+		}
+		
 		m_speed_power = DASH_SPEED;
+
 	}
 	else//通常速度
 	{
+		m_move_flag = false;
+		m_dash_flag = false;
 		m_speed_power = NORMAL_SPEED;
 	}
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
+		m_move_flag = true;
 		m_vy -= m_speed_power;
 		g_posture = 3;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
+		m_move_flag = true;
 		m_vy += m_speed_power;
 		g_posture = 0;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
+		m_move_flag = true;
 		m_vx -= m_speed_power;
 		g_posture = 2;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
+		m_move_flag = true;
 		m_vx += m_speed_power;
 		g_posture = 1;
 		m_ani_time += ANITIME;
@@ -215,6 +253,25 @@ void CObjHero::Action()
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
+
+	//MPが50以下になったら一定間隔で増える
+	if (m_dash_flag == false)//ダッシュしていなかったら増える
+	{
+		if (g_mp < 50)
+		{
+			m_regene_time++;
+			if (m_regene_time > 30)
+			{
+				m_regene_time = 0;
+				g_mp += 1;
+			}
+		}
+	}
+	else if (m_dash_flag == true)
+	{
+		;
+	}
+	
 
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(392, 277);//入り口から新しい位置（主人公の位置）情報に置き換える

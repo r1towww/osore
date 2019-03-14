@@ -40,7 +40,7 @@ void CObjAsteroid::Action()
 void CObjAsteroid::Draw()
 {
 	//•`‰æƒJƒ‰[î•ñ
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 0.7f,0.7f,0.7f,1.0f };
 
 	RECT_F src;	//•`‰æŒ³Ø‚èŽæ‚èˆÊ’u
 	RECT_F dst;	//•`‰ææ•\Ž¦ˆÊ’u
@@ -61,7 +61,7 @@ void CObjAsteroid::Draw()
 	dst.m_bottom = 192.0f + m_py + block->GetScrolly();
 
 	//•`‰æ
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(4, &src, &dst, c, 90.0f);
 }
 
 

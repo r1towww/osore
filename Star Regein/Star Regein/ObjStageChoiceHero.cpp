@@ -37,7 +37,6 @@ void ObjStageChoiceHero::Init()
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
-							//当たり判定用のHitBoxを作成
 }
 
 //アクション
