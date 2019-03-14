@@ -82,6 +82,11 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
 
+	if (Input::GetVKey(VK_SPACE))//‚Ä‚·‚Æ
+	{
+		m_scrollx = 100;
+		m_scrolly = 100;
+	}
 
 }
 
