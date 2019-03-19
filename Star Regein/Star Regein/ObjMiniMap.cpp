@@ -239,37 +239,4 @@ void CObjMiniMap::Draw()
 			}
 		}
 	}
-
-	//主人公の情報を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//主人公の位置を取得
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
-
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			if (g_map[i][j] >= 0)
-			{
-				//表示位置の設定
-				dst.m_top = i*m_blocksize + m_uisize_y;
-				dst.m_left = j*m_blocksize + m_uisize_x;
-				dst.m_right = dst.m_left + m_blocksize;
-				dst.m_bottom = dst.m_top + m_blocksize;
-
-				if (g_map[i][j] ==3)//主人公
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 150.0f;
-					src.m_right = 200.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-			}
-		}
-	}
 }
