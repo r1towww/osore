@@ -14,8 +14,9 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 private:
-	bool m_oushi;
-	bool m_tenbin;
+	bool m_key_flag;
+	bool m_Left;
+	bool m_Right;
 	float m_Tra1;//透過率
 	float m_Tra2;//透過率
 

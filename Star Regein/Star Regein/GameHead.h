@@ -76,11 +76,13 @@ struct UserData
 typedef enum Planet
 {
 	Earth,			//地球			0
-	VenusTaurus,	//金星（牡牛座）1
-	VenusLibra,		//金星（天秤座）2
-	MercuryGemini,	//水星（双子座）3
-	MercuryVirgo,	//水星（乙女座）4
-	SunLeo,			//太陽（獅子座）5
+	Venus,			//金星			1
+	VenusTaurus,	//金星（牡牛座）2
+	VenusLibra,		//金星（天秤座）3
+	Mercury,		//水星			4
+	MercuryGemini,	//水星（双子座）5
+	MercuryVirgo,	//水星（乙女座）6
+	SunLeo,			//太陽（獅子座）7
 }Planet;
 
 extern int g_StarCount;	//星を数える変数
@@ -152,5 +154,5 @@ extern int g_image_reft;  //スキル画像切り替え
 	CSceneVenus		金星
 
 */
-#define SET_GAME_START  CSceneStarChoice
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

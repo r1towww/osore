@@ -8,15 +8,22 @@
 #include "GameHead.h"
 #include "ObjStageChoice.h"
 
-#define Earthx 0
-#define Earthy 380
-#define Earthxx 100
-#define Earthyy 800
-#define Venusx 180
-#define Venusxx 320
-#define Venusy 300
-#define Venusyy 445
-
+#define EarthX	  0
+#define EarthY	  380
+#define EarthX2	  100
+#define EarthY2	  800
+#define VenusX	  180
+#define VenusX2	  320
+#define VenusY	  300
+#define VenusY2	  445
+#define MercuryX  420
+#define MercuryX2 570
+#define MercuryY  120
+#define MercuryY2 270
+#define SunX	  615
+#define SunX2	  800
+#define SunY	  0
+#define SunY2	  90
 //使用するネームスペース
 using namespace GameL;
 
@@ -35,8 +42,8 @@ void CObjStageChoice::Action()
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
-	//指定の場所でZキー
-	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
+	//地球へ
+	if (hx >= EarthX && hx<= EarthX2 && hy >= EarthY&&hy<= EarthY2)
 	{
 		//▼前シーンからZキー押し続けでこれを押さないように、
 		//このシーンに入って一度も押してない状態に移行しないと
@@ -47,16 +54,44 @@ void CObjStageChoice::Action()
 			Scene::SetScene(new CSceneEarth());
 		}
 	}
-	//指定の場所でZキー
-	else if (hx >= Venusx && hx <= Venusxx && hy >= Venusy&&hy <= Venusyy)
+	//金星へ
+	else if (hx >= VenusX && hx <= VenusX2 && hy >= VenusY&&hy <= VenusY2)
 	{
 		//▼前シーンからZキー押し続けでこれを押さないように、
 		//このシーンに入って一度も押してない状態に移行しないと
 		//実行出来ないようにしている。
 		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
+			//金星に設定
+			g_stage = Venus;
 			Scene::SetScene(new CSceneStarChoice());
 		}
+	}
+	//水星へ
+	else if (hx >= MercuryX && hx <= MercuryX2 && hy >= MercuryY&&hy <= MercuryY2)
+	{
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			//水星に設定
+			g_stage = Mercury;
+			Scene::SetScene(new CSceneStarChoice());
+		}
+
+	}
+	//太陽へ
+	else if (hx >= SunX && hx <= SunX2 && hy >= SunY&&hy <= SunY2)
+	{
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
+			//太陽に設定
+			//g_stage = SunLeo;←ステージが完成したらコメント外してね
+			Scene::SetScene(new CSceneTitle());
+		}
+
 	}
 	else
 	{
