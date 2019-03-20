@@ -14,11 +14,16 @@
 //使用するネームスペース
 using namespace GameL;
 
+float* g_cow_x[20];//全ての牛のX位置を把握する
+float* g_cow_y[20];//全ての牛のY位置を把握する
+
 CObjCow::CObjCow(float x, float y)
 {
 	m_px = x;	//位置
 	m_py = y;
 }
+
+
 
 //イニシャライズ
 void CObjCow::Init()
@@ -46,11 +51,11 @@ void CObjCow::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	
-
 	m_btime = 0;
 
 	m_time = 30;
+
+	m_df = true;
 
 	alpha = 1.0;
 
@@ -235,19 +240,19 @@ void CObjCow::Action()
 
 			if ((r < 45 && r >= 0) || r > 315)
 			{
-				m_vx = -10.0f;//左に移動させる
+				m_vx = -20.0f;//左に移動させる
 			}
 			if (r >= 45 && r < 135)
 			{
-				m_vy = 10.0f;//上に移動させる
+				m_vy = 20.0f;//上に移動させる
 			}
 			if (r >= 135 && r < 225)
 			{
-				m_vx = 10.0f;//右に移動させる
+				m_vx = 20.0f;//右に移動させる
 			}
 			if (r >= 225 && r < 315)
 			{
-				m_vy = -10.0f;//したに移動させる
+				m_vy = -20.0f;//したに移動させる
 			}
 		}
 
@@ -282,8 +287,11 @@ void CObjCow::Action()
 	if (m_hp == 0)
 	{
 		//敵削除
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		alpha = 0.0f;
+		hit->SetInvincibility(true);
+
+		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
+		map->Setdcow(true);
 	}
 }
 

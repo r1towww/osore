@@ -19,6 +19,8 @@ enum OBJ_NAME
 	OBJ_STAR,
 	OBJ_METEO,
 	OBJ_ASTEROID,
+	OBJ_BLACKHOLE,
+	OBJ_WHITEHOLE,
 
 	OBJ_COW,
 
@@ -73,7 +75,7 @@ struct UserData
 typedef enum Planet
 {
 	Earth,			//地球			0
-	VenusCow,		//金星（牛座）	1
+	VenusCow,		//金星（牡牛座）1
 	MercuryGemini,	//水星（双子座）2
 	MercuryVirgo,	//水星（乙女座）3
 	SunLeo,			//太陽（獅子座）4
@@ -81,9 +83,15 @@ typedef enum Planet
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
+extern float* g_cow_x[20];//全ての牛のX位置を把握する
+extern float* g_cow_y[20];//全ての牛のY位置を把握する
 
-extern float g_hp;     //今のHP
-extern float g_max_hp; //最大HP
+extern float g_hp;     //今のＨＰ
+extern float g_max_hp; //最大ＨＰ
+extern float g_mp;     //今のＭＰ
+extern float g_max_mp; //最大ＭＰ
+
+
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
@@ -104,6 +112,8 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "ObjStar.h"
 #include "ObjMeteo.h"
 #include "ObjAsteroid.h"
+#include "ObjBlackhole.h"
+#include "ObjWhitehole.h"
 
 
 #include "ObjTitle.h"
@@ -133,5 +143,10 @@ extern int g_image_reft;  //スキル画像切り替え
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
+/*
+	CSceneEarth		地球
+	CSceneVenus		金星
+
+*/
 #define SET_GAME_START  CSceneVenus
 //-----------------------------------------------

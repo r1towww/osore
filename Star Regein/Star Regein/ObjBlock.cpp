@@ -21,6 +21,8 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	c = 0;
+
 	//敵出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -30,6 +32,15 @@ void CObjBlock::Init()
 			{
 				//牛オブジェクト作成
 				CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+				//敵の位置を取得
+				float* cx = cow->GetPX();
+				float* cy = cow->GetPY();
+
+				g_cow_x[c] = cow->GetPX();
+				g_cow_y[c] = cow->GetPY();
+
+				c++;
+
 				Objs::InsertObj(cow, OBJ_COW, 10);
 			}
 		}
@@ -61,7 +72,18 @@ void CObjBlock::Init()
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
-
+			if (m_map[i][j] == 7)
+			{
+				//ブラックホールオブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 8)
+			{
+				//ホワイトホールオブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
+			}
 		}
 	}
 }
@@ -75,6 +97,12 @@ void CObjBlock::Action()
 	//float hx = hero->GetX();
 	//float hy = hero->GetY();
 
+	//てすと
+	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
+	float hx = blackhole->Getx();
+	float hy = blackhole->Gety();
+
+
 	//スクロール
 	hero->SetX(375);
 	m_scrollx -= hero->GetVX() * 4;
@@ -82,6 +110,11 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
 
+	if (Input::GetVKey(VK_SPACE))//てすと
+	{
+		m_scrollx = hx;
+		m_scrolly = hy;
+	}
 
 }
 

@@ -104,13 +104,19 @@
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
     <ClCompile Include="SceneEarth.cpp">
-      <Filter>ソースファイル\地球</Filter>
+      <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
     <ClCompile Include="SceneVenus.cpp">
-      <Filter>ソースファイル\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlackhole.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjWhitehole.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,10 +226,16 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="SceneEarth.h">
-      <Filter>ソースファイル\地球</Filter>
+      <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
     <ClInclude Include="SceneVenus.h">
-      <Filter>ソースファイル\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlackhole.h">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWhitehole.h">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル切り替え</Filter>
@@ -269,11 +281,17 @@
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{7678e96f-f465-467c-a493-ca82cc32487f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\地球">
+    <Filter Include="ソースファイル\惑星">
+      <UniqueIdentifier>{d694fd3f-522b-467a-a32a-33be0b3073b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\金星">
+      <UniqueIdentifier>{8d6bb325-e9bb-4f5a-b7cb-2adbef4e7830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\地球">
       <UniqueIdentifier>{dacf4474-251f-4ff7-bd20-2f2168c3bc3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\金星">
-      <UniqueIdentifier>{8d6bb325-e9bb-4f5a-b7cb-2adbef4e7830}</UniqueIdentifier>
+    <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
+      <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\スキル切り替え">
       <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>

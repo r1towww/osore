@@ -125,6 +125,7 @@
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjAsteroid.cpp" />
+    <ClCompile Include="ObjBlackhole.cpp" />
     <ClCompile Include="ObjMP.cpp" />
     <ClCompile Include="ObjHeart.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
     <ClCompile Include="SceneStageClear.cpp" />
@@ -164,6 +166,7 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjMP.h" />
     <ClInclude Include="ObjAsteroid.h" />
     <ClInclude Include="ObjBlock.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="ObjWhitehole.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneStageChoice.h" />
     <ClInclude Include="SceneStageClear.h" />
