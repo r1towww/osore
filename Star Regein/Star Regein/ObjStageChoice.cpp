@@ -55,7 +55,7 @@ void CObjStageChoice::Action()
 		//Àso—ˆ‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚éB
 		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
-			Scene::SetScene(new CSceneEarth());
+			Scene::SetScene(new CSceneStarChoice());
 		}
 	}
 	else

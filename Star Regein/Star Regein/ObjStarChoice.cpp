@@ -89,7 +89,10 @@ void CObjStarChoice::Draw()
 		m_Tra1 = 0.5f;
 		if (Input::GetVKey('Z') == true)
 		{
-			Scene::SetScene(new CSceneEarth());
+			//ステージをおうし座に設定
+			g_stage = VenusTaurus;
+			Scene::SetScene(new CSceneVenus());
+			
 		}
 
 	}
@@ -100,6 +103,8 @@ void CObjStarChoice::Draw()
 		m_Tra2 = 0.5f;
 		if (Input::GetVKey('Z') == true)
 		{
+			//ステージをてんびん座に設定
+			g_stage = VenusLibra;
 			Scene::SetScene(new CSceneEarth());
 		}
 
