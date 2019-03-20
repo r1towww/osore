@@ -36,11 +36,11 @@ void CObjBlackhole::Action()
 	float wy = whitehole->Gety();
 
 	//主人公と当たっているか確認
-	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	//{
-	//	block->SetScrollx(wx);	//ホワイトホールの位置に移動させる
-	//	block->SetScrolly(wy);
-	//}
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		block->SetScrollx(wx);	//ホワイトホールの位置に移動させる
+		block->SetScrolly(wy);
+	}
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);

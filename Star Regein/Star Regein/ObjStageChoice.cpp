@@ -43,6 +43,7 @@ void CObjStageChoice::Action()
 		//実行出来ないようにしている。
 		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
+			g_stage = Earth;	//ステージの値を地球に変更
 			Scene::SetScene(new CSceneEarth());
 		}
 	}

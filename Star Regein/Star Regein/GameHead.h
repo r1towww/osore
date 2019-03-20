@@ -76,10 +76,11 @@ struct UserData
 typedef enum Planet
 {
 	Earth,			//地球			0
-	VenusCow,		//金星（牡牛座）1
-	MercuryGemini,	//水星（双子座）2
-	MercuryVirgo,	//水星（乙女座）3
-	SunLeo,			//太陽（獅子座）4
+	VenusTaurus,	//金星（牡牛座）1
+	VenusLibra,		//金星（天秤座）2
+	MercuryGemini,	//水星（双子座）3
+	MercuryVirgo,	//水星（乙女座）4
+	SunLeo,			//太陽（獅子座）5
 }Planet;
 
 extern int g_StarCount;	//星を数える変数
