@@ -53,7 +53,6 @@ void CSceneVenus::InitScene()
 		}
 	}
 
-
 	//グラフィック読み込み
 	Draw::LoadImageW(L"HeroTouka.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
@@ -66,6 +65,7 @@ void CSceneVenus::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"スキル総合.png", 12, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -86,8 +86,11 @@ void CSceneVenus::InitScene()
 	//MPゲージオブジェクト作成
 	CObjMP* objMP = new CObjMP();
 	Objs::InsertObj(objMP, OBJ_MP, 140);
-}
 
+	//スキル切り替えオブジェクト作成
+	CObjSkill* objSkill = new CObjSkill();
+	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+}
 
 //実行中メソッド
 void CSceneVenus::Scene()
@@ -97,5 +100,4 @@ void CSceneVenus::Scene()
 	{
 		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 	}
-
 }

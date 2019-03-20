@@ -109,6 +109,9 @@
     <ClCompile Include="SceneVenus.cpp">
       <Filter>ソースファイル\金星</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkill.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="SceneVenus.h">
       <Filter>ソースファイル\金星</Filter>
     </ClInclude>
+    <ClInclude Include="ObjSkill.h">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -268,6 +274,9 @@
     </Filter>
     <Filter Include="ソースファイル\金星">
       <UniqueIdentifier>{8d6bb325-e9bb-4f5a-b7cb-2adbef4e7830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル切り替え">
+      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

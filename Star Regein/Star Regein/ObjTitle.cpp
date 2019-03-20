@@ -18,6 +18,8 @@ using namespace GameL;
 	SunLeo			太陽（獅子座）	4
 */
 int g_stage = VenusCow;	//ステージの値の初期化
+int g_image_right = 0;
+int g_image_reft  = 0;
 
 //イニシャライズ
 void CObjTitle::Init()

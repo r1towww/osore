@@ -24,6 +24,8 @@ enum OBJ_NAME
 
 	OBJ_BEAMSABER,
 
+	OBJ_SKILL,
+
 	OBJ_HEART,
 	OBJ_MP,
 };
@@ -85,7 +87,8 @@ extern float g_max_hp; //最大HP
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
-
+extern int g_image_right; //スキル画像切り替え
+extern int g_image_reft;  //スキル画像切り替え
 
 
 //------------------------------------------------
@@ -114,6 +117,7 @@ extern int g_stage;		//今いるステージの値
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
+#include "ObjSkill.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
