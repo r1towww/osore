@@ -12,6 +12,10 @@
 #define Earthy 380
 #define Earthxx 100
 #define Earthyy 800
+#define Venusx 180
+#define Venusxx 320
+#define Venusy 300
+#define Venusyy 445
 
 //使用するネームスペース
 using namespace GameL;
@@ -33,6 +37,17 @@ void CObjStageChoice::Action()
 
 	//指定の場所でZキー
 	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
+	{
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			Scene::SetScene(new CSceneEarth());
+		}
+	}
+	//指定の場所でZキー
+	else if (hx >= Venusx && hx <= Venusxx && hy >= Venusy&&hy <= Venusyy)
 	{
 		//▼前シーンからZキー押し続けでこれを押さないように、
 		//このシーンに入って一度も押してない状態に移行しないと

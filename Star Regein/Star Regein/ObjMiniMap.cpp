@@ -240,11 +240,6 @@ void CObjMiniMap::Draw()
 		}
 	}
 
-	//ŽålŒö‚Ìî•ñ‚ðŽæ“¾
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//ŽålŒö‚ÌˆÊ’u‚ðŽæ“¾
-	float hx = hero->GetX();
-	float hy = hero->GetY();
 
 
 	for (int i = 0; i < MAPSIZE; i++)

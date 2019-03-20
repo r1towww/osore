@@ -144,5 +144,5 @@ extern int g_stage;		//今いるステージの値
 	CSceneVenus		金星
 
 */
-#define SET_GAME_START  CSceneVenus
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------
