@@ -87,6 +87,10 @@ void CObjStarChoice::Draw()
 	{
 		m_Tra2 = 1.0f;
 		m_Tra1 = 0.5f;
+		if (Input::GetVKey('Z') == true)
+		{
+			Scene::SetScene(new CSceneEarth());
+		}
 
 	}
 	//‚Ä‚ñ‚Ñ‚ñÀ‚Ì‚Ù‚¤‚ğ–¾‚é‚­‚µ‚Ä‚¨‚¤‚µÀ‚ğˆÃ‚­‚·‚é
@@ -94,6 +98,10 @@ void CObjStarChoice::Draw()
 	{
 		m_Tra1 = 1.0f;
 		m_Tra2 = 0.5f;
+		if (Input::GetVKey('Z') == true)
+		{
+			Scene::SetScene(new CSceneEarth());
+		}
 
 	}
 
