@@ -7,7 +7,7 @@
 
 #include "GameHead.h"
 #include "ObjStageChoice.h"
-
+//星座位置関連----------------------
 #define EarthX	  0
 #define EarthY	  380
 #define EarthX2	  100
@@ -24,6 +24,7 @@
 #define SunX2	  800
 #define SunY	  0
 #define SunY2	  90
+//----------------------------------
 //使用するネームスペース
 using namespace GameL;
 
@@ -109,6 +110,7 @@ void CObjStageChoice::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
+	//背景------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -123,8 +125,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(2, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
+	//地球------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -139,8 +142,10 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(3, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
 
+	//金星------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -155,8 +160,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(4, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
+	//水星------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -171,9 +177,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(5, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
-
+	//太陽------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -188,6 +194,6 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(6, &src, &dst, c, 0.0f);
-
+	//----------------------------------------
 
 }
