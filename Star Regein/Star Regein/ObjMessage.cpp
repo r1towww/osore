@@ -19,7 +19,7 @@ void CObjMessage::Init()
 	//星の最大の数の初期化（星座を集める場所によって変化）
 	if (g_stage == Earth)
 		m_MaxStar = 5;	//地球
-	else if (g_stage == VenusCow)
+	else if (g_stage == VenusTaurus)
 		m_MaxStar = 18;	//金星（牡牛座）
 
 }

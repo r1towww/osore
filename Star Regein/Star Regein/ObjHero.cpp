@@ -227,7 +227,6 @@ void CObjHero::Action()
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
-
 	}
 
 	if (m_f == true)

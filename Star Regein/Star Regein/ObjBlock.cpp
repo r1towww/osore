@@ -98,9 +98,9 @@ void CObjBlock::Action()
 	//float hy = hero->GetY();
 
 	//ÇƒÇ∑Ç∆
-	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	float hx = blackhole->Getx();
-	float hy = blackhole->Gety();
+	//CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
+	//float hx = blackhole->Getx();
+	//float hy = blackhole->Gety();
 
 
 	//ÉXÉNÉçÅ[Éã
@@ -112,8 +112,8 @@ void CObjBlock::Action()
 
 	if (Input::GetVKey(VK_SPACE))//ÇƒÇ∑Ç∆
 	{
-		m_scrollx = hx;
-		m_scrolly = hy;
+		//m_scrollx = hx;
+		//m_scrolly = hy;
 	}
 
 }

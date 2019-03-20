@@ -11,14 +11,15 @@
 //使用するネームスペース
 using namespace GameL;
 /*		Planet列挙型
-	Earth			地球			0
-	VenusCow		金星（牡牛座）	1
-	MercuryGemini	水星（双子座）	2
-	MercuryVirgo	水星（乙女座）	3
-	SunLeo			太陽（獅子座）	4
+	Earth,			//地球			0
+	VenusTaurus,	//金星（牡牛座）1
+	VenusLibra,		//金星（天秤座）2
+	MercuryGemini,	//水星（双子座）3
+	MercuryVirgo,	//水星（乙女座）4
+	SunLeo,			//太陽（獅子座）5
 	* ステージ選択の際変更する *
 */
-int g_stage = VenusCow;	//ステージの値の初期化
+int g_stage = VenusTaurus;	//ステージの値の初期化
 int g_image_right = 0;
 int g_image_reft  = 0;
 
