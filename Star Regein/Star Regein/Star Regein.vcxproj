@@ -139,11 +139,13 @@
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
+    <ClCompile Include="ObjStarChoice.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
     <ClCompile Include="SceneStageClear.cpp" />
+    <ClCompile Include="SceneStarChoice.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -181,11 +183,13 @@
     <ClInclude Include="ObjStageChoiceHero.h" />
     <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
+    <ClInclude Include="ObjStarChoice.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjWhitehole.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneStageChoice.h" />
     <ClInclude Include="SceneStageClear.h" />
+    <ClInclude Include="SceneStarChoice.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="SceneMain.h" />

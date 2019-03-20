@@ -17,6 +17,7 @@ enum OBJ_NAME
 	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
+	OBJ_STARCHOICE,
 	OBJ_METEO,
 	OBJ_ASTEROID,
 	OBJ_BLACKHOLE,
@@ -107,6 +108,7 @@ extern int g_image_reft;  //スキル画像切り替え
 
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjHero.h"
+#include "ObjStageChoiceHero.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -118,7 +120,7 @@ extern int g_image_reft;  //スキル画像切り替え
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
-#include "ObjStageChoiceHero.h"
+#include "ObjStarChoice.h"
 #include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
@@ -138,6 +140,7 @@ extern int g_image_reft;  //スキル画像切り替え
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStarChoice.h"
 #include "SceneStageClear.h"
 //-----------------------------------------------
 
@@ -148,5 +151,5 @@ extern int g_image_reft;  //スキル画像切り替え
 	CSceneVenus		金星
 
 */
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneStarChoice
 //-----------------------------------------------
