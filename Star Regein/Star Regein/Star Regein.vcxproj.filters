@@ -109,6 +109,9 @@
     <ClCompile Include="SceneVenus.cpp">
       <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkill.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
     <ClCompile Include="ObjBlackhole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
@@ -234,6 +237,9 @@
     <ClInclude Include="ObjWhitehole.h">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
+    <ClInclude Include="ObjSkill.h">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -286,6 +292,9 @@
     </Filter>
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル切り替え">
+      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -139,6 +139,20 @@ void CObjHero::Action()
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
+	if (Input::GetVKey('Q'))
+	{
+		if (m_key_f == true)
+		{
+			g_image_reft += 900;
+			g_image_right += 900;
+			m_key_f = false;
+		}
+	}
+	else 
+	{
+		m_key_f = true;
+	}
+
 	//HitBox‚Ì“à—e‚ğXV
 	CHitBox*hit = Hits::GetHitBox(this);
 

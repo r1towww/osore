@@ -66,7 +66,6 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
-
 	
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
