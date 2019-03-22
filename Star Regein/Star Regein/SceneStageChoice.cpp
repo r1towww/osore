@@ -31,7 +31,7 @@ CSceneStageChoice::~CSceneStageChoice()
 //ゲームタイトル初期化メソッド
 void CSceneStageChoice::InitScene()
 {
-	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"HeroTouka.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ背景1.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択地球.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択金星.png", 4, TEX_SIZE_512);
