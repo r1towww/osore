@@ -35,8 +35,8 @@ void CSceneEarth::InitScene()
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"Earth.csv", &size);//外部データ読み込み
-
-	int map[29][29];
+	
+	int map[50][50];
 	int count = 1;
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -55,7 +55,7 @@ void CSceneEarth::InitScene()
 
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"HeroTouka.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
@@ -64,7 +64,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-
+	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -77,6 +78,14 @@ void CSceneEarth::InitScene()
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
+
+	//HPゲージオブジェクト作成
+	CObjHeart* objheart = new CObjHeart();
+	Objs::InsertObj(objheart, OBJ_HEART, 130);
+
+	//MPゲージオブジェクト作成
+	CObjMP* objMP = new CObjMP();
+	Objs::InsertObj(objMP, OBJ_MP, 140);
 }
 
 
@@ -86,7 +95,7 @@ void CSceneEarth::Scene()
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == 5)
 	{
-		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+		Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 	}
 	
 }

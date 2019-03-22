@@ -13,12 +13,24 @@ enum OBJ_NAME
 	OBJ_MINIMAP,
 
 	OBJ_HERO,
+	OBJ_STAGECHOICEHERO,
+	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
+	OBJ_STARCHOICE,
+	OBJ_METEO,
+	OBJ_ASTEROID,
+	OBJ_BLACKHOLE,
+	OBJ_WHITEHOLE,
 
 	OBJ_COW,
 
 	OBJ_BEAMSABER,
+
+	OBJ_SKILL,
+
+	OBJ_HEART,
+	OBJ_MP,
 };
 //------------------------------------------------
 
@@ -39,6 +51,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
+	ELEMENT_BLOCK,
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
 };
@@ -56,13 +69,39 @@ struct UserData
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
 //定数
-#define MAPSIZE 29
+#define MAPSIZE 50
+#define ALLSIZE 64.0f
 
-
+//惑星ごとの値
+typedef enum Planet
+{
+	Earth,			//地球			0
+	Venus,			//金星			1
+	VenusTaurus,	//金星（牡牛座）2
+	VenusLibra,		//金星（天秤座）3
+	Mercury,		//水星			4
+	MercuryGemini,	//水星（双子座）5
+	MercuryVirgo,	//水星（乙女座）6
+	SunLeo,			//太陽（獅子座）7
+}Planet;
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
-extern int g_map[29][29]; //ミニマップ情報
+extern float* g_cow_x[20];//全ての牛のX位置を把握する
+extern float* g_cow_y[20];//全ての牛のY位置を把握する
+
+extern float g_hp;     //今のＨＰ
+extern float g_max_hp; //最大ＨＰ
+extern float g_mp;     //今のＭＰ
+extern float g_max_mp; //最大ＭＰ
+
+
+extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
+extern int g_mapsize;	//マップのサイズ
+extern int g_stage;		//今いるステージの値
+extern int g_image_right; //スキル画像切り替え
+extern int g_image_reft;  //スキル画像切り替え
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -72,28 +111,49 @@ extern int g_map[29][29]; //ミニマップ情報
 
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjHero.h"
+#include "ObjStageChoiceHero.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
+#include "ObjMeteo.h"
+#include "ObjAsteroid.h"
+#include "ObjBlackhole.h"
+#include "ObjWhitehole.h"
+
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
+#include "ObjStarChoice.h"
+#include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
+#include "ObjHeart.h"
+#include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
+#include "ObjSkill.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
+#include "SceneVenus.h"
+
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStarChoice.h"
+#include "SceneStageClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START  CSceneEarth
+/*
+	CSceneStageChoice 惑星選択
+	CSceneEarth		地球
+	CSceneVenus		金星
+
+*/
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

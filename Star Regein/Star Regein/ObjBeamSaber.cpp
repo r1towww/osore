@@ -22,13 +22,13 @@ CObjBeamSaber::CObjBeamSaber(float x, float y)
 void CObjBeamSaber::Init()
 {
 	//主人公の向きによってビームサーベルを出す方向，向きを変える
-	if (g_posture == 0)	//下
+	if (g_posture == 3)	//下
 	{
 		m_angle = 270.0f;	//角度調整
 		m_pos_x = 20.0f;		//X軸調整
 		m_pos_y = 64.0f;	//Y軸調整
 	}
-	if (g_posture == 1)	//右
+	if (g_posture == 4)	//右
 	{
 		m_angle = 0.0f;		//角度調整
 		m_pos_x = 48.0f;	//X軸調整
@@ -40,7 +40,7 @@ void CObjBeamSaber::Init()
 		m_pos_x = -18.0f;	//X軸調整
 		m_pos_y = 24.0f;		//Y軸調整
 	}
-	if (g_posture == 3)	//上
+	if (g_posture == 1)	//上
 	{
 		m_angle = 90.0f;	//角度調整
 		m_pos_x = 10.0f;		//X軸調整

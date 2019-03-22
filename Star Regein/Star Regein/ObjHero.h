@@ -40,7 +40,8 @@ private:
 	float m_py;
 	float m_vx;  //移動ベクトル
 	float m_vy;
-	//float g_posture; //姿勢
+	
+	
 
 	float m_speed_power; //スピードパワー
 
@@ -48,8 +49,15 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	int m_f;//攻撃制御用
+	int m_key_f;
 
-	int m_time;
+	
+	int m_time;//無敵時間カウント
+	int m_MP_time;//ＭＰ減少カウント
+	int m_regene_time;//ＭＰリジェネカウント
+
+	bool m_dash_flag;  //ダッシュフラグ
+	bool m_move_flag;  //移動フラグ
 
 	//blockとの衝突状態確認用
 	bool m_hit_up;
