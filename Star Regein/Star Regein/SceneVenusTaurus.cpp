@@ -12,24 +12,24 @@
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneVenus.h"
+#include "SceneVenusTaurus.h"
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneVenus::CSceneVenus()
+CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
 }
 
 //デストラクタ
-CSceneVenus::~CSceneVenus()
+CSceneVenusTaurus::~CSceneVenusTaurus()
 {
 
 }
 
 //初期化メソッド
-void CSceneVenus::InitScene()
+void CSceneVenusTaurus::InitScene()
 {
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
@@ -96,7 +96,7 @@ void CSceneVenus::InitScene()
 }
 
 //実行中メソッド
-void CSceneVenus::Scene()
+void CSceneVenusTaurus::Scene()
 {
 	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
 	if (g_StarCount == 18)

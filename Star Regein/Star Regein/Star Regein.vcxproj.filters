@@ -106,9 +106,6 @@
     <ClCompile Include="SceneEarth.cpp">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
-    <ClCompile Include="SceneVenus.cpp">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
@@ -123,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="ObjStarChoice.cpp">
       <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneVenusTaurus.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,9 +234,6 @@
     <ClInclude Include="SceneEarth.h">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
-    <ClInclude Include="SceneVenus.h">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBlackhole.h">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
@@ -251,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="ObjStarChoice.h">
       <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenusTaurus.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

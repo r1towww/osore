@@ -93,15 +93,6 @@ void CObjBlock::Action()
 {
 	//主人公の情報を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	////主人公の位置を取得
-	//float hx = hero->GetX();
-	//float hy = hero->GetY();
-
-	//てすと
-	//CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	//float hx = blackhole->Getx();
-	//float hy = blackhole->Gety();
-
 
 	//スクロール
 	hero->SetX(375);
@@ -109,12 +100,6 @@ void CObjBlock::Action()
 
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
-
-	if (Input::GetVKey(VK_SPACE))//てすと
-	{
-		//m_scrollx = hx;
-		//m_scrolly = hy;
-	}
 
 }
 
@@ -221,7 +206,7 @@ void CObjBlock::BlockHit
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + ALLSIZE > bx) && (*x + (-scrollx) < bx + ALLSIZE) && (*y + (-scrolly) + ALLSIZE > by) && (*y + (-scrolly) < by + ALLSIZE))
+				if ((*x + (-scrollx) + HITBOXSIZE > bx) && (*x + (-scrollx) < bx + HITBOXSIZE) && (*y + (-scrolly) + HITBOXSIZE > by) && (*y + (-scrolly) < by + HITBOXSIZE))
 				{
 					//上下左右判定
 
@@ -248,26 +233,26 @@ void CObjBlock::BlockHit
 						if ((r < 45 && r >= 0) || r > 315)
 						{
 							*right = true;//オブジェクトの左部分が衝突している
-							*x = bx + ALLSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
+							*x = bx + HITBOXSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
 							*vx = 0.15f;//-VX*反発係数
 						}
 
 						if (r > 45 && r < 135)
 						{
 							*down = true;//オブジェクトの下の部分が衝突している
-							*y = by - ALLSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
+							*y = by - HITBOXSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
 							*vy = -0.15f;
 						}
 						if (r > 135 && r < 225)
 						{
 							*left = true;//オブジェクトの右部分が衝突している
-							*x = bx - ALLSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
+							*x = bx - HITBOXSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
 							*vx = -0.15f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							*up = true;//オブジェクトの上の部分が衝突している
-							*y = by + ALLSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
+							*y = by + HITBOXSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
 							*vy = 0.15f;
 						}
 					}

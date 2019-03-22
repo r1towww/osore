@@ -138,7 +138,7 @@ extern int g_image_reft;  //スキル画像切り替え
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
-#include "SceneVenus.h"
+#include "SceneVenusTaurus.h"
 
 
 #include "SceneTitle.h"
@@ -150,10 +150,10 @@ extern int g_image_reft;  //スキル画像切り替え
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
 /*
-	CSceneStageChoice 惑星選択
-	CSceneEarth		地球
-	CSceneVenus		金星
+	CSceneStageChoice	惑星選択
+	CSceneEarth			地球
+	CSceneVenusTaurus	金星（牡牛座）
 
 */
-#define SET_GAME_START  CSceneVenus
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

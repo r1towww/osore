@@ -13,6 +13,7 @@
 #define EarthX2	  100
 #define EarthY2	  800
 #define VenusX	  180
+
 #define VenusX2	  320
 #define VenusY	  300
 #define VenusY2	  445

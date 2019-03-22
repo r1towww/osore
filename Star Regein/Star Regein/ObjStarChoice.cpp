@@ -139,13 +139,13 @@ void CObjStarChoice::Draw()
 			{
 				//ステージをおうし座に設定
 				g_stage = VenusTaurus;
-				Scene::SetScene(new CSceneVenus());
+				Scene::SetScene(new CSceneVenusTaurus());
 			}
 			else if (g_stage == Mercury)
 			{
 				//ステージを双子座に設定
 				g_stage = MercuryGemini;
-				Scene::SetScene(new CSceneVenus());
+				Scene::SetScene(new CSceneVenusTaurus());
 			}
 		}
 

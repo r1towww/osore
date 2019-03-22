@@ -5,6 +5,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+//定数
+#define HITBOXSIZE 40.0f
+
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
 {
