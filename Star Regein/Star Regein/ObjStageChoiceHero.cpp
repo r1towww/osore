@@ -59,13 +59,13 @@ void ObjStageChoiceHero::Action()
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
 		m_vy -= m_speed_power;
-		g_posture = 3;
+		g_posture = 1;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_vy += m_speed_power;
-		g_posture = 0;
+		g_posture = 3;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
@@ -77,12 +77,12 @@ void ObjStageChoiceHero::Action()
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_vx += m_speed_power;
-		g_posture = 1;
+		g_posture = 4;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
 	{
-		m_ani_frame = 0;	//静止フレームにする
+		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
 

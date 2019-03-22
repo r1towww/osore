@@ -37,7 +37,7 @@ void CObjCow::Init()
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
-	m_ani_max_time = 5;	//アニメーション間隔幅
+	m_ani_max_time = 15;	//アニメーション間隔幅
 
 	m_movey = true; //true=背面　false=正面
 	m_movex = true;	//true=右　false=左
@@ -121,7 +121,7 @@ void CObjCow::Action()
 		m_ani_time = 0;
 	}
 
-	if (m_ani_frame == 4)
+	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 0;
 	}
