@@ -126,9 +126,9 @@ void ObjStageChoiceHero::Draw()
 
 	//ï\é¶à íuÇÃê›íË
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 64.0f + m_px;
+	dst.m_left = 80.0f + m_px;
 	dst.m_right = 0.0f + m_px;
-	dst.m_bottom = 64.0f + m_py;
+	dst.m_bottom = 80.0f + m_py;
 
 	//ï\é¶
 	Draw::Draw(1, &src, &dst, c, 0.0f);
