@@ -26,6 +26,7 @@ public:
 	void Action();  //アクション
 	void Draw();    //ドロー
 
+
 	float GetX() { return m_px; }
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
