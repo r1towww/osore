@@ -155,5 +155,5 @@ extern int g_image_reft;  //ƒXƒLƒ‹‰æ‘œØ‚è‘Ö‚¦
 	CSceneVenus		‹à¯
 
 */
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneVenus
 //-----------------------------------------------

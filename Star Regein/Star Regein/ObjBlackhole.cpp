@@ -32,14 +32,26 @@ void CObjBlackhole::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//ホワイトホールの情報を持ってくる
 	CObjWhitehole* whitehole = (CObjWhitehole*)Objs::GetObj(OBJ_WHITEHOLE);
-	float wx = whitehole->Getx();
-	float wy = whitehole->Gety();
-
+	float wx = whitehole->Getx() - HOLEBALANCE_X;	//移動先位置の調整
+	float wy = whitehole->Gety() - HOLEBALANCE_Y;
+	
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		block->SetScrollx(wx);	//ホワイトホールの位置に移動させる
-		block->SetScrolly(wy);
+		hit->SetInvincibility(true);	//無敵オン
+		m_time = SETTIME;	//時間をセットする
+		block->SetScrollx(-wx);	//ホワイトホールの位置に移動させる
+		block->SetScrolly(-wy + TELEPORTBALANCE);	//位置が被らないようにずらす
+	}
+
+	/* 無敵時間用 */
+	//時間がセットされている際
+	if (m_time > 0) {
+		m_time--;	//時間を減らす
+		if (m_time <= 0) {	//0以下になったら
+			m_time = 0;
+			hit->SetInvincibility(false);	//無敵をオフ
+		}
 	}
 
 	//HitBoxの位置の変更

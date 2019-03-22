@@ -21,4 +21,5 @@ class CObjWhitehole : public CObj
 	private:
 		float m_px;			//ˆÊ’u
 		float m_py;
+		int m_time;		//–³“GŠÔ‚Ìİ’è
 };
