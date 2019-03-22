@@ -57,7 +57,7 @@ void CSceneVenus::InitScene()
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
-	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
+	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
