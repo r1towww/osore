@@ -21,6 +21,8 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	m_roll = 0.0f;
+
 	c = 0;
 
 	//敵出現
@@ -101,6 +103,11 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
 
+	//背景を回転させる
+	m_roll += 0.1f;
+	if (m_roll == 360.0f) {	//1回転した際
+		m_roll = 0.0f;		//0.0fに値を戻す
+	}
 }
 
 //ドロー
@@ -120,13 +127,13 @@ void CObjBlock::Draw()
 	src.m_bottom = 600.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f;
-	dst.m_left   = 0.0f;
-	dst.m_right  = 800.0f;
-	dst.m_bottom = 600.0f;
+	dst.m_top    = -800.0f;
+	dst.m_left   = -600.0f;
+	dst.m_right  = 1800.0f;
+	dst.m_bottom = 1600.0f;
 
 	//描画
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(5, &src, &dst, c, m_roll);
 
 	/* ブロック（障害物用） */
 	for (int i = 0; i < MAPSIZE; i++)

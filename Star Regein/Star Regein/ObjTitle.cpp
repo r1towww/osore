@@ -12,14 +12,19 @@
 using namespace GameL;
 /*		Planet列挙型
 	Earth,			//地球			0
-	VenusTaurus,	//金星（牡牛座）1
-	VenusLibra,		//金星（天秤座）2
-	MercuryGemini,	//水星（双子座）3
-	MercuryVirgo,	//水星（乙女座）4
-	SunLeo,			//太陽（獅子座）5
+	EarthStar,		//地球			1
+	Venus,			//金星			2
+	VenusTaurus,	//金星（牡牛座）3
+	VenusLibra,		//金星（天秤座）4
+	Mercury,		//水星			5
+	MercuryGemini,	//水星（双子座）6
+	MercuryVirgo,	//水星（乙女座）7
+	Sun,			//太陽			8
+	SunLeo,			//太陽（獅子座）9
+	Space,			//ステージ選択	10
 	* ステージ選択の際変更する *
 */
-int g_stage = VenusTaurus;	//ステージの値の初期化
+int g_stage = Space;	//ステージの値の初期化
 int g_image_right = 0;
 int g_image_reft  = 0;
 

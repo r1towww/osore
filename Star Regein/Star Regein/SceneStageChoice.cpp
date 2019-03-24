@@ -37,6 +37,8 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択金星.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択水星.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
+	Draw::LoadImageW(L"スキル総合.png", 7, TEX_SIZE_2048);
+	Draw::LoadImageW(L"天秤スキル.png", 8, TEX_SIZE_512);
 
 	//ステージ選択オブジェクト作成
 	CObjStageChoice* o = new CObjStageChoice();
@@ -46,6 +48,9 @@ void CSceneStageChoice::InitScene()
 	ObjStageChoiceHero* oh = new ObjStageChoiceHero(50,500);
 	Objs::InsertObj(oh, OBJ_STAGECHOICEHERO, 10);
 
+	//ステージ選択(星座)オブジェクト作成
+	CObjStarChoice* star = new CObjStarChoice();
+	Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 }
 
 //ゲームタイトル実行中メソッド

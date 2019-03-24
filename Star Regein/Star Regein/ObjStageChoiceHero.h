@@ -61,6 +61,8 @@ private:
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
 
+	bool m_key_flag;	//キー入力制御フラグ
+
 };
 
 

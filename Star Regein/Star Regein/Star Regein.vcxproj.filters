@@ -115,14 +115,14 @@
     <ClCompile Include="ObjWhitehole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
-    <ClCompile Include="SceneStarChoice.cpp">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjStarChoice.cpp">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
-    </ClCompile>
     <ClCompile Include="SceneVenusTaurus.cpp">
       <Filter>ソースファイル\惑星\金星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneVenusLibra.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStarChoice.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -243,14 +243,14 @@
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClInclude>
-    <ClInclude Include="SceneStarChoice.h">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStarChoice.h">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
-    </ClInclude>
     <ClInclude Include="SceneVenusTaurus.h">
       <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenusLibra.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStarChoice.h">
+      <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -307,9 +307,6 @@
     </Filter>
     <Filter Include="ソースファイル\スキル切り替え">
       <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\ステージ選択\星座選択">
-      <UniqueIdentifier>{9d54336d-4974-4634-b6ff-f6412be1c6d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -4,9 +4,9 @@
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
 
-
 #include "GameHead.h"
 #include "ObjStageChoiceHero.h"
+#include "ObjStageChoice.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -42,6 +42,11 @@ void ObjStageChoiceHero::Init()
 //アクション
 void ObjStageChoiceHero::Action()
 {
+	//星座選択時に入力制御する
+	if (g_stage == Venus) {
+		return;
+	}
+
 	//移動ベクトルの破棄
 	m_vx = 0.0f;
 	m_vy = 0.0f;
@@ -96,6 +101,63 @@ void ObjStageChoiceHero::Action()
 	if (m_ani_frame == 4)
 	{
 		m_ani_frame = 0;
+	}
+
+	//ステージ選択画面の情報を取得
+	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
+
+
+	//地球へ
+	if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
+	{
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			g_stage = Earth;	//ステージの値を地球に変更
+			Scene::SetScene(new CSceneEarth());
+		}
+	}
+	//金星へ
+	else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
+	{
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			//金星に設定
+			g_stage = Venus;
+			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
+		}
+	}
+	//水星へ
+	else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
+	{
+		//▼前シーンからZキー押し続けでこれを押さないように、
+		//このシーンに入って一度も押してない状態に移行しないと
+		//実行出来ないようにしている。
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			//水星に設定
+			g_stage = Mercury;
+		}
+	}
+	//太陽へ
+	else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
+	{
+		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		{
+			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
+			//太陽に設定
+			//g_stage = SunLeo;←ステージが完成したらコメント外してね
+			Scene::SetScene(new CSceneTitle());
+		}
+	}
+	else
+	{
+		m_key_flag = true;
 	}
 
 	//位置の更新

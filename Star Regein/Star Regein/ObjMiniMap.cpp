@@ -89,8 +89,9 @@ void CObjMiniMap::Action()
 void CObjMiniMap::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,m_alpha};
-	
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha};	//基本カラー（半透明）
+	float ac[4] = { 1.0f,1.0f,1.0f,1.0f };	//主人公カラー（非透明）
+
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
@@ -204,7 +205,7 @@ void CObjMiniMap::Draw()
 					src.m_right = 190.0f;
 					src.m_bottom = 50.0f;
 					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
+					Draw::Draw(9, &src, &dst, ac, 0.0f);
 				}
 			}
 		}
