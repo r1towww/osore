@@ -116,7 +116,7 @@ void ObjStageChoiceHero::Action()
 		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
 			g_stage = Earth;	//ステージの値を地球に変更
-			Scene::SetScene(new CSceneEarth());
+			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		}
 	}
 	//金星へ
@@ -181,15 +181,15 @@ void ObjStageChoiceHero::Draw()
 	RECT_F dst; //描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * g_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_top    = 64.0f * g_posture;
+	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
+	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = 80.0f + m_px;
-	dst.m_right = 0.0f + m_px;
+	dst.m_top    =  0.0f + m_py;
+	dst.m_left   = 80.0f + m_px;
+	dst.m_right  =  0.0f + m_px;
 	dst.m_bottom = 80.0f + m_py;
 
 	//表示

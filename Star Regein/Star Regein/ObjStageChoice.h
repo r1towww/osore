@@ -38,6 +38,5 @@ class CObjStageChoice :public CObj
 		void SetAlpha(float a) { m_alpha = a; }	//アルファ値をセットする関数
 
 	private:
-		bool m_key_flag;
 		float m_alpha;	//背景透明度
 };

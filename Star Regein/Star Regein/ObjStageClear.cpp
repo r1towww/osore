@@ -15,13 +15,19 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageClear::Init()
 {
-
+	m_keytime = 0;	//キー入力タイムの初期化
 }
 
 //アクション
 void CObjStageClear::Action()
 {
-	if (Input::GetVKey('Z') == true)
+	//シーンに移ってきた際のキー入力タイム処理
+	if (m_keytime >= 50)
+		m_keytime = 50;	//タイムが50になった際、50で止める
+	else
+		m_keytime++;	//キー入力タイムを増やす
+
+	if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 	{
 		Scene::SetScene(new CSceneStageChoice());
 	}

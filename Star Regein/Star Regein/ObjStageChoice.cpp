@@ -16,7 +16,6 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-	m_key_flag = false;
 	m_alpha = 1.0f;		//アルファ値の初期化
 }
 

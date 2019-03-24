@@ -72,6 +72,8 @@ struct UserData
 #define MAPSIZE 50
 #define ALLSIZE 64.0f
 
+#define TIMELIMIT 50	//キー入力タイム用、間隔設定
+
 //惑星ごとの値
 typedef enum Planet
 {

@@ -19,10 +19,10 @@ class CObjStarChoice :public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 	private:
-		bool m_key_flag;
-
 		int m_direction;	//星座選択用変数
 		float m_Tra1;//透過率
 		float m_Tra2;//透過率
 		float m_Tra3;//透過率
+
+		int m_keytime;	//キー入力ができるまでの時間
 };
