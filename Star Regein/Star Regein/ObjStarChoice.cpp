@@ -42,30 +42,47 @@ void CObjStarChoice::Action()
 	}
 	else
 	{
-		m_keytime = 0;
+		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 
-	//下キー押して選択
-	if (Input::GetVKey(VK_DOWN) == true)
+	//星座選択が地球または太陽の場合（）
+	if (g_stage == Earth || g_stage == Sun)
 	{
-		m_direction = DOWN;
+		//上キーを入力して選択
+		if (Input::GetVKey(VK_UP) == true)
+		{
+			m_direction = UP;	//UPをセット
+		}
+		//下キーを入力して選択
+		if (Input::GetVKey(VK_DOWN) == true)
+		{
+			m_direction = DOWN;	//DOWNをセット
+		}
 	}
-	//右キー押して選択
-	if (Input::GetVKey(VK_RIGHT) == true)
-	{
-		m_direction = RIGHT;
-	}
-	//左キー押して選択
-	else if (Input::GetVKey(VK_LEFT) == true)
-	{
-		m_direction = LEFT;
+	else		//星座が2つある場合
+	{	
+		//下キーを入力して選択
+		if (Input::GetVKey(VK_DOWN) == true)
+		{
+			m_direction = DOWN;	//DOWNをセット
+		}
+		//右キーを入力して選択
+		if (Input::GetVKey(VK_RIGHT) == true)
+		{
+			m_direction = RIGHT;//RIGHTをセット
+		}
+		//左キーを入力して選択
+		else if (Input::GetVKey(VK_LEFT) == true)
+		{
+			m_direction = LEFT;	//LEFTをセット
+		}
 	}
 
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 	
-	//左のほうを明るくして右のほうを暗くする
-	if (m_direction == LEFT)
+	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPもLEFTと同様に扱う)
+	if (m_direction == LEFT || m_direction == UP)
 	{
 		//透過率変更
 		m_Tra1 = 1.0f;
@@ -142,12 +159,33 @@ void CObjStarChoice::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
-
-	//金星選択時に表示される画像---------------------------------------------------------
-	if (g_stage == Venus)
+	
+	//地球選択時に表示される画像
+	if (g_stage == Earth)
 	{
 		//戻るコマンド表示
-		Font::StrDraw(L"戻る", 380, 500, 25, down);
+		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
+
+		//地球選択用の画像
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 0.0f;
+		src.m_right  = 256.0f;
+		src.m_bottom = 256.0f;
+
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 300.0f;
+		dst.m_right  = 510.0f;
+		dst.m_bottom = 400.0f;
+		//表示
+		Draw::Draw(9, &src, &dst, left, 0.0f);
+	}
+	//金星選択時に表示される画像---------------------------------------------------------
+	else if (g_stage == Venus)
+	{
+		//戻るコマンド表示
+		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 
 		//おうし座の画像-----------------------------------------------------------------
 		//切り取り位置の設定

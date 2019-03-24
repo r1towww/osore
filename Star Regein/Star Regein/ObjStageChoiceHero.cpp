@@ -43,7 +43,7 @@ void ObjStageChoiceHero::Init()
 void ObjStageChoiceHero::Action()
 {
 	//¯À‘I‘ğ‚É“ü—Í§Œä‚·‚é
-	if (g_stage == Venus) {
+	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun ) {
 		return;
 	}
 

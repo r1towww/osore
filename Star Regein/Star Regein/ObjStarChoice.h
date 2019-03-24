@@ -5,9 +5,14 @@
 using namespace GameL;
 
 //定数
-#define DOWN	0
-#define RIGHT	1
-#define LEFT	2
+#define UP		0
+#define DOWN	1
+#define RIGHT	2
+#define LEFT	3
+
+#define BACK_POSX 380
+#define BACK_POSY 500
+#define BACK_FONTSIZE 25
 
 //オブジェクト：タイトル
 class CObjStarChoice :public CObj
