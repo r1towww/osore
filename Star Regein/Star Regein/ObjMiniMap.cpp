@@ -33,13 +33,13 @@ void CObjMiniMap::Setdcow(bool d_flag)
 //イニシャライズ
 void CObjMiniMap::Init()
 {
-	if (g_stage == Earth) {	//地球の場合
+	if (g_stage == EarthStar) {	//地球の場合
 		m_smallsize = 7.0f;	//スモールサイズを7.0fで初期化
 		m_bigsize = 14.0f;	//ビッグサイズを14.0fで初期化
 	}
-	else if (g_stage == VenusTaurus) {	//金星の場合
-		m_smallsize = 4.0f;	//ステージサイズを5.8fで初期化
-		m_bigsize = 8.0f;	//ビッグサイズを14.0fで初期化
+	else if (g_stage == VenusTaurus || g_stage == VenusLibra) {	//金星の場合
+		m_smallsize = 4.0f;	//ステージサイズを4.0fで初期化
+		m_bigsize = 8.0f;	//ビッグサイズを8.0fで初期化
 	}
 	m_blocksize = m_smallsize;	//ブロックサイズとスモールサイズを合わせる
 
@@ -211,7 +211,7 @@ void CObjMiniMap::Draw()
 		}
 	}
 
-	if (g_stage == Earth)
+	if (g_stage == EarthStar)
 	{
 		for (int i = 0; i < 1; i++)//敵の数分回す
 		{

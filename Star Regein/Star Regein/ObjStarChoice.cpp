@@ -7,9 +7,6 @@
 
 #include "GameHead.h"
 #include "ObjStarChoice.h"
-#include "ObjStageChoice.h"
-
-
 
 //使用するネームスペース
 using namespace GameL;
@@ -45,7 +42,7 @@ void CObjStarChoice::Action()
 		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 
-	//星座選択が地球または太陽の場合（）
+	//星座選択が地球または太陽の場合（星座が1つの場合）
 	if (g_stage == Earth || g_stage == Sun)
 	{
 		//上キーを入力して選択
@@ -81,17 +78,23 @@ void CObjStarChoice::Action()
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 	
-	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPもLEFTと同様に扱う)
+	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPをLEFTと同様に扱う)
 	if (m_direction == LEFT || m_direction == UP)
 	{
 		//透過率変更
 		m_Tra1 = 1.0f;
 		m_Tra2 = 0.5f;
 		m_Tra3 = 0.5f;
-
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		//キー入力タイムが一定に達した場合、キー入力を許可する
+		//キー入力タイムが一定に達した場合、キー入力を許可する
+		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		
 		{
-			if (g_stage == Venus)
+			if (g_stage == Earth)
+			{
+				//ステージを地球に設定
+				g_stage = EarthStar;
+				Scene::SetScene(new CSceneEarth());
+			}
+			else if (g_stage == Venus)
 			{
 				//ステージをおうし座に設定
 				g_stage = VenusTaurus;
@@ -113,8 +116,8 @@ void CObjStarChoice::Action()
 		m_Tra2 = 1.0f;
 		m_Tra1 = 0.5f;
 		m_Tra3 = 0.5f;
-
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		//キー入力タイムが一定に達した場合、キー入力を許可する
+		//キー入力タイムが一定に達した場合、キー入力を許可する
+		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		
 		{
 			if (g_stage == Venus)
 			{
@@ -131,13 +134,14 @@ void CObjStarChoice::Action()
 		}
 	}
 	//下のコマンドの明るさを変更
-	else if (m_direction == DOWN && m_keytime == TIMELIMIT)		//キー入力タイムが一定に達した場合、キー入力を許可する
+	else if (m_direction == DOWN)		
 	{
 		//透過率変更
 		m_Tra3 = 1.0f;
 		m_Tra2 = 0.5f;
 		m_Tra1 = 0.5f;
-		if (Input::GetVKey('Z') == true)
+		//キー入力タイムが一定に達した場合、キー入力を許可する
+		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)
 		{
 			g_stage = Space;	//ステージをSpaceに設定
 			stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
