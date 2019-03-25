@@ -34,7 +34,7 @@ void CObjWhitehole::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
-	//ホワイトホールの情報を持ってくる
+	//ブラックホールの情報を持ってくる
 	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 	float bx = blackhole->Getx() - hx;	//移動先X位置の調整
 	float by = blackhole->Gety() - hy;	//移動先Y位置の調整

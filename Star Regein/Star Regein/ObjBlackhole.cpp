@@ -42,6 +42,7 @@ void CObjBlackhole::Action()
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		
 		hit->SetInvincibility(true);	//無敵オン
 		m_time = SETTIME;	//時間をセットする
 		block->SetScrollx(-wx);	//ホワイトホールの位置に移動させる
