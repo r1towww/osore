@@ -124,6 +124,42 @@
     <ClCompile Include="ObjStarChoice.cpp">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
+    <ClCompile Include="GameL\Audio.cpp" />
+    <ClCompile Include="GameL\DirectXDevice.cpp" />
+    <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
+    <ClCompile Include="GameL\DrawFont.cpp" />
+    <ClCompile Include="GameL\DrawTexture.cpp" />
+    <ClCompile Include="GameL\GameL_Main.cpp" />
+    <ClCompile Include="GameL\HitBoxManager.cpp" />
+    <ClCompile Include="GameL\MultiThread.cpp" />
+    <ClCompile Include="GameL\SceneManager.cpp" />
+    <ClCompile Include="GameL\SceneObjManager.cpp" />
+    <ClCompile Include="GameL\SetWindow.cpp" />
+    <ClCompile Include="GameL\UserData.cpp" />
+    <ClCompile Include="GameL\WICTextureLoader.cpp" />
+    <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="ObjAsteroid.cpp" />
+    <ClCompile Include="ObjMP.cpp" />
+    <ClCompile Include="ObjHeart.cpp" />
+    <ClCompile Include="ObjBlock.cpp" />
+    <ClCompile Include="ObjBeamSaber.cpp" />
+    <ClCompile Include="ObjCow.cpp" />
+    <ClCompile Include="ObjMessage.cpp" />
+    <ClCompile Include="ObjMeteo.cpp" />
+    <ClCompile Include="ObjMiniMap.cpp" />
+    <ClCompile Include="ObjStageChoice.cpp" />
+    <ClCompile Include="ObjStageChoiceHero.cpp" />
+    <ClCompile Include="ObjStageClear.cpp" />
+    <ClCompile Include="ObjStar.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="SceneEarth.cpp" />
+    <ClCompile Include="SceneStageChoice.cpp" />
+    <ClCompile Include="SceneStageClear.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="ObjHero.cpp" />
+    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneVenus.cpp" />
+    <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -310,13 +346,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameL\DirectXTex.inl">
-      <Filter>リソースファイル</Filter>
-    </None>
+    <Library Include="GameL\DirectXTex.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="GameL\DirectXTex.lib">
-      <Filter>リソースファイル</Filter>
-    </Library>
+    <None Include="GameL\DirectXTex.inl" />
   </ItemGroup>
 </Project>

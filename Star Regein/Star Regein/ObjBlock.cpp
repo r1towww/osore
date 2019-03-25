@@ -95,6 +95,7 @@ void CObjBlock::Action()
 {
 	//主人公の情報を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	
 
 	//スクロール
 	hero->SetX(375);

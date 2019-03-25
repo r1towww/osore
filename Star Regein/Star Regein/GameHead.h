@@ -133,6 +133,7 @@ extern int g_image_reft;  //ƒXƒLƒ‹‰æ‘œØ‚è‘Ö‚¦
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
+
 #include "ObjHeart.h"
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
