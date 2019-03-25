@@ -255,10 +255,18 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
+	//ブラックホールと接触した場合
+	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	if(hit->CheckObjNameHit(OBJ_BLACKHOLE) != nullptr)
+	{
+		block->SetScrollx(-g_whitehole_x[0][0]);	//ホワイトホールの位置に移動させる
+		block->SetScrolly(-g_whitehole_y[0][0] + TELEPORTBALANCE);	//位置が被らないようにずらす
+	}
+
+	block->BlockHit(&m_px, &m_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);

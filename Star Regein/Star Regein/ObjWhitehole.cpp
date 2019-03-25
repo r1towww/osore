@@ -10,56 +10,28 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjWhitehole::CObjWhitehole(float x, float y)
+float* g_whitehole_x[10];//全てのホワイトホールのX位置を把握する
+float* g_whitehole_y[10];//全てのホワイトホールのY位置を把握する
+
+CObjWhitehole::CObjWhitehole(float x, float y, int i, int j)
 {
 	m_px = x;		//位置
 	m_py = y;
+	m_i = i;
+	m_j = j;
 }
 
 //イニシャライズ
 void CObjWhitehole::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_ASTEROID, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_WHITEHOLE, 1);
 }
 
 //アクション
 void CObjWhitehole::Action()
 {
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//主人公の位置情報を持ってくる
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-	//ブラックホールの情報を持ってくる
-	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	float bx = blackhole->Getx() - hx;	//移動先X位置の調整
-	float by = blackhole->Gety() - hy;	//移動先Y位置の調整
 
-	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		hit->SetInvincibility(true);	//無敵オン
-		m_time = SETTIME;	//時間をセットする
-		block->SetScrollx(-bx);	//ブラックホールの位置に移動させる
-		block->SetScrolly(-by + TELEPORTBALANCE);	//位置が被らないようにずらす
-	}
-	
-	/* 無敵時間用 */
-	//時間がセットされている際
-	if (m_time > 0) {
-		m_time--;	//時間を減らす
-		if (m_time <= 0) {	//0以下になったら
-			m_time = 0;
-			hit->SetInvincibility(false);	//無敵をオフ
-		}
-	}
-
-	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);
 }
 
 //ドロー

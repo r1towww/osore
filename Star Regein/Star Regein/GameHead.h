@@ -21,7 +21,12 @@ enum OBJ_NAME
 	OBJ_METEO,
 	OBJ_ASTEROID,
 	OBJ_BLACKHOLE,
+	OBJ_BLACKHOLE2,
+	OBJ_BLACKHOLE3,
+
 	OBJ_WHITEHOLE,
+	OBJ_WHITEHOLE2,
+	OBJ_WHITEHOLE3,
 
 	OBJ_COW,
 
@@ -94,6 +99,11 @@ extern int g_StarCount;	//¯‚ğ”‚¦‚é•Ï”
 extern float g_posture; //ålŒö‚ÌŒü‚«
 extern float* g_cow_x[20];//‘S‚Ä‚Ì‹‚ÌXˆÊ’u‚ğ”cˆ¬‚·‚é
 extern float* g_cow_y[20];//‘S‚Ä‚Ì‹‚ÌYˆÊ’u‚ğ”cˆ¬‚·‚é
+
+extern float* g_blackhole_x[10];
+extern float* g_blackhole_y[10];
+extern float* g_whitehole_x[10];
+extern float* g_whitehole_y[10];
 
 extern float g_hp;     //¡‚Ì‚g‚o
 extern float g_max_hp; //Å‘å‚g‚o
