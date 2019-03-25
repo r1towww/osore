@@ -266,9 +266,6 @@
     <ClInclude Include="SceneEarth.h">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
-    </ClInclude>
     <ClInclude Include="ObjWhitehole.h">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
