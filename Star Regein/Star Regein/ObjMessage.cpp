@@ -21,6 +21,7 @@ void CObjMessage::Init()
 		m_MaxStar = 5;	//’n‹…
 	else if (g_stage == VenusTaurus)
 		m_MaxStar = 18;	//‹à¯i‰²‹Àj
+	
 
 }
 
