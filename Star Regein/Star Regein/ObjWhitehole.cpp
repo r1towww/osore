@@ -30,10 +30,14 @@ void CObjWhitehole::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//主人公の位置情報を持ってくる
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
 	//ホワイトホールの情報を持ってくる
 	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	float bx = blackhole->Getx() - HOLEBALANCE_X;	//移動先X位置の調整
-	float by = blackhole->Gety() - HOLEBALANCE_Y;	//移動先Y位置の調整
+	float bx = blackhole->Getx() - hx;	//移動先X位置の調整
+	float by = blackhole->Gety() - hy;	//移動先Y位置の調整
 
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
