@@ -17,13 +17,17 @@ enum OBJ_NAME
 	OBJ_STAGECLEAR,
 	OBJ_BLOCK,
 	OBJ_STAR,
+	OBJ_STARCHOICE,
 	OBJ_METEO,
 	OBJ_ASTEROID,
-	
+	OBJ_BLACKHOLE,
+	OBJ_WHITEHOLE,
 
 	OBJ_COW,
 
 	OBJ_BEAMSABER,
+
+	OBJ_SKILL,
 
 	OBJ_HEART,
 	OBJ_MP,
@@ -68,14 +72,22 @@ struct UserData
 #define MAPSIZE 50
 #define ALLSIZE 64.0f
 
+#define TIMELIMIT 50	//キー入力タイム用、間隔設定
+
 //惑星ごとの値
 typedef enum Planet
 {
 	Earth,			//地球			0
-	VenusCow,		//金星（牡牛座）1
-	MercuryGemini,	//水星（双子座）2
-	MercuryVirgo,	//水星（乙女座）3
-	SunLeo,			//太陽（獅子座）4
+	EarthStar,		//地球			1
+	Venus,			//金星			2
+	VenusTaurus,	//金星（牡牛座）3
+	VenusLibra,		//金星（天秤座）4
+	Mercury,		//水星			5
+	MercuryGemini,	//水星（双子座）6
+	MercuryVirgo,	//水星（乙女座）7
+	Sun,			//太陽			8
+	SunLeo,			//太陽（獅子座）9
+	Space,			//ステージ選択	10
 }Planet;
 
 extern int g_StarCount;	//星を数える変数
@@ -92,7 +104,8 @@ extern float g_max_mp; //最大ＭＰ
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
-
+extern int g_image_right; //スキル画像切り替え
+extern int g_image_reft;  //スキル画像切り替え
 
 
 //------------------------------------------------
@@ -103,16 +116,19 @@ extern int g_stage;		//今いるステージの値
 
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjHero.h"
+#include "ObjStageChoiceHero.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
 #include "ObjMeteo.h"
 #include "ObjAsteroid.h"
+#include "ObjBlackhole.h"
+#include "ObjWhitehole.h"
 
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
-#include "ObjStageChoiceHero.h"
+#include "ObjStarChoice.h"
 #include "ObjStageClear.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
@@ -122,12 +138,14 @@ extern int g_stage;		//今いるステージの値
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjCow.h"
+#include "ObjSkill.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
-#include "SceneVenus.h"
+#include "SceneVenusTaurus.h"
+#include "SceneVenusLibra.h"
 
 
 #include "SceneTitle.h"
@@ -138,9 +156,10 @@ extern int g_stage;		//今いるステージの値
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
 /*
-	CSceneEarth		地球
-	CSceneVenus		金星
+	CSceneStageChoice	惑星選択
+	CSceneEarth			地球
+	CSceneVenusTaurus	金星（牡牛座）
 
 */
-#define SET_GAME_START  CSceneVenus
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

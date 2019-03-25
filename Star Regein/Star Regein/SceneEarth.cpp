@@ -55,7 +55,7 @@ void CSceneEarth::InitScene()
 
 
 	//グラフィック読み込み
-	Draw::LoadImageW(L"HeroTouka.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
@@ -66,7 +66,6 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
-
 	
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

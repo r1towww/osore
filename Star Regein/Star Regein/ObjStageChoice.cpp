@@ -8,11 +8,7 @@
 #include "GameHead.h"
 #include "ObjStageChoice.h"
 
-#define Earthx 0
-#define Earthy 380
-#define Earthxx 100
-#define Earthyy 800
-
+//----------------------------------
 //使用するネームスペース
 using namespace GameL;
 
@@ -20,32 +16,13 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-	m_key_flag = false;
+	m_alpha = 1.0f;		//アルファ値の初期化
 }
 
 //アクション
 void CObjStageChoice::Action()
 {
-	//主人公位置取得
-	ObjStageChoiceHero* hero = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
 
-	//指定の場所でZキー
-	if (hx >= Earthx && hx<=Earthxx && hy >= Earthy&&hy<=Earthyy)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
-		{
-			Scene::SetScene(new CSceneEarth());
-		}
-	}
-	else
-	{
-		m_key_flag = true;
-	}
 
 }
 
@@ -53,11 +30,12 @@ void CObjStageChoice::Action()
 void CObjStageChoice::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
+	//背景------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -72,8 +50,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(2, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
+	//地球------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -88,8 +67,10 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(3, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
 
+	//金星------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -104,8 +85,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(4, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
+	//水星------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -120,9 +102,9 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(5, &src, &dst, c, 0.0f);
+	//----------------------------------------
 
-
-
+	//太陽------------------------------------
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
@@ -137,6 +119,6 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(6, &src, &dst, c, 0.0f);
-
+	//----------------------------------------
 
 }

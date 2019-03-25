@@ -61,7 +61,7 @@ void CObjHero::Init()
 	m_dash_flag = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, 392, 277, 31, 64, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px+20, m_py +20, 40, 40, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
@@ -103,14 +103,14 @@ void CObjHero::Action()
 	{
 		m_move_flag = true;
 		m_vy -= m_speed_power;
-		g_posture = 3;
+		g_posture = 1;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vy += m_speed_power;
-		g_posture = 0;
+		g_posture = 3;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
@@ -124,12 +124,12 @@ void CObjHero::Action()
 	{
 		m_move_flag = true;
 		m_vx += m_speed_power;
-		g_posture = 1;
+		g_posture = 4;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
 	{
-		m_ani_frame = 0;	//静止フレームにする
+		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
 	if (Input::GetVKey('Z'))
@@ -137,6 +137,20 @@ void CObjHero::Action()
 		//ビームサーベルオブジェクト作成
 		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
+	}
+
+	if (Input::GetVKey('Q'))
+	{
+		if (m_key_f == true)
+		{
+			g_image_reft += 900;
+			g_image_right += 900;
+			m_key_f = false;
+		}
+	}
+	else 
+	{
+		m_key_f = true;
 	}
 
 	//HitBoxの内容を更新
@@ -213,7 +227,6 @@ void CObjHero::Action()
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
-
 	}
 
 	if (m_f == true)
@@ -274,7 +287,7 @@ void CObjHero::Action()
 	
 
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(392, 277);//入り口から新しい位置（主人公の位置）情報に置き換える
+	hit->SetPos(m_px + 20, m_py + 20);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
 	if (g_hp <= 0)
@@ -312,9 +325,9 @@ void CObjHero::Draw()
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 64.0f + m_px;
+	dst.m_left = 80.0f + m_px;
 	dst.m_right = 0.0f + m_px;
-	dst.m_bottom = 64.0f + m_py;
+	dst.m_bottom = 80.0f + m_py;
 
 	//表示
 	Draw::Draw(1, &src, &dst, c, 0.0f);

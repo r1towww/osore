@@ -36,8 +36,6 @@ void CSceneStageClear::InitScene()
 	Objs::InsertObj(oc, OBJ_STAGECLEAR, 1);
 
 }
-
-
 //実行中メソッド
 void CSceneStageClear::Scene()
 {

@@ -3,7 +3,6 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
-#include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
 #include "ObjHeart.h"
@@ -54,7 +53,5 @@ void CObjHeart::Draw()
 	dst.m_bottom = 50.0f;
 
 	//•`‰æ
-	Draw::Draw(10, &src, &dst, c, 0.0f);
-
-		
+	Draw::Draw(10, &src, &dst, c, 0.0f);	
 }

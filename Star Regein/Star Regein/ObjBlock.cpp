@@ -21,6 +21,8 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	m_roll = 0.0f;
+
 	c = 0;
 
 	//敵出現
@@ -72,7 +74,18 @@ void CObjBlock::Init()
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
-			
+			if (m_map[i][j] == 7)
+			{
+				//ブラックホールオブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 8)
+			{
+				//ホワイトホールオブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
+			}
 		}
 	}
 }
@@ -91,12 +104,11 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
 
-	if (Input::GetVKey(VK_SPACE))//てすと
-	{
-		m_scrollx = 100;
-		m_scrolly = 100;
+	//背景を回転させる
+	m_roll += 0.1f;
+	if (m_roll == 360.0f) {	//1回転した際
+		m_roll = 0.0f;		//0.0fに値を戻す
 	}
-
 }
 
 //ドロー
@@ -116,13 +128,13 @@ void CObjBlock::Draw()
 	src.m_bottom = 600.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f;
-	dst.m_left   = 0.0f;
-	dst.m_right  = 800.0f;
-	dst.m_bottom = 600.0f;
+	dst.m_top    = -800.0f;
+	dst.m_left   = -600.0f;
+	dst.m_right  = 1800.0f;
+	dst.m_bottom = 1600.0f;
 
 	//描画
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(5, &src, &dst, c, m_roll);
 
 	/* ブロック（障害物用） */
 	for (int i = 0; i < MAPSIZE; i++)
@@ -202,7 +214,7 @@ void CObjBlock::BlockHit
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + ALLSIZE > bx) && (*x + (-scrollx) < bx + ALLSIZE) && (*y + (-scrolly) + ALLSIZE > by) && (*y + (-scrolly) < by + ALLSIZE))
+				if ((*x + (-scrollx) + HITBOXSIZE > bx) && (*x + (-scrollx) < bx + HITBOXSIZE) && (*y + (-scrolly) + HITBOXSIZE > by) && (*y + (-scrolly) < by + HITBOXSIZE))
 				{
 					//上下左右判定
 
@@ -229,26 +241,26 @@ void CObjBlock::BlockHit
 						if ((r < 45 && r >= 0) || r > 315)
 						{
 							*right = true;//オブジェクトの左部分が衝突している
-							*x = bx + ALLSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
+							*x = bx + HITBOXSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
 							*vx = 0.15f;//-VX*反発係数
 						}
 
 						if (r > 45 && r < 135)
 						{
 							*down = true;//オブジェクトの下の部分が衝突している
-							*y = by - ALLSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
+							*y = by - HITBOXSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
 							*vy = -0.15f;
 						}
 						if (r > 135 && r < 225)
 						{
 							*left = true;//オブジェクトの右部分が衝突している
-							*x = bx - ALLSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
+							*x = bx - HITBOXSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
 							*vx = -0.15f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							*up = true;//オブジェクトの上の部分が衝突している
-							*y = by + ALLSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
+							*y = by + HITBOXSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
 							*vy = 0.15f;
 						}
 					}

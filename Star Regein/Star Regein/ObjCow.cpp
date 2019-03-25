@@ -37,7 +37,7 @@ void CObjCow::Init()
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
-	m_ani_max_time = 5;	//アニメーション間隔幅
+	m_ani_max_time = 15;	//アニメーション間隔幅
 
 	m_movey = true; //true=背面　false=正面
 	m_movex = true;	//true=右　false=左
@@ -121,7 +121,7 @@ void CObjCow::Action()
 		m_ani_time = 0;
 	}
 
-	if (m_ani_frame == 4)
+	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 0;
 	}
@@ -311,10 +311,10 @@ void CObjCow::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_top = 48.0f * m_posture;
+	src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
+	src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
+	src.m_bottom = src.m_top + 48.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();

@@ -26,6 +26,7 @@ public:
 	void Action();  //アクション
 	void Draw();    //ドロー
 
+
 	float GetX() { return m_px; }
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
@@ -59,6 +60,8 @@ private:
 
 	//踏んでいるblockの種類を確認用
 	int m_block_type;
+
+	bool m_key_flag;	//キー入力制御フラグ
 
 };
 
