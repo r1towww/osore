@@ -5,6 +5,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+//定数
+#define HITBOXSIZE 40.0f
+
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
 {
@@ -32,10 +35,11 @@ class CObjBlock : public CObj
 		);
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
+		int c;//カウント用
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用
-
+		float m_roll;			//背景回転用
 		int m_f;//主人公消滅時のエラー回避用
-
+		
 };
