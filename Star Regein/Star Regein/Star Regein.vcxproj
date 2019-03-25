@@ -153,7 +153,6 @@
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ObjBlackHole.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -169,7 +168,6 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjMP.h" />
     <ClInclude Include="ObjAsteroid.h" />
     <ClInclude Include="ObjBlock.h" />

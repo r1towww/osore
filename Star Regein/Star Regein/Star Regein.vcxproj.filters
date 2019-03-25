@@ -70,9 +70,6 @@
     <ClCompile Include="ObjMiniMap.cpp">
       <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
@@ -158,8 +155,10 @@
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
-    <ClCompile Include="SceneVenus.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
+    <ClCompile Include="ObjStar.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -234,9 +233,6 @@
     <ClInclude Include="ObjMiniMap.h">
       <Filter>ソースファイル\マップ</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStar.h">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClInclude>
     <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル\タイトル</Filter>
     </ClInclude>
@@ -287,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="ObjStarChoice.h">
       <Filter>ソースファイル\ステージ選択</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStar.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

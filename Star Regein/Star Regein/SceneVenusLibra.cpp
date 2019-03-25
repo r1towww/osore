@@ -34,7 +34,7 @@ void CSceneVenusLibra::InitScene()
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"VenusCow.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"VenusLibra.csv", &size);//外部データ読み込み
 
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
@@ -98,9 +98,9 @@ void CSceneVenusLibra::InitScene()
 //実行中メソッド
 void CSceneVenusLibra::Scene()
 {
-	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
-	if (g_StarCount == 18)
+	//金星（天秤座）で星を18個集めたら次へ移行
+	if (g_StarCount == 6)
 	{
-		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}
 }
