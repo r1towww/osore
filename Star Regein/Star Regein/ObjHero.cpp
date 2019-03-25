@@ -171,7 +171,7 @@ void CObjHero::Action()
 				r = hit_data[i]->r;
 
 				//Šp“x‚Åã‰º¶‰E‚ð”»’è
-				if ((r < 45 && r >= 0) || r > 315)
+				if ((r <= 45 && r >= 0) || r >= 315)
 				{
 					m_vx = -0.15f; //‰E
 				}
@@ -179,11 +179,11 @@ void CObjHero::Action()
 				{
 					m_vy = 0.15f;//ã
 				}
-				if (r > 135 && r < 225)
+				if (r >= 135 && r < 225)
 				{
 					m_vx = 0.15f;//¶
 				}
-				if (r > 225 && r < 315)
+				if (r >= 225 && r < 315)
 				{
 					m_vy = -0.15f; //‰º
 				}

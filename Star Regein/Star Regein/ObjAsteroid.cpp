@@ -20,7 +20,7 @@ CObjAsteroid::CObjAsteroid(float x, float y)
 void CObjAsteroid::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 25, m_py + 30, 145.0f, 150.0f, ELEMENT_BLOCK, OBJ_ASTEROID, 1);
+	Hits::SetHitBox(this, m_px + 25, m_py + 30, 155.0f, 160.0f, ELEMENT_BLOCK, OBJ_ASTEROID, 1);
 }
 
 //アクション
