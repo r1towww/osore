@@ -159,7 +159,7 @@ extern int g_image_reft;  //スキル画像切り替え
 	CSceneStageChoice	惑星選択
 	CSceneEarth			地球
 	CSceneVenusTaurus	金星（牡牛座）
-
+	CSceneVenusLibra	金星（天秤座）
 */
 #define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

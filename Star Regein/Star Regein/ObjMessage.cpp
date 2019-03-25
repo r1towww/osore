@@ -18,10 +18,11 @@ void CObjMessage::Init()
 	m_time = 0;		//メッセージ時間用の変数の初期化
 	//星の最大の数の初期化（星座を集める場所によって変化）
 	if (g_stage == EarthStar)
-		m_MaxStar = 5;	//地球
+		m_MaxStar = EARTHMAXSTAR;	//地球
 	else if (g_stage == VenusTaurus)
-		m_MaxStar = 18;	//金星（牡牛座）
-	
+		m_MaxStar = TAURUSMAXSTAR;	//金星（牡牛座）
+	else if (g_stage == VenusLibra)
+		m_MaxStar = LIBRAMAXSTAR;	//金星（天秤座）
 
 }
 
