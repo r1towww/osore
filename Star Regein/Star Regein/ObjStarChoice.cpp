@@ -123,7 +123,7 @@ void CObjStarChoice::Action()
 			{
 				//ステージをてんびん座に設定
 				g_stage = VenusLibra;
-				Scene::SetScene(new CSceneEarth());
+				Scene::SetScene(new CSceneVenusLibra());
 			}
 			else if (g_stage == Mercury)
 			{
