@@ -24,10 +24,8 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE,
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
-
+	OBJ_BLACKHOLE4,
 	OBJ_WHITEHOLE,
-	OBJ_WHITEHOLE2,
-	OBJ_WHITEHOLE3,
 
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
@@ -106,6 +104,7 @@ extern float* g_twinsblue_x[20];//全ての双子（青）のX位置を把握する
 extern float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
 extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
+extern int g_blackhole_cnt; //ブラックホールの数をカウント
 
 extern float* g_blackhole_x[10];
 extern float* g_blackhole_y[10];

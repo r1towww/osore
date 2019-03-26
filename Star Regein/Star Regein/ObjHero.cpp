@@ -11,8 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-float g_posture;
-
+float g_posture;	//主人公の向き
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -255,17 +254,22 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
-	//ブラックホールと接触した場合
+	//ブラックホールの情報を取得
 	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-	//ブロック情報を持ってくる
+	//ブロック情報を取得
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	if(hit->CheckObjNameHit(OBJ_BLACKHOLE) != nullptr)
+	//ブラックホールの数forループを回し、どのブラックホールに当たったかを探す
+	for (int i = 0; i < 4; i++)
 	{
-		block->SetScrollx(-g_whitehole_x[0][0]);	//ホワイトホールの位置に移動させる
-		block->SetScrolly(-g_whitehole_y[0][0] + TELEPORTBALANCE);	//位置が被らないようにずらす
+		//ブラックホールと接触した場合
+		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
+		{
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);	//同じ番号のホワイトホールの位置に移動させる
+			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+		}
 	}
 
+	//ブロックとの当たり判定
 	block->BlockHit(&m_px, &m_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type

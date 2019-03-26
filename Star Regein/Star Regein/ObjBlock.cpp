@@ -123,7 +123,7 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				
 				//ブラックホールの位置を取得
 				float* bx = objablackhole->GetBX();
@@ -135,11 +135,13 @@ void CObjBlock::Init()
 				b_c++;
 
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+
+				g_blackhole_cnt++;	//カウント数を増やす
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 																							 //ブラックホールの位置を取得
 				float* bx = objawhitehole->GetWX();
 				float* by = objawhitehole->GetWY();

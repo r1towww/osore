@@ -183,7 +183,6 @@ void CObjMiniMap::Draw()
 	float sx = block->GetScrollx();
 	float sy = block->GetScrolly();
 
-
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)

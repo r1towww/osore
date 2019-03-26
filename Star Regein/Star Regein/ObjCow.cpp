@@ -23,8 +23,6 @@ CObjCow::CObjCow(float x, float y)
 	m_py = y;
 }
 
-
-
 //イニシャライズ
 void CObjCow::Init()
 {
