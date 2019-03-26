@@ -12,34 +12,33 @@
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneStageClear.h"
+#include "SceneGameOver.h"
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneStageClear::CSceneStageClear()
+CSceneGameOver::CSceneGameOver()
 {
 
 }
 
 //デストラクタ
-CSceneStageClear::~CSceneStageClear()
+CSceneGameOver::~CSceneGameOver()
 {
 
 }
 
 //初期化メソッド
-void CSceneStageClear::InitScene()
+void CSceneGameOver::InitScene()
 {
 	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_1024);
 
 
 	//クリアオブジェクト作成
-	CObjStageClear* oc = new CObjStageClear();
-	Objs::InsertObj(oc, OBJ_STAGECLEAR, 1);
-
+	CObjGameOver* o = new CObjGameOver();
+	Objs::InsertObj(o, OBJ_STAGECLEAR, 1);
 }
 //実行中メソッド
-void CSceneStageClear::Scene()
+void CSceneGameOver::Scene()
 {
 
 }

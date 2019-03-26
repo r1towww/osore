@@ -15,13 +15,19 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_STAGECHOICEHERO,
 	OBJ_STAGECLEAR,
+	OBJ_GAMEOVER,
 	OBJ_BLOCK,
 	OBJ_STAR,
 	OBJ_STARCHOICE,
 	OBJ_METEO,
 	OBJ_ASTEROID,
 	OBJ_BLACKHOLE,
+	OBJ_BLACKHOLE2,
+	OBJ_BLACKHOLE3,
+
 	OBJ_WHITEHOLE,
+	OBJ_WHITEHOLE2,
+	OBJ_WHITEHOLE3,
 
 	OBJ_COW,
 
@@ -95,6 +101,11 @@ extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
 extern float* g_cow_y[20];//全ての牛のY位置を把握する
 
+extern float* g_blackhole_x[10];
+extern float* g_blackhole_y[10];
+extern float* g_whitehole_x[10];
+extern float* g_whitehole_y[10];
+
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
@@ -130,6 +141,7 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
 #include "ObjStageClear.h"
+#include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
@@ -151,6 +163,7 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
 #include "SceneStageClear.h"
+#include "SceneGameOver.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
@@ -161,5 +174,5 @@ extern int g_image_reft;  //スキル画像切り替え
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
 */
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneGameOver
 //-----------------------------------------------

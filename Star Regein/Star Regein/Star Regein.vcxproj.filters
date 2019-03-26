@@ -159,6 +159,12 @@
     <ClCompile Include="ObjStar.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -284,6 +290,12 @@
     <ClInclude Include="ObjStar.h">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -339,6 +351,9 @@
     </Filter>
     <Filter Include="ソースファイル\スキル切り替え">
       <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\Game Over">
+      <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

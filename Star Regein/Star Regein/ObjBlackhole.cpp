@@ -10,17 +10,22 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBlackhole::CObjBlackhole(float x, float y)
+float* g_blackhole_x[10];//全てのブラックホールのX位置を把握する
+float* g_blackhole_y[10];//全てのブラックホールのY位置を把握する
+
+CObjBlackhole::CObjBlackhole(float x, float y, int i, int j)
 {
 	m_px = x;		//位置
 	m_py = y;
+	m_i = i;
+	m_j = j;
 }
 
 //イニシャライズ
 void CObjBlackhole::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_ASTEROID, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE+1, 1);
 }
 
 //アクション
@@ -38,13 +43,12 @@ void CObjBlackhole::Action()
 	CObjWhitehole* whitehole = (CObjWhitehole*)Objs::GetObj(OBJ_WHITEHOLE);
 	float wx = whitehole->Getx() - hx;	//移動先位置の調整
 	float wy = whitehole->Gety() - hy;
-	
+
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
-		
 		hit->SetInvincibility(true);	//無敵オン
-		m_time = SETTIME;	//時間をセットする
+		m_time = SETTIME;		//時間をセットする
 		block->SetScrollx(-wx);	//ホワイトホールの位置に移動させる
 		block->SetScrolly(-wy + TELEPORTBALANCE);	//位置が被らないようにずらす
 	}
@@ -61,7 +65,6 @@ void CObjBlackhole::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);
-
 }
 
 //ドロー

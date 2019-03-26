@@ -24,6 +24,8 @@ void CObjBlock::Init()
 	m_roll = 0.0f;
 
 	c = 0;
+	b_c = 0;
+	w_c = 0;
 
 	//敵出現
 	for (int i = 0; i < MAPSIZE; i++)
@@ -77,13 +79,32 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				
+				//ブラックホールの位置を取得
+				float* bx = objablackhole->GetBX();
+				float* by = objablackhole->GetBY();
+
+				g_blackhole_x[b_c] = objablackhole->GetBX();
+				g_blackhole_y[b_c] = objablackhole->GetBY();
+
+				b_c++;
+
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+																							 //ブラックホールの位置を取得
+				float* bx = objawhitehole->GetWX();
+				float* by = objawhitehole->GetWY();
+
+				g_whitehole_x[w_c] = objawhitehole->GetWX();
+				g_whitehole_y[w_c] = objawhitehole->GetWY();
+
+				w_c++;
+
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
 			}
 		}
