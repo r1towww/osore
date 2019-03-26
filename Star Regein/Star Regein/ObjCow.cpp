@@ -128,7 +128,7 @@ void CObjCow::Action()
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	pb->BlockHit(&m_px, &m_py,false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);
@@ -140,7 +140,7 @@ void CObjCow::Action()
 
 	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 	bool check;
-	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), -10.0f, -10.0f, 810.0f, 610.0f);
+	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
 	if (check == true)
 	{
 		//主人公機が存在する場合、誘導角度の計算する
@@ -150,8 +150,8 @@ void CObjCow::Action()
 			float x;
 			float y;
 
-			x = 400 - (m_px + pb->GetScrollx());
-			y = 300 - (m_py + pb->GetScrolly());
+			x = 375 - (m_px + pb->GetScrollx());
+			y = 275 - (m_py + pb->GetScrolly());
 
 			float ar = GetAtan2Angle(x, y);
 

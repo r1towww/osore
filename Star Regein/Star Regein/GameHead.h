@@ -174,5 +174,5 @@ extern int g_image_reft;  //スキル画像切り替え
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
 */
-#define SET_GAME_START  CSceneGameOver
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------

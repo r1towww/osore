@@ -252,11 +252,11 @@ void CObjMiniMap::Draw()
 
 			if (m_df == false)
 			{
-				//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-				bool check;
-				check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-				if (check == true)
-				{
+				////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+				//bool check;
+				//check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+				//if (check == true)
+				//{
 					//ミニマップに敵の位置を表示する
 					//表示位置の設定
 					dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
@@ -271,7 +271,7 @@ void CObjMiniMap::Draw()
 					src.m_bottom = 50.0f;
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
+				//}
 			}
 		}
 	}
