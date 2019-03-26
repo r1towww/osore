@@ -34,7 +34,7 @@ void CSceneEarth::InitScene()
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"Earth.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Earth test.csv", &size);//外部データ読み込み
 	
 	int map[50][50];
 	int count = 1;
@@ -66,6 +66,10 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+
+	//テスト用
+	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 	
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

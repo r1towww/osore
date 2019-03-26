@@ -142,6 +142,8 @@
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjStarChoice.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="ObjTwinsBule.cpp" />
+    <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
@@ -187,6 +189,8 @@
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjStarChoice.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="ObjTwinsBlue.h" />
+    <ClInclude Include="ObjTwinsRed.h" />
     <ClInclude Include="ObjWhitehole.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneGameOver.h" />

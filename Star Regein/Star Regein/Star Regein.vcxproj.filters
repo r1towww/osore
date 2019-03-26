@@ -165,6 +165,12 @@
     <ClCompile Include="ObjGameOver.cpp">
       <Filter>ソースファイル\Game Over</Filter>
     </ClCompile>
+    <ClCompile Include="ObjTwinsBule.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsRed.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -296,6 +302,12 @@
     <ClInclude Include="ObjGameOver.h">
       <Filter>ソースファイル\Game Over</Filter>
     </ClInclude>
+    <ClInclude Include="ObjTwinsBlue.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTwinsRed.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -354,6 +366,9 @@
     </Filter>
     <Filter Include="ソースファイル\Game Over">
       <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\敵\双子">
+      <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

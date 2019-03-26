@@ -23,29 +23,73 @@ void CObjBlock::Init()
 {
 	m_roll = 0.0f;
 
+	blue_c = 0;
+	red_c = 0;
 	c = 0;
 	b_c = 0;
 	w_c = 0;
 
 	//敵出現
-	for (int i = 0; i < MAPSIZE; i++)
+	if (g_stage == VenusTaurus)
 	{
-		for (int j = 0; j < MAPSIZE; j++)
+		for (int i = 0; i < MAPSIZE; i++)
 		{
-			if (m_map[i][j] == 5)
+			for (int j = 0; j < MAPSIZE; j++)
 			{
-				//牛オブジェクト作成
-				CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
-				//敵の位置を取得
-				float* cx = cow->GetPX();
-				float* cy = cow->GetPY();
+				if (m_map[i][j] == 5)
+				{
+					//牛オブジェクト作成
+					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* cx = cow->GetPX();
+					float* cy = cow->GetPY();
 
-				g_cow_x[c] = cow->GetPX();
-				g_cow_y[c] = cow->GetPY();
+					g_cow_x[c] = cow->GetPX();
+					g_cow_y[c] = cow->GetPY();
 
-				c++;
+					c++;
 
-				Objs::InsertObj(cow, OBJ_COW, 10);
+					Objs::InsertObj(cow, OBJ_COW, 10);
+				}
+			}
+		}
+	}
+	else if (g_stage == EarthStar)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//双子（青）オブジェクト作成
+					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* bx = blue->GetPX();
+					float* by = blue->GetPY();
+
+					g_twinsblue_x[blue_c] = blue->GetPX();
+					g_twinsblue_y[blue_c] = blue->GetPY();
+
+					blue_c++;
+
+					Objs::InsertObj(blue, OBJ_TWINS_BLUE, 10);
+				}
+				if (m_map[i][j] == 10)
+				{
+					//双子（赤）オブジェクト作成
+					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* rx = red->GetPX();
+					float* ry = red->GetPY();
+
+					g_twinsred_x[red_c] = red->GetPX();
+					g_twinsred_y[red_c] = red->GetPY();
+
+					red_c++;
+
+					Objs::InsertObj(red, OBJ_TWINS_RED, 10);
+				}
 			}
 		}
 	}
