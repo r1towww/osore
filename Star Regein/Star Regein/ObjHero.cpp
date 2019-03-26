@@ -61,7 +61,7 @@ void CObjHero::Init()
 	m_dash_flag = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px+20, m_py +20, 40, 40, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 }
 
 //アクション
@@ -295,7 +295,7 @@ void CObjHero::Action()
 	
 
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_px + 20, m_py + 20);//入り口から新しい位置（主人公の位置）情報に置き換える
+	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
 	if (g_hp <= 0)
