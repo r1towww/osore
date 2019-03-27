@@ -126,6 +126,7 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjAsteroid.cpp" />
     <ClCompile Include="ObjBlackhole.cpp" />
+    <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjMP.cpp" />
     <ClCompile Include="ObjHeart.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
@@ -141,15 +142,18 @@
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjStarChoice.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="ObjTwinsBule.cpp" />
+    <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
+    <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
     <ClCompile Include="SceneStageClear.cpp" />
-    <ClCompile Include="SceneStarChoice.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
-    <ClCompile Include="SceneVenus.cpp" />
+    <ClCompile Include="SceneVenusLibra.cpp" />
+    <ClCompile Include="SceneVenusTaurus.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +172,7 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjMP.h" />
     <ClInclude Include="ObjAsteroid.h" />
     <ClInclude Include="ObjBlock.h" />
@@ -185,15 +189,18 @@
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjStarChoice.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="ObjTwinsBlue.h" />
+    <ClInclude Include="ObjTwinsRed.h" />
     <ClInclude Include="ObjWhitehole.h" />
     <ClInclude Include="SceneEarth.h" />
+    <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneStageChoice.h" />
     <ClInclude Include="SceneStageClear.h" />
-    <ClInclude Include="SceneStarChoice.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="SceneMain.h" />
-    <ClInclude Include="SceneVenus.h" />
+    <ClInclude Include="SceneVenusLibra.h" />
+    <ClInclude Include="SceneVenusTaurus.h" />
     <ClInclude Include="UtilityModule.h" />
   </ItemGroup>
   <ItemGroup>

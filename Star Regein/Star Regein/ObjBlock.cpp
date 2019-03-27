@@ -21,27 +21,75 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	m_roll = 0.0f;
+
+	blue_c = 0;
+	red_c = 0;
 	c = 0;
+	b_c = 0;
+	w_c = 0;
 
 	//敵出現
-	for (int i = 0; i < MAPSIZE; i++)
+	if (g_stage == VenusTaurus)
 	{
-		for (int j = 0; j < MAPSIZE; j++)
+		for (int i = 0; i < MAPSIZE; i++)
 		{
-			if (m_map[i][j] == 5)
+			for (int j = 0; j < MAPSIZE; j++)
 			{
-				//牛オブジェクト作成
-				CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
-				//敵の位置を取得
-				float* cx = cow->GetPX();
-				float* cy = cow->GetPY();
+				if (m_map[i][j] == 5)
+				{
+					//牛オブジェクト作成
+					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* cx = cow->GetPX();
+					float* cy = cow->GetPY();
 
-				g_cow_x[c] = cow->GetPX();
-				g_cow_y[c] = cow->GetPY();
+					g_cow_x[c] = cow->GetPX();
+					g_cow_y[c] = cow->GetPY();
 
-				c++;
+					c++;
 
-				Objs::InsertObj(cow, OBJ_COW, 10);
+					Objs::InsertObj(cow, OBJ_COW, 10);
+				}
+			}
+		}
+	}
+	else if (g_stage == EarthStar)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//双子（青）オブジェクト作成
+					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* bx = blue->GetPX();
+					float* by = blue->GetPY();
+
+					g_twinsblue_x[blue_c] = blue->GetPX();
+					g_twinsblue_y[blue_c] = blue->GetPY();
+
+					blue_c++;
+
+					Objs::InsertObj(blue, OBJ_TWINS_BLUE, 10);
+				}
+				if (m_map[i][j] == 10)
+				{
+					//双子（赤）オブジェクト作成
+					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* rx = red->GetPX();
+					float* ry = red->GetPY();
+
+					g_twinsred_x[red_c] = red->GetPX();
+					g_twinsred_y[red_c] = red->GetPY();
+
+					red_c++;
+
+					Objs::InsertObj(red, OBJ_TWINS_RED, 10);
+				}
 			}
 		}
 	}
@@ -75,13 +123,32 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				
+				//ブラックホールの位置を取得
+				float* bx = objablackhole->GetBX();
+				float* by = objablackhole->GetBY();
+
+				g_blackhole_x[b_c] = objablackhole->GetBX();
+				g_blackhole_y[b_c] = objablackhole->GetBY();
+
+				b_c++;
+
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+																							 //ブラックホールの位置を取得
+				float* bx = objawhitehole->GetWX();
+				float* by = objawhitehole->GetWY();
+
+				g_whitehole_x[w_c] = objawhitehole->GetWX();
+				g_whitehole_y[w_c] = objawhitehole->GetWY();
+
+				w_c++;
+
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
 			}
 		}
@@ -93,15 +160,7 @@ void CObjBlock::Action()
 {
 	//主人公の情報を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	////主人公の位置を取得
-	//float hx = hero->GetX();
-	//float hy = hero->GetY();
-
-	//てすと
-	//CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	//float hx = blackhole->Getx();
-	//float hy = blackhole->Gety();
-
+	
 
 	//スクロール
 	hero->SetX(375);
@@ -110,12 +169,11 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * 4;
 
-	if (Input::GetVKey(VK_SPACE))//てすと
-	{
-		//m_scrollx = hx;
-		//m_scrolly = hy;
-	}
-
+	//背景を回転させる
+	//m_roll += 0.1f;
+	//if (m_roll == 360.0f) {	//1回転した際
+	//	m_roll = 0.0f;		//0.0fに値を戻す
+	//}
 }
 
 //ドロー
@@ -221,7 +279,7 @@ void CObjBlock::BlockHit
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + ALLSIZE > bx) && (*x + (-scrollx) < bx + ALLSIZE) && (*y + (-scrolly) + ALLSIZE > by) && (*y + (-scrolly) < by + ALLSIZE))
+				if ((*x + (-scrollx) + HITBOXSIZE > bx) && (*x + (-scrollx) < bx + HITBOXSIZE) && (*y + (-scrolly) + HITBOXSIZE > by) && (*y + (-scrolly) < by + HITBOXSIZE))
 				{
 					//上下左右判定
 
@@ -248,26 +306,26 @@ void CObjBlock::BlockHit
 						if ((r < 45 && r >= 0) || r > 315)
 						{
 							*right = true;//オブジェクトの左部分が衝突している
-							*x = bx + ALLSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
+							*x = bx + HITBOXSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
 							*vx = 0.15f;//-VX*反発係数
 						}
 
 						if (r > 45 && r < 135)
 						{
 							*down = true;//オブジェクトの下の部分が衝突している
-							*y = by - ALLSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
+							*y = by - HITBOXSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
 							*vy = -0.15f;
 						}
 						if (r > 135 && r < 225)
 						{
 							*left = true;//オブジェクトの右部分が衝突している
-							*x = bx - ALLSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
+							*x = bx - HITBOXSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
 							*vx = -0.15f;//-VX*反発係数
 						}
 						if (r > 225 && r < 315)
 						{
 							*up = true;//オブジェクトの上の部分が衝突している
-							*y = by + ALLSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
+							*y = by + HITBOXSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
 							*vy = 0.15f;
 						}
 					}

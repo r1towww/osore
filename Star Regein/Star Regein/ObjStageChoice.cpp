@@ -7,23 +7,7 @@
 
 #include "GameHead.h"
 #include "ObjStageChoice.h"
-//星座位置関連----------------------
-#define EarthX	  0
-#define EarthY	  380
-#define EarthX2	  100
-#define EarthY2	  800
-#define VenusX	  180
-#define VenusX2	  320
-#define VenusY	  300
-#define VenusY2	  445
-#define MercuryX  420
-#define MercuryX2 570
-#define MercuryY  120
-#define MercuryY2 270
-#define SunX	  615
-#define SunX2	  800
-#define SunY	  0
-#define SunY2	  90
+
 //----------------------------------
 //使用するネームスペース
 using namespace GameL;
@@ -32,72 +16,13 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-	m_key_flag = false;
+	m_alpha = 1.0f;		//アルファ値の初期化
 }
 
 //アクション
 void CObjStageChoice::Action()
 {
-	//主人公位置取得
-	ObjStageChoiceHero* hero = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
 
-	//地球へ
-	if (hx >= EarthX && hx<= EarthX2 && hy >= EarthY&&hy<= EarthY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
-		{
-			g_stage = Earth;	//ステージの値を地球に変更
-			Scene::SetScene(new CSceneEarth());
-		}
-	}
-	//金星へ
-	else if (hx >= VenusX && hx <= VenusX2 && hy >= VenusY&&hy <= VenusY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
-		{
-			//金星に設定
-			g_stage = Venus;
-			Scene::SetScene(new CSceneStarChoice());
-		}
-	}
-	//水星へ
-	else if (hx >= MercuryX && hx <= MercuryX2 && hy >= MercuryY&&hy <= MercuryY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
-		{
-			//水星に設定
-			g_stage = Mercury;
-			Scene::SetScene(new CSceneStarChoice());
-		}
-
-	}
-	//太陽へ
-	else if (hx >= SunX && hx <= SunX2 && hy >= SunY&&hy <= SunY2)
-	{
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
-		{
-			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
-			//太陽に設定
-			//g_stage = SunLeo;←ステージが完成したらコメント外してね
-			Scene::SetScene(new CSceneTitle());
-		}
-
-	}
-	else
-	{
-		m_key_flag = true;
-	}
 
 }
 
@@ -105,7 +30,7 @@ void CObjStageChoice::Action()
 void CObjStageChoice::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置

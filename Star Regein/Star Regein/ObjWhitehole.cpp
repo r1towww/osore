@@ -10,40 +10,28 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjWhitehole::CObjWhitehole(float x, float y)
+float* g_whitehole_x[10];//全てのホワイトホールのX位置を把握する
+float* g_whitehole_y[10];//全てのホワイトホールのY位置を把握する
+
+CObjWhitehole::CObjWhitehole(float x, float y, int i, int j)
 {
 	m_px = x;		//位置
 	m_py = y;
+	m_i = i;
+	m_j = j;
 }
 
 //イニシャライズ
 void CObjWhitehole::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_ASTEROID, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_WHITEHOLE, 1);
 }
 
 //アクション
 void CObjWhitehole::Action()
 {
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//ホワイトホールの情報を持ってくる
-	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-	float bx = blackhole->Getx();
-	float by = blackhole->Gety();
 
-	//主人公と当たっているか確認
-	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	//{
-	//	block->SetScrollx(bx);	//ブラックホールの位置に移動させる
-	//	block->SetScrolly(by);
-	//}
-	
-	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);
 }
 
 //ドロー

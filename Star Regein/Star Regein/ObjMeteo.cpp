@@ -7,10 +7,8 @@
 #include "GameHead.h"
 #include "ObjMeteo.h"
 
-
 //使用するネームスペース
 using namespace GameL;
-
 
 CObjMeteo::CObjMeteo(float x, float y)
 {

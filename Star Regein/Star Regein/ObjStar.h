@@ -5,6 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+
 //オブジェクト：ブロック＆背景
 class CObjStar : public CObj
 {

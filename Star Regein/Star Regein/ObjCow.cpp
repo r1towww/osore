@@ -37,9 +37,9 @@ void CObjCow::Init()
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
-	m_ani_max_time = 5;	//アニメーション間隔幅
+	m_ani_max_time = 15;	//アニメーション間隔幅
 
-	m_movey = true; //true=背面　false=正面
+	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
 	//blockとの衝突状態確認用
@@ -121,17 +121,19 @@ void CObjCow::Action()
 		m_ani_time = 0;
 	}
 
-	if (m_ani_frame == 4)
+	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 0;
 	}
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	pb->BlockHit(&m_px, &m_py,false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type
 	);
+
+
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -140,7 +142,7 @@ void CObjCow::Action()
 
 	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 	bool check;
-	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), -10.0f, -10.0f, 810.0f, 610.0f);
+	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
 	if (check == true)
 	{
 		//主人公機が存在する場合、誘導角度の計算する
@@ -150,8 +152,8 @@ void CObjCow::Action()
 			float x;
 			float y;
 
-			x = 400 - (m_px + pb->GetScrollx());
-			y = 300 - (m_py + pb->GetScrolly());
+			x = 375 - (m_px + pb->GetScrollx());
+			y = 275 - (m_py + pb->GetScrolly());
 
 			float ar = GetAtan2Angle(x, y);
 
@@ -161,26 +163,26 @@ void CObjCow::Action()
 			//角度で上下左右を判定
 			if ((ar < 45 && ar>0) || ar > 315)
 			{
-				//右
+				//左
 				m_posture = 1.0f;
 				m_ani_time += 1;
 			}
 
 			if (ar > 45 && ar < 135)
 			{
-				//上
+				//下
 				m_posture = 0.0f;
 				m_ani_time += 1;
 			}
 			if (ar > 135 && ar < 225)
 			{
-				//左
+				//右
 				m_posture = 2.0f;
 				m_ani_time += 1;
 			}
 			if (ar > 225 && ar < 315)
 			{
-				//下
+				//上
 				m_posture = 3.0f;
 				m_ani_time += 1;
 
@@ -197,21 +199,25 @@ void CObjCow::Action()
 		{
 			m_vy = 0;
 			m_movex = true;
+			m_posture = 2.0f;
 		}
 		if (m_btime >= 501 && m_btime <= 1000)
 		{
 			m_vx = 0;
 			m_movey = false;
+			m_posture = 3.0f;
 		}
 		if (m_btime >= 1001 && m_btime <= 1500)
 		{
 			m_vy = 0;
 			m_movex = false;
+			m_posture = 1.0f;
 		}
 		if (m_btime >= 1501 && m_btime <= 2000)
 		{
 			m_vx = 0;
 			m_movey = true;
+			m_posture = 0.0f;
 		}
 		if (m_btime >= 2001)
 			m_btime = 0;
@@ -221,6 +227,41 @@ void CObjCow::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 //	hit->SetPos(m_px + 9 + pb->GetScrollx(), m_py + 7 + pb->GetScrolly());
 	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
+
+	//敵とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
 
 	//ELEMENT_MAGICを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
@@ -311,10 +352,10 @@ void CObjCow::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_top = 48.0f * m_posture;
+	src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
+	src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
+	src.m_bottom = src.m_top + 48.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();

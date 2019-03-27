@@ -5,6 +5,11 @@
 //使用するネームスペース
 using namespace GameL;
 
+//定数
+#define EARTHMAXSTAR	5
+#define TAURUSMAXSTAR	18
+#define LIBRAMAXSTAR	6
+
 //オブジェクト：
 class CObjMessage :public CObj
 {

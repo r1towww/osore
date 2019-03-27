@@ -70,9 +70,6 @@
     <ClCompile Include="ObjMiniMap.cpp">
       <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClCompile>
     <ClCompile Include="SceneTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
@@ -106,9 +103,6 @@
     <ClCompile Include="SceneEarth.cpp">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
-    <ClCompile Include="SceneVenus.cpp">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
@@ -118,11 +112,64 @@
     <ClCompile Include="ObjWhitehole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
-    <ClCompile Include="SceneStarChoice.cpp">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+    <ClCompile Include="SceneVenusTaurus.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneVenusLibra.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
     <ClCompile Include="ObjStarChoice.cpp">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\Audio.cpp" />
+    <ClCompile Include="GameL\DirectXDevice.cpp" />
+    <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
+    <ClCompile Include="GameL\DrawFont.cpp" />
+    <ClCompile Include="GameL\DrawTexture.cpp" />
+    <ClCompile Include="GameL\GameL_Main.cpp" />
+    <ClCompile Include="GameL\HitBoxManager.cpp" />
+    <ClCompile Include="GameL\MultiThread.cpp" />
+    <ClCompile Include="GameL\SceneManager.cpp" />
+    <ClCompile Include="GameL\SceneObjManager.cpp" />
+    <ClCompile Include="GameL\SetWindow.cpp" />
+    <ClCompile Include="GameL\UserData.cpp" />
+    <ClCompile Include="GameL\WICTextureLoader.cpp" />
+    <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="ObjAsteroid.cpp" />
+    <ClCompile Include="ObjMP.cpp" />
+    <ClCompile Include="ObjHeart.cpp" />
+    <ClCompile Include="ObjBlock.cpp" />
+    <ClCompile Include="ObjBeamSaber.cpp" />
+    <ClCompile Include="ObjCow.cpp" />
+    <ClCompile Include="ObjMessage.cpp" />
+    <ClCompile Include="ObjMeteo.cpp" />
+    <ClCompile Include="ObjMiniMap.cpp" />
+    <ClCompile Include="ObjStageChoice.cpp" />
+    <ClCompile Include="ObjStageChoiceHero.cpp" />
+    <ClCompile Include="ObjStageClear.cpp" />
+    <ClCompile Include="ObjStar.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="SceneEarth.cpp" />
+    <ClCompile Include="SceneStageChoice.cpp" />
+    <ClCompile Include="SceneStageClear.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="ObjHero.cpp" />
+    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="UtilityModule.cpp" />
+    <ClCompile Include="ObjStar.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsBule.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsRed.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,9 +245,6 @@
     <ClInclude Include="ObjMiniMap.h">
       <Filter>ソースファイル\マップ</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStar.h">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClInclude>
     <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル\タイトル</Filter>
     </ClInclude>
@@ -234,23 +278,35 @@
     <ClInclude Include="SceneEarth.h">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
-    <ClInclude Include="SceneVenus.h">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
-    </ClInclude>
     <ClInclude Include="ObjWhitehole.h">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClInclude>
-    <ClInclude Include="SceneStarChoice.h">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+    <ClInclude Include="SceneVenusTaurus.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenusLibra.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClInclude>
     <ClInclude Include="ObjStarChoice.h">
-      <Filter>ソースファイル\ステージ選択\星座選択</Filter>
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStar.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ソースファイル\Game Over</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTwinsBlue.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTwinsRed.h">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,18 +364,17 @@
     <Filter Include="ソースファイル\スキル切り替え">
       <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ステージ選択\星座選択">
-      <UniqueIdentifier>{9d54336d-4974-4634-b6ff-f6412be1c6d0}</UniqueIdentifier>
+    <Filter Include="ソースファイル\Game Over">
+      <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\敵\双子">
+      <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameL\DirectXTex.inl">
-      <Filter>リソースファイル</Filter>
-    </None>
+    <Library Include="GameL\DirectXTex.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="GameL\DirectXTex.lib">
-      <Filter>リソースファイル</Filter>
-    </Library>
+    <None Include="GameL\DirectXTex.inl" />
   </ItemGroup>
 </Project>
