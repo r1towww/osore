@@ -150,6 +150,7 @@ extern int g_image_reft;  //スキル画像切り替え
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
 /*
+	CSceneStageChoice 惑星選択
 	CSceneEarth		地球
 	CSceneVenus		金星
 
