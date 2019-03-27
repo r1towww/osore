@@ -15,7 +15,6 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_STAGECHOICEHERO,
 	OBJ_STAGECLEAR,
-	OBJ_GAMEOVER,
 	OBJ_BLOCK,
 	OBJ_STAR,
 	OBJ_STARCHOICE,
@@ -28,8 +27,6 @@ enum OBJ_NAME
 	OBJ_WHITEHOLE,
 
 	OBJ_COW,
-	OBJ_TWINS_BLUE,
-	OBJ_TWINS_RED,
 
 	OBJ_BEAMSABER,
 
@@ -150,9 +147,6 @@ extern int g_image_reft;  //スキル画像切り替え
 //ゲームシーンオブジェクトヘッダ------------------
 #include "ObjHero.h"
 #include "ObjStageChoiceHero.h"
-#include "ObjCow.h"
-#include "Objtwinsblue.h"
-#include "Objtwinsred.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -166,37 +160,35 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
 #include "ObjStageClear.h"
-#include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
-
 
 #include "ObjHeart.h"
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
+#include "ObjCow.h"
 #include "ObjSkill.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
-#include "SceneVenusTaurus.h"
-#include "SceneVenusLibra.h"
+#include "SceneVenus.h"
 
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
+#include "SceneStarChoice.h"
 #include "SceneStageClear.h"
-#include "SceneGameOver.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
 /*
-	CSceneStageChoice	惑星選択
-	CSceneEarth			地球
-	CSceneVenusTaurus	金星（牡牛座）
-	CSceneVenusLibra	金星（天秤座）
+	CSceneStageChoice 惑星選択
+	CSceneEarth		地球
+	CSceneVenus		金星
+
 */
 #define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------
