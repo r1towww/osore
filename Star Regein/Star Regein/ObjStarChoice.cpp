@@ -28,9 +28,13 @@ void CObjStarChoice::Init()
 //アクション
 void CObjStarChoice::Action()
 {
+	//ステージ選択画面の情報を取得
+	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
+
 	//惑星が選択され、星座選択画面への移行の際
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
+		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		//画像が表示された際の、キー入力タイム処理
 		if (m_keytime >= 50)
 			m_keytime = 50;	//タイムが50になった際、50で止める
@@ -75,9 +79,6 @@ void CObjStarChoice::Action()
 		}
 	}
 
-	//ステージ選択画面の情報を取得
-	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
-	
 	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPをLEFTと同様に扱う)
 	if (m_direction == LEFT || m_direction == UP)
 	{
@@ -193,10 +194,10 @@ void CObjStarChoice::Draw()
 
 		//おうし座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 870.0f;
-		src.m_bottom = 600.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 0.0f;
+		src.m_right  = 256.0f;
+		src.m_bottom = 256.0f;
 
 		//表示位置の設定
 		dst.m_top = 150.0f;
@@ -208,18 +209,18 @@ void CObjStarChoice::Draw()
 		//-------------------------------------------------------------------------------
 		//てんびん座---------------------------------------------------------------------
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 900.0f;
-		src.m_bottom = 600.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 256.0f;
+		src.m_right  = 512.0f;
+		src.m_bottom = 256.0f;
 
 		//表示位置の設定
-		dst.m_top = 150.0f;
-		dst.m_left = 430.0f;
-		dst.m_right = 680.0f;
+		dst.m_top    = 150.0f;
+		dst.m_left   = 430.0f;
+		dst.m_right  = 680.0f;
 		dst.m_bottom = 400.0f;
 		//表示
-		Draw::Draw(8, &src, &dst, right, 0.0f);
+		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//----------------------------------------------------------------------------------
 	}
 	//水星選択時に表示される画像---------------------------------------------------------
@@ -230,30 +231,30 @@ void CObjStarChoice::Draw()
 
 		//双子座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 870.0f;
-		src.m_right = 1700.0f;
-		src.m_bottom = 600.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 512.0f;
+		src.m_right  = 768.0f;
+		src.m_bottom = 256.0f;
 
 		//表示位置の設定
-		dst.m_top = 150.0f;
-		dst.m_left = 100.0f;
-		dst.m_right = 350.0f;
+		dst.m_top    = 150.0f;
+		dst.m_left   = 100.0f;
+		dst.m_right  = 350.0f;
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		//-------------------------------------------------------------------------------
 		//乙女座---------------------------------------------------------------------
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 1700.0f;
-		src.m_right = 2620.0f;
-		src.m_bottom = 600.0f;
+		src.m_top    = 0.0f;
+		src.m_left   = 768.0f;
+		src.m_right  = 1024.0f;
+		src.m_bottom = 256.0f;
 
 		//表示位置の設定
-		dst.m_top = 150.0f;
-		dst.m_left = 430.0f;
-		dst.m_right = 680.0f;
+		dst.m_top    = 150.0f;
+		dst.m_left   = 430.0f;
+		dst.m_right  = 680.0f;
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(8, &src, &dst, right, 0.0f);

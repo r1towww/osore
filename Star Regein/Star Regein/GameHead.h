@@ -80,6 +80,11 @@ struct UserData
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
 
+#define HEROUP		1
+#define HEROLEFT	2
+#define HERODOWN	3
+#define HERORIGHT	4
+
 //惑星ごとの値
 typedef enum Planet
 {
@@ -94,7 +99,19 @@ typedef enum Planet
 	Sun,			//太陽			8
 	SunLeo,			//太陽（獅子座）9
 	Space,			//ステージ選択	10
+
 }Planet;
+
+//スキルごとの値
+typedef enum Skill
+{
+	Taurus,		//牡牛座		0
+	Libra,		//天秤座		1
+	Gemini,		//双子座		2
+	Virgo,		//乙女座		3
+	Leo,		//獅子座		4
+	NoSkill,	//スキル無し	5
+}Skill;
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
@@ -106,20 +123,20 @@ extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 extern int g_blackhole_cnt; //ブラックホールの数をカウント
 
-extern float* g_blackhole_x[10];
-extern float* g_blackhole_y[10];
-extern float* g_whitehole_x[10];
-extern float* g_whitehole_y[10];
+extern float* g_blackhole_x[10];	//ブラックホールの位置配列X
+extern float* g_blackhole_y[10];	//ホワイトホールの位置配列Y
+extern float* g_whitehole_x[10];	//ホワイトホールの位置配列X
+extern float* g_whitehole_y[10];	//ホワイトホールの位置配列Y
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
 extern float g_max_mp; //最大ＭＰ
 
-
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
+extern int g_skill;		//スキル情報
 extern int g_image_right; //スキル画像切り替え
 extern int g_image_reft;  //スキル画像切り替え
 

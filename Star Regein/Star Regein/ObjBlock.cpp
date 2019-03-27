@@ -253,7 +253,7 @@ void CObjBlock::BlockHit
 (
 	float *x, float *y, bool scroll_on,
 	bool*up, bool* down, bool*left, bool*right,
-	float*vx, float*vy, int*bt
+	float*vx, float*vy
 )
 {
 	//主人公の衝突状態確認用フラグの初期化
@@ -261,9 +261,6 @@ void CObjBlock::BlockHit
 	*down = false;
 	*left = false;
 	*right = false;
-
-	//踏んでいるblockの種類の初期化
-	*bt = 0;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAPSIZE; i++)
