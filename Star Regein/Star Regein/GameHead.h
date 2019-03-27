@@ -173,13 +173,14 @@ extern int g_image_reft;  //スキル画像切り替え
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneMain.h"
 #include "SceneEarth.h"
-#include "SceneVenus.h"
-
+#include "SceneVenusTaurus.h"
+#include "SceneVenusLibra.h"
 
 #include "SceneTitle.h"
 #include "SceneStageChoice.h"
 #include "SceneStarChoice.h"
 #include "SceneStageClear.h"
+#include "SceneGameOver.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
