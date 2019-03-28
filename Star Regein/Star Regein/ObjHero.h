@@ -65,9 +65,6 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 
-	//“¥‚ñ‚Å‚¢‚éblock‚ÌŽí—Þ‚ðŠm”F—p
-	int m_block_type;
-
 };
 
 

@@ -23,8 +23,6 @@ CObjCow::CObjCow(float x, float y)
 	m_py = y;
 }
 
-
-
 //イニシャライズ
 void CObjCow::Init()
 {
@@ -129,8 +127,7 @@ void CObjCow::Action()
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py,false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
 

@@ -11,8 +11,17 @@
 //使用するネームスペース
 using namespace GameL;
 
-float g_posture;
-
+float g_posture = HERODOWN;	//主人公の向き
+/*		Skill列挙型
+	Taurus,		//牡牛座		0
+	Libra,		//天秤座		1
+	Gemini,		//双子座		2
+	Virgo,		//乙女座		3
+	Leo,		//獅子座		4
+	NoSkill,	//スキル無し	5
+	* スキルを変更する際値を変える *
+*/
+int g_skill = Taurus;		//選択中のスキル
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -26,7 +35,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = 0;
+	g_posture = HERODOWN;
 
 	//最大HPの初期化
 	g_max_hp = 5;
@@ -46,8 +55,6 @@ void CObjHero::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
@@ -71,26 +78,27 @@ void CObjHero::Action()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	
+	//ダッシュを実行
 	//Shiftキーが入力されたらダッシュ
 	if ((Input::GetVKey(VK_SHIFT)))
 	{
-		//ダッシュフラグをオン
-		m_dash_flag = true;
-
-		if (m_move_flag == true)
+		if (g_skill == Taurus)
 		{
-			m_MP_time++;
+			//ダッシュフラグをオン
+			m_dash_flag = true;
 
-			if (m_MP_time > 60)
+			if (m_move_flag == true)
 			{
-				m_MP_time = 0;
-				g_mp -= 5;
-			}
-		}
-		
-		m_speed_power = DASH_SPEED;
+				m_MP_time++;
 
+				if (m_MP_time > 60)
+				{
+					m_MP_time = 0;
+					g_mp -= 5;
+				}
+			}
+			m_speed_power = DASH_SPEED;
+		}
 	}
 	else//通常速度
 	{
@@ -98,33 +106,34 @@ void CObjHero::Action()
 		m_dash_flag = false;
 		m_speed_power = NORMAL_SPEED;
 	}
+	
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vy -= m_speed_power;
-		g_posture = 1;
+		g_posture = HEROUP;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vy += m_speed_power;
-		g_posture = 3;
+		g_posture = HERODOWN;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx -= m_speed_power;
-		g_posture = 2;
+		g_posture = HEROLEFT;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx += m_speed_power;
-		g_posture = 4;
+		g_posture = HERORIGHT;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -143,8 +152,7 @@ void CObjHero::Action()
 	{
 		if (m_key_f == true)
 		{
-			g_image_reft += 900;
-			g_image_right += 900;
+			g_skill++;	//スキルの情報を次へ移す
 			m_key_f = false;
 		}
 	}
@@ -240,7 +248,6 @@ void CObjHero::Action()
 		hit->SetInvincibility(false);
 
 		m_time = 30;
-
 	}
 
 	//アニメーション用
@@ -249,26 +256,29 @@ void CObjHero::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
 	if (m_ani_frame == 4)
 	{
 		m_ani_frame = 0;
 	}
 
-	//ブラックホールと接触した場合
+	//ブラックホールの情報を取得
 	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-	//ブロック情報を持ってくる
+	//ブロック情報を取得
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	if(hit->CheckObjNameHit(OBJ_BLACKHOLE) != nullptr)
+	//ブラックホールの数forループを回し、どのブラックホールに当たったかを探す
+	for (int i = 0; i < 4; i++)
 	{
-		block->SetScrollx(-g_whitehole_x[0][0]);	//ホワイトホールの位置に移動させる
-		block->SetScrolly(-g_whitehole_y[0][0] + TELEPORTBALANCE);	//位置が被らないようにずらす
+		//ブラックホールと接触した場合
+		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
+		{
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);	//同じ番号のホワイトホールの位置に移動させる
+			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+		}
 	}
 
+	//ブロックとの当たり判定
 	block->BlockHit(&m_px, &m_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
 	//位置の更新

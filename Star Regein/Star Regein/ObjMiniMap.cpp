@@ -183,7 +183,6 @@ void CObjMiniMap::Draw()
 	float sx = block->GetScrollx();
 	float sy = block->GetScrolly();
 
-
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)
@@ -268,6 +267,39 @@ void CObjMiniMap::Draw()
 				src.m_bottom = 50.0f;
 				//描画
 				Draw::Draw(9, &src, &dst, c, 0.0f);
+			}
+		}
+	}
+
+	if (g_stage == Earth)
+	{
+		for (int i = 0; i < 1; i++)//敵の数分回す
+		{
+			float cx = *g_cow_x[i];
+			float cy = *g_cow_y[i];
+
+			if (m_df == false)
+			{
+				//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+				bool check;
+				check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+				if (check == true)
+				{
+					//ミニマップに敵の位置を表示する
+					//表示位置の設定
+					dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+					dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+					dst.m_right = dst.m_left + m_blocksize;
+					dst.m_bottom = dst.m_top + m_blocksize;
+
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 50.0f;
+					src.m_right = 100.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
 			}
 		}
 	}

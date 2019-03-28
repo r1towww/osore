@@ -42,7 +42,7 @@ void CObjTwinsBlue::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
-					//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -128,8 +128,7 @@ void CObjTwinsBlue::Action()
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
 
