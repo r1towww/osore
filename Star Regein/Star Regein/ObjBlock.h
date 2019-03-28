@@ -33,7 +33,7 @@ class CObjBlock : public CObj
 		void BlockHit(
 			float *x, float *y, bool scroll_on,
 			bool*up, bool* down, bool*left, bool*right,
-			float*vx, float*vy
+			float*vx, float*vy, int*bt
 		);
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//É}ÉbÉvèÓïÒa

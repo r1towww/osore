@@ -11,6 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+
 ObjStageChoiceHero::ObjStageChoiceHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
 	m_px = x;
@@ -23,7 +24,7 @@ void ObjStageChoiceHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = HERODOWN;
+	g_posture = 0;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
@@ -63,25 +64,25 @@ void ObjStageChoiceHero::Action()
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
 		m_vy -= m_speed_power;
-		g_posture = HEROUP;
+		g_posture = 1;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_vy += m_speed_power;
-		g_posture = HERODOWN;
+		g_posture = 3;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_vx -= m_speed_power;
-		g_posture = HEROLEFT;
+		g_posture = 2;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_vx += m_speed_power;
-		g_posture = HERORIGHT;
+		g_posture = 4;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -115,6 +116,7 @@ void ObjStageChoiceHero::Action()
 		if (Input::GetVKey('Z') == true && m_key_flag == true)
 		{
 			g_stage = Earth;	//ステージの値を地球に変更
+			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		}
 	}
 	//金星へ
@@ -127,6 +129,7 @@ void ObjStageChoiceHero::Action()
 		{
 			//金星に設定
 			g_stage = Venus;
+			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		}
 	}
 	//水星へ

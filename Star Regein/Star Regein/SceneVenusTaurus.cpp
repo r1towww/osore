@@ -100,7 +100,7 @@ void CSceneVenusTaurus::InitScene()
 void CSceneVenusTaurus::Scene()
 {
 	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
-	if (g_StarCount == TAURUSMAXSTAR)
+	if (g_StarCount == 18)
 	{
 		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 	}
