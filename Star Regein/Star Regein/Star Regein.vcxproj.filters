@@ -171,6 +171,9 @@
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
+    <ClCompile Include="ObjTutorial.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="ObjTwinsRed.h">
       <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTutorial.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
