@@ -24,11 +24,7 @@ void CObjSkill::Init()
 //アクション
 void CObjSkill::Action()
 {
-	//選択スキルがNoSkillになった場合
-	if (g_skill == NoSkill)
-	{
-		g_skill = Taurus;	//牡牛座をセット
-	}
+
 }
 
 //ドロー
@@ -42,9 +38,9 @@ void CObjSkill::Draw()
 
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
-	src.m_left   = (256.0f * g_skill) ;
-	src.m_right  = 256.0f + (256.0f * g_skill);	//スキルの情報を入れ、画像を切り替える
-	src.m_bottom = 256.0f;
+	src.m_left   = 0.0f   + g_image_reft ;
+	src.m_right  = 900.0f + g_image_right;
+	src.m_bottom = 600.0f;
 
 	//表示位置の設定
 	dst.m_top    = 400.0f;

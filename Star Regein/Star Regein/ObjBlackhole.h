@@ -15,7 +15,7 @@ using namespace GameL;
 class CObjBlackhole : public CObj
 {
 	public:
-		CObjBlackhole(float x, float y);
+		CObjBlackhole(float x, float y,int i ,int j);
 		~CObjBlackhole() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
