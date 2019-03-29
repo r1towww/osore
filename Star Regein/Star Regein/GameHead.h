@@ -81,10 +81,11 @@ struct UserData
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
 	
-#define HEROUP		1
-#define HEROLEFT	2
-#define HERODOWN	3
-#define HERORIGHT	4
+//主人公の向き
+#define HERO_UP		1
+#define HERO_LEFT	2
+#define HERO_DOWN	3
+#define HERO_RIGHT	4
 
 //惑星ごとの値
 typedef enum Planet

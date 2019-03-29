@@ -26,7 +26,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = HERODOWN;
+	g_posture = HERO_DOWN;
 
 	//最大HPの初期化
 	g_max_hp = 5;
@@ -103,28 +103,28 @@ void CObjHero::Action()
 	{
 		m_move_flag = true;
 		m_vy -= m_speed_power;
-		g_posture = HEROUP;
+		g_posture = HERO_UP;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vy += m_speed_power;
-		g_posture = HERODOWN;
+		g_posture = HERO_DOWN;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx -= m_speed_power;
-		g_posture = HEROLEFT;
+		g_posture = HERO_LEFT;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx += m_speed_power;
-		g_posture = HERORIGHT;
+		g_posture = HERO_RIGHT;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -132,6 +132,7 @@ void CObjHero::Action()
 		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
+	//Zキーが入力された場合
 	if (Input::GetVKey('Z'))
 	{
 		//ビームサーベルオブジェクト作成
@@ -267,12 +268,12 @@ void CObjHero::Action()
 		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
 		{
 			//同じ値のホワイトホール位置に移動させる
-			block->SetScrollx(-g_whitehole_x[i][0] + m_px);	//ホワイトホールの位置に移動させる
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);
 			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
 		}
 	}
 
-	//ブロックとの当たり判定
+	//ブロックとの当たり判定実行	
 	block->BlockHit(&m_px, &m_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
