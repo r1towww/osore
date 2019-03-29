@@ -81,10 +81,15 @@ struct UserData
 #define ALLSIZE 64.0f
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
+	
+#define HEROUP		1
+#define HEROLEFT	2
+#define HERODOWN	3
+#define HERORIGHT	4
 
 //惑星ごとの値
 typedef enum Planet
-{
+{	/* ステージごとの値 */
 	Earth,			//地球			0
 	EarthStar,		//地球			1
 	Venus,			//金星			2
@@ -96,7 +101,18 @@ typedef enum Planet
 	Sun,			//太陽			8
 	SunLeo,			//太陽（獅子座）9
 	Space,			//ステージ選択	10
+
 }Planet;
+
+typedef enum Skill
+{	/* スキルごとの値 */
+	Taurus,		//牡牛座	0
+	Libra,		//天秤座	1
+	Gemini,		//双子座	2
+	Virgo,		//乙女座	3
+	Leo,		//獅子座	4
+
+}Skill;
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
@@ -123,7 +139,7 @@ extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
 extern int g_image_right; //スキル画像切り替え
 extern int g_image_reft;  //スキル画像切り替え
-
+extern int g_skill;		//各星座スキルの値
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------

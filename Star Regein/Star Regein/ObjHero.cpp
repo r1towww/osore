@@ -103,28 +103,28 @@ void CObjHero::Action()
 	{
 		m_move_flag = true;
 		m_vy -= m_speed_power;
-		g_posture = 1;
+		g_posture = HEROUP;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vy += m_speed_power;
-		g_posture = 3;
+		g_posture = HERODOWN;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx -= m_speed_power;
-		g_posture = 2;
+		g_posture = HEROLEFT;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_move_flag = true;
 		m_vx += m_speed_power;
-		g_posture = 4;
+		g_posture = HERORIGHT;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -143,8 +143,7 @@ void CObjHero::Action()
 	{
 		if (m_key_f == true)
 		{
-			g_image_reft += 900;
-			g_image_right += 900;
+			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
 			m_key_f = false;
 		}
 	}

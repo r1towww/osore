@@ -14,6 +14,8 @@ using namespace GameL;
 #define DASH_SPEED 5.0
 //通常速度
 #define NORMAL_SPEED 3.0
+//スキルを進ませる値
+#define NEXTSKILL 1
 
 //-------------------------------------
 //オブジェクト:主人公

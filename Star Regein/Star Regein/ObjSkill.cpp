@@ -9,6 +9,14 @@
 
 //使用するネームスペース
 using namespace GameL;
+/*
+		 スキルごとの値 
+	Taurus,		//牡牛座	0
+	Libra,		//天秤座	1
+	Gemini,		//双子座	2
+	Virgo,		//乙女座	3
+	Leo,		//獅子座	4
+*/
 
 CObjSkill::CObjSkill()
 {
@@ -24,7 +32,11 @@ void CObjSkill::Init()
 //アクション
 void CObjSkill::Action()
 {
-
+	//スキルの値が獅子座を超えたら
+	if (g_skill < Leo)
+	{
+		g_skill = Taurus;	//牡牛座に戻す
+	}
 }
 
 //ドロー
@@ -38,9 +50,9 @@ void CObjSkill::Draw()
 
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
-	src.m_left   = 0.0f   + g_image_reft ;
-	src.m_right  = 900.0f + g_image_right;
-	src.m_bottom = 600.0f;
+	src.m_left   = 0.0f   + (256.0f * g_skill);		//スキルの値が変われば次の画像へ移行
+	src.m_right  = 256.0f + (256.0f * g_skill);
+	src.m_bottom = 256.0f;
 
 	//表示位置の設定
 	dst.m_top    = 400.0f;
