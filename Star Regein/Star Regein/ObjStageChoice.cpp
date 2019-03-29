@@ -54,9 +54,9 @@ void CObjStageChoice::Draw()
 
 	//地球------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 300.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 300.0f;
 	src.m_bottom = 283.0f;
 
 	//表示位置の設定

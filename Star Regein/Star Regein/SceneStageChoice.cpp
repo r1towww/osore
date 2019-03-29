@@ -38,8 +38,6 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択水星.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"スキル総合.png", 7, TEX_SIZE_2048);
-	Draw::LoadImageW(L"天秤スキル.png", 8, TEX_SIZE_512);
-	Draw::LoadImageW(L"星（星座）.png", 9, TEX_SIZE_256);
 
 	
 	//ステージ選択オブジェクト作成

@@ -24,10 +24,9 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE,
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
+	OBJ_BLACKHOLE4,
 
 	OBJ_WHITEHOLE,
-	OBJ_WHITEHOLE2,
-	OBJ_WHITEHOLE3,
 
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
@@ -106,11 +105,12 @@ typedef enum Planet
 
 typedef enum Skill
 {	/* スキルごとの値 */
-	Taurus,		//牡牛座	0
-	Libra,		//天秤座	1
-	Gemini,		//双子座	2
-	Virgo,		//乙女座	3
-	Leo,		//獅子座	4
+	NoSkill,	//スキル無し	0
+	Taurus,		//牡牛座		1
+	Libra,		//天秤座		2
+	Gemini,		//双子座		3
+	Virgo,		//乙女座		4
+	Leo,		//獅子座		5
 
 }Skill;
 
@@ -123,10 +123,11 @@ extern float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
 extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 
-extern float* g_blackhole_x[10];
-extern float* g_blackhole_y[10];
-extern float* g_whitehole_x[10];
-extern float* g_whitehole_y[10];
+extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
+extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
+extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
+extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
+extern int g_blackholecnt;	//ブラックホールカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
@@ -137,8 +138,6 @@ extern float g_max_mp; //最大ＭＰ
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
-extern int g_image_right; //スキル画像切り替え
-extern int g_image_reft;  //スキル画像切り替え
 extern int g_skill;		//各星座スキルの値
 
 //------------------------------------------------

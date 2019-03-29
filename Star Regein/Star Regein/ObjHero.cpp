@@ -12,7 +12,7 @@
 using namespace GameL;
 
 float g_posture;
-
+int g_skill = Taurus;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -26,7 +26,7 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = 0;
+	g_posture = HERODOWN;
 
 	//最大HPの初期化
 	g_max_hp = 5;
@@ -46,8 +46,6 @@ void CObjHero::Init()
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
@@ -75,22 +73,24 @@ void CObjHero::Action()
 	//Shiftキーが入力されたらダッシュ
 	if ((Input::GetVKey(VK_SHIFT)))
 	{
-		//ダッシュフラグをオン
-		m_dash_flag = true;
-
-		if (m_move_flag == true)
+		if (g_skill == Taurus)
 		{
-			m_MP_time++;
+			//ダッシュフラグをオン
+			m_dash_flag = true;
 
-			if (m_MP_time > 60)
+			if (m_move_flag == true)
 			{
-				m_MP_time = 0;
-				g_mp -= 5;
-			}
-		}
-		
-		m_speed_power = DASH_SPEED;
+				m_MP_time++;
 
+				if (m_MP_time > 60)
+				{
+					m_MP_time = 0;
+					g_mp -= 5;
+				}
+			}
+
+			m_speed_power = DASH_SPEED;
+		}
 	}
 	else//通常速度
 	{
@@ -138,7 +138,7 @@ void CObjHero::Action()
 		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
-
+	//Qキーが入力された場合
 	if (Input::GetVKey('Q'))
 	{
 		if (m_key_f == true)
@@ -259,15 +259,22 @@ void CObjHero::Action()
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	if(hit->CheckObjNameHit(OBJ_BLACKHOLE) != nullptr)
+
+	//ブラックホールの数forループを回す
+	for (int i = 0; i < 4; i++)
 	{
-		block->SetScrollx(-g_whitehole_x[0][0]);	//ホワイトホールの位置に移動させる
-		block->SetScrolly(-g_whitehole_y[0][0] + TELEPORTBALANCE);	//位置が被らないようにずらす
+		//ブラックホールと当たった場合
+		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
+		{
+			//同じ値のホワイトホール位置に移動させる
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);	//ホワイトホールの位置に移動させる
+			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+		}
 	}
 
+	//ブロックとの当たり判定
 	block->BlockHit(&m_px, &m_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
 	//位置の更新
