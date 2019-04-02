@@ -34,7 +34,7 @@ void CObjStarChoice::Action()
 	//惑星が選択され、星座選択画面への移行の際
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
-		stagec->SetAlpha(ALPHAUNDER);	//アルファ値を下げる
+		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		//画像が表示された際の、キー入力タイム処理
 		if (m_keytime >= TIMELIMIT)
 			m_keytime = TIMELIMIT;	//タイムが50になった際、50で止める

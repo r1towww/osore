@@ -132,7 +132,7 @@ void CObjHero::Action()
 		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
-	//Zキーが入力された場合
+	//Zキーが入力された場合	
 	if (Input::GetVKey('Z'))
 	{
 		//ビームサーベルオブジェクト作成

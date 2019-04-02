@@ -24,6 +24,7 @@ void CObjBlackhole::Init()
 {
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackholecnt, 1);
+	//作成のたびにカウントを増やし、別のオブジェクトとする
 }
 
 //アクション
@@ -34,7 +35,6 @@ void CObjBlackhole::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);
 }
@@ -43,7 +43,7 @@ void CObjBlackhole::Action()
 void CObjBlackhole::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 0.5f,0.5f,0.5f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
