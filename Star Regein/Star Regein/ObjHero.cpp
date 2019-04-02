@@ -12,7 +12,7 @@
 using namespace GameL;
 
 float g_posture;
-int g_skill = Taurus;
+int g_skill = NoSkill;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -52,6 +52,9 @@ void CObjHero::Init()
 
 	//ＭＰリジェネカウント用初期化
 	m_regene_time = 0;
+
+	//キーフラグの初期化
+	m_key_f = true;
 
 	//ダッシュフラグ初期化
 	m_dash_flag = false;
