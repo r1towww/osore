@@ -31,7 +31,7 @@ void CObjHero::Init()
 	//最大HPの初期化
 	g_max_hp = 5;
 	//HPの初期化
-	g_hp = 5;
+	g_hp = g_max_hp;
 
 	//最大ＭＰの初期化
 	g_max_mp = 50;
@@ -42,9 +42,9 @@ void CObjHero::Init()
 	m_ani_frame = 1;
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	//ＭＰのタイムカウント用初期化
@@ -71,26 +71,23 @@ void CObjHero::Action()
 
 	
 	//Shiftキーが入力されたらダッシュ
-	if ((Input::GetVKey(VK_SHIFT)))
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus && g_mp >= 5)
 	{
-		if (g_skill == Taurus)
+		//ダッシュフラグをオン
+		m_dash_flag = true;
+
+		if (m_move_flag == true)
 		{
-			//ダッシュフラグをオン
-			m_dash_flag = true;
+			m_MP_time++;
 
-			if (m_move_flag == true)
+			if (m_MP_time > 60)
 			{
-				m_MP_time++;
-
-				if (m_MP_time > 60)
-				{
-					m_MP_time = 0;
-					g_mp -= 5;
-				}
+				m_MP_time = 0;
+				g_mp -= 5;
 			}
-
-			m_speed_power = DASH_SPEED;
 		}
+
+		m_speed_power = DASH_SPEED;
 	}
 	else//通常速度
 	{

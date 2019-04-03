@@ -19,7 +19,7 @@ using namespace GameL;
 //コンストラクタ
 CSceneStageChoice::CSceneStageChoice()
 {
-
+	g_hp = g_max_hp;	//hpを最大hpで初期化
 }
 
 //デストラクタ

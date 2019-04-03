@@ -11,9 +11,9 @@ using namespace GameL;
 #define ANITIME 1
 
 //ダッシュ速度
-#define DASH_SPEED 5.0
+#define DASH_SPEED 3.0f
 //通常速度
-#define NORMAL_SPEED 3.0
+#define NORMAL_SPEED 1.5f
 //スキルを進ませる値
 #define NEXTSKILL 1
 

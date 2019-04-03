@@ -30,9 +30,9 @@ void ObjStageChoiceHero::Init()
 	m_ani_frame = 1;
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
@@ -54,11 +54,11 @@ void ObjStageChoiceHero::Action()
 	//Shiftキーが入力されたらダッシュ
 	if ((Input::GetVKey(VK_SHIFT)))
 	{
-		m_speed_power = DASH_SPEED;
+		m_speed_power = STAGE_DASH_SPEED;
 	}
 	else//通常速度
 	{
-		m_speed_power = NORMAL_SPEED;
+		m_speed_power = STAGE_NORMAL_SPEED;
 	}
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき

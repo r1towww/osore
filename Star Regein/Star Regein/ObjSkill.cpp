@@ -33,7 +33,7 @@ void CObjSkill::Init()
 void CObjSkill::Action()
 {
 	//スキルの値が獅子座を超えたら
-	if (g_skill < Leo)
+	if (g_skill > Leo)
 	{
 		g_skill = Taurus;	//牡牛座に戻す
 	}

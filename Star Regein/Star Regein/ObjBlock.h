@@ -6,7 +6,7 @@
 using namespace GameL;
 
 //定数
-#define HITBOXSIZE 40.0f
+#define HITBOXSIZE 50.0f	//障害物用のヒットボックスサイズ
 
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
