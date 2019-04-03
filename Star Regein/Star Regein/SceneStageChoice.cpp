@@ -48,9 +48,9 @@ void CSceneStageChoice::InitScene()
 	ObjStageChoiceHero* oh = new ObjStageChoiceHero(50,500);
 	Objs::InsertObj(oh, OBJ_STAGECHOICEHERO, 10);
 
-	//ステージ選択(星座)オブジェクト作成
-	CObjStarChoice* star = new CObjStarChoice();
-	Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+	////ステージ選択(星座)オブジェクト作成
+	//CObjStarChoice* star = new CObjStarChoice();
+	//Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 }
 
 //ゲームタイトル実行中メソッド

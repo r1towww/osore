@@ -28,9 +28,10 @@ int g_stage = Space;	//ステージの値の初期化
 //各星座の取得情報
 bool g_Taurus = true;	//牡牛座	
 bool g_Libra  = true;	//天秤座
-bool g_Gemini = false;	//双子座
-bool g_Virgo  = false;	//乙女座
-bool g_Leo    = false;	//獅子座
+bool g_Gemini = true;	//双子座
+bool g_Virgo  = true;	//乙女座
+bool g_Leo    = true;	//獅子座
+bool g_key_flag = false;	//キー入力制御フラグ
 
 //イニシャライズ
 void CObjTitle::Init()

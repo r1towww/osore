@@ -135,6 +135,7 @@ extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
 extern float g_max_mp; //最大ＭＰ
 
+extern bool g_key_flag;	//キー入力制御フラグ
 
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
@@ -168,7 +169,6 @@ extern bool g_Leo;		//獅子座
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
 
-
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
@@ -177,11 +177,13 @@ extern bool g_Leo;		//獅子座
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
-
 #include "ObjHeart.h"
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
+#include "ObjSkillLibra.h"
+
+
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

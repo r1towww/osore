@@ -106,58 +106,54 @@ void ObjStageChoiceHero::Action()
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 
-
-	//地球へ
-	if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
+	//キー入力を長押しで出来ないようにする
+	if (Input::GetVKey('Z') == false)
 	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		g_key_flag = true;	//離したらオンにする
+	}
+	// Zキーを入力かつ、キーフラグがオンの時に実行
+	if (Input::GetVKey('Z') == true && g_key_flag == true)
+	{
+		//地球へ
+		if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
 		{
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
 			g_stage = Earth;	//ステージの値を地球に変更
 		}
-	}
-	//金星へ
-	else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//金星へ
+		else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
 		{
-			//金星に設定
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
+				//金星に設定
 			g_stage = Venus;
 		}
-	}
-	//水星へ
-	else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//水星へ
+		else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
 		{
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
 			//水星に設定
 			g_stage = Mercury;
 		}
-	}
-	//太陽へ
-	else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
-	{
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//太陽へ
+		else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
 		{
 			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 			//太陽に設定
-			//g_stage = SunLeo;←ステージが完成したらコメント外してね
+			//g_stage = Sun;←ステージが完成したらコメント外してね
 			Scene::SetScene(new CSceneTitle());
 		}
+		g_key_flag = false;	//キーフラグをオフ
+		//ステージ選択(星座)オブジェクト作成
+		CObjStarChoice* star = new CObjStarChoice();
+		Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 	}
-	else
-	{
-		m_key_flag = true;
-	}
-
+	
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;

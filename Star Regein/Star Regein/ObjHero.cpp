@@ -29,14 +29,14 @@ void CObjHero::Init()
 	g_posture = HERO_DOWN;
 
 	//最大HPの初期化
-	g_max_hp = 5;
+	g_max_hp = 50.0f;
 	//HPの初期化
-	g_hp = g_max_hp;
+	g_hp = 50.0f;
 
 	//最大ＭＰの初期化
-	g_max_mp = 50;
+	g_max_mp = 50.0f;
 	//ＭＰの初期化
-	g_mp = 50;
+	g_mp = 50.0f;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
@@ -74,7 +74,8 @@ void CObjHero::Action()
 
 	
 	//Shiftキーが入力されたらダッシュ
-	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus && g_mp >= 5)
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
+		&& g_Taurus == true && g_mp >= 5.0f)
 	{
 		//ダッシュフラグをオン
 		m_dash_flag = true;
@@ -86,7 +87,7 @@ void CObjHero::Action()
 			if (m_MP_time > 60)
 			{
 				m_MP_time = 0;
-				g_mp -= 5;
+				g_mp -= 5.0f;
 			}
 		}
 
@@ -139,8 +140,25 @@ void CObjHero::Action()
 		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
+
+	//Zキーが入力された場合、スキルを使用
+	if (Input::GetVKey('X'))
+	{
+		if (m_key_f == true)
+		{
+			//天秤座の場合
+			if (g_skill == Libra)
+			{
+				g_mp -= 25.0f;	//mp消費
+				g_hp += 10.0f;	//hp回復
+
+			}
+
+			m_key_f = false;
+		}
+	}
 	//Qキーが入力された場合
-	if (Input::GetVKey('Q'))
+	else if (Input::GetVKey('Q'))
 	{
 		if (m_key_f == true)
 		{
@@ -223,7 +241,7 @@ void CObjHero::Action()
 			}
 		}
 
-		g_hp--;
+		g_hp -= 10.0f;
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
@@ -249,7 +267,6 @@ void CObjHero::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
 	if (m_ani_frame == 4)
 	{
 		m_ani_frame = 0;
@@ -305,7 +322,7 @@ void CObjHero::Action()
 	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
-	if (g_hp <= 0)
+	if (g_hp <= 0.0f)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する

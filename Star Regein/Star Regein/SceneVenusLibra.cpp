@@ -99,6 +99,7 @@ void CSceneVenusLibra::Scene()
 	//金星（天秤座）で星を18個集めたら次へ移行
 	if (g_StarCount == LIBRAMAXSTAR)
 	{
+		g_Libra = true;		//スキル（天秤座）をオンにする
 		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}
 }

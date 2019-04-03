@@ -48,6 +48,7 @@ void CObjSkill::Action()
 	else if (g_Leo == false && g_skill == Leo)		//‚qÀ‚ğæ“¾‚µ‚Ä‚¢‚È‚¢ê‡
 		g_skill = Taurus;	//‰²‹À‚É–ß‚·
 
+	
 
 
 

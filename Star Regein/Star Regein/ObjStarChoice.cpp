@@ -19,10 +19,10 @@ void CObjStarChoice::Init()
 	m_Tra1 = 0.5f;
 	m_Tra2 = 0.5f;
 	m_Tra3 = 0.5f;
-	
+	m_direction = DOWN;	//初期選択位置の初期化
+
 	//キー入力用タイムの初期化
 	m_keytime = 0;
-
 }
 
 //アクション
@@ -35,15 +35,6 @@ void CObjStarChoice::Action()
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
 		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
-		//画像が表示された際の、キー入力タイム処理
-		if (m_keytime >= TIMELIMIT)
-			m_keytime = TIMELIMIT;	//タイムが50になった際、50で止める
-		else
-			m_keytime++;	//キー入力タイムを増やす
-	}
-	else
-	{
-		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 
 	//星座選択が地球または太陽の場合（星座が1つの場合）
@@ -87,7 +78,7 @@ void CObjStarChoice::Action()
 		m_Tra2 = 0.5f;
 		m_Tra3 = 0.5f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		
+		if (Input::GetVKey('Z') == true && g_key_flag == true)		
 		{
 			if (g_stage == Earth)
 			{
@@ -118,7 +109,7 @@ void CObjStarChoice::Action()
 		m_Tra1 = 0.5f;
 		m_Tra3 = 0.5f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)		
+		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
 			if (g_stage == Venus)
 			{
@@ -142,11 +133,18 @@ void CObjStarChoice::Action()
 		m_Tra2 = 0.5f;
 		m_Tra1 = 0.5f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)
+		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
 			g_stage = Space;	//ステージをSpaceに設定
 			stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
+			g_key_flag = false;	//キーフラグをオフ
+			this->SetStatus(false);    //自身に削除命令を出す
 		}
+	}
+	//キー入力を長押しで出来ないようにする
+	if (Input::GetVKey('Z') == false)
+	{
+		g_key_flag = true;	//離したらオンにする
 	}
 }
 
