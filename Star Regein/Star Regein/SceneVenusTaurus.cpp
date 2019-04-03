@@ -67,7 +67,7 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 
-	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 
 
 
