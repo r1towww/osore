@@ -11,17 +11,21 @@
 using namespace GameL;
 /*
 		 スキルごとの値 
-	Taurus,		//牡牛座	0
-	Libra,		//天秤座	1
-	Gemini,		//双子座	2
-	Virgo,		//乙女座	3
-	Leo,		//獅子座	4
+	NoSkill,	//スキル無し	0
+	Taurus,		//牡牛座		1
+	Libra,		//天秤座		2
+	Gemini,		//双子座		3
+	Virgo,		//乙女座		4
+	Leo,		//獅子座		5
+
+		各星座の取得情報
+	g_Taurus;	//牡牛座	
+	g_Libra;	//天秤座
+	g_Gemini;	//双子座
+	g_Virgo;	//乙女座
+	g_Leo;		//獅子座
+
 */
-
-CObjSkill::CObjSkill()
-{
-
-}
 
 //イニシャライズ
 void CObjSkill::Init()
@@ -32,16 +36,29 @@ void CObjSkill::Init()
 //アクション
 void CObjSkill::Action()
 {
-	//スキルの値が獅子座を超えたら
-	if (g_skill > Leo)
-	{
-		g_skill = NoSkill;	//牡牛座に戻す
-	}
+	//スキルを持っていない場合の処理
+	if (g_skill > Leo)	//獅子座の値を超えた場合
+		g_skill = Taurus;	//牡牛座に戻す
+	else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
+		g_skill = Taurus;	//牡牛座に戻す
+	else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
+		g_skill = Taurus;	//牡牛座に戻す
+	else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
+		g_skill = Taurus;	//牡牛座に戻す
+	else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
+		g_skill = Taurus;	//牡牛座に戻す
+
+
+
+
 }
 
 //ドロー
 void CObjSkill::Draw()
 {
+	if (g_Taurus == false)
+		return;
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -55,8 +72,8 @@ void CObjSkill::Draw()
 	src.m_bottom = 256.0f;
 
 	//表示位置の設定
-	dst.m_top    = 400.0f;
-	dst.m_left   = 600.0f;
+	dst.m_top    = 450.0f;
+	dst.m_left   = 650.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 600.0f;
 

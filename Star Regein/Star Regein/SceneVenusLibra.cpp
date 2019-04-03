@@ -66,8 +66,6 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
-
-
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 
 	//blockオブジェクト作成
@@ -99,7 +97,7 @@ void CSceneVenusLibra::InitScene()
 void CSceneVenusLibra::Scene()
 {
 	//金星（天秤座）で星を18個集めたら次へ移行
-	if (g_StarCount == 6)
+	if (g_StarCount == LIBRAMAXSTAR)
 	{
 		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}

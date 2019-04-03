@@ -12,7 +12,7 @@
 using namespace GameL;
 
 float g_posture;
-int g_skill = NoSkill;
+int g_skill = Taurus;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入

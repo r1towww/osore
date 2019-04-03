@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjSkill : public CObj
 {
 	public:
-		CObjSkill();
+		CObjSkill() {};
 		~CObjSkill() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション

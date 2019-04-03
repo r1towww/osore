@@ -25,8 +25,12 @@ using namespace GameL;
 	* ステージ選択の際変更する *
 */
 int g_stage = Space;	//ステージの値の初期化
-int g_image_right = 0;
-int g_image_reft  = 0;
+//各星座の取得情報
+bool g_Taurus = true;	//牡牛座	
+bool g_Libra  = true;	//天秤座
+bool g_Gemini = false;	//双子座
+bool g_Virgo  = false;	//乙女座
+bool g_Leo    = false;	//獅子座
 
 //イニシャライズ
 void CObjTitle::Init()

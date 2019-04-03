@@ -141,6 +141,13 @@ extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
 extern int g_skill;		//各星座スキルの値
 
+//各星座の取得情報
+extern bool g_Taurus;	//牡牛座	
+extern bool g_Libra;	//天秤座
+extern bool g_Gemini;	//双子座
+extern bool g_Virgo;	//乙女座
+extern bool g_Leo;		//獅子座
+
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
 
