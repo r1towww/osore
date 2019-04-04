@@ -23,7 +23,7 @@ using namespace GameL;
 #define SunY2	  90
 
 #define ALPHAORIGIN	1.0f
-#define ALPHAUNDER 0.5f
+#define ALPHAUNDER 0.3f
 
 //オブジェクト：タイトル
 class CObjStageChoice :public CObj

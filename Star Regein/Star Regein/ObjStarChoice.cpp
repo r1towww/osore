@@ -16,9 +16,9 @@ using namespace GameL;
 void CObjStarChoice::Init()
 {
 	//透明度の初期化
-	m_Tra1 = 0.5f;
-	m_Tra2 = 0.5f;
-	m_Tra3 = 0.5f;
+	m_Tra1 = 0.3f;
+	m_Tra2 = 0.3f;
+	m_Tra3 = 0.3f;
 	m_direction = DOWN;	//初期選択位置の初期化
 
 	//キー入力用タイムの初期化
@@ -46,7 +46,7 @@ void CObjStarChoice::Action()
 			m_direction = UP;	//UPをセット
 		}
 		//下キーを入力して選択
-		if (Input::GetVKey(VK_DOWN) == true)
+		else if (Input::GetVKey(VK_DOWN) == true)
 		{
 			m_direction = DOWN;	//DOWNをセット
 		}
@@ -59,7 +59,7 @@ void CObjStarChoice::Action()
 			m_direction = DOWN;	//DOWNをセット
 		}
 		//右キーを入力して選択
-		if (Input::GetVKey(VK_RIGHT) == true)
+		else if (Input::GetVKey(VK_RIGHT) == true)
 		{
 			m_direction = RIGHT;//RIGHTをセット
 		}
@@ -75,8 +75,8 @@ void CObjStarChoice::Action()
 	{
 		//透過率変更
 		m_Tra1 = 1.0f;
-		m_Tra2 = 0.5f;
-		m_Tra3 = 0.5f;
+		m_Tra2 = 0.3f;
+		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)		
 		{
@@ -106,8 +106,8 @@ void CObjStarChoice::Action()
 	{
 		//透過率変更
 		m_Tra2 = 1.0f;
-		m_Tra1 = 0.5f;
-		m_Tra3 = 0.5f;
+		m_Tra1 = 0.3f;
+		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
@@ -130,8 +130,8 @@ void CObjStarChoice::Action()
 	{
 		//透過率変更
 		m_Tra3 = 1.0f;
-		m_Tra2 = 0.5f;
-		m_Tra1 = 0.5f;
+		m_Tra2 = 0.3f;
+		m_Tra1 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{

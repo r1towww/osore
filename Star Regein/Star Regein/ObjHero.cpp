@@ -75,7 +75,7 @@ void CObjHero::Action()
 	
 	//Shiftキーが入力されたらダッシュ
 	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
-		&& g_Taurus == true && g_mp >= 5.0f)
+		&& g_Taurus == true && g_mp >= 1.0f)
 	{
 		//ダッシュフラグをオン
 		m_dash_flag = true;
@@ -83,12 +83,12 @@ void CObjHero::Action()
 		if (m_move_flag == true)
 		{
 			m_MP_time++;
-
-			if (m_MP_time > 60)
-			{
-				m_MP_time = 0;
-				g_mp -= 5.0f;
-			}
+			g_mp -= 0.1f;
+			//if (m_MP_time > 60)
+			//{
+			//	m_MP_time = 0;
+			//	g_mp -= 5.0f;
+			//}
 		}
 
 		m_speed_power = DASH_SPEED;
@@ -141,7 +141,7 @@ void CObjHero::Action()
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
-	//Zキーが入力された場合、スキルを使用
+	//Xキーが入力された場合、スキルを使用
 	if (Input::GetVKey('X'))
 	{
 		if (m_key_f == true)
@@ -149,9 +149,11 @@ void CObjHero::Action()
 			//天秤座の場合
 			if (g_skill == Libra)
 			{
-				g_mp -= 25.0f;	//mp消費
-				g_hp += 10.0f;	//hp回復
-
+				if (g_hp <= g_max_hp)
+				{
+					g_mp -= 25.0f;	//mp消費
+					g_hp += 10.0f;	//hp回復
+				}
 			}
 
 			m_key_f = false;
@@ -170,6 +172,18 @@ void CObjHero::Action()
 	{
 		m_key_f = true;
 	}
+
+	//HPが最大を超えないようにする（回復スキル）
+	if (g_hp >= g_max_hp)	//HPが最大を超えたら
+	{
+		g_hp = g_max_hp;	//最大HPに戻す
+	}
+	//MPが最大を超えないようにする（リジェネ）
+	if (g_mp >= g_max_mp)	//MPが最大を超えたら
+	{
+		g_mp = g_max_mp;	//最大MPに戻す
+	}
+
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -302,13 +316,13 @@ void CObjHero::Action()
 	//MPが50以下になったら一定間隔で増える
 	if (m_dash_flag == false)//ダッシュしていなかったら増える
 	{
-		if (g_mp < 50)
+		if (g_mp < 50.0f)
 		{
 			m_regene_time++;
 			if (m_regene_time > 30)
 			{
 				m_regene_time = 0;
-				g_mp += 1;
+				g_mp += 1.0f;
 			}
 		}
 	}
