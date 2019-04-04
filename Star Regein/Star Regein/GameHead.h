@@ -16,6 +16,7 @@ enum OBJ_NAME
 	OBJ_STAGECHOICEHERO,
 	OBJ_STAGECLEAR,
 	OBJ_TUTORIAL,
+	OBJ_TEXTBOX,
 	OBJ_GAMEOVER,
 	OBJ_BLOCK,
 	OBJ_STAR,
@@ -153,6 +154,7 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjStarChoice.h"
 #include "ObjStageClear.h"
 #include "ObjTutorial.h"
+#include "ObjTextBox.h"
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"

@@ -80,36 +80,55 @@ void CObjTutorial::Draw()
 				//切り取り位置の設定
 				src.m_top = 0.0f;
 				src.m_left = 0.0f;
-				src.m_right = 775.0f;
-				src.m_bottom = 183.0f;
+				src.m_right = 822.0f;
+				src.m_bottom = 218.0f;
 
 				//表示位置の設定
-				dst.m_top = 400.0f;
-				dst.m_left = 0.0f;
-				dst.m_right = 775.0f;
-				dst.m_bottom = 588.0f;
+				dst.m_top = 422.0f;
+				dst.m_left = 10.0f;
+				dst.m_right = 785.0f;
+				dst.m_bottom = 600.0f;
 				//表示
 				Draw::Draw(12, &src, &dst, c, 0.0f);
-				if (m_p != 1) {//ページ数が1ではない場合
-				//同じ画像を名前用に上から表示
-				//表示位置の設定
-					dst.m_top = 400.0f;
-					dst.m_left = 0.0f;
-					dst.m_right = 775.0f;
-					dst.m_bottom = 588.0f;
 
-					//描画
-					Draw::Draw(12, &src, &dst, c, 0.0f);
-				}
-				else { ; }
+
+				//if (m_p != 1) {//ページ数が1ではない場合
+				////同じ画像を名前用に上から表示
+				////表示位置の設定
+				//	dst.m_top = 400.0f;
+				//	dst.m_left = 0.0f;
+				//	dst.m_right = 775.0f;
+				//	dst.m_bottom = 588.0f;
+
+				//	//描画
+				//	Draw::Draw(12, &src, &dst, c, 0.0f);
+				//}
+				//else { ; }
 
 			}
 			//----------------------------------------
-			else if (m_tipe == 1) {//tipe1は、コメントを隠す画像表示
-				if (m_sec <= 700) {//715(コメントの幅)まで時間経過
+			else if (m_tipe == 1) 
+			{//tipe1は、コメントを隠す画像表示
+				//チュートリアル専用miniボックス------------------------------------
+				//切り取り位置の設定
+				src.m_top = 0.0f;
+				src.m_left = 0.0f;
+				src.m_right = 287.0f;
+				src.m_bottom = 97.0f;
+
+				//表示位置の設定
+				dst.m_top = 343.0f;
+				dst.m_left = -30.0f;
+				dst.m_right = 257.0f;
+				dst.m_bottom = 440.0f;
+				Draw::Draw(14, &src, &dst, c, 0.0f);
+
+				if (m_sec <= 715) 
+				{//715(コメントの幅)まで時間経過
 					m_sec += 5;	   //文字の表示スピード---------------------
 				}				   //幅を超えると、行数を+1
-				else {
+				else 
+				{
 					m_line += 1;
 					m_sec = 0;
 				}
@@ -120,10 +139,11 @@ void CObjTutorial::Draw()
 				src.m_right = 119.0f;
 				src.m_bottom = 55.0f;
 
-				if (m_p != 1) {
+				if (m_p != 1)
+				{
 					if (m_line == 0) 
 					{//１行目ーーーーーーーーーーーーーーーーーーーーーーー
-									  //表示位置の設定
+						//表示位置の設定
 						dst.m_top = 450.0f;
 						if (m_line == 0)//１行目の時のみ動作
 							dst.m_left = 50.0f + (m_sec*1.0f);
@@ -137,7 +157,7 @@ void CObjTutorial::Draw()
 					else { ; }
 					if (m_line <= 1) 
 					{//２行目ーーーーーーーーーーーーーーーーーーーーーーーー
-									  //表示位置の設定
+						//表示位置の設定
 						dst.m_top = 480.0f;
 						if (m_line == 1)//２行目の時のみ動作
 							dst.m_left = 50.0f + (m_sec*1.0f);
@@ -151,7 +171,7 @@ void CObjTutorial::Draw()
 					else { ; }
 					if (m_line <= 2 && m_p != 1) 
 					{//３行目ーーーーーーーーーーーーーーーーーー
-												  //表示位置の設定
+						//表示位置の設定
 						dst.m_top = 520.0f;
 						if (m_line == 2)//３行目の時のみ動作
 							dst.m_left = 50.0f + (m_sec*1.0f);
@@ -187,7 +207,7 @@ void CObjTutorial::Draw()
 				}
 				else { ; }
 			}
-			Font::StrDraw(L"チュートリアル", 0, 410, 30, c);
+			Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
 
 			//キー入力可能時間になったらZを押して進む
 			if (m_keytime == 50)
