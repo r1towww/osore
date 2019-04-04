@@ -160,9 +160,9 @@ void CObjTutorial::Draw()
 						//表示位置の設定
 						dst.m_top = 480.0f;
 						if (m_line == 1)//２行目の時のみ動作
-							dst.m_left = 50.0f + (m_sec*1.0f);
+							dst.m_left = 20.0f + (m_sec*1.0f);
 						else
-							dst.m_left = 50.0f;
+							dst.m_left = 20.0f;
 						dst.m_right = 765.0f;
 						dst.m_bottom = 510.0f;
 						//描画
@@ -172,13 +172,13 @@ void CObjTutorial::Draw()
 					if (m_line <= 2 && m_p != 1) 
 					{//３行目ーーーーーーーーーーーーーーーーーー
 						//表示位置の設定
-						dst.m_top = 520.0f;
+						dst.m_top = 510.0f;
 						if (m_line == 2)//３行目の時のみ動作
-							dst.m_left = 50.0f + (m_sec*1.0f);
+							dst.m_left = 20.0f + (m_sec*1.0f);
 						else
-							dst.m_left = 50.0f;
+							dst.m_left = 20.0f;
 						dst.m_right = 765.0f;
-						dst.m_bottom = 550.0f;
+						dst.m_bottom = 540.0f;
 						//描画
 						Draw::Draw(13, &src, &dst, c, 0.0f);
 					}//行が変わると、表示しない
