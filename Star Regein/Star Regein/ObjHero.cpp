@@ -75,7 +75,7 @@ void CObjHero::Action()
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 
-	
+	}
 	//Shiftキーが入力されたらダッシュ
 	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
 		&& g_Taurus == true && g_mp >= 1.0f)
