@@ -26,12 +26,12 @@ void CObjTextBox::Init()
 //アクション
 void CObjTextBox::Action()
 {
-
 	if (Input::GetVKey('Z') == true)
 	{
 		if (m_f == false)
 		{
-			m_text += 1;
+			m_text ++;
+			m_f = true;
 		}
 		else
 		{
@@ -58,6 +58,32 @@ void CObjTextBox::Draw()
 	{
 		if (m_text == 0)
 		{
+			Font::StrDraw(L"Star Reginへようこそ！！", 20, 450, 32, c);
+			Font::StrDraw(L"ここ、地球ステージでは基本的な操作と", 20, 480, 32, c);
+			Font::StrDraw(L"ゲームのクリア条件をお伝えします！", 20, 510, 32, c);
+		}
+		else if (m_text == 1)
+		{
+			Font::StrDraw(L"テスト2", 20, 450, 32, c);
+		}
+		else if (m_text == 2)
+		{
+			Font::StrDraw(L"テスト3", 20, 450, 32, c);
+		}
+		else if (m_text == 3)
+		{
+			Font::StrDraw(L"テスト4", 20, 450, 32, c);
+		}
+		else if (m_text == 4)
+		{
+			Font::StrDraw(L"テスト5", 20, 450, 32, c);
+
+		}
+	}
+	else if (g_stage == VenusTaurus)
+	{
+		if (m_text == 0)
+		{
 			Font::StrDraw(L"テスト", 150, 450, 32, c);
 		}
 		else if (m_text == 1)
@@ -66,8 +92,17 @@ void CObjTextBox::Draw()
 		}
 		else if (m_text == 2)
 		{
-			Font::StrDraw(L"テスト2", 150, 450, 32, c);
+			Font::StrDraw(L"テスト3", 150, 450, 32, c);
 		}
+		else if (m_text == 3)
+		{
+			Font::StrDraw(L"テスト4", 150, 450, 32, c);
+		}
+		else if (m_text == 4)
+		{
+			Font::StrDraw(L"テスト5", 150, 450, 32, c);
+		}
+
 	}
 	
 
