@@ -104,7 +104,7 @@
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+      <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlackhole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
@@ -147,7 +147,6 @@
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
-    <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
@@ -170,6 +169,12 @@
     </ClCompile>
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStar.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp">
+      <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
     <ClCompile Include="ObjTutorial.cpp">
       <Filter>ソースファイル</Filter>
@@ -288,7 +293,7 @@
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="SceneVenusTaurus.h">
       <Filter>ソースファイル\惑星\金星</Filter>
@@ -313,6 +318,12 @@
     </ClInclude>
     <ClInclude Include="ObjTwinsRed.h">
       <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlackhole.h">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLibra.h">
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="ObjTutorial.h">
       <Filter>ソースファイル</Filter>
@@ -373,14 +384,14 @@
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\スキル切り替え">
-      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\Game Over">
       <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\敵\双子">
       <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル">
+      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

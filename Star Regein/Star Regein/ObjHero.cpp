@@ -12,7 +12,7 @@
 using namespace GameL;
 
 float g_posture;
-
+int g_skill = Taurus;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -26,34 +26,35 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = 0;
+	g_posture = HERO_DOWN;
 
 	//最大HPの初期化
-	g_max_hp = 5;
+	g_max_hp = 50.0f;
 	//HPの初期化
-	g_hp = 5;
+	g_hp = 50.0f;
 
 	//最大ＭＰの初期化
-	g_max_mp = 50;
+	g_max_mp = 50.0f;
 	//ＭＰの初期化
-	g_mp = 50;
+	g_mp = 50.0f;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
 
 	//ＭＰリジェネカウント用初期化
 	m_regene_time = 0;
+
+	//キーフラグの初期化
+	m_key_f = true;
 
 	//ダッシュフラグ初期化
 	m_dash_flag = false;
@@ -74,90 +75,121 @@ void CObjHero::Action()
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 
+	
+	//Shiftキーが入力されたらダッシュ
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
+		&& g_Taurus == true && g_mp >= 1.0f)
+	{
+		//ダッシュフラグをオン
+		m_dash_flag = true;
 
-		//Shiftキーが入力されたらダッシュ
-		if ((Input::GetVKey(VK_SHIFT)))
+		if (m_move_flag == true)
 		{
-			//ダッシュフラグをオン
-			m_dash_flag = true;
+			m_MP_time++;
+			g_mp -= 0.1f;
+			//if (m_MP_time > 60)
+			//{
+			//	m_MP_time = 0;
+			//	g_mp -= 5.0f;
+			//}
+		}
 
-			if (m_move_flag == true)
+		m_speed_power = DASH_SPEED;
+	}
+	else//通常速度
+	{
+		m_move_flag = false;
+		m_dash_flag = false;
+		m_speed_power = NORMAL_SPEED;
+	}
+
+	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
+	{
+		m_move_flag = true;
+		m_vy -= m_speed_power;
+		g_posture = HERO_UP;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
+	{
+		m_move_flag = true;
+		m_vy += m_speed_power;
+		g_posture = HERO_DOWN;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
+	{
+		m_move_flag = true;
+		m_vx -= m_speed_power;
+		g_posture = HERO_LEFT;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
+	{
+		m_move_flag = true;
+		m_vx += m_speed_power;
+		g_posture = HERO_RIGHT;
+		m_ani_time += ANITIME;
+	}
+	else//移動キーの入力が無い場合
+	{
+		m_ani_frame = 1;	//静止フレームにする
+		m_ani_time = 0;		//アニメーション時間リセット
+	}
+	//Zキーが入力された場合	
+	if (Input::GetVKey('Z'))
+	{
+		//ビームサーベルオブジェクト作成
+		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
+		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
+	}
+
+	//Xキーが入力された場合、スキルを使用
+	if (Input::GetVKey('X'))
+	{
+		if (m_key_f == true)
+		{
+			//天秤座の場合
+			if (g_skill == Libra)
 			{
-				m_MP_time++;
-
-				if (m_MP_time > 60)
+				if (g_hp <= g_max_hp)
 				{
-					m_MP_time = 0;
-					g_mp -= 5;
+					g_mp -= 25.0f;	//mp消費
+					g_hp += 10.0f;	//hp回復
 				}
 			}
 
-			m_speed_power = DASH_SPEED;
+			m_key_f = false;
+		}
+	}
+	//Qキーが入力された場合
+	else if (Input::GetVKey('Q'))
+	{
+		if (m_key_f == true)
+		{
+			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
+			m_key_f = false;
+		}
+	}
+	else 
+	{
+		m_key_f = true;
+	}
 
-		}
-		else//通常速度
-		{
-			m_move_flag = false;
-			m_dash_flag = false;
-			m_speed_power = NORMAL_SPEED;
-		}
+	//HPが最大を超えないようにする（回復スキル）
+	if (g_hp >= g_max_hp)	//HPが最大を超えたら
+	{
+		g_hp = g_max_hp;	//最大HPに戻す
+	}
+	//MPが最大を超えないようにする（リジェネ）
+	if (g_mp >= g_max_mp)	//MPが最大を超えたら
+	{
+		g_mp = g_max_mp;	//最大MPに戻す
+	}
 
-		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
-		{
-			m_move_flag = true;
-			m_vy -= m_speed_power;
-			g_posture = 1;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
-		{
-			m_move_flag = true;
-			m_vy += m_speed_power;
-			g_posture = 3;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
-		{
-			m_move_flag = true;
-			m_vx -= m_speed_power;
-			g_posture = 2;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
-		{
-			m_move_flag = true;
-			m_vx += m_speed_power;
-			g_posture = 4;
-			m_ani_time += ANITIME;
-		}
-		else//移動キーの入力が無い場合
-		{
-			m_ani_frame = 1;	//静止フレームにする
-			m_ani_time = 0;		//アニメーション時間リセット
-		}
-		if (Input::GetVKey('Z'))
-		{
-			//ビームサーベルオブジェクト作成
-			CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
-			Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
-		}
 
-		if (Input::GetVKey('Q'))
-		{
-			if (m_key_f == true)
-			{
-				g_image_reft += 900;
-				g_image_right += 900;
-				m_key_f = false;
-			}
-		}
-		else
-		{
-			m_key_f = true;
-		}
-
-		//HitBoxの内容を更新
-		CHitBox*hit = Hits::GetHitBox(this);
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
 
 		//主人公とBLOCK系統との当たり判定
 		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -226,11 +258,11 @@ void CObjHero::Action()
 				}
 			}
 
-			g_hp--;
-			m_f = true;
-			m_key_f = true;
-			hit->SetInvincibility(true);
-		}
+		g_hp -= 10.0f;
+		m_f = true;
+		m_key_f = true;
+		hit->SetInvincibility(true);
+	}
 
 		if (m_f == true)
 		{
@@ -246,72 +278,72 @@ void CObjHero::Action()
 
 		}
 
-		//アニメーション用
-		if (m_ani_time > 4)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame == 4)
-		{
-			m_ani_frame = 0;
-		}
+	//アニメーション用
+	if (m_ani_time > 4)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 
 		//ブラックホールと接触した場合
 		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
-		//ブロック情報を持ってくる
-		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		if (hit->CheckObjNameHit(OBJ_BLACKHOLE) != nullptr)
-		{
-			block->SetScrollx(-g_whitehole_x[0][0]);	//ホワイトホールの位置に移動させる
-			block->SetScrolly(-g_whitehole_y[0][0] + TELEPORTBALANCE);	//位置が被らないようにずらす
-		}
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-		block->BlockHit(&m_px, &m_py, true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-			&m_block_type
-		);
+	//ブラックホールの数forループを回す
+	for (int i = 0; i < 4; i++)
+	{
+		//ブラックホールと当たった場合
+		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
+		{
+			//同じ値のホワイトホール位置に移動させる
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);
+			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+		}
+	}
+
+	//ブロックとの当たり判定実行	
+	block->BlockHit(&m_px, &m_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+	);
 
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
 
-		//MPが50以下になったら一定間隔で増える
-		if (m_dash_flag == false)//ダッシュしていなかったら増える
+	//MPが50以下になったら一定間隔で増える
+	if (m_dash_flag == false)//ダッシュしていなかったら増える
+	{
+		if (g_mp < 50.0f)
 		{
-			if (g_mp < 50)
+			m_regene_time++;
+			if (m_regene_time > 30)
 			{
-				m_regene_time++;
-				if (m_regene_time > 30)
-				{
-					m_regene_time = 0;
-					g_mp += 1;
-				}
+				m_regene_time = 0;
+				g_mp += 1.0f;
 			}
 		}
-		else if (m_dash_flag == true)
-		{
-			;
-		}
-
+	}
+	else if (m_dash_flag == true)
+	{
+		;
+	}
+	
 
 		//作成したHitBox更新用の入り口を取り出す
 		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
-		//HPが０になったら削除
-		if (g_hp <= 0)
-		{
-			this->SetStatus(false);    //自身に削除命令を出す
-			Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-			Scene::SetScene(new CSceneGameOver());
-		}
-	}
-	//チュートリアルフラグが立っているなら動かないようにする
-	else
+	//HPが０になったら削除
+	if (g_hp <= 0.0f)
 	{
-		return;
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		Scene::SetScene(new CSceneGameOver());
 	}
 }
 

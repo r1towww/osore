@@ -7,14 +7,15 @@ using namespace GameL;
 
 
 //オブジェクト：ブロック＆背景
-class CObjSkill : public CObj
+class CObjSkillLibra : public CObj
 {
 	public:
-		CObjSkill() {};
-		~CObjSkill() {};
+		CObjSkillLibra() {};
+		~CObjSkillLibra() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
 
 	private:
+
 };

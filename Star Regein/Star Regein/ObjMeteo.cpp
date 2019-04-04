@@ -35,7 +35,7 @@ void CObjMeteo::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)	//キーを取得
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		this->SetStatus(false);		//自身を削除
 		Hits::DeleteHitBox(this);
@@ -59,18 +59,18 @@ void CObjMeteo::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 50.0f;
-	src.m_right = 100.0f;
-	src.m_bottom = 50.0f;
+	src.m_top    =   0.0f;
+	src.m_left   =  50.0f;
+	src.m_right  = 100.0f;
+	src.m_bottom =  50.0f;
 	
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
-	dst.m_left = 0.0f + m_px + block->GetScrollx();
-	dst.m_right = ALLSIZE + m_px + block->GetScrollx();
+	dst.m_top    = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
+	dst.m_left   = 0.0f + m_px + block->GetScrollx();
+	dst.m_right  = ALLSIZE + m_px + block->GetScrollx();
 	dst.m_bottom = ALLSIZE + m_py + block->GetScrolly();
 
 	//描画

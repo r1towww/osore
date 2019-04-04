@@ -136,6 +136,7 @@
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjMP.h" />
     <ClInclude Include="ObjAsteroid.h" />
@@ -185,6 +187,7 @@
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
     <ClInclude Include="ObjSkill.h" />
+    <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />
     <ClInclude Include="ObjStageClear.h" />

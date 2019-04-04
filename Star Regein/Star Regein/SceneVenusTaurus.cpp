@@ -67,7 +67,7 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 
-	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 
 
 
@@ -100,8 +100,9 @@ void CSceneVenusTaurus::InitScene()
 void CSceneVenusTaurus::Scene()
 {
 	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
-	if (g_StarCount == 18)
+	if (g_StarCount == TAURUSMAXSTAR)
 	{
+		g_Taurus = true;		//スキル（牡牛座）をオンにする
 		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
 	}
 }

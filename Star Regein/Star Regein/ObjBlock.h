@@ -6,7 +6,7 @@
 using namespace GameL;
 
 //定数
-#define HITBOXSIZE 40.0f
+#define HITBOXSIZE 50.0f	//障害物用のヒットボックスサイズ
 
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
@@ -33,7 +33,7 @@ class CObjBlock : public CObj
 		void BlockHit(
 			float *x, float *y, bool scroll_on,
 			bool*up, bool* down, bool*left, bool*right,
-			float*vx, float*vy, int*bt
+			float*vx, float*vy
 		);
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a

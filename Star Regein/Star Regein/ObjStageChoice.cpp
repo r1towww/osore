@@ -16,7 +16,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
-	m_alpha = 1.0f;		//アルファ値の初期化
+	m_alpha = ALPHAORIGIN;		//アルファ値の初期化
 }
 
 //アクション
@@ -37,15 +37,15 @@ void CObjStageChoice::Draw()
 
 	//背景------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 1920.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 1920.0f;
 	src.m_bottom = 1080.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f ;
-	dst.m_left = 0.0f ;
-	dst.m_right = 800.0f ;
+	dst.m_top    = 0.0f ;
+	dst.m_left   = 0.0f ;
+	dst.m_right  = 800.0f ;
 	dst.m_bottom = 600.0f ;
 
 	//表示
@@ -54,15 +54,15 @@ void CObjStageChoice::Draw()
 
 	//地球------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 300.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 300.0f;
 	src.m_bottom = 283.0f;
 
 	//表示位置の設定
-	dst.m_top =	450.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = 150.0f;
+	dst.m_top    = 450.0f;
+	dst.m_left   = 0.0f;
+	dst.m_right  = 150.0f;
 	dst.m_bottom = 600.0f;
 
 	//表示
@@ -72,15 +72,15 @@ void CObjStageChoice::Draw()
 
 	//金星------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 303.0f;
-	src.m_bottom =303.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 303.0f;
+	src.m_bottom = 303.0f;
 
 	//表示位置の設定
-	dst.m_top = 350.0f;
-	dst.m_left = 200.0f;
-	dst.m_right = 350.0f;
+	dst.m_top    = 350.0f;
+	dst.m_left   = 200.0f;
+	dst.m_right  = 350.0f;
 	dst.m_bottom = 500.0f;
 
 	//表示
@@ -89,16 +89,16 @@ void CObjStageChoice::Draw()
 
 	//水星------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 325.0f;
-	src.m_bottom =325.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 325.0f;
+	src.m_bottom = 325.0f;
 
 	//表示位置の設定
-	dst.m_top = 180.0f;
-	dst.m_left = 450.0f;
-	dst.m_right = 600.0f;
-	dst.m_bottom =330.0f;
+	dst.m_top    = 180.0f;
+	dst.m_left   = 450.0f;
+	dst.m_right  = 600.0f;
+	dst.m_bottom = 330.0f;
 
 	//表示
 	Draw::Draw(5, &src, &dst, c, 0.0f);
@@ -106,15 +106,15 @@ void CObjStageChoice::Draw()
 
 	//太陽------------------------------------
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 335.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 335.0f;
 	src.m_bottom = 350.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f;
-	dst.m_left = 650.0f;
-	dst.m_right = 800.0f;
+	dst.m_top    = 0.0f;
+	dst.m_left   = 650.0f;
+	dst.m_right  = 800.0f;
 	dst.m_bottom = 150.0f;
 
 	//表示

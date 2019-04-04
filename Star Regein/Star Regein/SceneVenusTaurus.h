@@ -5,6 +5,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+//定数
+#define TAURUSMAXSTAR	18	//牡牛座の星の数
+
 //シーン：メイン
 class CSceneVenusTaurus :public CScene
 {

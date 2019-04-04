@@ -26,10 +26,9 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE,
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
+	OBJ_BLACKHOLE4,
 
 	OBJ_WHITEHOLE,
-	OBJ_WHITEHOLE2,
-	OBJ_WHITEHOLE3,
 
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
@@ -83,10 +82,16 @@ struct UserData
 #define ALLSIZE 64.0f
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
+	
+//主人公の向き
+#define HERO_UP		1
+#define HERO_LEFT	2
+#define HERO_DOWN	3
+#define HERO_RIGHT	4
 
 //惑星ごとの値
 typedef enum Planet
-{
+{	/* ステージごとの値 */
 	Earth,			//地球			0
 	EarthStar,		//地球			1
 	Venus,			//金星			2
@@ -98,7 +103,19 @@ typedef enum Planet
 	Sun,			//太陽			8
 	SunLeo,			//太陽（獅子座）9
 	Space,			//ステージ選択	10
+
 }Planet;
+
+typedef enum Skill
+{	/* スキルごとの値 */
+	NoSkill,	//スキル無し	0
+	Taurus,		//牡牛座		1
+	Libra,		//天秤座		2
+	Gemini,		//双子座		3
+	Virgo,		//乙女座		4
+	Leo,		//獅子座		5
+
+}Skill;
 
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
@@ -109,23 +126,30 @@ extern float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
 extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 
-extern float* g_blackhole_x[10];
-extern float* g_blackhole_y[10];
-extern float* g_whitehole_x[10];
-extern float* g_whitehole_y[10];
+extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
+extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
+extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
+extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
+extern int g_blackholecnt;	//ブラックホールカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
 extern float g_max_mp; //最大ＭＰ
 
+extern bool g_key_flag;	//キー入力制御フラグ
 
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
-extern int g_image_right; //スキル画像切り替え
-extern int g_image_reft;  //スキル画像切り替え
+extern int g_skill;		//各星座スキルの値
 
+//各星座の取得情報
+extern bool g_Taurus;	//牡牛座	
+extern bool g_Libra;	//天秤座
+extern bool g_Gemini;	//双子座
+extern bool g_Virgo;	//乙女座
+extern bool g_Leo;		//獅子座
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
 
 //------------------------------------------------
@@ -148,7 +172,6 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
 
-
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
@@ -159,11 +182,13 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
-
 #include "ObjHeart.h"
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
+#include "ObjSkillLibra.h"
+
+
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

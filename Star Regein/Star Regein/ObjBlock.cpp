@@ -11,12 +11,13 @@
 //使用するネームスペース
 using namespace GameL;
 
+int g_blackholecnt = 0;
+
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
 	memcpy(m_map, map, sizeof(int)*(MAPSIZE * MAPSIZE));
 }
-
 
 //イニシャライズ
 void CObjBlock::Init()
@@ -123,7 +124,7 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				
 				//ブラックホールの位置を取得
 				float* bx = objablackhole->GetBX();
@@ -133,13 +134,13 @@ void CObjBlock::Init()
 				g_blackhole_y[b_c] = objablackhole->GetBY();
 
 				b_c++;
-
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+				g_blackholecnt++;	//ブラックホールのカウントを増やす
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 																							 //ブラックホールの位置を取得
 				float* bx = objawhitehole->GetWX();
 				float* by = objawhitehole->GetWY();
@@ -251,7 +252,7 @@ void CObjBlock::BlockHit
 (
 	float *x, float *y, bool scroll_on,
 	bool*up, bool* down, bool*left, bool*right,
-	float*vx, float*vy, int*bt
+	float*vx, float*vy
 )
 {
 	//主人公の衝突状態確認用フラグの初期化
@@ -259,9 +260,6 @@ void CObjBlock::BlockHit
 	*down = false;
 	*left = false;
 	*right = false;
-
-	//踏んでいるblockの種類の初期化
-	*bt = 0;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAPSIZE; i++)
