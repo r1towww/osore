@@ -76,32 +76,9 @@ void CObjHero::Action()
 		m_vy = 0.0f;
 
 	}
-	//Shiftキーが入力されたらダッシュ
-	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
-		&& g_Taurus == true && g_mp >= 1.0f)
-	{
-		//ダッシュフラグをオン
-		m_dash_flag = true;
+	
 
-		if (m_move_flag == true)
-		{
-			m_MP_time++;
-			g_mp -= 0.1f;
-			//if (m_MP_time > 60)
-			//{
-			//	m_MP_time = 0;
-			//	g_mp -= 5.0f;
-			//}
-		}
-
-		m_speed_power = DASH_SPEED;
-	}
-	else//通常速度
-	{
-		m_move_flag = false;
-		m_dash_flag = false;
-		m_speed_power = NORMAL_SPEED;
-	}
+//移動系統情報--------------------------------------------------
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
@@ -136,6 +113,11 @@ void CObjHero::Action()
 		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
+
+//---------------------------------------------------------------
+
+//通常攻撃情報---------------------------------------------------
+
 	//Zキーが入力された場合	
 	if (Input::GetVKey('Z'))
 	{
@@ -144,6 +126,34 @@ void CObjHero::Action()
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
+//---------------------------------------------------------------
+
+//スキル系統情報-------------------------------------------------
+
+	//Shiftキーが入力されたらダッシュ
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+		&& g_Taurus == true && g_mp >= 1.0f)
+	{
+		//ダッシュフラグをオン
+		m_dash_flag = true;
+
+		if (m_move_flag == true)
+		{
+			m_MP_time++;
+			if (m_MP_time > 60)
+			{
+				m_MP_time = 0;
+				g_mp -= 5.0f;
+			}
+		}
+		m_speed_power = DASH_SPEED;
+	}
+	else//通常速度
+	{
+		m_move_flag = false;
+		m_dash_flag = false;
+		m_speed_power = NORMAL_SPEED;
+	}
 	//Xキーが入力された場合、スキルを使用
 	if (Input::GetVKey('X'))
 	{
@@ -152,7 +162,7 @@ void CObjHero::Action()
 			//天秤座の場合
 			if (g_skill == Libra)
 			{
-				if (g_hp <= g_max_hp)
+				if (g_hp < g_max_hp)
 				{
 					g_mp -= 25.0f;	//mp消費
 					g_hp += 10.0f;	//hp回復
@@ -187,76 +197,77 @@ void CObjHero::Action()
 		g_mp = g_max_mp;	//最大MPに戻す
 	}
 
+//----------------------------------------------------------------
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 
-		//主人公とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
 		{
-			//主人公がブロックとどの角度で当たっているのかを確認
-			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-			float r = 0;
-
-			for (int i = 0; i < 10; i++)
+			if (hit_data[i] != nullptr)
 			{
-				if (hit_data[i] != nullptr)
-				{
-					r = hit_data[i]->r;
+				r = hit_data[i]->r;
 
-					//角度で上下左右を判定
-					if ((r <= 45 && r >= 0) || r >= 315)
-					{
-						m_vx = -0.15f; //右
-					}
-					if (r > 45 && r < 135)
-					{
-						m_vy = 0.15f;//上
-					}
-					if (r >= 135 && r < 225)
-					{
-						m_vx = 0.15f;//左
-					}
-					if (r >= 225 && r < 315)
-					{
-						m_vy = -0.15f; //下
-					}
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
 				}
-			}
-		}
-
-		if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
-		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_ENEMY);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < 10; i++)
-			{
-				if (hit_data[i] == nullptr)
-					continue;
-
-				float r = hit_data[i]->r;
-
-
-				if ((r < 45 && r >= 0) || r > 315)
+				if (r > 45 && r < 135)
 				{
-					m_vx = -10.0f;//左に移動させる
-				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 10.0f;//上に移動させる
+					m_vy = 0.15f;//上
 				}
 				if (r >= 135 && r < 225)
 				{
-					m_vx = 10.0f;//右に移動させる
+					m_vx = 0.15f;//左
 				}
 				if (r >= 225 && r < 315)
 				{
-					m_vy = -10.0f;//したに移動させる
+					m_vy = -0.15f; //下
 				}
 			}
+		}
+	}
+
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_ENEMY);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] == nullptr)
+				continue;
+
+			float r = hit_data[i]->r;
+
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -10.0f;//左に移動させる
+			}
+			if (r >= 45 && r < 135)
+			{
+				m_vy = 10.0f;//上に移動させる
+			}
+			if (r >= 135 && r < 225)
+			{
+				m_vx = 10.0f;//右に移動させる
+			}
+			if (r >= 225 && r < 315)
+			{
+				m_vy = -10.0f;//したに移動させる
+			}
+		}
 
 		g_hp -= 10.0f;
 		m_f = true;
@@ -264,19 +275,18 @@ void CObjHero::Action()
 		hit->SetInvincibility(true);
 	}
 
-		if (m_f == true)
-		{
-			m_time--;
+	if (m_f == true)
+	{
+		m_time--;
 
-		}
-		if (m_time <= 0)
-		{
-			m_f = false;
-			hit->SetInvincibility(false);
+	}
+	if (m_time <= 0)
+	{
+		m_f = false;
+		hit->SetInvincibility(false);
 
-			m_time = 30;
-
-		}
+		m_time = 30;
+	}
 
 	//アニメーション用
 	if (m_ani_time > 4)
@@ -289,8 +299,8 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
-		//ブラックホールと接触した場合
-		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
+	//ブラックホールと接触した場合
+	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -335,8 +345,8 @@ void CObjHero::Action()
 	}
 	
 
-		//作成したHitBox更新用の入り口を取り出す
-		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
+	//作成したHitBox更新用の入り口を取り出す
+	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
 	if (g_hp <= 0.0f)
