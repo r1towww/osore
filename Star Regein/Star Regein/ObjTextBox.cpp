@@ -64,20 +64,26 @@ void CObjTextBox::Draw()
 		}
 		else if (m_text == 1)
 		{
-			Font::StrDraw(L"テスト2", 20, 450, 32, c);
+			Font::StrDraw(L"まずは移動してみましょう", 20, 450, 32, c);
 		}
 		else if (m_text == 2)
 		{
-			Font::StrDraw(L"テスト3", 20, 450, 32, c);
+			Font::StrDraw(L"方向キーで移動することができます", 20, 450, 32, c);
 		}
 		else if (m_text == 3)
 		{
-			Font::StrDraw(L"テスト4", 20, 450, 32, c);
+			Font::StrDraw(L"次にこのゲームのクリア条件は", 20, 450, 32, c);
+			Font::StrDraw(L"各ステージにある星を集めることです", 20, 450, 32, c);
 		}
 		else if (m_text == 4)
 		{
-			Font::StrDraw(L"テスト5", 20, 450, 32, c);
-
+			Font::StrDraw(L"星を集めきると星座が完成し、", 20, 450, 32, c);
+			Font::StrDraw(L"新しくスキルを使うことができます", 20, 450, 32, c);
+		}
+		else if (m_text == 5)
+		{
+			Font::StrDraw(L"それでは星を集めてみましょう", 20, 450, 32, c);
+		
 		}
 	}
 	else if (g_stage == VenusTaurus)
