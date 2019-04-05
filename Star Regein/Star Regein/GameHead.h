@@ -15,6 +15,8 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_STAGECHOICEHERO,
 	OBJ_STAGECLEAR,
+	OBJ_TUTORIAL,
+	OBJ_TEXTBOX,
 	OBJ_GAMEOVER,
 	OBJ_BLOCK,
 	OBJ_STAR,
@@ -148,6 +150,7 @@ extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
+extern bool g_tutorial_flag;//チュートリアルの表示制御用
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -173,6 +176,8 @@ extern bool g_Leo;		//獅子座
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
 #include "ObjStageClear.h"
+#include "ObjTutorial.h"
+#include "ObjTextBox.h"
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"

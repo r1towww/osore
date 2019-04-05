@@ -68,37 +68,17 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	//移動ベクトルの破棄
-	m_vx = 0.0f;
-	m_vy = 0.0f;
+	//チュートリアルフラグが立っていないとき動くようにする
+	if (g_tutorial_flag == false)
+	{
+		//移動ベクトルの破棄
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 
+	}
 	
-	//Shiftキーが入力されたらダッシュ
-	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus 
-		&& g_Taurus == true && g_mp >= 5.0f)
-	{
-		//ダッシュフラグをオン
-		m_dash_flag = true;
 
-		if (m_move_flag == true)
-		{
-			m_MP_time++;
-
-			if (m_MP_time > 60)
-			{
-				m_MP_time = 0;
-				g_mp -= 5.0f;
-			}
-		}
-
-		m_speed_power = DASH_SPEED;
-	}
-	else//通常速度
-	{
-		m_move_flag = false;
-		m_dash_flag = false;
-		m_speed_power = NORMAL_SPEED;
-	}
+//移動系統情報--------------------------------------------------
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
@@ -133,6 +113,11 @@ void CObjHero::Action()
 		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
+
+//---------------------------------------------------------------
+
+//通常攻撃情報---------------------------------------------------
+
 	//Zキーが入力された場合	
 	if (Input::GetVKey('Z'))
 	{
@@ -141,7 +126,35 @@ void CObjHero::Action()
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 	}
 
-	//Zキーが入力された場合、スキルを使用
+//---------------------------------------------------------------
+
+//スキル系統情報-------------------------------------------------
+
+	//Shiftキーが入力されたらダッシュ
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+		&& g_Taurus == true && g_mp >= 1.0f)
+	{
+		//ダッシュフラグをオン
+		m_dash_flag = true;
+
+		if (m_move_flag == true)
+		{
+			m_MP_time++;
+			if (m_MP_time > 60)
+			{
+				m_MP_time = 0;
+				g_mp -= 5.0f;
+			}
+		}
+		m_speed_power = DASH_SPEED;
+	}
+	else//通常速度
+	{
+		m_move_flag = false;
+		m_dash_flag = false;
+		m_speed_power = NORMAL_SPEED;
+	}
+	//Xキーが入力された場合、スキルを使用
 	if (Input::GetVKey('X'))
 	{
 		if (m_key_f == true)
@@ -149,9 +162,11 @@ void CObjHero::Action()
 			//天秤座の場合
 			if (g_skill == Libra)
 			{
-				g_mp -= 25.0f;	//mp消費
-				g_hp += 10.0f;	//hp回復
-
+				if (g_hp < g_max_hp)
+				{
+					g_mp -= 25.0f;	//mp消費
+					g_hp += 10.0f;	//hp回復
+				}
 			}
 
 			m_key_f = false;
@@ -170,6 +185,19 @@ void CObjHero::Action()
 	{
 		m_key_f = true;
 	}
+
+	//HPが最大を超えないようにする（回復スキル）
+	if (g_hp >= g_max_hp)	//HPが最大を超えたら
+	{
+		g_hp = g_max_hp;	//最大HPに戻す
+	}
+	//MPが最大を超えないようにする（リジェネ）
+	if (g_mp >= g_max_mp)	//MPが最大を超えたら
+	{
+		g_mp = g_max_mp;	//最大MPに戻す
+	}
+
+//----------------------------------------------------------------
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -258,7 +286,6 @@ void CObjHero::Action()
 		hit->SetInvincibility(false);
 
 		m_time = 30;
-
 	}
 
 	//アニメーション用
@@ -295,20 +322,20 @@ void CObjHero::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
+		//位置の更新
+		m_px += m_vx;
+		m_py += m_vy;
 
 	//MPが50以下になったら一定間隔で増える
 	if (m_dash_flag == false)//ダッシュしていなかったら増える
 	{
-		if (g_mp < 50)
+		if (g_mp < 50.0f)
 		{
 			m_regene_time++;
 			if (m_regene_time > 30)
 			{
 				m_regene_time = 0;
-				g_mp += 1;
+				g_mp += 1.0f;
 			}
 		}
 	}
