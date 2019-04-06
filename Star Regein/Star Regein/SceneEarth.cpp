@@ -96,10 +96,10 @@ void CSceneEarth::InitScene()
 	Objs::InsertObj(objMP, OBJ_MP, 140);
 
 	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,3);
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,6);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 150);
 	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 4);
+	CObjTutorial* objtutorial = new CObjTutorial(1, 6);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
 	if (g_tutorial_flag == true)

@@ -42,8 +42,8 @@ void CObjTutorial::Action()
 	{
 
 		//画像が表示された際の、キー入力タイム処理
-		if (m_keytime >= 50)
-			m_keytime = 50;	//タイムが50になった際、50で止める
+		if (m_keytime >=300)
+			m_keytime = 300;	//タイムが50になった際、50で止める
 		else
 			m_keytime++;	//キー入力タイムを増やす
 
@@ -92,19 +92,6 @@ void CObjTutorial::Draw()
 				Draw::Draw(12, &src, &dst, c, 0.0f);
 
 
-				//if (m_p != 1) {//ページ数が1ではない場合
-				////同じ画像を名前用に上から表示
-				////表示位置の設定
-				//	dst.m_top = 400.0f;
-				//	dst.m_left = 0.0f;
-				//	dst.m_right = 775.0f;
-				//	dst.m_bottom = 588.0f;
-
-				//	//描画
-				//	Draw::Draw(12, &src, &dst, c, 0.0f);
-				//}
-				//else { ; }
-
 			}
 			//----------------------------------------
 			else if (m_tipe == 1) 
@@ -150,7 +137,7 @@ void CObjTutorial::Draw()
 						else
 							dst.m_left = 50.0f;
 						dst.m_right = 765.0f;
-						dst.m_bottom = 480.0f;
+						dst.m_bottom = 490.0f;
 						//描画
 						Draw::Draw(13, &src, &dst, c, 0.0f);
 					}//行が変わると、表示しない
@@ -158,13 +145,13 @@ void CObjTutorial::Draw()
 					if (m_line <= 1) 
 					{//２行目ーーーーーーーーーーーーーーーーーーーーーーーー
 						//表示位置の設定
-						dst.m_top = 480.0f;
+						dst.m_top = 491.0f;
 						if (m_line == 1)//２行目の時のみ動作
 							dst.m_left = 20.0f + (m_sec*1.0f);
 						else
 							dst.m_left = 20.0f;
 						dst.m_right = 765.0f;
-						dst.m_bottom = 510.0f;
+						dst.m_bottom = 520.0f;
 						//描画
 						Draw::Draw(13, &src, &dst, c, 0.0f);
 					}//行が変わると、表示しない
@@ -172,13 +159,13 @@ void CObjTutorial::Draw()
 					if (m_line <= 2 && m_p != 1) 
 					{//３行目ーーーーーーーーーーーーーーーーーー
 						//表示位置の設定
-						dst.m_top = 510.0f;
+						dst.m_top = 521.0f;
 						if (m_line == 2)//３行目の時のみ動作
 							dst.m_left = 20.0f + (m_sec*1.0f);
 						else
 							dst.m_left = 20.0f;
 						dst.m_right = 765.0f;
-						dst.m_bottom = 540.0f;
+						dst.m_bottom = 570.0f;
 						//描画
 						Draw::Draw(13, &src, &dst, c, 0.0f);
 					}//行が変わると、表示しない
@@ -187,20 +174,16 @@ void CObjTutorial::Draw()
 
 				if (m_line <= 3 || m_p == 1) 
 				{//・・・ーーーーーーーーーーーーーーーー
-					dst.m_top = 550.0f;
+					dst.m_top = 540.0f;
 					if (m_line > 2 || m_p == 1)//３行目以降、動作
 						if (m_sec <= 160)//表示位置を段階的に変更
-							dst.m_left = 745.0f;
-						else if (m_sec <= 280)
-							dst.m_left = 760.0f;
-						else if (m_sec <= 440)
-							dst.m_left = 770.0f;
-						else if (m_sec <= 600)
-							dst.m_left = 730.0f;
-						else { dst.m_left = 730.0f; m_sec = 0; }//カウントを０にして、元に戻す
+							dst.m_left = 780.0f;
+						else if (m_sec <= 250)
+							dst.m_left = 600.0f;
+						else { dst.m_left = 600.0f; m_sec = 0; }//カウントを０にして、元に戻す
 					else
-						dst.m_left = 730.0f;
-					dst.m_right = 770.0f;
+						dst.m_left = 780.0f;
+					dst.m_right = 750.0f;
 					dst.m_bottom = 575.0f;
 					//描画
 					Draw::Draw(13, &src, &dst, c, 0.0f);
@@ -210,7 +193,7 @@ void CObjTutorial::Draw()
 			Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
 
 			//キー入力可能時間になったらZを押して進む
-			if (m_keytime == 50)
+			if (m_keytime == 300)
 			{
 				if (Input::GetVKey('Z') == true)
 				{
