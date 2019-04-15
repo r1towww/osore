@@ -23,6 +23,9 @@ void CObjMessage::Init()
 		m_MaxStar = TAURUSMAXSTAR;	//金星（牡牛座）
 	else if (g_stage == VenusLibra)
 		m_MaxStar = LIBRAMAXSTAR;	//金星（天秤座）
+	else if (g_stage == MercuryGemini)
+		m_MaxStar = GEMINIMAXSTAR;	//水星（双子座）
+
 
 }
 
@@ -60,4 +63,6 @@ void CObjMessage::Draw()
 			m_time = 0;	//timeの初期化
 		}
 	}
+
+
 }

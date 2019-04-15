@@ -92,7 +92,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
@@ -104,7 +104,7 @@
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp">
-      <Filter>ソースファイル\スキル</Filter>
+      <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlackhole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
@@ -147,6 +147,7 @@
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
+    <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
@@ -170,11 +171,15 @@
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjTextBox.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル</Filter>
+    <ClCompile Include="ObjTutorial.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMercuryGemini.cpp">
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル\スキル</Filter>
@@ -275,7 +280,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソースファイル\主人公</Filter>
@@ -290,7 +295,7 @@
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
-      <Filter>ソースファイル\スキル</Filter>
+      <Filter>ソースファイル\スキル切り替え</Filter>
     </ClInclude>
     <ClInclude Include="SceneVenusTaurus.h">
       <Filter>ソースファイル\惑星\金星</Filter>
@@ -316,11 +321,16 @@
     <ClInclude Include="ObjTwinsRed.h">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjSkillLibra.h" />
+    <ClInclude Include="ObjTextBox.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル</Filter>
+    <ClInclude Include="ObjTutorial.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMercuryGemini.h">
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <Filter>ソースファイル\スキル</Filter>
@@ -360,9 +370,6 @@
     <Filter Include="ソースファイル\ゲームオブジェクト">
       <UniqueIdentifier>{7a706132-e21a-481e-8eb2-4735989dcedf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ビームサーベル">
-      <UniqueIdentifier>{aa2d2fae-0fac-49a2-87c4-4f2fcb53a332}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{7678e96f-f465-467c-a493-ca82cc32487f}</UniqueIdentifier>
     </Filter>
@@ -378,14 +385,20 @@
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソースファイル\スキル切り替え">
+      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソースファイル\Game Over">
       <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\敵\双子">
       <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\スキル">
-      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
+    <Filter Include="ソースファイル\チュートリアル">
+      <UniqueIdentifier>{cf90c3ba-6ea1-43eb-bd49-fbc9f09c919f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\水星">
+      <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

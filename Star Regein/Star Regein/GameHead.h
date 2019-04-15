@@ -15,6 +15,8 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_STAGECHOICEHERO,
 	OBJ_STAGECLEAR,
+	OBJ_TUTORIAL,
+	OBJ_TEXTBOX,
 	OBJ_GAMEOVER,
 	OBJ_BLOCK,
 	OBJ_STAR,
@@ -116,6 +118,7 @@ typedef enum Skill
 
 }Skill;
 
+
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
@@ -138,6 +141,9 @@ extern float g_max_mp; //最大ＭＰ
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
+extern int g_asteroid;		//マップのランダム化用変数（小惑星）
+extern int g_block;			//マップのランダム化用変数（隕石ブロック）
+
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
@@ -149,6 +155,24 @@ extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
+
+//各惑星・星座のクリア状況
+extern bool g_Earth_clear;	//地球	
+extern bool g_Venus_clear;	//金星
+extern bool g_Mercury_clear;	//水星
+extern bool g_Sun_clear;	//太陽
+
+extern bool g_Taurus_clear;	//牡牛座	
+extern bool g_Libra_clear;	//天秤座
+extern bool g_Gemini_clear;	//双子座
+extern bool g_Virgo_clear;	//乙女座
+extern bool g_Leo_clear;	//獅子座
+
+extern bool g_tutorial_flag;//チュートリアルの表示制御用
+
+extern bool g_attack_flag; //攻撃アニメーションフラグ
+extern int g_slash_time;
+extern int g_slash_frame;
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -174,6 +198,8 @@ extern bool g_Leo;		//獅子座
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"
 #include "ObjStageClear.h"
+#include "ObjTutorial.h"
+#include "ObjTextBox.h"
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
@@ -192,6 +218,7 @@ extern bool g_Leo;		//獅子座
 #include "SceneEarth.h"
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"
+#include "SceneMercuryGemini.h"
 
 
 #include "SceneTitle.h"

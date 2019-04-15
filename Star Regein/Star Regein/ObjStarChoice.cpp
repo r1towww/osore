@@ -16,9 +16,9 @@ using namespace GameL;
 void CObjStarChoice::Init()
 {
 	//透明度の初期化
-	m_Tra1 = 0.5f;
-	m_Tra2 = 0.5f;
-	m_Tra3 = 0.5f;
+	m_Tra1 = 0.3f;
+	m_Tra2 = 0.3f;
+	m_Tra3 = 0.3f;
 	m_direction = DOWN;	//初期選択位置の初期化
 
 	//キー入力用タイムの初期化
@@ -46,7 +46,7 @@ void CObjStarChoice::Action()
 			m_direction = UP;	//UPをセット
 		}
 		//下キーを入力して選択
-		if (Input::GetVKey(VK_DOWN) == true)
+		else if (Input::GetVKey(VK_DOWN) == true)
 		{
 			m_direction = DOWN;	//DOWNをセット
 		}
@@ -59,7 +59,7 @@ void CObjStarChoice::Action()
 			m_direction = DOWN;	//DOWNをセット
 		}
 		//右キーを入力して選択
-		if (Input::GetVKey(VK_RIGHT) == true)
+		else if (Input::GetVKey(VK_RIGHT) == true)
 		{
 			m_direction = RIGHT;//RIGHTをセット
 		}
@@ -71,12 +71,13 @@ void CObjStarChoice::Action()
 	}
 
 	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPをLEFTと同様に扱う)
+	//左を選択している際
 	if (m_direction == LEFT || m_direction == UP)
 	{
 		//透過率変更
 		m_Tra1 = 1.0f;
-		m_Tra2 = 0.5f;
-		m_Tra3 = 0.5f;
+		m_Tra2 = 0.3f;
+		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)		
 		{
@@ -88,7 +89,7 @@ void CObjStarChoice::Action()
 			}
 			else if (g_stage == Venus)
 			{
-				//ステージをおうし座に設定
+				//ステージを牡牛座に設定
 				g_stage = VenusTaurus;
 				Scene::SetScene(new CSceneVenusTaurus());
 			}
@@ -96,18 +97,19 @@ void CObjStarChoice::Action()
 			{
 				//ステージを双子座に設定
 				g_stage = MercuryGemini;
-				Scene::SetScene(new CSceneVenusTaurus());
+				Scene::SetScene(new CSceneMercuryGemini());
 			}
 		}
 	}
 
 	//右のほうのほうを明るくして左のほうを暗くする
+	//右を選択している際
 	else if (m_direction == RIGHT)
 	{
 		//透過率変更
 		m_Tra2 = 1.0f;
-		m_Tra1 = 0.5f;
-		m_Tra3 = 0.5f;
+		m_Tra1 = 0.3f;
+		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
@@ -126,12 +128,13 @@ void CObjStarChoice::Action()
 		}
 	}
 	//下のコマンドの明るさを変更
+	//下（戻る）を選択している際
 	else if (m_direction == DOWN)		
 	{
 		//透過率変更
 		m_Tra3 = 1.0f;
-		m_Tra2 = 0.5f;
-		m_Tra1 = 0.5f;
+		m_Tra2 = 0.3f;
+		m_Tra1 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
@@ -152,7 +155,7 @@ void CObjStarChoice::Action()
 void CObjStarChoice::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//標準カラー
+	float c[4] = { 1.0f,1.0f,1.0f,m_Tra1 };	//標準カラー
 	//左の星座
 	float left[4]  = { 1.0f,1.0f,1.0f,m_Tra1 };
 	//右の星座
@@ -183,6 +186,10 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
+		if (g_Earth_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
+		}
 	}
 	//金星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Venus)
