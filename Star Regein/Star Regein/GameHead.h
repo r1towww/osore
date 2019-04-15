@@ -139,6 +139,7 @@ extern float g_max_mp; //最大ＭＰ
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
+extern int g_rand;		//マップのランダム化用変数
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
@@ -151,6 +152,10 @@ extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+
+extern bool g_attack_flag; //攻撃アニメーションフラグ
+extern int g_slash_time;
+extern int g_slash_frame;
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -196,6 +201,7 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "SceneEarth.h"
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"
+#include "SceneMercuryGemini.h"
 
 
 #include "SceneTitle.h"

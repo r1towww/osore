@@ -14,6 +14,9 @@ using namespace GameL;
 float g_posture;
 int g_skill = Taurus;
 
+//int g_ani_time;
+//int g_ani_frame;
+
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
 	m_px = x;
@@ -38,6 +41,7 @@ void CObjHero::Init()
 	//ＭＰの初期化
 	g_mp = 50.0f;
 
+	//アニメーション用変数初期化
 	m_ani_time = 0;
 	m_ani_frame = 1;
 
@@ -60,6 +64,8 @@ void CObjHero::Init()
 	m_dash_flag = false;
 	//移動フラグ初期化
 	m_dash_flag = false;
+	//攻撃アニメーションフラグ初期化
+	g_attack_flag = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -77,6 +83,13 @@ void CObjHero::Action()
 
 	}
 	
+
+
+	//デバック用
+	if (Input::GetVKey('O'))
+	{
+		Scene::SetScene(new CSceneStageChoice());
+	}
 
 //移動系統情報--------------------------------------------------
 
@@ -121,10 +134,24 @@ void CObjHero::Action()
 	//Zキーが入力された場合	
 	if (Input::GetVKey('Z'))
 	{
+		
 		//ビームサーベルオブジェクト作成
 		CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 		Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
+
+		//攻撃アニメーションフラグオン
+		g_attack_flag = true;
+
+		g_slash_time += ANITIME;
 	}
+	else
+	{
+		g_attack_flag = false;
+		g_slash_frame = 1;
+		g_slash_time = 0;
+
+	}
+
 
 //---------------------------------------------------------------
 
@@ -195,6 +222,30 @@ void CObjHero::Action()
 	if (g_mp >= g_max_mp)	//MPが最大を超えたら
 	{
 		g_mp = g_max_mp;	//最大MPに戻す
+	}
+	//MPが0を下回らないようにする（スキルによるMPのオーバー）
+	if(g_mp <= 0.0f)
+	{
+		g_mp = 0.0f;	//0に戻す
+	}
+
+
+	//MPが50以下になったら一定間隔で増える
+	if (m_dash_flag == false)//ダッシュしていなかったら増える
+	{
+		if (g_mp < 50.0f)
+		{
+			m_regene_time++;
+			if (m_regene_time > 30)
+			{
+				m_regene_time = 0;
+				g_mp += 1.0f;
+			}
+		}
+	}
+	else if (m_dash_flag == true)
+	{
+		;
 	}
 
 //----------------------------------------------------------------
@@ -288,7 +339,7 @@ void CObjHero::Action()
 		m_time = 30;
 	}
 
-	//アニメーション用
+	//移動アニメーション用
 	if (m_ani_time > 4)
 	{
 		m_ani_frame += 1;
@@ -326,23 +377,6 @@ void CObjHero::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 
-	//MPが50以下になったら一定間隔で増える
-	if (m_dash_flag == false)//ダッシュしていなかったら増える
-	{
-		if (g_mp < 50.0f)
-		{
-			m_regene_time++;
-			if (m_regene_time > 30)
-			{
-				m_regene_time = 0;
-				g_mp += 1.0f;
-			}
-		}
-	}
-	else if (m_dash_flag == true)
-	{
-		;
-	}
 	
 
 	//作成したHitBox更新用の入り口を取り出す
