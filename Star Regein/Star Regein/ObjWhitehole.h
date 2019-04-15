@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjWhitehole : public CObj
 {
 	public:
-		CObjWhitehole(float x, float y, int i, int j);
+		CObjWhitehole(float x, float y);
 		~CObjWhitehole() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション

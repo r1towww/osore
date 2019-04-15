@@ -7,9 +7,14 @@
 
 #include "GameHead.h"
 #include "ObjBlock.h"
+#include <time.h>
 
 //使用するネームスペース
 using namespace GameL;
+
+int g_blackholecnt = 0;
+int g_asteroid;
+int g_block;
 
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
@@ -17,10 +22,23 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 	memcpy(m_map, map, sizeof(int)*(MAPSIZE * MAPSIZE));
 }
 
-
 //イニシャライズ
 void CObjBlock::Init()
 {
+	//マップのランダム処理の初期化
+	m_rand = rand() % 2;
+
+	//ランダムの値が0の場合
+	if (m_rand == 0)
+	{
+		g_block = 10;	//10をセット
+		g_asteroid = 6;	//6をセット
+	}
+	else if (m_rand = 1)	//1の場合
+	{
+		g_block = 11;		//11をセット
+		g_asteroid = 13;	//13をセット
+	}
 	m_roll = 0.0f;
 
 	blue_c = 0;
@@ -116,7 +134,7 @@ void CObjBlock::Init()
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
 			}
-			if (m_map[i][j] == 6)
+			if (m_map[i][j] == g_asteroid)
 			{
 				//小惑星オブジェクト作成
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
@@ -125,7 +143,7 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 				
 				//ブラックホールの位置を取得
 				float* bx = objablackhole->GetBX();
@@ -135,13 +153,13 @@ void CObjBlock::Init()
 				g_blackhole_y[b_c] = objablackhole->GetBY();
 
 				b_c++;
-
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+				g_blackholecnt++;	//ブラックホールのカウントを増やす
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
 																							 //ブラックホールの位置を取得
 				float* bx = objawhitehole->GetWX();
 				float* by = objawhitehole->GetWY();
@@ -155,6 +173,18 @@ void CObjBlock::Init()
 			}
 		}
 	}
+
+	//惑星によって背景を変える（カラー変更）
+	if (g_stage == EarthStar) {		//地球の場合
+		m_red = 1.0f;  m_green = 1.0f;  m_blue = 1.0f;
+	}
+	else if (g_stage == VenusTaurus || g_stage == VenusLibra) {	//金星の場合
+		m_red = 2.0f;  m_green = 2.0f;  m_blue = 1.0f;	
+	}
+	else if (g_stage == MercuryGemini || g_stage == MercuryVirgo) {	//水星の場合
+		m_red = 1.0f;  m_green = 2.0f;  m_blue = 2.0f;
+	}
+	
 }
 
 //アクション
@@ -182,7 +212,8 @@ void CObjBlock::Action()
 void CObjBlock::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };		//通常カラー
+	float backc[4] = { m_red,m_green,m_blue,1.0f };	//背景カラー
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -201,7 +232,7 @@ void CObjBlock::Draw()
 	dst.m_bottom = 600.0f;
 
 	//描画
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(5, &src, &dst, backc, 0.0f);
 
 	/* ブロック（障害物用） */
 	for (int i = 0; i < MAPSIZE; i++)
@@ -218,16 +249,22 @@ void CObjBlock::Draw()
 				if (m_map[i][j] == 1)//隕石
 				{
 					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 0.0f;
-					src.m_right  = 258.0f;
+					src.m_top = 0.0f;
+					src.m_left = 0.0f;
+					src.m_right = 258.0f;
 					src.m_bottom = 220.0f;
 					//描画
 					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-				else
+				if (m_map[i][j] == g_block)//隕石（ランダム）
 				{
-
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 0.0f;
+					src.m_right = 258.0f;
+					src.m_bottom = 220.0f;
+					//描画
+					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
 			}
 		}
@@ -253,7 +290,7 @@ void CObjBlock::BlockHit
 (
 	float *x, float *y, bool scroll_on,
 	bool*up, bool* down, bool*left, bool*right,
-	float*vx, float*vy, int*bt
+	float*vx, float*vy
 )
 {
 	//主人公の衝突状態確認用フラグの初期化
@@ -262,15 +299,13 @@ void CObjBlock::BlockHit
 	*left = false;
 	*right = false;
 
-	//踏んでいるblockの種類の初期化
-	*bt = 0;
-
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 99)
+			if (m_map[i][j] == 1  || m_map[i][j] == 99
+			 || m_map[i][j] == g_block)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALLSIZE;

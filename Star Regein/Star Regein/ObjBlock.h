@@ -6,7 +6,7 @@
 using namespace GameL;
 
 //定数
-#define HITBOXSIZE 40.0f
+#define HITBOXSIZE 50.0f	//障害物用のヒットボックスサイズ
 
 //オブジェクト：ブロック＆背景
 class CObjBlock : public CObj
@@ -33,7 +33,7 @@ class CObjBlock : public CObj
 		void BlockHit(
 			float *x, float *y, bool scroll_on,
 			bool*up, bool* down, bool*left, bool*right,
-			float*vx, float*vy, int*bt
+			float*vx, float*vy
 		);
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
@@ -49,5 +49,12 @@ class CObjBlock : public CObj
 		int m_f;//主人公消滅時のエラー回避用
 
 		bool m_Atypef;
+
+		int m_rand;	//マップのランダム化用
+
+		//惑星ごとの背景カラー情報
+		float m_red;	//赤
+		float m_green;	//緑
+		float m_blue;	//青
 		
 };

@@ -24,15 +24,15 @@ void ObjStageChoiceHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	//初期姿勢
-	g_posture = 0;
+	g_posture = HERO_DOWN;
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
 
 	//blockとの衝突状態確認
-	m_hit_up = false;
-	m_hit_down = false;
-	m_hit_left = false;
+	m_hit_up    = false;
+	m_hit_down  = false;
+	m_hit_left  = false;
 	m_hit_right = false;
 
 	m_block_type = 0;		//踏んでいるblockの種類を確認用
@@ -54,35 +54,35 @@ void ObjStageChoiceHero::Action()
 	//Shiftキーが入力されたらダッシュ
 	if ((Input::GetVKey(VK_SHIFT)))
 	{
-		m_speed_power = DASH_SPEED;
+		m_speed_power = STAGE_DASH_SPEED;
 	}
 	else//通常速度
 	{
-		m_speed_power = NORMAL_SPEED;
+		m_speed_power = STAGE_NORMAL_SPEED;
 	}
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
 		m_vy -= m_speed_power;
-		g_posture = 1;
+		g_posture = HERO_UP;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 	{
 		m_vy += m_speed_power;
-		g_posture = 3;
+		g_posture = HERO_DOWN;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 	{
 		m_vx -= m_speed_power;
-		g_posture = 2;
+		g_posture = HERO_LEFT;
 		m_ani_time += ANITIME;
 	}
 	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 	{
 		m_vx += m_speed_power;
-		g_posture = 4;
+		g_posture = HERO_RIGHT;
 		m_ani_time += ANITIME;
 	}
 	else//移動キーの入力が無い場合
@@ -106,60 +106,54 @@ void ObjStageChoiceHero::Action()
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 
-
-	//地球へ
-	if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
+	//キー入力を長押しで出来ないようにする
+	if (Input::GetVKey('Z') == false)
 	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		g_key_flag = true;	//離したらオンにする
+	}
+	// Zキーを入力かつ、キーフラグがオンの時に実行
+	if (Input::GetVKey('Z') == true && g_key_flag == true)
+	{
+		//地球へ
+		if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
 		{
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
 			g_stage = Earth;	//ステージの値を地球に変更
-			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		}
-	}
-	//金星へ
-	else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//金星へ
+		else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
 		{
-			//金星に設定
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
+				//金星に設定
 			g_stage = Venus;
-			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 		}
-	}
-	//水星へ
-	else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
-	{
-		//▼前シーンからZキー押し続けでこれを押さないように、
-		//このシーンに入って一度も押してない状態に移行しないと
-		//実行出来ないようにしている。
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//水星へ
+		else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
 		{
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
 			//水星に設定
 			g_stage = Mercury;
 		}
-	}
-	//太陽へ
-	else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
-	{
-		if (Input::GetVKey('Z') == true && m_key_flag == true)
+		//太陽へ
+		else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
 		{
 			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 			//太陽に設定
-			//g_stage = SunLeo;←ステージが完成したらコメント外してね
+			//g_stage = Sun;←ステージが完成したらコメント外してね
 			Scene::SetScene(new CSceneTitle());
 		}
+		g_key_flag = false;	//キーフラグをオフ
+		//ステージ選択(星座)オブジェクト作成
+		CObjStarChoice* star = new CObjStarChoice();
+		Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 	}
-	else
-	{
-		m_key_flag = true;
-	}
-
+	
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;

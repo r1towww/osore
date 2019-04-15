@@ -92,7 +92,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
@@ -170,6 +170,16 @@
     </ClCompile>
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjTextBox.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTutorial.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMercuryGemini.cpp">
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillTwinsB.cpp">
       <Filter>ソースファイル\主人公</Filter>
@@ -276,7 +286,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソースファイル\主人公</Filter>
@@ -326,6 +336,17 @@
     <ClInclude Include="ObjRedBullet.h">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjSkillLibra.h" />
+    <ClInclude Include="ObjTextBox.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTutorial.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMercuryGemini.h">
+      <Filter>ソースファイル\惑星\水星</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -361,9 +382,6 @@
     <Filter Include="ソースファイル\ゲームオブジェクト">
       <UniqueIdentifier>{7a706132-e21a-481e-8eb2-4735989dcedf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ビームサーベル">
-      <UniqueIdentifier>{aa2d2fae-0fac-49a2-87c4-4f2fcb53a332}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{7678e96f-f465-467c-a493-ca82cc32487f}</UniqueIdentifier>
     </Filter>
@@ -387,6 +405,12 @@
     </Filter>
     <Filter Include="ソースファイル\敵\双子">
       <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\チュートリアル">
+      <UniqueIdentifier>{cf90c3ba-6ea1-43eb-bd49-fbc9f09c919f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\水星">
+      <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -21,6 +21,7 @@ void CObjGameOver::Init()
 //アクション
 void CObjGameOver::Action()
 {
+
 }
 
 //ドロー

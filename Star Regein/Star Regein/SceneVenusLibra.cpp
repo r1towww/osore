@@ -66,10 +66,11 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
-	Draw::LoadImageW(L"弾丸.png", 14, TEX_SIZE_128);
-
-
-	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
+	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
+	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -94,14 +95,30 @@ void CSceneVenusLibra::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+
+	//チュートリアル吹き出し作成
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
+	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+	//チュートリアルオブジェクト作成
+	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
+	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+	//チュートリアル発生時のみ作成
+	if (g_tutorial_flag == true)
+	{
+		//テキストボックスオブジェクト作成
+		CObjTextBox* objtextbox = new CObjTextBox();
+		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+	}
+
 }
 
 //実行中メソッド
 void CSceneVenusLibra::Scene()
 {
 	//金星（天秤座）で星を18個集めたら次へ移行
-	if (g_StarCount == 6)
+	if (g_StarCount == LIBRAMAXSTAR)
 	{
+		g_Libra = true;		//スキル（天秤座）をオンにする
 		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}
 }

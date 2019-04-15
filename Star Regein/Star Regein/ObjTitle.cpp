@@ -7,6 +7,17 @@
 
 #include "GameHead.h"
 #include "ObjTitle.h"
+//各惑星・星座のクリア状況
+bool g_Earth_clear=false;	//地球	
+bool g_Venus_clear=false;	//金星
+bool g_Mercury_clear=false;	//水星
+bool g_Sun_clear=false;	//太陽
+
+bool g_Taurus_clear=false;	//牡牛座	
+bool g_Libra_clear=false;	//天秤座
+bool g_Gemini_clear=false;	//双子座
+bool g_Virgo_clear=false;	//乙女座
+bool g_Leo_clear=false;	//獅子座
 
 //使用するネームスペース
 using namespace GameL;
@@ -25,8 +36,13 @@ using namespace GameL;
 	* ステージ選択の際変更する *
 */
 int g_stage = Space;	//ステージの値の初期化
-int g_image_right = 0;
-int g_image_reft  = 0;
+//各星座の取得情報
+bool g_Taurus = true;	//牡牛座	
+bool g_Libra  = true;	//天秤座
+bool g_Gemini = true;	//双子座
+bool g_Virgo  = true;	//乙女座
+bool g_Leo    = true;	//獅子座
+bool g_key_flag = false;	//キー入力制御フラグ
 
 //イニシャライズ
 void CObjTitle::Init()

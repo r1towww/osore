@@ -57,9 +57,6 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 
-	//踏んでいるblockの種類を確認用
-	int m_block_type;
-
 	//移動用の向き制御用
 	bool m_movex;//左右
 	bool m_movey;//上下
