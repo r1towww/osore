@@ -155,7 +155,7 @@ void CObjStarChoice::Action()
 void CObjStarChoice::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//標準カラー
+	float c[4] = { 1.0f,1.0f,1.0f,m_Tra1 };	//標準カラー
 	//左の星座
 	float left[4]  = { 1.0f,1.0f,1.0f,m_Tra1 };
 	//右の星座
@@ -186,6 +186,10 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
+		if (g_Earth_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
+		}
 	}
 	//金星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Venus)
