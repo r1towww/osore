@@ -122,6 +122,7 @@ void CSceneEarth::Scene()
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == EARTHMAXSTAR)
 	{
+		g_Earth_clear = true;
 		Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 	}
 	
