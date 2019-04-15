@@ -78,6 +78,13 @@ void CObjHero::Action()
 	}
 	
 
+
+	//デバック用
+	if (Input::GetVKey('O'))
+	{
+		Scene::SetScene(new CSceneStageChoice());
+	}
+
 //移動系統情報--------------------------------------------------
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -195,6 +202,30 @@ void CObjHero::Action()
 	if (g_mp >= g_max_mp)	//MPが最大を超えたら
 	{
 		g_mp = g_max_mp;	//最大MPに戻す
+	}
+	//MPが0を下回らないようにする（スキルによるMPのオーバー）
+	if(g_mp <= 0.0f)
+	{
+		g_mp = 0.0f;	//0に戻す
+	}
+
+
+	//MPが50以下になったら一定間隔で増える
+	if (m_dash_flag == false)//ダッシュしていなかったら増える
+	{
+		if (g_mp < 50.0f)
+		{
+			m_regene_time++;
+			if (m_regene_time > 30)
+			{
+				m_regene_time = 0;
+				g_mp += 1.0f;
+			}
+		}
+	}
+	else if (m_dash_flag == true)
+	{
+		;
 	}
 
 //----------------------------------------------------------------
@@ -326,23 +357,6 @@ void CObjHero::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 
-	//MPが50以下になったら一定間隔で増える
-	if (m_dash_flag == false)//ダッシュしていなかったら増える
-	{
-		if (g_mp < 50.0f)
-		{
-			m_regene_time++;
-			if (m_regene_time > 30)
-			{
-				m_regene_time = 0;
-				g_mp += 1.0f;
-			}
-		}
-	}
-	else if (m_dash_flag == true)
-	{
-		;
-	}
 	
 
 	//作成したHitBox更新用の入り口を取り出す

@@ -49,5 +49,10 @@ class CObjBlock : public CObj
 		int m_f;//主人公消滅時のエラー回避用
 
 		bool m_Atypef;
+
+		//惑星ごとの背景カラー情報
+		float m_red;	//赤
+		float m_green;	//緑
+		float m_blue;	//青
 		
 };

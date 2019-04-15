@@ -178,6 +178,9 @@
     <ClCompile Include="ObjTutorial.cpp">
       <Filter>ソースファイル\チュートリアル</Filter>
     </ClCompile>
+    <ClCompile Include="SceneMercuryGemini.cpp">
+      <Filter>ソースファイル\惑星\水星</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -323,6 +326,9 @@
     <ClInclude Include="ObjTutorial.h">
       <Filter>ソースファイル\チュートリアル</Filter>
     </ClInclude>
+    <ClInclude Include="SceneMercuryGemini.h">
+      <Filter>ソースファイル\惑星\水星</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -387,6 +393,9 @@
     </Filter>
     <Filter Include="ソースファイル\チュートリアル">
       <UniqueIdentifier>{cf90c3ba-6ea1-43eb-bd49-fbc9f09c919f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\水星">
+      <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
