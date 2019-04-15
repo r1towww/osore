@@ -41,11 +41,10 @@ void CObjTextBox::Action()
 		m_key_time = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 	//キータイムが300を超えるとZ可能
-	if (m_key_time >= 300)
-	{
 		//Zキー入力
 		if (Input::GetVKey('Z') == true)
 		{
+			
 			if (m_f == false)
 			{
 				m_text++;//テキストを進める
@@ -61,7 +60,7 @@ void CObjTextBox::Action()
 		{
 			m_f = false;
 		}
-	}
+
 }
 
 //ドロー
@@ -72,10 +71,17 @@ void CObjTextBox::Draw()
 
 	if (g_tutorial_flag == true)
 	{
+		
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
+		Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
+
 	}
 	//地球
-	if (g_stage == EarthStar)
+	if (g_tutorial_flag == false)
+	{
+		;
+	}
+	else if (g_stage == EarthStar)
 	{
 		if (m_text == 0)
 		{
@@ -86,51 +92,69 @@ void CObjTextBox::Draw()
 		else if (m_text == 1)
 		{
 			Font::StrDraw(L"まずは移動してみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"方向キーで移動することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
 		}
 		else if (m_text == 2)
 		{
-			Font::StrDraw(L"方向キーで移動することができます", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"次にこのゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"各ステージにある星を集めることです", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
 		}
 		else if (m_text == 3)
 		{
-			Font::StrDraw(L"次にこのゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-			Font::StrDraw(L"各ステージにある星を集めることです", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"星を集めきると星座が完成し、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"新しくスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
 		}
 		else if (m_text == 4)
 		{
-			Font::StrDraw(L"星を集めきると星座が完成し、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-			Font::StrDraw(L"新しくスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-		}
-		else if (m_text == 5)
-		{
 			Font::StrDraw(L"それでは星を集めてみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-		
+
 		}
 	}
-	//else if (g_stage == VenusTaurus)
-	//{
-	//	if (m_text == 0)
-	//	{
-	//		Font::StrDraw(L"テスト", 150, 450, 32, c);
-	//	}
-	//	else if (m_text == 1)
-	//	{
-	//		Font::StrDraw(L"テスト2", 150, 450, 32, c);
-	//	}
-	//	else if (m_text == 2)
-	//	{
-	//		Font::StrDraw(L"テスト3", 150, 450, 32, c);
-	//	}
-	//	else if (m_text == 3)
-	//	{
-	//		Font::StrDraw(L"テスト4", 150, 450, 32, c);
-	//	}
-	//	else if (m_text == 4)
-	//	{
-	//		Font::StrDraw(L"テスト5", 150, 450, 32, c);
-	//	}
+	else if (g_stage == VenusTaurus)
+	{
+		if (m_text == 0)
+		{
+			Font::StrDraw(L"ここ金星ではおうし座とてんびん座の", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+		}
+		else if (m_text == 1)
+		{
+			Font::StrDraw(L"ここ、おうし座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"ダッシュスキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
-	//}
-	
+		}
+		else if (m_text == 2)
+		{
+			Font::StrDraw(L"ここで獲得すべき星は全部で１８個もあります", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"しかも、この金星から敵も出現します", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+		}
+		else if (m_text == 3)
+		{
+			Font::StrDraw(L"Zキーで攻撃することが可能です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"自分のHPが０になってしまうと", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"GAMEOVERになってしまいます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+		}
+		else if (m_text == 4)
+		{
+			Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+		}
+
+	}
+	else if (g_stage == VenusLibra)
+	{
+		if (m_text == 0)
+		{
+
+		}
+	}
+
 
 }

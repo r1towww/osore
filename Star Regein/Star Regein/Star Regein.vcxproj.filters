@@ -92,7 +92,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
@@ -274,7 +274,7 @@
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル\ビームサーベル</Filter>
+      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソースファイル\主人公</Filter>
@@ -358,9 +358,6 @@
     <Filter Include="ソースファイル\ゲームオブジェクト">
       <UniqueIdentifier>{7a706132-e21a-481e-8eb2-4735989dcedf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ビームサーベル">
-      <UniqueIdentifier>{aa2d2fae-0fac-49a2-87c4-4f2fcb53a332}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{7678e96f-f465-467c-a493-ca82cc32487f}</UniqueIdentifier>
     </Filter>
@@ -387,6 +384,9 @@
     </Filter>
     <Filter Include="ソースファイル\チュートリアル">
       <UniqueIdentifier>{cf90c3ba-6ea1-43eb-bd49-fbc9f09c919f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\マップ\ビームサーベル">
+      <UniqueIdentifier>{aa2d2fae-0fac-49a2-87c4-4f2fcb53a332}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
