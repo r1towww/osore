@@ -71,6 +71,7 @@ void CObjStarChoice::Action()
 	}
 
 	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPをLEFTと同様に扱う)
+	//左を選択している際
 	if (m_direction == LEFT || m_direction == UP)
 	{
 		//透過率変更
@@ -88,7 +89,7 @@ void CObjStarChoice::Action()
 			}
 			else if (g_stage == Venus)
 			{
-				//ステージをおうし座に設定
+				//ステージを牡牛座に設定
 				g_stage = VenusTaurus;
 				Scene::SetScene(new CSceneVenusTaurus());
 			}
@@ -96,12 +97,13 @@ void CObjStarChoice::Action()
 			{
 				//ステージを双子座に設定
 				g_stage = MercuryGemini;
-				Scene::SetScene(new CSceneVenusTaurus());
+				Scene::SetScene(new CSceneMercuryGemini());
 			}
 		}
 	}
 
 	//右のほうのほうを明るくして左のほうを暗くする
+	//右を選択している際
 	else if (m_direction == RIGHT)
 	{
 		//透過率変更
@@ -126,6 +128,7 @@ void CObjStarChoice::Action()
 		}
 	}
 	//下のコマンドの明るさを変更
+	//下（戻る）を選択している際
 	else if (m_direction == DOWN)		
 	{
 		//透過率変更

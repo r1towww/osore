@@ -12,29 +12,29 @@
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneVenusLibra.h"
+#include "SceneMercuryGemini.h"
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneVenusLibra::CSceneVenusLibra()
+CSceneMercuryGemini::CSceneMercuryGemini()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
 }
 
 //デストラクタ
-CSceneVenusLibra::~CSceneVenusLibra()
+CSceneMercuryGemini::~CSceneMercuryGemini()
 {
 
 }
 
 //初期化メソッド
-void CSceneVenusLibra::InitScene()
+void CSceneMercuryGemini::InitScene()
 {
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"VenusLibra.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"MercuryGemini.csv", &size);//外部データ読み込み
 
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
@@ -67,9 +67,6 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
-	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -89,33 +86,18 @@ void CSceneVenusLibra::InitScene()
 
 	//MPゲージオブジェクト作成
 	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 140);
+	Objs::InsertObj(objMP, OBJ_MP, 130);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
-
-	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
-	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
-	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-	//チュートリアル発生時のみ作成
-	if (g_tutorial_flag == true)
-	{
-		//テキストボックスオブジェクト作成
-		CObjTextBox* objtextbox = new CObjTextBox();
-		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-	}
-
 }
 
 //実行中メソッド
-void CSceneVenusLibra::Scene()
+void CSceneMercuryGemini::Scene()
 {
-	//金星（天秤座）で星を18個集めたら次へ移行
-	if (g_StarCount == LIBRAMAXSTAR)
+	//水星（双子座）で星を18個集めたら次へ移行
+	if (g_StarCount == GEMINIMAXSTAR)
 	{
 		g_Libra = true;		//スキル（天秤座）をオンにする
 		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行

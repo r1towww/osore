@@ -37,7 +37,7 @@ void CObjMiniMap::Init()
 		m_smallsize = 7.0f;	//スモールサイズを7.0fで初期化
 		m_bigsize = 14.0f;	//ビッグサイズを14.0fで初期化
 	}
-	else if (g_stage == VenusTaurus || g_stage == VenusLibra) {	//金星の場合
+	else{	//それ以外の場合
 		m_smallsize = 4.0f;	//ステージサイズを4.0fで初期化
 		m_bigsize = 8.0f;	//ビッグサイズを8.0fで初期化
 	}
@@ -148,26 +148,66 @@ void CObjMiniMap::Draw()
 
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
-				if (g_map[i][j] == 6)//小惑星
+				if (g_rand == 0)
 				{
-					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 0.0f;
-					src.m_right  = 40.0f;
-					src.m_bottom = 50.0f;
+					if (g_map[i][j] == 10)//隕石
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == 6)//小惑星
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
 
-					//表示位置の設定
-					dst.m_top    = i*m_blocksize + m_uisize_y + 2.0f;
-					dst.m_left   = j*m_blocksize + m_uisize_x + 4.0f;
-					dst.m_right  = dst.m_left + m_blocksize * 1.8;
-					dst.m_bottom = dst.m_top + m_blocksize * 1.8;
+						//表示位置の設定
+						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
+						dst.m_left = j*m_blocksize + m_uisize_x + 4.0f;
+						dst.m_right = dst.m_left + m_blocksize * 1.8;
+						dst.m_bottom = dst.m_top + m_blocksize * 1.8;
 
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					
 				}
-				else
+				else if (g_rand == 1)
 				{
+					if (g_map[i][j] == 11)//隕石
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == 13)//小惑星
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
 
+						//表示位置の設定
+						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
+						dst.m_left = j*m_blocksize + m_uisize_x + 4.0f;
+						dst.m_right = dst.m_left + m_blocksize * 1.8;
+						dst.m_bottom = dst.m_top + m_blocksize * 1.8;
+
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
 				}
 			}
 		}
