@@ -104,5 +104,5 @@ void CObjBlueBullet::Draw()
 	dst.m_bottom = 25.0f + m_y + block->GetScrolly();
 
 	//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
-	Draw::Draw(14, &src, &dst, c, 0);
+	Draw::Draw(16, &src, &dst, c, 0);
 }

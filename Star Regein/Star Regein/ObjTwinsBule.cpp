@@ -73,46 +73,44 @@ void CObjTwinsBlue::Action()
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
+
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 		m_btime++;
-{
 
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	m_btime++;
-
-	//20°間隔で弾丸発射
-	m_bullet_time++;
-	if (m_bullet_time > 100)
-	{
-		m_bullet_time = 0;
-
-		//19発同時発射
-		CObjBlueBullet*obj_b;
-		for (int i = 0; i < 360; i += 20)
+		//20°間隔で弾丸発射
+		m_bullet_time++;
+		if (m_bullet_time > 100)
 		{
-			//角度iで角度弾丸発射
-			obj_b = new CObjBlueBullet(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), i, 5.0f);
-			Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
-		}
-	}
+			m_bullet_time = 0;
 
-	//ブロック衝突で向き変更
-	if (m_hit_up == true)
-	{
-		m_movey = true;
-	}
-	if (m_hit_down == true)
-	{
-		m_movey = false;
-	}
-	if (m_hit_left == true)
-	{
-		m_movex = false;
-	}
-	if (m_hit_right == true)
-	{
-		m_movex = true;
-	}
+			//19発同時発射
+			CObjBlueBullet*obj_b;
+			for (int i = 0; i < 360; i += 20)
+			{
+				//角度iで角度弾丸発射
+				obj_b = new CObjBlueBullet(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), i, 5.0f);
+				Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
+			}
+		}
+
+		//ブロック衝突で向き変更
+		if (m_hit_up == true)
+		{
+			m_movey = true;
+		}
+		if (m_hit_down == true)
+		{
+			m_movey = false;
+		}
+		if (m_hit_left == true)
+		{
+			m_movex = false;
+		}
+		if (m_hit_right == true)
+		{
+			m_movex = true;
+		}
 
 		//方向
 		if (m_movey == true)
@@ -151,10 +149,10 @@ void CObjTwinsBlue::Action()
 			m_ani_frame = 0;
 		}
 
-	//ブロックとの当たり判定実行
-	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-	);
+		//ブロックとの当たり判定実行
+		pb->BlockHit(&m_px, &m_py, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 
 
@@ -250,14 +248,14 @@ void CObjTwinsBlue::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
-	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
-	{
-		//敵がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-		hit_data = hit->SearchElementHit(ELEMENT_NULL);
-		float r = 0;
+		//敵とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		{
+			//敵がブロックとどの角度で当たっているのかを確認
+			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_NULL);
+			float r = 0;
 
 			for (int i = 0; i < 10; i++)
 			{
