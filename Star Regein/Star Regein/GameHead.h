@@ -139,7 +139,9 @@ extern float g_max_mp; //最大ＭＰ
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
-extern int g_rand;		//マップのランダム化用変数
+extern int g_asteroid;		//マップのランダム化用変数（小惑星）
+extern int g_block;			//マップのランダム化用変数（隕石ブロック）
+
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値

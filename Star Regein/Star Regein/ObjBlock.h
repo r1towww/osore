@@ -50,6 +50,8 @@ class CObjBlock : public CObj
 
 		bool m_Atypef;
 
+		int m_rand;	//マップのランダム化用
+
 		//惑星ごとの背景カラー情報
 		float m_red;	//赤
 		float m_green;	//緑
