@@ -181,6 +181,9 @@
     <ClCompile Include="SceneMercuryGemini.cpp">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="SceneMercuryGemini.h">
       <Filter>ソースファイル\惑星\水星</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

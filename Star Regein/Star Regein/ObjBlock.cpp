@@ -13,7 +13,9 @@
 using namespace GameL;
 
 int g_blackholecnt = 0;
-int g_rand;
+int g_asteroid;
+int g_block;
+
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
@@ -24,8 +26,19 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 void CObjBlock::Init()
 {
 	//マップのランダム処理の初期化
-	g_rand = rand() % 2;
+	m_rand = rand() % 2;
 
+	//ランダムの値が0の場合
+	if (m_rand == 0)
+	{
+		g_block = 10;	//10をセット
+		g_asteroid = 6;	//6をセット
+	}
+	else if (m_rand = 1)	//1の場合
+	{
+		g_block = 11;		//11をセット
+		g_asteroid = 13;	//13をセット
+	}
 	m_roll = 0.0f;
 
 	blue_c = 0;
@@ -119,23 +132,11 @@ void CObjBlock::Init()
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
 			}
-			if (g_rand == 0)
+			if (m_map[i][j] == g_asteroid)
 			{
-				if (m_map[i][j] == 6)
-				{
-					//小惑星オブジェクト作成
-					CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-					Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
-				}
-			}
-			else if (g_rand == 1)
-			{
-				if (m_map[i][j] == 13)
-				{
-					//小惑星オブジェクト作成
-					CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-					Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
-				}
+				//小惑星オブジェクト作成
+				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 7)
 			{
@@ -253,33 +254,16 @@ void CObjBlock::Draw()
 					//描画
 					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-				if (g_rand == 0)
+				if (m_map[i][j] == g_block)//隕石（ランダム）
 				{
-					if (m_map[i][j] == 10)//隕石
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 258.0f;
-						src.m_bottom = 220.0f;
-						//描画
-						Draw::Draw(4, &src, &dst, c, 0.0f);
-					}
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 0.0f;
+					src.m_right = 258.0f;
+					src.m_bottom = 220.0f;
+					//描画
+					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-				else if (g_rand == 1)
-				{
-					if (m_map[i][j] == 11)//隕石
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 258.0f;
-						src.m_bottom = 220.0f;
-						//描画
-						Draw::Draw(4, &src, &dst, c, 0.0f);
-					}
-				}
-				
 			}
 		}
 	}
@@ -319,7 +303,7 @@ void CObjBlock::BlockHit
 		for (int j = 0; j < MAPSIZE; j++)
 		{
 			if (m_map[i][j] == 1  || m_map[i][j] == 99
-			 || m_map[i][j] == 10 || m_map[i][j] == 11)
+			 || m_map[i][j] == g_block)
 			{
 				//要素番号を座標に変更
 				float bx = j*ALLSIZE;

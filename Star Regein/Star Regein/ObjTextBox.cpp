@@ -81,7 +81,6 @@ void CObjTextBox::Draw()
 		;
 	}
 	//’n‹…
-
 	else if (g_stage == EarthStar)
 	{
 		if (m_text == 0)
