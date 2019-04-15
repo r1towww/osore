@@ -35,6 +35,7 @@ enum OBJ_NAME
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
+	OBJ_SKILL_GEMINI,
 
 	OBJ_HEART,
 	OBJ_MP,
@@ -182,7 +183,7 @@ extern bool g_Leo;		//éÇéqç¿
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
 #include "ObjSkillLibra.h"
-
+#include "ObjSkillGemini.h"
 
 //------------------------------------------------
 

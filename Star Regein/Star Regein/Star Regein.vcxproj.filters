@@ -176,6 +176,9 @@
     <ClCompile Include="ObjSkillLibra.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -317,6 +320,9 @@
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
   </ItemGroup>

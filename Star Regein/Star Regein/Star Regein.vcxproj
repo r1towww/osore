@@ -136,6 +136,7 @@
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
     <ClInclude Include="ObjSkill.h" />
+    <ClInclude Include="ObjSkillGemini.h" />
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />
