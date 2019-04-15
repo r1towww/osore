@@ -138,7 +138,9 @@
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjRedBullet.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
-    <ClCompile Include="ObjSkillGemini.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
@@ -161,7 +163,9 @@
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
-    <ClCompile Include="ObjSkillTwinsB.cpp" />
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,8 +198,12 @@
     <ClInclude Include="ObjMiniMap.h" />
     <ClInclude Include="ObjRedBullet.h" />
     <ClInclude Include="ObjSkill.h" />
-    <ClInclude Include="ObjSkillTwinsB.h" />
-    <ClInclude Include="ObjSkillGemini.h" />
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />

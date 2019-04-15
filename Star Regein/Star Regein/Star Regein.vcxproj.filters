@@ -91,9 +91,6 @@
     <ClCompile Include="ObjMeteo.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
     </ClCompile>
@@ -190,9 +187,8 @@
     <ClCompile Include="ObjRedBullet.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -288,9 +284,6 @@
     <ClInclude Include="ObjMeteo.h">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル\マップ\ビームサーベル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjHero.h">
       <Filter>ソースファイル\主人公</Filter>
     </ClInclude>
@@ -350,9 +343,8 @@
     <ClInclude Include="SceneMercuryGemini.h">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
+    <ClInclude Include="ObjBeamSaber.h" />
+    <ClInclude Include="ObjSkillGemini.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">

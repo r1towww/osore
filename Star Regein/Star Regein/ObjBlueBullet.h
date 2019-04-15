@@ -27,5 +27,4 @@ private:
 	int m_ani_frame;//描画フレーム
 	int m_time;//削除までの時間測定
 	bool	m_del;		//削除チェック
-	RECT_F	m_eff;		//着弾エフェクト描画用
 };
