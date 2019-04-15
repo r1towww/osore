@@ -14,7 +14,7 @@ public:
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-
+	int Getline() { return m_line; }
 
 private:
 	int m_tipe;		//動作の種類
@@ -23,5 +23,6 @@ private:
 	int m_sec;		//セコンド(秒)
 	int m_keytime;	//キー入力ができるまでの時間
 	int m_line;		//行数
+	bool m_f;
 
 };

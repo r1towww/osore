@@ -33,5 +33,6 @@ private:
 	int m_page;		//ページ数
 	int m_key_time;
 	int m_text;		//渡されたページ数
+	int m_line;
 
 };

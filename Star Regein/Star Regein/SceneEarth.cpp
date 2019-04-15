@@ -67,9 +67,9 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 
 	//テスト用
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
@@ -96,10 +96,10 @@ void CSceneEarth::InitScene()
 	Objs::InsertObj(objMP, OBJ_MP, 140);
 
 	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,6);
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,5);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 150);
 	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 6);
+	CObjTutorial* objtutorial = new CObjTutorial(1, 5);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
 	if (g_tutorial_flag == true)
