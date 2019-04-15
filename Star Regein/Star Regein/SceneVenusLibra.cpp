@@ -66,6 +66,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
+	Draw::LoadImageW(L"íeä€.png", 14, TEX_SIZE_128);
 
 
 	Draw::LoadImageW(L"ÉXÉLÉãëççá.png", 13, TEX_SIZE_512);

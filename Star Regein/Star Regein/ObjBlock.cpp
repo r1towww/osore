@@ -47,6 +47,8 @@ void CObjBlock::Init()
 					g_cow_x[c] = cow->GetPX();
 					g_cow_y[c] = cow->GetPY();
 
+					g_cow_id[c] = c;
+
 					c++;
 
 					Objs::InsertObj(cow, OBJ_COW, 10);

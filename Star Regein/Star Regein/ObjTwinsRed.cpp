@@ -62,7 +62,7 @@ void CObjTwinsRed::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_ENEMY, OBJ_TWINS_RED, 1);
+	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_RED, 1);
 }
 
 //アクション
@@ -227,11 +227,12 @@ void CObjTwinsRed::Action()
 	hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
 	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
 	{
 		//敵がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_NULL);
 		float r = 0;
 
 		for (int i = 0; i < 10; i++)
@@ -330,7 +331,7 @@ void CObjTwinsRed::Action()
 		hit->SetInvincibility(true);
 
 		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-		map->Setdcow(true);
+		map->Setdcow(3);
 	}
 }
 

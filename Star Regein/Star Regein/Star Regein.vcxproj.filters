@@ -171,6 +171,15 @@
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlueBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRedBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -306,6 +315,15 @@
       <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
     <ClInclude Include="ObjTwinsRed.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlueBullet.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRedBullet.h">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
   </ItemGroup>

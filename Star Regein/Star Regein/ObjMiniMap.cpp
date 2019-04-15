@@ -14,6 +14,7 @@ using namespace GameL;
 
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
 extern float* g_cow_y[20];//全ての牛のY位置を把握する
+
 int g_map[MAPSIZE][MAPSIZE];
 
 CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
@@ -22,12 +23,14 @@ CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
 	memcpy(g_map, map, sizeof(int)*(MAPSIZE * MAPSIZE));
 }
 
-void CObjMiniMap::Setdcow(bool d_flag)
+void CObjMiniMap::Setdcow(int t)
 {
-	if (d_flag == true)
-	{
-		m_df = true;
-	}
+	if (t == 1)
+		g_cow_id[count] = true;
+	if (t == 2)
+		m_d_twinsb_f[10] = true;
+	if (t == 3)
+		m_d_twinsr_f[10] = true;
 }
 
 //イニシャライズ
@@ -48,7 +51,11 @@ void CObjMiniMap::Init()
 	m_f = false;	//キー入力制御の初期化
 	m_alpha = 0.7f;	//アルファ値初期化
 
-	m_df = false;
+	m_d_cow_f[20] = false;
+	m_d_twinsb_f[10] = false;
+	m_d_twinsr_f[10] = false;
+
+	count = 0;
 }
 
 
@@ -218,7 +225,7 @@ void CObjMiniMap::Draw()
 			float by = *g_twinsblue_y[i];
 
 
-			if (m_df == false)
+			if (m_d_twinsb_f[i] == false)
 			{
 				////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 				//bool check;
@@ -247,7 +254,7 @@ void CObjMiniMap::Draw()
 			float ry = *g_twinsred_y[i];
 
 
-			if (m_df == false)
+			if (m_d_twinsr_f[i] == false)
 			{
 				////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 				//bool check;
@@ -279,7 +286,7 @@ void CObjMiniMap::Draw()
 			float cx = *g_cow_x[i];
 			float cy = *g_cow_y[i];
 
-			if (m_df == false)
+			if (g_cow_id[i] == false)
 			{
 				//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 				bool check;

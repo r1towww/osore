@@ -32,10 +32,14 @@ enum OBJ_NAME
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
 	OBJ_TWINS_RED,
+	OBJ_BLUE_BULLET,
+	OBJ_RED_BULLET,
 
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
+
+	OBJ_SKILL_TWINS_B,
 
 	OBJ_HEART,
 	OBJ_MP,
@@ -124,6 +128,8 @@ extern int g_stage;		//今いるステージの値
 extern int g_image_right; //スキル画像切り替え
 extern int g_image_reft;  //スキル画像切り替え
 
+extern int g_cow_id[20];//牛の識別ID
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -137,6 +143,8 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "ObjCow.h"
 #include "Objtwinsblue.h"
 #include "Objtwinsred.h"
+#include "ObjBlueBullet.h"
+#include "ObjRedBullet.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -159,6 +167,8 @@ extern int g_image_reft;  //スキル画像切り替え
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
+
+#include "ObjSkillTwinsB.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

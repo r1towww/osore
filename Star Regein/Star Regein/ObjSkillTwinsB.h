@@ -5,25 +5,21 @@
 using namespace GameL;
 
 //オブジェクト：敵
-class CObjCow :public CObj
+class CObjSkillTwinsB :public CObj
 {
 public:
-	CObjCow(float x, float y);
-	~CObjCow() {};
+	CObjSkillTwinsB(float x, float y);
+	~CObjSkillTwinsB() {};
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
 
 	float* GetPX() { return &m_px; }
 	float* GetPY() { return &m_py; }
-	
 	float GetX() { return m_px; }
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
-
-	int GetID() { return count; } //牛の識別番号
-
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
@@ -40,6 +36,7 @@ private:
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
+
 	int m_hp;//体力
 
 	int m_time;//無敵時間測定
@@ -54,7 +51,7 @@ private:
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-							//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
@@ -71,5 +68,5 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
-	
+
 };

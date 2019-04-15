@@ -66,6 +66,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"弾丸.png", 14, TEX_SIZE_128);
 
 	//テスト用
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);

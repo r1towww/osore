@@ -44,6 +44,7 @@ private:
 	int count;
 	int e_time;//“Gs“®ŠÔ
 	int enemy_move;//“GˆÚ“®
+	int m_bullet_time;//’eŠÛ”­ËŠÔ‘ª’è
 
 	int m_btime;//ˆê’ès“®‚Ì‚½‚ß‚ÌŠÔ‘ª’è
 
