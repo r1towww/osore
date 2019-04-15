@@ -138,6 +138,7 @@
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjRedBullet.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="ObjRedBullet.h" />
     <ClInclude Include="ObjSkill.h" />
     <ClInclude Include="ObjSkillTwinsB.h" />
+    <ClInclude Include="ObjSkillGemini.h" />
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />

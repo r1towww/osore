@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
+	OBJ_SKILL_GEMINI,
 
 	OBJ_SKILL_TWINS_B,
 
@@ -218,7 +219,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 
 #include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
-
+#include "ObjSkillGemini.h"
 
 //------------------------------------------------
 
