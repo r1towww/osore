@@ -71,16 +71,17 @@ void CObjTextBox::Draw()
 
 	if (g_tutorial_flag == true)
 	{
-		
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
 		Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 
 	}
-	//地球
+	//チュートリアルフラグがオフで終了する
 	if (g_tutorial_flag == false)
 	{
 		;
 	}
+	//地球
+
 	else if (g_stage == EarthStar)
 	{
 		if (m_text == 0)
@@ -113,6 +114,7 @@ void CObjTextBox::Draw()
 
 		}
 	}
+	//おうし座
 	else if (g_stage == VenusTaurus)
 	{
 		if (m_text == 0)
@@ -146,12 +148,67 @@ void CObjTextBox::Draw()
 			Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 		}
-
+		else if (m_text == 5)
+		{
+			Font::StrDraw(L"もし、先にてんびん座のヒールスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"獲得しているなら、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"シフトキーで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+		}
+		else if (m_text == 6)
+		{
+			Font::StrDraw(L"スキルを使うにはMP（青いゲージ）が必要です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"MPは時間経過で回復していくので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"どんどん使っていきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+		}
 	}
+	//てんびん座
 	else if (g_stage == VenusLibra)
 	{
 		if (m_text == 0)
 		{
+			Font::StrDraw(L"ここ金星ではおうし座とてんびん座の", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+		}
+		else if (m_text == 1)
+		{
+			Font::StrDraw(L"ここ、てんびん座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"ヒール（回復）スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+		}
+		else if (m_text == 2)
+		{
+			Font::StrDraw(L"ここで獲得すべき星は全部で６個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"この金星から敵も出現します", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+		}
+		else if (m_text == 3)
+		{
+			Font::StrDraw(L"Zキーで攻撃することが可能です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"自分のHPが０になってしまうと", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"GAMEOVERになってしまいます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+		}
+		else if (m_text == 4)
+		{
+			Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+		}
+		else if (m_text == 5)
+		{
+			Font::StrDraw(L"もし、先におうし座のダッシュスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"獲得しているなら、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"シフトキーで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+
+		}
+		else if (m_text == 6)
+		{
+			Font::StrDraw(L"スキルを使うにはMP（青いゲージ）が必要です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"MPは時間経過で回復していくので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"どんどん使っていきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 		}
 	}
