@@ -93,13 +93,9 @@ void CSceneEarth::InitScene()
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
 
-	//HPゲージオブジェクト作成
-	CObjHeart* objheart = new CObjHeart();
-	Objs::InsertObj(objheart, OBJ_HEART, 130);
-
-	//MPゲージオブジェクト作成
-	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 140);
+	//Statusゲージオブジェクト作成
+	CObjStatus* objstatus = new CObjStatus();
+	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,5);
