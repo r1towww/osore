@@ -119,6 +119,14 @@ void CSceneVenusLibra::Scene()
 	if (g_StarCount == LIBRAMAXSTAR)
 	{
 		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		//てんびん座をクリア表示
+		g_Libra_clear = true;
+		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
+		if (g_Libra_clear == true && g_Taurus_clear == true)
+		{
+			g_Venus_clear = true;
+		}
+
+		Scene::SetScene(new CSceneStageChoice());	
 	}
 }

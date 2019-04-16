@@ -188,7 +188,6 @@
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp" />
-    <ClCompile Include="ObjSkillGemini.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
