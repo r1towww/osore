@@ -100,6 +100,6 @@ void CSceneMercuryGemini::Scene()
 	if (g_StarCount == GEMINIMAXSTAR)
 	{
 		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 	}
 }
