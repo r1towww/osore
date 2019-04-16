@@ -14,8 +14,8 @@
 //使用するネームスペース
 using namespace GameL;
 
-float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
-float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
+float* g_twinsred_x[20];//全ての双子（青）のX位置を把握する
+float* g_twinsred_y[20];//全ての双子（青）のY位置を把握する
 
 CObjTwinsRed::CObjTwinsRed(float x, float y)
 {
@@ -53,6 +53,8 @@ void CObjTwinsRed::Init()
 
 	m_btime = 0;
 
+	m_bullet_time = 100;
+
 	m_time = 30;
 
 	m_df = true;
@@ -62,7 +64,7 @@ void CObjTwinsRed::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_RED, 1);
+	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_BLUE, 1);
 }
 
 //アクション
@@ -71,7 +73,26 @@ void CObjTwinsRed::Action()
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
+
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 		m_btime++;
+
+		//20°間隔で弾丸発射
+		m_bullet_time++;
+		if (m_bullet_time > 300)
+		{
+			m_bullet_time = 0;
+
+			//6発同時発射
+			CObjRedBullet*obj_b;
+			for (int i = 0; i < 360; i += 60)
+			{
+				//角度iで角度弾丸発射
+				obj_b = new CObjRedBullet(m_px, m_py, i, 3.0f);
+				Objs::InsertObj(obj_b, OBJ_RED_BULLET, 5);
+			}
+		}
 
 		//ブロック衝突で向き変更
 		if (m_hit_up == true)
@@ -128,11 +149,10 @@ void CObjTwinsRed::Action()
 			m_ani_frame = 0;
 		}
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-	);
+		//ブロックとの当たり判定実行
+		pb->BlockHit(&m_px, &m_py, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 
 
@@ -228,14 +248,14 @@ void CObjTwinsRed::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
-	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
-	{
-		//敵がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-		hit_data = hit->SearchElementHit(ELEMENT_NULL);
-		float r = 0;
+		//敵とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		{
+			//敵がブロックとどの角度で当たっているのかを確認
+			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_NULL);
+			float r = 0;
 
 			for (int i = 0; i < 10; i++)
 			{

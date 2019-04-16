@@ -23,7 +23,7 @@ void CObjBlueBullet::Init()
 	m_ani_time = 0;
 	m_ani_frame = 2;
 
-	m_time = 100;
+	m_time = 400;
 
 	m_ani_max_time = 7;	//アニメーション間隔幅
 
@@ -64,7 +64,7 @@ void CObjBlueBullet::Action()
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());			//HitBoxの位置を敵機弾丸の位置に更新
 
 	//主人公機オブジェクトと接触したら弾丸削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || m_time <= 0)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit ->CheckElementHit(ELEMENT_BLOCK) || m_time <= 0)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
