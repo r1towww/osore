@@ -264,6 +264,12 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
+		//双子座クリアでクリア表記
+		if (g_Gemini_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 180, 400, 40, left_clear);
+		}
+
 		//-------------------------------------------------------------------------------
 		//乙女座---------------------------------------------------------------------
 		//切り取り位置の設定
@@ -279,6 +285,12 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
+		//おとめ座クリアでクリア表記
+		if (g_Virgo_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+		}
+
 		//----------------------------------------------------------------------------------
 	}
 	else
