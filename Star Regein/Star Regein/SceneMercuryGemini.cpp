@@ -67,6 +67,7 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -80,13 +81,9 @@ void CSceneMercuryGemini::InitScene()
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
 
-	//HPゲージオブジェクト作成
-	CObjHeart* objheart = new CObjHeart();
-	Objs::InsertObj(objheart, OBJ_HEART, 130);
-
-	//MPゲージオブジェクト作成
-	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 130);
+	//Statusゲージオブジェクト作成
+	CObjStatus* objstatus = new CObjStatus();
+	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
