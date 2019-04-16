@@ -205,9 +205,9 @@ void CObjHero::Action()
 			//双子座の場合
 			else if (g_skill == Gemini)
 			{
-				//サブ機オブジェクト作成
-				CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
-				Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+				////サブ機オブジェクト作成
+				//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
+				//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
 			}
 			m_key_f = false;
 		}
