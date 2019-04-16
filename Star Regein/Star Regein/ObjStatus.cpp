@@ -1,0 +1,111 @@
+//使用するヘッダーファイル
+#include "GameL\DrawTexture.h"
+#include "GameL\WinInputs.h"
+#include "GameL\SceneManager.h"
+#include "GameL\SceneObjManager.h"
+
+#include "GameHead.h"
+#include "ObjStatus.h"
+
+//使用するネームスペース
+using namespace GameL;
+
+float g_hp;
+float g_max_hp;
+float g_mp;
+float g_max_mp;
+
+CObjStatus::CObjStatus()
+{
+
+}
+
+//イニシャライズ
+void CObjStatus::Init()
+{
+
+}
+
+//アクション
+void CObjStatus::Action()
+{
+
+
+}
+
+//ドロー
+void CObjStatus::Draw()
+{
+	//描画カラー情報
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	RECT_F src;	//描画元切り取り位置
+	RECT_F dst;	//描画先表示位置
+
+//HP,MPの背景用--------------------------------
+
+	//切り取り位置の設定（HP）
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 40.0f;
+	src.m_bottom = 50.0f;
+
+	//表示位置の設定（HP）
+	dst.m_top    = 23.0f;
+	dst.m_left   = 0.0f;
+	dst.m_right  = 136.0f;
+	dst.m_bottom = 53.0f;
+
+	//描画（HP）
+	Draw::Draw(9, &src, &dst, c, 0.0f);
+
+	//表示位置の設定（MP）
+	dst.m_top    = 77.0f;
+	dst.m_left   = 0.0f;
+	dst.m_right  = 136.0f;
+	dst.m_bottom = 108.0f;
+
+	//描画（MP）
+	Draw::Draw(9, &src, &dst, c, 0.0f);
+
+//----------------------------------------------
+
+
+//HP描画用--------------------------------------
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 600.0f;
+	src.m_bottom = 300.0f;
+
+	//表示位置の設定
+	dst.m_top    = 26.0f;
+	dst.m_left   = 4.0f;
+	dst.m_right  = (g_hp / g_max_hp)*132.0f;
+	dst.m_bottom = 50.0f;
+
+	//描画
+	Draw::Draw(10, &src, &dst, c, 0.0f);
+//----------------------------------------------
+
+//MP描画用--------------------------------------
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 600.0f;
+	src.m_bottom = 300.0f;
+
+	//表示位置の設定
+	dst.m_top    = 80.0f;
+	dst.m_left   = 4.0f;
+	dst.m_right  = (g_mp / g_max_mp)*132.0f;
+	dst.m_bottom = 105.0f;
+
+	//描画
+	Draw::Draw(11, &src, &dst, c, 0.0f);
+//----------------------------------------------
+
+
+
+
+}

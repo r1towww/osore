@@ -47,10 +47,10 @@ void CObjMessage::Draw()
 	wchar_t mp[128];
 
 	swprintf_s(hp,L"HP");
-	Font::StrDraw(hp, 0, 0, 25, b);
+	Font::StrDraw(hp, 0, 0, 23, b);
 
 	swprintf_s(mp, L"MP");
-	Font::StrDraw(mp, 0, 60, 25, b);
+	Font::StrDraw(mp, 0, 55, 23, b);
 
 	//¯‚ÌƒJƒEƒ“ƒg‚ª‘‚¦‚½ê‡
 	if (g_StarCount > m_memory)

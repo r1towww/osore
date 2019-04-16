@@ -44,8 +44,8 @@ enum OBJ_NAME
 
 	OBJ_SKILL_TWINS_B,
 
-	OBJ_HEART,
-	OBJ_MP,
+	OBJ_STATUS,
+
 };
 //------------------------------------------------
 
@@ -217,8 +217,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
-#include "ObjHeart.h"
-#include "ObjMP.h"
+#include "ObjStatus.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
 

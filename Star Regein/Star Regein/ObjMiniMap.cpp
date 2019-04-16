@@ -253,7 +253,6 @@ void CObjMiniMap::Draw()
 				float bx = *g_twinsblue_x[i];
 				float by = *g_twinsblue_y[i];
 
-
 				if (m_d_twinsb_f[i] == false)
 				{
 					////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
