@@ -144,6 +144,7 @@
     <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjStarChoice.cpp" />
+    <ClCompile Include="ObjStarEffect.cpp" />
     <ClCompile Include="ObjTextBox.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTutorial.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjStarChoice.h" />
+    <ClInclude Include="ObjStarEffect.h" />
     <ClInclude Include="ObjTextBox.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTutorial.h" />

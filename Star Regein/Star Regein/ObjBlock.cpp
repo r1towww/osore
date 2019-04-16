@@ -136,6 +136,10 @@ void CObjBlock::Init()
 				//星オブジェクト作成
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
+				//星オブジェクト作成
+				CObjStarEffect* objstareff = new CObjStarEffect(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				Objs::InsertObj(objstareff, OBJ_STAR_EFFECT, 9);//マネージャに登録
+
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
 			{

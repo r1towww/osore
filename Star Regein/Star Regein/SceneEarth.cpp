@@ -76,6 +76,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 
+	Draw::LoadImageW(L"星エフェクト.png", 99, TEX_SIZE_1024);
 
 	//テスト用
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
