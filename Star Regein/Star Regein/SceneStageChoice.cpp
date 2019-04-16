@@ -45,7 +45,7 @@ void CSceneStageChoice::InitScene()
 	Objs::InsertObj(o, OBJ_STAGECHOICE, 0);
 	
 	//ステージ選択用ヒーローオブジェクト作成
-	ObjStageChoiceHero* oh = new ObjStageChoiceHero(50,500);
+	ObjStageChoiceHero* oh = new ObjStageChoiceHero(g_stage_px,g_stage_py);
 	Objs::InsertObj(oh, OBJ_STAGECHOICEHERO, 10);
 
 	////ステージ選択(星座)オブジェクト作成

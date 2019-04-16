@@ -28,17 +28,20 @@ void CObjBlock::Init()
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
 
+	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
 	{
 		g_block = 10;	//10をセット
-		g_asteroid = 6;	//6をセット
+		g_asteroid = 13;	//13をセット
 	}
 	else if (m_rand = 1)	//1の場合
 	{
 		g_block = 11;		//11をセット
-		g_asteroid = 13;	//13をセット
+		g_asteroid = 14;	//14をセット
 	}
+
+
 	m_roll = 0.0f;
 
 	blue_c = 0;
@@ -132,7 +135,7 @@ void CObjBlock::Init()
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
 			}
-			if (m_map[i][j] == g_asteroid)
+			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
 			{
 				//小惑星オブジェクト作成
 				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成

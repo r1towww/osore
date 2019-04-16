@@ -145,7 +145,27 @@ void CObjMiniMap::Draw()
 					src.m_left   = 110.0f;
 					src.m_right  = 140.0f;
 					src.m_bottom = 50.0f;
-
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 7)//ブラックホール
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 260.0f;
+					src.m_right  = 290.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 8)//ホワイトホール
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 310.0f;
+					src.m_right  = 340.0f;
+					src.m_bottom = 50.0f;
+					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 				if (g_map[i][j] == g_block)//隕石
@@ -158,7 +178,7 @@ void CObjMiniMap::Draw()
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
-				if (g_map[i][j] == g_asteroid)//小惑星
+				if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
 				{
 					//切り取り位置の設定
 					src.m_top    = 0.0f;
