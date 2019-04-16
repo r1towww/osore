@@ -138,9 +138,6 @@
     <ClCompile Include="ObjMiniMap.cpp" />
     <ClCompile Include="ObjRedBullet.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
@@ -203,6 +200,7 @@
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />

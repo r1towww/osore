@@ -90,6 +90,10 @@ void CObjStageChoice::Draw()
 	//•\¦
 	Draw::Draw(4, &src, &dst, c, 0.0f);
 	//----------------------------------------
+	if (g_Venus_clear == true)
+	{
+		Font::StrDraw(L"CLEAR!", 220, 400, 40, y);
+	}
 
 	//…¯------------------------------------
 	//Ø‚èæ‚èˆÊ’u‚Ìİ’è

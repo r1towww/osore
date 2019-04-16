@@ -120,9 +120,16 @@ void CSceneVenusTaurus::InitScene()
 void CSceneVenusTaurus::Scene()
 {
 	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
-	if (g_StarCount == TAURUSMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
-		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+		//おうし座にクリア表記
+		g_Taurus_clear = true;
+		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
+		if (g_Libra_clear == true && g_Taurus_clear == true)
+		{
+			g_Venus_clear = true;
+		}
+		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}
 }
