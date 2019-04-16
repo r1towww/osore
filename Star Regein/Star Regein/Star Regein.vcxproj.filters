@@ -176,6 +176,13 @@
     <ClCompile Include="SceneMercuryGemini.cpp">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBlueBullet.cpp" />
+    <ClCompile Include="ObjRedBullet.cpp" />
+    <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjSkillTwinsB.cpp" />
+    <ClCompile Include="ObjSkillVirgo.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -320,6 +327,14 @@
     </ClInclude>
     <ClInclude Include="SceneMercuryGemini.h">
       <Filter>ソースファイル\惑星\水星</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlueBullet.h" />
+    <ClInclude Include="ObjBeamSaber.h" />
+    <ClInclude Include="ObjRedBullet.h" />
+    <ClInclude Include="ObjSkillTwinsB.h" />
+    <ClInclude Include="ObjSkillGemini.h" />
+    <ClInclude Include="ObjSkillVirgo.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

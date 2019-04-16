@@ -40,6 +40,7 @@ enum OBJ_NAME
 
 	OBJ_SKILL,
 	OBJ_SKILL_GEMINI,
+	OBJ_SKILL_VIRGO,
 
 	OBJ_SKILL_TWINS_B,
 
@@ -157,6 +158,7 @@ extern int g_stage;		//今いるステージの値
 extern int g_skill;		//各星座スキルの値
 
 //各星座の取得情報
+
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
@@ -223,6 +225,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
+#include "ObjSkillVirgo.h"
 
 //------------------------------------------------
 

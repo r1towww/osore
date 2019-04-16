@@ -51,9 +51,9 @@ void CObjMiniMap::Init()
 	m_f = false;	//キー入力制御の初期化
 	m_alpha = 0.7f;	//アルファ値初期化
 
-	m_d_cow_f[20] = false;
-	m_d_twinsb_f[10] = false;
-	m_d_twinsr_f[10] = false;
+	//m_d_cow_f[20] = false;
+	//m_d_twinsb_f[10] = false;
+	//m_d_twinsr_f[10] = false;
 
 	count = 0;
 }

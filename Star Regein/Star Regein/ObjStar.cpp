@@ -16,6 +16,7 @@ CObjStar::CObjStar(float x, float y ,int i,int j)
 	m_py = y;
 	m_i = i;
 	m_j = j;
+
 }
 
 //イニシャライズ

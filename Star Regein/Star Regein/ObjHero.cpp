@@ -211,6 +211,13 @@ void CObjHero::Action()
 					//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
 					//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
 				}
+				//乙女座の場合
+				else if (g_skill == Virgo)
+				{
+					//ハート弾オブジェクト作成
+					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px, m_py);
+					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+				}
 				m_key_f = false;
 			}
 		}

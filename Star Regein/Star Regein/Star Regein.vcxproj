@@ -139,6 +139,7 @@
     <ClCompile Include="ObjRedBullet.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
@@ -203,6 +204,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
+    <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />
     <ClInclude Include="ObjStageClear.h" />
