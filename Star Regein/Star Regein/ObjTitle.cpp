@@ -44,6 +44,10 @@ bool g_Virgo  = true;	//乙女座
 bool g_Leo    = true;	//獅子座
 bool g_key_flag = false;	//キー入力制御フラグ
 
+//ステージ選択画面の主人公の位置（初期位置）
+float g_stage_px = 50;  //ステージ選択時の位置X
+float g_stage_py = 500;  //ステージ選択時の位置Y
+
 //イニシャライズ
 void CObjTitle::Init()
 {
@@ -56,6 +60,16 @@ void CObjTitle::Init()
 //アクション
 void CObjTitle::Action()
 {
+	 g_Earth_clear = false;	//地球	
+	 g_Venus_clear = false;	//金星
+	 g_Mercury_clear = false;	//水星
+	 g_Sun_clear = false;	//太陽
+
+	 g_Taurus_clear = false;	//牡牛座	
+	 g_Libra_clear = false;	//天秤座
+	 g_Gemini_clear = false;	//双子座
+	 g_Virgo_clear = false;	//乙女座
+	 g_Leo_clear = false;	//獅子座
 
 }
 

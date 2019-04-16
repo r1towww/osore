@@ -5,11 +5,11 @@
 using namespace GameL;
 
 //オブジェクト：敵
-class CObjTwinsBlue :public CObj
+class CObjSkillTwinsB :public CObj
 {
 public:
-	CObjTwinsBlue(float x, float y);
-	~CObjTwinsBlue() {};
+	CObjSkillTwinsB(float x, float y);
+	~CObjSkillTwinsB() {};
 	void Init();	//イニシャライズ
 	void Action();	//アクション
 	void Draw();	//ドロー
@@ -36,6 +36,7 @@ private:
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
+
 	int m_hp;//体力
 
 	int m_time;//無敵時間測定
@@ -44,18 +45,20 @@ private:
 	int count;
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
-	int m_bullet_time;//弾丸発射時間測定
 
 	int m_btime;//一定行動のための時間測定
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-							//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
+
+	//踏んでいるblockの種類を確認用
+	int m_block_type;
 
 	//移動用の向き制御用
 	bool m_movex;//左右

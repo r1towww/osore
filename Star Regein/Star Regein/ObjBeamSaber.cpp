@@ -119,5 +119,5 @@ void CObjBeamSaber::Draw()
 
 
 	//•\Ž¦
-	Draw::Draw(15, &src, &dst, c, m_angle);
+	Draw::Draw(2, &src, &dst, c, m_angle);
 }

@@ -55,7 +55,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -67,6 +67,7 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -80,13 +81,9 @@ void CSceneMercuryGemini::InitScene()
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
 
-	//HPゲージオブジェクト作成
-	CObjHeart* objheart = new CObjHeart();
-	Objs::InsertObj(objheart, OBJ_HEART, 130);
-
-	//MPゲージオブジェクト作成
-	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 130);
+	//Statusゲージオブジェクト作成
+	CObjStatus* objstatus = new CObjStatus();
+	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
@@ -96,10 +93,18 @@ void CSceneMercuryGemini::InitScene()
 //実行中メソッド
 void CSceneMercuryGemini::Scene()
 {
-	//水星（双子座）で星を18個集めたら次へ移行
+	//水星（ふたご座）で星を18個集めたら次へ移行
 	if (g_StarCount == GEMINIMAXSTAR)
 	{
-		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		//ふたご座のスキル開放
+		g_Gemini = true;
+		//ふたご座のクリア表記
+		g_Gemini_clear = true;
+		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
+		if (g_Gemini_clear == true && g_Virgo_clear == true)
+		{
+			g_Mercury_clear = true;
+		}
+		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
 	}
 }

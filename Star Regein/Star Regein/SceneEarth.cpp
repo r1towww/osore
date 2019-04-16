@@ -57,11 +57,11 @@ void CSceneEarth::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	//Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
-	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
@@ -74,6 +74,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 
 
 	//テスト用
@@ -92,13 +93,9 @@ void CSceneEarth::InitScene()
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
 
-	//HPゲージオブジェクト作成
-	CObjHeart* objheart = new CObjHeart();
-	Objs::InsertObj(objheart, OBJ_HEART, 130);
-
-	//MPゲージオブジェクト作成
-	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 140);
+	//Statusゲージオブジェクト作成
+	CObjStatus* objstatus = new CObjStatus();
+	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,5);

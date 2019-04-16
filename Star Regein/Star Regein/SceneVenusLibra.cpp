@@ -55,7 +55,7 @@ void CSceneVenusLibra::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -66,10 +66,12 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -83,13 +85,9 @@ void CSceneVenusLibra::InitScene()
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
 
-	//HPゲージオブジェクト作成
-	CObjHeart* objheart = new CObjHeart();
-	Objs::InsertObj(objheart, OBJ_HEART, 130);
-
-	//MPゲージオブジェクト作成
-	CObjMP* objMP = new CObjMP();
-	Objs::InsertObj(objMP, OBJ_MP, 140);
+	//Statusゲージオブジェクト作成
+	CObjStatus* objstatus = new CObjStatus();
+	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
@@ -118,6 +116,14 @@ void CSceneVenusLibra::Scene()
 	if (g_StarCount == LIBRAMAXSTAR)
 	{
 		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		//てんびん座をクリア表示
+		g_Libra_clear = true;
+		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
+		if (g_Libra_clear == true && g_Taurus_clear == true)
+		{
+			g_Venus_clear = true;
+		}
+
+		Scene::SetScene(new CSceneStageChoice());	
 	}
 }

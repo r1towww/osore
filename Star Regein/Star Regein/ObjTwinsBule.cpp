@@ -53,6 +53,8 @@ void CObjTwinsBlue::Init()
 
 	m_btime = 0;
 
+	m_bullet_time = 200;
+
 	m_time = 30;
 
 	m_df = true;
@@ -62,7 +64,7 @@ void CObjTwinsBlue::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_ENEMY, OBJ_TWINS_BLUE, 1);
+	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_BLUE, 1);
 }
 
 //アクション
@@ -71,7 +73,26 @@ void CObjTwinsBlue::Action()
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
+
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 		m_btime++;
+
+		//20°間隔で弾丸発射
+		m_bullet_time++;
+		if (m_bullet_time > 300)
+		{
+			m_bullet_time = 0;
+
+			//6発同時発射
+			CObjBlueBullet*obj_b;
+			for (int i = 0; i < 360; i += 60)
+			{
+				//角度iで角度弾丸発射
+				obj_b = new CObjBlueBullet(m_px, m_py, i, 3.0f);
+				Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
+			}
+		}
 
 		//ブロック衝突で向き変更
 		if (m_hit_up == true)
@@ -128,18 +149,20 @@ void CObjTwinsBlue::Action()
 			m_ani_frame = 0;
 		}
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-	);
+		//ブロックとの当たり判定実行
+		pb->BlockHit(&m_px, &m_py, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 
 
 		//主人公の位置を取得
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		float hx = hero->GetX();
-		float hy = hero->GetY();
+		if (hero != nullptr)
+		{
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+		}
 
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
@@ -229,11 +252,12 @@ void CObjTwinsBlue::Action()
 		hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
 		//敵とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
 		{
 			//敵がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_NULL);
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)
@@ -354,7 +378,7 @@ void CObjTwinsBlue::Draw()
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
-			   //ブロック情報を持ってくる
+	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定

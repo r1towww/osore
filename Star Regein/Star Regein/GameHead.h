@@ -33,14 +33,19 @@ enum OBJ_NAME
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
 	OBJ_TWINS_RED,
+	OBJ_BLUE_BULLET,
+	OBJ_RED_BULLET,
 
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
 	OBJ_SKILL_GEMINI,
+	OBJ_SKILL_VIRGO,
 
-	OBJ_HEART,
-	OBJ_MP,
+	OBJ_SKILL_TWINS_B,
+
+	OBJ_STATUS,
+
 };
 //------------------------------------------------
 
@@ -120,6 +125,9 @@ typedef enum Skill
 }Skill;
 
 
+extern float g_stage_px;  //ステージ選択時の位置X
+extern float g_stage_py;  //ステージ選択時の位置Y
+
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
@@ -151,6 +159,7 @@ extern int g_stage;		//今いるステージの値
 extern int g_skill;		//各星座スキルの値
 
 //各星座の取得情報
+
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
@@ -174,6 +183,8 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 extern bool g_attack_flag; //攻撃アニメーションフラグ
 extern int g_slash_time;
 extern int g_slash_frame;
+extern int g_cow_id[20];//牛の識別ID
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -187,6 +198,8 @@ extern int g_slash_frame;
 #include "ObjCow.h"
 #include "Objtwinsblue.h"
 #include "Objtwinsred.h"
+#include "ObjBlueBullet.h"
+#include "ObjRedBullet.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -205,12 +218,14 @@ extern int g_slash_frame;
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 
-#include "ObjHeart.h"
-#include "ObjMP.h"
+#include "ObjStatus.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
+
+#include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
+#include "ObjSkillVirgo.h"
 
 //------------------------------------------------
 
