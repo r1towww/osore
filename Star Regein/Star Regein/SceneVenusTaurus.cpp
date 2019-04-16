@@ -123,6 +123,11 @@ void CSceneVenusTaurus::Scene()
 	if (g_StarCount == TAURUSMAXSTAR)
 	{
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
-		Scene::SetScene(new CSceneMain());	//ゲームメインシーンに移行
+		g_Taurus_clear = true;
+		if (g_Libra_clear == true)
+		{
+			g_Venus_clear = true;
+		}
+		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
 	}
 }
