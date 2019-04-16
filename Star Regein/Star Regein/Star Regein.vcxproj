@@ -110,7 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ObjBlueBullet.cpp" />
+    <ClCompile Include="ObjBlueBullet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -128,22 +130,24 @@
     <ClCompile Include="ObjAsteroid.cpp" />
     <ClCompile Include="ObjBlackhole.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
-    <ClCompile Include="ObjMP.cpp" />
-    <ClCompile Include="ObjHeart.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
-    <ClCompile Include="ObjRedBullet.cpp" />
+    <ClCompile Include="ObjRedBullet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjSkill.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjStarChoice.cpp" />
+    <ClCompile Include="ObjStatus.cpp" />
     <ClCompile Include="ObjTextBox.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTutorial.cpp" />
@@ -162,7 +166,7 @@
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
     <ClCompile Include="ObjSkillTwinsB.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
@@ -182,33 +186,37 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="ObjBlueBullet.h" />
+    <ClInclude Include="ObjBlueBullet.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjGameOver.h" />
-    <ClInclude Include="ObjMP.h" />
     <ClInclude Include="ObjAsteroid.h" />
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjCow.h" />
-    <ClInclude Include="ObjHeart.h" />
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
-    <ClInclude Include="ObjRedBullet.h" />
+    <ClInclude Include="ObjRedBullet.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjSkill.h" />
     <ClInclude Include="ObjSkillTwinsB.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
+    <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />
     <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjStarChoice.h" />
+    <ClInclude Include="ObjStatus.h" />
     <ClInclude Include="ObjTextBox.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="ObjTutorial.h" />

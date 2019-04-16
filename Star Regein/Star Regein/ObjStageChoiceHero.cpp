@@ -14,8 +14,8 @@ using namespace GameL;
 
 ObjStageChoiceHero::ObjStageChoiceHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
-	m_px = x;
-	m_py = y;
+	g_stage_px = x;
+	g_stage_py = y;
 }
 
 //イニシャライズ
@@ -28,14 +28,6 @@ void ObjStageChoiceHero::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
-
-	//blockとの衝突状態確認
-	m_hit_up    = false;
-	m_hit_down  = false;
-	m_hit_left  = false;
-	m_hit_right = false;
-
-	m_block_type = 0;		//踏んでいるblockの種類を確認用
 
 }
 
@@ -115,7 +107,7 @@ void ObjStageChoiceHero::Action()
 	if (Input::GetVKey('Z') == true && g_key_flag == true)
 	{
 		//地球へ
-		if (m_px >= EarthX && m_px <= EarthX2 && m_py >= EarthY&&m_py <= EarthY2)
+		if (g_stage_px >= EarthX && g_stage_px <= EarthX2 && g_stage_py >= EarthY&&g_stage_py <= EarthY2)
 		{
 			//▼前シーンからZキー押し続けでこれを押さないように、
 			//このシーンに入って一度も押してない状態に移行しないと
@@ -123,7 +115,7 @@ void ObjStageChoiceHero::Action()
 			g_stage = Earth;	//ステージの値を地球に変更
 		}
 		//金星へ
-		else if (m_px >= VenusX && m_px <= VenusX2 && m_py >= VenusY&&m_py <= VenusY2)
+		else if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2)
 		{
 			//▼前シーンからZキー押し続けでこれを押さないように、
 			//このシーンに入って一度も押してない状態に移行しないと
@@ -132,7 +124,7 @@ void ObjStageChoiceHero::Action()
 			g_stage = Venus;
 		}
 		//水星へ
-		else if (m_px >= MercuryX && m_px <= MercuryX2 && m_py >= MercuryY&&m_py <= MercuryY2)
+		else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
 		{
 			//▼前シーンからZキー押し続けでこれを押さないように、
 			//このシーンに入って一度も押してない状態に移行しないと
@@ -141,7 +133,7 @@ void ObjStageChoiceHero::Action()
 			g_stage = Mercury;
 		}
 		//太陽へ
-		else if (m_px >= SunX && m_px <= SunX2 && m_py >= SunY&&m_py <= SunY2)
+		else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
 		{
 			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 			//太陽に設定
@@ -155,8 +147,8 @@ void ObjStageChoiceHero::Action()
 	}
 	
 	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
+	g_stage_px += m_vx;
+	g_stage_py += m_vy;
 }
 
 //ドロー
@@ -181,10 +173,10 @@ void ObjStageChoiceHero::Draw()
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
+	dst.m_top    =  0.0f + g_stage_py;
+	dst.m_left   = 80.0f + g_stage_px;
+	dst.m_right  =  0.0f + g_stage_px;
+	dst.m_bottom = 80.0f + g_stage_py;
 
 	//表示
 	Draw::Draw(1, &src, &dst, c, 0.0f);
