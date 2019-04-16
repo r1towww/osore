@@ -88,8 +88,6 @@ void CObjHero::Action()
 		m_vy = 0.0f;
 
 	}
-	
-
 
 	//デバック用
 	if (Input::GetVKey('O'))
@@ -401,8 +399,8 @@ void CObjHero::Action()
 	//HPが０になったら削除
 	if (g_hp <= 0.0f)
 	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		alpha = 0.0f;
+		hit->SetInvincibility(true);
 		Scene::SetScene(new CSceneGameOver());
 	}
 }

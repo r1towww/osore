@@ -125,12 +125,12 @@ void CObjSkillTwinsB::Action()
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-
 	//主人公機が存在する場合、誘導角度の計算する
 	if (hero != nullptr)
 	{
+		float hx = hero->GetX();
+		float hy = hero->GetY();
+
 		float x;
 		float y;
 
