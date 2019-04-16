@@ -66,7 +66,6 @@ void CObjCow::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-//	Hits::SetHitBox(this, m_px + 9, m_py + 7, 80, 80, ELEMENT_ENEMY, OBJ_COW, 1);
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
 
@@ -140,8 +139,11 @@ void CObjCow::Action()
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	if (hero != nullptr)
+	{
+		float hx = hero->GetX();
+		float hy = hero->GetY();
+	}
 
 	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 	bool check;
@@ -228,7 +230,6 @@ void CObjCow::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-//	hit->SetPos(m_px + 9 + pb->GetScrollx(), m_py + 7 + pb->GetScrolly());
 	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
 
 	//敵とBLOCK系統との当たり判定
@@ -337,7 +338,6 @@ void CObjCow::Action()
 
 		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 		map->Setdcow(1);
-		map->GetID();
 	}
 }
 

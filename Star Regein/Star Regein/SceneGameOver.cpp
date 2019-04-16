@@ -29,6 +29,7 @@ CSceneGameOver::~CSceneGameOver()
 
 //‰Šú‰»ƒƒ\ƒbƒh
 void CSceneGameOver::InitScene()
+
 {
 	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_1024);
 

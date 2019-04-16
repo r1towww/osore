@@ -158,8 +158,11 @@ void CObjTwinsBlue::Action()
 
 		//主人公の位置を取得
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		float hx = hero->GetX();
-		float hy = hero->GetY();
+		if (hero != nullptr)
+		{
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+		}
 
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;

@@ -123,6 +123,9 @@ typedef enum Skill
 }Skill;
 
 
+extern float g_stage_px;  //ステージ選択時の位置X
+extern float g_stage_py;  //ステージ選択時の位置Y
+
 extern int g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
