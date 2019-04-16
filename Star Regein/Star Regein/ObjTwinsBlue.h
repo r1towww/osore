@@ -8,7 +8,7 @@ using namespace GameL;
 class CObjTwinsBlue :public CObj
 {
 public:
-	CObjTwinsBlue(float x, float y);
+	CObjTwinsBlue(float x, float y,int id);
 	~CObjTwinsBlue() {};
 	void Init();	//イニシャライズ
 	void Action();	//アクション
@@ -45,6 +45,8 @@ private:
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
 	int m_bullet_time;//弾丸発射時間測定
+
+	int m_blue_id;
 
 	int m_btime;//一定行動のための時間測定
 

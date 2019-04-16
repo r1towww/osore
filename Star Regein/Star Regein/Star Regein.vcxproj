@@ -150,6 +150,7 @@
     <ClCompile Include="ObjTwinsBule.cpp" />
     <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
+    <ClCompile Include="ObjWoman.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMercuryGemini.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="ObjTwinsBlue.h" />
     <ClInclude Include="ObjTwinsRed.h" />
     <ClInclude Include="ObjWhitehole.h" />
+    <ClInclude Include="ObjWoman.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMercuryGemini.h" />

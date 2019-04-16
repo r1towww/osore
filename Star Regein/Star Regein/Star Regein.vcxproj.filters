@@ -188,6 +188,9 @@
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp" />
+    <ClCompile Include="ObjWoman.cpp">
+      <Filter>ソースファイル\敵\乙女</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjSkillGemini.h" />
+    <ClInclude Include="ObjWoman.h">
+      <Filter>ソースファイル\敵\乙女</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -408,6 +414,9 @@
     </Filter>
     <Filter Include="ソースファイル\惑星\水星">
       <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\敵\乙女">
+      <UniqueIdentifier>{cc197620-662c-4414-ad4e-870295aeba6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
