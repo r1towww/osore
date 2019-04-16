@@ -53,7 +53,7 @@ void CObjTwinsBlue::Init()
 
 	m_btime = 0;
 
-	m_bullet_time = 0;
+	m_bullet_time = 200;
 
 	m_time = 30;
 
@@ -80,16 +80,16 @@ void CObjTwinsBlue::Action()
 
 		//20‹ŠÔŠu‚Å’eŠÛ”­ŽË
 		m_bullet_time++;
-		if (m_bullet_time > 100)
+		if (m_bullet_time > 300)
 		{
 			m_bullet_time = 0;
 
-			//19”­“¯Žž”­ŽË
+			//6”­“¯Žž”­ŽË
 			CObjBlueBullet*obj_b;
-			for (int i = 0; i < 360; i += 20)
+			for (int i = 0; i < 360; i += 60)
 			{
 				//Šp“xi‚ÅŠp“x’eŠÛ”­ŽË
-				obj_b = new CObjBlueBullet(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), i, 5.0f);
+				obj_b = new CObjBlueBullet(m_px, m_py, i, 3.0f);
 				Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
 			}
 		}

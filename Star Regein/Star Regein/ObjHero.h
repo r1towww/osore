@@ -42,6 +42,8 @@ private:
 	float m_py;
 	float m_vx;  //移動ベクトル
 	float m_vy;
+
+	float alpha;//透明度
 	
 	
 

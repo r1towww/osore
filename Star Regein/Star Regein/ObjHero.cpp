@@ -51,6 +51,12 @@ void CObjHero::Init()
 	m_hit_left  = false;
 	m_hit_right = false;
 
+	//無敵時間初期化
+	m_time = 100;
+
+	//透明度初期化
+	alpha = 1.0f;
+
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
 
@@ -296,11 +302,12 @@ void CObjHero::Action()
 		}
 	}
 
-	if (hit->CheckElementHit(ELEMENT_NULL) == true)
+	if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY))
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_NULL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		//hit_data = hit->SearchElementHit(ELEMENT_ENEMY);
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -308,7 +315,6 @@ void CObjHero::Action()
 				continue;
 
 			float r = hit_data[i]->r;
-
 
 			if ((r < 45 && r >= 0) || r > 315)
 			{
@@ -337,14 +343,16 @@ void CObjHero::Action()
 	if (m_f == true)
 	{
 		m_time--;
+		alpha = 0.5f;
 
 	}
 	if (m_time <= 0)
 	{
 		m_f = false;
 		hit->SetInvincibility(false);
+		alpha = 1.0f;
 
-		m_time = 30;
+		m_time = 100;
 	}
 
 	//移動アニメーション用
@@ -410,7 +418,7 @@ void CObjHero::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
