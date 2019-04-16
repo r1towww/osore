@@ -57,7 +57,7 @@ void CSceneEarth::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	//Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -74,6 +74,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 
 
 	//テスト用

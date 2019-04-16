@@ -28,8 +28,11 @@ void CObjMeteo::Action()
 {
 	//ålŒö‚ÌˆÊ’u‚ğæ“¾
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
+	if(hero != nullptr)
+	{
+		float hx = hero->GetX();
+		float hy = hero->GetY();
+	}
 
 	//©g‚ÌHitBox‚ğ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);

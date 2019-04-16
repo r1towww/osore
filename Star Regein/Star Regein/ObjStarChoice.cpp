@@ -156,6 +156,10 @@ void CObjStarChoice::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra1 };	//標準カラー
+	//クリア用
+	float left_clear[4] = { 1.0f,1.0f,0.0f,m_Tra1 };
+	float right_clear[4] = { 1.0f,1.0f,0.0f,m_Tra2 };
+
 	//左の星座
 	float left[4]  = { 1.0f,1.0f,1.0f,m_Tra1 };
 	//右の星座
@@ -211,6 +215,11 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
+		//おうし座クリアでクリア表記
+		if (g_Taurus_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 200, 400, 40, left_clear);
+		}
 		//-------------------------------------------------------------------------------
 		//天秤座---------------------------------------------------------------------
 		//切り取り位置の設定
@@ -226,7 +235,14 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
+		//てんびん座クリアでクリア表記
+		if (g_Libra_clear== true)
+		{
+			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+		}
+
 		//----------------------------------------------------------------------------------
+
 	}
 	//水星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Mercury)
@@ -248,6 +264,12 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
+		//双子座クリアでクリア表記
+		if (g_Gemini_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 180, 400, 40, left_clear);
+		}
+
 		//-------------------------------------------------------------------------------
 		//乙女座---------------------------------------------------------------------
 		//切り取り位置の設定
@@ -263,6 +285,12 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 400.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
+		//おとめ座クリアでクリア表記
+		if (g_Virgo_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+		}
+
 		//----------------------------------------------------------------------------------
 	}
 	else

@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ObjBlueBullet.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
+    <ClCompile Include="ObjRedBullet.cpp" />
     <ClCompile Include="ObjSkill.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
@@ -158,6 +160,9 @@
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +181,7 @@
     <ClInclude Include="GameL\WICTextureLoader.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ObjBlueBullet.h" />
     <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjMP.h" />
@@ -187,7 +193,15 @@
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
+    <ClInclude Include="ObjRedBullet.h" />
     <ClInclude Include="ObjSkill.h" />
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />

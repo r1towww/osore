@@ -55,7 +55,7 @@ void CSceneVenusLibra::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -66,6 +66,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
@@ -118,6 +119,14 @@ void CSceneVenusLibra::Scene()
 	if (g_StarCount == LIBRAMAXSTAR)
 	{
 		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		//てんびん座をクリア表示
+		g_Libra_clear = true;
+		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
+		if (g_Libra_clear == true && g_Taurus_clear == true)
+		{
+			g_Venus_clear = true;
+		}
+
+		Scene::SetScene(new CSceneStageChoice());	
 	}
 }

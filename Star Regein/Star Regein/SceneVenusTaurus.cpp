@@ -55,7 +55,7 @@ void CSceneVenusTaurus::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -123,8 +123,10 @@ void CSceneVenusTaurus::Scene()
 	if (g_StarCount == TAURUSMAXSTAR)
 	{
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
+		//おうし座にクリア表記
 		g_Taurus_clear = true;
-		if (g_Libra_clear == true)
+		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
+		if (g_Libra_clear == true && g_Taurus_clear == true)
 		{
 			g_Venus_clear = true;
 		}

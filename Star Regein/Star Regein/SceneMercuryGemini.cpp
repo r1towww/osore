@@ -55,7 +55,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
@@ -96,10 +96,18 @@ void CSceneMercuryGemini::InitScene()
 //実行中メソッド
 void CSceneMercuryGemini::Scene()
 {
-	//水星（双子座）で星を18個集めたら次へ移行
+	//水星（ふたご座）で星を18個集めたら次へ移行
 	if (g_StarCount == GEMINIMAXSTAR)
 	{
-		g_Libra = true;		//スキル（天秤座）をオンにする
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		//ふたご座のスキル開放
+		g_Gemini = true;
+		//ふたご座のクリア表記
+		g_Gemini_clear = true;
+		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
+		if (g_Gemini_clear == true && g_Virgo_clear == true)
+		{
+			g_Mercury_clear = true;
+		}
+		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
 	}
 }

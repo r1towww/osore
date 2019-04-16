@@ -16,7 +16,9 @@ class CObjMiniMap : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-		void Setdcow(bool d_flag = true);
+		void Setdcow(int t);
+
+		int GetID() { return count; } //牛の識別番号
 
 	private:
 		float m_blocksize,m_uisize_x, m_uisize_y;			//マップUIのサイズ
@@ -28,6 +30,10 @@ class CObjMiniMap : public CObj
 
 		int m_f;//キー入力制御
 
-		bool m_df;
+		int count;
+
+		bool m_d_cow_f[20];//牛削除フラグ
+		bool m_d_twinsb_f[10];//双子（青）フラグ
+		bool m_d_twinsr_f[10];//双子（赤）フラグ
 		
 };

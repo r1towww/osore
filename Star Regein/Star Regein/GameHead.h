@@ -33,10 +33,15 @@ enum OBJ_NAME
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
 	OBJ_TWINS_RED,
+	OBJ_BLUE_BULLET,
+	OBJ_RED_BULLET,
 
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
+	OBJ_SKILL_GEMINI,
+
+	OBJ_SKILL_TWINS_B,
 
 	OBJ_HEART,
 	OBJ_MP,
@@ -175,6 +180,8 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 extern bool g_attack_flag; //攻撃アニメーションフラグ
 extern int g_slash_time;
 extern int g_slash_frame;
+extern int g_cow_id[20];//牛の識別ID
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -188,6 +195,8 @@ extern int g_slash_frame;
 #include "ObjCow.h"
 #include "Objtwinsblue.h"
 #include "Objtwinsred.h"
+#include "ObjBlueBullet.h"
+#include "ObjRedBullet.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -210,8 +219,10 @@ extern int g_slash_frame;
 #include "ObjMP.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
-#include "ObjSkillLibra.h"
 
+#include "ObjSkillTwinsB.h"
+#include "ObjSkillLibra.h"
+#include "ObjSkillGemini.h"
 
 //------------------------------------------------
 

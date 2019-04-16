@@ -51,6 +51,12 @@ void CObjHero::Init()
 	m_hit_left  = false;
 	m_hit_right = false;
 
+	//無敵時間初期化
+	m_time = 100;
+
+	//透明度初期化
+	alpha = 1.0f;
+
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
 
@@ -82,8 +88,6 @@ void CObjHero::Action()
 		m_vy = 0.0f;
 
 	}
-	
-
 
 	//デバック用
 	if (Input::GetVKey('O'))
@@ -194,8 +198,16 @@ void CObjHero::Action()
 					g_mp -= 25.0f;	//mp消費
 					g_hp += 10.0f;	//hp回復
 				}
+				g_mp -= 25.0f;	//mp消費
+				g_hp += 10.0f;	//hp回復
 			}
-
+			//双子座の場合
+			else if (g_skill == Gemini)
+			{
+				////サブ機オブジェクト作成
+				//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
+				//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+			}
 			m_key_f = false;
 		}
 	}
@@ -288,11 +300,12 @@ void CObjHero::Action()
 		}
 	}
 
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+	if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY))
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_ENEMY);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_NULL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		//hit_data = hit->SearchElementHit(ELEMENT_ENEMY);
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -300,7 +313,6 @@ void CObjHero::Action()
 				continue;
 
 			float r = hit_data[i]->r;
-
 
 			if ((r < 45 && r >= 0) || r > 315)
 			{
@@ -329,14 +341,16 @@ void CObjHero::Action()
 	if (m_f == true)
 	{
 		m_time--;
+		alpha = 0.5f;
 
 	}
 	if (m_time <= 0)
 	{
 		m_f = false;
 		hit->SetInvincibility(false);
+		alpha = 1.0f;
 
-		m_time = 30;
+		m_time = 100;
 	}
 
 	//移動アニメーション用
@@ -383,8 +397,8 @@ void CObjHero::Action()
 	//HPが０になったら削除
 	if (g_hp <= 0.0f)
 	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		alpha = 0.0f;
+		hit->SetInvincibility(true);
 		Scene::SetScene(new CSceneGameOver());
 	}
 }
@@ -400,7 +414,7 @@ void CObjHero::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
