@@ -132,8 +132,6 @@ void CObjCow::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
-
-
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
@@ -194,6 +192,7 @@ void CObjCow::Action()
 	}
 	else
 	{
+		//範囲外での行動
 		if (m_btime <= 500)
 		{
 			m_vy = 0;

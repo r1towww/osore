@@ -64,6 +64,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLOCK,
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
+	ELEMENT_SAB,
 };
 //------------------------------------------------
 

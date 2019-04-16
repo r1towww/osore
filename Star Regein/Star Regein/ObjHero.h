@@ -51,7 +51,7 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	int m_f;//攻撃制御用
-	int m_key_f;
+	bool m_key_f;
 
 	
 	int m_time;//無敵時間カウント

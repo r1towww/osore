@@ -194,8 +194,6 @@ void CObjHero::Action()
 					g_mp -= 25.0f;	//mpÁ”ï
 					g_hp += 10.0f;	//hp‰ñ•œ
 				}
-				g_mp -= 25.0f;	//mpÁ”ï
-				g_hp += 10.0f;	//hp‰ñ•œ
 			}
 			//‘oqÀ‚Ìê‡
 			else if (g_skill == Gemini)
