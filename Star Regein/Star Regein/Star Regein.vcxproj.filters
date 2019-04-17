@@ -138,6 +138,7 @@
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
+    <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjTextBox.cpp">
       <Filter>ソースファイル\チュートリアル</Filter>
     </ClCompile>
@@ -170,22 +172,26 @@
     <ClCompile Include="SceneMercuryGemini.cpp">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\主人公</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    <ClCompile Include="ObjBlueBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    <ClCompile Include="ObjRedBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBlueBullet.cpp" />
-    <ClCompile Include="ObjRedBullet.cpp" />
+    <ClCompile Include="ObjBeamSaber.cpp" />
+    <ClCompile Include="ObjWoman.cpp">
+      <Filter>ソースファイル\敵\乙女</Filter>
+    </ClCompile>
     <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStatus.cpp" />
-    <ClCompile Include="ObjSkillTwinsB.cpp" />
+    <ClCompile Include="ObjStarEffect.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
     <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+      <Filter>ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +321,17 @@
     <ClInclude Include="ObjTwinsRed.h">
       <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlueBullet.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRedBullet.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjTextBox.h">
       <Filter>ソースファイル\チュートリアル</Filter>
     </ClInclude>
@@ -324,23 +341,16 @@
     <ClInclude Include="SceneMercuryGemini.h">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClInclude Include="ObjBeamSaber.h" />
+    <ClInclude Include="ObjSkillGemini.h" />
+    <ClInclude Include="ObjWoman.h">
+      <Filter>ソースファイル\敵\乙女</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBeamSaber.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlueBullet.h" />
-    <ClInclude Include="ObjRedBullet.h" />
-    <ClInclude Include="ObjSkillTwinsB.h" />
     <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStatus.h" />
+    <ClInclude Include="ObjStarEffect.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -405,6 +415,9 @@
     </Filter>
     <Filter Include="ソースファイル\惑星\水星">
       <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\敵\乙女">
+      <UniqueIdentifier>{cc197620-662c-4414-ad4e-870295aeba6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

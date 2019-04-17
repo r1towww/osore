@@ -22,6 +22,7 @@ CObjStar::CObjStar(float x, float y ,int i,int j)
 //イニシャライズ
 void CObjStar::Init()
 {
+
 	m_GetStar = false;	//星を取得変数の初期化
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py,64, 64, ELEMENT_STAR, OBJ_STAR, 1);
@@ -53,6 +54,7 @@ void CObjStar::Action()
 //ドロー
 void CObjStar::Draw()
 {
+
 	//描画カラー情報
 	float b[4] = { 0.4f,0.4f,0.4f,1.0f };	//取得できていない色
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//取得できている色
@@ -63,7 +65,7 @@ void CObjStar::Draw()
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
 	src.m_left   = 0.0f;
-	src.m_right  = 640.0f;
+	src.m_right  = 640.0f ;
 	src.m_bottom = 608.0f;
 
 	//ブロック情報を持ってくる

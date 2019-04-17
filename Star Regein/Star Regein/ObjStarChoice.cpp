@@ -180,14 +180,14 @@ void CObjStarChoice::Draw()
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 0.0f;
-		src.m_right  = 256.0f;
-		src.m_bottom = 256.0f;
+		src.m_right  = 300.0f;
+		src.m_bottom = 200.0f;
 
 		//表示位置の設定
 		dst.m_top    = 150.0f;
-		dst.m_left   = 300.0f;
-		dst.m_right  = 510.0f;
-		dst.m_bottom = 400.0f;
+		dst.m_left   = 250.0f;
+		dst.m_right  = 550.0f;
+		dst.m_bottom = 350.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		if (g_Earth_clear == true)
@@ -204,15 +204,15 @@ void CObjStarChoice::Draw()
 		//おうし座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
-		src.m_left   = 256.0f;
-		src.m_right  = 512.0f;
-		src.m_bottom = 256.0f;
+		src.m_left   = 300.0f;
+		src.m_right  = 600.0f;
+		src.m_bottom = 200.0f;
 
 		//表示位置の設定
 		dst.m_top    = 150.0f;
-		dst.m_left   = 100.0f;
-		dst.m_right  = 350.0f;
-		dst.m_bottom = 400.0f;
+		dst.m_left   = 80.0f;
+		dst.m_right  = 380.0f;
+		dst.m_bottom = 350.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		//おうし座クリアでクリア表記
@@ -224,15 +224,15 @@ void CObjStarChoice::Draw()
 		//天秤座---------------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
-		src.m_left   = 512.0f;
-		src.m_right  = 768.0f;
-		src.m_bottom = 256.0f;
+		src.m_left   = 600.0f;
+		src.m_right  = 900.0f;
+		src.m_bottom = 200.0f;
 
 		//表示位置の設定
 		dst.m_top    = 150.0f;
-		dst.m_left   = 430.0f;
-		dst.m_right  = 680.0f;
-		dst.m_bottom = 400.0f;
+		dst.m_left   = 400.0f;
+		dst.m_right  = 700.0f;
+		dst.m_bottom = 350.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//てんびん座クリアでクリア表記
@@ -253,15 +253,15 @@ void CObjStarChoice::Draw()
 		//双子座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
-		src.m_left   = 768.0f;
-		src.m_right  = 1024.0f;
-		src.m_bottom = 256.0f;
+		src.m_left   = 900.0f;
+		src.m_right  = 1200.0f;
+		src.m_bottom = 200.0f;
 
 		//表示位置の設定
 		dst.m_top    = 150.0f;
-		dst.m_left   = 100.0f;
-		dst.m_right  = 350.0f;
-		dst.m_bottom = 400.0f;
+		dst.m_left   = 90.0f;
+		dst.m_right  = 390.0f;
+		dst.m_bottom = 350.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		//双子座クリアでクリア表記
@@ -274,15 +274,15 @@ void CObjStarChoice::Draw()
 		//乙女座---------------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
-		src.m_left   = 1024.0f;
-		src.m_right  = 1280.0f;
-		src.m_bottom = 256.0f;
+		src.m_left   = 1200.0f;
+		src.m_right  = 1500.0f;
+		src.m_bottom = 200.0f;
 
 		//表示位置の設定
 		dst.m_top    = 150.0f;
-		dst.m_left   = 430.0f;
-		dst.m_right  = 680.0f;
-		dst.m_bottom = 400.0f;
+		dst.m_left   = 420.0f;
+		dst.m_right  = 720.0f;
+		dst.m_bottom = 350.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//おとめ座クリアでクリア表記

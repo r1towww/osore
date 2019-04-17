@@ -46,6 +46,7 @@ void CObjBlock::Init()
 
 	blue_c = 0;
 	red_c = 0;
+	woman_c = 0;
 	c = 0;
 	b_c = 0;
 	w_c = 0;
@@ -60,7 +61,7 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//牛オブジェクト作成
-					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE);
+					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE,c);
 					//敵の位置を取得
 					float* cx = cow->GetPX();
 					float* cy = cow->GetPY();
@@ -68,7 +69,7 @@ void CObjBlock::Init()
 					g_cow_x[c] = cow->GetPX();
 					g_cow_y[c] = cow->GetPY();
 
-					//g_cow_id[c] = c;
+					g_cow_d_flag[c] = true;
 
 					c++;
 
@@ -85,14 +86,43 @@ void CObjBlock::Init()
 			{
 				if (m_map[i][j] == 5)
 				{
+					//乙女オブジェクト作成
+					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,woman_c);
+					//敵の位置を取得
+					float* wx = woman->GetPX();
+					float* wy = woman->GetPY();
+
+					g_woman_x[woman_c] = woman->GetPX();
+					g_woman_y[woman_c] = woman->GetPY();
+
+					g_woman_d_flag[woman_c] = true;
+
+					woman_c++;
+
+					Objs::InsertObj(woman, OBJ_WOMAN, 10);
+				}
+			}
+		}
+	}
+
+	else if(g_stage == MercuryGemini)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
 					//双子（青）オブジェクト作成
-					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE);
+					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE, blue_c);
 					//敵の位置を取得
 					float* bx = blue->GetPX();
 					float* by = blue->GetPY();
 
 					g_twinsblue_x[blue_c] = blue->GetPX();
 					g_twinsblue_y[blue_c] = blue->GetPY();
+
+					g_blue_d_flag[blue_c] = true;
 
 					blue_c++;
 
@@ -101,13 +131,15 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 10)
 				{
 					//双子（赤）オブジェクト作成
-					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE);
+					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE, red_c);
 					//敵の位置を取得
 					float* rx = red->GetPX();
 					float* ry = red->GetPY();
 
 					g_twinsred_x[red_c] = red->GetPX();
 					g_twinsred_y[red_c] = red->GetPY();
+
+					g_red_d_flag[red_c] = true;
 
 					red_c++;
 
@@ -136,6 +168,10 @@ void CObjBlock::Init()
 				//星オブジェクト作成
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
+				////星オブジェクト作成
+				//CObjStarEffect* objstareff = new CObjStarEffect(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				//Objs::InsertObj(objstareff, OBJ_STAR_EFFECT, 9);//マネージャに登録
+
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
 			{

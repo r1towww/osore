@@ -15,7 +15,8 @@ class CObjStar : public CObj
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
-
+		float GetX() { return m_px; }
+		float GetY() { return m_py; }
 	private:
 		int m_i;	//星の位置i番の変数
 		int m_j;	//星の位置j番の変数

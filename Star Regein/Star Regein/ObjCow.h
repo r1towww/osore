@@ -8,7 +8,7 @@ using namespace GameL;
 class CObjCow :public CObj
 {
 public:
-	CObjCow(float x, float y);
+	CObjCow(float x, float y,int id);
 	~CObjCow() {};
 	void Init();	//イニシャライズ
 	void Action();	//アクション
@@ -42,6 +42,8 @@ private:
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
 
+	int m_cow_id;
+
 	int m_time;//無敵時間測定
 	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
@@ -54,7 +56,7 @@ private:
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-							//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;

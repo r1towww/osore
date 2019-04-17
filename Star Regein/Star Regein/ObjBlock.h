@@ -40,6 +40,7 @@ class CObjBlock : public CObj
 		int c;//カウント用
 		int blue_c;//双子（青）カウント用
 		int red_c;//双子（赤）カウント用
+		int woman_c;//乙女カウント用
 		int b_c;//ブラックホールカウント用
 		int w_c;//ホワイトホールカウント用
 
