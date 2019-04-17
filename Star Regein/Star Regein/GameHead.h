@@ -21,7 +21,6 @@ enum OBJ_NAME
 	OBJ_BLOCK,
 	OBJ_STAR,
 	OBJ_STARCHOICE,
-	OBJ_STAR_EFFECT,
 	OBJ_METEO,
 	OBJ_ASTEROID,
 	OBJ_BLACKHOLE,
@@ -213,7 +212,6 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
-#include "ObjStarEffect.h"
 #include "ObjMeteo.h"
 #include "ObjAsteroid.h"
 #include "ObjBlackhole.h"

@@ -150,9 +150,6 @@
     <ClCompile Include="ObjStageClear.cpp" />
     <ClCompile Include="ObjStar.cpp" />
     <ClCompile Include="ObjStarChoice.cpp" />
-    <ClCompile Include="ObjStarEffect.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="ObjStatus.cpp" />
     <ClCompile Include="ObjTextBox.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
@@ -222,9 +219,6 @@
     <ClInclude Include="ObjStageClear.h" />
     <ClInclude Include="ObjStar.h" />
     <ClInclude Include="ObjStarChoice.h" />
-    <ClInclude Include="ObjStarEffect.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="ObjStatus.h" />
     <ClInclude Include="ObjTextBox.h" />
     <ClInclude Include="ObjTitle.h" />
