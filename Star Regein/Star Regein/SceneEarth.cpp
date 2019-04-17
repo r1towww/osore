@@ -80,6 +80,7 @@ void CSceneEarth::InitScene()
 
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
 
 	
 	//blockオブジェクト作成
