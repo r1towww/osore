@@ -231,6 +231,42 @@ void CObjCow::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
 
+
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
+
 	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_FIELD))
 	{
@@ -269,7 +305,7 @@ void CObjCow::Action()
 		}
 	}
 
-	//ELEMENT_MAGICを持つオブジェクトと接触したら
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
@@ -282,7 +318,9 @@ void CObjCow::Action()
 			if (hit_data[i] == nullptr)
 				continue;
 
+			
 			float r = hit_data[i]->r;
+			
 
 
 			if ((r < 45 && r >= 0) || r > 315)
@@ -310,6 +348,49 @@ void CObjCow::Action()
 		
 	}
 
+	//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_VIRGO_SKILL) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_VIRGO_SKILL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//攻撃の左右に当たったら
+			if (hit_data[i] == nullptr)
+				continue;
+
+
+			float r = hit_data[i]->r;
+
+
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -20.0f;//左に移動させる
+			}
+			if (r >= 45 && r < 135)
+			{
+				m_vy = 20.0f;//上に移動させる
+			}
+			if (r >= 135 && r < 225)
+			{
+				m_vx = 20.0f;//右に移動させる
+			}
+			if (r >= 225 && r < 315)
+			{
+				m_vy = -20.0f;//したに移動させる
+			}
+		}
+
+		m_hp -= 1;
+		m_f = true;
+		m_key_f = true;
+		hit->SetInvincibility(true);
+
+	}
+
 	if (m_f == true)
 	{
 		m_time--;
@@ -333,6 +414,23 @@ void CObjCow::Action()
 	//HPが0になったら破棄
 	if (m_hp == 0)
 	{
+		//HPが０になると乱数を生成し、仲間になるかどうかの抽選を行う
+		float sab = 0;
+		srand(time(NULL));
+		sab = rand() % 10+1;
+
+		//テスト １０％
+		if (sab == 1)
+		{
+			//サブ機になる処理
+		}
+		else
+		{
+			//敵削除
+			alpha = 0.0f;
+			hit->SetInvincibility(true);
+		}
+		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
