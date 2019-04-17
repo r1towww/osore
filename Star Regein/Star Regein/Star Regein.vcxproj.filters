@@ -188,6 +188,9 @@
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjHomingHeart.cpp">
+      <Filter>ソースファイル\敵\乙女</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStatus.h" />
+    <ClInclude Include="ObjHomingHeart.h">
+      <Filter>ソースファイル\敵\乙女</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
