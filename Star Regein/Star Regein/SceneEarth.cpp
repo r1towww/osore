@@ -98,6 +98,7 @@ void CSceneEarth::InitScene()
 	CObjStatus* objstatus = new CObjStatus();
 	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
 
+
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,5);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 150);

@@ -127,8 +127,6 @@
     <ClCompile Include="GameL\WICTextureLoader.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjAsteroid.cpp" />
-    <ClCompile Include="ObjMP.cpp" />
-    <ClCompile Include="ObjHeart.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
@@ -187,9 +185,6 @@
     </ClCompile>
     <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStatus.cpp" />
-    <ClCompile Include="ObjStarEffect.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -348,9 +343,6 @@
     </ClInclude>
     <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStatus.h" />
-    <ClInclude Include="ObjStarEffect.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
