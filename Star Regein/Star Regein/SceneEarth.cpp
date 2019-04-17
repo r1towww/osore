@@ -61,7 +61,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
-	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
@@ -76,7 +76,6 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
 
 
-	Draw::LoadImageW(L"星エフェクト.png", 99, TEX_SIZE_1024);
 
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
