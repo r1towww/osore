@@ -178,14 +178,20 @@
     <ClCompile Include="ObjSkillLibra.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBlueBullet.cpp" />
-    <ClCompile Include="ObjRedBullet.cpp" />
-    <ClCompile Include="ObjSkillTwinsB.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjStatus.cpp">
       <Filter>ソースファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlueBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRedBullet.cpp">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -333,12 +339,20 @@
     <ClInclude Include="ObjSkillLibra.h">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlueBullet.h" />
-    <ClInclude Include="ObjRedBullet.h" />
-    <ClInclude Include="ObjSkillTwinsB.h" />
-    <ClInclude Include="ObjSkillGemini.h" />
     <ClInclude Include="ObjStatus.h">
       <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlueBullet.h">
+      <Filter>ソースファイル\敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRedBullet.h">
+      <Filter>ソースファイル\敵\双子</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -390,9 +404,6 @@
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\スキル切り替え">
-      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\Game Over">
       <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
     </Filter>
@@ -404,6 +415,9 @@
     </Filter>
     <Filter Include="ソースファイル\惑星\水星">
       <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル切り替え">
+      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
