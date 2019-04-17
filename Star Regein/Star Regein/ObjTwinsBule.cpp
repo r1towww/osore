@@ -55,7 +55,7 @@ void CObjTwinsBlue::Init()
 
 	m_btime = 0;
 
-	m_bullet_time = 200;
+	m_bullet_time = 250;
 
 	m_time = 30;
 
