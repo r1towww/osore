@@ -140,6 +140,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
