@@ -99,10 +99,13 @@ void CObjHero::Action()
 
 		//移動系統情報--------------------------------------------------
 
+		//押していないときに初期化
+		m_dash_flag = true;
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 		{
 			m_move_flag = true;
 			m_vy -= m_speed_power;
+			m_dash_flag = false;
 			g_posture = HERO_UP;
 			m_ani_time += ANITIME;
 		}
@@ -110,6 +113,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vy += m_speed_power;
+			m_dash_flag = false;
 			g_posture = HERO_DOWN;
 			m_ani_time += ANITIME;
 		}
@@ -117,6 +121,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vx -= m_speed_power;
+			m_dash_flag = false;
 			g_posture = HERO_LEFT;
 			m_ani_time += ANITIME;
 		}
@@ -124,6 +129,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vx += m_speed_power;
+			m_dash_flag = false;
 			g_posture = HERO_RIGHT;
 			m_ani_time += ANITIME;
 		}
@@ -165,10 +171,8 @@ void CObjHero::Action()
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp >= 1.0f)
+			&& g_Taurus == true && g_mp >= 1.0f && m_dash_flag==false)
 		{
-			//ダッシュフラグをオン
-			m_dash_flag = true;
 
 			if (m_move_flag == true)
 			{
@@ -184,7 +188,7 @@ void CObjHero::Action()
 		else//通常速度
 		{
 			m_move_flag = false;
-			m_dash_flag = false;
+			m_dash_flag = true;
 			m_speed_power = NORMAL_SPEED;
 		}
 		//Xキーが入力された場合、スキルを使用
@@ -201,8 +205,6 @@ void CObjHero::Action()
 						g_mp -= 25.0f;	//mp消費
 						g_hp += 10.0f;	//hp回復
 					}
-					g_mp -= 25.0f;	//mp消費
-					g_hp += 10.0f;	//hp回復
 				}
 				//双子座の場合
 				else if (g_skill == Gemini)
@@ -256,7 +258,7 @@ void CObjHero::Action()
 
 
 		//MPが50以下になったら一定間隔で増える
-		if (m_dash_flag == false)//ダッシュしていなかったら増える
+		if (m_dash_flag == true)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 50.0f)
 			{
@@ -267,10 +269,6 @@ void CObjHero::Action()
 					g_mp += 1.0f;
 				}
 			}
-		}
-		else if (m_dash_flag == true)
-		{
-			;
 		}
 
 		//----------------------------------------------------------------
