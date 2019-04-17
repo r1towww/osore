@@ -431,7 +431,6 @@ void CObjCow::Action()
 			hit->SetInvincibility(true);
 		}
 		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-		map->Setdcow(1);
 		//“Gíœ
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
