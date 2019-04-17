@@ -35,11 +35,13 @@ enum OBJ_NAME
 	OBJ_TWINS_RED,
 	OBJ_BLUE_BULLET,
 	OBJ_RED_BULLET,
+	OBJ_WOMAN,
 
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
 	OBJ_SKILL_GEMINI,
+	OBJ_SKILL_VIRGO,
 
 	OBJ_SKILL_TWINS_B,
 
@@ -68,6 +70,8 @@ enum HIT_ELEMENTS
 	ELEMENT_BLOCK,
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
+	ELEMENT_SUB,
+	ELEMENT_VIRGO_SKILL,
 };
 //------------------------------------------------
 
@@ -87,6 +91,9 @@ struct UserData
 #define ALLSIZE 64.0f
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
+
+//ハート弾の速度
+#define MOVE 1
 	
 //主人公の向き
 #define HERO_UP		1
@@ -134,6 +141,8 @@ extern float* g_twinsblue_x[20];//全ての双子（青）のX位置を把握する
 extern float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
 extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
+extern float* g_woman_x[20];//すべての乙女のX位置を把握する
+extern float* g_woman_y[20];//すべての乙女のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
@@ -148,6 +157,11 @@ extern float g_max_mp; //最大ＭＰ
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
+extern bool g_cow_d_flag[20];//牛削除フラグ
+extern bool g_blue_d_flag[20];//双子（青）削除フラグ
+extern bool g_red_d_flag[20];//双子（赤）削除フラグ
+extern bool g_woman_d_flag[20];//乙女削除フラグ
+
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
 
@@ -157,6 +171,7 @@ extern int g_stage;		//今いるステージの値
 extern int g_skill;		//各星座スキルの値
 
 //各星座の取得情報
+
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
@@ -197,6 +212,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "Objtwinsred.h"
 #include "ObjBlueBullet.h"
 #include "ObjRedBullet.h"
+//#include "ObjWoman.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -222,6 +238,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
+#include "ObjSkillVirgo.h"
 
 //------------------------------------------------
 
