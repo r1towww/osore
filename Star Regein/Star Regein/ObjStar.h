@@ -23,6 +23,12 @@ class CObjStar : public CObj
 
 		float m_px;			//位置
 		float m_py;
+		int m_del;
+		int	   m_ani;		//チャージアニメーション用
+		int	   m_ani_time;	//チャージアニメーション間隔タイム
+		RECT_F m_eff;		//チャージエフェクト描画用
+		int m_ani_stop;
+		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
 
 		bool m_GetStar;		//星を取得したかどうかの変数
 };

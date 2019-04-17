@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjStarEffect : public CObj
 {
 public:
-	CObjStarEffect(float x, float y, int i, int j);
+	CObjStarEffect(float x, float y);
 	~CObjStarEffect() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
