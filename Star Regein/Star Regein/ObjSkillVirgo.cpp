@@ -11,8 +11,8 @@
 //使用するネームスペース
 using namespace GameL;
 
-//テスト
-#define MOVE 1
+
+
 
 //コンストラクタ
 CObjSkillVirgo::CObjSkillVirgo(float x, float y)
@@ -26,6 +26,7 @@ void CObjSkillVirgo::Init()
 {
 	m_vx = 0.0f;
 	m_vy = 0.0f;
+	m_time = 0.0f;
 
 
 	//主人公の向きによってビームサーベルを出す方向，向きを変える
@@ -55,13 +56,13 @@ void CObjSkillVirgo::Init()
 	}
 	//当たり判定をセット
 	if (g_posture == 1)  //上
-		Hits::SetHitBox(this, m_x + m_pos_x + 10, m_y + m_pos_y, 32, 28,ELEMENT_PLAYER, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x+m_pos_x , m_y+m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 2) //左
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_PLAYER, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y+m_pos_y , 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 3) //下
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y + 20, 32, 28, ELEMENT_PLAYER, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y+m_pos_y , 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 4) //右
-		Hits::SetHitBox(this, m_x + m_pos_x + 30, m_y + m_pos_y + 10, 32, 28, ELEMENT_PLAYER, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y+m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
 
 }
 
@@ -94,13 +95,21 @@ void CObjSkillVirgo::Action()
 		m_x += m_vx;
 	}
 
+
+
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_x, m_y);//入り口から新しい位置（主人公の位置）情報に置き換える
+	hit->SetPos(m_x+m_pos_x, m_y+m_pos_y);//入り口から新しい位置（主人公の位置）情報に置き換える
 
-	//this->SetStatus(false);    //自身に削除命令を出す
-	//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	m_time++;
+
+	if (m_time >= 20)
+	{
+		m_time = 0.0f;
+
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	}
 }
-
 //ドロー
 void CObjSkillVirgo::Draw()
 {
@@ -119,11 +128,11 @@ void CObjSkillVirgo::Draw()
 	src.m_bottom = 28.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f+m_y+m_pos_y;
-	dst.m_left   = 0.0f+m_x+m_pos_x;
-	dst.m_right  = 32.0f+m_x+m_pos_x;
-	dst.m_bottom = 32.0f+m_y+m_pos_y ;
+	dst.m_top = 0.0f + m_y + m_pos_y;
+	dst.m_left = 0.0f + m_x + m_pos_x;
+	dst.m_right = 32.0f + m_x + m_pos_x;
+	dst.m_bottom = 32.0f + m_y + m_pos_y;
 
 	//表示
-	Draw::Draw(20, &src, &dst, c,0.0f);
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 }
