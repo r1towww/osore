@@ -212,7 +212,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "Objtwinsred.h"
 #include "ObjBlueBullet.h"
 #include "ObjRedBullet.h"
-//#include "ObjWoman.h"
+#include "ObjWoman.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
