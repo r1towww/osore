@@ -36,6 +36,7 @@ enum OBJ_NAME
 	OBJ_BLUE_BULLET,
 	OBJ_RED_BULLET,
 	OBJ_WOMAN,
+	OBJ_HOMING_HEART,
 
 	OBJ_BEAMSABER,
 
@@ -213,6 +214,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjBlueBullet.h"
 #include "ObjRedBullet.h"
 #include "ObjWoman.h"
+#include "ObjHomingHeart.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"

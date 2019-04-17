@@ -55,6 +55,8 @@ void CObjWoman::Init()
 
 	m_btime = 0;
 
+	m_bullet_time = 300;
+
 	m_time = 30;
 
 	m_df = true;
@@ -75,6 +77,7 @@ void CObjWoman::Action()
 	if (g_tutorial_flag == false)
 	{
 		m_btime++;
+
 
 		//ブロック衝突で向き変更
 		if (m_hit_up == true)
@@ -137,8 +140,6 @@ void CObjWoman::Action()
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 		);
 
-
-
 		//主人公の位置を取得
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 		if (hero != nullptr)
@@ -152,6 +153,20 @@ void CObjWoman::Action()
 		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
 		if (check == true)
 		{
+			//ハート弾発射
+			m_bullet_time++;
+			if (m_bullet_time > 300)
+			{
+				m_bullet_time = 0;
+				CObjHomingHeart*obj_b;
+				for (int i = 0; i < 360; i += 60)
+				{
+					//角度iで角度弾丸発射
+					obj_b = new CObjHomingHeart(m_px, m_py, 1.5f);
+					Objs::InsertObj(obj_b, OBJ_HOMING_HEART, 5);
+				}
+			}
+
 			//主人公機が存在する場合、誘導角度の計算する
 			if (hero != nullptr)
 			{

@@ -77,26 +77,26 @@ void CObjSkillGemini::Action()
 	//方向
 	if (m_movey == true)
 	{
-		m_vy = 1;
-		m_posture = 0.0f;
+		m_vy = 1.0f;
+		m_posture = HERO_DOWN;
 		m_ani_time += 1;
 	}
 	if (m_movey == false)
 	{
-		m_vy = -1;
-		m_posture = 3.0f;
+		m_vy = -1.0f;
+		m_posture = HERO_UP;
 		m_ani_time += 1;
 	}
 	if (m_movex == true)
 	{
-		m_vx = 1;
-		m_posture = 1.0f;
+		m_vx = 1.0f;
+		m_posture = HERO_RIGHT;
 		m_ani_time += 1;
 	}
 	if (m_movex == false)
 	{
-		m_vx = -1;
-		m_posture = 2.0f;
+		m_vx = -1.0f;
+		m_posture = HERO_LEFT;
 		m_ani_time += 1;
 	}
 
@@ -117,73 +117,53 @@ void CObjSkillGemini::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
-
-
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+	bool check;
+	check = CheckWindow(m_px, m_py, -100.0f, -100.0f, 900.0f, 700.0f);
+	if (check ==true)
+	{
+		;
+	}
+	else
+	{
+		m_px = hero->GetX();
+		m_py = hero->GetY();
+	}
+	
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
+	hit->SetPos(m_px + 2 , m_py + 4 );
+
 	if (hero != nullptr)
 	{
 		float hx = hero->GetX();
 		float hy = hero->GetY();
 	}
 
-	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-	bool check;
-	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-	if (check == true)
+	//主人公周辺で動くため
+	if (hero->GetX() <= m_px - 100)
 	{
-		//主人公機が存在する場合、誘導角度の計算する
-		if (hero != nullptr)
-		{
-
-			float x;
-			float y;
-
-			x = 375 - (m_px + pb->GetScrollx());
-			y = 275 - (m_py + pb->GetScrolly());
-
-			float ar = GetAtan2Angle(x, y);
-
-			//敵の現在の向いている角度を取る
-			float br = GetAtan2Angle(m_vx, m_vy);
-
-			//角度で上下左右を判定
-			if ((ar < 45 && ar>0) || ar > 315)
-			{
-				//左
-				m_posture = 1.0f;
-				m_ani_time += 1;
-			}
-
-			if (ar > 45 && ar < 135)
-			{
-				//下
-				m_posture = 0.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 135 && ar < 225)
-			{
-				//右
-				m_posture = 2.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 225 && ar < 315)
-			{
-				//上
-				m_posture = 3.0f;
-				m_ani_time += 1;
-
-			}
-
-			//主人公機と敵角度があんまりにもかけ離れたら
-			m_vx = cos(3.14 / 180 * ar) * 2;
-			m_vy = sin(3.14 / 180 * ar) * 2;
-		}
+		m_movex == false;
 	}
-	
-	//HitBoxの内容を更新
-	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 2 , m_py + 4 );
+
+	else if (hero->GetX() >= m_px + 100)
+	{
+		m_movex == true;
+	}
+
+	if (hero->GetY() <= m_py - 100)
+	{
+		m_movey == false;
+	}
+
+	else if (hero->GetY() >= m_py + 100)
+	{
+		m_movey == true;
+	}
+
 
 	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -221,6 +201,7 @@ void CObjSkillGemini::Action()
 		}
 	}
 
+
 	//位置の更新
 	m_px += m_vx;
 	m_py += m_vy;
@@ -245,7 +226,7 @@ void CObjSkillGemini::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * g_posture;
+	src.m_top = 64.0f * m_posture;
 	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
@@ -257,5 +238,6 @@ void CObjSkillGemini::Draw()
 	dst.m_bottom = 80.0f + m_py;
 
 	//表示
+
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 }
