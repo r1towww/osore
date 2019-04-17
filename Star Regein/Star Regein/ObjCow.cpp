@@ -18,12 +18,12 @@ float* g_cow_x[20];//全ての牛のX位置を把握する
 float* g_cow_y[20];//全ての牛のY位置を把握する
 int g_cow_id[20];
 
-CObjCow::CObjCow(float x, float y)
+CObjCow::CObjCow(float x, float y,int id)
 {
 	m_px = x;	//位置
 	m_py = y;
 
-	g_cow_id[count];
+	m_cow_id = id;
 }
 
 
@@ -126,7 +126,7 @@ void CObjCow::Action()
 
 	if (m_ani_frame == 3)
 	{
-		m_ani_frame = 0;
+		m_ani_frame = 1;
 	}
 
 	//ブロックとの当たり判定実行
@@ -134,8 +134,6 @@ void CObjCow::Action()
 	pb->BlockHit(&m_px, &m_py,false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
-
-
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -200,6 +198,7 @@ void CObjCow::Action()
 	}
 	else
 	{
+		//範囲外での行動
 		if (m_btime <= 500)
 		{
 			m_vy = 0;
@@ -233,12 +232,14 @@ void CObjCow::Action()
 	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
 
 	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_FIELD))
 	{
 		//敵がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 		hit_data = hit->SearchElementHit(ELEMENT_NULL);
+		hit_data = hit->SearchElementHit(ELEMENT_FIELD);
+
 		float r = 0;
 
 		for (int i = 0; i < 10; i++)
@@ -395,6 +396,10 @@ void CObjCow::Action()
 		}
 		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 		map->Setdcow(1);
+		//敵削除
+		alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_cow_d_flag[m_cow_id] = false;
 	}
 }
 

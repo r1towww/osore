@@ -10,18 +10,46 @@ using namespace GameL;
 class CObjSkillGemini : public CObj
 {
 public:
-	CObjSkillGemini() {};
+	CObjSkillGemini(float x, float y);
 	~CObjSkillGemini() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
 
+	float* GetPX() { return &m_px; }
+	float* GetPY() { return &m_py; }
+	float GetX() { return m_px; }
+	float GetY() { return m_py; }
+	float GetVY() { return m_vy; }
+	float GetVX() { return m_vx; }
+	void SetX(float x) { m_px = x; }
+	void SetY(float y) { m_py = y; }
+	void SetVY(float vy) { m_vy = vy; }
+	void SetVX(float vx) { m_vx = vx; }
+
 private:
-	int m_ani_time; //アニメーションフレーム動作間隔
-	int m_ani_frame;//描画フレーム
-	float m_x;
-	float m_y;
-	float m_vx;
+	float m_px;		//位置
+	float m_py;
+	float m_vx;		//移動ベクトル
 	float m_vy;
+	float m_posture;//姿勢
+	float alpha;
 	
+	int m_ani_time;	//アニメーションフレーム動作間隔
+	int m_ani_frame;//描画フレーム
+
+	float m_speed_power;	//通常速度
+	float m_ani_max_time;	//アニメーション動作間隔最大値
+
+	//blockとの衝突状態確認用
+	bool m_hit_up;
+	bool m_hit_down;
+	bool m_hit_left;
+	bool m_hit_right;
+
+	//移動用の向き制御用
+	bool m_movex;//左右
+	bool m_movey;//上下
+
+	bool m_df;//ミニマップからの削除フラグ
 };

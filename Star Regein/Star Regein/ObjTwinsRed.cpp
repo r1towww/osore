@@ -17,10 +17,12 @@ using namespace GameL;
 float* g_twinsred_x[20];//全ての双子（青）のX位置を把握する
 float* g_twinsred_y[20];//全ての双子（青）のY位置を把握する
 
-CObjTwinsRed::CObjTwinsRed(float x, float y)
+CObjTwinsRed::CObjTwinsRed(float x, float y,int id)
 {
 	m_px = x;	//位置
 	m_py = y;
+
+	m_red_id = id;
 }
 
 
@@ -354,9 +356,7 @@ void CObjTwinsRed::Action()
 			//敵削除
 			alpha = 0.0f;
 			hit->SetInvincibility(true);
-
-			CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-			map->Setdcow(true);
+			g_red_d_flag[m_red_id] = false;
 		}
 	}
 	//チュートリアルフラグが立っていたら動かないようにする

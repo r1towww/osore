@@ -23,7 +23,7 @@ void CObjBlueBullet::Init()
 	m_ani_time = 0;
 	m_ani_frame = 2;
 
-	m_time = 400;
+	m_time = 300;
 
 	m_ani_max_time = 7;	//アニメーション間隔幅
 
@@ -68,8 +68,6 @@ void CObjBlueBullet::Action()
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-
-		m_time = 100;
 	}
 }
 
