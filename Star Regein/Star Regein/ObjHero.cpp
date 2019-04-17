@@ -14,8 +14,7 @@ using namespace GameL;
 float g_posture;
 int g_skill = Taurus;
 
-//int g_ani_time;
-//int g_ani_frame;
+
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -171,60 +170,73 @@ void CObjHero::Action()
 			//ダッシュフラグをオン
 			m_dash_flag = true;
 
-		if (m_move_flag == true)
-		{
-			m_MP_time++;
-			if (m_MP_time > 60)
+			if (m_move_flag == true)
 			{
-				m_MP_time = 0;
-				g_mp -= 5.0f;
-			}
-		}
-		m_speed_power = DASH_SPEED;
-	}
-	else//通常速度
-	{
-		m_move_flag = false;
-		m_dash_flag = false;
-		m_speed_power = NORMAL_SPEED;
-	}
-	//Xキーが入力された場合、スキルを使用
-	if (Input::GetVKey('X'))
-	{
-		if (m_key_f == true)
-		{
-			//天秤座の場合
-			if (g_skill == Libra)
-			{
-				if (g_hp < g_max_hp)
+				m_MP_time++;
+				if (m_MP_time > 60)
 				{
+					m_MP_time = 0;
+					g_mp -= 5.0f;
+				}
+			}
+			m_speed_power = DASH_SPEED;
+		}
+		else//通常速度
+		{
+			m_move_flag = false;
+			m_dash_flag = false;
+			m_speed_power = NORMAL_SPEED;
+		}
+		//Xキーが入力された場合、スキルを使用
+		if (Input::GetVKey('X'))
+		{
+			if (m_key_f == true)
+			{
+
+				//天秤座の場合
+				if (g_skill == Libra)
+				{
+					if (g_hp < g_max_hp)
+					{
+						g_mp -= 25.0f;	//mp消費
+						g_hp += 10.0f;	//hp回復
+					}
 					g_mp -= 25.0f;	//mp消費
 					g_hp += 10.0f;	//hp回復
 				}
+				//双子座の場合
+				else if (g_skill == Gemini)
+				{
+					////サブ機オブジェクト作成
+					//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
+					//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+				}
+				//乙女座の場合
+				else if (g_skill == Virgo)
+				{
+					//ハート弾オブジェクト作成
+					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px, m_py);
+					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+
+					g_mp -= 20.0f;	//mp消費
+
+				}
+				m_key_f = false;
 			}
-			//双子座の場合
-			else if (g_skill == Gemini)
-			{
-				////サブ機オブジェクト作成
-				//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
-				//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
-			}
-			m_key_f = false;
 		}
-	}
-	//Qキーが入力された場合
-	else if (Input::GetVKey('Q'))
-	{
-		if (m_key_f == true)
+		//Qキーが入力された場合
+		else if (Input::GetVKey('Q'))
 		{
-			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
-			m_key_f = false;
+			if (m_key_f == true)
+			{
+				g_skill += NEXTSKILL;	//スキルの画像を次へ送る
+				m_key_f = false;
+			}
 		}
-	}
-	else 
-	{
-		m_key_f = true;
-	}
+		else
+		{
+			m_key_f = true;
+		}
 
 		//HPが最大を超えないようにする（回復スキル）
 		if (g_hp >= g_max_hp)	//HPが最大を超えたら
