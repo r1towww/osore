@@ -12,8 +12,6 @@
 using namespace GameL;
 
 
-
-
 //コンストラクタ
 CObjSkillVirgo::CObjSkillVirgo(float x, float y)
 {
@@ -24,8 +22,11 @@ CObjSkillVirgo::CObjSkillVirgo(float x, float y)
 //イニシャライズ
 void CObjSkillVirgo::Init()
 {
+	//移動量の初期化
 	m_vx = 0.0f;
 	m_vy = 0.0f;
+
+	//弾削除のカウント初期化
 	m_time = 0.0f;
 
 
@@ -134,5 +135,5 @@ void CObjSkillVirgo::Draw()
 	dst.m_bottom = 32.0f + m_y + m_pos_y;
 
 	//表示
-	Draw::Draw(22, &src, &dst, c,0.0f);
+	Draw::Draw(20, &src, &dst, c,0.0f);
 }
