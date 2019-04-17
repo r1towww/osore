@@ -140,7 +140,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjSkillLibra.cpp" />
+    <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
     <ClCompile Include="ObjStageChoiceHero.cpp" />
     <ClCompile Include="ObjStageClear.cpp" />
@@ -153,6 +157,7 @@
     <ClCompile Include="ObjTwinsBule.cpp" />
     <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
+    <ClCompile Include="ObjWoman.cpp" />
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMercuryGemini.cpp" />
@@ -204,10 +209,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
+    <ClInclude Include="ObjSkillVirgo.h" />
     <ClInclude Include="ObjStageChoice.h" />
     <ClInclude Include="ObjStageChoiceHero.h" />
     <ClInclude Include="ObjStageClear.h" />
@@ -220,6 +226,7 @@
     <ClInclude Include="ObjTwinsBlue.h" />
     <ClInclude Include="ObjTwinsRed.h" />
     <ClInclude Include="ObjWhitehole.h" />
+    <ClInclude Include="ObjWoman.h" />
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMercuryGemini.h" />

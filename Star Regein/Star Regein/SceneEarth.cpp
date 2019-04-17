@@ -35,7 +35,7 @@ void CSceneEarth::InitScene()
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"Earth test.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"Earth.csv", &size);//外部データ読み込み
 	
 	int map[50][50];
 	int count = 1;
@@ -61,7 +61,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
-	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
@@ -74,12 +74,13 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
-	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 
+
+	Draw::LoadImageW(L"星エフェクト.png", 99, TEX_SIZE_1024);
 
 	//テスト用
-	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
-	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
+	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
+
 	
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -96,6 +97,7 @@ void CSceneEarth::InitScene()
 	//Statusゲージオブジェクト作成
 	CObjStatus* objstatus = new CObjStatus();
 	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
+
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0,5);

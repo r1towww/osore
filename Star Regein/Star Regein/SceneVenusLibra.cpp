@@ -59,7 +59,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
-	Draw::LoadImageW(L"星.png", 6, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_1024);
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
@@ -71,6 +71,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

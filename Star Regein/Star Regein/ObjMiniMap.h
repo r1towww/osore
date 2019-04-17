@@ -31,9 +31,5 @@ class CObjMiniMap : public CObj
 		int m_f;//キー入力制御
 
 		int count;
-
-		bool m_d_cow_f[20];//牛削除フラグ
-		bool m_d_twinsb_f[10];//双子（青）フラグ
-		bool m_d_twinsr_f[10];//双子（赤）フラグ
 		
 };

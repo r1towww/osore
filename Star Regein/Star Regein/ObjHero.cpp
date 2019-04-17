@@ -14,8 +14,7 @@ using namespace GameL;
 float g_posture;
 int g_skill = Taurus;
 
-//int g_ani_time;
-//int g_ani_frame;
+
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -193,6 +192,7 @@ void CObjHero::Action()
 		{
 			if (m_key_f == true)
 			{
+
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
@@ -210,6 +210,16 @@ void CObjHero::Action()
 					////サブ機オブジェクト作成
 					//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
 					//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+				}
+				//乙女座の場合
+				else if (g_skill == Virgo)
+				{
+					//ハート弾オブジェクト作成
+					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px, m_py);
+					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+
+					g_mp -= 20.0f;	//mp消費
+
 				}
 				m_key_f = false;
 			}
