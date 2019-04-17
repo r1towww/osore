@@ -24,8 +24,8 @@ void CObjStar::Init()
 {
 	m_eff.m_top = 0;
 	m_eff.m_left = 0;
-	m_eff.m_right =640;
-	m_eff.m_bottom = 608;
+	m_eff.m_right =220;
+	m_eff.m_bottom = 203;
 	m_ani = 0;
 	m_ani_time = 0;
 	m_ani_stop = 0;
@@ -39,13 +39,17 @@ void CObjStar::Init()
 //アクション
 void CObjStar::Action()
 {
-	RECT_F ani_src[5] =
+	RECT_F ani_src[8] =
 	{
-		{ 0,   0,   950, 640 },
-		{ 0, 950,   1900, 640 },
-		{ 0, 1900,   2851, 640 },
-		{ 0, 2851,   3801, 640 },
-		{ 0, 4752,   4752, 640 },
+		{ 0,  220,   460, 203 },
+		{ 0, 460,   490, 203 },
+		{ 0, 490,   930, 203 },
+		{ 0, 930,   1160, 203 },
+		{ 0, 1160,   1390, 203 },
+		{ 0, 1390,   1625, 203 },
+		{ 0, 1625,   1850, 203 },
+		{ 0, 1850,   2096, 203 },
+
 	};
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -70,13 +74,13 @@ void CObjStar::Action()
 
 			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
 			m_ani_stop++;
-			if (m_ani_stop >= 10)
+			if (m_ani_stop >= 8)
 			{
 				m_ani_flag = false;
 				m_eff.m_top = 0;
 				m_eff.m_left = 0;
-				m_eff.m_right = 640;
-				m_eff.m_bottom = 608;
+				m_eff.m_right = 220;
+				m_eff.m_bottom = 203;
 
 			}
 		}
@@ -84,11 +88,11 @@ void CObjStar::Action()
 		{
 			m_ani_time++;
 		}
-		//3コマ目突入後、0コマ目に戻す事でアニメーションを無限ループさせる。
-		if (m_ani == 3)
-		{
-			m_ani = 0;
-		}
+		////3コマ目突入後、0コマ目に戻す事でアニメーションを無限ループさせる。
+		//if (m_ani == 3)
+		//{
+		//	m_ani = 0;
+		//}
 
 	}
 	//ブロック情報を持ってくる

@@ -133,6 +133,7 @@
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
+    <ClCompile Include="ObjHomingHeart.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
@@ -141,7 +142,7 @@
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp" />
     <ClCompile Include="ObjSkillGemini.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjSkillVirgo.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjCow.h" />
+    <ClInclude Include="ObjHomingHeart.h" />
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
@@ -209,7 +211,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
