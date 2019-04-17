@@ -70,7 +70,8 @@ enum HIT_ELEMENTS
 	ELEMENT_BLOCK,
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
-	ELEMENT_SAB,
+	ELEMENT_SUB,
+	ELEMENT_VIRGO_SKILL,
 };
 //------------------------------------------------
 
@@ -90,6 +91,9 @@ struct UserData
 #define ALLSIZE 64.0f
 
 #define TIMELIMIT 50	//キー入力タイム用、間隔設定
+
+//ハート弾の速度
+#define MOVE 1
 	
 //主人公の向き
 #define HERO_UP		1

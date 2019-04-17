@@ -20,6 +20,8 @@ private:
 	float m_vx;
 	float m_vy;
 
+	float m_time;
+
 	int m_pos_x;	//ヒットボックスの向き用変数
 	int m_pos_y;
 	int m_angle;	//ハート弾の角度用変数
