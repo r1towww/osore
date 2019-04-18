@@ -43,7 +43,7 @@ private:
 	float m_vx;  //移動ベクトル
 	float m_vy;
 
-	float alpha;//透明度
+	float m_alpha;//透明度
 	
 	
 
@@ -63,11 +63,15 @@ private:
 	bool m_dash_flag;  //ダッシュフラグ
 	bool m_move_flag;  //移動フラグ
 
+	bool m_a_flag;//攻撃制御用
+
 	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
+
+	bool m_invincible_flag;//無敵フラグ
 
 	
 };

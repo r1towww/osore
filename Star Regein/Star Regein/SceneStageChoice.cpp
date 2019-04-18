@@ -39,6 +39,10 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"スキル総合.png", 7, TEX_SIZE_1024);
 
+	//Audio
+	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
+	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
+
 	
 	//ステージ選択オブジェクト作成
 	CObjStageChoice* o = new CObjStageChoice();

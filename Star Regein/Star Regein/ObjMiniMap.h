@@ -16,8 +16,6 @@ class CObjMiniMap : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-		void Setdcow(int t);
-
 		int GetID() { return count; } //牛の識別番号
 
 	private:

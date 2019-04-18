@@ -3,7 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
 #include "GameL\SceneManager.h"
-#include "GameL/Audio.h"
+#include "GameL\Audio.h"
 #include "GameHead.h"
 #include "ObjTextBox.h"
 #include "ObjTutorial.h"
@@ -47,9 +47,13 @@ void CObjTextBox::Action()
 			
 			if (m_f == false)
 			{
-				m_text++;//テキストを進める
-				m_key_time = 0;//キータイムをリセットする
-				m_f = true;
+				if (g_tutorial_flag == true)
+				{
+					Audio::Start(1);
+					m_text++;//テキストを進める
+					m_key_time = 0;//キータイムをリセットする
+					m_f = true;
+				}
 			}
 			else
 			{
