@@ -18,7 +18,7 @@ float* g_cow_x[20];//全ての牛のX位置を把握する
 float* g_cow_y[20];//全ての牛のY位置を把握する
 int g_cow_id[20];
 
-CObjCow::CObjCow(float x, float y,int id)
+CObjCow::CObjCow(float x, float y, int id)
 {
 	m_px = x;	//位置
 	m_py = y;
@@ -131,7 +131,7 @@ void CObjCow::Action()
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py,false,
+	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
@@ -318,9 +318,9 @@ void CObjCow::Action()
 			if (hit_data[i] == nullptr)
 				continue;
 
-			
+
 			float r = hit_data[i]->r;
-			
+
 
 
 			if ((r < 45 && r >= 0) || r > 315)
@@ -345,7 +345,7 @@ void CObjCow::Action()
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
-		
+
 	}
 
 	//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
@@ -401,7 +401,7 @@ void CObjCow::Action()
 	{
 		m_f = false;
 		hit->SetInvincibility(false);
-		
+
 		m_time = 30;
 
 	}
@@ -414,29 +414,16 @@ void CObjCow::Action()
 	//HPが0になったら破棄
 	if (m_hp == 0)
 	{
-		//HPが０になると乱数を生成し、仲間になるかどうかの抽選を行う
-		float sab = 0;
-		srand(time(NULL));
-		sab = rand() % 10+1;
-
-		//テスト １０％
-		if (sab == 1)
-		{
-			//サブ機になる処理
-		}
-		else
-		{
-			//敵削除
-			alpha = 0.0f;
-			hit->SetInvincibility(true);
-		}
-		CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_cow_id] = false;
 	}
+	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
+
+
+
 }
 
 //ドロー
