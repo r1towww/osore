@@ -3,7 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
-
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjHero.h"
@@ -54,7 +54,7 @@ void CObjHero::Init()
 	m_time = 100;
 
 	//透明度初期化
-	alpha = 1.0f;
+	m_alpha = ALPHAORIGIN;
 
 	//ＭＰのタイムカウント用初期化
 	m_MP_time = 0;
@@ -72,8 +72,13 @@ void CObjHero::Init()
 	//攻撃アニメーションフラグ初期化
 	g_attack_flag = false;
 
+	//攻撃制御フラグ
+	m_a_flag = true;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
+
+
 }
 
 //アクション
@@ -85,11 +90,6 @@ void CObjHero::Action()
 		//移動ベクトルの破棄
 		m_vx = 0.0f;
 		m_vy = 0.0f;
-
-
-
-
-
 
 		//デバック用
 		if (Input::GetVKey('O'))
@@ -146,21 +146,26 @@ void CObjHero::Action()
 			//Zキーが入力された場合	
 		if (Input::GetVKey('Z'))
 		{
+			if (m_a_flag == true)
+			{
+				//ビームサーベルオブジェクト作成
+				CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
+				Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 
-			//ビームサーベルオブジェクト作成
-			CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
-			Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
+				//攻撃アニメーションフラグオン
+				g_attack_flag = true;
 
-			//攻撃アニメーションフラグオン
-			g_attack_flag = true;
+				g_slash_time += ANITIME;
 
-			g_slash_time += ANITIME;
+				m_a_flag = false;
+			}
 		}
 		else
 		{
 			g_attack_flag = false;
 			g_slash_frame = 1;
 			g_slash_time = 0;
+			m_a_flag = true;
 
 		}
 
@@ -311,12 +316,11 @@ void CObjHero::Action()
 			}
 		}
 
-		if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY))
+		if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
 		{
 			//敵が主人公とどの角度で当たっているかを確認
 			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchElementHit(ELEMENT_NULL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-			//hit_data = hit->SearchElementHit(ELEMENT_ENEMY);
 
 			for (int i = 0; i < 10; i++)
 			{
@@ -343,6 +347,9 @@ void CObjHero::Action()
 				}
 			}
 
+			//ダメージ音を鳴らす
+			Audio::Start(3);
+
 			g_hp -= 10.0f;
 			m_f = true;
 			m_key_f = true;
@@ -352,14 +359,14 @@ void CObjHero::Action()
 		if (m_f == true)
 		{
 			m_time--;
-			alpha = 0.5f;
+			m_alpha = ALPHAUNDER;
 
 		}
 		if (m_time <= 0)
 		{
 			m_f = false;
 			hit->SetInvincibility(false);
-			alpha = 1.0f;
+			m_alpha = ALPHAORIGIN;
 
 			m_time = 100;
 		}
@@ -432,7 +439,7 @@ void CObjHero::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置

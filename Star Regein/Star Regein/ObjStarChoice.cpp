@@ -30,11 +30,13 @@ void CObjStarChoice::Action()
 {
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
+	ObjStageChoiceHero* stageh = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
 
 	//惑星が選択され、星座選択画面への移行の際
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
 		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
+		stageh->SetAlpha(ALPHAUNDER);
 	}
 
 	//星座選択が地球または太陽の場合（星座が1つの場合）
@@ -140,6 +142,7 @@ void CObjStarChoice::Action()
 		{
 			g_stage = Space;	//ステージをSpaceに設定
 			stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
+			stageh->SetAlpha(ALPHAORIGIN);
 			g_key_flag = false;	//キーフラグをオフ
 			this->SetStatus(false);    //自身に削除命令を出す
 		}

@@ -7,6 +7,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
+#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -80,6 +81,13 @@ void CSceneEarth::InitScene()
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
+
+	//Audio
+	Audio::LoadAudio(1, L"刀剣・斬る01.wav", EFFECT);		//近距離空振り時SE
+	Audio::LoadAudio(2, L"刀剣・斬る07.wav", EFFECT);		//近距離ヒット時SE
+	Audio::LoadAudio(3, L"ダメージ音02.wav", EFFECT);		//ダメージSE
+	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
+	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
 	
 	//blockオブジェクト作成

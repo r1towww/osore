@@ -23,12 +23,16 @@ class ObjStageChoiceHero :public CObj
 		void Action();  //アクション
 		void Draw();    //ドロー
 
+		void SetAlpha(float a) { m_alpha = a; }	//アルファ値をセットする関数
+
 	private:
 		float m_vx;  //移動ベクトル
 		float m_vy;
 		//float g_posture; //姿勢
 
 		float m_speed_power; //スピードパワー
+
+		float m_alpha;
 
 		int m_ani_time; //アニメーションフレーム動作間隔
 		int m_ani_frame;//描画フレーム
