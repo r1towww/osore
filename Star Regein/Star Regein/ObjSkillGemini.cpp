@@ -44,7 +44,7 @@ void CObjSkillGemini::Init()
 	m_hit_right = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 2, m_py + 4, 50, 50, ELEMENT_PLAYER, OBJ_SKILL_GEMINI, 1);
+	Hits::SetHitBox(this, m_px + 15, m_py + 15, 50, 50, ELEMENT_GREEN, OBJ_SKILL_GEMINI, 1);
 }
 
 //アクション
@@ -55,50 +55,6 @@ void CObjSkillGemini::Action()
 	srand(time(NULL)); // ランダム情報を初期化
 
 	Direction = rand() % 4; // このように記述するとnpcには０～3までの値が入ります
-
-	//ブロック衝突で向き変更
-	if (m_hit_up == true)
-	{
-		m_movey = true;
-	}
-	if (m_hit_down == true)
-	{
-		m_movey = false;
-	}
-	if (m_hit_left == true)
-	{
-		m_movex = false;
-	}
-	if (m_hit_right == true)
-	{
-		m_movex = true;
-	}
-
-	//方向
-	if (m_movey == true)
-	{
-		m_vy = 1.0f;
-		m_posture = HERO_DOWN;
-		m_ani_time += 1;
-	}
-	if (m_movey == false)
-	{
-		m_vy = -1.0f;
-		m_posture = HERO_UP;
-		m_ani_time += 1;
-	}
-	if (m_movex == true)
-	{
-		m_vx = 1.0f;
-		m_posture = HERO_RIGHT;
-		m_ani_time += 1;
-	}
-	if (m_movex == false)
-	{
-		m_vx = -1.0f;
-		m_posture = HERO_LEFT;
-		m_ani_time += 1;
-	}
 
 	if (m_ani_time > m_ani_max_time)
 	{
@@ -113,57 +69,133 @@ void CObjSkillGemini::Action()
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
+	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-	bool check;
-	check = CheckWindow(m_px, m_py, -100.0f, -100.0f, 900.0f, 700.0f);
-	if (check ==true)
-	{
-		;
-	}
-	else
-	{
-		m_px = hero->GetX();
-		m_py = hero->GetY();
-	}
-	
-	//HitBoxの内容を更新
-	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 2 , m_py + 4 );
-
 	if (hero != nullptr)
 	{
 		float hx = hero->GetX();
 		float hy = hero->GetY();
 	}
 
-	//主人公周辺で動くため
-	if (hero->GetX() <= m_px - 100)
-	{
-		m_movex == false;
-	}
 
-	else if (hero->GetX() >= m_px + 100)
-	{
-		m_movex == true;
-	}
 
-	if (hero->GetY() <= m_py - 100)
+	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+	bool check;
+	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 100.0f, 100.0f, 700.0f, 500.0f);
+	if (check ==true)
 	{
-		m_movey == false;
-	}
+		//主人公機が存在する場合、誘導角度の計算する
+		if (hero != nullptr)
+		{
+			float x;
+			float y;
 
-	else if (hero->GetY() >= m_py + 100)
+			x = 375 - (m_px + pb->GetScrollx());
+			y = 275 - (m_py + pb->GetScrolly());
+
+			float ar = GetAtan2Angle(x, y);
+
+			//敵の現在の向いている角度を取る
+			float br = GetAtan2Angle(m_vx, m_vy);
+
+			//角度で上下左右を判定
+			if ((ar < 45 && ar>0) || ar > 315)
+			{
+				//左
+				m_posture = 4.0f;
+				m_ani_time += 1;
+			}
+
+			if (ar > 45 && ar < 135)
+			{
+				//下
+				m_posture = 3.0f;
+				m_ani_time += 1;
+			}
+			if (ar > 135 && ar < 225)
+			{
+				//右
+				m_posture = 2.0f;
+				m_ani_time += 1;
+			}
+			if (ar > 225 && ar < 315)
+			{
+				//上
+				m_posture = 1.0f;
+				m_ani_time += 1;
+
+			}
+
+			//主人公機と敵角度があんまりにもかけ離れたら
+			m_vx = cos(3.14 / 180 * ar) * 3;
+			m_vy = sin(3.14 / 180 * ar) * 3;
+		}
+	}
+	else
 	{
-		m_movey == true;
-	}
 
+		CObjCow* cow = (CObjCow*)Objs::GetObj(OBJ_COW);
+
+		//牛が存在する場合、誘導角度の計算する
+		if (cow != nullptr)
+		{
+
+			float x;
+			float y;
+
+			float cx = cow->GetX();
+			float cy = cow->GetY();
+
+			x = cx;
+			y = cy;
+
+			float ar = GetAtan2Angle(x, y);
+
+			//敵の現在の向いている角度を取る
+			float br = GetAtan2Angle(m_vx, m_vy);
+
+			//角度で上下左右を判定
+			if ((ar < 45 && ar>0) || ar > 315)
+			{
+				//左
+				m_posture = 4.0f;
+				m_ani_time += 1;
+			}
+
+			if (ar > 45 && ar < 135)
+			{
+				//下
+				m_posture = 3.0f;
+				m_ani_time += 1;
+			}
+			if (ar > 135 && ar < 225)
+			{
+				//右
+				m_posture = 2.0f;
+				m_ani_time += 1;
+			}
+			if (ar > 225 && ar < 315)
+			{
+				//上
+				m_posture = 1.0f;
+				m_ani_time += 1;
+
+			}
+
+			//主人公機と敵角度があんまりにもかけ離れたら
+			m_vx = cos(3.14 / 180 * ar) * 1;
+			m_vy = sin(3.14 / 180 * ar) * 1;
+		}
+
+	}
+	
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
+	hit->SetPos(m_px + 15 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
 	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -226,18 +258,17 @@ void CObjSkillGemini::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_top    = 64.0f * m_posture;
+	src.m_left   = 0.0f  + (AniData[m_ani_frame] * 64);
+	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = 80.0f + m_px;
-	dst.m_right = 0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
+	dst.m_top    =  0.0f + m_py + block->GetScrolly();
+	dst.m_left   = 80.0f + m_px + block->GetScrollx();
+	dst.m_right  =  0.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 80.0f + m_py + block->GetScrolly();
 
 	//表示
-
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 }
