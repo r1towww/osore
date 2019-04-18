@@ -37,8 +37,26 @@ void ObjStageChoiceHero::Init()
 void ObjStageChoiceHero::Action()
 {
 	//星座選択時に入力制御する
+
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun ) {
 		return;
+	}
+	//主人公機が領域外行かない処理
+	if (g_stage_px + 64.0f > 800.0f)
+	{
+		g_stage_px = 800.0f - 64.0f;
+	}
+	if (g_stage_py + 64.0f > 600.0f)
+	{
+		g_stage_py = 600.0f - 64.0f;
+	}
+	if (g_stage_py < 0.0f)
+	{
+		g_stage_py = 0.0f;
+	}
+	if (g_stage_px < 0.0f)
+	{
+		g_stage_px = 0.0f;
 	}
 
 	//移動ベクトルの破棄
