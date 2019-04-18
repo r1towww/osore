@@ -206,6 +206,12 @@
     <ClCompile Include="ObjBeamSaber.cpp">
       <Filter>ソースファイル\主人公</Filter>
     </ClCompile>
+    <ClCompile Include="SceneSunLeo.cpp">
+      <Filter>ソースファイル\惑星\太陽</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -379,6 +385,9 @@
     <ClInclude Include="SceneMercuryVirgo.h">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
+    <ClInclude Include="SceneSunLeo.h">
+      <Filter>ソースファイル\惑星\太陽</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ヘッダーファイル">
@@ -446,6 +455,9 @@
     </Filter>
     <Filter Include="ソースファイル\敵\乙女">
       <UniqueIdentifier>{cc197620-662c-4414-ad4e-870295aeba6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\太陽">
+      <UniqueIdentifier>{6be346fe-26d3-44f3-b5cd-91abbe7a316c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

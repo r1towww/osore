@@ -277,7 +277,7 @@ void CObjStarChoice::Draw()
 		//戻るコマンド表示
 		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 
-		//おうし座の画像-----------------------------------------------------------------
+		//牡牛座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 300.0f;
@@ -361,7 +361,7 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
-		//おとめ座クリアでクリア表記
+		//乙女座クリアでクリア表記
 		if (g_Virgo_clear == true)
 		{
 			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
@@ -369,8 +369,31 @@ void CObjStarChoice::Draw()
 
 		//----------------------------------------------------------------------------------
 	}
-	else
+	else if(g_stage == Sun)
 	{
+		//戻るコマンド表示
+		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
+
+		//獅子座---------------------------------------------------------------------
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 1500.0f;
+		src.m_right  = 1800.0f;
+		src.m_bottom = 200.0f;
+
+		//表示位置の設定
+		dst.m_top    = 190.0f;
+		dst.m_left   = 250.0f;
+		dst.m_right  = 550.0f;
+		dst.m_bottom = 390.0f;
+		//表示
+		Draw::Draw(7, &src, &dst, left, 0.0f);
+		//おとめ座クリアでクリア表記
+		if (g_Sun_clear == true)
+		{
+			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+		}
+
 
 	}
 	
