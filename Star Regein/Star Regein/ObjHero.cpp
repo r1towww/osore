@@ -288,7 +288,7 @@ void CObjHero::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 
 		//主人公とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_GREEN) == true)
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
