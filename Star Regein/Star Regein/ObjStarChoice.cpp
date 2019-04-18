@@ -30,11 +30,13 @@ void CObjStarChoice::Action()
 {
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
+	ObjStageChoiceHero* stageh = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
 
 	//惑星が選択され、星座選択画面への移行の際
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
 		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
+		stageh->SetAlpha(ALPHAUNDER);
 	}
 
 	//星座選択が地球または太陽の場合（星座が1つの場合）
@@ -115,7 +117,7 @@ void CObjStarChoice::Action()
 		{
 			if (g_stage == Venus)
 			{
-				//ステージをてんびん座に設定
+				//ステージを天秤座に設定
 				g_stage = VenusLibra;
 				Scene::SetScene(new CSceneVenusLibra());
 			}
@@ -123,7 +125,7 @@ void CObjStarChoice::Action()
 			{
 				//ステージを乙女座に設定
 				g_stage = MercuryVirgo;
-				Scene::SetScene(new CSceneEarth());
+				Scene::SetScene(new CSceneMercuryVirgo());
 			}
 		}
 	}
@@ -140,6 +142,7 @@ void CObjStarChoice::Action()
 		{
 			g_stage = Space;	//ステージをSpaceに設定
 			stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
+			stageh->SetAlpha(ALPHAORIGIN);
 			g_key_flag = false;	//キーフラグをオフ
 			this->SetStatus(false);    //自身に削除命令を出す
 		}
@@ -184,10 +187,10 @@ void CObjStarChoice::Draw()
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
-		dst.m_top    = 150.0f;
+		dst.m_top    = 190.0f;
 		dst.m_left   = 250.0f;
 		dst.m_right  = 550.0f;
-		dst.m_bottom = 350.0f;
+		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		if (g_Earth_clear == true)
@@ -209,10 +212,10 @@ void CObjStarChoice::Draw()
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
-		dst.m_top    = 150.0f;
+		dst.m_top    = 190.0f;
 		dst.m_left   = 80.0f;
 		dst.m_right  = 380.0f;
-		dst.m_bottom = 350.0f;
+		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		//おうし座クリアでクリア表記
@@ -229,10 +232,10 @@ void CObjStarChoice::Draw()
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
-		dst.m_top    = 150.0f;
+		dst.m_top    = 190.0f;
 		dst.m_left   = 400.0f;
 		dst.m_right  = 700.0f;
-		dst.m_bottom = 350.0f;
+		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//てんびん座クリアでクリア表記
@@ -258,10 +261,10 @@ void CObjStarChoice::Draw()
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
-		dst.m_top    = 150.0f;
+		dst.m_top    = 190.0f;
 		dst.m_left   = 90.0f;
 		dst.m_right  = 390.0f;
-		dst.m_bottom = 350.0f;
+		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		//双子座クリアでクリア表記
@@ -279,10 +282,10 @@ void CObjStarChoice::Draw()
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
-		dst.m_top    = 150.0f;
+		dst.m_top    = 190.0f;
 		dst.m_left   = 420.0f;
 		dst.m_right  = 720.0f;
-		dst.m_bottom = 350.0f;
+		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//おとめ座クリアでクリア表記

@@ -7,35 +7,34 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
-#include"GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneVenusTaurus.h"
+#include "SceneMercuryVirgo.h"
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneVenusTaurus::CSceneVenusTaurus()
+CSceneMercuryVirgo::CSceneMercuryVirgo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
 }
 
 //デストラクタ
-CSceneVenusTaurus::~CSceneVenusTaurus()
+CSceneMercuryVirgo::~CSceneMercuryVirgo()
 {
 
 }
 
 //初期化メソッド
-void CSceneVenusTaurus::InitScene()
+void CSceneMercuryVirgo::InitScene()
 {
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"VenusCow.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"MercuryVirgo.csv", &size);//外部データ読み込み
 
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
@@ -67,23 +66,12 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
-
-
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
-	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 
-	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-
-	//Audio
-	Audio::LoadAudio(1, L"刀剣・斬る01.wav", EFFECT);		//近距離空振り時SE
-	Audio::LoadAudio(2, L"刀剣・斬る07.wav", EFFECT);		//近距離ヒット時SE
-	Audio::LoadAudio(3, L"ダメージ音02.wav", EFFECT);		//ダメージSE
-	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
-	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
-
-
+	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -96,7 +84,7 @@ void CSceneVenusTaurus::InitScene()
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
 	Objs::InsertObj(objmes, OBJ_MESSAGE, 120);
-	
+
 	//Statusゲージオブジェクト作成
 	CObjStatus* objstatus = new CObjStatus();
 	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
@@ -104,37 +92,23 @@ void CSceneVenusTaurus::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
-
-	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
-	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
-	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-	//チュートリアル発生時のみ作成
-	if (g_tutorial_flag == true)
-	{
-		//テキストボックスオブジェクト作成
-		CObjTextBox* objtextbox = new CObjTextBox();
-		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-	}
-
 }
 
 //実行中メソッド
-void CSceneVenusTaurus::Scene()
+void CSceneMercuryVirgo::Scene()
 {
-	//テスト（金星（おうし座）で星を18個集めたら次へ移行）
-	if (g_StarCount == TAURUSMAXSTAR)
+	//水星（乙女座）で星を18個集めたら次へ移行
+	if (g_StarCount == VIRGOMAXSTAR)
 	{
-		g_Taurus = true;		//スキル（牡牛座）をオンにする
-		//おうし座にクリア表記
-		g_Taurus_clear = true;
-		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
-		if (g_Libra_clear == true && g_Taurus_clear == true)
+		//乙女座のスキル開放
+		g_Gemini = true;
+		//乙女座のクリア表記
+		g_Gemini_clear = true;
+		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
+		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
-			g_Venus_clear = true;
+			g_Mercury_clear = true;
 		}
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
 	}
 }

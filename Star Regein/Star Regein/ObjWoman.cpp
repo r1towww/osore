@@ -67,7 +67,7 @@ void CObjWoman::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 32, 32, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px, m_py, 32, 32, ELEMENT_NULL, OBJ_WOMAN, 1);
 }
 
 //アクション
@@ -162,7 +162,7 @@ void CObjWoman::Action()
 				for (int i = 0; i < 360; i += 60)
 				{
 					//角度iで角度弾丸発射
-					obj_b = new CObjHomingHeart(m_px, m_py, 1.5f);
+					obj_b = new CObjHomingHeart(m_px, m_py, 1.3f);
 					Objs::InsertObj(obj_b, OBJ_HOMING_HEART, 5);
 				}
 			}
