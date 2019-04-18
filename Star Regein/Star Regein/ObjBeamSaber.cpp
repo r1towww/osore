@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 //使用するヘッダーファイル
 #include "GameHead.h"
@@ -62,6 +63,8 @@ void CObjBeamSaber::Init()
 	else if(g_posture==4) //右
 		Hits::SetHitBox(this, m_x + m_pos_x +30, m_y + m_pos_y + 10, 32, 40, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 
+
+
 }
 
 //アクション
@@ -69,6 +72,15 @@ void CObjBeamSaber::Action()
 {
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
+
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true )
+	{
+		Audio::Start(4);
+	}
+	else
+	{
+		Audio::Start(3);
+	}
 
 	//攻撃アニメーション用
 	if (g_slash_time > 4)

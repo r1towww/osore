@@ -55,7 +55,7 @@ void CObjWoman::Init()
 
 	m_btime = 0;
 
-	m_bullet_time = 300;
+	m_bullet_time = 0;
 
 	m_time = 30;
 
@@ -67,7 +67,7 @@ void CObjWoman::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 32, 32, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px, m_py, 32, 32, ELEMENT_NULL, OBJ_WOMAN, 1);
 }
 
 //アクション
@@ -151,18 +151,18 @@ void CObjWoman::Action()
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
 		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-		if (check == true)
+		if (check == true && m_hp > 0)
 		{
 			//ハート弾発射
 			m_bullet_time++;
-			if (m_bullet_time > 300)
+			if (m_bullet_time > 200)
 			{
 				m_bullet_time = 0;
 				CObjHomingHeart*obj_b;
 				for (int i = 0; i < 360; i += 60)
 				{
 					//角度iで角度弾丸発射
-					obj_b = new CObjHomingHeart(m_px, m_py, 1.5f);
+					obj_b = new CObjHomingHeart(m_px, m_py, 1.4f);
 					Objs::InsertObj(obj_b, OBJ_HOMING_HEART, 5);
 				}
 			}

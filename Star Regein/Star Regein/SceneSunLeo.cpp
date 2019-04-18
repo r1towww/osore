@@ -13,29 +13,30 @@
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneVenusLibra.h"
+#include "SceneSunLeo.h"
 #include "GameHead.h"
 
 //コンストラクタ
-CSceneVenusLibra::CSceneVenusLibra()
+CSceneSunLeo::CSceneSunLeo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
 }
 
 //デストラクタ
-CSceneVenusLibra::~CSceneVenusLibra()
+CSceneSunLeo::~CSceneSunLeo()
 {
+
 
 }
 
 //初期化メソッド
-void CSceneVenusLibra::InitScene()
+void CSceneSunLeo::InitScene()
 {
 	//外部データ読み込み（ステージ情報）
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
-	p = Save::ExternalDataOpen(L"VenusLibra.csv", &size);//外部データ読み込み
+	p = Save::ExternalDataOpen(L"SunLeo.csv", &size);//外部データ読み込み
 
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
@@ -73,18 +74,16 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
-	Draw::LoadImageW(L"着弾アニメーション.png", 21, TEX_SIZE_512);
+
 
 	//Audio
-	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
-	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
-	Audio::LoadAudio(3, L"刀剣・斬る01.wav", EFFECT);		//近距離空振り時SE
-	Audio::LoadAudio(4, L"刀剣・斬る07.wav", EFFECT);		//近距離ヒット時SE
-	Audio::LoadAudio(5, L"手足・殴る、蹴る09.wav", EFFECT);		//ダメージSE
-	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
-	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
+	Audio::LoadAudio(1, L"刀剣・斬る01.wav", EFFECT);		//近距離空振り時SE
+	Audio::LoadAudio(2, L"刀剣・斬る07.wav", EFFECT);		//近距離ヒット時SE
+	Audio::LoadAudio(3, L"ダメージ音02.wav", EFFECT);		//ダメージSE
+	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
+	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
-	//blockオブジェクト作成
+													  //blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);
 
@@ -121,20 +120,15 @@ void CSceneVenusLibra::InitScene()
 }
 
 //実行中メソッド
-void CSceneVenusLibra::Scene()
+void CSceneSunLeo::Scene()
 {
-	//金星（天秤座）で星を18個集めたら次へ移行
-	if (g_StarCount == LIBRAMAXSTAR)
+	//太陽で星を14個集めたら次へ移行
+	if (g_StarCount == LEOMAXSTAR)
 	{
-		g_Libra = true;		//スキル（天秤座）をオンにする
-		//てんびん座をクリア表示
-		g_Libra_clear = true;
-		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
-		if (g_Libra_clear == true && g_Taurus_clear == true)
-		{
-			g_Venus_clear = true;
-		}
+		g_Leo = true;		//スキル（天秤座）をオンにする
+		//獅子座をクリア表示
+		g_Sun_clear = true;
 
-		Scene::SetScene(new CSceneStageChoice());	
+		Scene::SetScene(new CSceneStageChoice());
 	}
 }
