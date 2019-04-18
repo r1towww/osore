@@ -21,8 +21,8 @@ void CObjStarChoice::Init()
 	m_Tra3 = 0.3f;
 	m_direction = DOWN;	//初期選択位置の初期化
 
-	//キー入力用タイムの初期化
-	m_keytime = 0;
+	//キー入力用フラグの初期化
+	m_key_flag = true;
 }
 
 //アクション
@@ -35,7 +35,8 @@ void CObjStarChoice::Action()
 	//惑星が選択され、星座選択画面への移行の際
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
-		stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
+			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
+			stageh->SetAlpha(ALPHAUNDER);
 	}
 
 	//星座選択が地球または太陽の場合（星座が1つの場合）
@@ -44,31 +45,60 @@ void CObjStarChoice::Action()
 		//上キーを入力して選択
 		if (Input::GetVKey(VK_UP) == true)
 		{
-			m_direction = UP;	//UPをセット
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_direction = UP;	//UPをセット
+				m_key_flag = false;
+			}
 		}
 		//下キーを入力して選択
 		else if (Input::GetVKey(VK_DOWN) == true)
 		{
-			m_direction = DOWN;	//DOWNをセット
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_direction = DOWN;	//DOWNをセット
+				m_key_flag = false;
+			}
 		}
+		else
+			m_key_flag = true;
 	}
 	else		//星座が2つある場合
 	{	
 		//下キーを入力して選択
 		if (Input::GetVKey(VK_DOWN) == true)
 		{
-			m_direction = DOWN;	//DOWNをセット
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_direction = DOWN;	//DOWNをセット
+				m_key_flag = false;
+			}
 		}
 		//右キーを入力して選択
 		else if (Input::GetVKey(VK_RIGHT) == true)
 		{
-			m_direction = RIGHT;//RIGHTをセット
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_direction = RIGHT;//RIGHTをセット
+				m_key_flag = false;
+			}
 		}
 		//左キーを入力して選択
 		else if (Input::GetVKey(VK_LEFT) == true)
 		{
-			m_direction = LEFT;	//LEFTをセット
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_direction = LEFT;	//LEFTをセット
+				m_key_flag = false;
+			}
 		}
+		else
+			m_key_flag = true;
 	}
 
 	//左のほうを明るくして右のほうを暗くする(1つしか無い際はUPをLEFTと同様に扱う)
@@ -84,28 +114,45 @@ void CObjStarChoice::Action()
 		{
 			if (g_stage == Earth)
 			{
-				//ステージを地球に設定
-				g_stage = EarthStar;
-				Scene::SetScene(new CSceneEarth());
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを地球に設定
+					g_stage = EarthStar;
+					Scene::SetScene(new CSceneEarth());
+				}
 			}
 			else if (g_stage == Venus)
 			{
-				//ステージを牡牛座に設定
-				g_stage = VenusTaurus;
-				Scene::SetScene(new CSceneVenusTaurus());
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを牡牛座に設定
+					g_stage = VenusTaurus;
+					Scene::SetScene(new CSceneVenusTaurus());
+				}
 			}
 			else if (g_stage == Mercury)
 			{
-				//ステージを双子座に設定
-				g_stage = MercuryGemini;
-				Scene::SetScene(new CSceneMercuryGemini());
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを双子座に設定
+					g_stage = MercuryGemini;
+					Scene::SetScene(new CSceneMercuryGemini());
+				}
 			}
-			else if (g_stage == Sun)
-			{
-				//ステージを獅子座に設定
-				g_stage = SunLeo;
-				Scene::SetScene(new CSceneSunLeo());
-			}
+			else
+				m_key_flag = true;
 		}
 	}
 
@@ -122,16 +169,32 @@ void CObjStarChoice::Action()
 		{
 			if (g_stage == Venus)
 			{
-				//ステージを天秤座に設定
-				g_stage = VenusLibra;
-				Scene::SetScene(new CSceneVenusLibra());
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを天秤座に設定
+					g_stage = VenusLibra;
+					Scene::SetScene(new CSceneVenusLibra());
+				}
 			}
 			else if (g_stage == Mercury)
 			{
-				//ステージを乙女座に設定
-				g_stage = MercuryVirgo;
-				Scene::SetScene(new CSceneMercuryVirgo());
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを乙女座に設定
+					g_stage = MercuryVirgo;
+					Scene::SetScene(new CSceneMercuryVirgo());
+				}
 			}
+			else
+				m_key_flag = true;
 		}
 	}
 	//下のコマンドの明るさを変更
@@ -145,11 +208,16 @@ void CObjStarChoice::Action()
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if (Input::GetVKey('Z') == true && g_key_flag == true)
 		{
-			g_stage = Space;	//ステージをSpaceに設定
-			stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
-			stageh->SetAlpha(ALPHAORIGIN);
-			g_key_flag = false;	//キーフラグをオフ
-			this->SetStatus(false);    //自身に削除命令を出す
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				g_stage = Space;	//ステージをSpaceに設定
+				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
+				stageh->SetAlpha(ALPHAORIGIN);
+				m_key_flag = false;
+				g_key_flag = false;	//キーフラグをオフ
+				this->SetStatus(false);    //自身に削除命令を出す
+			}
 		}
 	}
 	//キー入力を長押しで出来ないようにする

@@ -19,4 +19,5 @@ private:
 	bool m_start;
 	bool m_end;
 
+	bool m_key_flag;	//キー制御フラグ
 };

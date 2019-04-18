@@ -58,7 +58,7 @@ void CObjStar::Action()
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら取得
 	{
 		//スター獲得音
-		Audio::Start(4);
+		Audio::Start(6);
 
 		m_ani_flag = true;//アニメーション開始
 		hit->SetInvincibility(true);	//触れられなくする

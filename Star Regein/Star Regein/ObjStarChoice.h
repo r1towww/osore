@@ -29,5 +29,5 @@ class CObjStarChoice :public CObj
 		float m_Tra2;//透過率
 		float m_Tra3;//透過率
 
-		int m_keytime;	//キー入力ができるまでの時間
+		bool m_key_flag;	//キー制御フラグ
 };
