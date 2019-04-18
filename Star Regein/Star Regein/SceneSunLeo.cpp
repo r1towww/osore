@@ -122,16 +122,11 @@ void CSceneSunLeo::InitScene()
 void CSceneSunLeo::Scene()
 {
 	//金星（天秤座）で星を18個集めたら次へ移行
-	if (g_StarCount == LIBRAMAXSTAR)
+	if (g_StarCount == LEOMAXSTAR)
 	{
-		g_Libra = true;		//スキル（天秤座）をオンにする
-							//てんびん座をクリア表示
-		g_Libra_clear = true;
-		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
-		if (g_Libra_clear == true && g_Taurus_clear == true)
-		{
-			g_Venus_clear = true;
-		}
+		g_Leo = true;		//スキル（天秤座）をオンにする
+		//獅子座をクリア表示
+		g_Sun_clear = true;
 
 		Scene::SetScene(new CSceneStageChoice());
 	}

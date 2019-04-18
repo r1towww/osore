@@ -6,17 +6,17 @@
 using namespace GameL;
 
 //定数
-#define LIBRAMAXSTAR	6	//天秤座の星の数
+#define LEOMAXSTAR	14	//獅子座の星の数
 
 //シーン：メイン
 class CSceneSunLeo :public CScene
 {
-public:
-	CSceneSunLeo();
-	~CSceneSunLeo();
-	void InitScene(); //初期化メソッド
-	void Scene();     //実行中メソッド
-private:
+	public:
+		CSceneSunLeo();
+		~CSceneSunLeo();
+		void InitScene(); //初期化メソッド
+		void Scene();     //実行中メソッド
+	private:
 
 };
 

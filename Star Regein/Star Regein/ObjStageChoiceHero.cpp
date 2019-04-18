@@ -139,7 +139,7 @@ void ObjStageChoiceHero::Action()
 		{
 			//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 			//太陽に設定
-			g_stage = SunLeo;
+			g_stage = Sun;
 		}
 		g_key_flag = false;	//キーフラグをオフ
 		//ステージ選択(星座)オブジェクト作成
