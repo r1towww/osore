@@ -28,7 +28,7 @@ void CObjHomingHeart::Init()
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 
-	m_time = 200;
+	m_time = 250;
 
 	alpha = 1.0f;
 
@@ -78,7 +78,7 @@ void CObjHomingHeart::Action()
 	hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
 
 	//主人公機オブジェクトと接触したら弾丸削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckElementHit(ELEMENT_BLOCK) || m_time <= 0)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckElementHit(ELEMENT_BLOCK) || hit->CheckElementHit(ELEMENT_BEAMSABER) || m_time <= 0)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
