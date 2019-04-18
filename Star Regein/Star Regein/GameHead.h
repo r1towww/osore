@@ -250,6 +250,7 @@ extern int g_cow_id[20];//‹‚Ì¯•ÊID
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"
 #include "SceneMercuryGemini.h"
+#include "SceneMercuryVirgo.h"
 
 
 #include "SceneTitle.h"

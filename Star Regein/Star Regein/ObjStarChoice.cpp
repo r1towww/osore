@@ -117,7 +117,7 @@ void CObjStarChoice::Action()
 		{
 			if (g_stage == Venus)
 			{
-				//ステージをてんびん座に設定
+				//ステージを天秤座に設定
 				g_stage = VenusLibra;
 				Scene::SetScene(new CSceneVenusLibra());
 			}
@@ -125,7 +125,7 @@ void CObjStarChoice::Action()
 			{
 				//ステージを乙女座に設定
 				g_stage = MercuryVirgo;
-				Scene::SetScene(new CSceneEarth());
+				Scene::SetScene(new CSceneMercuryVirgo());
 			}
 		}
 	}
