@@ -32,6 +32,7 @@ public:
 	float GetY() { return m_py; }
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
+	float GetPos() { return g_posture; }
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
