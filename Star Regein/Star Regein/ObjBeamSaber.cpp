@@ -117,7 +117,7 @@ void CObjBeamSaber::Draw()
 	RECT_F dst; //描画先表示位置
 
 
-		//切り取り位置の設定
+	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f + (AniData[g_slash_frame] * 200);
 	src.m_right = 200.0f + (AniData[g_slash_frame] * 200);
