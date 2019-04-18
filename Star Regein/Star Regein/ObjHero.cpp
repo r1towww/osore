@@ -198,6 +198,7 @@ void CObjHero::Action()
 			m_dash_flag = true;
 			m_speed_power = NORMAL_SPEED;
 		}
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -216,9 +217,12 @@ void CObjHero::Action()
 				//双子座の場合
 				else if (g_skill == Gemini)
 				{
-					////サブ機オブジェクト作成
-					//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
-					//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+					//ブロック情報を持ってくる
+					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+					//サブ機オブジェクト作成
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
+					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
 				}
 				//乙女座の場合
 				else if (g_skill == Virgo)
@@ -284,7 +288,7 @@ void CObjHero::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 
 		//主人公とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_GREEN) == true)
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
