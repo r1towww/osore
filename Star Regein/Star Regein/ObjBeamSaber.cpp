@@ -75,11 +75,11 @@ void CObjBeamSaber::Action()
 
 	if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true )
 	{
-		Audio::Start(2);
+		Audio::Start(4);
 	}
 	else
 	{
-		Audio::Start(1);
+		Audio::Start(3);
 	}
 
 	//攻撃アニメーション用
