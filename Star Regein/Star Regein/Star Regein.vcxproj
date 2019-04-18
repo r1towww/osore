@@ -165,6 +165,7 @@
     <ClCompile Include="SceneMercuryVirgo.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
     <ClCompile Include="SceneStageClear.cpp" />
+    <ClCompile Include="SceneSunLeo.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="SceneMercuryVirgo.h" />
     <ClInclude Include="SceneStageChoice.h" />
     <ClInclude Include="SceneStageClear.h" />
+    <ClInclude Include="SceneSunLeo.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="SceneMain.h" />
