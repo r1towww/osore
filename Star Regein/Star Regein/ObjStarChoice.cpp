@@ -134,6 +134,7 @@ void CObjStarChoice::Action()
 					Audio::Start(2);
 					Sleep(500);
 					//ステージを牡牛座に設定
+
 					g_stage = VenusTaurus;
 					Scene::SetScene(new CSceneVenusTaurus());
 				}
@@ -151,6 +152,20 @@ void CObjStarChoice::Action()
 					Scene::SetScene(new CSceneMercuryGemini());
 				}
 			}
+			else if (g_stage == Sun)
+			{
+				if (m_key_flag == true)
+				{
+					m_key_flag = false;
+					//シーン遷移音
+					Audio::Start(2);
+					Sleep(500);
+					//ステージを双子座に設定
+					g_stage = SunLeo;
+					Scene::SetScene(new CSceneSunLeo());
+				}
+			}
+
 			else
 				m_key_flag = true;
 		}
