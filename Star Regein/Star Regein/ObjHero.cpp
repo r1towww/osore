@@ -394,6 +394,9 @@ void CObjHero::Action()
 			//ブラックホールと当たった場合
 			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
 			{
+				//ワープ音
+				Audio::Start(5);
+
 				//同じ値のホワイトホール位置に移動させる
 				block->SetScrollx(-g_whitehole_x[i][0] + m_px);
 				block->SetScrolly(-g_whitehole_y[i][0] + m_py);
