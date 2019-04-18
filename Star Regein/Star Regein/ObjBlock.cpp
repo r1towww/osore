@@ -424,7 +424,7 @@ void CObjBlock::BlockHit
 				float scrolly = scroll_on ? m_scrolly : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + ALLSIZE > bx) && (*x + (-scrollx) < bx + ALLSIZE) && (*y + (-scrolly) + 150.0f > by) && (*y + (-scrolly) < by + 150.0f))
+				if ((*x + (-scrollx) + 40.0f > bx) && (*x + (-scrollx) < bx + 155.0f) && (*y + (-scrolly)  + ALLSIZE> by ) && (*y + (-scrolly) < by + 150.0f))
 				{
 					//上下左右判定
 
@@ -445,21 +445,21 @@ void CObjBlock::BlockHit
 						r = 360.0f - abs(r);
 
 					//lenがある一定の長さのより短い場合判定に入る
-					if (len < 88.0f)
+					if (len < 170.0f)
 					{
 						//角度で上下左右を判定
 						if ((r < 45 && r >= 0) || r > 315)
 						{
 							*right = true;//オブジェクトの左部分が衝突している
 							*x = bx + 155.0f + (scrollx);//ブロックの位置+オブジェクトの幅
-							*vx = 0.15f;//-VX*反発係数
+							*vx = 0.1f;//-VX*反発係数
 						}
 
 						if (r > 45 && r < 135)
 						{
 							*down = true;//オブジェクトの下の部分が衝突している
 							*y = by - 40.0f + (scrolly);//ブロックの位置-オブジェクトの幅
-							*vy = -0.15f;
+							*vy = -0.1f;
 						}
 						if (r > 135 && r < 225)
 						{
@@ -471,7 +471,7 @@ void CObjBlock::BlockHit
 						{
 							*up = true;//オブジェクトの上の部分が衝突している
 							*y = by + 150.0f + (scrolly);//ブロックの位置+オブジェクトの幅							
-							*vy = 0.15f;
+							*vy = 0.1f;
 						}
 					}
 				}
