@@ -16,8 +16,6 @@ class CObjSkillLibra : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-		void SetANIF(bool x) { m_ani_flag = x; }	//アニメーション動作フラグのセット
-
 	private:
 		int m_x;		//位置
 		int m_y;

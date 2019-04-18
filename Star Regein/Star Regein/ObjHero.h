@@ -53,6 +53,11 @@ private:
 	int m_ani_time; //アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 
+	int	 m_ani;			//アニメーション用
+	int	 m_eff_time;	//アニメーション間隔タイム
+	RECT_F m_eff;		//エフェクト描画用
+
+
 	int m_f;//攻撃制御用
 	bool m_key_f;
 
