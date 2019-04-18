@@ -268,5 +268,5 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
 */
-#define SET_GAME_START  CSceneTitle
+#define SET_GAME_START  CSceneStageChoice
 //-----------------------------------------------
