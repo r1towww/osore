@@ -28,6 +28,11 @@ CSceneTitle::~CSceneTitle()
 //ゲームタイトル初期化メソッド
 void CSceneTitle::InitScene()
 {
+	//Audio
+	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
+	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
+
+
 	//タイトルオブジェクト作成
 	CObjTitle* obj = new CObjTitle();
 	Objs::InsertObj(obj, OBJ_TITLE, 10);

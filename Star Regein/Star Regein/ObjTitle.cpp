@@ -3,7 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\DrawFont.h"
 #include "GameL\SceneManager.h"
-#include "GameL/Audio.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjTitle.h"
@@ -55,6 +55,8 @@ void CObjTitle::Init()
 	m_down=false;
 	m_start=false;
 	m_end=false;
+
+	m_key_flag =true;	//キー制御フラグ
 }
 
 //アクション
@@ -80,24 +82,43 @@ void CObjTitle::Draw()
 	//上キーを押したとき
 	if (Input::GetVKey(VK_UP) == true)
 	{
-		m_up = true;
-		m_down = false;
+		if (m_key_flag == true)
+		{
+			Audio::Start(1);
+			m_key_flag = false;
+			m_up = true;
+			m_down = false;
+		}
 
 	}
 	//下キーを押したとき
-	if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey(VK_DOWN) == true)
 	{
-		m_down = true;
-		m_up = false;
+		if (m_key_flag == true)
+		{
+			Audio::Start(1);
+			m_key_flag = false;
+			m_down = true;
+			m_up = false;
+		}
 	}
+	else
+		m_key_flag = true;
+
 	//ゲーム開始
 	if (m_start == true)
 	{
+		//シーン遷移音
+		Audio::Start(2);
+		Sleep(500);
 		Scene::SetScene(new CSceneStageChoice());
 	}
 	//ゲーム終了
 	if (m_end == true)
 	{
+		//シーン遷移音
+		Audio::Start(1);
+		Sleep(500);
 		exit(4);
 	}
 	//カーソルが動く

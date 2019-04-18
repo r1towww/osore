@@ -203,6 +203,9 @@
     <ClCompile Include="SceneMercuryVirgo.cpp">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
     <ClCompile Include="SceneSunLeo.cpp">
       <Filter>ソースファイル\惑星\太陽</Filter>
     </ClCompile>
