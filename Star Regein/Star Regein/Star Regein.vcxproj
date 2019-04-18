@@ -162,6 +162,7 @@
     <ClCompile Include="SceneEarth.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneMercuryGemini.cpp" />
+    <ClCompile Include="SceneMercuryVirgo.cpp" />
     <ClCompile Include="SceneStageChoice.cpp" />
     <ClCompile Include="SceneStageClear.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="SceneEarth.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneMercuryGemini.h" />
+    <ClInclude Include="SceneMercuryVirgo.h" />
     <ClInclude Include="SceneStageChoice.h" />
     <ClInclude Include="SceneStageClear.h" />
     <ClInclude Include="SceneTitle.h" />

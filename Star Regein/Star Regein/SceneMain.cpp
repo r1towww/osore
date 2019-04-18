@@ -30,10 +30,7 @@ CSceneMain::~CSceneMain()
 //初期化メソッド
 void CSceneMain::InitScene()
 {
-	//グラフィック読み込み
-	Draw::LoadImageW(L"HeroTouka.png", 1, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"ビームサーベル.png", 2, TEX_SIZE_512);
 }
 
 

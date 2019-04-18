@@ -25,6 +25,8 @@ void CObjMessage::Init()
 		m_MaxStar = LIBRAMAXSTAR;	//金星（天秤座）
 	else if (g_stage == MercuryGemini)
 		m_MaxStar = GEMINIMAXSTAR;	//水星（双子座）
+	else if (g_stage == MercuryVirgo)
+		m_MaxStar = VIRGOMAXSTAR;	//水星（乙女座）
 
 
 }
