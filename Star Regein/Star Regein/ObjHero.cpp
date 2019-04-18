@@ -178,7 +178,7 @@ void CObjHero::Action()
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp >= 1.0f && m_dash_flag==false)
+			&& g_Taurus == true && g_mp > 5.0f && m_dash_flag==false)
 		{
 
 			if (m_move_flag == true)
@@ -198,6 +198,11 @@ void CObjHero::Action()
 			m_dash_flag = true;
 			m_speed_power = NORMAL_SPEED;
 		}
+
+		//天秤座エフェクトの情報を持ってくる
+		CObjSkillLibra* libra = (CObjSkillLibra*)Objs::GetObj(OBJ_SKILL_LIBRA);
+
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -207,8 +212,12 @@ void CObjHero::Action()
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
-					if (g_hp < g_max_hp)
+					if (g_hp < g_max_hp && g_mp > 25.0f)
 					{
+						//天秤エフェクトの作成
+						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+
 						g_mp -= 25.0f;	//mp消費
 						g_hp += 10.0f;	//hp回復
 					}
@@ -387,7 +396,7 @@ void CObjHero::Action()
 			m_ani_frame = 0;
 		}
 
-		//ブラックホールと接触した場合
+		//ブラックホールの情報を持ってくる
 		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
 		//ブロック情報を持ってくる
@@ -432,7 +441,7 @@ void CObjHero::Action()
 	}
 	else
 	{
-		;
+		return;
 	}
 }
 

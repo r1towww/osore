@@ -292,7 +292,6 @@ void CObjBlock::Draw()
 					//•`‰æ
 					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-
 			}
 		}
 	}

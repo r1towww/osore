@@ -70,6 +70,9 @@ void CSceneVenusTaurus::InitScene()
 
 
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
+	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
+
+
 	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
