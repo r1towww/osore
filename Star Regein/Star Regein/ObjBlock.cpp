@@ -25,6 +25,7 @@ CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 //イニシャライズ
 void CObjBlock::Init()
 {
+	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
 
@@ -42,6 +43,7 @@ void CObjBlock::Init()
 	}
 
 
+
 	m_roll = 0.0f;
 
 	blue_c = 0;
@@ -52,7 +54,7 @@ void CObjBlock::Init()
 	w_c = 0;
 
 	//敵出現
-	if (g_stage == VenusTaurus)
+	if (g_stage == VenusTaurus||g_stage==SunLeo)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -105,7 +107,7 @@ void CObjBlock::Init()
 		}
 	}
 
-	else if(g_stage == MercuryGemini)
+	else if(g_stage == MercuryGemini )
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -220,7 +222,10 @@ void CObjBlock::Init()
 	else if (g_stage == MercuryGemini || g_stage == MercuryVirgo) {	//水星の場合
 		m_red = 1.0f;  m_green = 2.0f;  m_blue = 2.0f;
 	}
-	
+	else if (g_stage == SunLeo) {		//太陽の場合
+			m_red = 1.0f;  m_green = 1.0f;  m_blue = 1.0f;
+		}
+
 }
 
 //アクション

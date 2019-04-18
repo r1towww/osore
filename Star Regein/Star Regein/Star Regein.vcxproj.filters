@@ -182,6 +182,22 @@
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillVirgo.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStar.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStatus.cpp">
+      <Filter>ソースファイル\UI</Filter>
+      <Filter>ソースファイル\スキル切り替え</Filter>
+    </ClCompile>
     <ClCompile Include="ObjSkillVirgo.cpp">
       <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
@@ -211,6 +227,8 @@
     </ClCompile>
     <ClCompile Include="ObjBeamSaber.cpp">
       <Filter>ソースファイル\主人公</Filter>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\スキル切り替え</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +327,6 @@
     </ClInclude>
     <ClInclude Include="SceneEarth.h">
       <Filter>ソースファイル\惑星\地球</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjWhitehole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル切り替え</Filter>

@@ -75,6 +75,7 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
 
+
 	//Audio
 	Audio::LoadAudio(1, L"刀剣・斬る01.wav", EFFECT);		//近距離空振り時SE
 	Audio::LoadAudio(2, L"刀剣・斬る07.wav", EFFECT);		//近距離ヒット時SE
@@ -121,7 +122,7 @@ void CSceneSunLeo::InitScene()
 //実行中メソッド
 void CSceneSunLeo::Scene()
 {
-	//金星（天秤座）で星を18個集めたら次へ移行
+	//太陽で星を14個集めたら次へ移行
 	if (g_StarCount == LEOMAXSTAR)
 	{
 		g_Leo = true;		//スキル（天秤座）をオンにする

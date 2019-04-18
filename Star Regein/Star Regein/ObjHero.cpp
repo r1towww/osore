@@ -199,10 +199,6 @@ void CObjHero::Action()
 			m_speed_power = NORMAL_SPEED;
 		}
 
-		//天秤座エフェクトの情報を持ってくる
-		CObjSkillLibra* libra = (CObjSkillLibra*)Objs::GetObj(OBJ_SKILL_LIBRA);
-
-
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -225,9 +221,12 @@ void CObjHero::Action()
 				//双子座の場合
 				else if (g_skill == Gemini)
 				{
-					////サブ機オブジェクト作成
-					//CObjSkillGemini* objg = new CObjSkillGemini(m_px, m_py);
-					//Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 2);
+					//ブロック情報を持ってくる
+					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+					//サブ機オブジェクト作成
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
+					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
 				}
 				//乙女座の場合
 				else if (g_skill == Virgo)

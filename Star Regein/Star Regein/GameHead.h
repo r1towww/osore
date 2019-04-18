@@ -49,6 +49,7 @@ enum OBJ_NAME
 
 	OBJ_STATUS,
 
+
 };
 //------------------------------------------------
 
@@ -242,6 +243,8 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
+
+
 
 //------------------------------------------------
 

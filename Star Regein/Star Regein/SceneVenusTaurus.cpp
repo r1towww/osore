@@ -74,6 +74,7 @@ void CSceneVenusTaurus::InitScene()
 
 
 	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 21, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
