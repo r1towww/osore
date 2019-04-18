@@ -29,6 +29,8 @@ void ObjStageChoiceHero::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;
 
+	m_alpha = ALPHAORIGIN;
+
 }
 
 //アクション
@@ -144,7 +146,10 @@ void ObjStageChoiceHero::Action()
 		//ステージ選択(星座)オブジェクト作成
 		CObjStarChoice* star = new CObjStarChoice();
 		Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+
 	}
+
+
 	
 	//位置の更新
 	g_stage_px += m_vx;
@@ -161,7 +166,7 @@ void ObjStageChoiceHero::Draw()
 	};
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置

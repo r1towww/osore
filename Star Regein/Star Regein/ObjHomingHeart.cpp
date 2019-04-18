@@ -28,7 +28,7 @@ void CObjHomingHeart::Init()
 	m_vx = 0.0f;	//ˆÚ“®ƒxƒNƒgƒ‹
 	m_vy = 0.0f;
 
-	m_time = 300;
+	m_time = 200;
 
 	alpha = 1.0f;
 
