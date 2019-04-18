@@ -174,9 +174,9 @@ void CObjBlock::Init()
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
 			{
-				////小惑星オブジェクト作成
-				//CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-				//Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
+				//小惑星オブジェクト作成
+				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 7)
 			{
@@ -297,24 +297,6 @@ void CObjBlock::Draw()
 					//描画
 					Draw::Draw(4, &src, &dst, c, 0.0f);
 				}
-				if (m_map[i][j] == 6 || m_map[i][j] == g_asteroid)//隕石（大）
-				{
-					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 0.0f;
-					src.m_right  = 258.0f;
-					src.m_bottom = 220.0f;
-
-					//表示位置の設定
-					dst.m_top    = i*ALLSIZE + m_scrolly;
-					dst.m_left   = j*ALLSIZE + m_scrollx;
-					dst.m_right  = dst.m_left + 192.0f;
-					dst.m_bottom = dst.m_top  + 192.0f;
-
-					//描画
-					Draw::Draw(4, &src, &dst, c, 90.0f);
-				}
-
 			}
 		}
 	}
@@ -418,72 +400,6 @@ void CObjBlock::BlockHit
 				}
 			}
 			
-			if (m_map[i][j] == 6 || m_map[i][j] == g_asteroid)
-			{
-				//要素番号を座標に変更
-				float bx = j*ALLSIZE;
-				float by = i*ALLSIZE;
-
-				//スクロールの影響
-				float scrollx = scroll_on ? m_scrollx : 0;
-				float scrolly = scroll_on ? m_scrolly : 0;
-
-				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + 40.0f > bx) && (*x + (-scrollx) < bx + 155.0f) && (*y + (-scrolly)  + ALLSIZE> by ) && (*y + (-scrolly) < by + 150.0f))
-				{
-					//上下左右判定
-
-					//Vectorの作成
-					float rvx = (*x + (-scrollx)) - bx;
-					float rvy = (*y + (-scrolly)) - by;
-
-					//長さを求める
-					float len = sqrt(rvx*rvx + rvy*rvy);
-
-					//角度を求める
-					float r = atan2(rvy, rvx);
-					r = r*180.0f / 3.14f;
-
-					if (r <= 0.0f)
-						r = abs(r);
-					else
-						r = 360.0f - abs(r);
-
-					//lenがある一定の長さのより短い場合判定に入る
-					if (len < 170.0f)
-					{
-						//角度で上下左右を判定
-						if ((r < 45 && r >= 0) || r > 315)
-						{
-							*right = true;//オブジェクトの左部分が衝突している
-							*x = bx + 155.0f + (scrollx);//ブロックの位置+オブジェクトの幅
-							*vx = 0.1f;//-VX*反発係数
-						}
-
-						if (r > 45 && r < 135)
-						{
-							*down = true;//オブジェクトの下の部分が衝突している
-							*y = by - 40.0f + (scrolly);//ブロックの位置-オブジェクトの幅
-							*vy = -0.1f;
-						}
-						if (r > 135 && r < 225)
-						{
-							*left = true;//オブジェクトの右部分が衝突している
-							*x = bx - 40.0f + (scrollx);//ブロックの位置-オブジェクトの幅
-							*vx = -0.1f;//-VX*反発係数
-						}
-						if (r > 225 && r < 315)
-						{
-							*up = true;//オブジェクトの上の部分が衝突している
-							*y = by + 150.0f + (scrolly);//ブロックの位置+オブジェクトの幅							
-							*vy = 0.1f;
-						}
-					}
-				}
-			}
-
-
-
 		}
 	}
 }

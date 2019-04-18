@@ -138,64 +138,47 @@ void CObjSkillGemini::Action()
 	else
 	{
 
-		CObjCow* cow = (CObjCow*)Objs::GetObj(OBJ_COW);
-
-		//牛が存在する場合、誘導角度の計算する
-		if (cow != nullptr)
-		{
-
-			float x;
-			float y;
-
-			float cx = cow->GetX();
-			float cy = cow->GetY();
-
-			x = cx;
-			y = cy;
-
-			float ar = GetAtan2Angle(x, y);
-
-			//敵の現在の向いている角度を取る
-			float br = GetAtan2Angle(m_vx, m_vy);
-
-			//角度で上下左右を判定
-			if ((ar < 45 && ar>0) || ar > 315)
-			{
-				//左
-				m_posture = 4.0f;
-				m_ani_time += 1;
-			}
-
-			if (ar > 45 && ar < 135)
-			{
-				//下
-				m_posture = 3.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 135 && ar < 225)
-			{
-				//右
-				m_posture = 2.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 225 && ar < 315)
-			{
-				//上
-				m_posture = 1.0f;
-				m_ani_time += 1;
-
-			}
-
-			//主人公機と敵角度があんまりにもかけ離れたら
-			m_vx = cos(3.14 / 180 * ar) * 1;
-			m_vy = sin(3.14 / 180 * ar) * 1;
-		}
-
+	
 	}
 	
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + 15 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
+
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchObjNameHit(OBJ_HERO);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.20f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.20f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.20f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.20f; //下
+				}
+			}
+		}
+	}
 
 	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)

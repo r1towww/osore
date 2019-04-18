@@ -52,11 +52,14 @@ void CObjTutorial::Action()
 	{
 		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
-	if (Input::GetVKey('X') == true)
+
+	//Xキーを押してスキップ（移動キーを入力できなくしている）
+	if (Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false 
+									&& Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_RIGHT) == false )
 	{
 		g_tutorial_flag = false;
 	}
-
+	
 }
 
 
