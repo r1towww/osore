@@ -96,61 +96,6 @@ void CObjTwinsBlue::Action()
 			}
 		}
 
-		//ブロック衝突で向き変更
-		if (m_hit_up == true)
-		{
-			m_movey = true;
-		}
-		if (m_hit_down == true)
-		{
-			m_movey = false;
-		}
-		if (m_hit_left == true)
-		{
-			m_movex = false;
-		}
-		if (m_hit_right == true)
-		{
-			m_movex = true;
-		}
-
-		//方向
-		if (m_movey == true)
-		{
-			m_vy = 1;
-			m_posture = 1.0f;
-			m_ani_time += 1;
-		}
-		if (m_movey == false)
-		{
-			m_vy = -1;
-			m_posture = 3.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == true)
-		{
-			m_vx = 1;
-			m_posture = 2.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == false)
-		{
-			m_vx = -1;
-			m_posture = 4.0f;
-			m_ani_time += 1;
-		}
-
-		if (m_ani_time > m_ani_max_time)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame == 3)
-		{
-			m_ani_frame = 0;
-		}
-
 		//ブロックとの当たり判定実行
 		pb->BlockHit(&m_px, &m_py, false,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
@@ -182,9 +127,6 @@ void CObjTwinsBlue::Action()
 				y = 275 - (m_py + pb->GetScrolly());
 
 				float ar = GetAtan2Angle(x, y);
-
-				//敵の現在の向いている角度を取る
-				float br = GetAtan2Angle(m_vx, m_vy);
 
 				//角度で上下左右を判定
 				if ((ar < 45 && ar>0) || ar > 315)

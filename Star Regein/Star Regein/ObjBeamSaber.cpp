@@ -26,43 +26,40 @@ CObjBeamSaber::CObjBeamSaber(float x, float y)
 //イニシャライズ
 void CObjBeamSaber::Init()
 {
-	
+	m_ani_frame = 0;	//アニメーションフレームの初期化
+	m_ani_time = 0;		//アニメーションタイムの初期化
 
-	//主人公の向きによってビームサーベルを出す方向，向きを変える
-	if (g_posture == 3)	//下
-	{
-		m_angle = 90.0f;	//角度調整
-		m_pos_x = 20.0f;		//X軸調整
-		m_pos_y = 45.0f;	//Y軸調整
-	}
-	if (g_posture == 4)	//右
-	{
-		m_angle = 180.0f;		//角度調整
-		m_pos_x = 38.0f;	//X軸調整
-		m_pos_y = 14.0f;		//Y軸調整
-	}
-	if (g_posture == 2)	//左
-	{
-		m_angle = 0.0f;	//角度調整
-		m_pos_x = -28.0f;	//X軸調整
-		m_pos_y = 24.0f;		//Y軸調整
-	}
-	if (g_posture == 1)	//上
+
+	//主人公の向きによって攻撃を出す方向，向きを変える
+	//当たり判定をセット
+	if (g_posture == HERO_UP)  //上
 	{
 		m_angle = 270.0f;	//角度調整
-		m_pos_x = 10.0f;		//X軸調整
-		m_pos_y = -25.0f;	//Y軸調整
+		m_pos_x = 10.0f;	//X軸調整
+		m_pos_y = -40.0f;	//Y軸調整
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 	}
-	//当たり判定をセット
-	if (g_posture == 1)  //上
-		Hits::SetHitBox(this, m_x + m_pos_x +10, m_y + m_pos_y, 40, 32, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
-	else if(g_posture==2) //左
-		Hits::SetHitBox(this, m_x + m_pos_x , m_y + m_pos_y , 32, 40, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
-	else if(g_posture==3) //下
-		Hits::SetHitBox(this, m_x + m_pos_x , m_y + m_pos_y+20 , 40, 32, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
-	else if(g_posture==4) //右
-		Hits::SetHitBox(this, m_x + m_pos_x +30, m_y + m_pos_y + 10, 32, 40, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
-
+	else if (g_posture == HERO_LEFT) //左
+	{
+		m_angle = 0.0f;		//角度調整
+		m_pos_x = -35.0f;	//X軸調整
+		m_pos_y = 10.0f;	//Y軸調整
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
+	}
+	else if (g_posture == HERO_DOWN) //下
+	{
+		m_angle = 90.0f;	//角度調整
+		m_pos_x = 10.0f;	//X軸調整
+		m_pos_y = 50.0f;	//Y軸調整
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
+	}
+	else if (g_posture == HERO_RIGHT) //右
+	{
+		m_angle = 180.0f;		//角度調整
+		m_pos_x = 50.0f;	//X軸調整
+		m_pos_y = 10.0f;		//Y軸調整
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
+	}
 
 
 }
@@ -82,23 +79,22 @@ void CObjBeamSaber::Action()
 		Audio::Start(3);
 	}
 
-	//攻撃アニメーション用
-	if (g_slash_time > 4)
+	//攻撃アニメーション用---------------------------------------
+
+	m_ani_time++;		//アニメーションタイムを進ませる
+	if (m_ani_time > 4)	//タイムが4より多くなったら
 	{
-		g_slash_frame += 1;
-		g_slash_time = 0;
+		m_ani_frame += 1;	//フレームを進める
+		m_ani_time = 0;		//タイムを0に戻す
 	}
-	if (g_slash_frame == 4)
+	if (m_ani_frame == 5)	//アニメーションフレームが5になったら
 	{
-		g_slash_frame = 0;
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //所有するHitBoxに削除する
 	}
 
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_x, m_y);//入り口から新しい位置（主人公の位置）情報に置き換える
-
-	this->SetStatus(false);    //自身に削除命令を出す
-	Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-
+	hit->SetPos(m_x + m_pos_x, m_y + m_pos_y);//入り口から新しい位置（主人公の位置）情報に置き換える
 }
 
 //ドロー
@@ -107,7 +103,7 @@ void CObjBeamSaber::Draw()
 	//アニメーション
 	int AniData[5] =
 	{
-		0,1,2,3,0,
+		0,1,2,3,4,
 	};
 
 	//描画カラー情報
@@ -118,15 +114,15 @@ void CObjBeamSaber::Draw()
 
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f + (AniData[g_slash_frame] * 200);
-	src.m_right = 200.0f + (AniData[g_slash_frame] * 200);
-	src.m_bottom = 200.0f;
+	src.m_top    =   0.0f;
+	src.m_left   =   0.0f + (AniData[m_ani_frame] * 192.0f);
+	src.m_right  = 192.0f + (AniData[m_ani_frame] * 192.0f);
+	src.m_bottom = 192.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_y + m_pos_y;
-	dst.m_left = 0.0f + m_x + m_pos_x;
-	dst.m_right = 64.0f + m_x + m_pos_x;
+	dst.m_top    =  0.0f + m_y + m_pos_y;
+	dst.m_left   =  0.0f + m_x + m_pos_x;
+	dst.m_right  = 64.0f + m_x + m_pos_x;
 	dst.m_bottom = 64.0f + m_y + m_pos_y;
 
 

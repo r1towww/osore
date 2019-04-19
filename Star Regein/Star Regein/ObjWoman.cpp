@@ -155,14 +155,14 @@ void CObjWoman::Action()
 		{
 			//ƒn[ƒg’e”­ŽË
 			m_bullet_time++;
-			if (m_bullet_time > 200)
+			if (m_bullet_time > 100)
 			{
 				m_bullet_time = 0;
 				CObjHomingHeart*obj_b;
 				for (int i = 0; i < 360; i += 60)
 				{
 					//Šp“xi‚ÅŠp“x’eŠÛ”­ŽË
-					obj_b = new CObjHomingHeart(m_px, m_py, 1.4f);
+					obj_b = new CObjHomingHeart(m_px, m_py);
 					Objs::InsertObj(obj_b, OBJ_HOMING_HEART, 5);
 				}
 			}

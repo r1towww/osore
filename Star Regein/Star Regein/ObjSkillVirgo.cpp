@@ -142,6 +142,7 @@ void CObjSkillVirgo::Action()
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//主人公と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_COW) != nullptr)//当たっていたら取得
@@ -188,12 +189,15 @@ void CObjSkillVirgo::Action()
 		}
 	*/
 	}
+
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_x + m_pos_x, m_y + m_pos_y);//入り口から新しい位置（主人公の位置）情報に置き換える
+	hit->SetPos(m_x + m_pos_x + block->GetScrollx(), m_y + m_pos_y + block->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	m_time++;
 
-	if (m_time >= 20)
+	if (m_time >= 25)
 	{
 		m_time = 0.0f;
 
@@ -211,6 +215,7 @@ void CObjSkillVirgo::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 
 	if (m_hit_flag == true)
@@ -222,10 +227,10 @@ void CObjSkillVirgo::Draw()
 		src.m_bottom = 32.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_y;
-		dst.m_left = 0.0f + m_x;
-		dst.m_right = 64.0f + m_x;
-		dst.m_bottom = 64.0f + m_y;
+		dst.m_top = 0.0f + m_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x + block->GetScrollx();
+		dst.m_right = 64.0f + m_x + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
 
 		//表示
 		Draw::Draw(21, &m_eff, &dst, c, 0.0f);
@@ -239,10 +244,10 @@ void CObjSkillVirgo::Draw()
 		src.m_bottom = 28.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_y + m_pos_y;
-		dst.m_left = 0.0f + m_x + m_pos_x;
-		dst.m_right = 32.0f + m_x + m_pos_x;
-		dst.m_bottom = 32.0f + m_y + m_pos_y;
+		dst.m_top = 0.0f + m_y + m_pos_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x + m_pos_x + block->GetScrollx();
+		dst.m_right = 32.0f + m_x + m_pos_x + block->GetScrollx();
+		dst.m_bottom = 32.0f + m_y + m_pos_y + block->GetScrolly();
 
 		//表示
 		Draw::Draw(20, &src, &dst, c, 0.0f);
