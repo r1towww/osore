@@ -263,13 +263,20 @@ void CObjHero::Action()
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
 				}
 				//乙女座の場合
-				else if (g_skill == Virgo)
+				else if (g_skill == Virgo && g_mp >= 10.0f)
 				{
 					//ハート弾オブジェクト作成
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px, m_py);
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 20.0f;	//mp消費
+					g_mp -= 10.0f;	//mp消費
+
+				}
+				else if (g_skill == Leo)
+				{
+					//スタンオブジェクト作成
+					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
+					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
 				}
 				m_key_f = false;

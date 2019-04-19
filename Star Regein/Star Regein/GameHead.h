@@ -44,6 +44,7 @@ enum OBJ_NAME
 	OBJ_SKILL_LIBRA,
 	OBJ_SKILL_GEMINI,
 	OBJ_SKILL_VIRGO,
+	OBJ_SKILL_LEO,
 
 	OBJ_SKILL_TWINS_B,
 
@@ -74,7 +75,8 @@ enum HIT_ELEMENTS
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
 	ELEMENT_SUB,
-	ELEMENT_VIRGO_SKILL,
+	ELEMENT_SKILL_VIRGO,
+	ELEMENT_SKILL_LEO,
 };
 //------------------------------------------------
 
@@ -103,6 +105,17 @@ struct UserData
 #define HERO_LEFT	2
 #define HERO_DOWN	3
 #define HERO_RIGHT	4
+
+//アニメーション用
+#define ANITIME 1
+
+//ダッシュ速度
+#define DASH_SPEED 3.0f
+//通常速度
+#define NORMAL_SPEED 1.5f
+
+//スキルを進ませる値
+#define NEXTSKILL 1
 
 //惑星ごとの値
 typedef enum Planet
@@ -172,6 +185,9 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	//マップのサイズ
 extern int g_stage;		//今いるステージの値
 extern int g_skill;		//各星座スキルの値
+
+extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
+extern int  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
 
@@ -243,6 +259,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
+#include "ObjSkillLeo.h"
 
 
 

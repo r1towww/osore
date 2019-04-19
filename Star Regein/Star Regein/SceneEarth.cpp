@@ -74,13 +74,14 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_blue.png", 12, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
-	Draw::LoadImageW(L"斬撃アニメーション.png", 15, TEX_SIZE_512);
+	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_512);
 
 
 
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);

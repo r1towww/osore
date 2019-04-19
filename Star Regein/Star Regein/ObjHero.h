@@ -5,19 +5,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//-------定数------------------------
-
-//アニメーション用
-#define ANITIME 1
-
-//ダッシュ速度
-#define DASH_SPEED 3.0f
-//通常速度
-#define NORMAL_SPEED 1.5f
-//スキルを進ませる値
-#define NEXTSKILL 1
-
-//-------------------------------------
 //オブジェクト:主人公
 class CObjHero :public CObj
 {

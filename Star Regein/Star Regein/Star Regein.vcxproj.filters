@@ -172,6 +172,9 @@
     <ClCompile Include="SceneStageClear.cpp">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -347,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="SceneStageClear.h">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

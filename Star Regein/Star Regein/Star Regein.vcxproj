@@ -144,6 +144,7 @@
     <ClCompile Include="ObjSkillGemini.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
     <ClCompile Include="ObjSkillVirgo.cpp" />
     <ClCompile Include="ObjStageChoice.cpp" />
@@ -209,12 +210,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkill.h" />
+    <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillTwinsB.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkillLibra.h" />
     <ClInclude Include="ObjSkillVirgo.h" />
