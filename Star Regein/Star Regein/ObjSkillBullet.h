@@ -4,13 +4,12 @@
 
 //使用するネームスペース
 using namespace GameL;
-
 //オブジェクト：ビームサーベル
-class CObjSkillVirgo : public CObj
+class CObjSkillBullet : public CObj
 {
 public:
-	CObjSkillVirgo(float x,float y);
-	~CObjSkillVirgo() {};
+	CObjSkillBullet(float gx, float gy);
+	~CObjSkillBullet() {};
 	void Init();  //イニシャライズ
 	void Action();//アクション
 	void Draw();  //ドロー
@@ -19,8 +18,6 @@ private:
 	float m_gx;		//位置
 	float m_gy;
 
-	float m_x;
-	float m_y;
 	float m_vx;
 	float m_vy;
 

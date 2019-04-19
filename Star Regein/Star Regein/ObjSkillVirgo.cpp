@@ -233,7 +233,7 @@ void CObjSkillVirgo::Draw()
 		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
 
 		//•\Ž¦
-		Draw::Draw(21, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
 
 	}
 	else {
@@ -250,6 +250,6 @@ void CObjSkillVirgo::Draw()
 		dst.m_bottom = 32.0f + m_y + m_pos_y + block->GetScrolly();
 
 		//•\Ž¦
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+		Draw::Draw(22, &src, &dst, c, 0.0f);
 	}
 }

@@ -47,6 +47,8 @@ enum OBJ_NAME
 
 	OBJ_SKILL_TWINS_B,
 
+	OBJ_SKILL_BULLET,
+
 	OBJ_STATUS,
 
 
@@ -66,7 +68,7 @@ enum HIT_ELEMENTS
 	ELEMENT_FIELD,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
-	ELEMENT_BLUE,
+	cc,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
@@ -172,9 +174,10 @@ extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
 
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
-extern int g_mapsize;	//マップのサイズ
-extern int g_stage;		//今いるステージの値
-extern int g_skill;		//各星座スキルの値
+extern int g_mapsize;	   //マップのサイズ
+extern int g_stage;		   //今いるステージの値
+extern int g_skill;		   //各星座スキルの値
+extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 
 //各星座の取得情報
 
@@ -243,6 +246,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
+#include "ObjSkillBullet.h"
 
 
 
