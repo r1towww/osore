@@ -55,7 +55,7 @@ void CObjWoman::Init()
 
 	m_btime = 0;
 
-	m_bullet_time = 0;
+	m_bullet_time = 100;
 
 	m_time = 30;
 
@@ -79,61 +79,6 @@ void CObjWoman::Action()
 		m_btime++;
 
 
-		//ブロック衝突で向き変更
-		if (m_hit_up == true)
-		{
-			m_movey = true;
-		}
-		if (m_hit_down == true)
-		{
-			m_movey = false;
-		}
-		if (m_hit_left == true)
-		{
-			m_movex = false;
-		}
-		if (m_hit_right == true)
-		{
-			m_movex = true;
-		}
-
-		//方向
-		if (m_movey == true)
-		{
-			m_vy = 1;
-			m_posture = 0.0f;
-			m_ani_time += 1;
-		}
-		if (m_movey == false)
-		{
-			m_vy = -1;
-			m_posture = 3.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == true)
-		{
-			m_vx = 1;
-			m_posture = 1.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == false)
-		{
-			m_vx = -1;
-			m_posture = 2.0f;
-			m_ani_time += 1;
-		}
-
-		if (m_ani_time > m_ani_max_time)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame == 3)
-		{
-			m_ani_frame = 1;
-		}
-
 		//ブロックとの当たり判定実行
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 		pb->BlockHit(&m_px, &m_py, false,
@@ -155,16 +100,12 @@ void CObjWoman::Action()
 		{
 			//ハート弾発射
 			m_bullet_time++;
-			if (m_bullet_time > 100)
+			if (m_bullet_time > 200)
 			{
 				m_bullet_time = 0;
-				CObjHomingHeart*obj_b;
-				for (int i = 0; i < 360; i += 60)
-				{
-					//角度iで角度弾丸発射
-					obj_b = new CObjHomingHeart(m_px, m_py);
-					Objs::InsertObj(obj_b, OBJ_HOMING_HEART, 5);
-				}
+				//ハート弾オブジェクト作成
+				CObjHomingHeart* objh = new CObjHomingHeart(m_px, m_py);
+				Objs::InsertObj(objh, OBJ_HOMING_HEART, 2);
 			}
 
 			//主人公機が存在する場合、誘導角度の計算する
@@ -299,6 +240,48 @@ void CObjWoman::Action()
 					continue;
 
 				float r = hit_data[i]->r;
+
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= 1;
+			m_f = true;
+			m_key_f = true;
+			hit->SetInvincibility(true);
+
+		}
+		//ELEMENT_SKILL_VIRGOを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+
+				float r = hit_data[i]->r;
+
 
 
 				if ((r < 45 && r >= 0) || r > 315)

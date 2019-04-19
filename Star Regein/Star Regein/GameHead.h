@@ -37,6 +37,7 @@ enum OBJ_NAME
 	OBJ_RED_BULLET,
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
+	OBJ_LIBRA,
 
 	OBJ_BEAMSABER,
 
@@ -44,6 +45,7 @@ enum OBJ_NAME
 	OBJ_SKILL_LIBRA,
 	OBJ_SKILL_GEMINI,
 	OBJ_SKILL_VIRGO,
+	OBJ_SKILL_LEO,
 
 	OBJ_SKILL_TWINS_B,
 
@@ -76,7 +78,8 @@ enum HIT_ELEMENTS
 	ELEMENT_STAR,
 	ELEMENT_BEAMSABER,
 	ELEMENT_SUB,
-	ELEMENT_VIRGO_SKILL,
+	ELEMENT_SKILL_VIRGO,
+	ELEMENT_SKILL_LEO,
 };
 //------------------------------------------------
 
@@ -105,6 +108,17 @@ struct UserData
 #define HERO_LEFT	2
 #define HERO_DOWN	3
 #define HERO_RIGHT	4
+
+//アニメーション用
+#define ANITIME 1
+
+//ダッシュ速度
+#define DASH_SPEED 3.0f
+//通常速度
+#define NORMAL_SPEED 1.5f
+
+//スキルを進ませる値
+#define NEXTSKILL 1
 
 //主人公の移動ベクトルの+値
 #define HERO_VEC    4
@@ -151,12 +165,13 @@ extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
+extern float* g_libra_x[20];//すべての天秤のX位置を把握する
+extern float* g_libra_y[20];//すべての天秤のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
-extern int g_blackholecnt;	//ブラックホールカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
@@ -169,6 +184,7 @@ extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
+extern bool g_libra_d_flag[20];//天秤削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -178,6 +194,9 @@ extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
+
+extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
+extern int  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
 
@@ -220,6 +239,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjRedBullet.h"
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
+#include "ObjLibra.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -247,6 +267,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
 #include "ObjSkillBullet.h"
+#include "ObjSkillLeo.h"
 
 
 
@@ -276,5 +297,5 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
 */
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

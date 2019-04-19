@@ -31,14 +31,14 @@ void CObjHero::Init()
 	g_posture = HERO_DOWN;
 
 	//最大HPの初期化
-	g_max_hp = 50.0f;
+	g_max_hp = 100.0f;
 	//HPの初期化
-	g_hp = 50.0f;
+	g_hp = 100.0f;
 
 	//最大ＭＰの初期化
-	g_max_mp = 50.0f;
+	g_max_mp = 100.0f;
 	//ＭＰの初期化
-	g_mp = 50.0f;
+	g_mp = 100.0f;
 
 	//アニメーション用変数初期化
 	m_ani_time = 0;
@@ -173,7 +173,7 @@ void CObjHero::Action()
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp > 5.0f && m_dash_flag==true)
+			&& g_Taurus == true && g_mp > 10.0f && m_dash_flag==true)
 		{
 
 			if (m_move_flag == true)
@@ -182,7 +182,7 @@ void CObjHero::Action()
 				if (m_MP_time > 60)
 				{
 					m_MP_time = 0;
-					g_mp -= 5.0f;
+					g_mp -= 10.0f;
 				}
 			}
 			m_speed_power = DASH_SPEED;
@@ -241,7 +241,7 @@ void CObjHero::Action()
 						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 
 						g_mp -= 25.0f;	//mp消費
-						g_hp += 10.0f;	//hp回復
+						g_hp += 20.0f;	//hp回復
 					}
 				}
 				//双子座の場合
@@ -255,7 +255,7 @@ void CObjHero::Action()
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
 				}
 				//乙女座の場合
-				else if (g_skill == Virgo)
+				else if (g_skill == Virgo && g_mp >= 10.0f)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -264,7 +264,14 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 20.0f;	//mp消費
+					g_mp -= 10.0f;	//mp消費
+
+				}
+				else if (g_skill == Leo)
+				{
+					//スタンオブジェクト作成
+					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
+					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
 				}
 				m_key_f = false;
@@ -304,10 +311,10 @@ void CObjHero::Action()
 		//MPが50以下になったら一定間隔で増える
 		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
-			if (g_mp < 50.0f)
+			if (g_mp < 100.0f)
 			{
 				m_regene_time++;
-				if (m_regene_time > 30)
+				if (m_regene_time > 15)
 				{
 					m_regene_time = 0;
 					g_mp += 1.0f;

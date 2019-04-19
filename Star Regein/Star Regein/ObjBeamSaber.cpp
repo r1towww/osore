@@ -29,7 +29,7 @@ void CObjBeamSaber::Init()
 	m_ani_frame = 0;	//アニメーションフレームの初期化
 	m_ani_time = 0;		//アニメーションタイムの初期化
 
-
+	m_f = false;	//サウンド用フラグの初期化
 	//主人公の向きによって攻撃を出す方向，向きを変える
 	//当たり判定をセット
 	if (g_posture == HERO_UP)  //上
@@ -70,13 +70,19 @@ void CObjBeamSaber::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true )
+	//フラグがオフの場合
+	if (m_f == false)
 	{
-		Audio::Start(4);
-	}
-	else
-	{
-		Audio::Start(3);
+		//サウンドを鳴らす
+		if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		{
+			Audio::Start(4);
+		}		
+		else
+		{
+			Audio::Start(3);
+		}
+		m_f = true;		//オンにして2重に鳴らないようにする
 	}
 
 	//攻撃アニメーション用---------------------------------------

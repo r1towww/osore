@@ -64,8 +64,8 @@ void CSceneMercuryVirgo::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
@@ -75,7 +75,8 @@ void CSceneMercuryVirgo::InitScene()
 
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -110,7 +111,7 @@ void CSceneMercuryVirgo::InitScene()
 //実行中メソッド
 void CSceneMercuryVirgo::Scene()
 {
-	//水星（乙女座）で星を18個集めたら次へ移行
+	//水星（乙女座）で星を15個集めたら次へ移行
 	if (g_StarCount == VIRGOMAXSTAR)
 	{
 		//乙女座のスキル開放
