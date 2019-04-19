@@ -5,6 +5,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define STATUS_PX 24.0f	//ステータス表示位置のX位置調整用
+#define STATUS_PY 0.0f	//ステータス表示位置のY位置調整用
 
 //オブジェクト：ブロック＆背景
 class CObjStatus : public CObj

@@ -46,15 +46,6 @@ void CObjMessage::Draw()
 	float b[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	wchar_t STAR[128];	//星の数を数えるメッセージ用
-	wchar_t hp[128];
-	wchar_t mp[128];
-
-	swprintf_s(hp,L"HP");
-	Font::StrDraw(hp, 0, 0, 23, b);
-
-	swprintf_s(mp, L"MP");
-	Font::StrDraw(mp, 0, 55, 23, b);
-
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)
 	{
