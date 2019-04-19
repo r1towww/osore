@@ -47,6 +47,7 @@ void CSceneSunLeo::InitScene()
 	{
 		for (int j = 0; j < MAPSIZE; j++)
 		{
+
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
 			map[i][j] = w;
