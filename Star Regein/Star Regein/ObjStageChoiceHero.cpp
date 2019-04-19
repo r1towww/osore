@@ -166,8 +166,8 @@ void ObjStageChoiceHero::Action()
 			//‘¾—z‚Ö
 			else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
 			{
-				m_key_flag = false;
 				Audio::Start(1);
+				m_key_flag = false;
 				//‰¼‚Åƒ^ƒCƒgƒ‹‚És‚­‚æ‚¤‚É‚µ‚Ä‚é‚©‚ç‚ ‚Æ‚Å‚¿‚á‚ñ‚Æ‘¾—z‚É‚µ‚Ä‚¨‚¢‚Ä‚Ë
 				//‘¾—z‚ÉÝ’è
 				g_stage = Sun;

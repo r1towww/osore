@@ -80,8 +80,8 @@ void CSceneEarth::InitScene()
 
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"着弾アニメーション.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
