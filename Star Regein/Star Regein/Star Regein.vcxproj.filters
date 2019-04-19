@@ -7,28 +7,25 @@
     <ClCompile Include="GameL\DirectXDevice.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameL\DrawFont.cpp">
+    <ClCompile Include="GameL\Draw2DTex_Source.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameL\Draw2DTex_Source.cpp">
+    <ClCompile Include="GameL\DrawFont.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameL\DrawTexture.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameL\HitBoxManager.cpp">
+    <ClCompile Include="GameL\GameL_Main.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameL\GameL_Main.cpp">
+    <ClCompile Include="GameL\HitBoxManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameL\MultiThread.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameL\SceneManager.cpp">
-      <Filter>リソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameL\SceneObjManager.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameL\SetWindow.cpp">
@@ -49,53 +46,101 @@
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStageChoice.cpp">
-      <Filter>ソースファイル\ステージ選択</Filter>
+    <ClCompile Include="ObjBlock.cpp">
+      <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
-    <ClCompile Include="SceneStageChoice.cpp">
+    <ClCompile Include="ObjMiniMap.cpp">
+      <Filter>ソースファイル\マップ\ミニマップ</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageChoice.cpp">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
     <ClCompile Include="ObjStageChoiceHero.cpp">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStageClear.cpp">
-      <Filter>ソースファイル\ステージクリア</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneStageClear.cpp">
-      <Filter>ソースファイル\ステージクリア</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBlock.cpp">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMiniMap.cpp">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソースファイル\タイトル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソースファイル\タイトル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjCow.cpp">
-      <Filter>ソースファイル\敵\牛</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjAsteroid.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMeteo.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソースファイル\主人公</Filter>
+    <ClCompile Include="ObjStarChoice.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
     <ClCompile Include="ObjMessage.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\主人公</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ソースファイル\GAMEOVER</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjStageClear.cpp">
+      <Filter>ソースファイル\STAGE　CLEAR</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStageChoice.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTutorial.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTextBox.cpp">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkill.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillVirgo.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
     <ClCompile Include="SceneEarth.cpp">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkill.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ソースファイル\GAMEOVER</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMercuryGemini.cpp">
+      <Filter>ソースファイル\惑星\水星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMercuryVirgo.cpp">
+      <Filter>ソースファイル\惑星\水星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneVenusLibra.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneVenusTaurus.cpp">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSunLeo.cpp">
+      <Filter>ソースファイル\惑星\太陽</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjCow.cpp">
+      <Filter>ソースファイル\各惑星敵\牛</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsBule.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsRed.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHomingHeart.cpp">
+      <Filter>ソースファイル\各惑星敵\乙女</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBlueBullet.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjRedBullet.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjAsteroid.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlackhole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
@@ -103,132 +148,29 @@
     <ClCompile Include="ObjWhitehole.cpp">
       <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
-    <ClCompile Include="SceneVenusTaurus.cpp">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneVenusLibra.cpp">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjStarChoice.cpp">
-      <Filter>ソースファイル\ステージ選択</Filter>
-    </ClCompile>
-    <ClCompile Include="GameL\Audio.cpp" />
-    <ClCompile Include="GameL\DirectXDevice.cpp" />
-    <ClCompile Include="GameL\Draw2DTex_Source.cpp" />
-    <ClCompile Include="GameL\DrawFont.cpp" />
-    <ClCompile Include="GameL\DrawTexture.cpp" />
-    <ClCompile Include="GameL\GameL_Main.cpp" />
-    <ClCompile Include="GameL\HitBoxManager.cpp" />
-    <ClCompile Include="GameL\MultiThread.cpp" />
-    <ClCompile Include="GameL\SceneManager.cpp" />
-    <ClCompile Include="GameL\SceneObjManager.cpp" />
-    <ClCompile Include="GameL\SetWindow.cpp" />
-    <ClCompile Include="GameL\UserData.cpp" />
-    <ClCompile Include="GameL\WICTextureLoader.cpp" />
-    <ClCompile Include="GameL\WinInputs.cpp" />
-    <ClCompile Include="ObjAsteroid.cpp" />
-    <ClCompile Include="ObjBlock.cpp" />
-    <ClCompile Include="ObjCow.cpp" />
-    <ClCompile Include="ObjMessage.cpp" />
-    <ClCompile Include="ObjMeteo.cpp" />
-    <ClCompile Include="ObjMiniMap.cpp" />
-    <ClCompile Include="ObjStageChoice.cpp" />
-    <ClCompile Include="ObjStageChoiceHero.cpp" />
-    <ClCompile Include="ObjStageClear.cpp" />
-    <ClCompile Include="ObjTitle.cpp" />
-    <ClCompile Include="SceneEarth.cpp" />
-    <ClCompile Include="SceneStageChoice.cpp" />
-    <ClCompile Include="SceneStageClear.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
-    <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
-    <ClCompile Include="UtilityModule.cpp" />
     <ClCompile Include="ObjStar.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGameOver.cpp">
-      <Filter>ソースファイル\Game Over</Filter>
+    <ClCompile Include="GameL\SceneObjManager.cpp">
+      <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjGameOver.cpp">
-      <Filter>ソースファイル\Game Over</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTwinsBule.cpp">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTwinsRed.cpp">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTextBox.cpp">
-      <Filter>ソースファイル\チュートリアル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTutorial.cpp">
-      <Filter>ソースファイル\チュートリアル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMercuryGemini.cpp">
-      <Filter>ソースファイル\惑星\水星</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBlueBullet.cpp">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRedBullet.cpp">
-      <Filter>ソースファイル\敵\双子</Filter>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
     <ClCompile Include="ObjWoman.cpp">
-      <Filter>ソースファイル\敵\乙女</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHomingHeart.cpp">
-      <Filter>ソースファイル\敵\乙女</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillVirgo.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClCompile>
     <ClCompile Include="ObjStatus.cpp">
-      <Filter>ソースファイル\UI</Filter>
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillVirgo.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjStar.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStatus.cpp">
-      <Filter>ソースファイル\UI</Filter>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClCompile Include="ObjMeteo.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMercuryVirgo.cpp">
-      <Filter>ソースファイル\惑星\水星</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneSunLeo.cpp">
-      <Filter>ソースファイル\惑星\太陽</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公</Filter>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClCompile Include="SceneStageClear.cpp">
+      <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +198,6 @@
     <ClInclude Include="GameL\SceneManager.h">
       <Filter>リソースファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GameL\SceneObjManager.h">
-      <Filter>リソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="GameL\SetWindow.h">
       <Filter>リソースファイル</Filter>
     </ClInclude>
@@ -283,202 +222,221 @@
     <ClInclude Include="SceneMain.h">
       <Filter>ソースファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStageChoice.h">
-      <Filter>ソースファイル\ステージ選択</Filter>
+    <ClInclude Include="ObjBlock.h">
+      <Filter>ソースファイル\マップ</Filter>
     </ClInclude>
-    <ClInclude Include="SceneStageChoice.h">
+    <ClInclude Include="ObjMiniMap.h">
+      <Filter>ソースファイル\マップ\ミニマップ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStageChoice.h">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
     <ClInclude Include="ObjStageChoiceHero.h">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStageClear.h">
-      <Filter>ソースファイル\ステージクリア</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneStageClear.h">
-      <Filter>ソースファイル\ステージクリア</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlock.h">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMiniMap.h">
-      <Filter>ソースファイル\マップ</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソースファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソースファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjCow.h">
-      <Filter>ソースファイル\敵\牛</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjAsteroid.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMeteo.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソースファイル\主人公</Filter>
+    <ClInclude Include="ObjStarChoice.h">
+      <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
     <ClInclude Include="ObjMessage.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SceneEarth.h">
-      <Filter>ソースファイル\惑星\地球</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkill.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneVenusTaurus.h">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneVenusLibra.h">
-      <Filter>ソースファイル\惑星\金星</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStarChoice.h">
-      <Filter>ソースファイル\ステージ選択</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStar.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameOver.h">
-      <Filter>ソースファイル\Game Over</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGameOver.h">
-      <Filter>ソースファイル\Game Over</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTwinsBlue.h">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTwinsRed.h">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBlueBullet.h">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjRedBullet.h">
-      <Filter>ソースファイル\敵\双子</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTextBox.h">
-      <Filter>ソースファイル\チュートリアル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTutorial.h">
-      <Filter>ソースファイル\チュートリアル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMercuryGemini.h">
-      <Filter>ソースファイル\惑星\水星</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjWoman.h">
-      <Filter>ソースファイル\敵\乙女</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHomingHeart.h">
-      <Filter>ソースファイル\敵\乙女</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillVirgo.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ソースファイル\主人公</Filter>
     </ClInclude>
     <ClInclude Include="ObjBeamSaber.h">
       <Filter>ソースファイル\主人公</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ソースファイル\GAMEOVER</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStatus.h">
-      <Filter>ソースファイル\UI</Filter>
+    <ClInclude Include="ObjStageClear.h">
+      <Filter>ソースファイル\STAGE　CLEAR</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStageChoice.h">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTutorial.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTextBox.h">
+      <Filter>ソースファイル\チュートリアル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkill.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLibra.h">
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillTwinsB.h">
-      <Filter>ソースファイル\スキル切り替え</Filter>
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillVirgo.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEarth.h">
+      <Filter>ソースファイル\惑星\地球</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ソースファイル\GAMEOVER</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMercuryGemini.h">
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
     <ClInclude Include="SceneMercuryVirgo.h">
       <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
+    <ClInclude Include="SceneVenusLibra.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneVenusTaurus.h">
+      <Filter>ソースファイル\惑星\金星</Filter>
+    </ClInclude>
     <ClInclude Include="SceneSunLeo.h">
       <Filter>ソースファイル\惑星\太陽</Filter>
     </ClInclude>
+    <ClInclude Include="ObjCow.h">
+      <Filter>ソースファイル\各惑星敵\牛</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTwinsBlue.h">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTwinsRed.h">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHomingHeart.h">
+      <Filter>ソースファイル\各惑星敵\乙女</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlueBullet.h">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjRedBullet.h">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjAsteroid.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBlackhole.h">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWhitehole.h">
+      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStar.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneObjManager.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjStatus.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWoman.h">
+      <Filter>ソースファイル\各惑星敵\乙女</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソースファイル\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMeteo.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStageClear.h">
+      <Filter>ソースファイル\STAGE　CLEAR</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="リソースファイル">
+      <UniqueIdentifier>{7010ca8f-a8cd-4053-a484-7582e8ce0ff8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ヘッダーファイル">
-      <UniqueIdentifier>{958fa35d-376b-449a-8b80-df472c28e958}</UniqueIdentifier>
+      <UniqueIdentifier>{8a6186d3-2388-4354-b944-e539b04ac524}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル">
-      <UniqueIdentifier>{19426ebf-88f5-4b06-b342-beb72ea7f37d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="リソースファイル">
-      <UniqueIdentifier>{540b6b83-c44d-4512-ac7d-2256f0a5d138}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\ステージクリア">
-      <UniqueIdentifier>{044c5854-b299-46bb-b8eb-6bc33791a785}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\ステージ選択">
-      <UniqueIdentifier>{7c5ea375-2652-4a7b-94d1-e7bd8576b6d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\マップ">
-      <UniqueIdentifier>{814f47b8-e480-47ea-ba44-9d685c0dff2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\タイトル">
-      <UniqueIdentifier>{6dc9e5c1-6fa9-49e5-9645-30be4db0bd96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\敵">
-      <UniqueIdentifier>{3a0b48ab-2c5c-4eff-99c2-eca956caf9a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\敵\牛">
-      <UniqueIdentifier>{97c79f36-f2e7-4e0d-a648-124b2dc81662}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\UI">
-      <UniqueIdentifier>{2bedfcf6-9f9b-4294-8594-24891ce7d1db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\ゲームオブジェクト">
-      <UniqueIdentifier>{7a706132-e21a-481e-8eb2-4735989dcedf}</UniqueIdentifier>
+      <UniqueIdentifier>{a8c5a240-1e94-4333-b0e2-fbece331f47e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\主人公">
-      <UniqueIdentifier>{7678e96f-f465-467c-a493-ca82cc32487f}</UniqueIdentifier>
+      <UniqueIdentifier>{2c03d728-5e68-45bb-a1f3-ab49fe3738aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\惑星">
-      <UniqueIdentifier>{d694fd3f-522b-467a-a32a-33be0b3073b2}</UniqueIdentifier>
+    <Filter Include="ソースファイル\ゲームオブジェクト">
+      <UniqueIdentifier>{4a6cddb7-9e8c-4e81-89d6-5acbbb25f133}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\惑星\金星">
-      <UniqueIdentifier>{8d6bb325-e9bb-4f5a-b7cb-2adbef4e7830}</UniqueIdentifier>
+    <Filter Include="ソースファイル\UI">
+      <UniqueIdentifier>{ac6dee42-2c1f-40c7-88e9-8086016db91e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\惑星\地球">
-      <UniqueIdentifier>{dacf4474-251f-4ff7-bd20-2f2168c3bc3e}</UniqueIdentifier>
+    <Filter Include="ソースファイル\マップ">
+      <UniqueIdentifier>{87bcc825-0cf2-4767-be7e-4f1937d63cf8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
-      <UniqueIdentifier>{c3ee861f-090d-45cb-ab12-46d03ff684e7}</UniqueIdentifier>
+    <Filter Include="ソースファイル\マップ\ミニマップ">
+      <UniqueIdentifier>{ca94b817-5e7a-426d-9db3-740e2b7967d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\スキル切り替え">
-      <UniqueIdentifier>{65c8e10e-4871-4fe1-9beb-a5823d23f68d}</UniqueIdentifier>
+    <Filter Include="ソースファイル\ステージ選択">
+      <UniqueIdentifier>{4105a179-b077-4923-8977-5b38cc956289}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\Game Over">
-      <UniqueIdentifier>{a43d6edb-9d2d-4106-aca2-ee264514d7fb}</UniqueIdentifier>
+    <Filter Include="ソースファイル\GAMEOVER">
+      <UniqueIdentifier>{794a2b04-94b2-417a-a142-a1ccb212c9d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\敵\双子">
-      <UniqueIdentifier>{1325af2e-c5b4-47a4-804e-de03772c0f8f}</UniqueIdentifier>
+    <Filter Include="ソースファイル\STAGE　CLEAR">
+      <UniqueIdentifier>{3b5a4550-77eb-4073-970a-a6f60654e3be}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\チュートリアル">
-      <UniqueIdentifier>{cf90c3ba-6ea1-43eb-bd49-fbc9f09c919f}</UniqueIdentifier>
+      <UniqueIdentifier>{af480544-5725-4e0d-8df8-6df1af98adbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル">
+      <UniqueIdentifier>{721439e3-4057-46b7-963f-679e43005a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星">
+      <UniqueIdentifier>{9afac6c9-d727-4953-915f-2342563defd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\地球">
+      <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\金星">
+      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\惑星\水星">
-      <UniqueIdentifier>{6b89834f-10a7-4370-834d-7e96085ec51b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\敵\乙女">
-      <UniqueIdentifier>{cc197620-662c-4414-ad4e-870295aeba6f}</UniqueIdentifier>
+      <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\惑星\太陽">
-      <UniqueIdentifier>{6be346fe-26d3-44f3-b5cd-91abbe7a316c}</UniqueIdentifier>
+      <UniqueIdentifier>{18ee5544-b49a-4972-bf09-10535f65f2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵">
+      <UniqueIdentifier>{d6de1a25-fb1f-4069-a30d-47db46a80c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\牛">
+      <UniqueIdentifier>{41eb0d22-bcd3-477b-9500-d39e13a55b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\双子">
+      <UniqueIdentifier>{e989f6a9-a645-4883-9963-c60b3de7aa03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\乙女">
+      <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\天秤">
+      <UniqueIdentifier>{3e90780b-9020-4022-82de-850371e4facf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\NewFilter1">
+      <UniqueIdentifier>{f2cf742a-4aa6-4696-9626-790a5d52d15b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
+      <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\タイトル">
+      <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="GameL\DirectXTex.lib" />
+    <Library Include="GameL\DirectXTex.lib">
+      <Filter>リソースファイル</Filter>
+    </Library>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GameL\DirectXTex.inl" />
+    <None Include="GameL\DirectXTex.inl">
+      <Filter>リソースファイル</Filter>
+    </None>
   </ItemGroup>
 </Project>
