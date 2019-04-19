@@ -90,7 +90,7 @@ void CSceneSunLeo::InitScene()
 	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
-													  //blockオブジェクト作成
+    //blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);
 
