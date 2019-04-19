@@ -66,9 +66,6 @@ void CObjSkillLibra::Action()
 		this->SetStatus(false);
 	}
 
-	
-
-
 }
 
 //ƒhƒ[
