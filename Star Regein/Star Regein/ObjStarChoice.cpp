@@ -246,7 +246,7 @@ void CObjStarChoice::Action()
 void CObjStarChoice::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,m_Tra1 };	//標準カラー
+	float c[4] = { 1.0f,1.0f,0.0f,m_Tra1 };	//標準カラー
 	//クリア用
 	float left_clear[4] = { 1.0f,1.0f,0.0f,m_Tra1 };
 	float right_clear[4] = { 1.0f,1.0f,0.0f,m_Tra2 };
@@ -403,12 +403,13 @@ void CObjStarChoice::Draw()
 		dst.m_bottom = 390.0f;
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
-		//おとめ座クリアでクリア表記
+		//獅子座クリアでクリア表記
 		if (g_Sun_clear == true)
 		{
-			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
 
+		Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 
 	}
 	
