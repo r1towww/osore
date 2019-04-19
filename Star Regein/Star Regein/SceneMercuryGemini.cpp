@@ -72,6 +72,9 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
+	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
@@ -105,12 +108,27 @@ void CSceneMercuryGemini::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+
+	//チュートリアル吹き出し作成
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
+	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+	//チュートリアルオブジェクト作成
+	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
+	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+	//チュートリアル発生時のみ作成
+	if (g_tutorial_flag == true)
+	{
+		//テキストボックスオブジェクト作成
+		CObjTextBox* objtextbox = new CObjTextBox();
+		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+	}
+
 }
 
 //実行中メソッド
 void CSceneMercuryGemini::Scene()
 {
-	//水星（ふたご座）で星を18個集めたら次へ移行
+	//水星（ふたご座）で星を14個集めたら次へ移行
 	if (g_StarCount == GEMINIMAXSTAR)
 	{
 		//ふたご座のスキル開放

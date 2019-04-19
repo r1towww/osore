@@ -41,29 +41,25 @@ void CObjTextBox::Action()
 		m_key_time = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 	//キータイムが300を超えるとZ可能
-		//Zキー入力
-		if (Input::GetVKey('Z') == true)
-		{
+	//Zキー入力
+	if (Input::GetVKey('Z') == true)
+	{
 			
-			if (m_f == false)
+		if (m_f == false)
+		{
+			if (g_tutorial_flag == true)
 			{
-				if (g_tutorial_flag == true)
-				{
-					Audio::Start(1);
-					m_text++;//テキストを進める
-					m_key_time = 0;//キータイムをリセットする
-					m_f = true;
-				}
-			}
-			else
-			{
+				Audio::Start(1);
+				m_text++;//テキストを進める
+				m_key_time = 0;//キータイムをリセットする
 				m_f = true;
 			}
 		}
-		else
-		{
-			m_f = false;
-		}
+	}
+	else
+	{
+		m_f = false;
+	}
 
 }
 
@@ -215,6 +211,44 @@ void CObjTextBox::Draw()
 
 		}
 	}
+	//ふたご座
+	else if (g_stage == MercuryGemini)
+	{
+		if (m_text == 0)
+		{
+			Font::StrDraw(L"水星へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"ここ水星では双子座とおとめ座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+			Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+		}
+		else if (m_text == 1)
+		{
+			Font::StrDraw(L"ここ、双子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+			Font::StrDraw(L"分身スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+		}
+		else if (m_text == 2)
+		{
+			Font::StrDraw(L"ここで獲得すべき星は全部で14個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+		}
+		else if (m_text == 3)
+		{
+
+		}
+		else if (m_text == 4)
+		{
+
+		}
+		else if (m_text == 5)
+		{
 
 
+		}
+		else if (m_text == 6)
+		{
+		}
+	}
 }
+
+
+

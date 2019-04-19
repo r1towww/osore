@@ -82,7 +82,7 @@ void CObjTwinsRed::Action()
 
 		//20‹ŠÔŠu‚Å’eŠÛ”­ŽË
 		m_bullet_time++;
-		if (m_bullet_time > 300)
+		if (m_bullet_time > 300 && m_hp > 0)
 		{
 			m_bullet_time = 0;
 
@@ -94,50 +94,6 @@ void CObjTwinsRed::Action()
 				obj_b = new CObjRedBullet(m_px, m_py, i, 3.0f);
 				Objs::InsertObj(obj_b, OBJ_RED_BULLET, 5);
 			}
-		}
-
-		//ƒuƒƒbƒNÕ“Ë‚ÅŒü‚«•ÏX
-		if (m_hit_up == true)
-		{
-			m_movey = true;
-		}
-		if (m_hit_down == true)
-		{
-			m_movey = false;
-		}
-		if (m_hit_left == true)
-		{
-			m_movex = false;
-		}
-		if (m_hit_right == true)
-		{
-			m_movex = true;
-		}
-
-		//•ûŒü
-		if (m_movey == true)
-		{
-			m_vy = 1;
-			m_posture = 1.0f;
-			m_ani_time += 1;
-		}
-		if (m_movey == false)
-		{
-			m_vy = -1;
-			m_posture = 3.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == true)
-		{
-			m_vx = 1;
-			m_posture = 2.0f;
-			m_ani_time += 1;
-		}
-		if (m_movex == false)
-		{
-			m_vx = -1;
-			m_posture = 4.0f;
-			m_ani_time += 1;
 		}
 
 		if (m_ani_time > m_ani_max_time)

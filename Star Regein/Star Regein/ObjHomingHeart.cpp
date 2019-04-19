@@ -1,85 +1,150 @@
 //使用するヘッダーファイル
-#include <stdlib.h>
-#include <time.h>
-#include"GameL\DrawTexture.h"
-#include"GameL\WinInputs.h"
-#include"GameL\SceneManager.h"
-#include"GameL\HitBoxManager.h"
-#include"GameL\UserData.h" 
+#include "GameL\DrawTexture.h"
+#include "GameL\WinInputs.h"
+#include "GameL\SceneManager.h"
+#include "GameL\HitBoxManager.h"
 
-#include"GameHead.h"
-#include"ObjHomingHeart.h"
+
+//使用するヘッダーファイル
+
+#include "ObjHomingHeart.h"
+#include "GameHead.h"
 #include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-CObjHomingHeart::CObjHomingHeart(float x, float y, float speed)
-{
-	m_px = x;	//位置
-	m_py = y;
 
-	m_speed = speed;
+//コンストラクタ
+CObjHomingHeart::CObjHomingHeart(float x, float y)
+{
+	m_x = x;
+	m_y = y;
 }
 
 //イニシャライズ
 void CObjHomingHeart::Init()
 {
-	m_vx = 0.0f;	//移動ベクトル
+	//移動量の初期化
+	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	m_time = 250;
+	//弾削除のカウント初期化
+	m_time = 0.0f;
 
-	alpha = 1.0f;
+	//着弾フラグ初期化
+	m_hit_flag = false;
 
-	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 32, 28, ELEMENT_ENEMY, OBJ_HOMING_HEART, 1);
+	m_ani_frame = 0;
+	m_ani_time = 0;
+
+	m_eff.m_top = 0;
+	m_eff.m_left = 0;
+	m_eff.m_right = 220;
+	m_eff.m_bottom = 203;
+	m_ani = 0;
+	m_ani_time = 0;
+	m_ani_stop = 0;
+
+	//当たり判定をセット
+	Hits::SetHitBox(this, m_x, m_y, 32, 28, ELEMENT_ENEMY, OBJ_HOMING_HEART, 1);
+
 }
 
 //アクション
 void CObjHomingHeart::Action()
 {
+	//大から小
+	RECT_F ani_src[12] =
+	{
+		{ 0,   0,    32, 32 },
+		{ 0,  32,    64, 32 },
+		{ 0,  64,    96, 32 },
+		{ 0,  96,   128, 32 },
+		{ 0, 128,   160, 32 },
+		{ 0, 160,   192, 32 },
+		{ 0, 192,   224, 32 },
+		{ 0, 224,   256, 32 },
+		{ 0, 256,   288, 32 },
+		{ 0, 288,   320, 32 },
+		{ 0, 320,   352, 32 },
+	};
 
-	m_time--;
-
-	//弾丸実行処理　-----
-	//主人公機と誘導弾丸で角度を取る
-	CObjHero* obj = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//主人公機が存在する場合、誘導角度の計算する
-	if (obj != nullptr)
+		//主人公機が存在する場合、誘導角度の計算する
+		if (hero != nullptr)
+		{
+			float x;
+			float y;
+
+			x = 375 - (m_x + pb->GetScrollx());
+			y = 275 - (m_y + pb->GetScrolly());
+
+			float ar = GetAtan2Angle(x, y);
+
+			//主人公機と敵角度があんまりにもかけ離れたら
+			m_vx = cos(3.14 / 180 * ar) * 3;
+			m_vy = sin(3.14 / 180 * ar) * 3;
+		}
+
+
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//主人公と当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckObjNameHit(OBJ_BEAMSABER) != nullptr)
 	{
-
-		float x;
-		float y;
-
-		x = 375 - (m_px + pb->GetScrollx());
-		y = 275 - (m_py + pb->GetScrolly());
-
-		float ar = GetAtan2Angle(x, y);
-
-		//敵の現在の向いている角度を取る
-		float br = GetAtan2Angle(m_vx, m_vy);
-
-		//主人公機と敵角度があんまりにもかけ離れたら
-		m_vx = cos(3.14 / 180 * ar) * 2;
-		m_vy = sin(3.14 / 180 * ar) * 2;
+		m_hit_flag = true;//アニメーション開始
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 	}
 
-	//移動
-	m_px += m_vx*m_speed;
-	m_py += m_vy*m_speed;
-
-	//HitBoxの内容を更新
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
-
-	//主人公機オブジェクトと接触したら弾丸削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckElementHit(ELEMENT_BLOCK) || hit->CheckElementHit(ELEMENT_BEAMSABER) || m_time <= 0)
+	if (m_hit_flag == true)
 	{
+		//アニメーションのコマ間隔制御
+		if (m_ani_time > 0)
+		{
+
+			m_ani++;	//アニメーションのコマを１つ進める
+			m_ani_time = 0;
+
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			m_ani_stop++;
+			if (m_ani_stop >= 11)
+			{
+				m_eff.m_top = 0;
+				m_eff.m_left = 0;
+				m_eff.m_right = 220;
+				m_eff.m_bottom = 203;
+
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+
+			}
+		}
+		else
+		{
+			m_ani_time++;
+		}
+	}
+
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//作成したHitBox更新用の入り口を取り出す
+	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
+
+	 //位置の更新
+	m_x += m_vx*1.0;
+	m_y += m_vy*1.0;
+
+	m_time++;
+
+	if (m_time >= 200)
+	{
+		m_time = 0.0f;
+
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 	}
@@ -88,31 +153,47 @@ void CObjHomingHeart::Action()
 //ドロー
 void CObjHomingHeart::Draw()
 {
-	int AniData[4] =
-	{ 1,0,2,0, };
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c[4] = { 1.0f,1.0f,1.0f,100.0f };
 
-	RECT_F src;//描画元切り取り位置
-	RECT_F dst;//描画先表示位置
-
-	 //ブロック情報を持ってくる
-	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 32.0f;
-	src.m_bottom = 28.0f;
-
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrolly();
-	dst.m_left = 32.0f + m_px + block->GetScrollx();
-	dst.m_right = 0.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 28.0f + m_py + block->GetScrolly();
+	RECT_F src; //描画元切り取り位置
+	RECT_F dst; //描画先表示位置
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 
-	//描画
-	Draw::Draw(22, &src, &dst, c, 0.0f);
+	if (m_hit_flag == true)
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 32.0f;
+		src.m_bottom = 32.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x + block->GetScrollx();
+		dst.m_right = 64.0f + m_x + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
+
+		//表示
+		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+
+	}
+	else {
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 32.0f;
+		src.m_bottom = 28.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x  + block->GetScrollx();
+		dst.m_right = 32.0f + m_x  + block->GetScrollx();
+		dst.m_bottom = 32.0f + m_y  + block->GetScrolly();
+
+		//表示
+		Draw::Draw(22, &src, &dst, c, 0.0f);
+	}
 }
