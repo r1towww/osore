@@ -23,14 +23,22 @@ CObjStatus::CObjStatus()
 //イニシャライズ
 void CObjStatus::Init()
 {
+	m_red = 1.0f;		//HP用カラー 赤	の初期化
+	m_gleen = 1.0f;		//HP用カラー 緑	の初期化
+	m_blue = 1.0f;		//HP用カラー 青	の初期化
+
 
 }
 
 //アクション
 void CObjStatus::Action()
 {
-
-
+	if (g_hp >= 30.0f)
+	{
+		m_red = 1.0f;
+		m_gleen = 1.0f;	
+		m_blue = 1.0f;
+	}
 }
 
 //ドロー
@@ -38,6 +46,8 @@ void CObjStatus::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float hpc[4] = { m_red,m_gleen,m_blue,1.0f };
+	float mpc[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -85,7 +95,7 @@ void CObjStatus::Draw()
 	dst.m_bottom = 50.0f;
 
 	//描画
-	Draw::Draw(10, &src, &dst, c, 0.0f);
+	Draw::Draw(10, &src, &dst, hpc, 0.0f);
 //----------------------------------------------
 
 //MP描画用--------------------------------------
@@ -102,10 +112,8 @@ void CObjStatus::Draw()
 	dst.m_bottom = 105.0f;
 
 	//描画
-	Draw::Draw(11, &src, &dst, c, 0.0f);
+	Draw::Draw(11, &src, &dst, mpc, 0.0f);
 //----------------------------------------------
-
-
 
 
 }

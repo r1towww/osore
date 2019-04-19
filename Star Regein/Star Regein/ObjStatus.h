@@ -17,6 +17,8 @@ class CObjStatus : public CObj
 		void Draw();		//ドロー
 
 	private:
-
+		int m_red;		//HP用カラー 赤
+		int m_gleen;	//HP用カラー 緑
+		int m_blue;		//HP用カラー 青
 
 };

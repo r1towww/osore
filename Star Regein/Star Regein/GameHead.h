@@ -37,6 +37,7 @@ enum OBJ_NAME
 	OBJ_RED_BULLET,
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
+	OBJ_LIBRA,
 
 	OBJ_BEAMSABER,
 
@@ -117,6 +118,9 @@ struct UserData
 //スキルを進ませる値
 #define NEXTSKILL 1
 
+//主人公の移動ベクトルの+値
+#define HERO_VEC    4
+
 //惑星ごとの値
 typedef enum Planet
 {	/* ステージごとの値 */
@@ -159,12 +163,13 @@ extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
+extern float* g_libra_x[20];//すべての天秤のX位置を把握する
+extern float* g_libra_y[20];//すべての天秤のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
-extern int g_blackholecnt;	//ブラックホールカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
@@ -177,6 +182,7 @@ extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
+extern bool g_libra_d_flag[20];//天秤削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -211,9 +217,6 @@ extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
 
-extern bool g_attack_flag; //攻撃アニメーションフラグ
-extern int g_slash_time;
-extern int g_slash_frame;
 extern int g_cow_id[20];//牛の識別ID
 
 
@@ -233,6 +236,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjRedBullet.h"
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
+#include "ObjLibra.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -289,5 +293,5 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
 */
-#define SET_GAME_START  CSceneStageChoice
+#define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

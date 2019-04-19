@@ -78,6 +78,8 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"天秤座敵.png", 23, TEX_SIZE_128);
+
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);

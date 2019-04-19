@@ -32,6 +32,8 @@ void CSceneTitle::InitScene()
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
 
+	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_512);
+
 
 	//タイトルオブジェクト作成
 	CObjTitle* obj = new CObjTitle();

@@ -18,6 +18,7 @@ using namespace GameL;
 
 //コンストラクタ
 CSceneSunLeo::CSceneSunLeo()
+
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
@@ -38,12 +39,15 @@ void CSceneSunLeo::InitScene()
 	int size;				//ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"SunLeo.csv", &size);//外部データ読み込み
 
+
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
+
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)
 		{
+
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
 			map[i][j] = w;
@@ -87,7 +91,7 @@ void CSceneSunLeo::InitScene()
 	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
-													  //blockオブジェクト作成
+    //blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);
 

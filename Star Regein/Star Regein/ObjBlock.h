@@ -37,12 +37,14 @@ class CObjBlock : public CObj
 		);
 	private:
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
-		int c;//カウント用
-		int blue_c;//双子（青）カウント用
-		int red_c;//双子（赤）カウント用
-		int woman_c;//乙女カウント用
-		int b_c;//ブラックホールカウント用
-		int w_c;//ホワイトホールカウント用
+
+		int m_c_c;//牛カウント用
+		int m_blue_c;//双子（青）カウント用
+		int m_red_c;//双子（赤）カウント用
+		int m_woman_c;//乙女カウント用
+		int m_b_c;//ブラックホールカウント用
+		int m_w_c;//ホワイトホールカウント用
+		int m_libra_c;//天秤カウント用
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用

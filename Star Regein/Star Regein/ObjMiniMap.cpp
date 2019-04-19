@@ -16,6 +16,7 @@ bool g_cow_d_flag[20];//牛削除フラグ
 bool g_blue_d_flag[20];//双子（青）削除フラグ
 bool g_red_d_flag[20];//双子（赤）削除フラグ
 bool g_woman_d_flag[20];//乙女削除フラグ
+bool g_libra_d_flag[20];//天秤削除フラグ
 
 
 int g_map[MAPSIZE][MAPSIZE];

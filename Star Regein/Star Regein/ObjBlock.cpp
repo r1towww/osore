@@ -12,7 +12,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-int g_blackholecnt = 0;
 int g_asteroid;
 int g_block;
 
@@ -46,12 +45,13 @@ void CObjBlock::Init()
 
 	m_roll = 0.0f;
 
-	blue_c = 0;
-	red_c = 0;
-	woman_c = 0;
-	c = 0;
-	b_c = 0;
-	w_c = 0;
+	m_blue_c = 0;
+	m_red_c = 0;
+	m_woman_c = 0;
+	m_c_c = 0;
+	m_b_c = 0;
+	m_w_c = 0;
+	m_libra_c = 0;
 
 	//敵出現
 	if (g_stage == VenusTaurus||g_stage==SunLeo)
@@ -63,17 +63,17 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//牛オブジェクト作成
-					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE,c);
+					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE, m_c_c);
 					//敵の位置を取得
 					float* cx = cow->GetPX();
 					float* cy = cow->GetPY();
 
-					g_cow_x[c] = cow->GetPX();
-					g_cow_y[c] = cow->GetPY();
+					g_cow_x[m_c_c] = cow->GetPX();
+					g_cow_y[m_c_c] = cow->GetPY();
 
-					g_cow_d_flag[c] = true;
+					g_cow_d_flag[m_c_c] = true;
 
-					c++;
+					m_c_c++;
 
 					Objs::InsertObj(cow, OBJ_COW, 10);
 				}
@@ -89,17 +89,17 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//乙女オブジェクト作成
-					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,woman_c);
+					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,m_woman_c);
 					//敵の位置を取得
 					float* wx = woman->GetPX();
 					float* wy = woman->GetPY();
 
-					g_woman_x[woman_c] = woman->GetPX();
-					g_woman_y[woman_c] = woman->GetPY();
+					g_woman_x[m_woman_c] = woman->GetPX();
+					g_woman_y[m_woman_c] = woman->GetPY();
 
-					g_woman_d_flag[woman_c] = true;
+					g_woman_d_flag[m_woman_c] = true;
 
-					woman_c++;
+					m_woman_c++;
 
 					Objs::InsertObj(woman, OBJ_WOMAN, 10);
 				}
@@ -116,36 +116,63 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//双子（青）オブジェクト作成
-					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE, blue_c);
+					CObjTwinsBlue* blue = new CObjTwinsBlue(j*MAPSIZE, i*MAPSIZE, m_blue_c);
 					//敵の位置を取得
 					float* bx = blue->GetPX();
 					float* by = blue->GetPY();
 
-					g_twinsblue_x[blue_c] = blue->GetPX();
-					g_twinsblue_y[blue_c] = blue->GetPY();
+					g_twinsblue_x[m_blue_c] = blue->GetPX();
+					g_twinsblue_y[m_blue_c] = blue->GetPY();
 
-					g_blue_d_flag[blue_c] = true;
+					g_blue_d_flag[m_blue_c] = true;
 
-					blue_c++;
+					m_blue_c++;
 
 					Objs::InsertObj(blue, OBJ_TWINS_BLUE, 10);
 				}
 				if (m_map[i][j] == 9)
 				{
 					//双子（赤）オブジェクト作成
-					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE, red_c);
+					CObjTwinsRed* red = new CObjTwinsRed(j*MAPSIZE, i*MAPSIZE, m_red_c);
 					//敵の位置を取得
 					float* rx = red->GetPX();
 					float* ry = red->GetPY();
 
-					g_twinsred_x[red_c] = red->GetPX();
-					g_twinsred_y[red_c] = red->GetPY();
+					g_twinsred_x[m_red_c] = red->GetPX();
+					g_twinsred_y[m_red_c] = red->GetPY();
 
-					g_red_d_flag[red_c] = true;
+					g_red_d_flag[m_red_c] = true;
 
-					red_c++;
+					m_red_c++;
 
 					Objs::InsertObj(red, OBJ_TWINS_RED, 10);
+				}
+			}
+		}
+	}
+
+	else if (g_stage == VenusLibra)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//天秤オブジェクト作成
+					CObjLibra* libra = new CObjLibra(j*MAPSIZE, i*MAPSIZE, m_libra_c);
+					//敵の位置を取得
+					float* bx = libra->GetPX();
+					float* by = libra->GetPY();
+
+					g_libra_x[m_libra_c] = libra->GetPX();
+					g_libra_y[m_libra_c] = libra->GetPY();
+
+					g_libra_d_flag[m_libra_c] = true;
+
+					m_libra_c++;
+
+					Objs::InsertObj(libra, OBJ_LIBRA, 10);
 				}
 			}
 		}
@@ -169,7 +196,7 @@ void CObjBlock::Init()
 			{
 				//星オブジェクト作成
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
-				Objs::InsertObj(objstar, OBJ_STAR, 9);//マネージャに登録
+				Objs::InsertObj(objstar, OBJ_STAR, 5);//マネージャに登録
 
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
@@ -181,31 +208,30 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE, m_b_c);//オブジェクト作成
 				
 				//ブラックホールの位置を取得
 				float* bx = objablackhole->GetBX();
 				float* by = objablackhole->GetBY();
 
-				g_blackhole_x[b_c] = objablackhole->GetBX();
-				g_blackhole_y[b_c] = objablackhole->GetBY();
+				g_blackhole_x[m_b_c] = objablackhole->GetBX();
+				g_blackhole_y[m_b_c] = objablackhole->GetBY();
 
-				b_c++;
+				m_b_c++;
 				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
-				g_blackholecnt++;	//ブラックホールのカウントを増やす
 			}
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-																							 //ブラックホールの位置を取得
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, m_w_c);//オブジェクト作成
+				//ブラックホールの位置を取得
 				float* bx = objawhitehole->GetWX();
 				float* by = objawhitehole->GetWY();
 
-				g_whitehole_x[w_c] = objawhitehole->GetWX();
-				g_whitehole_y[w_c] = objawhitehole->GetWY();
+				g_whitehole_x[m_w_c] = objawhitehole->GetWX();
+				g_whitehole_y[m_w_c] = objawhitehole->GetWY();
 
-				w_c++;
+				m_w_c++;
 
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
 			}
@@ -237,10 +263,10 @@ void CObjBlock::Action()
 
 	//スクロール
 	hero->SetX(375);
-	m_scrollx -= hero->GetVX() * 4;
+	m_scrollx -= hero->GetVX() * HERO_VEC;
 
 	hero->SetY(275);
-	m_scrolly -= hero->GetVY() * 4;
+	m_scrolly -= hero->GetVY() * HERO_VEC;
 
 	//背景を回転させる
 	//m_roll += 0.1f;
