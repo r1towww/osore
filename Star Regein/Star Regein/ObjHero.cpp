@@ -71,8 +71,6 @@ void CObjHero::Init()
 	m_dash_flag = false;
 	//移動フラグ初期化
 	m_dash_flag = false;
-	//攻撃アニメーションフラグ初期化
-	g_attack_flag = false;
 
 	//攻撃制御フラグ
 	m_a_flag = true;
@@ -82,8 +80,9 @@ void CObjHero::Init()
 
 	m_ani = 0;			//アニメーション用
 	m_ani_time = 0;		//アニメーション間隔タイム
-	m_eff.m_top    = 0;
-	m_eff.m_left   = 0;
+	m_eff_time = 0;
+	m_eff.m_top    = 0;		//エフェクトの初期化
+	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
 	m_eff.m_bottom = 240;
 }
@@ -106,8 +105,6 @@ void CObjHero::Action()
 
 		//移動系統情報--------------------------------------------------
 
-		//押していないときに初期化
-		m_dash_flag = false;
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 		{
 			m_move_flag = true;
@@ -142,6 +139,8 @@ void CObjHero::Action()
 		}
 		else//移動キーの入力が無い場合
 		{
+			//押していないときに初期化
+			m_dash_flag = false;
 			m_ani_frame = 1;	//静止フレームにする
 			m_ani_time = 0;		//アニメーション時間リセット
 		}
@@ -159,21 +158,12 @@ void CObjHero::Action()
 				CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
 				Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 
-				//攻撃アニメーションフラグオン
-				g_attack_flag = true;
-
-				g_slash_time += ANITIME;
-
 				m_a_flag = false;
 			}
 		}
 		else
 		{
-			g_attack_flag = false;
-			g_slash_frame = 1;
-			g_slash_time = 0;
 			m_a_flag = true;
-
 		}
 
 
@@ -197,7 +187,7 @@ void CObjHero::Action()
 			}
 			m_speed_power = DASH_SPEED;
 
-			//エフェクト用
+			//ダッシュエフェクト用処理------------------------------
 			RECT_F ani_src[6] =
 			{
 				{   0,    0,  240, 240 },
@@ -208,23 +198,25 @@ void CObjHero::Action()
 				{ 240,  480,  720, 480 },
 			};
 
-			//アニメーションのコマ間隔制御
-			if (m_ani_time > 2)
+			//ダッシュエフェクトのコマ間隔制御
+			if (m_eff_time > 4)
 			{
-				m_ani++;		//アニメーションのコマを1つ進める
-				m_ani_time = 0;
+				m_ani++;		//ダッシュエフェクトのコマを1つ進める
+				m_eff_time = 0;
 
-				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+				m_eff = ani_src[m_ani];//ダッシュエフェクトのRECT配列からm_ani番目のRECT情報取得
 			}
 			else
 			{
-				m_ani_time++;
+				m_eff_time++;	//エフェクトタイムをプラス
 			}
-			//８番目（画像最後）まで進んだら、0に戻す
-			if (m_ani == 8)
+			// 5番目（画像最後）まで進んだら、0に戻す
+			if (m_ani == 5)
 			{
 				m_ani = 0;
 			}
+
+			//-----------------------------------------------
 		}
 		else//通常速度
 		{
@@ -498,26 +490,40 @@ void CObjHero::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * g_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_top    = 64.0f * g_posture;
+	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
+	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = 80.0f + m_px;
-	dst.m_right = 0.0f + m_px;
+	dst.m_top    =  0.0f + m_py;
+	dst.m_left   = 80.0f + m_px;
+	dst.m_right  =  0.0f + m_px;
 	dst.m_bottom = 80.0f + m_py;
 
-	//表示
+	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = 80.0f + m_px;
-	dst.m_right = 0.0f + m_px;
+	dst.m_top    =  0.0f + m_py;
+	dst.m_left   = 80.0f + m_px;
+	dst.m_right  =  0.0f + m_px;
 	dst.m_bottom = 80.0f + m_py;
 
-	Draw::Draw(15, &m_eff, &dst, c, 0.0f);
+	//ダッシュフラグがオンの場合
+	if (m_dash_flag == true)
+	{
+		/* g_posture  HERO_UP 1  HERO_LEFT 2  HERO_DOWN 3  HERO_RIGHT 4 */
+
+		//エフェクトの描画
+		if (g_posture == HERO_LEFT || g_posture == HERO_RIGHT)	//左右の際、画像が反転してしまうための対策
+			Draw::Draw(15, &m_eff, &dst, c, (g_posture * 270.0f + 180.0f));
+		else
+			Draw::Draw(15, &m_eff, &dst, c, (g_posture * 270.0f));
+	}
+	else
+	{
+		m_ani = 0;
+	}
 
 }
