@@ -195,9 +195,6 @@ extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
 
-extern bool g_attack_flag; //攻撃アニメーションフラグ
-extern int g_slash_time;
-extern int g_slash_frame;
 extern int g_cow_id[20];//牛の識別ID
 
 
