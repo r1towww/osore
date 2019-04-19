@@ -237,10 +237,10 @@ void CObjBlock::Action()
 
 	//ƒXƒNƒ[ƒ‹
 	hero->SetX(375);
-	m_scrollx -= hero->GetVX() * 4;
+	m_scrollx -= hero->GetVX() * HERO_VEC;
 
 	hero->SetY(275);
-	m_scrolly -= hero->GetVY() * 4;
+	m_scrolly -= hero->GetVY() * HERO_VEC;
 
 	//”wŒi‚ð‰ñ“]‚³‚¹‚é
 	//m_roll += 0.1f;

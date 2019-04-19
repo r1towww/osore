@@ -67,9 +67,6 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClCompile>
     <ClCompile Include="ObjGameOver.cpp">
       <Filter>ソースファイル\GAMEOVER</Filter>
     </ClCompile>
@@ -172,6 +169,9 @@
     <ClCompile Include="SceneStageClear.cpp">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\主人公\攻撃</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -241,9 +241,6 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBeamSaber.h">
       <Filter>ソースファイル\主人公</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameOver.h">
@@ -348,6 +345,9 @@
     <ClInclude Include="SceneStageClear.h">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBeamSaber.h">
+      <Filter>ソースファイル\主人公\攻撃</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -419,14 +419,14 @@
     <Filter Include="ソースファイル\各惑星敵\天秤">
       <UniqueIdentifier>{3e90780b-9020-4022-82de-850371e4facf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\各惑星敵\NewFilter1">
-      <UniqueIdentifier>{f2cf742a-4aa6-4696-9626-790a5d52d15b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\主人公\攻撃">
+      <UniqueIdentifier>{14dbd969-9b9e-4fb0-9787-3bafcca2e83e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

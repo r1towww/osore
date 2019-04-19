@@ -104,6 +104,9 @@ struct UserData
 #define HERO_DOWN	3
 #define HERO_RIGHT	4
 
+//主人公の移動ベクトルの+値
+#define HERO_VEC    4
+
 //惑星ごとの値
 typedef enum Planet
 {	/* ステージごとの値 */
