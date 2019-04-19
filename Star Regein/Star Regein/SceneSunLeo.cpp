@@ -18,6 +18,7 @@ using namespace GameL;
 
 //コンストラクタ
 CSceneSunLeo::CSceneSunLeo()
+
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
@@ -38,12 +39,15 @@ void CSceneSunLeo::InitScene()
 	int size;				//ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"SunLeo.csv", &size);//外部データ読み込み
 
+
 	int map[MAPSIZE][MAPSIZE];
 	int count = 1;
+
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)
 		{
+
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
 			map[i][j] = w;
