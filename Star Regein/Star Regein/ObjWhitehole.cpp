@@ -13,10 +13,12 @@ using namespace GameL;
 float* g_whitehole_x[10];//全てのホワイトホールのX位置を把握する
 float* g_whitehole_y[10];//全てのホワイトホールのY位置を把握する
 
-CObjWhitehole::CObjWhitehole(float x, float y)
+CObjWhitehole::CObjWhitehole(float x, float y,int id)
 {
 	m_px = x;		//位置
 	m_py = y;
+
+	m_whitehole_id = id;
 }
 
 //イニシャライズ

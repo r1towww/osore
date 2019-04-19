@@ -65,7 +65,7 @@ void CObjStarChoice::Action()
 		else
 			m_key_flag = true;
 	}
-	else		//¯À‚ª2‚Â‚ ‚éê‡
+	else if(g_stage == Venus || g_stage == Mercury)		//¯À‚ª2‚Â‚ ‚éê‡
 	{	
 		//‰ºƒL[‚ğ“ü—Í‚µ‚Ä‘I‘ğ
 		if (Input::GetVKey(VK_DOWN) == true)
