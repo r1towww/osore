@@ -67,9 +67,6 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソースファイル\主人公</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClCompile>
     <ClCompile Include="ObjGameOver.cpp">
       <Filter>ソースファイル\GAMEOVER</Filter>
     </ClCompile>
@@ -172,6 +169,9 @@
     <ClCompile Include="SceneStageClear.cpp">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBeamSaber.cpp">
+      <Filter>ソースファイル\主人公\攻撃</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -241,9 +241,6 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjHero.h">
-      <Filter>ソースファイル\主人公</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjBeamSaber.h">
       <Filter>ソースファイル\主人公</Filter>
     </ClInclude>
     <ClInclude Include="ObjGameOver.h">
@@ -348,6 +345,9 @@
     <ClInclude Include="SceneStageClear.h">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBeamSaber.h">
+      <Filter>ソースファイル\主人公\攻撃</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -427,6 +427,9 @@
     </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\主人公\攻撃">
+      <UniqueIdentifier>{14dbd969-9b9e-4fb0-9787-3bafcca2e83e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
