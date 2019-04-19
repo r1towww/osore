@@ -80,7 +80,12 @@ void CObjHero::Init()
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 
-
+	m_ani = 0;			//アニメーション用
+	m_ani_time = 0;		//アニメーション間隔タイム
+	m_eff.m_top    = 0;
+	m_eff.m_left   = 0;
+	m_eff.m_right  = 240;
+	m_eff.m_bottom = 240;
 }
 
 //アクション
@@ -102,12 +107,12 @@ void CObjHero::Action()
 		//移動系統情報--------------------------------------------------
 
 		//押していないときに初期化
-		m_dash_flag = true;
+		m_dash_flag = false;
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 		{
 			m_move_flag = true;
 			m_vy -= m_speed_power;
-			m_dash_flag = false;
+			m_dash_flag = true;
 			g_posture = HERO_UP;
 			m_ani_time += ANITIME;
 		}
@@ -115,7 +120,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vy += m_speed_power;
-			m_dash_flag = false;
+			m_dash_flag = true;
 			g_posture = HERO_DOWN;
 			m_ani_time += ANITIME;
 		}
@@ -123,7 +128,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vx -= m_speed_power;
-			m_dash_flag = false;
+			m_dash_flag = true;
 			g_posture = HERO_LEFT;
 			m_ani_time += ANITIME;
 		}
@@ -131,7 +136,7 @@ void CObjHero::Action()
 		{
 			m_move_flag = true;
 			m_vx += m_speed_power;
-			m_dash_flag = false;
+			m_dash_flag = true;
 			g_posture = HERO_RIGHT;
 			m_ani_time += ANITIME;
 		}
@@ -178,7 +183,7 @@ void CObjHero::Action()
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp >= 1.0f && m_dash_flag==false)
+			&& g_Taurus == true && g_mp > 5.0f && m_dash_flag==true)
 		{
 
 			if (m_move_flag == true)
@@ -191,11 +196,40 @@ void CObjHero::Action()
 				}
 			}
 			m_speed_power = DASH_SPEED;
+
+			//エフェクト用
+			RECT_F ani_src[6] =
+			{
+				{   0,    0,  240, 240 },
+				{   0,  240,  480, 240 },
+				{   0,  480,  720, 240 },
+				{ 240,    0,  240, 480 },
+				{ 240,  240,  480, 480 },
+				{ 240,  480,  720, 480 },
+			};
+
+			//アニメーションのコマ間隔制御
+			if (m_ani_time > 2)
+			{
+				m_ani++;		//アニメーションのコマを1つ進める
+				m_ani_time = 0;
+
+				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_ani_time++;
+			}
+			//８番目（画像最後）まで進んだら、0に戻す
+			if (m_ani == 8)
+			{
+				m_ani = 0;
+			}
 		}
 		else//通常速度
 		{
 			m_move_flag = false;
-			m_dash_flag = true;
+			m_dash_flag = false;
 			m_speed_power = NORMAL_SPEED;
 		}
 
@@ -208,8 +242,12 @@ void CObjHero::Action()
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
-					if (g_hp < g_max_hp)
+					if (g_hp < g_max_hp && g_mp > 25.0f)
 					{
+						//天秤エフェクトの作成
+						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+
 						g_mp -= 25.0f;	//mp消費
 						g_hp += 10.0f;	//hp回復
 					}
@@ -269,7 +307,7 @@ void CObjHero::Action()
 
 
 		//MPが50以下になったら一定間隔で増える
-		if (m_dash_flag == true)//ダッシュしていなかったら増える
+		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 50.0f)
 			{
@@ -288,7 +326,7 @@ void CObjHero::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 
 		//主人公とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_GREEN) == true)
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
@@ -391,7 +429,7 @@ void CObjHero::Action()
 			m_ani_frame = 0;
 		}
 
-		//ブラックホールと接触した場合
+		//ブラックホールの情報を持ってくる
 		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
 		//ブロック情報を持ってくる
@@ -436,7 +474,7 @@ void CObjHero::Action()
 	}
 	else
 	{
-		;
+		return;
 	}
 }
 
@@ -473,4 +511,13 @@ void CObjHero::Draw()
 
 	//表示
 	Draw::Draw(1, &src, &dst, c, 0.0f);
+
+	//表示位置の設定
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = 80.0f + m_px;
+	dst.m_right = 0.0f + m_px;
+	dst.m_bottom = 80.0f + m_py;
+
+	Draw::Draw(15, &m_eff, &dst, c, 0.0f);
+
 }

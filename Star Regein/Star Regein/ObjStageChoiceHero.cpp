@@ -170,8 +170,7 @@ void ObjStageChoiceHero::Action()
 				Audio::Start(1);
 				//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 				//太陽に設定
-				//g_stage = Sun;←ステージが完成したらコメント外してね
-				Scene::SetScene(new CSceneTitle());
+				g_stage = Sun;
 			}
 		}
 		g_key_flag = false;	//キーフラグをオフ
