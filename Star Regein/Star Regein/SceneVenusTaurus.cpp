@@ -106,7 +106,7 @@ void CSceneVenusTaurus::InitScene()
 	
 	//Statusゲージオブジェクト作成
 	CObjStatus* objstatus = new CObjStatus();
-	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
+	Objs::InsertObj(objstatus, OBJ_STATUS, 100);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();

@@ -24,9 +24,9 @@ CObjStatus::CObjStatus()
 //イニシャライズ
 void CObjStatus::Init()
 {
-	m_red = 1.0f;		//HP用カラー 赤	の初期化
+	m_red = 0.0f;		//HP用カラー 赤	の初期化
 	m_gleen = 1.0f;		//HP用カラー 緑	の初期化
-	m_blue = 1.0f;		//HP用カラー 青	の初期化
+	m_blue = 0.0f;		//HP用カラー 青	の初期化
 
 
 }
@@ -34,11 +34,28 @@ void CObjStatus::Init()
 //アクション
 void CObjStatus::Action()
 {
-	if (g_hp >= 30.0f)
+	//HPが20.0f以下の場合
+	if (g_hp <= 20.0f)
 	{
+		//カラーを赤に変更
 		m_red = 1.0f;
-		m_gleen = 1.0f;	
-		m_blue = 1.0f;
+		m_gleen = 0.0f;	
+		m_blue = 0.0f;
+	}
+	//HPが50.0f以下の場合
+	else if (g_hp <= 50.0f)
+	{
+		//カラーを黄に変更
+		m_red = 1.0f;
+		m_gleen = 1.0f;
+		m_blue = 0.0f;
+	}
+	else	//それ以外の場合
+	{
+		//カラーを緑に変更
+		m_red = 0.0f;
+		m_gleen = 1.0f;
+		m_blue = 0.0f;
 	}
 }
 
@@ -62,10 +79,10 @@ void CObjStatus::Draw()
 	src.m_bottom = 50.0f;
 
 	//表示位置の設定
-	dst.m_top    =  10.0f + STATUS_PY;
+	dst.m_top    =  10.0f + STATUS_BACK_PY;
 	dst.m_left   =   0.0f ;
-	dst.m_right  = 324.0f + STATUS_PX;
-	dst.m_bottom =  53.0f + STATUS_PY;
+	dst.m_right  = 324.0f + STATUS_BACK_PX;
+	dst.m_bottom =  53.0f + STATUS_BACK_PY;
 
 	//描画
 	Draw::Draw(9, &src, &dst, c, 0.0f);
