@@ -70,9 +70,10 @@ void CObjBeamSaber::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true )
+	if (hit->CheckElementHit(ELEMENT_ENEMY) == true || hit->CheckElementHit(ELEMENT_NULL) == true && m_ani_time == 1)
 	{
 		Audio::Start(4);
+
 	}
 	else
 	{
@@ -82,6 +83,8 @@ void CObjBeamSaber::Action()
 	//攻撃アニメーション用---------------------------------------
 
 	m_ani_time++;		//アニメーションタイムを進ませる
+	if (m_ani_time == 1)
+
 	if (m_ani_time > 4)	//タイムが4より多くなったら
 	{
 		m_ani_frame += 1;	//フレームを進める

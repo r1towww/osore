@@ -94,7 +94,7 @@ void CObjHomingHeart::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckObjNameHit(OBJ_BEAMSABER) != nullptr)
 	{
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;

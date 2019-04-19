@@ -82,7 +82,7 @@ void CObjTwinsBlue::Action()
 
 		//20‹ŠÔŠu‚Å’eŠÛ”­ŽË
 		m_bullet_time++;
-		if (m_bullet_time > 300)
+		if (m_bullet_time > 300 && m_hp > 0)
 		{
 			m_bullet_time = 0;
 
