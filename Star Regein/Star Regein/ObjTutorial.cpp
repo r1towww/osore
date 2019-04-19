@@ -8,7 +8,6 @@
 #include "GameHead.h"
 #include "ObjTutorial.h"
 
-bool g_tutorial_flag = false;
 
 //----------------------------------
 //使用するネームスペース
@@ -32,10 +31,12 @@ void CObjTutorial::Init()
 //アクション
 void CObjTutorial::Action()
 {
+	
 	if (m_page == m_p) 
 	{//渡されたページ数と現在のページ数が同じになったら
 		g_tutorial_flag = false;
 	}
+
 
 	//惑星が選択され、戦闘画面への移行の際
 	if (g_stage == EarthStar )
@@ -72,9 +73,12 @@ void CObjTutorial::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
-
+	if (g_tutorial_flag == false)
+	{
+		return;
+	}
 	//チュートリアルフラグが立った時チュートリアルを開始する
-	if (g_tutorial_flag == true)
+	else if (g_tutorial_flag == true)
 	{
 		//テキストボックス表示
 		if (m_tipe == 0)

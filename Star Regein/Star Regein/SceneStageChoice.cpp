@@ -39,6 +39,10 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択水星.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"スキル総合.png", 7, TEX_SIZE_1024);
+	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -61,5 +65,4 @@ void CSceneStageChoice::InitScene()
 //ゲームタイトル実行中メソッド
 void CSceneStageChoice::Scene()
 {
-
 }

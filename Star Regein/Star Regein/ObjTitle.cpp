@@ -19,6 +19,8 @@ bool g_Gemini_clear=false;	//双子座
 bool g_Virgo_clear=false;	//乙女座
 bool g_Leo_clear=false;	//獅子座
 
+bool g_tutorial_flag = false;
+
 //使用するネームスペース
 using namespace GameL;
 /*		Planet列挙型
