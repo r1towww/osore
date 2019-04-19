@@ -271,7 +271,7 @@ void CObjHero::Action()
 			}
 		}
 		//QƒL[‚ª“ü—Í‚³‚ê‚½ê‡
-		else if (Input::GetVKey('Q'))
+		else if (Input::GetVKey('C'))
 		{
 			if (m_key_f == true)
 			{
