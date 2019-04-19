@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjWhitehole : public CObj
 {
 	public:
-		CObjWhitehole(float x, float y);
+		CObjWhitehole(float x, float y,int id);
 		~CObjWhitehole() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
@@ -29,4 +29,6 @@ class CObjWhitehole : public CObj
 		int m_j;
 
 		int m_time;		//無敵時間の設定
+
+		int m_whitehole_id;
 };

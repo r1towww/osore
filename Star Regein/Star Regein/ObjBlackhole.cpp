@@ -13,17 +13,19 @@ using namespace GameL;
 float* g_blackhole_x[10];//全てのブラックホールのX位置を把握する
 float* g_blackhole_y[10];//全てのブラックホールのY位置を把握する
 
-CObjBlackhole::CObjBlackhole(float x, float y)
+CObjBlackhole::CObjBlackhole(float x, float y,int id)
 {
 	m_px = x;		//位置
 	m_py = y;
+
+	m_blackhole_id = id;
 }
 
 //イニシャライズ
 void CObjBlackhole::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackholecnt, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE, 1);
 	//作成のたびにカウントを増やし、別のオブジェクトとする
 }
 

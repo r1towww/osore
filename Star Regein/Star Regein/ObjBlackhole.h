@@ -15,7 +15,7 @@ using namespace GameL;
 class CObjBlackhole : public CObj
 {
 	public:
-		CObjBlackhole(float x, float y);
+		CObjBlackhole(float x, float y,int id);
 		~CObjBlackhole() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
@@ -35,4 +35,6 @@ class CObjBlackhole : public CObj
 		int m_j;
 
 		int m_time;		//無敵時間の設定
+
+		int m_blackhole_id;
 };

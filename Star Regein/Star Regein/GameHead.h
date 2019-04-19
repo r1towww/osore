@@ -37,6 +37,7 @@ enum OBJ_NAME
 	OBJ_RED_BULLET,
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
+	OBJ_LIBRA,
 
 	OBJ_BEAMSABER,
 
@@ -149,12 +150,13 @@ extern float* g_twinsred_x[20];//全ての双子（赤）のX位置を把握する
 extern float* g_twinsred_y[20];//全ての双子（赤）のY位置を把握する
 extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
+extern float* g_libra_x[20];//すべての天秤のX位置を把握する
+extern float* g_libra_y[20];//すべての天秤のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
-extern int g_blackholecnt;	//ブラックホールカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
@@ -167,6 +169,7 @@ extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
+extern bool g_libra_d_flag[20];//天秤削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -217,6 +220,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjRedBullet.h"
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
+#include "ObjLibra.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
