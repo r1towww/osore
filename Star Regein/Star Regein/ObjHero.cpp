@@ -265,8 +265,11 @@ void CObjHero::Action()
 				//乙女座の場合
 				else if (g_skill == Virgo)
 				{
+					//ブロック情報を持ってくる
+					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 					//ハート弾オブジェクト作成
-					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px, m_py);
+					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
 					g_mp -= 20.0f;	//mp消費
@@ -392,6 +395,7 @@ void CObjHero::Action()
 						m_vy = -10.0f;//したに移動させる
 					}
 				}
+				
 
 				//ダメージ音を鳴らす
 				Audio::Start(5);
