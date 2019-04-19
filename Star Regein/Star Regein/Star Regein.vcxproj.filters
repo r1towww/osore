@@ -157,9 +157,6 @@
     <ClCompile Include="ObjWoman.cpp">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStatus.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
@@ -169,8 +166,8 @@
     <ClCompile Include="SceneStageClear.cpp">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeamSaber.cpp">
-      <Filter>ソースファイル\主人公\攻撃</Filter>
+    <ClCompile Include="ObjStatus.cpp">
+      <Filter>ソースファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +326,6 @@
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjStatus.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjWoman.h">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
