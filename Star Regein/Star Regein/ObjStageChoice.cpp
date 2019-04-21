@@ -23,7 +23,6 @@ void CObjStageChoice::Init()
 void CObjStageChoice::Action()
 {
 
-
 }
 
 //ドロー
@@ -68,11 +67,12 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(3, &src, &dst, c, 0.0f);
-	//----------------------------------------
 	if (g_Earth_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 10, 500, 40, y);
+		Font::StrDraw(L"CLEAR!", 10, 400, 40, y);
 	}
+
+	//----------------------------------------
 
 	//金星------------------------------------
 	//切り取り位置の設定
@@ -87,13 +87,15 @@ void CObjStageChoice::Draw()
 	dst.m_right  = 350.0f;
 	dst.m_bottom = 500.0f;
 
+
 	//表示
 	Draw::Draw(4, &src, &dst, c, 0.0f);
-	//----------------------------------------
 	if (g_Venus_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 220, 400, 40, y);
+		Font::StrDraw(L"CLEAR!", 220, 350, 40, y);
 	}
+
+	//----------------------------------------
 
 	//水星------------------------------------
 	//切り取り位置の設定
@@ -110,6 +112,11 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(5, &src, &dst, c, 0.0f);
+	if (g_Mercury_clear == true)
+	{
+		Font::StrDraw(L"CLEAR!", 470, 150, 40, y);
+	}
+
 	//----------------------------------------
 
 	//太陽------------------------------------
@@ -127,6 +134,11 @@ void CObjStageChoice::Draw()
 
 	//表示
 	Draw::Draw(6, &src, &dst, c, 0.0f);
+	if (g_Sun_clear == true)
+	{
+		Font::StrDraw(L"CLEAR!", 680, 150, 40, y);
+	}
+
 	//----------------------------------------
 
 }

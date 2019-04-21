@@ -22,7 +22,7 @@ class ObjStageChoiceHero :public CObj
 		void Init();    //イニシャライズ
 		void Action();  //アクション
 		void Draw();    //ドロー
-
+	
 		void SetAlpha(float a) { m_alpha = a; }	//アルファ値をセットする関数
 
 	private:

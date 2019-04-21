@@ -64,8 +64,8 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
@@ -75,8 +75,10 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
-	Draw::LoadImageW(L"着弾アニメーション.png", 21, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"天秤座敵.png", 23, TEX_SIZE_128);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);

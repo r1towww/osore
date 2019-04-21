@@ -69,8 +69,8 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
@@ -80,7 +80,8 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 
 	//Audio
@@ -90,7 +91,7 @@ void CSceneSunLeo::InitScene()
 	Audio::LoadAudio(4, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(5, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
-													  //blockオブジェクト作成
+    //blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);
 
@@ -130,7 +131,7 @@ void CSceneSunLeo::InitScene()
 void CSceneSunLeo::Scene()
 {
 	//太陽で星を14個集めたら次へ移行
-	if (g_StarCount == LEOMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		g_Leo = true;		//スキル（天秤座）をオンにする
 		//獅子座をクリア表示

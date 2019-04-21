@@ -70,22 +70,6 @@ void CObjHomingHeart::Action()
 		{ 0, 320,   352, 32 },
 	};
 
-	//小から大
-	RECT_F ani_src2[12] =
-	{
-		{ 0, 320,   352, 32 },
-		{ 0, 288,   320, 32 },
-		{ 0, 256,   288, 32 },
-		{ 0, 224,   256, 32 },
-		{ 0, 192,   224, 32 },
-		{ 0, 160,   192, 32 },
-		{ 0, 128,   160, 32 },
-		{ 0,  96,   128, 32 },
-		{ 0,  64,    96, 32 },
-		{ 0,  32,    64, 32 },
-		{ 0,   0,    32, 32 },
-	};
-
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -101,8 +85,8 @@ void CObjHomingHeart::Action()
 			float ar = GetAtan2Angle(x, y);
 
 			//主人公機と敵角度があんまりにもかけ離れたら
-			m_vx = cos(3.14 / 180 * ar) * 2;
-			m_vy = sin(3.14 / 180 * ar) * 2;
+			m_vx = cos(3.14 / 180 * ar) * 3;
+			m_vy = sin(3.14 / 180 * ar) * 3;
 		}
 
 
@@ -110,7 +94,7 @@ void CObjHomingHeart::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_COW) != nullptr)//当たっていたら取得
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckObjNameHit(OBJ_BEAMSABER) != nullptr)
 	{
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;
@@ -135,24 +119,15 @@ void CObjHomingHeart::Action()
 				m_eff.m_right = 220;
 				m_eff.m_bottom = 203;
 
+				this->SetStatus(false);
+				Hits::DeleteHitBox(this);
+
 			}
 		}
 		else
 		{
 			m_ani_time++;
 		}
-
-		/*攻撃アニメーション用
-		if (m_ani_time > 10)
-		{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-		}
-		if (m_ani_frame == 10)
-		{
-		m_ani_frame = 0;
-		}
-		*/
 	}
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -160,13 +135,13 @@ void CObjHomingHeart::Action()
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
 
-	//位置の更新
+	 //位置の更新
 	m_x += m_vx*1.0;
 	m_y += m_vy*1.0;
 
 	m_time++;
 
-	if (m_time >= 300)
+	if (m_time >= 200)
 	{
 		m_time = 0.0f;
 
@@ -202,7 +177,7 @@ void CObjHomingHeart::Draw()
 		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
 
 		//表示
-		Draw::Draw(21, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
 
 	}
 	else {
@@ -219,6 +194,6 @@ void CObjHomingHeart::Draw()
 		dst.m_bottom = 32.0f + m_y  + block->GetScrolly();
 
 		//表示
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+		Draw::Draw(22, &src, &dst, c, 0.0f);
 	}
 }

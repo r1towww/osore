@@ -32,6 +32,7 @@ void CObjSkillVirgo::Init()
 	//着弾フラグ初期化
 	m_hit_flag = false;
 
+	//主人公の向きを取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_posture = hero->GetPos();
 
@@ -73,20 +74,21 @@ void CObjSkillVirgo::Init()
 	}
 	//当たり判定をセット
 	if (g_posture == 1)  //上
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 2) //左
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 3) //下
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
 	else if (g_posture == 4) //右
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_VIRGO_SKILL, OBJ_SKILL_VIRGO, 1);
+		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
 
 }
 
 //アクション
 void CObjSkillVirgo::Action()
 {
-	//大から小
+	//着弾アニメーション
+	
 	RECT_F ani_src[12] =
 	{
 		{ 0,   0,    32, 32 },
@@ -102,22 +104,7 @@ void CObjSkillVirgo::Action()
 		{ 0, 320,   352, 32 },
 	};
 
-	//小から大
-	RECT_F ani_src2[12] =
-	{
-		{ 0, 320,   352, 32 },
-		{ 0, 288,   320, 32 },
-		{ 0, 256,   288, 32 },
-		{ 0, 224,   256, 32 },
-		{ 0, 192,   224, 32 },
-		{ 0, 160,   192, 32 },
-		{ 0, 128,   160, 32 },
-		{ 0,  96,   128, 32 },
-		{ 0,  64,    96, 32 },
-		{ 0,  32,    64, 32 },
-		{ 0,   0,    32, 32 },
-	};
-
+	//主人公の向きによって弾の出る方向を変える
 	if (m_posture == 1)//上
 	{
 		m_vy -= MOVE;
@@ -144,8 +131,13 @@ void CObjSkillVirgo::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+
 	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_COW) != nullptr)//当たっていたら取得
+	if (hit->CheckObjNameHit(OBJ_COW) != nullptr       ||
+		hit->CheckObjNameHit(OBJ_TWINS_BLUE) !=nullptr ||
+		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
+		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr     
+		)//当たっていたら取得
 	{
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;
@@ -177,17 +169,7 @@ void CObjSkillVirgo::Action()
 			m_ani_time++;
 		}
 
-		/*攻撃アニメーション用
-		if (m_ani_time > 10)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-		if (m_ani_frame == 10)
-		{
-			m_ani_frame = 0;
-		}
-	*/
+		
 	}
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -233,7 +215,7 @@ void CObjSkillVirgo::Draw()
 		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
 
 		//表示
-		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(51, &m_eff, &dst, c, 0.0f);
 
 	}
 	else {
@@ -250,6 +232,6 @@ void CObjSkillVirgo::Draw()
 		dst.m_bottom = 32.0f + m_y + m_pos_y + block->GetScrolly();
 
 		//表示
-		Draw::Draw(22, &src, &dst, c, 0.0f);
+		Draw::Draw(50, &src, &dst, c, 0.0f);
 	}
 }

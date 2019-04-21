@@ -64,19 +64,22 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
+	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
+	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"着弾アニメーション.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -106,12 +109,27 @@ void CSceneMercuryGemini::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+
+	//チュートリアル吹き出し作成
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
+	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+	//チュートリアルオブジェクト作成
+	CObjTutorial* objtutorial = new CObjTutorial(1, 3);
+	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+	//チュートリアル発生時のみ作成
+	if (g_tutorial_flag == true)
+	{
+		//テキストボックスオブジェクト作成
+		CObjTextBox* objtextbox = new CObjTextBox();
+		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+	}
+
 }
 
 //実行中メソッド
 void CSceneMercuryGemini::Scene()
 {
-	//水星（ふたご座）で星を18個集めたら次へ移行
+	//水星（ふたご座）で星を14個集めたら次へ移行
 	if (g_StarCount == GEMINIMAXSTAR)
 	{
 		//ふたご座のスキル開放

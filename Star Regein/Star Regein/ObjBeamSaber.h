@@ -17,7 +17,7 @@ class CObjBeamSaber : public CObj
 	private:
 		float m_x;
 		float m_y;
-		int m_time;
+		bool m_f;		//サウンド用フラグ
 		int m_pos_x;	//ヒットボックスの向き用変数
 		int m_pos_y;
 		int m_angle;	//ビームサーベルの角度用変数
