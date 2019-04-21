@@ -116,7 +116,6 @@ void CObjStar::Draw()
 
 	RECT_F dst;	//描画先表示位置
 
-
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 

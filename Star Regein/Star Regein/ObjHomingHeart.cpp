@@ -135,7 +135,7 @@ void CObjHomingHeart::Action()
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
 
-	 //位置の更新
+	//位置の更新
 	m_x += m_vx*1.0;
 	m_y += m_vy*1.0;
 
