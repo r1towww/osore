@@ -160,6 +160,9 @@
     <ClCompile Include="ObjWoman.cpp">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClCompile>
+    <ClCompile Include="ObjStatus.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
@@ -172,10 +175,8 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStatus.cpp">
-      <Filter>ソースファイル\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp">
+    <ClCompile Include="ObjSkillLeo.cpp" />
+    <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -339,6 +340,9 @@
     <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル\タイトル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjStatus.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
     <ClInclude Include="ObjWoman.h">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClInclude>
@@ -354,10 +358,8 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStatus.h">
-      <Filter>ソースファイル\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h">
+    <ClInclude Include="ObjSkillLeo.h" />
+    <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
   </ItemGroup>
