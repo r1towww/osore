@@ -5,9 +5,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//定数
-#define GEMINIMAXSTAR	14	//双子座の星の数
-
 //シーン：メイン
 class CSceneMercuryGemini :public CScene
 {
