@@ -24,8 +24,15 @@ CObjBlackhole::CObjBlackhole(float x, float y,int id)
 //イニシャライズ
 void CObjBlackhole::Init()
 {
+	m_ani = 0;			//アニメーション用
+	m_ani_time = 0;		//アニメーション間隔タイム
+	m_eff.m_top = 0;
+	m_eff.m_left = 0;
+	m_eff.m_right = 200;
+	m_eff.m_bottom = 200;
+
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackhole_cnt, 1);
 	//作成のたびにカウントを増やし、別のオブジェクトとする
 }
 
@@ -37,6 +44,41 @@ void CObjBlackhole::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+
+	//エフェクト用
+	RECT_F ani_src[10] =
+	{
+		{ 0,   0,  192, 192 },
+		{ 0, 192,  384, 192 },
+		{ 0, 384,  576, 192 },
+		{ 0, 576,  768, 192 },
+		{ 0, 768,  960, 192 },
+		{ 0,   0,  192, 384 },
+		{ 0, 192,  384, 384 },
+		{ 0, 384,  576, 384 },
+		{ 0, 576,  768, 384 },
+		{ 0, 768,  960, 384 },
+	};
+
+
+	//アニメーションのコマ間隔制御
+	if (m_ani_time > 2)
+	{
+		m_ani++;		//アニメーションのコマを1つ進める
+		m_ani_time = 0;
+
+		m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+	}
+	else
+	{
+		m_ani_time++;
+	}
+	//８番目（画像最後）まで進んだら、削除
+	if (m_ani == 10)
+	{
+		m_ani = 0;
+	}
+
 	//HitBoxの位置の変更
 	hit->SetPos(m_px + block->GetScrollx() + 20, m_py + block->GetScrolly() + 20);
 }
@@ -47,16 +89,9 @@ void CObjBlackhole::Draw()
 	//描画カラー情報
 	float c[4] = { 0.5f,0.5f,0.5f,1.0f };
 
-	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 256.0f;
-	src.m_bottom = 256.0f;
-
-	//ブロック情報を持ってくる
+				//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//表示位置の設定
@@ -66,7 +101,7 @@ void CObjBlackhole::Draw()
 	dst.m_bottom = ALLSIZE + m_py + block->GetScrolly();
 
 	//描画
-	Draw::Draw(12, &src, &dst, c, 90.0f);
+	Draw::Draw(12, &m_eff, &dst, c, 90.0f);
 }
 
 

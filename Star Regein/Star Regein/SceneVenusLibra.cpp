@@ -66,7 +66,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
-	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
+	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_1024);
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
