@@ -133,6 +133,7 @@
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
+    <ClCompile Include="ObjHelp.cpp" />
     <ClCompile Include="ObjHomingHeart.cpp" />
     <ClCompile Include="ObjLibra.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjCow.h" />
+    <ClInclude Include="ObjHelp.h" />
     <ClInclude Include="ObjHomingHeart.h" />
     <ClInclude Include="ObjLibra.h" />
     <ClInclude Include="ObjMessage.h" />

@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
 
+	OBJ_HELP,
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
@@ -258,6 +259,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
+#include "ObjHelp.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
