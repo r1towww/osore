@@ -15,7 +15,7 @@ using namespace GameL;
 int g_asteroid;
 int g_block;
 int g_blackhole_cnt = 0;
-
+int g_whitehole_cnt = 0;
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
@@ -215,6 +215,7 @@ void CObjBlock::Init()
 				float* bx = objablackhole->GetBX();
 				float* by = objablackhole->GetBY();
 
+				
 				g_blackhole_x[m_b_c] = objablackhole->GetBX();
 				g_blackhole_y[m_b_c] = objablackhole->GetBY();
 
@@ -235,7 +236,8 @@ void CObjBlock::Init()
 
 				m_w_c++;
 
-				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE + g_whitehole_cnt, 9);//マネージャに登録
+				g_whitehole_cnt++;
 			}
 		}
 	}

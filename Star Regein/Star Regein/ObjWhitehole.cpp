@@ -25,7 +25,7 @@ CObjWhitehole::CObjWhitehole(float x, float y,int id)
 void CObjWhitehole::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_WHITEHOLE, 1);
+	Hits::SetHitBox(this, m_px + 20, m_py + 20, 20.0f, 24.0f, ELEMENT_FIELD, OBJ_WHITEHOLE+g_whitehole_cnt, 1);
 }
 
 //アクション
