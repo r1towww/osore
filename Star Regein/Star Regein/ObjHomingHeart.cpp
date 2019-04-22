@@ -177,7 +177,7 @@ void CObjHomingHeart::Draw()
 		dst.m_bottom = 64.0f + m_y + block->GetScrolly();
 
 		//•\Ž¦
-		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(51, &m_eff, &dst, c, 0.0f);
 
 	}
 	else {
@@ -194,6 +194,6 @@ void CObjHomingHeart::Draw()
 		dst.m_bottom = 32.0f + m_y  + block->GetScrolly();
 
 		//•\Ž¦
-		Draw::Draw(22, &src, &dst, c, 0.0f);
+		Draw::Draw(50, &src, &dst, c, 0.0f);
 	}
 }
