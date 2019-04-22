@@ -62,9 +62,10 @@ void CObjHelp::Draw()
 //操作説明用メッセージ--------------------------
 
 	//説明用のメッセージの表示
-	Font::StrDraw(L"Zキー 前方に剣で攻撃", 65, 115, 25, c);	
-	Font::StrDraw(L"Xキー 選択中のスキル発動", 65, 140, 25, c);	
-	Font::StrDraw(L"Cキー スキルの切り替え", 65, 165, 25, c);
+	Font::StrDraw(L"Zキー 前方に剣で攻撃", 75, 120, 27, c);	
+	Font::StrDraw(L"Xキー 選択中のスキル発動", 75, 155, 27, c);
+	Font::StrDraw(L"Cキー スキルの切り替え", 75, 190, 27, c);
+	Font::StrDraw(L"Mキー マップの表示", 75, 225, 27, c);
 
 
 
@@ -73,9 +74,10 @@ void CObjHelp::Draw()
 	if (g_skill == Taurus)	//牡牛座
 	{
 		//説明文
-		Font::StrDraw(L"*牡牛座スキル*    MP消費 1ゲージ", 320, 320, 25, c);
-		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 320, 345, 25, c);
-		Font::StrDraw(L"ダッシュが可能！！", 320, 370, 25, c);
+		Font::StrDraw(L"*牡牛座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
+		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 315, 350, 25, c);
+		Font::StrDraw(L"ダッシュが可能！！", 315, 380, 25, c);
+		Font::StrDraw(L"ダッシュ！ダッシュ！ダッシュ！！", 315, 410, 25, c);
 
 		
 		//切り取り位置の設定
@@ -83,10 +85,10 @@ void CObjHelp::Draw()
 		src.m_left   = 300.0f;
 		src.m_right  = 600.0f;
 		src.m_bottom = 200.0f;
-
 	}
 	else if (g_skill == Libra)	//天秤座
 	{
+		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 600.0f;
 		src.m_right  = 900.0f;
@@ -94,6 +96,7 @@ void CObjHelp::Draw()
 	}
 	else if (g_skill == Gemini)	//双子座
 	{
+		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 900.0f;
 		src.m_right  = 1200.0f;
@@ -101,6 +104,7 @@ void CObjHelp::Draw()
 	}
 	else if (g_skill == Virgo)	//乙女座
 	{
+		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 1200.0f;
 		src.m_right  = 1500.0f;
@@ -108,6 +112,7 @@ void CObjHelp::Draw()
 	}
 	else if (g_skill == Leo)	//獅子座
 	{
+		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 1500.0f;
 		src.m_right  = 1800.0f;
@@ -119,5 +124,83 @@ void CObjHelp::Draw()
 	dst.m_right  = 280.0f;
 	dst.m_bottom = 490.0f;
 	//表示
-	Draw::Draw(13, &src, &dst, a, 0.0f);
+	Draw::Draw(13, &src, &dst, c, 0.0f);
+
+	if (g_Taurus == true)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 300.0f;
+		src.m_right  = 600.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 420.0f;
+		dst.m_right  = 480.0f;
+		dst.m_bottom = 210.0f;
+		//表示
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	}
+	if (g_Libra == true)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 600.0f;
+		src.m_right  = 900.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 490.0f;
+		dst.m_right  = 540.0f;
+		dst.m_bottom = 210.0f;
+		//表示
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	}
+	if (g_Gemini == true)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 900.0f;
+		src.m_right  = 1200.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 550.0f;
+		dst.m_right  = 600.0f;
+		dst.m_bottom = 210.0f;
+		//表示
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	}
+	if (g_Virgo == true)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 1200.0f;
+		src.m_right  = 1500.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 610.0f;
+		dst.m_right  = 660.0f;
+		dst.m_bottom = 210.0f;
+		//表示
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	}
+	if (g_Leo == true)
+	{
+		//切り取り位置の設定
+		src.m_top    = 0.0f;
+		src.m_left   = 1500.0f;
+		src.m_right  = 1800.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top    = 150.0f;
+		dst.m_left   = 670.0f;
+		dst.m_right  = 720.0f;
+		dst.m_bottom = 210.0f;
+		//表示
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+	}
+	
+
 }
