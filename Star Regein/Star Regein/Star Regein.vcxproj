@@ -133,6 +133,7 @@
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
     <ClCompile Include="ObjCow.cpp" />
+    <ClCompile Include="ObjHelp.cpp" />
     <ClCompile Include="ObjHomingHeart.cpp" />
     <ClCompile Include="ObjLibra.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
@@ -142,6 +143,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjSkill.cpp" />
+    <ClCompile Include="ObjSkillBullet.cpp" />
     <ClCompile Include="ObjSkillGemini.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -203,6 +205,7 @@
     <ClInclude Include="ObjBlock.h" />
     <ClInclude Include="ObjBeamSaber.h" />
     <ClInclude Include="ObjCow.h" />
+    <ClInclude Include="ObjHelp.h" />
     <ClInclude Include="ObjHomingHeart.h" />
     <ClInclude Include="ObjLibra.h" />
     <ClInclude Include="ObjMessage.h" />
@@ -212,6 +215,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjSkill.h" />
+    <ClInclude Include="ObjSkillBullet.h" />
     <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillTwinsB.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

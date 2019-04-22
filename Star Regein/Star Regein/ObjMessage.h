@@ -6,9 +6,12 @@
 using namespace GameL;
 
 //定数
-#define EARTHMAXSTAR	5
-#define TAURUSMAXSTAR	18
-#define LIBRAMAXSTAR	6
+#define EARTHMAXSTAR	5	//地球の星の数
+#define TAURUSMAXSTAR	18	//牡牛座の星の数
+#define LIBRAMAXSTAR	6	//天秤座の星の数
+#define GEMINIMAXSTAR	14	//双子座の星の数
+#define VIRGOMAXSTAR	15	//乙女座の星の数
+#define LEOMAXSTAR	14		//獅子座の星の数
 
 //オブジェクト：
 class CObjMessage :public CObj

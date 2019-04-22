@@ -66,9 +66,10 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
-	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
+	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
+	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
 
-
+	
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
@@ -106,7 +107,7 @@ void CSceneVenusTaurus::InitScene()
 	
 	//Statusゲージオブジェクト作成
 	CObjStatus* objstatus = new CObjStatus();
-	Objs::InsertObj(objstatus, OBJ_STATUS, 130);
+	Objs::InsertObj(objstatus, OBJ_STATUS, 100);
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();

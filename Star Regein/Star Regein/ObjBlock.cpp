@@ -14,6 +14,7 @@ using namespace GameL;
 
 int g_asteroid;
 int g_block;
+int g_blackhole_cnt = 0;
 
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
@@ -218,7 +219,8 @@ void CObjBlock::Init()
 				g_blackhole_y[m_b_c] = objablackhole->GetBY();
 
 				m_b_c++;
-				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE + g_blackhole_cnt, 9);//マネージャに登録
+				g_blackhole_cnt++;	//カウントを増やしオブジェクトを別にする
 			}
 			if (m_map[i][j] == 8)
 			{

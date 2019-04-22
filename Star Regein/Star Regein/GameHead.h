@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
 
+	OBJ_HELP,
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
@@ -48,6 +49,8 @@ enum OBJ_NAME
 	OBJ_SKILL_LEO,
 
 	OBJ_SKILL_TWINS_B,
+
+	OBJ_SKILL_BULLET,
 
 	OBJ_STATUS,
 
@@ -68,7 +71,7 @@ enum HIT_ELEMENTS
 	ELEMENT_FIELD,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
-	ELEMENT_BLUE,
+	cc,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
 
@@ -170,6 +173,7 @@ extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
+extern int g_blackhole_cnt;			//ブラックホールのカウント用
 
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
@@ -188,9 +192,10 @@ extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
 
 extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
-extern int g_mapsize;	//マップのサイズ
-extern int g_stage;		//今いるステージの値
-extern int g_skill;		//各星座スキルの値
+extern int g_mapsize;	   //マップのサイズ
+extern int g_stage;		   //今いるステージの値
+extern int g_skill;		   //各星座スキルの値
+extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern int  g_Leo_cnt;//獅子座スタンカウント
@@ -254,6 +259,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
+#include "ObjHelp.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
@@ -263,6 +269,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
+#include "ObjSkillBullet.h"
 #include "ObjSkillLeo.h"
 
 
