@@ -225,6 +225,7 @@ void ObjStageChoiceHero::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
+	float red[4] = { 1.0f,0.0f,0.0f,m_alpha };
 
 
 	//アニメーション
@@ -242,7 +243,7 @@ void ObjStageChoiceHero::Draw()
 	//地球をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2&&g_Earth_clear == false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, c);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
 	}
 	//金星
 	else if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2&&g_Earth_clear == true)
@@ -252,7 +253,7 @@ void ObjStageChoiceHero::Draw()
 	//金星をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2&&g_Venus_clear==false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, c);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
 	}
 	//水星
 	else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2&&g_Venus_clear == true)
@@ -262,7 +263,7 @@ void ObjStageChoiceHero::Draw()
 	//水星をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2&&g_Mercury_clear == false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, c);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
 	}
 	//太陽
 	else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2&&g_Mercury_clear == true)
