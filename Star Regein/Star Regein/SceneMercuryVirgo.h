@@ -5,9 +5,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-//定数
-#define VIRGOMAXSTAR	15	//乙女座の星の数
-
 //シーン：メイン
 class CSceneMercuryVirgo :public CScene
 {

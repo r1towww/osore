@@ -33,6 +33,8 @@ private:
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 
+	int m_bullet_time;//弾丸発射時間測定
+
 	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
