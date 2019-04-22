@@ -267,6 +267,7 @@ void CObjHero::Action()
 					g_mp -= 10.0f;	//mp消費
 
 				}
+				//獅子座の場合
 				else if (g_skill == Leo)
 				{
 					//スタンオブジェクト作成
