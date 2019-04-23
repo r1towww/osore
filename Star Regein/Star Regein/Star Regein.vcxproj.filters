@@ -185,6 +185,9 @@
     <ClCompile Include="ObjLeo.cpp">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClCompile>
+    <ClCompile Include="ObjMoveStone.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMoveStone.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjLeo.h">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>

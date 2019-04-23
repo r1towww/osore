@@ -95,7 +95,8 @@ struct UserData
 //------------------------------------------------
 
 
-//ゲーム内で使用されるグローバル変数・定数・列挙--
+//ゲーム内で使用されるグローバル変数・定数・列挙-------------------------------------------
+
 //定数
 #define MAPSIZE 50
 #define ALLSIZE 64.0f
@@ -177,7 +178,7 @@ extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
 extern int g_blackhole_cnt;			//ブラックホールのカウント用
-
+extern int g_whitehole_cnt;
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
@@ -202,7 +203,7 @@ extern int g_skill;		   //各星座スキルの値
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
-extern int  g_Leo_cnt;//獅子座スタンカウント
+extern float  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
 

@@ -140,6 +140,7 @@
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
+    <ClCompile Include="ObjMoveStone.cpp" />
     <ClCompile Include="ObjRedBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -213,6 +214,7 @@
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
+    <ClInclude Include="ObjMoveStone.h" />
     <ClInclude Include="ObjRedBullet.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

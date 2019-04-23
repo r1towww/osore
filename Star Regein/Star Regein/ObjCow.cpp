@@ -18,7 +18,7 @@ float* g_cow_x[20];//全ての牛のX位置を把握する
 float* g_cow_y[20];//全ての牛のY位置を把握する
 int g_cow_id[20];
 bool g_Leo_hit_flag;
-int g_Leo_cnt;
+float g_Leo_cnt;
 
 
 CObjCow::CObjCow(float x, float y, int id)
@@ -71,6 +71,7 @@ void CObjCow::Init()
 
 	srand(time(NULL));
 
+	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
@@ -407,7 +408,8 @@ void CObjCow::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
+		//ヒット判定on
+		g_Leo_hit_flag = true;
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//攻撃の左右に当たったら
@@ -416,47 +418,28 @@ void CObjCow::Action()
 
 
 			float r = hit_data[i]->r;
-			g_Leo_hit_flag = true;
 		
-
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
-		
-			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
-
-
 			//獅子座スキルヒットフラグがオンならスタンさせ
 			//カウントを進め、一定数になればスタン解除
 			
-			if (g_Leo_hit_flag == true)
-			{
-				m_vx = 0.0f;
-				m_vy = 0.0f;
-			
-				if (g_Leo_cnt >= 10)
-				{
-					g_Leo_hit_flag == false;
-				}
-
-			}
-
 		}
 
 		
 	}
+	//しし座のヒット判定がonの時スタン
+	if (g_Leo_hit_flag == true)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		g_Leo_cnt += 1.0f;
+		if (g_Leo_cnt >= 1000.0f)
+		{
+			g_Leo_hit_flag = false;
+			g_Leo_cnt = 0.0f;
+		}
+	}
+	
+
 
 	if (m_f == true)
 	{

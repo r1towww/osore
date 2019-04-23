@@ -39,6 +39,7 @@ class CObjBlock : public CObj
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
 
 		int m_c_c;//牛カウント用
+		int m_rand_cow;
 		int m_blue_c;//双子（青）カウント用
 		int m_red_c;//双子（赤）カウント用
 		int m_woman_c;//乙女カウント用

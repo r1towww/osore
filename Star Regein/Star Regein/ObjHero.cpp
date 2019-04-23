@@ -264,7 +264,7 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 10.0f;	//mp消費
+					g_mp -= 50.0f;	//mp消費
 
 				}
 				//獅子座の場合
@@ -471,12 +471,6 @@ void CObjHero::Action()
 			m_ani_frame = 0;
 		}
 
-		
-
-		//ブロックとの当たり判定実行	
-		block->BlockHit(&m_px, &m_py, true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-		);
 
 		//位置の更新
 		m_px += m_vx;
