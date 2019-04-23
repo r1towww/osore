@@ -348,7 +348,6 @@ void CObjHero::Action()
 		//ブラックホールの情報を持ってくる
 		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
-		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//ブラックホールの数forループを回す
@@ -476,7 +475,11 @@ void CObjHero::Action()
 		m_px += m_vx;
 		m_py += m_vy;
 
+		//ブロックとの当たり判定実行
 
+		block->BlockHit(&m_px, &m_py, true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 		//作成したHitBox更新用の入り口を取り出す
 		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
