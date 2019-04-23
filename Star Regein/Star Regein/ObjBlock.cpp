@@ -28,7 +28,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
-
+	
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
@@ -42,6 +42,25 @@ void CObjBlock::Init()
 		g_asteroid = 14;	//14をセット
 	}
 
+	//さらにマップのランダム処理の初期化
+	m_rand = rand() % 3;
+
+	//数値を変えることでステージ上の敵の位置を変更
+	//ランダムの値が0の場合
+	if (m_rand == 0)
+	{
+		m_rand_cow = 15;
+	}
+	else if (m_rand = 1)	//1の場合
+	{
+		m_rand_cow = 16;
+
+	}
+	else if (m_rand = 2)	//2の場合
+	{
+		m_rand_cow = 17;
+
+	}
 
 
 	m_roll = 0.0f;
@@ -61,7 +80,7 @@ void CObjBlock::Init()
 		{
 			for (int j = 0; j < MAPSIZE; j++)
 			{
-				if (m_map[i][j] == 5)
+				if (m_map[i][j] == 5||m_map[i][j]==15|| m_map[i][j] == 16 || m_map[i][j] == 17 )
 				{
 					//牛オブジェクト作成
 					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE, m_c_c);

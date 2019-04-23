@@ -71,6 +71,7 @@ void CObjCow::Init()
 
 	srand(time(NULL));
 
+	
 	//“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }

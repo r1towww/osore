@@ -471,61 +471,6 @@ void CObjHero::Action()
 			m_ani_frame = 0;
 		}
 
-		//ブラックホールの情報を持ってくる
-		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-		//ブロック情報を持ってくる
-		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		int cnt = 0;
-		//ブラックホールの数forループを回す
-		if (g_stage == VenusLibra)
-		{
-			for (int i = 0; i < 4; i++)
-			{
-				//ブラックホールと当たった場合
-				if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
-				{
-					//ワープ音
-					Audio::Start(7);
-
-					//同じ値のホワイトホール位置に移動させる
-					block->SetScrollx(-g_whitehole_x[i][0] + m_px);
-					block->SetScrolly(-g_whitehole_y[i][0] + m_py);
-				}
-			}
-		}
-		else if (g_stage == SunLeo)
-		{
-			for (int i = 0; i < 2; i++)
-			{
-				//ブラックホールと当たった場合
-				if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
-				{
-					//ワープ音
-					Audio::Start(7);
-					if (cnt == 0)
-					{
-						//同じ値のホワイトホール位置に移動させる
-						block->SetScrollx(-g_whitehole_x[i][0] + m_px);
-						block->SetScrolly(-g_whitehole_y[i][0] + m_py);
-						cnt++;
-					}
-					else if(cnt==1)
-					{
-						//同じ値のホワイトホール位置に移動させる
-						block->SetScrollx(-g_whitehole_x[i][0] + m_px);
-						block->SetScrolly(-g_whitehole_y[i][0] + m_py);
-						cnt--;
-					}
-				}
-			}
-
-		}
-		//ブロックとの当たり判定実行	
-		block->BlockHit(&m_px, &m_py, true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-		);
 
 		//位置の更新
 		m_px += m_vx;
