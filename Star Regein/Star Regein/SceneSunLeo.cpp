@@ -140,7 +140,7 @@ void CSceneSunLeo::Scene()
 	//太陽で星を14個集めたら次へ移行
 	if (g_StarCount == 14)
 	{
-		g_Leo = true;		//スキル（天秤座）をオンにする
+		g_Leo = true;		//スキル（しし座）をオンにする
 		//獅子座をクリア表示
 		g_Sun_clear = true;
 

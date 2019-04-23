@@ -400,6 +400,7 @@ void CObjHero::Action()
 			}
 		}
 
+
 		if (m_invincible_flag == false)
 		{
 			if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
@@ -474,9 +475,7 @@ void CObjHero::Action()
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
-
-		//ブロックとの当たり判定実行
-
+		//ブロックとの当たり判定実行	
 		block->BlockHit(&m_px, &m_py, true,
 			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 		);
