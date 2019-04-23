@@ -71,10 +71,9 @@ void CObjSkillGemini::Action()
 				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 				//サブ機弾丸オブジェクト作成
-				CObjSkillBullet* objB = new CObjSkillBullet(m_gx - block->GetScrollx(), m_gy - block->GetScrolly());
+				CObjSkillBullet* objB = new CObjSkillBullet(m_gx , m_gy);
 				Objs::InsertObj(objB, OBJ_SKILL_BULLET, 150);
 
-				g_gemini_check = true;
 			}
 		}
 	}

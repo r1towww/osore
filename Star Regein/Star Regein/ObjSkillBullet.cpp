@@ -40,8 +40,10 @@ void CObjSkillBullet::Init()
 	m_ani_time = 0;
 	m_ani_stop = 0;
 
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_gx, m_gy, 25, 25, ELEMENT_PLAYER, OBJ_SKILL_BULLET, 1);
+	Hits::SetHitBox(this, m_gx + pb->GetScrollx(), m_gy + pb->GetScrolly(), 25, 25, ELEMENT_PLAYER, OBJ_SKILL_BULLET, 1);
 }
 
 //アクション
@@ -71,24 +73,26 @@ void CObjSkillBullet::Action()
 	CObjWoman*woman = (CObjWoman*)Objs::GetObj(OBJ_WOMAN);
 	CObjTwinsRed*red = (CObjTwinsRed*)Objs::GetObj(OBJ_TWINS_RED);
 	CObjTwinsBlue*bule = (CObjTwinsBlue*)Objs::GetObj(OBJ_TWINS_BLUE);
+	//m_vx = 1.0f;
+	//m_vy = 1.0f;
 
-
-
-
-	//主人公機が存在する場合、誘導角度の計算する
+//主人公機が存在する場合、誘導角度の計算する	
 	if (cow || woman || red || bule != nullptr)
 	{
-		;
-			//float x;
-			//float y;
+			float x;
+			float y;
 
-			//x = 375 - (m_gx + pb->GetScrollx());
-			//y = 275 - (m_gy + pb->GetScrolly());
+			x = 375 - (m_gx + pb->GetScrollx());
+			y = 275 - (m_gy + pb->GetScrolly());
 
-			//float ar = GetAtan2Angle(x, y);
+			float ar = GetAtan2Angle(x, y);
+
+			//主人公機と敵角度があんまりにもかけ離れたら
+			m_vx = cos(3.14 / 180 * ar) * 3;
+			m_vy = sin(3.14 / 180 * ar) * 3;
 	}
 
-	//自身のHitBoxを持ってくる
+//	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
 	//敵と当たっているか確認
@@ -126,20 +130,25 @@ void CObjSkillBullet::Action()
 	}
 
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_gx + m_pos_x + pb->GetScrollx(), m_gy + m_pos_y + pb->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
+	//hit->SetPos(m_gx + m_pos_x + pb->GetScrollx(), m_gy + m_pos_y + pb->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
+
 	m_time++;
 
-	if (m_time >= 30)
+	if (m_time >= 100)
 	{
 		m_time = 0.0f;
 
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 	}
-
 	//位置の更新
-	m_gx += m_vx*HERO_VEC;
-	m_gy += m_vy*HERO_VEC;
+	m_gx += m_vx;
+	m_gy += m_vy;
+
+
+	hit->SetPos(m_gx, m_gy);			//HitBoxの位置を敵機弾丸の位置に更新
+
+	
 }
 
 //ドロー
@@ -147,7 +156,7 @@ void CObjSkillBullet::Draw()
 {
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,100.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -169,7 +178,7 @@ void CObjSkillBullet::Draw()
 		dst.m_bottom = 64.0f + m_gy + block->GetScrolly();
 
 		//表示
-		Draw::Draw(23, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(51, &m_eff, &dst, c, 0.0f);
 	}
 	else {
 		//切り取り位置の設定

@@ -193,7 +193,9 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
-extern bool g_gemini_check; //サブ機の弾丸生成の為の値
+
+extern bool g_gemini_check; //サブ機の生成の為の値
+
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern int  g_Leo_cnt;//獅子座スタンカウント

@@ -175,8 +175,10 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillBullet.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -358,8 +360,10 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillBullet.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
   </ItemGroup>

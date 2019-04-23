@@ -172,7 +172,7 @@ void ObjStageChoiceHero::Action()
 				//水星へ
 				else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
 				{
-					if (g_Venus_clear == true)
+					if (g_Venus_clear == false)
 					{
 						//▼前シーンからZキー押し続けでこれを押さないように、
 						//このシーンに入って一度も押してない状態に移行しないと
