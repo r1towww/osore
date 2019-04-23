@@ -8,31 +8,28 @@
 #include"GameL\UserData.h" 
 
 #include"GameHead.h"
-#include"ObjCow.h"
+#include"ObjLeo.h"
 #include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-float* g_cow_x[20];//全ての牛のX位置を把握する
-float* g_cow_y[20];//全ての牛のY位置を把握する
-int g_cow_id[20];
-bool g_Leo_hit_flag;
-float g_Leo_cnt;
+float* g_leo_x[50];//全ての牛のX位置を把握する
+float* g_leo_y[50];//全ての牛のY位置を把握する
 
 
-CObjCow::CObjCow(float x, float y, int id)
+CObjLeo::CObjLeo(float x, float y, int id)
 {
 	m_px = x;	//位置
 	m_py = y;
 
-	m_cow_id = id;
+	m_leo_id = id;
 }
 
 
 
 //イニシャライズ
-void CObjCow::Init()
+void CObjLeo::Init()
 {
 	m_hp = 5;        //体力
 	m_vx = 0.0f;	//移動ベクトル
@@ -48,7 +45,7 @@ void CObjCow::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
-	//blockとの衝突状態確認用
+					//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -56,7 +53,6 @@ void CObjCow::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
-
 
 	g_Leo_hit_flag = false;
 	g_Leo_cnt = 0.0f;
@@ -72,59 +68,14 @@ void CObjCow::Init()
 
 	srand(time(NULL));
 
-	
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
 
 //アクション
-void CObjCow::Action()
+void CObjLeo::Action()
 {
 	m_btime++;
-
-	//ブロック衝突で向き変更
-	if (m_hit_up == true)
-	{
-		m_movey = true;
-	}
-	if (m_hit_down == true)
-	{
-		m_movey = false;
-	}
-	if (m_hit_left == true)
-	{
-		m_movex = false;
-	}
-	if (m_hit_right == true)
-	{
-		m_movex = true;
-	}
-
-	//方向
-	if (m_movey == true)
-	{
-		m_vy = 1;
-		m_posture = 0.0f;
-		m_ani_time += 1;
-	}
-	if (m_movey == false)
-	{
-		m_vy = -1;
-		m_posture = 3.0f;
-		m_ani_time += 1;
-	}
-	if (m_movex == true)
-	{
-		m_vx = 1;
-		m_posture = 1.0f;
-		m_ani_time += 1;
-	}
-	if (m_movex == false)
-	{
-		m_vx = -1;
-		m_posture = 2.0f;
-		m_ani_time += 1;
-	}
 
 	if (m_ani_time > m_ani_max_time)
 	{
@@ -253,7 +204,7 @@ void CObjCow::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-				
+
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -311,7 +262,7 @@ void CObjCow::Action()
 				{
 					m_vy = -0.15f; //下
 				}
-			
+
 			}
 		}
 	}
@@ -409,8 +360,7 @@ void CObjCow::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-		//ヒット判定on
-		g_Leo_hit_flag = true;
+
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//攻撃の左右に当たったら
@@ -419,28 +369,47 @@ void CObjCow::Action()
 
 
 			float r = hit_data[i]->r;
-		
+			g_Leo_hit_flag = true;
+
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -20.0f;//左に移動させる
+
+			}
+			if (r >= 45 && r < 135)
+			{
+				m_vy = 20.0f;//上に移動させる
+			}
+			if (r >= 135 && r < 225)
+			{
+				m_vx = 20.0f;//右に移動させる
+			}
+			if (r >= 225 && r < 315)
+			{
+				m_vy = -20.0f;//したに移動させる
+			}
+
+
 			//獅子座スキルヒットフラグがオンならスタンさせ
 			//カウントを進め、一定数になればスタン解除
-			
+
+			if (g_Leo_hit_flag == true)
+			{
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+
+				if (g_Leo_cnt >= 10)
+				{
+					g_Leo_hit_flag == false;
+				}
+
+			}
+
 		}
 
-		
-	}
-	//しし座のヒット判定がonの時スタン
-	if (g_Leo_hit_flag == true)
-	{
-		m_vx = 0.0f;
-		m_vy = 0.0f;
-		g_Leo_cnt += 1.0f;
-		if (g_Leo_cnt >= 1000.0f)
-		{
-			g_Leo_hit_flag = false;
-			g_Leo_cnt = 0.0f;
-		}
-	}
-	
 
+	}
 
 	if (m_f == true)
 	{
@@ -469,7 +438,7 @@ void CObjCow::Action()
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
-		g_cow_d_flag[m_cow_id] = false;
+		g_leo_d_flag[m_leo_id] = false;
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
@@ -478,7 +447,7 @@ void CObjCow::Action()
 }
 
 //ドロー
-void CObjCow::Draw()
+void CObjLeo::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
@@ -489,7 +458,7 @@ void CObjCow::Draw()
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
-	//ブロック情報を持ってくる
+			   //ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
@@ -506,5 +475,5 @@ void CObjCow::Draw()
 
 
 	//描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	Draw::Draw(52, &src, &dst, c, 0.0f);
 }

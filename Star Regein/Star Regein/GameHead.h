@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
+	OBJ_LEO,
 
 	OBJ_HELP,
 	OBJ_BEAMSABER,
@@ -95,7 +96,8 @@ struct UserData
 //------------------------------------------------
 
 
-//ゲーム内で使用されるグローバル変数・定数・列挙--
+//ゲーム内で使用されるグローバル変数・定数・列挙-------------------------------------------
+
 //定数
 #define MAPSIZE 50
 #define ALLSIZE 64.0f
@@ -169,13 +171,15 @@ extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
 extern float* g_libra_x[20];//すべての天秤のX位置を把握する
 extern float* g_libra_y[20];//すべての天秤のY位置を把握する
+extern float* g_leo_x[50];//全ての獅子のX位置を把握する
+extern float* g_leo_y[50];//全ての獅子のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
 extern int g_blackhole_cnt;			//ブラックホールのカウント用
-
+extern int g_whitehole_cnt;
 extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
@@ -188,6 +192,7 @@ extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
 extern bool g_libra_d_flag[20];//天秤削除フラグ
+extern bool g_leo_d_flag[50];//獅子削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -196,10 +201,12 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
-extern bool g_gemini_check; //サブ機の弾丸生成の為の値
+
+extern bool g_gemini_check; //サブ機の生成の為の値
+
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
-extern int  g_Leo_cnt;//獅子座スタンカウント
+extern float  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
 
@@ -223,8 +230,6 @@ extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
 
-extern int g_cow_id[20];//牛の識別ID
-
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -243,6 +248,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
 #include "ObjLibra.h"
+#include "ObjLeo.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"

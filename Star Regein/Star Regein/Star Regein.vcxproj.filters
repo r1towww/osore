@@ -182,8 +182,11 @@
     <ClCompile Include="ObjHelp.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBreakRock.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    <ClCompile Include="ObjLeo.cpp">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMoveStone.cpp">
+      <Filter>ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -371,8 +374,11 @@
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBreakRock.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    <ClInclude Include="ObjMoveStone.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +456,9 @@
     </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\獅子">
+      <UniqueIdentifier>{634f1ffc-bea0-424e-aac9-1347666c154d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
