@@ -132,16 +132,24 @@ void CObjSkillVirgo::Action()
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 
-	//主人公と当たっているか確認
+	//各敵と当たっているか確認
 	if (hit->CheckObjNameHit(OBJ_COW) != nullptr       ||
 		hit->CheckObjNameHit(OBJ_TWINS_BLUE) !=nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
-		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr     
-		)//当たっていたら取得
+		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr)//当たっていたら取得  
 	{
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+
+		//HPが減っていたら30回復
+		if (g_hp <= 100)
+		{
+
+			g_hp += 30;
+
+		}
+
 	}
 
 	if (m_hit_flag == true)

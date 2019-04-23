@@ -264,7 +264,7 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 10.0f;	//mpÁ”ï
+					g_mp -= 50.0f;	//mpÁ”ï
 
 				}
 				//‚qÀ‚Ìê‡
