@@ -264,7 +264,7 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 10.0f;	//mp消費
+					g_mp -= 50.0f;	//mp消費
 
 				}
 				//獅子座の場合
@@ -470,12 +470,6 @@ void CObjHero::Action()
 		{
 			m_ani_frame = 0;
 		}
-
-		//ブラックホールの情報を持ってくる
-		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-		//ブロック情報を持ってくる
-		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		int cnt = 0;
 		//ブラックホールの数forループを回す
