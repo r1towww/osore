@@ -34,7 +34,9 @@ class CObjBlackhole : public CObj
 		int m_i;		//位置	
 		int m_j;
 
-		int m_time;		//無敵時間の設定
+		int	 m_ani;			//アニメーション用
+		int	 m_ani_time;	//アニメーション間隔タイム
+		RECT_F m_eff;		//エフェクト描画用
 
 		int m_blackhole_id;
 };

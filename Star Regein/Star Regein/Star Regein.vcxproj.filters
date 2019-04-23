@@ -160,9 +160,6 @@
     <ClCompile Include="ObjWoman.cpp">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClCompile>
-    <ClCompile Include="ObjStatus.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
@@ -175,11 +172,21 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp">
-      <Filter>ソースファイル\スキル</Filter>
+    <ClCompile Include="ObjStatus.cpp">
+      <Filter>ソースファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHelp.cpp">
+      <Filter>ソースファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeo.cpp">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMoveStone.cpp">
+      <Filter>ソースファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,9 +349,6 @@
     <ClInclude Include="SceneTitle.h">
       <Filter>ソースファイル\タイトル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjStatus.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
-    </ClInclude>
     <ClInclude Include="ObjWoman.h">
       <Filter>ソースファイル\各惑星敵\乙女</Filter>
     </ClInclude>
@@ -360,11 +364,21 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h">
-      <Filter>ソースファイル\スキル</Filter>
+    <ClInclude Include="ObjStatus.h">
+      <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHelp.h">
+      <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMoveStone.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +456,9 @@
     </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\獅子">
+      <UniqueIdentifier>{634f1ffc-bea0-424e-aac9-1347666c154d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

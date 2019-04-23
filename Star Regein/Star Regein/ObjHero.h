@@ -48,8 +48,8 @@ private:
 
 	int m_f;//攻撃制御用
 	bool m_key_f;
+	bool m_help_key_f;	//helpキー用のフラグ
 
-	
 	int m_time;//無敵時間カウント
 	int m_MP_time;//ＭＰ減少カウント
 	int m_regene_time;//ＭＰリジェネカウント

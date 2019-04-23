@@ -14,7 +14,8 @@ using namespace GameL;
 
 int g_asteroid;
 int g_block;
-
+int g_blackhole_cnt = 0;
+int g_whitehole_cnt = 0;
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
@@ -27,7 +28,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
-
+	
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
@@ -42,7 +43,6 @@ void CObjBlock::Init()
 	}
 
 
-
 	m_roll = 0.0f;
 
 	m_blue_c = 0;
@@ -52,9 +52,10 @@ void CObjBlock::Init()
 	m_b_c = 0;
 	m_w_c = 0;
 	m_libra_c = 0;
+	m_leo_c = 0;
 
 	//敵出現
-	if (g_stage == VenusTaurus||g_stage==SunLeo)
+	if (g_stage == VenusTaurus)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -89,7 +90,7 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//乙女オブジェクト作成
-					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,m_woman_c);
+					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE, m_woman_c);
 					//敵の位置を取得
 					float* wx = woman->GetPX();
 					float* wy = woman->GetPY();
@@ -107,7 +108,7 @@ void CObjBlock::Init()
 		}
 	}
 
-	else if(g_stage == MercuryGemini )
+	else if (g_stage == MercuryGemini)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -178,6 +179,34 @@ void CObjBlock::Init()
 		}
 	}
 
+	else if (g_stage == SunLeo)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//獅子オブジェクト作成
+					CObjLeo* leo = new CObjLeo(j*MAPSIZE, i*MAPSIZE, m_leo_c);
+					//敵の位置を取得
+					float* lx = leo->GetPX();
+					float* ly = leo->GetPY();
+
+					g_leo_x[m_leo_c] = leo->GetPX();
+					g_leo_y[m_leo_c] = leo->GetPY();
+
+					g_leo_d_flag[m_leo_c] = true;
+
+					m_leo_c++;
+
+					Objs::InsertObj(leo, OBJ_LEO, 10);
+				}
+			}
+		}
+	}
+
+
 	//出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -214,11 +243,13 @@ void CObjBlock::Init()
 				float* bx = objablackhole->GetBX();
 				float* by = objablackhole->GetBY();
 
+				
 				g_blackhole_x[m_b_c] = objablackhole->GetBX();
 				g_blackhole_y[m_b_c] = objablackhole->GetBY();
 
 				m_b_c++;
-				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE, 9);//マネージャに登録
+				Objs::InsertObj(objablackhole, OBJ_BLACKHOLE + g_blackhole_cnt, 9);//マネージャに登録
+				g_blackhole_cnt++;	//カウントを増やしオブジェクトを別にする
 			}
 			if (m_map[i][j] == 8)
 			{
@@ -233,7 +264,8 @@ void CObjBlock::Init()
 
 				m_w_c++;
 
-				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE + g_whitehole_cnt, 9);//マネージャに登録
+				g_whitehole_cnt++;
 			}
 		}
 	}
