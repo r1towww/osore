@@ -55,7 +55,7 @@ void CObjBlock::Init()
 	m_leo_c = 0;
 
 	//“GoŒ»
-	if (g_stage == VenusTaurus || g_stage == SunLeo)
+	if (g_stage == VenusTaurus)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -179,7 +179,7 @@ void CObjBlock::Init()
 		}
 	}
 
-	else if (g_stage == Sun)
+	else if (g_stage == SunLeo)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
