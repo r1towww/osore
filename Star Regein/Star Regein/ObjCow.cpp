@@ -57,6 +57,7 @@ void CObjCow::Init()
 	m_key_f = false;		//–³“GŠÔs“®§Œä
 	m_f = false;
 
+
 	g_Leo_hit_flag = false;
 	g_Leo_cnt = 0.0f;
 
