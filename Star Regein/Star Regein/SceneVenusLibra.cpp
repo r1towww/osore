@@ -70,6 +70,8 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+
 	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
 
@@ -80,7 +82,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"天秤座敵.png", 23, TEX_SIZE_128);
-
+	
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);

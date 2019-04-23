@@ -25,7 +25,9 @@ public:
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
+	float GetDashF() { return m_dash_flag; } //ダッシュフラグの取得
 
+	
 private:
 	float m_px;  //位置
 	float m_py;

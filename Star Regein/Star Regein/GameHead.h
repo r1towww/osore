@@ -27,6 +27,7 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
 	OBJ_BLACKHOLE4,
+	OBJ_BREAKROCK,
 
 	OBJ_WHITEHOLE,
 
@@ -249,6 +250,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjAsteroid.h"
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
+#include "ObjBreakRock.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"

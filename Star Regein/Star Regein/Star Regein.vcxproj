@@ -129,6 +129,7 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjAsteroid.cpp" />
     <ClCompile Include="ObjBlackhole.cpp" />
+    <ClCompile Include="ObjBreakRock.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
     <ClCompile Include="ObjBeamSaber.cpp" />
@@ -200,6 +201,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjBreakRock.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjAsteroid.h" />
     <ClInclude Include="ObjBlock.h" />

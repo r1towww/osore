@@ -237,6 +237,12 @@ void CObjBlock::Init()
 
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE, 9);//マネージャに登録
 			}
+			if (m_map[i][j] == 15)
+			{
+				//ブレイクロックオブジェクト作成
+				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				Objs::InsertObj(objbrock, OBJ_BREAKROCK, 9);//マネージャに登録
+			}
 		}
 	}
 
