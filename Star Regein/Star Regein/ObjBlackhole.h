@@ -37,7 +37,6 @@ class CObjBlackhole : public CObj
 		int	 m_ani;			//アニメーション用
 		int	 m_ani_time;	//アニメーション間隔タイム
 		RECT_F m_eff;		//エフェクト描画用
-		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
 
 		int m_blackhole_id;
 };

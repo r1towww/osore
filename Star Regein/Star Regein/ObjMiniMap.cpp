@@ -135,7 +135,17 @@ void CObjMiniMap::Draw()
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
-				if (g_map[i][j] == 4)//星
+				if (g_map[i][j] == 2)//星（取得前）
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 410.0f;
+					src.m_right  = 440.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 4)//星（取得後）
 				{
 					//切り取り位置の設定
 					src.m_top = 0.0f;

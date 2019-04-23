@@ -39,6 +39,7 @@ enum OBJ_NAME
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
 
+	OBJ_HELP,
 	OBJ_BEAMSABER,
 
 	OBJ_SKILL,
@@ -259,6 +260,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjGameOver.h"
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
+#include "ObjHelp.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
@@ -298,6 +300,7 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneEarth			地球
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
+	
 */
 #define SET_GAME_START  CSceneTitle
 //-----------------------------------------------
