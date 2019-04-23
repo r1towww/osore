@@ -14,9 +14,8 @@
 //使用するネームスペース
 using namespace GameL;
 
-float* g_leo_x[20];//全ての牛のX位置を把握する
-float* g_leo_y[20];//全ての牛のY位置を把握する
-int g_leo_id[20];
+float* g_leo_x[50];//全ての牛のX位置を把握する
+float* g_leo_y[50];//全ての牛のY位置を把握する
 
 
 CObjLeo::CObjLeo(float x, float y, int id)
