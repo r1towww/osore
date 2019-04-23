@@ -378,14 +378,14 @@ void CObjMiniMap::Draw()
 			}
 		}
 
-		if (g_stage == Sun)
+		if (g_stage == SunLeo)
 		{
-			for (int i = 0; i < 45; i++)//“G‚Ì”•ª‰ñ‚·
+			for (int i = 0; i < 50; i++)//“G‚Ì”•ª‰ñ‚·
 			{
 				float lx = *g_leo_x[i];
 				float ly = *g_leo_y[i];
 
-				if (g_cow_d_flag[i] == true)
+				if (g_leo_d_flag[i] == true)
 				{
 					//UtilityModule‚Ìƒ`ƒFƒbƒNŠÖ”‚ÉêŠ‚Æ—Ìˆæ‚ð“n‚µA—ÌˆæŠO‚©”»’è
 					bool check;
