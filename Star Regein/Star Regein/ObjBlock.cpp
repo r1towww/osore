@@ -193,10 +193,10 @@ void CObjBlock::Init()
 					float* lx = leo->GetPX();
 					float* ly = leo->GetPY();
 
-					g_libra_x[m_leo_c] = leo->GetPX();
-					g_libra_y[m_leo_c] = leo->GetPY();
+					g_leo_x[m_leo_c] = leo->GetPX();
+					g_leo_y[m_leo_c] = leo->GetPY();
 
-					g_libra_d_flag[m_leo_c] = true;
+					g_leo_d_flag[m_leo_c] = true;
 
 					m_leo_c++;
 
