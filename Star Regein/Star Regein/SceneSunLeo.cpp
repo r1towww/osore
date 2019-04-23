@@ -86,6 +86,7 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
+	Draw::LoadImageW(L"獅子.png", 52, TEX_SIZE_512);
 
 
 	//Audio
