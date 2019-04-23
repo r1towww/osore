@@ -53,9 +53,10 @@ void CObjBlock::Init()
 	m_b_c = 0;
 	m_w_c = 0;
 	m_libra_c = 0;
+	m_leo_c = 0;
 
 	//敵出現
-	if (g_stage == VenusTaurus||g_stage==SunLeo)
+	if (g_stage == VenusTaurus || g_stage == SunLeo)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -90,7 +91,7 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//乙女オブジェクト作成
-					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,m_woman_c);
+					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE, m_woman_c);
 					//敵の位置を取得
 					float* wx = woman->GetPX();
 					float* wy = woman->GetPY();
@@ -108,7 +109,7 @@ void CObjBlock::Init()
 		}
 	}
 
-	else if(g_stage == MercuryGemini )
+	else if (g_stage == MercuryGemini)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -178,6 +179,34 @@ void CObjBlock::Init()
 			}
 		}
 	}
+
+	else if (g_stage == Sun)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//獅子オブジェクト作成
+					CObjLeo* leo = new CObjLeo(j*MAPSIZE, i*MAPSIZE, m_leo_c);
+					//敵の位置を取得
+					float* lx = leo->GetPX();
+					float* ly = leo->GetPY();
+
+					g_libra_x[m_leo_c] = leo->GetPX();
+					g_libra_y[m_leo_c] = leo->GetPY();
+
+					g_libra_d_flag[m_leo_c] = true;
+
+					m_leo_c++;
+
+					Objs::InsertObj(leo, OBJ_LEO, 10);
+				}
+			}
+		}
+	}
+
 
 	//出現
 	for (int i = 0; i < MAPSIZE; i++)

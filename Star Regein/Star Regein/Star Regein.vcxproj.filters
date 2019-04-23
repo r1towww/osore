@@ -182,6 +182,9 @@
     <ClCompile Include="ObjHelp.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="ObjLeo.cpp">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -368,6 +371,9 @@
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -444,6 +450,9 @@
     </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\獅子">
+      <UniqueIdentifier>{634f1ffc-bea0-424e-aac9-1347666c154d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
