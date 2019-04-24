@@ -27,6 +27,8 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
 	OBJ_BLACKHOLE4,
+	OBJ_BREAK_ROCK,
+	OBJ_BREAK_BIGROCK,
 
 	OBJ_WHITEHOLE,
 
@@ -38,6 +40,7 @@ enum OBJ_NAME
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
+	OBJ_LEO,
 
 	OBJ_HELP,
 	OBJ_BEAMSABER,
@@ -173,6 +176,8 @@ extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
 extern float* g_libra_x[20];//すべての天秤のX位置を把握する
 extern float* g_libra_y[20];//すべての天秤のY位置を把握する
+extern float* g_leo_x[50];//全ての獅子のX位置を把握する
+extern float* g_leo_y[50];//全ての獅子のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
@@ -192,6 +197,7 @@ extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
 extern bool g_libra_d_flag[20];//天秤削除フラグ
+extern bool g_leo_d_flag[50];//獅子削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -258,6 +264,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
 #include "ObjLibra.h"
+#include "ObjLeo.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -265,6 +272,8 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjAsteroid.h"
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
+#include "ObjBreakRock.h"
+#include "ObjBreakBigRock.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"

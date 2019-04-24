@@ -20,7 +20,7 @@ CObjMeteo::CObjMeteo(float x, float y)
 void CObjMeteo::Init()
 {
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALLSIZE, ELEMENT_FIELD, OBJ_METEO, 1);
+	Hits::SetHitBox(this, m_px + 10, m_py, 30, ALLSIZE, ELEMENT_BLOCK, OBJ_METEO, 1);
 }
 
 //アクション

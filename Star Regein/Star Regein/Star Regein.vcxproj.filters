@@ -160,14 +160,26 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillBullet.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
     <ClCompile Include="ObjStatus.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
     <ClCompile Include="ObjHelp.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMoveStone.cpp">
-      <Filter>ソースファイル</Filter>
+    <ClCompile Include="ObjBreakRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeo.cpp">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBreakBigRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
@@ -354,14 +366,26 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
+    <ClInclude Include="ObjSkillBullet.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
     <ClInclude Include="ObjStatus.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMoveStone.h">
-      <Filter>ソースファイル</Filter>
+    <ClInclude Include="ObjBreakRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBreakBigRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>

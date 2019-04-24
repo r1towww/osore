@@ -75,16 +75,34 @@ void CObjHero::Init()
 	//攻撃制御フラグ
 	m_a_flag = true;
 
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;	
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+
+
+	//獅子攻撃ヒットフラグ
+	m_eff_flag = false;
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 	m_ani = 0;			//アニメーション用
+	m_ani2 = 0;
 	m_ani_time = 0;		//アニメーション間隔タイム
 	m_eff_time = 0;
+	m_eff_time2 = 0;
 	m_eff.m_top    = 0;		//エフェクトの初期化
 	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
 	m_eff.m_bottom = 240;
+	m_eff2.m_top = 0;		//エフェクトの初期化
+	m_eff2.m_left = 0;
+	m_eff2.m_right = 192;
+	m_eff2.m_bottom = 192;
 }
 
 //アクション
@@ -214,6 +232,7 @@ void CObjHero::Action()
 			if (m_ani == 5)
 			{
 				m_ani = 0;
+				m_eff_time = 0;
 			}
 
 			//-----------------------------------------------
@@ -245,14 +264,15 @@ void CObjHero::Action()
 					}
 				}
 				//双子座の場合
-				else if (g_skill == Gemini)
+				else if (g_skill == Gemini && g_gemini_check==false)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 					//サブ機オブジェクト作成
-					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx()-20,m_py - block->GetScrolly()-5);
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					g_gemini_check = true;
 				}
 				//乙女座の場合
 				else if (g_skill == Virgo && g_mp >= 10.0f)
@@ -350,11 +370,10 @@ void CObjHero::Action()
 		//ブラックホールの情報を持ってくる
 		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
-		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//ブラックホールの数forループを回す
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < m_blackhole_num; i++)
 		{
 			//ブラックホールと当たった場合
 			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
@@ -373,7 +392,7 @@ void CObjHero::Action()
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)
@@ -402,6 +421,7 @@ void CObjHero::Action()
 				}
 			}
 		}
+
 
 		if (m_invincible_flag == false)
 		{
@@ -447,6 +467,59 @@ void CObjHero::Action()
 			}
 		}
 
+		if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			m_eff_flag = true;
+
+		}
+
+		if (m_eff_flag == true)
+		{
+			//エフェクト用
+			RECT_F ani_src2[15] =
+			{
+				{ 0,    0,  192, 192 },
+				{ 0,  192,  384, 192 },
+				{ 0,  384,  576, 192 },
+				{ 0,  576,  768, 192 },
+				{ 0,  768,  960, 192 },
+				{ 192,    0,  192, 384 },
+				{ 192,  192,  384, 384 },
+				{ 192,  384,  576, 384 },
+				{ 192,  576,  768, 384 },
+				{ 192,  768,  960, 384 },
+				{ 384,    0,  384, 576 },
+				{ 384,  192,  384, 384 },
+				{ 384,  384,  576, 384 },
+				{ 384,  576,  768, 384 },
+				{ 384,  768,  960, 384 },
+			};
+			//アニメーションのコマ間隔制御
+			if (m_eff_time2 > 2)
+			{
+				m_ani2++;		//アニメーションのコマを1つ進める
+				m_eff_time2 = 0;
+
+				m_eff2 = ani_src2[m_ani2];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_eff_time2++;
+			}
+			// 14番目（画像最後）まで進んだら、0に戻す
+			if (m_ani2 == 14)
+			{
+				m_ani2 = 0;
+				m_eff_time2 = 0;
+
+				m_eff_flag = false;
+			}
+		}
+
 		if (m_f == true)
 		{
 			m_time--;
@@ -477,8 +550,10 @@ void CObjHero::Action()
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
-
-
+		//ブロックとの当たり判定実行	
+		block->BlockHit(&m_px, &m_py, true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 		//作成したHitBox更新用の入り口を取り出す
 		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
@@ -531,12 +606,6 @@ void CObjHero::Draw()
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 
-	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
-
 	//ダッシュフラグがオンの場合
 	if (m_dash_flag == true)
 	{
@@ -551,6 +620,17 @@ void CObjHero::Draw()
 	else
 	{
 		m_ani = 0;
+	}
+
+	if (m_eff_flag == true)
+	{
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 0.0f + m_px;
+		dst.m_right = 94.0f + m_px;
+		dst.m_bottom = 94.0f + m_py;
+		//描画
+		Draw::Draw(18, &m_eff2, &dst, c, 90.0f);
 	}
 
 }

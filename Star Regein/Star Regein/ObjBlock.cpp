@@ -28,7 +28,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
-	
+	m_block_rand = 0;	//障害物ブロックのランダム化用
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
@@ -42,26 +42,6 @@ void CObjBlock::Init()
 		g_asteroid = 14;	//14をセット
 	}
 
-	//さらにマップのランダム処理の初期化
-	m_rand = rand() % 3;
-
-	//数値を変えることでステージ上の敵の位置を変更
-	//ランダムの値が0の場合
-	if (m_rand == 0)
-	{
-		m_rand_cow = 15;
-	}
-	else if (m_rand = 1)	//1の場合
-	{
-		m_rand_cow = 16;
-
-	}
-	else if (m_rand = 2)	//2の場合
-	{
-		m_rand_cow = 17;
-
-	}
-
 
 	m_roll = 0.0f;
 
@@ -72,15 +52,16 @@ void CObjBlock::Init()
 	m_b_c = 0;
 	m_w_c = 0;
 	m_libra_c = 0;
+	m_leo_c = 0;
 
 	//敵出現
-	if (g_stage == VenusTaurus||g_stage==SunLeo)
+	if (g_stage == VenusTaurus)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
 			for (int j = 0; j < MAPSIZE; j++)
 			{
-				if (m_map[i][j] == 5||m_map[i][j]==15|| m_map[i][j] == 16 || m_map[i][j] == 17 )
+				if (m_map[i][j] == 5)
 				{
 					//牛オブジェクト作成
 					CObjCow* cow = new CObjCow(j*MAPSIZE, i*MAPSIZE, m_c_c);
@@ -109,7 +90,7 @@ void CObjBlock::Init()
 				if (m_map[i][j] == 5)
 				{
 					//乙女オブジェクト作成
-					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE,m_woman_c);
+					CObjWoman* woman = new CObjWoman(j*MAPSIZE, i*MAPSIZE, m_woman_c);
 					//敵の位置を取得
 					float* wx = woman->GetPX();
 					float* wy = woman->GetPY();
@@ -127,7 +108,7 @@ void CObjBlock::Init()
 		}
 	}
 
-	else if(g_stage == MercuryGemini )
+	else if (g_stage == MercuryGemini)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{
@@ -198,6 +179,34 @@ void CObjBlock::Init()
 		}
 	}
 
+	else if (g_stage == SunLeo)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//獅子オブジェクト作成
+					CObjLeo* leo = new CObjLeo(j*MAPSIZE, i*MAPSIZE, m_leo_c);
+					//敵の位置を取得
+					float* lx = leo->GetPX();
+					float* ly = leo->GetPY();
+
+					g_leo_x[m_leo_c] = leo->GetPX();
+					g_leo_y[m_leo_c] = leo->GetPY();
+
+					g_leo_d_flag[m_leo_c] = true;
+
+					m_leo_c++;
+
+					Objs::InsertObj(leo, OBJ_LEO, 10);
+				}
+			}
+		}
+	}
+
+
 	//出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -258,6 +267,18 @@ void CObjBlock::Init()
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE + g_whitehole_cnt, 9);//マネージャに登録
 				g_whitehole_cnt++;
 			}
+			if (m_map[i][j] == 15)
+			{
+				//ブレイクロックオブジェクト作成
+				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				Objs::InsertObj(objbrock, OBJ_BREAK_ROCK, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 16)
+			{
+				//ブレイクビックロックオブジェクト作成
+				CObjBreakBigRock* objbbrock = new CObjBreakBigRock(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				Objs::InsertObj(objbbrock, OBJ_BREAK_BIGROCK, 9);//マネージャに登録
+			}
 		}
 	}
 
@@ -303,6 +324,9 @@ void CObjBlock::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };		//通常カラー
+	float r[4] = { 1.0f,0.7f,0.7f,1.0f };		//レッドカラー
+	float b[4] = { 0.7f,0.7f,1.0f,1.0f };		//ブルーカラー
+
 	float backc[4] = { m_red,m_green,m_blue,1.0f };	//背景カラー
 
 	RECT_F src;	//描画元切り取り位置

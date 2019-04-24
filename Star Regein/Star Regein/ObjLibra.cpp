@@ -53,7 +53,6 @@ void CObjLibra::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	m_btime = 0;
 
 	m_bullet_time = 100;
 
@@ -76,7 +75,6 @@ void CObjLibra::Action()
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
-		m_btime++;
 
 
 		//ブロックとの当たり判定実行
@@ -155,45 +153,19 @@ void CObjLibra::Action()
 		}
 		else
 		{
-			if (m_btime <= 500)
-			{
-				m_vy = 0;
-				m_movex = true;
-				m_posture = 1.0f;
-			}
-			if (m_btime >= 501 && m_btime <= 1000)
-			{
-				m_vx = 0;
-				m_movey = false;
-				m_posture = 3.0f;
-			}
-			if (m_btime >= 1001 && m_btime <= 1500)
-			{
-				m_vy = 0;
-				m_movex = false;
-				m_posture = 2.0f;
-			}
-			if (m_btime >= 1501 && m_btime <= 2000)
-			{
-				m_vx = 0;
-				m_movey = true;
-				m_posture = 0.0f;
-			}
-			if (m_btime >= 2001)
-				m_btime = 0;
+
 		}
 
 		//HitBoxの内容を更新
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
-		//敵とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		//主人公とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
 		{
-			//敵がブロックとどの角度で当たっているのかを確認
+			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-			hit_data = hit->SearchElementHit(ELEMENT_NULL);
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)

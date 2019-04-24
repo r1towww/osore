@@ -17,6 +17,7 @@ bool g_blue_d_flag[20];//双子（青）削除フラグ
 bool g_red_d_flag[20];//双子（赤）削除フラグ
 bool g_woman_d_flag[20];//乙女削除フラグ
 bool g_libra_d_flag[20];//天秤削除フラグ
+bool g_leo_d_flag[50];//獅子削除フラグ
 
 
 int g_map[MAPSIZE][MAPSIZE];
@@ -128,9 +129,9 @@ void CObjMiniMap::Draw()
 				if (g_map[i][j] == 1)//隕石
 				{
 					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -178,19 +179,46 @@ void CObjMiniMap::Draw()
 				if (g_map[i][j] == g_block)//隕石
 				{
 					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 15)//壊れる隕石
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 16)//壊れる隕石（大）
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+
+					//表示位置の設定
+					dst.m_top    = i*m_blocksize + m_uisize_y + 2.0f;
+					dst.m_left   = j*m_blocksize + m_uisize_x ;
+					dst.m_right  = dst.m_left + m_blocksize * 2.8;
+					dst.m_bottom = dst.m_top + m_blocksize * 2.0f;
+
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 				if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
 				{
 					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
 
 					//表示位置の設定
@@ -202,7 +230,6 @@ void CObjMiniMap::Draw()
 					//描画
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
-
 			}
 		}
 	}
@@ -362,6 +389,39 @@ void CObjMiniMap::Draw()
 						//表示位置の設定
 						dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
 						dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						dst.m_right = dst.m_left + m_blocksize;
+						dst.m_bottom = dst.m_top + m_blocksize;
+
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+				}
+			}
+		}
+
+		if (g_stage == SunLeo)
+		{
+			for (int i = 0; i < 50; i++)//敵の数分回す
+			{
+				float lx = *g_leo_x[i];
+				float ly = *g_leo_y[i];
+
+				if (g_leo_d_flag[i] == true)
+				{
+					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+					bool check;
+					check = CheckWindow(lx + block->GetScrollx(), ly + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+					if (check == true)
+					{
+						//ミニマップに敵の位置を表示する
+						//表示位置の設定
+						dst.m_top = m_uisize_y + (ly / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						dst.m_left = m_uisize_x + (lx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
 						dst.m_right = dst.m_left + m_blocksize;
 						dst.m_bottom = dst.m_top + m_blocksize;
 
