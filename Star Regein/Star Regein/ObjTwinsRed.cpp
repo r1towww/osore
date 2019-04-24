@@ -53,10 +53,8 @@ void CObjTwinsRed::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	m_btime = 0;
 
 	m_bullet_time = 100;
-
 	m_time = 30;
 
 	m_df = true;
@@ -77,8 +75,6 @@ void CObjTwinsRed::Action()
 	{
 
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		m_btime++;
 
 		//20°間隔で弾丸発射
 		m_bullet_time++;
@@ -177,44 +173,54 @@ void CObjTwinsRed::Action()
 		}
 		else
 		{
-			if (m_btime <= 500)
-			{
-				m_vy = 0;
-				m_movex = true;
-				m_posture = 4.0f;
-			}
-			if (m_btime >= 501 && m_btime <= 1000)
-			{
-				m_vx = 0;
-				m_movey = false;
-				m_posture = 1.0f;
-			}
-			if (m_btime >= 1001 && m_btime <= 1500)
-			{
-				m_vy = 0;
-				m_movex = false;
-				m_posture = 2.0f;
-			}
-			if (m_btime >= 1501 && m_btime <= 2000)
-			{
-				m_vx = 0;
-				m_movey = true;
-				m_posture = 3.0f;
-			}
-			if (m_btime >= 2001)
-				m_btime = 0;
+
 		}
 
 		//HitBoxの内容を更新
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
+		//主人公とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+		{
+			//主人公がブロックとどの角度で当たっているのかを確認
+			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			float r = 0;
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (hit_data[i] != nullptr)
+				{
+					r = hit_data[i]->r;
+
+
+					//角度で上下左右を判定
+					if ((r <= 45 && r >= 0) || r >= 315)
+					{
+						m_vx = -0.15f; //右
+					}
+					if (r > 45 && r < 135)
+					{
+						m_vy = 0.15f;//上
+					}
+					if (r >= 135 && r < 225)
+					{
+						m_vx = 0.15f;//左
+					}
+					if (r >= 225 && r < 315)
+					{
+						m_vy = -0.15f; //下
+					}
+				}
+			}
+		}
+
 		//敵とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		if (hit->CheckElementHit(ELEMENT_NULL) == true)
 		{
 			//敵がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 			hit_data = hit->SearchElementHit(ELEMENT_NULL);
 			float r = 0;
 
