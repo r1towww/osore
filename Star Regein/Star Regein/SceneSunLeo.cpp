@@ -78,6 +78,7 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+	Draw::LoadImageW(L"獅子攻撃エフェクト.png", 18, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);

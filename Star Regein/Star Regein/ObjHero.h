@@ -44,8 +44,11 @@ private:
 	int m_ani_frame;//描画フレーム
 
 	int	 m_ani;			//アニメーション用
+	int  m_ani2;
 	int	 m_eff_time;	//アニメーション間隔タイム
+	int  m_eff_time2;
 	RECT_F m_eff;		//エフェクト描画用
+	RECT_F m_eff2;		//獅子攻撃エフェクト描画用
 
 
 	int m_f;//攻撃制御用
@@ -68,6 +71,8 @@ private:
 	bool m_hit_right;
 
 	bool m_invincible_flag;//無敵フラグ
+
+	bool m_eff_flag;
 
 	
 };

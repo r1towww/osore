@@ -69,7 +69,7 @@ void CObjLeo::Init()
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_LEO, 1);
 }
 
 //アクション
@@ -202,13 +202,11 @@ void CObjLeo::Action()
 	}
 
 	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_FIELD))
+	if (hit->CheckElementHit(ELEMENT_NULL) == true)
 	{
 		//敵がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 		hit_data = hit->SearchElementHit(ELEMENT_NULL);
-		hit_data = hit->SearchElementHit(ELEMENT_FIELD);
 
 		float r = 0;
 
