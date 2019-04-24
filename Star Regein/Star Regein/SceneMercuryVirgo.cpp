@@ -20,7 +20,7 @@ using namespace GameL;
 CSceneMercuryVirgo::CSceneMercuryVirgo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-
+	cnt = 0.0f;
 }
 
 //デストラクタ
@@ -121,11 +121,44 @@ void CSceneMercuryVirgo::Scene()
 		g_Gemini = true;
 		//乙女座のクリア表記
 		g_Gemini_clear = true;
+		g_Gemini_Max = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
 			g_Mercury_clear = true;
 		}
-		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
+
+		//アイテム作成
+		MakeItem(g_Virgo_Max);
+
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+		}
+
 	}
 }
+
+//アイテム作成関数
+void CSceneMercuryVirgo::MakeItem(bool b)
+{
+	int cnt = 0;
+
+	if (b == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//スキルアイテムオブジェクト作成
+			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+			cnt++;
+		}
+	}
+}
+

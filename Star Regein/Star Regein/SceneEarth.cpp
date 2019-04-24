@@ -13,6 +13,8 @@
 using namespace GameL;
 
 int g_StarCount = 0;	//星を数える変数の初期化
+bool g_skill_item_flag;
+
 
 //使用ヘッダー
 #include "SceneEarth.h"
@@ -22,6 +24,8 @@ int g_StarCount = 0;	//星を数える変数の初期化
 CSceneEarth::CSceneEarth()
 {
 	g_StarCount = 0;
+	cnt = 0.0f;
+	g_skill_item_flag = false;
 }
 
 //デストラクタ
@@ -37,7 +41,7 @@ void CSceneEarth::InitScene()
 	unique_ptr<wchar_t> p;	//ステージ情報ポインター
 	int size;				//ステージ情報の大きさ
 	p = Save::ExternalDataOpen(L"Earth.csv", &size);//外部データ読み込み
-	
+
 	int map[50][50];
 	int count = 1;
 	for (int i = 0; i < MAPSIZE; i++)
@@ -66,16 +70,14 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png",10, TEX_SIZE_2048);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
+	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
-
+	
 
 
 	//テスト用
@@ -91,11 +93,11 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(5, L"手足・殴る、蹴る09.wav", EFFECT);		//ダメージSE
 	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
-	
+
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);
-	
+
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
 	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
@@ -122,6 +124,8 @@ void CSceneEarth::InitScene()
 		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
 	}
 
+	
+
 }
 
 
@@ -131,8 +135,35 @@ void CSceneEarth::Scene()
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == EARTHMAXSTAR)
 	{
+
 		g_Earth_clear = true;
-		Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+
+		//星を集めきるとオン
+		g_Earth_Max = true;
+
+		if (g_Earth_Max == true)
+		{
+			if (cnt >= 1)
+			{
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				cnt++;
+			}
+		}
+
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+		}
+		
 	}
-	
+
 }
+

@@ -20,7 +20,7 @@ using namespace GameL;
 CSceneMercuryGemini::CSceneMercuryGemini()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-
+	cnt = 0.0f;
 }
 
 //デストラクタ
@@ -127,6 +127,15 @@ void CSceneMercuryGemini::InitScene()
 		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
 	}
 
+	//スキルアイテム作成
+	MakeItem(g_Gemini_Max);
+
+	if (g_skill_item_flag == true)
+	{
+		g_skill_item_flag = false;
+		Scene::SetScene(new CSceneStageChoice());
+	}
+
 }
 
 //実行中メソッド
@@ -139,11 +148,38 @@ void CSceneMercuryGemini::Scene()
 		g_Gemini = true;
 		//ふたご座のクリア表記
 		g_Gemini_clear = true;
+		g_Gemini_Max = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
 			g_Mercury_clear = true;
 		}
-		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+		}
+
+	}
+}
+
+void CSceneMercuryGemini::MakeItem(bool b)
+{
+	int cnt = 0;
+
+	if (g_Libra_Max == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//スキルアイテムオブジェクト作成
+			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+			cnt++;
+		}
 	}
 }

@@ -16,11 +16,14 @@ using namespace GameL;
 #include "SceneVenusLibra.h"
 #include "GameHead.h"
 
+
+
 //コンストラクタ
 CSceneVenusLibra::CSceneVenusLibra()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-
+	
+	cnt = 0.0f;
 }
 
 //デストラクタ
@@ -135,12 +138,43 @@ void CSceneVenusLibra::Scene()
 		g_Libra = true;		//スキル（天秤座）をオンにする
 		//てんびん座をクリア表示
 		g_Libra_clear = true;
+		g_Libra_Max = true;
 		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
 		{
 			g_Venus_clear = true;
 		}
 
-		Scene::SetScene(new CSceneStageChoice());	
+		//スキルアイテム作成
+		MakeItem(g_Libra_Max);
+
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageChoice());
+		}
+		
+	}
+}
+
+
+//アイテム作成関数
+void CSceneVenusLibra::MakeItem(bool b)
+{
+	int cnt = 0;
+
+	if (b == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//スキルアイテムオブジェクト作成
+			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+			cnt++;
+		}
 	}
 }
