@@ -129,9 +129,9 @@ void CObjMiniMap::Draw()
 				if (g_map[i][j] == 1)//θ¦Ξ
 				{
 					//Ψ‚θζ‚θΚ’u‚Μέ’θ
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
 					//•`‰ζ
 					Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -179,19 +179,46 @@ void CObjMiniMap::Draw()
 				if (g_map[i][j] == g_block)//θ¦Ξ
 				{
 					//Ψ‚θζ‚θΚ’u‚Μέ’θ
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
+					//•`‰ζ
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 15)//‰σ‚κ‚ιθ¦Ξ
+				{
+					//Ψ‚θζ‚θΚ’u‚Μέ’θ
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+					//•`‰ζ
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 16)//‰σ‚κ‚ιθ¦Ξi‘εj
+				{
+					//Ψ‚θζ‚θΚ’u‚Μέ’θ
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+
+					//•\¦Κ’u‚Μέ’θ
+					dst.m_top    = i*m_blocksize + m_uisize_y + 2.0f;
+					dst.m_left   = j*m_blocksize + m_uisize_x ;
+					dst.m_right  = dst.m_left + m_blocksize * 2.8;
+					dst.m_bottom = dst.m_top + m_blocksize * 2.0f;
+
 					//•`‰ζ
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 				if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//¬f―
 				{
 					//Ψ‚θζ‚θΚ’u‚Μέ’θ
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
 					src.m_bottom = 50.0f;
 
 					//•\¦Κ’u‚Μέ’θ
@@ -203,7 +230,6 @@ void CObjMiniMap::Draw()
 					//•`‰ζ
 					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
-
 			}
 		}
 	}

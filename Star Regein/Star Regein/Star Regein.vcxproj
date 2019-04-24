@@ -129,6 +129,7 @@
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjAsteroid.cpp" />
     <ClCompile Include="ObjBlackhole.cpp" />
+    <ClCompile Include="ObjBreakBigRock.cpp" />
     <ClCompile Include="ObjBreakRock.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
     <ClCompile Include="ObjBlock.cpp" />
@@ -141,7 +142,6 @@
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
-    <ClCompile Include="ObjMoveStone.cpp" />
     <ClCompile Include="ObjRedBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -203,6 +203,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjBlackhole.h" />
+    <ClInclude Include="ObjBreakBigRock.h" />
     <ClInclude Include="ObjBreakRock.h" />
     <ClInclude Include="ObjGameOver.h" />
     <ClInclude Include="ObjAsteroid.h" />
@@ -216,7 +217,6 @@
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
-    <ClInclude Include="ObjMoveStone.h" />
     <ClInclude Include="ObjRedBullet.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

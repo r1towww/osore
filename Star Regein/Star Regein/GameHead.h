@@ -27,7 +27,8 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
 	OBJ_BLACKHOLE4,
-	OBJ_BREAKROCK,
+	OBJ_BREAK_ROCK,
+	OBJ_BREAK_BIGROCK,
 
 	OBJ_WHITEHOLE,
 
@@ -257,6 +258,7 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
 #include "ObjBreakRock.h"
+#include "ObjBreakBigRock.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"

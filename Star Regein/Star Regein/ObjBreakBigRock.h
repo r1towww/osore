@@ -6,11 +6,11 @@
 using namespace GameL;
 
 //オブジェクト：ブロック＆背景
-class CObjBreakRock : public CObj
+class CObjBreakBigRock : public CObj
 {
 	public:
-		CObjBreakRock(float x, float y,int i,int j);
-		~CObjBreakRock() {};
+		CObjBreakBigRock(float x, float y, int i, int j);
+		~CObjBreakBigRock() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
@@ -21,6 +21,11 @@ class CObjBreakRock : public CObj
 		int m_i;		//マップ上の座標取得用
 		int m_j;
 
+		int m_cnt;		//消滅までのカウント用
+		bool m_f;		//無敵用フラグ
+
+		float m_bom_x;	//爆発エフェクトの表示位置
+		float m_bom_y;
 
 		bool m_eff_flag;	//エフェクト用フラグ
 		int	 m_ani;			//アニメーション用

@@ -75,6 +75,15 @@ void CObjHero::Init()
 	//攻撃制御フラグ
 	m_a_flag = true;
 
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;	
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 
@@ -352,7 +361,7 @@ void CObjHero::Action()
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//ブラックホールの数forループを回す
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < m_blackhole_num; i++)
 		{
 			//ブラックホールと当たった場合
 			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
@@ -371,7 +380,7 @@ void CObjHero::Action()
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)

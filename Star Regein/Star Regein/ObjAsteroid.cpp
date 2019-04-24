@@ -32,7 +32,7 @@ void CObjAsteroid::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollx() + 25, m_py + block->GetScrolly() + 20);
+	hit->SetPos(m_px + block->GetScrollx() + 25.0f, m_py + block->GetScrolly() + 20.0f);
 
 }
 
