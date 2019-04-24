@@ -25,7 +25,9 @@ public:
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
 	void SetVX(float vx) { m_vx = vx; }
+	float GetDashF() { return m_dash_flag; } //ダッシュフラグの取得
 
+	
 private:
 	float m_px;  //位置
 	float m_py;
@@ -48,8 +50,8 @@ private:
 
 	int m_f;//攻撃制御用
 	bool m_key_f;
+	bool m_help_key_f;	//helpキー用のフラグ
 
-	
 	int m_time;//無敵時間カウント
 	int m_MP_time;//ＭＰ減少カウント
 	int m_regene_time;//ＭＰリジェネカウント

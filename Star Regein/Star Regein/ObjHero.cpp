@@ -66,7 +66,7 @@ void CObjHero::Init()
 
 	//キーフラグの初期化
 	m_key_f = true;
-
+	m_help_key_f = true;
 	//ダッシュフラグ初期化
 	m_dash_flag = false;
 	//移動フラグ初期化
@@ -265,9 +265,10 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 10.0f;	//mp消費
+					g_mp -= 50.0f;	//mp消費
 
 				}
+				//獅子座の場合
 				else if (g_skill == Leo)
 				{
 					//スタンオブジェクト作成
@@ -325,8 +326,45 @@ void CObjHero::Action()
 
 		//----------------------------------------------------------------
 
+		//Hキーが入力された場合
+		if (Input::GetVKey('H'))
+		{
+			if (m_help_key_f == true)
+			{
+				//HELPオブジェクトを作成
+				CObjHelp *objhelp = new CObjHelp();
+				Objs::InsertObj(objhelp, OBJ_HELP, 150);
+				m_help_key_f = false;
+			}
+		}
+		else
+		{
+			m_help_key_f = true;
+		}
+
+
 			//HitBoxの内容を更新
 		CHitBox*hit = Hits::GetHitBox(this);
+
+		//ブラックホールの情報を持ってくる
+		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
+
+		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		//ブラックホールの数forループを回す
+		for (int i = 0; i < 4; i++)
+		{
+			//ブラックホールと当たった場合
+			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
+			{
+				//ワープ音
+				Audio::Start(7);
+
+				//同じ値のホワイトホール位置に移動させる
+				block->SetScrollx(-g_whitehole_x[i][0] + m_px);
+				block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+			}
+		}
 
 		//主人公とBLOCK系統との当たり判定
 		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -362,6 +400,7 @@ void CObjHero::Action()
 				}
 			}
 		}
+
 
 		if (m_invincible_flag == false)
 		{
@@ -433,37 +472,14 @@ void CObjHero::Action()
 			m_ani_frame = 0;
 		}
 
-		//ブラックホールの情報を持ってくる
-		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-		//ブロック情報を持ってくる
-		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		//ブラックホールの数forループを回す
-		for (int i = 0; i < 4; i++)
-		{
-			//ブラックホールと当たった場合
-			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
-			{
-				//ワープ音
-				Audio::Start(7);
-
-				//同じ値のホワイトホール位置に移動させる
-				block->SetScrollx(-g_whitehole_x[i][0] + m_px);
-				block->SetScrolly(-g_whitehole_y[i][0] + m_py);
-			}
-		}
-
-		//ブロックとの当たり判定実行	
-		block->BlockHit(&m_px, &m_py, true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-		);
 
 		//位置の更新
 		m_px += m_vx;
 		m_py += m_vy;
-
-
+		//ブロックとの当たり判定実行	
+		block->BlockHit(&m_px, &m_py, true,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+		);
 
 		//作成したHitBox更新用の入り口を取り出す
 		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える

@@ -242,6 +242,7 @@ void CObjTextBox::Draw()
 
 			}
 		}
+		//おとめ座
 		else if (g_stage == MercuryVirgo)
 		{
 			if (m_text == 0)
@@ -266,10 +267,35 @@ void CObjTextBox::Draw()
 			}
 
 		}
+		//太陽
+		else if (g_stage == SunLeo)
+		{
+			if (m_text == 0)
+			{
+				Font::StrDraw(L"最終ステージ太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"ここ太陽では獅子座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+			}
+			else if (m_text == 1)
+			{
+				Font::StrDraw(L"獅子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"周囲の敵をマヒさせるスキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+			}
+			else if (m_text == 2)
+			{
+				Font::StrDraw(L"ここで獲得すべき星は全部で15個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"これまでに集めた星座たちを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"クリア目指して頑張りましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+			}
+
+		}
 		
 	}
 
 }
-
 
 

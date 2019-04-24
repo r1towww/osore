@@ -66,12 +66,16 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
-	Draw::LoadImageW(L"blackhole.png", 12, TEX_SIZE_256);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
 	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
+	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+
+	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
+	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
+
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);

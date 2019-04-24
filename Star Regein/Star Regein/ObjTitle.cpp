@@ -8,10 +8,10 @@
 #include "GameHead.h"
 #include "ObjTitle.h"
 //各惑星・星座のクリア状況
-bool g_Earth_clear=false;	//地球	
-bool g_Venus_clear=false;	//金星
-bool g_Mercury_clear=false;	//水星
-bool g_Sun_clear=false;	//太陽
+bool g_Earth_clear=true;	//地球	
+bool g_Venus_clear= true;	//金星
+bool g_Mercury_clear= true;	//水星
+bool g_Sun_clear= true;	//太陽
 
 bool g_Taurus_clear=false;	//牡牛座	
 bool g_Libra_clear=false;	//天秤座
@@ -66,16 +66,16 @@ void CObjTitle::Init()
 //アクション
 void CObjTitle::Action()
 {
-	 g_Earth_clear = false;	//地球	
-	 g_Venus_clear = false;	//金星
-	 g_Mercury_clear = false;	//水星
-	 g_Sun_clear = false;	//太陽
+	 //g_Earth_clear = false;	//地球	
+	 //g_Venus_clear = false;	//金星
+	 //g_Mercury_clear = false;	//水星
+	 //g_Sun_clear = false;	//太陽
 
-	 g_Taurus_clear = false;	//牡牛座	
-	 g_Libra_clear = false;	//天秤座
-	 g_Gemini_clear = false;	//双子座
-	 g_Virgo_clear = false;	//乙女座
-	 g_Leo_clear = false;	//獅子座
+	 //g_Taurus_clear = false;	//牡牛座	
+	 //g_Libra_clear = false;	//天秤座
+	 //g_Gemini_clear = false;	//双子座
+	 //g_Virgo_clear = false;	//乙女座
+	 //g_Leo_clear = false;	//獅子座
 
 }
 

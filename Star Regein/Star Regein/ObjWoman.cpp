@@ -53,8 +53,6 @@ void CObjWoman::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	m_btime = 0;
-
 	m_bullet_time = 100;
 
 	m_time = 30;
@@ -76,7 +74,6 @@ void CObjWoman::Action()
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
-		m_btime++;
 
 
 		//ブロックとの当たり判定実行
@@ -158,32 +155,7 @@ void CObjWoman::Action()
 		}
 		else
 		{
-			if (m_btime <= 500)
-			{
-				m_vy = 0;
-				m_movex = true;
-				m_posture = 1.0f;
-			}
-			if (m_btime >= 501 && m_btime <= 1000)
-			{
-				m_vx = 0;
-				m_movey = false;
-				m_posture = 3.0f;
-			}
-			if (m_btime >= 1001 && m_btime <= 1500)
-			{
-				m_vy = 0;
-				m_movex = false;
-				m_posture = 2.0f;
-			}
-			if (m_btime >= 1501 && m_btime <= 2000)
-			{
-				m_vx = 0;
-				m_movey = true;
-				m_posture = 0.0f;
-			}
-			if (m_btime >= 2001)
-				m_btime = 0;
+
 		}
 
 		//HitBoxの内容を更新

@@ -23,7 +23,6 @@ void CObjSkillLibra::Init()
 
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
-	m_ani_flag = false;	//trueでアニメーション動作、falseでアニメーション停止
 	m_eff.m_top    =   0;
 	m_eff.m_left   =   0;
 	m_eff.m_right  = 200;
