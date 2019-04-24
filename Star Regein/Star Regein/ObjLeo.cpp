@@ -45,7 +45,7 @@ void CObjLeo::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
-					//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -157,33 +157,7 @@ void CObjLeo::Action()
 	}
 	else
 	{
-		//範囲外での行動
-		if (m_btime <= 500)
-		{
-			m_vy = 0;
-			m_movex = true;
-			m_posture = 1.0f;
-		}
-		if (m_btime >= 501 && m_btime <= 1000)
-		{
-			m_vx = 0;
-			m_movey = false;
-			m_posture = 3.0f;
-		}
-		if (m_btime >= 1001 && m_btime <= 1500)
-		{
-			m_vy = 0;
-			m_movex = false;
-			m_posture = 2.0f;
-		}
-		if (m_btime >= 1501 && m_btime <= 2000)
-		{
-			m_vx = 0;
-			m_movey = true;
-			m_posture = 0.0f;
-		}
-		if (m_btime >= 2001)
-			m_btime = 0;
+
 	}
 
 	//HitBoxの内容を更新

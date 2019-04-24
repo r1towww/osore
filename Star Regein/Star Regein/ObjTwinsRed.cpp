@@ -53,10 +53,8 @@ void CObjTwinsRed::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	m_btime = 0;
 
 	m_bullet_time = 100;
-
 	m_time = 30;
 
 	m_df = true;
@@ -77,8 +75,6 @@ void CObjTwinsRed::Action()
 	{
 
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		m_btime++;
 
 		//20°間隔で弾丸発射
 		m_bullet_time++;
@@ -177,32 +173,7 @@ void CObjTwinsRed::Action()
 		}
 		else
 		{
-			if (m_btime <= 500)
-			{
-				m_vy = 0;
-				m_movex = true;
-				m_posture = 4.0f;
-			}
-			if (m_btime >= 501 && m_btime <= 1000)
-			{
-				m_vx = 0;
-				m_movey = false;
-				m_posture = 1.0f;
-			}
-			if (m_btime >= 1001 && m_btime <= 1500)
-			{
-				m_vy = 0;
-				m_movex = false;
-				m_posture = 2.0f;
-			}
-			if (m_btime >= 1501 && m_btime <= 2000)
-			{
-				m_vx = 0;
-				m_movey = true;
-				m_posture = 3.0f;
-			}
-			if (m_btime >= 2001)
-				m_btime = 0;
+
 		}
 
 		//HitBoxの内容を更新

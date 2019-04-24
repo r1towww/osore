@@ -61,7 +61,6 @@ void CObjCow::Init()
 	g_Leo_hit_flag = false;
 	g_Leo_cnt = 0.0f;
 
-	m_btime = 0;
 
 	m_time = 30;
 
@@ -80,7 +79,6 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
-	m_btime++;
 
 	//ブロック衝突で向き変更
 	if (m_hit_up == true)
@@ -206,33 +204,7 @@ void CObjCow::Action()
 	}
 	else
 	{
-		//範囲外での行動
-		if (m_btime <= 500)
-		{
-			m_vy = 0;
-			m_movex = true;
-			m_posture = 1.0f;
-		}
-		if (m_btime >= 501 && m_btime <= 1000)
-		{
-			m_vx = 0;
-			m_movey = false;
-			m_posture = 3.0f;
-		}
-		if (m_btime >= 1001 && m_btime <= 1500)
-		{
-			m_vy = 0;
-			m_movex = false;
-			m_posture = 2.0f;
-		}
-		if (m_btime >= 1501 && m_btime <= 2000)
-		{
-			m_vx = 0;
-			m_movey = true;
-			m_posture = 0.0f;
-		}
-		if (m_btime >= 2001)
-			m_btime = 0;
+
 	}
 
 	//HitBoxの内容を更新
