@@ -20,7 +20,8 @@ using namespace GameL;
 CSceneMercuryGemini::CSceneMercuryGemini()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-	cnt = 0.0f;
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -127,14 +128,7 @@ void CSceneMercuryGemini::InitScene()
 		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
 	}
 
-	//スキルアイテム作成
-	MakeItem(g_Gemini_Max);
-
-	if (g_skill_item_flag == true)
-	{
-		g_skill_item_flag = false;
-		Scene::SetScene(new CSceneStageChoice());
-	}
+	
 
 }
 
@@ -154,6 +148,24 @@ void CSceneMercuryGemini::Scene()
 		{
 			g_Mercury_clear = true;
 		}
+
+
+		//星を集めきったら
+		if (g_Gemini_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
 		//スキルアイテムを獲得したら
 		if (g_skill_item_flag == true)
 		{
@@ -164,22 +176,3 @@ void CSceneMercuryGemini::Scene()
 	}
 }
 
-void CSceneMercuryGemini::MakeItem(bool b)
-{
-	int cnt = 0;
-
-	if (g_Libra_Max == true)
-	{
-		if (cnt >= 1)
-		{
-			return;
-		}
-		else
-		{
-			//スキルアイテムオブジェクト作成
-			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-			cnt++;
-		}
-	}
-}

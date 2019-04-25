@@ -14,7 +14,6 @@ class CSceneSunLeo :public CScene
 		void InitScene(); //初期化メソッド
 		void Scene();     //実行中メソッド
 	private:
-		void MakeItem(bool b);
-		float cnt;
+		float Item_cnt;
 };
 

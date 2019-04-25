@@ -22,7 +22,8 @@ CSceneSunLeo::CSceneSunLeo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
-	cnt = 0.0f;
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 
 }
 
@@ -146,37 +147,34 @@ void CSceneSunLeo::Scene()
 		//獅子座をクリア表示
 		g_Sun_clear = true;
 
-		//アイテム作成
-		MakeItem(g_Leo_Max);
+		//星を集めきったら
+		if (g_Leo_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
 
 		//スキルアイテムを獲得したら
 		if (g_skill_item_flag == true)
 		{
+			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
 			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
+
 	}
 }
 
-//アイテム作成関数
-void CSceneSunLeo::MakeItem(bool b)
-{
-	int cnt = 0;
 
-	if (b == true)
-	{
-		if (cnt >= 1)
-		{
-			return;
-		}
-		else
-		{
-			//スキルアイテムオブジェクト作成
-			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-			cnt++;
-		}
-	}
-}
 

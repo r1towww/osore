@@ -20,7 +20,8 @@ using namespace GameL;
 CSceneMercuryVirgo::CSceneMercuryVirgo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-	cnt = 0.0f;
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -118,47 +119,41 @@ void CSceneMercuryVirgo::Scene()
 	if (g_StarCount == VIRGOMAXSTAR)
 	{
 		//乙女座のスキル開放
-		g_Gemini = true;
+		g_Virgo = true;
 		//乙女座のクリア表記
-		g_Gemini_clear = true;
-		g_Gemini_Max = true;
+		g_Virgo_clear = true;
+		g_Virgo_Max = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
 			g_Mercury_clear = true;
 		}
 
-		//アイテム作成
-		MakeItem(g_Virgo_Max);
-
-		//スキルアイテムを獲得したら
-		if (g_skill_item_flag == true)
+		//星を集めきったら
+		if (g_Virgo_Max == true)
 		{
-			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
-		}
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
 
-	}
-}
+			//スキルアイテムを獲得したら
+			if (g_skill_item_flag == true)
+			{
+				//スキルアイテムフラグオフ
+				g_skill_item_flag = false;
+				Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+			}
 
-//アイテム作成関数
-void CSceneMercuryVirgo::MakeItem(bool b)
-{
-	int cnt = 0;
 
-	if (b == true)
-	{
-		if (cnt >= 1)
-		{
-			return;
-		}
-		else
-		{
-			//スキルアイテムオブジェクト作成
-			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-			cnt++;
 		}
 	}
 }
-

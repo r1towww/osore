@@ -242,6 +242,8 @@ extern bool g_Gemini_Max;
 extern bool g_Virgo_Max;
 extern bool g_Leo_Max;
 
+extern bool g_Make_Item;//ƒAƒCƒeƒ€‚ª¶¬‚³‚ê‚½‚©‚Ç‚¤‚©
+
 
 
 extern int g_cow_id[20];//‹‚Ì¯•ÊID

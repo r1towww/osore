@@ -21,8 +21,8 @@ using namespace GameL;
 CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-	cnt = 0.0f;
-	
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -147,9 +147,22 @@ void CSceneVenusTaurus::Scene()
 			g_Venus_clear = true;
 		}
 
-
-		//スキルアイテム作成
-		MakeItem(g_Taurus_Max);
+		//星を集めきったら
+		if (g_Taurus_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
 
 		//スキルアイテムを獲得したら
 		if (g_skill_item_flag == true)
@@ -162,23 +175,3 @@ void CSceneVenusTaurus::Scene()
 }
 
 
-//アイテム作成関数
-void CSceneVenusTaurus::MakeItem(bool b)
-{
-	int cnt = 0;
-
-	if (b == true)
-	{
-		if (cnt >= 1)
-		{
-			return;
-		}
-		else
-		{
-			//スキルアイテムオブジェクト作成
-			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-			cnt++;
-		}
-	}
-}

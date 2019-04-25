@@ -14,7 +14,7 @@ using namespace GameL;
 
 int g_StarCount = 0;	//星を数える変数の初期化
 bool g_skill_item_flag;
-
+bool g_Make_Item;
 
 //使用ヘッダー
 #include "SceneEarth.h"
@@ -24,8 +24,9 @@ bool g_skill_item_flag;
 CSceneEarth::CSceneEarth()
 {
 	g_StarCount = 0;
-	cnt = 0.0f;
+	Item_cnt = 0.0f;
 	g_skill_item_flag = false;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -143,8 +144,9 @@ void CSceneEarth::Scene()
 
 		if (g_Earth_Max == true)
 		{
-			if (cnt >= 1)
+			if (Item_cnt >= 1)
 			{
+				//一回作成されると終了
 				;
 			}
 			else
@@ -152,13 +154,14 @@ void CSceneEarth::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-				cnt++;
+				Item_cnt++;
 			}
 		}
 
 		//スキルアイテムを獲得したら
 		if (g_skill_item_flag == true)
 		{
+			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
 			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}

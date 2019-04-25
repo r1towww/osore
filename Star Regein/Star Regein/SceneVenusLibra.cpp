@@ -22,8 +22,9 @@ using namespace GameL;
 CSceneVenusLibra::CSceneVenusLibra()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 	
-	cnt = 0.0f;
 }
 
 //デストラクタ
@@ -146,36 +147,30 @@ void CSceneVenusLibra::Scene()
 			g_Venus_clear = true;
 		}
 
-		//スキルアイテム作成
-		MakeItem(g_Libra_Max);
+		//星を集めきったら
+		if (g_Libra_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
 
+		//スキルアイテムフラグがオンなら
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageChoice());
+			Scene::SetScene(new CSceneStageChoice());//ステージ選択に移行
 		}
 		
 	}
 }
 
-
-//アイテム作成関数
-void CSceneVenusLibra::MakeItem(bool b)
-{
-	int cnt = 0;
-
-	if (b == true)
-	{
-		if (cnt >= 1)
-		{
-			return;
-		}
-		else
-		{
-			//スキルアイテムオブジェクト作成
-			CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-			Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-			cnt++;
-		}
-	}
-}

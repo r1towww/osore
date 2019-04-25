@@ -54,6 +54,8 @@ void CObjSkillItem::Action()
 
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(m_x + 80, m_y);//入り口から新しい位置（主人公の位置）情報に置き換える
+
+
 	
 
 	//主人公と当たったらオブジェクト削除し、スキルアイテムフラグをオン
@@ -85,7 +87,7 @@ void CObjSkillItem::Draw()
 		src.m_right = 300.0f;
 		src.m_bottom = 200.0f;
 	}
-	else if (g_Taurus_Max==true)//牡牛座
+	if (g_Taurus_Max==true)//牡牛座
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
@@ -93,7 +95,7 @@ void CObjSkillItem::Draw()
 		src.m_right = 600.0f;
 		src.m_bottom = 200.0f;
 	}
-	else if (g_Libra_Max == true)//天秤座
+	if (g_Libra_Max == true)//天秤座
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
@@ -101,7 +103,7 @@ void CObjSkillItem::Draw()
 		src.m_right = 900.0f;
 		src.m_bottom = 200.0f;	
 	}
-	else if (g_Gemini_Max == true)//双子座
+	if (g_Gemini_Max == true)//双子座
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
@@ -109,7 +111,7 @@ void CObjSkillItem::Draw()
 		src.m_right = 1200.0f;
 		src.m_bottom = 200.0f;
 	}
-	else if (g_Virgo_Max == true)//乙女座
+	if (g_Virgo_Max == true)//乙女座
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
