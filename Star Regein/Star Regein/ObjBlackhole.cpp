@@ -31,54 +31,54 @@ void CObjBlackhole::Init()
 	m_eff.m_right  = 192;
 	m_eff.m_bottom = 192;
 
-	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 48.0f, m_py + 48.0f, 34.0f, 34.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackhole_cnt, 1);
-	//作成のたびにカウントを増やし、別のオブジェクトとする
+	////当たり判定用のHitBoxを作成
+	//Hits::SetHitBox(this, m_px + 48.0f, m_py + 48.0f, 34.0f, 34.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackhole_cnt, 1);
+	////作成のたびにカウントを増やし、別のオブジェクトとする
 }
 
 //アクション
 void CObjBlackhole::Action()
 {
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	////自身のHitBoxを持ってくる
+	//CHitBox* hit = Hits::GetHitBox(this);
+	////ブロック情報を持ってくる
+	//CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//エフェクト用
-	RECT_F ani_src[10] =
-	{
-		{   0,   0,  192, 192 },
-		{   0, 192,  384, 192 },
-		{   0, 384,  576, 192 },
-		{   0, 576,  768, 192 },
-		{   0, 768,  960, 192 },
-		{ 192,   0,  192, 384 },
-		{ 192, 192,  384, 384 },
-		{ 192, 384,  576, 384 },
-		{ 192, 576,  768, 384 },
-		{ 192, 768,  960, 384 },
-	};
+	////エフェクト用
+	//RECT_F ani_src[10] =
+	//{
+	//	{   0,   0,  192, 192 },
+	//	{   0, 192,  384, 192 },
+	//	{   0, 384,  576, 192 },
+	//	{   0, 576,  768, 192 },
+	//	{   0, 768,  960, 192 },
+	//	{ 192,   0,  192, 384 },
+	//	{ 192, 192,  384, 384 },
+	//	{ 192, 384,  576, 384 },
+	//	{ 192, 576,  768, 384 },
+	//	{ 192, 768,  960, 384 },
+	//};
 
-	//アニメーションのコマ間隔制御
-	if (m_ani_time > 2)
-	{
-		m_ani++;		//アニメーションのコマを1つ進める
-		m_ani_time = 0;
+	////アニメーションのコマ間隔制御
+	//if (m_ani_time > 2)
+	//{
+	//	m_ani++;		//アニメーションのコマを1つ進める
+	//	m_ani_time = 0;
 
-		m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-	}
-	else
-	{
-		m_ani_time++;
-	}
-	//9番目（画像最後）まで進んだら、0に戻す
-	if (m_ani == 9)
-	{
-		m_ani = 0;
-	}
+	//	m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+	//}
+	//else
+	//{
+	//	m_ani_time++;
+	//}
+	////9番目（画像最後）まで進んだら、0に戻す
+	//if (m_ani == 9)
+	//{
+	//	m_ani = 0;
+	//}
 
-	//HitBoxの位置の変更
-	hit->SetPos(m_px + block->GetScrollx() + 48.0f, m_py + block->GetScrolly() + 48.0f);
+	////HitBoxの位置の変更
+	//hit->SetPos(m_px + block->GetScrollx() + 48.0f, m_py + block->GetScrolly() + 48.0f);
 }
 
 //ドロー
@@ -95,8 +95,8 @@ void CObjBlackhole::Draw()
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
 	dst.m_left   = 0.0f + m_px + block->GetScrollx();
-	dst.m_right  = 128.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 128.0f + m_py + block->GetScrolly();
+	dst.m_right  = 64.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 	//描画
 	Draw::Draw(30, &m_eff, &dst, c, 90.0f);

@@ -209,6 +209,7 @@ extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
+extern bool g_stage_clear;
 
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座

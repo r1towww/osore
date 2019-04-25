@@ -13,7 +13,7 @@
 using namespace GameL;
 
 int g_StarCount = 0;	//星を数える変数の初期化
-
+bool g_stage_clear = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -22,6 +22,7 @@ int g_StarCount = 0;	//星を数える変数の初期化
 CSceneEarth::CSceneEarth()
 {
 	g_StarCount = 0;
+	cnt = 0;
 }
 
 //デストラクタ
@@ -71,10 +72,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 13, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
 
 
 
@@ -128,11 +127,33 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
+
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == EARTHMAXSTAR)
 	{
 		g_Earth_clear = true;
-		Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+
+		g_stage_clear = true;
 	}
+
+	ClearCheck(g_stage_clear);
 	
+}
+
+void CSceneEarth::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			cnt++;
+		}
+	}
 }

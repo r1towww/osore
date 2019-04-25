@@ -13,7 +13,8 @@ class CSceneMercuryGemini :public CScene
 		~CSceneMercuryGemini();
 		void InitScene(); //初期化メソッド
 		void Scene();     //実行中メソッド
+		void ClearCheck(bool a);
 	private:
-
+		bool m_clear_f;
 };
 

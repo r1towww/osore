@@ -16,7 +16,9 @@ class CSceneEarth :public CScene
 		~CSceneEarth();
 		void InitScene(); //初期化メソッド
 		void Scene();     //実行中メソッド
+		void ClearCheck(bool a);
 	private:
 
+		int cnt;
 };
 

@@ -188,6 +188,7 @@
     <ClCompile Include="ObjMoveStone.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBreakRock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -380,6 +381,7 @@
     <ClInclude Include="ObjLeo.h">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBreakRock.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">

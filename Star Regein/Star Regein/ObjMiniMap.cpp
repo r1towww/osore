@@ -92,320 +92,322 @@ void CObjMiniMap::Draw()
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
-
-	/* 背景用 */
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 500.0f;
-	src.m_bottom = 500.0f;
-
-	//表示位置の設定
-	dst.m_top = m_uisize_y;
-	dst.m_left = m_uisize_x;
-	dst.m_right = m_uisize_x + m_backsize;
-	dst.m_bottom = m_uisize_y + m_backsize;
-
-	//背景の描画
-	Draw::Draw(7, &src, &dst, c, 0.0f);
-
-	/* ミニマップ描画処理 */
-	for (int i = 0; i < MAPSIZE; i++)
+	if (g_stage_clear == false)
 	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			if (g_map[i][j] >= 0)
-			{
-				if (g_map[i][j] == 98)//マップ描画外なのでブレイク
-				{
-					break;
-				}
-				//表示位置の設定
-				dst.m_top = i*m_blocksize + m_uisize_y;
-				dst.m_left = j*m_blocksize + m_uisize_x;
-				dst.m_right = dst.m_left + m_blocksize;
-				dst.m_bottom = dst.m_top + m_blocksize;
+		/* 背景用 */
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 500.0f;
+		src.m_bottom = 500.0f;
 
-				if (g_map[i][j] == 1)//隕石
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == 2)//星（取得前）
-				{
-					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 410.0f;
-					src.m_right  = 440.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == 4)//星（取得後）
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 110.0f;
-					src.m_right = 140.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == 7)//ブラックホール
-				{
-					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 260.0f;
-					src.m_right  = 290.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == 8)//ホワイトホール
-				{
-					//切り取り位置の設定
-					src.m_top    = 0.0f;
-					src.m_left   = 310.0f;
-					src.m_right  = 340.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == g_block)//隕石
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
-					src.m_bottom = 50.0f;
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-				if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
-				{
-					//切り取り位置の設定
-					src.m_top = 0.0f;
-					src.m_left = 0.0f;
-					src.m_right = 40.0f;
-					src.m_bottom = 50.0f;
+		//表示位置の設定
+		dst.m_top = m_uisize_y;
+		dst.m_left = m_uisize_x;
+		dst.m_right = m_uisize_x + m_backsize;
+		dst.m_bottom = m_uisize_y + m_backsize;
 
-					//表示位置の設定
-					dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
-					dst.m_left = j*m_blocksize + m_uisize_x + 4.0f;
-					dst.m_right = dst.m_left + m_blocksize * 1.8;
-					dst.m_bottom = dst.m_top + m_blocksize * 1.8;
+		//背景の描画
+		Draw::Draw(7, &src, &dst, c, 0.0f);
 
-					//描画
-					Draw::Draw(9, &src, &dst, c, 0.0f);
-				}
-
-			}
-		}
-	}
-	//主人公の情報を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (hero != nullptr)
-	{
-		//主人公の位置を取得
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-
-		//ブロック情報を持ってくる
-		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		float sx = block->GetScrollx();
-		float sy = block->GetScrolly();
-
-
+		/* ミニマップ描画処理 */
 		for (int i = 0; i < MAPSIZE; i++)
 		{
 			for (int j = 0; j < MAPSIZE; j++)
 			{
 				if (g_map[i][j] >= 0)
 				{
+					if (g_map[i][j] == 98)//マップ描画外なのでブレイク
+					{
+						break;
+					}
 					//表示位置の設定
-					dst.m_top = m_uisize_y + (hy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize))) - ((block->GetScrolly()) / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-					dst.m_left = m_uisize_x + (hx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize))) - ((block->GetScrollx()) / ((MAPSIZE*64.0f) / (MAPSIZE*m_blocksize)));
+					dst.m_top = i*m_blocksize + m_uisize_y;
+					dst.m_left = j*m_blocksize + m_uisize_x;
 					dst.m_right = dst.m_left + m_blocksize;
 					dst.m_bottom = dst.m_top + m_blocksize;
 
-					if (g_map[i][j] == 3)//主人公
+					if (g_map[i][j] == 1)//隕石
 					{
 						//切り取り位置の設定
 						src.m_top = 0.0f;
-						src.m_left = 160.0f;
-						src.m_right = 190.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
 						src.m_bottom = 50.0f;
 						//描画
-						Draw::Draw(9, &src, &dst, ac, 0.0f);
+						Draw::Draw(9, &src, &dst, c, 0.0f);
 					}
+					if (g_map[i][j] == 2)//星（取得前）
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 410.0f;
+						src.m_right = 440.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == 4)//星（取得後）
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 110.0f;
+						src.m_right = 140.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == 7)//ブラックホール
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 260.0f;
+						src.m_right = 290.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == 8)//ホワイトホール
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 310.0f;
+						src.m_right = 340.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == g_block)//隕石
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+					if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
+					{
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = 40.0f;
+						src.m_bottom = 50.0f;
+
+						//表示位置の設定
+						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
+						dst.m_left = j*m_blocksize + m_uisize_x + 4.0f;
+						dst.m_right = dst.m_left + m_blocksize * 1.8;
+						dst.m_bottom = dst.m_top + m_blocksize * 1.8;
+
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+					}
+
 				}
 			}
 		}
-
-		if (g_stage == EarthStar)
+		//主人公の情報を取得
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		if (hero != nullptr)
 		{
-			for (int i = 0; i < 4; i++)//敵の数分回す
+			//主人公の位置を取得
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+
+			//ブロック情報を持ってくる
+			CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			float sx = block->GetScrollx();
+			float sy = block->GetScrolly();
+
+
+			for (int i = 0; i < MAPSIZE; i++)
 			{
-				float wx = *g_woman_x[i];
-				float wy = *g_woman_y[i];
-
-
-				if (g_woman_d_flag[i] == true)
+				for (int j = 0; j < MAPSIZE; j++)
 				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(wx + block->GetScrollx(), wy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
+					if (g_map[i][j] >= 0)
 					{
-						//ミニマップに敵の位置を表示する
 						//表示位置の設定
-						dst.m_top = m_uisize_y + (wy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (wx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						dst.m_top = m_uisize_y + (hy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize))) - ((block->GetScrolly()) / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						dst.m_left = m_uisize_x + (hx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize))) - ((block->GetScrollx()) / ((MAPSIZE*64.0f) / (MAPSIZE*m_blocksize)));
 						dst.m_right = dst.m_left + m_blocksize;
 						dst.m_bottom = dst.m_top + m_blocksize;
 
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 50.0f;
-						src.m_right = 100.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
+						if (g_map[i][j] == 3)//主人公
+						{
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 160.0f;
+							src.m_right = 190.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, ac, 0.0f);
+						}
 					}
 				}
 			}
-		}
 
-		if (g_stage == MercuryGemini)
-		{
-			for (int i = 0; i < 7; i++)//敵の数分回す
+			if (g_stage == EarthStar)
 			{
-				float bx = *g_twinsblue_x[i];
-				float by = *g_twinsblue_y[i];
+				//for (int i = 0; i < 4; i++)//敵の数分回す
+				//{
+				//	float wx = *g_woman_x[i];
+				//	float wy = *g_woman_y[i];
 
 
-				if (g_blue_d_flag[i] == true)
+				//	if (g_woman_d_flag[i] == true)
+				//	{
+				//		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+				//		bool check;
+				//		check = CheckWindow(wx + block->GetScrollx(), wy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+				//		if (check == true)
+				//		{
+				//			//ミニマップに敵の位置を表示する
+				//			//表示位置の設定
+				//			dst.m_top = m_uisize_y + (wy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+				//			dst.m_left = m_uisize_x + (wx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+				//			dst.m_right = dst.m_left + m_blocksize;
+				//			dst.m_bottom = dst.m_top + m_blocksize;
+
+				//			//切り取り位置の設定
+				//			src.m_top = 0.0f;
+				//			src.m_left = 50.0f;
+				//			src.m_right = 100.0f;
+				//			src.m_bottom = 50.0f;
+				//			//描画
+				//			Draw::Draw(9, &src, &dst, c, 0.0f);
+				//		}
+				//	}
+				//}
+			}
+
+			if (g_stage == MercuryGemini)
+			{
+				for (int i = 0; i < 7; i++)//敵の数分回す
 				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(bx + block->GetScrollx(), by + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
-					{
-						//ミニマップに敵の位置を表示する
-						//表示位置の設定
-						dst.m_top = m_uisize_y + (by / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (bx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_right = dst.m_left + m_blocksize;
-						dst.m_bottom = dst.m_top + m_blocksize;
+					float bx = *g_twinsblue_x[i];
+					float by = *g_twinsblue_y[i];
 
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 50.0f;
-						src.m_right = 100.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
+
+					if (g_blue_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(bx + block->GetScrollx(), by + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (by / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (bx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+						}
+					}
+				}
+				for (int i = 0; i < 7; i++)//敵の数分回す
+				{
+					float rx = *g_twinsred_x[i];
+					float ry = *g_twinsred_y[i];
+
+
+					if (g_red_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(rx + block->GetScrollx(), ry + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (ry / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (rx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+						}
 					}
 				}
 			}
-			for (int i = 0; i < 7; i++)//敵の数分回す
+
+			if (g_stage == VenusTaurus)
 			{
-				float rx = *g_twinsred_x[i];
-				float ry = *g_twinsred_y[i];
-
-
-				if (g_red_d_flag[i] == true)
+				for (int i = 0; i < 13; i++)//敵の数分回す
 				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(rx + block->GetScrollx(), ry + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
-					{
-						//ミニマップに敵の位置を表示する
-						//表示位置の設定
-						dst.m_top = m_uisize_y + (ry / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (rx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_right = dst.m_left + m_blocksize;
-						dst.m_bottom = dst.m_top + m_blocksize;
+					float cx = *g_cow_x[i];
+					float cy = *g_cow_y[i];
 
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 50.0f;
-						src.m_right = 100.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
+					if (g_cow_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+						}
 					}
 				}
 			}
-		}
 
-		if (g_stage == VenusTaurus)
-		{
-			for (int i = 0; i < 13; i++)//敵の数分回す
+			if (g_stage == SunLeo)
 			{
-				float cx = *g_cow_x[i];
-				float cy = *g_cow_y[i];
-
-				if (g_cow_d_flag[i] == true)
+				for (int i = 0; i < 50; i++)//敵の数分回す
 				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
+					float lx = *g_leo_x[i];
+					float ly = *g_leo_y[i];
+
+					if (g_leo_d_flag[i] == true)
 					{
-						//ミニマップに敵の位置を表示する
-						//表示位置の設定
-						dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_right = dst.m_left + m_blocksize;
-						dst.m_bottom = dst.m_top + m_blocksize;
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(lx + block->GetScrollx(), ly + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (ly / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (lx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
 
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 50.0f;
-						src.m_right = 100.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-				}
-			}
-		}
-
-		if (g_stage == SunLeo)
-		{
-			for (int i = 0; i < 50; i++)//敵の数分回す
-			{
-				float lx = *g_leo_x[i];
-				float ly = *g_leo_y[i];
-
-				if (g_leo_d_flag[i] == true)
-				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(lx + block->GetScrollx(), ly + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
-					{
-						//ミニマップに敵の位置を表示する
-						//表示位置の設定
-						dst.m_top = m_uisize_y + (ly / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (lx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_right = dst.m_left + m_blocksize;
-						dst.m_bottom = dst.m_top + m_blocksize;
-
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 50.0f;
-						src.m_right = 100.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+						}
 					}
 				}
 			}

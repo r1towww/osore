@@ -100,7 +100,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
+	//Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
@@ -134,17 +134,39 @@ void CSceneMercuryGemini::InitScene()
 void CSceneMercuryGemini::Scene()
 {
 	//水星（ふたご座）で星を14個集めたら次へ移行
-	if (g_StarCount == GEMINIMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		//ふたご座のスキル開放
 		g_Gemini = true;
 		//ふたご座のクリア表記
 		g_Gemini_clear = true;
+
+		g_stage_clear = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
 			g_Mercury_clear = true;
 		}
-		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
+	}
+
+	ClearCheck(g_stage_clear);
+
+}
+
+void CSceneMercuryGemini::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
+		}
 	}
 }

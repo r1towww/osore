@@ -522,21 +522,41 @@ void CObjHero::Draw()
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
-
-	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
-
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top    = 0.0f	 + m_py;
+		dst.m_left   = 80.0f   + m_px;
+		dst.m_right  = 0.0f   + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 
-	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 80.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 
 	//ダッシュフラグがオンの場合
 	if (m_dash_flag == true)

@@ -72,7 +72,7 @@ void CObjWoman::Init()
 void CObjWoman::Action()
 {
 	//チュートリアルフラグが立っていない場合動く
-	if (g_tutorial_flag == false)
+	if (g_tutorial_flag == false&&g_stage_clear==false)
 	{
 
 

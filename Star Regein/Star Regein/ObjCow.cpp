@@ -396,9 +396,8 @@ void CObjCow::Action()
 			//カウントを進め、一定数になればスタン解除
 			
 		}
-
-		
 	}
+	
 	//しし座のヒット判定がonの時スタン
 	if (g_Leo_hit_flag == true)
 	{
@@ -410,8 +409,9 @@ void CObjCow::Action()
 			g_Leo_hit_flag = false;
 			g_Leo_cnt = 0.0f;
 		}
+
 	}
-	
+
 
 
 	if (m_f == true)
