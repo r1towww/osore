@@ -145,6 +145,7 @@ void CSceneEarth::Scene()
 
 		//星を集めきるとオン
 		g_Earth_Max = true;
+		g_stage_clear = true;
 
 		if (g_Earth_Max == true)
 		{
@@ -167,18 +168,14 @@ void CSceneEarth::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 		
 	}
 
-}
+
+ClearCheck(g_stage_clear);
 
 
-		g_stage_clear = true;
-	}
-
-	ClearCheck(g_stage_clear);
 	
 }
 

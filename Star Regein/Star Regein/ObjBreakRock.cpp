@@ -42,51 +42,51 @@ void CObjBreakRock::Action()
 	//ヒーローの情報を持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	////主人公と当たっている、かつダッシュフラグがオンの場合
-	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && hero->GetDashF() == true)
-	//{
-	//	//this->SetStatus(false);		//自身を削除
-	//	//Hits::DeleteHitBox(this);
+	//主人公と当たっている、かつダッシュフラグがオンの場合
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && hero->GetDashF() == true)
+	{
+		//this->SetStatus(false);		//自身を削除
+		//Hits::DeleteHitBox(this);
 
-	//	m_eff_flag = true;		//フラグをオンにして、エフェクトの開始
-	//}
-	//if (m_eff_flag == true)
-	//{
-	//	//エフェクト用
-	//	RECT_F ani_src[10] =
-	//	{
-	//		{   0,    0,  192, 192 },
-	//		{   0,  192,  384, 192 },
-	//		{   0,  384,  576, 192 },
-	//		{   0,  576,  768, 192 },
-	//		{   0,  768,  960, 192 },
-	//		{ 192,    0,  192, 400 },
-	//		{ 192,  192,  384, 400 },
-	//		{ 192,  384,  576, 400 },
-	//		{ 192,  576,  768, 400 },
-	//		{ 192,  768,  960, 400 },
-	//	};
-	//	//アニメーションのコマ間隔制御
-	//	if (m_ani_time > 2)
-	//	{
-	//		m_ani++;		//アニメーションのコマを1つ進める
-	//		m_ani_time = 0;
+		m_eff_flag = true;		//フラグをオンにして、エフェクトの開始
+	}
+	if (m_eff_flag == true)
+	{
+		//エフェクト用
+		RECT_F ani_src[10] =
+		{
+			{   0,    0,  192, 192 },
+			{   0,  192,  384, 192 },
+			{   0,  384,  576, 192 },
+			{   0,  576,  768, 192 },
+			{   0,  768,  960, 192 },
+			{ 192,    0,  192, 400 },
+			{ 192,  192,  384, 400 },
+			{ 192,  384,  576, 400 },
+			{ 192,  576,  768, 400 },
+			{ 192,  768,  960, 400 },
+		};
+		//アニメーションのコマ間隔制御
+		if (m_ani_time > 2)
+		{
+			m_ani++;		//アニメーションのコマを1つ進める
+			m_ani_time = 0;
 
-	//		m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-	//	}
-	//	else
-	//	{
-	//		m_ani_time++;	
-	//	}
-	//	//9番目（画像最後）まで進んだら、削除
-	//	if (m_ani == 9)
-	//	{
-	//		Hits::DeleteHitBox(this);
-	//		this->SetStatus(false);
-	//	}
-	//}
-	////HitBoxの位置の変更
-	//hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_ani_time++;	
+		}
+		//9番目（画像最後）まで進んだら、削除
+		if (m_ani == 9)
+		{
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
+	}
+	//HitBoxの位置の変更
+	hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
 
 }
 
@@ -111,8 +111,8 @@ void CObjBreakRock::Draw()
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
 	dst.m_left   = 0.0f + m_px + block->GetScrollx();
-	dst.m_right  = 12.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 12.0f + m_py + block->GetScrolly();
+	dst.m_right  = 64.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 90.0f);

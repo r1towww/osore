@@ -88,6 +88,10 @@ void CObjHero::Init()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
+	else
+	{
+		m_blackhole_num = 0;
+	}
 
 
 	//獅子攻撃ヒットフラグ

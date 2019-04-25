@@ -72,6 +72,8 @@ void CSceneMercuryGemini::InitScene()
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+	
+	Draw::LoadImageW(L"ステージクリア画像_水星_双子座.png", 18, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
@@ -172,7 +174,6 @@ void CSceneMercuryGemini::Scene()
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
 	}
@@ -181,8 +182,10 @@ void CSceneMercuryGemini::Scene()
 
 }
 
+//クリアチェック
 void CSceneMercuryGemini::ClearCheck(bool a)
 {
+	//クリアしたなら星座完成画像貼り付け
 	if (a == true)
 	{
 		if (m_clear_f == true)

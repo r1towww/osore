@@ -129,7 +129,7 @@ void CObjStatus::Draw()
 		dst.m_bottom = 50.0f + STATUS_PY;
 
 		//•`‰æ
-		Draw::Draw(11, &src, &dst, mpc, 0.0f);
+		Draw::Draw(10, &src, &dst, mpc, 0.0f);
 		//----------------------------------------------
 	}
 

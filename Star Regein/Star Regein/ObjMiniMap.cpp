@@ -276,36 +276,36 @@ void CObjMiniMap::Draw()
 
 			if (g_stage == EarthStar)
 			{
-				//for (int i = 0; i < 4; i++)//敵の数分回す
-				//{
-				//	float wx = *g_woman_x[i];
-				//	float wy = *g_woman_y[i];
+				for (int i = 0; i < 4; i++)//敵の数分回す
+				{
+					float wx = *g_woman_x[i];
+					float wy = *g_woman_y[i];
 
 
-				//	if (g_woman_d_flag[i] == true)
-				//	{
-				//		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-				//		bool check;
-				//		check = CheckWindow(wx + block->GetScrollx(), wy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-				//		if (check == true)
-				//		{
-				//			//ミニマップに敵の位置を表示する
-				//			//表示位置の設定
-				//			dst.m_top = m_uisize_y + (wy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-				//			dst.m_left = m_uisize_x + (wx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-				//			dst.m_right = dst.m_left + m_blocksize;
-				//			dst.m_bottom = dst.m_top + m_blocksize;
+					if (g_woman_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(wx + block->GetScrollx(), wy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (wy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (wx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
 
-				//			//切り取り位置の設定
-				//			src.m_top = 0.0f;
-				//			src.m_left = 50.0f;
-				//			src.m_right = 100.0f;
-				//			src.m_bottom = 50.0f;
-				//			//描画
-				//			Draw::Draw(9, &src, &dst, c, 0.0f);
-				//		}
-				//	}
-				//}
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+						}
+					}
+				}
 			}
 
 			if (g_stage == MercuryGemini)

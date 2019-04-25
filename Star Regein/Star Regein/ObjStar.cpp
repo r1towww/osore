@@ -131,12 +131,12 @@ void CObjStar::Draw()
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
 	dst.m_left   = 0.0f + m_px + block->GetScrollx();
-	dst.m_right  = 32.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 32.0f + m_py + block->GetScrolly();
+	dst.m_right  = 64.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 	//描画(カラー変更)
 	if(m_GetStar == false)
-		Draw::Draw(6, &m_eff, &dst, c, 0.0f);
+		Draw::Draw(6, &m_eff, &dst, b, 0.0f);
 	else
 		Draw::Draw(6, &m_eff, &dst, c, 0.0f);
 }

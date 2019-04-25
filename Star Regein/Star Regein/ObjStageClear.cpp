@@ -99,6 +99,65 @@ void CObjStageClear::Draw()
 		Draw::Draw(18, &src, &dst, c, 0.0f);
 		//---------------------------------------
 	}
+	if (g_stage == MercuryGemini)
+	{
+		//金星（牡牛座）--------------------------
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 790.0f;
+		src.m_bottom = 590.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		//表示
+		Draw::Draw(18, &src, &dst, c, 0.0f);
+		//---------------------------------------
+	}
+	if (g_stage == MercuryVirgo)
+	{
+		//金星（牡牛座）--------------------------
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 790.0f;
+		src.m_bottom = 590.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		//表示
+		Draw::Draw(18, &src, &dst, c, 0.0f);
+		//---------------------------------------
+	}
+	if (g_stage == SunLeo)
+	{
+		//金星（牡牛座）--------------------------
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 790.0f;
+		src.m_bottom = 590.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		//表示
+		Draw::Draw(19, &src, &dst, c, 0.0f);
+		//---------------------------------------
+	}
+
+
 
 	Font::StrDraw(L"STAGE CLEAR", 120,150, 100,y);
 
