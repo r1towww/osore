@@ -119,6 +119,7 @@ void CObjSkillBullet::Action()
 				Hits::DeleteHitBox(this);
 
 			}
+
 		}
 		else
 		{

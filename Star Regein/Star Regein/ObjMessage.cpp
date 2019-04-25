@@ -73,7 +73,7 @@ void CObjMessage::Draw()
 
 		//•`‰æ
 		Draw::Draw(6, &src, &dst, c, 0.0f);
-	}
+	
 	//¯‚ÌƒJƒEƒ“ƒg‚ª‘‚¦‚½ê‡
 	if (g_StarCount > m_memory)
 	{
