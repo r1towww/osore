@@ -70,6 +70,11 @@ void CObjHelp::Draw()
 
 
 //----------------------------------------------
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f + (g_skill * 300.0f);
+	src.m_right  = 300.0f + (g_skill * 300.0f);
+	src.m_bottom = 200.0f;
 	//選択中のスキルによって説明文を変更
 	if (g_skill == Taurus)	//牡牛座
 	{
@@ -78,45 +83,22 @@ void CObjHelp::Draw()
 		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 315, 350, 25, c);
 		Font::StrDraw(L"ダッシュが可能！！", 315, 380, 25, c);
 		Font::StrDraw(L"ダッシュ！ダッシュ！ダッシュ！！", 315, 410, 25, c);
-
-		
-		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 300.0f;
-		src.m_right  = 600.0f;
-		src.m_bottom = 200.0f;
 	}
 	else if (g_skill == Libra)	//天秤座
 	{
-		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 600.0f;
-		src.m_right  = 900.0f;
-		src.m_bottom = 200.0f;
+		
 	}
 	else if (g_skill == Gemini)	//双子座
 	{
-		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 900.0f;
-		src.m_right  = 1200.0f;
-		src.m_bottom = 200.0f;
+		
 	}
 	else if (g_skill == Virgo)	//乙女座
 	{
-		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 1200.0f;
-		src.m_right  = 1500.0f;
-		src.m_bottom = 200.0f;
+		
 	}
 	else if (g_skill == Leo)	//獅子座
 	{
-		//切り取り位置の設定
-		src.m_top    = 0.0f;
-		src.m_left   = 1500.0f;
-		src.m_right  = 1800.0f;
-		src.m_bottom = 200.0f;
+		
 	}
 	//表示位置の設定
 	dst.m_top    = 290.0f;

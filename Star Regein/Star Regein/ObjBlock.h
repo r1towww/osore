@@ -56,6 +56,7 @@ class CObjBlock : public CObj
 		bool m_Atypef;
 
 		int m_rand;	//マップのランダム化用
+		int m_block_rand;	//障害物ブロックのランダム化用
 
 		//惑星ごとの背景カラー情報
 		float m_red;	//赤

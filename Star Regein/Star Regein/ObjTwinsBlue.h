@@ -48,7 +48,6 @@ private:
 
 	int m_blue_id;
 
-	int m_btime;//一定行動のための時間測定
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値

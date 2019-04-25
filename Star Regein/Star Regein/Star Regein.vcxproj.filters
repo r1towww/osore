@@ -172,7 +172,6 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
@@ -182,11 +181,17 @@
     <ClCompile Include="ObjHelp.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBreakRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
     <ClCompile Include="ObjLeo.cpp">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMoveStone.cpp">
-      <Filter>ソースファイル</Filter>
+    <ClCompile Include="ObjBreakBigRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,7 +369,6 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
@@ -374,11 +378,17 @@
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ObjMoveStone.h">
-      <Filter>ソースファイル</Filter>
+    <ClInclude Include="ObjBreakRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="ObjLeo.h">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBreakBigRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -458,7 +468,7 @@
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\各惑星敵\獅子">
-      <UniqueIdentifier>{634f1ffc-bea0-424e-aac9-1347666c154d}</UniqueIdentifier>
+      <UniqueIdentifier>{ac02dc52-3bb7-4b4a-b943-04fb6e9200eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

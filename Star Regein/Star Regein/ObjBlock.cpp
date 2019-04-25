@@ -28,7 +28,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
-	
+	m_block_rand = 0;	//障害物ブロックのランダム化用
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
@@ -267,6 +267,18 @@ void CObjBlock::Init()
 				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE + g_whitehole_cnt, 9);//マネージャに登録
 				g_whitehole_cnt++;
 			}
+			if (m_map[i][j] == 15)
+			{
+				//ブレイクロックオブジェクト作成
+				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				Objs::InsertObj(objbrock, OBJ_BREAK_ROCK, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 16)
+			{
+				//ブレイクビックロックオブジェクト作成
+				CObjBreakBigRock* objbbrock = new CObjBreakBigRock(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				Objs::InsertObj(objbbrock, OBJ_BREAK_BIGROCK, 9);//マネージャに登録
+			}
 		}
 	}
 
@@ -312,6 +324,9 @@ void CObjBlock::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };		//通常カラー
+	float r[4] = { 1.0f,0.7f,0.7f,1.0f };		//レッドカラー
+	float b[4] = { 0.7f,0.7f,1.0f,1.0f };		//ブルーカラー
+
 	float backc[4] = { m_red,m_green,m_blue,1.0f };	//背景カラー
 
 	RECT_F src;	//描画元切り取り位置
