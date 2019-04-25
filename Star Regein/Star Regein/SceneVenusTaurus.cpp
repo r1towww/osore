@@ -16,11 +16,13 @@ using namespace GameL;
 #include "SceneVenusTaurus.h"
 #include "GameHead.h"
 
+
 //コンストラクタ
 CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -138,11 +140,38 @@ void CSceneVenusTaurus::Scene()
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
 		//おうし座にクリア表記
 		g_Taurus_clear = true;
+		g_Taurus_Max = true;
 		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
 		{
 			g_Venus_clear = true;
 		}
-		Scene::SetScene(new CSceneStageChoice());	//ゲームメインシーンに移行
+
+		//星を集めきったら
+		if (g_Taurus_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
+
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+		}
+
 	}
 }
+
+

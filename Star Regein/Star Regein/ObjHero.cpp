@@ -355,6 +355,8 @@ void CObjHero::Action()
 			m_key_f = true;
 		}
 
+	
+
 		//HPが最大を超えないようにする（回復スキル）
 		if (g_hp >= g_max_hp)	//HPが最大を超えたら
 		{

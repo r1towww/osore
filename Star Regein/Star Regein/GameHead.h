@@ -56,10 +56,12 @@ enum OBJ_NAME
 	OBJ_SKILL_BULLET,
 
 	OBJ_STATUS,
+	OBJ_SKILL_ITEM,
 
 
 };
 //------------------------------------------------
+
 
 //当たり判定属性----------------------------------
 enum HIT_ELEMENTS
@@ -84,6 +86,8 @@ enum HIT_ELEMENTS
 	ELEMENT_SUB,
 	ELEMENT_SKILL_VIRGO,
 	ELEMENT_SKILL_LEO,
+
+	ELEMENT_SKILL_ITEM,
 };
 //------------------------------------------------
 
@@ -203,9 +207,8 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
-
-extern bool g_gemini_check; //サブ機の生成の為の値
-
+extern bool g_gemini_check; //サブ機の弾丸生成の為の値
+extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
@@ -230,6 +233,20 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+
+//各星座の星を集めきったかどうか
+extern bool g_Earth_Max; 
+extern bool g_Taurus_Max;
+extern bool g_Libra_Max;
+extern bool g_Gemini_Max;
+extern bool g_Virgo_Max;
+extern bool g_Leo_Max;
+
+extern bool g_Make_Item;//アイテムが生成されたかどうか
+
+
+
+extern int g_cow_id[20];//牛の識別ID
 
 
 //------------------------------------------------
@@ -281,6 +298,8 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjSkillVirgo.h"
 #include "ObjSkillBullet.h"
 #include "ObjSkillLeo.h"
+
+#include "ObjSkillItem.h"
 
 
 

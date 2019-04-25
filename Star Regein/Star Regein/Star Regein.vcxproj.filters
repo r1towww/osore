@@ -88,18 +88,6 @@
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillVirgo.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneEarth.cpp">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
@@ -181,14 +169,33 @@
     <ClCompile Include="ObjBreakRock.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjLeo.cpp">
-      <Filter>ソースファイル\各惑星敵\獅子</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBreakBigRock.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillTwinsB.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp">
+      <Filter>ソースファイル\スキル\牡牛座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillVirgo.cpp">
+      <Filter>ソースファイル\スキル\乙女座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillBullet.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeo.cpp" />
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClCompile>
     <ClCompile Include="ObjTwinsBlue.cpp">
       <Filter>ソースファイル\各惑星敵\双子</Filter>
@@ -285,18 +292,6 @@
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillVirgo.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
     <ClInclude Include="SceneEarth.h">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
@@ -381,14 +376,33 @@
     <ClInclude Include="ObjBreakRock.h">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjLeo.h">
-      <Filter>ソースファイル\各惑星敵\獅子</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBreakBigRock.h">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillTwinsB.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLibra.h">
+      <Filter>ソースファイル\スキル\牡牛座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillVirgo.h">
+      <Filter>ソースファイル\スキル\乙女座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillBullet.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h" />
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +481,17 @@
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\各惑星敵\獅子">
-      <UniqueIdentifier>{ac02dc52-3bb7-4b4a-b943-04fb6e9200eb}</UniqueIdentifier>
+    <Filter Include="ソースファイル\スキル\双子座">
+      <UniqueIdentifier>{e304d6be-3823-48ee-a41c-61acf7a3f192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\獅子座">
+      <UniqueIdentifier>{acb956e5-9d4d-47bd-af7b-97195d00f8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\牡牛座">
+      <UniqueIdentifier>{1ac3fdbb-7194-47d8-a9d3-2997780a8477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\乙女座">
+      <UniqueIdentifier>{35da95ca-d704-4b48-bc3d-08a816469f6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

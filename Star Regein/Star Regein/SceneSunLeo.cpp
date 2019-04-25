@@ -22,7 +22,8 @@ CSceneSunLeo::CSceneSunLeo()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
 
-
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 
 }
 
@@ -141,10 +142,39 @@ void CSceneSunLeo::Scene()
 	//太陽で星を14個集めたら次へ移行
 	if (g_StarCount == 14)
 	{
-		g_Leo = true;		//スキル（しし座）をオンにする
+		g_Leo = true;		//スキル（天秤座）をオンにする
+		g_Leo_Max = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
 
-		Scene::SetScene(new CSceneStageChoice());
+		//星を集めきったら
+		if (g_Leo_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
+
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			//スキルアイテムフラグオフ
+			g_skill_item_flag = false;
+			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+		}
+
+
 	}
 }
+
+
+
