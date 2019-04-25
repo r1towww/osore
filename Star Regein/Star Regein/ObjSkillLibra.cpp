@@ -23,6 +23,9 @@ void CObjSkillLibra::Init()
 
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
+
+	m_persist_time = 0;
+
 	m_eff.m_top    =   0;
 	m_eff.m_left   =   0;
 	m_eff.m_right  = 192;
@@ -32,7 +35,7 @@ void CObjSkillLibra::Init()
 //アクション
 void CObjSkillLibra::Action()
 {
-	
+
 	//エフェクト用
 	RECT_F ani_src[15] =
 	{
@@ -72,8 +75,15 @@ void CObjSkillLibra::Action()
 		m_ani = 0;
 	}
 
-	//HPが50より大きくなる、または別のスキルが選択されたら
-	if (g_skill != Libra)
+	m_persist_time++;
+	if (m_persist_time > 60)
+	{
+		m_persist_time = 0;
+		g_mp -= 10.0f;
+	}
+
+	//MPが0になるか別のスキルが選択されたら
+	if (g_skill != Libra || g_mp <= 0.0f)
 	{
 		this->SetStatus(false);		//削除
 	}

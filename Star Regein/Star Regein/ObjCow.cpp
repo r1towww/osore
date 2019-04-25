@@ -16,7 +16,6 @@ using namespace GameL;
 
 float* g_cow_x[20];//全ての牛のX位置を把握する
 float* g_cow_y[20];//全ての牛のY位置を把握する
-bool g_stan_cow_flag[20];
 float g_Leo_cnt;
 
 
@@ -388,8 +387,6 @@ void CObjCow::Action()
 		}
 
 	}
-
-
 
 	if (m_f == true)
 	{

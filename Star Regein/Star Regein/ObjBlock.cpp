@@ -16,6 +16,14 @@ int g_asteroid;
 int g_block;
 int g_blackhole_cnt = 0;
 int g_whitehole_cnt = 0;
+
+bool g_stan_cow_flag[20];//スタン牛個別認識用
+bool g_stan_blue_flag[20];//スタン双子（青）個別認識用
+bool g_stan_red_flag[20];//スタン双子（赤）個別認識用
+bool g_stan_woman_flag[20];//スタン乙女個別認識用
+bool g_stan_libra_flag[20];//スタン天秤個別認識用
+bool g_stan_leo_flag[60];//スタン獅子個別認識用
+
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
 	//マップデータをコピー
@@ -109,6 +117,8 @@ void CObjBlock::Init()
 
 					g_woman_d_flag[m_woman_c] = true;
 
+					g_stan_woman_flag[m_woman_c] = false;
+
 					m_woman_c++;
 
 					Objs::InsertObj(woman, OBJ_WOMAN, 10);
@@ -136,6 +146,8 @@ void CObjBlock::Init()
 
 					g_blue_d_flag[m_blue_c] = true;
 
+					g_stan_blue_flag[m_blue_c] = false;
+
 					m_blue_c++;
 
 					Objs::InsertObj(blue, OBJ_TWINS_BLUE, 10);
@@ -152,6 +164,8 @@ void CObjBlock::Init()
 					g_twinsred_y[m_red_c] = red->GetPY();
 
 					g_red_d_flag[m_red_c] = true;
+
+					g_stan_red_flag[m_red_c] = false;
 
 					m_red_c++;
 
@@ -180,6 +194,8 @@ void CObjBlock::Init()
 
 					g_libra_d_flag[m_libra_c] = true;
 
+					g_stan_libra_flag[m_libra_c] = false;
+
 					m_libra_c++;
 
 					Objs::InsertObj(libra, OBJ_LIBRA, 10);
@@ -205,6 +221,8 @@ void CObjBlock::Init()
 					g_leo_y[m_leo_c] = leo->GetPY();
 
 					g_leo_d_flag[m_leo_c] = true;
+
+					g_stan_leo_flag[m_leo_c] = false;
 
 					m_leo_c++;
 

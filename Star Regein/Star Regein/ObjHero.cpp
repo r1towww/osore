@@ -212,16 +212,16 @@ void CObjHero::Action()
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp > 10.0f && m_dash_flag==true)
+			&& g_Taurus == true && g_mp > 0.0f && m_dash_flag==true)
 		{
 
 			if (m_move_flag == true)
 			{
 				m_MP_time++;
-				if (m_MP_time > 60)
+				if (m_MP_time > 3)
 				{
 					m_MP_time = 0;
-					g_mp -= 10.0f;
+					g_mp -= 1.0f;
 				}
 			}
 			m_speed_power = DASH_SPEED;
@@ -301,7 +301,7 @@ void CObjHero::Action()
 			if (m_key_f == true)
 			{
 				//双子座の場合
-				if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
+				if (g_skill == Gemini && g_gemini_check==false && g_mp == g_max_mp)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -313,7 +313,7 @@ void CObjHero::Action()
 					g_gemini_check = true;
 				}
 				//乙女座の場合
-				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true)
+				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -322,16 +322,17 @@ void CObjHero::Action()
 					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
 					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 50.0f;	//mp消費
+					g_mp -= 30.0f;	//mp消費
 
 				}
 				//獅子座の場合
-				else if (g_skill == Leo && g_Leo == true)
+				else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
 				{
 					//スタンオブジェクト作成
 					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
 					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
+					g_mp -= 30.0f;
 				}
 				m_key_f = false;
 			}
@@ -370,7 +371,7 @@ void CObjHero::Action()
 
 
 		//MPが50以下になったら一定間隔で増える（リジェネ）
-		if (m_dash_flag == false)//ダッシュしていなかったら増える
+		if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)
 			{
