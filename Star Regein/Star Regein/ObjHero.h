@@ -51,9 +51,10 @@ class CObjHero :public CObj
 		RECT_F m_eff2;		//獅子攻撃エフェクト描画用
 
 		bool m_libra_eff_f;	//天秤座スキルエフェクト用フラグ
+		bool m_menu_key_f;	//メニューキー用の制御フラグ
 		int m_f;//攻撃制御用
 		bool m_key_f;
-		bool m_help_key_f;	//helpキー用のフラグ
+		bool m_help_key_f;	//helpキー用の制御フラグ
 
 		int m_time;//無敵時間カウント
 		int m_MP_time;//ＭＰ減少カウント

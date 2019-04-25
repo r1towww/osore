@@ -46,6 +46,8 @@ void CObjMiniMap::Init()
 	m_f = false;	//キー入力制御の初期化
 	m_alpha = 0.7f;	//アルファ値初期化
 
+	m_hint_f = false;	//ヒント表示用フラグの初期化
+
 	count = 0;
 }
 
@@ -61,6 +63,7 @@ void CObjMiniMap::Action()
 			//マップサイズの変更
 			if (m_blocksize == m_smallsize)	//小さい場合大きくする
 			{
+				m_hint_f = false;		//フラグをオフ
 				m_blocksize = m_bigsize;	//ブロックのサイズ変更	
 				m_uisize_x = 200.0f, m_uisize_y = 100.0f;	//マップの位置の変更
 				m_backsize = 400.0f;						//背景のサイズ変更
@@ -68,6 +71,7 @@ void CObjMiniMap::Action()
 			}
 			else						//大きい場合小さくする
 			{
+				m_hint_f = true;		//フラグをオン
 				m_blocksize = m_smallsize;		//ブロックのサイズ変更	
 				m_uisize_x = 590.0f, m_uisize_y = 10.0f;	//マップの位置の変更
 				m_backsize = 200.0f;						//背景のサイズ変更
@@ -95,19 +99,37 @@ void CObjMiniMap::Draw()
 
 	/* 背景用 */
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 500.0f;
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 500.0f;
 	src.m_bottom = 500.0f;
 
 	//表示位置の設定
-	dst.m_top = m_uisize_y;
-	dst.m_left = m_uisize_x;
-	dst.m_right = m_uisize_x + m_backsize;
+	dst.m_top    = m_uisize_y;
+	dst.m_left   = m_uisize_x;
+	dst.m_right  = m_uisize_x + m_backsize;
 	dst.m_bottom = m_uisize_y + m_backsize;
 
 	//背景の描画
 	Draw::Draw(7, &src, &dst, c, 0.0f);
+
+	if (m_hint_f == true)
+	{
+
+
+
+
+
+
+	}
+	else
+	{
+
+	}
+
+
+
+
 
 	/* ミニマップ描画処理 */
 	for (int i = 0; i < MAPSIZE; i++)

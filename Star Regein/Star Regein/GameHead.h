@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_LIBRA,
 	OBJ_LEO,
 
+	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
 
@@ -233,6 +234,7 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+extern bool g_move_stop_flag;//主人公の操作制御用フラグ
 
 //各星座の星を集めきったかどうか
 extern bool g_Earth_Max; 
@@ -287,6 +289,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
+#include "ObjMenu.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"

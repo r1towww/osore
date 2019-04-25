@@ -139,6 +139,7 @@
     <ClCompile Include="ObjHomingHeart.cpp" />
     <ClCompile Include="ObjLeo.cpp" />
     <ClCompile Include="ObjLibra.cpp" />
+    <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="ObjHomingHeart.h" />
     <ClInclude Include="ObjLeo.h" />
     <ClInclude Include="ObjLibra.h" />
+    <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />

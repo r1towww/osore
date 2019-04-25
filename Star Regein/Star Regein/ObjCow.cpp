@@ -79,6 +79,9 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true)
+		return;	//行動を制御
 
 	//ブロック衝突で向き変更
 	if (m_hit_up == true)

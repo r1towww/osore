@@ -71,6 +71,10 @@ void CObjTwinsBlue::Init()
 //アクション
 void CObjTwinsBlue::Action()
 {	
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true)
+		return;	//行動を制御
+
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{

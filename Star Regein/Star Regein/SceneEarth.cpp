@@ -111,6 +111,10 @@ void CSceneEarth::InitScene()
 	CObjStatus* objstatus = new CObjStatus();
 	Objs::InsertObj(objstatus, OBJ_STATUS, 100);
 
+	//スキル切り替えオブジェクト作成
+	CObjSkill* objSkill = new CObjSkill();
+	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);

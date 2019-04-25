@@ -41,8 +41,9 @@ void CObjMessage::Action()
 //ドロー
 void CObjMessage::Draw()
 {
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//メッセージフォントカラー
 
-	float c[4] = { 1.0f,1.0f,0.4f,1.0f };	//メッセージフォントカラー
+	float sc[4] = { 1.0f,1.0f,0.4f,1.0f };
 	float b[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
@@ -52,7 +53,11 @@ void CObjMessage::Draw()
 	wchar_t STAR[128];	//星の数を常に表示する
 
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
-	Font::StrDraw(STAR, 400, 20, 25, c);//メッセージを表示
+	Font::StrDraw(STAR, 400, 20, 25, sc);//メッセージを表示
+
+	Font::StrDraw(L"Q:メニュー", 460, 12, 21, c);	//HP
+	Font::StrDraw(L"H:ヘルプ", 460, 33, 21, c);	//MP
+
 
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
@@ -74,7 +79,7 @@ void CObjMessage::Draw()
 	{
 		m_time++;	//timeをプラスしている時だけメッセージを表示
 		swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
-		Font::StrDraw(STARMES, 150, 240, 25, c);//メッセージを表示
+		Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
 		if (m_time == 100) {
 			m_memory = g_StarCount;	//現在の星の数を代入
 			m_time = 0;	//timeの初期化

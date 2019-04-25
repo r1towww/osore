@@ -7,22 +7,23 @@
 
 #include "GameHead.h"
 #include "ObjTitle.h"
-//各惑星・星座のクリア状況
-bool g_Earth_clear=true;	//地球	
-bool g_Venus_clear= true;	//金星
-bool g_Mercury_clear= true;	//水星
-bool g_Sun_clear= true;	//太陽
 
-bool g_Taurus_clear=false;	//牡牛座	
-bool g_Libra_clear=false;	//天秤座
-bool g_Gemini_clear=false;	//双子座
-bool g_Virgo_clear=false;	//乙女座
-bool g_Leo_clear=false;	//獅子座
+#define CLEARF	true
+//各惑星・星座のクリア状況
+bool g_Earth_clear= CLEARF;	//地球	
+bool g_Venus_clear= CLEARF;	//金星
+bool g_Mercury_clear= CLEARF;	//水星
+bool g_Sun_clear= CLEARF;	//太陽
+
+bool g_Taurus_clear= CLEARF;	//牡牛座	
+bool g_Libra_clear= CLEARF;	//天秤座
+bool g_Gemini_clear= CLEARF;	//双子座
+bool g_Virgo_clear= CLEARF;	//乙女座
+bool g_Leo_clear= CLEARF;	//獅子座
 
 bool g_gemini_check = false;
-
 bool g_tutorial_flag = false;
-
+bool g_move_stop_flag = false;
 //使用するネームスペース
 using namespace GameL;
 /*		Planet列挙型
@@ -41,11 +42,11 @@ using namespace GameL;
 */
 int g_stage = Space;	//ステージの値の初期化
 //各星座の取得情報
-bool g_Taurus = true;	//牡牛座	
-bool g_Libra  = true;	//天秤座
-bool g_Gemini = true;	//双子座
-bool g_Virgo  = true;	//乙女座
-bool g_Leo    = true;	//獅子座
+bool g_Taurus = CLEARF;	//牡牛座	
+bool g_Libra  = CLEARF;	//天秤座
+bool g_Gemini = CLEARF;	//双子座
+bool g_Virgo  = CLEARF;	//乙女座
+bool g_Leo    = CLEARF;	//獅子座
 bool g_key_flag = false;	//キー入力制御フラグ
 
 //ステージ選択画面の主人公の位置（初期位置）
