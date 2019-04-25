@@ -21,6 +21,7 @@ CSceneStageChoice::CSceneStageChoice()
 {
 	g_hp = g_max_hp;	//hpを最大hpで初期化
 	g_skill = Taurus;	//スキルの値を牡牛座で初期化
+	g_gemini_check = false;//双子座スキル削除
 }
 
 //デストラクタ

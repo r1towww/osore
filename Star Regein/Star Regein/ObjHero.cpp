@@ -264,14 +264,15 @@ void CObjHero::Action()
 					}
 				}
 				//双子座の場合
-				else if (g_skill == Gemini && g_gemini_check==false)
+				else if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 					//サブ機オブジェクト作成
-					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx()-20,m_py - block->GetScrolly()-5);
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					g_mp -= g_max_mp;	//mp消費
 					g_gemini_check = true;
 				}
 				//乙女座の場合

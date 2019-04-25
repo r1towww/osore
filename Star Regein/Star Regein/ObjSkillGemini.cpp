@@ -15,6 +15,8 @@
 
 using namespace GameL;
 
+bool g_geminiattck_check;
+
 CObjSkillGemini::CObjSkillGemini(float x, float y)
 {
 	m_gx = x;	//位置
@@ -24,21 +26,26 @@ CObjSkillGemini::CObjSkillGemini(float x, float y)
 //イニシャライズ
 void CObjSkillGemini::Init()
 {
-	m_vx = 0.0f;	//移動ベクトル
-	m_vy = 0.0f;
+	m_vx = 0.0f;//移動xベクトル
+	m_vy = 0.0f;//移動yベクトル
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
 	m_ani_time = 0;
-	m_ani_frame = 1;	//静止フレームを初期にする
+	m_ani_frame = 1;//静止フレームを初期にする
 
-	m_ani_max_time = 15;	//アニメーション間隔幅
+	m_ani_max_time = 10;//アニメーション間隔幅
 
-	alpha = 1.0;
-
+	m_movey = true; //true=正面　false=背面
+	m_movex = true;	//true=右　false=左
+	
 	m_bullet_time = 0;
 
-	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_gx, m_gy, 40, 40, ELEMENT_GREEN, OBJ_SKILL_GEMINI, 1);
+	m_time = 1500;
+
+	alpha = 5.0;
+
+	m_pos_x = 0;//主人公と同じ方向に向くため
+	m_pos_y = 0;//主人公と同じ方向に向くため
 }
 
 //アクション
@@ -52,29 +59,66 @@ void CObjSkillGemini::Action()
 	CObjTwinsRed*red = (CObjTwinsRed*)Objs::GetObj(OBJ_TWINS_RED);
 	CObjTwinsBlue*bule = (CObjTwinsBlue*)Objs::GetObj(OBJ_TWINS_BLUE);
 
-	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-	bool check;
-	check = CheckWindow(m_gx + pb->GetScrollx(), m_gy + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-	if (check == true)
+	if (g_posture == HERO_UP)  //上
 	{
-		//主人公機が存在する場合、誘導角度の計算する
-		if (cow || woman || red || bule != nullptr)
+		m_pos_x     = +40.0f;	//X軸調整
+		m_pos_y     = -5.0f;	//Y軸調整
+		m_ani_time += 1;    //maxまで数える
+        m_posture   = 1.0f;   //姿勢
+	}
+	else if (g_posture == HERO_LEFT) //左
+	{
+		m_pos_x     = -15.0f;	//X軸調整
+		m_pos_y     = -20.0f;	//Y軸調整
+		m_ani_time += 1;    //maxまで数える
+		m_posture   = 2.0f;   //姿勢
+	}
+	else if (g_posture == HERO_DOWN) //下
+	{
+		m_pos_x     = -20.0f;	//X軸調整
+		m_pos_y     = +40.0f;	//Y軸調整
+		m_ani_time += 1;    //maxまで数える
+		m_posture   = 3.0f;   //姿勢
+	}
+	else if (g_posture == HERO_RIGHT) //右
+	{
+		m_pos_x     = +35.0f;   //X軸調整
+		m_pos_y     = +45.0f;   //Y軸調整
+		m_ani_time += 1;    //maxまで数える
+		m_posture   = 4.0f;   //姿勢
+	}
+	//timeの方が大きくなると初期化フレームを進める
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	//フレームが3になると初期化
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 0;
+	}
+
+	if (g_geminiattck_check ==true)
+	{
+		//20°間隔で弾丸発射
+		m_bullet_time++;
+
+		if (m_bullet_time > 200)
 		{
-			//20°間隔で弾丸発射
-			m_bullet_time++;
+			m_bullet_time = 0;
 
-			if (m_bullet_time > 100)
+			//ブロック情報を持ってくる
+			CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+			//10発同時発射
+			for (int i = 0; i < 360; i += 36)
 			{
-				m_bullet_time = 0;
-
-				//ブロック情報を持ってくる
-				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 				//サブ機弾丸オブジェクト作成
-				CObjSkillBullet* objB = new CObjSkillBullet(m_gx , m_gy);
+				CObjSkillBullet* objB = new CObjSkillBullet(m_gx + m_pos_x, m_gy + m_pos_y, i);
 				Objs::InsertObj(objB, OBJ_SKILL_BULLET, 150);
-
 			}
+			g_geminiattck_check = false;
 		}
 	}
 
@@ -82,13 +126,19 @@ void CObjSkillGemini::Action()
 	 m_vx = hero->GetVX()*HERO_VEC;
 	 m_vy = hero->GetVY()*HERO_VEC;
 
-	//HitBoxの内容を更新
-	 CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_gx + 19 + pb->GetScrollx(), m_gy + 15 + pb->GetScrolly());
-
 	//位置の更新
 	m_gx += m_vx;
 	m_gy += m_vy;
+
+	m_time--;
+
+	if (m_time < 0)
+	{
+		this->SetStatus(false);
+		g_gemini_check = false;
+	}
+
+
 }
 
 //ドロー
@@ -114,10 +164,10 @@ void CObjSkillGemini::Draw()
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_gy + block->GetScrolly();
-	dst.m_left   = 32.0f + m_gx + block->GetScrollx();
-	dst.m_right  =  0.0f + m_gx + block->GetScrollx();
-	dst.m_bottom = 32.0f + m_gy + block->GetScrolly();
+	dst.m_top    =  0.0f + m_gy + m_pos_y + block->GetScrolly();
+	dst.m_left   = 70.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_right  =  0.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_bottom = 70.0f + m_gy + m_pos_y + block->GetScrolly();
 
 	//表示
 	Draw::Draw(21, &src, &dst, c, 0.0f);

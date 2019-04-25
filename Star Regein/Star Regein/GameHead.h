@@ -205,6 +205,7 @@ extern int g_skill;		   //各星座スキルの値
 
 extern bool g_gemini_check; //サブ機の生成の為の値
 
+extern bool g_geminiattck_check; //双子座スキル弾丸制御
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント

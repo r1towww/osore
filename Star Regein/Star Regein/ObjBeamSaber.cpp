@@ -37,31 +37,26 @@ void CObjBeamSaber::Init()
 		m_angle = 270.0f;	//角度調整
 		m_pos_x = 10.0f;	//X軸調整
 		m_pos_y = -40.0f;	//Y軸調整
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 	}
 	else if (g_posture == HERO_LEFT) //左
 	{
 		m_angle = 0.0f;		//角度調整
 		m_pos_x = -35.0f;	//X軸調整
 		m_pos_y = 10.0f;	//Y軸調整
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 	}
 	else if (g_posture == HERO_DOWN) //下
 	{
 		m_angle = 90.0f;	//角度調整
 		m_pos_x = 10.0f;	//X軸調整
 		m_pos_y = 50.0f;	//Y軸調整
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 	}
 	else if (g_posture == HERO_RIGHT) //右
 	{
-		m_angle = 180.0f;		//角度調整
-		m_pos_x = 50.0f;	//X軸調整
-		m_pos_y = 10.0f;		//Y軸調整
-		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
+		m_angle = 180.0f;  //角度調整
+		m_pos_x = 50.0f;   //X軸調整
+		m_pos_y = 10.0f;   //Y軸調整
 	}
-
-
+	Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
 }
 
 //アクション

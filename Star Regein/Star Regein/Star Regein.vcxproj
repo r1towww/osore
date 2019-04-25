@@ -178,9 +178,6 @@
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -223,9 +220,6 @@
     <ClInclude Include="ObjSkill.h" />
     <ClInclude Include="ObjSkillBullet.h" />
     <ClInclude Include="ObjSkillLeo.h" />
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

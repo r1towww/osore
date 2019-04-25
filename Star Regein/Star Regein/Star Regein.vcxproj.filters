@@ -88,13 +88,7 @@
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillVirgo.cpp">
@@ -172,9 +166,6 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillBullet.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjStatus.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
@@ -192,6 +183,12 @@
     </ClCompile>
     <ClCompile Include="ObjBreakBigRock.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillBullet.cpp">
+      <Filter>ソースファイル\スキル\双子座スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル\双子座スキル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,13 +282,7 @@
     <ClInclude Include="ObjSkill.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillTwinsB.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillVirgo.h">
@@ -369,9 +360,6 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillBullet.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjStatus.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
@@ -389,6 +377,12 @@
     </ClInclude>
     <ClInclude Include="ObjBreakBigRock.h">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillBullet.h">
+      <Filter>ソースファイル\スキル\双子座スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\スキル\双子座スキル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +463,9 @@
     </Filter>
     <Filter Include="ソースファイル\各惑星敵\獅子">
       <UniqueIdentifier>{ac02dc52-3bb7-4b4a-b943-04fb6e9200eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\双子座スキル">
+      <UniqueIdentifier>{a899be31-df61-45e5-8006-d9209cabd862}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

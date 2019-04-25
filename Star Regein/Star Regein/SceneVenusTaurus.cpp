@@ -74,7 +74,12 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
 
+
+	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	
+	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 	Draw::LoadImageW(L"衝撃波.png", 23, TEX_SIZE_512);
