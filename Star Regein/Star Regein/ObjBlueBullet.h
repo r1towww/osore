@@ -23,8 +23,17 @@ private:
 	float m_speed;	//速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
+
 	int m_ani_time; //アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
+	int m_ani_stop;
+	int	   m_ani;		//チャージアニメーション用
+
+	int m_posture;//主人公の向きを代入する変数
+
+	RECT_F m_eff;		//チャージエフェクト描画用
+
 	int m_time;//削除までの時間測定
 	bool	m_del;		//削除チェック
+	
 };

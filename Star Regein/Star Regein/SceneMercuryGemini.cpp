@@ -79,6 +79,8 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
 
+	Draw::LoadImageW(L"ステージクリア画像_水星_双子座.png", 18, TEX_SIZE_2048);
+
 	Draw::LoadImageW(L"ミニマップ枠.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
@@ -104,7 +106,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
+	//Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
@@ -140,13 +142,15 @@ void CSceneMercuryGemini::InitScene()
 void CSceneMercuryGemini::Scene()
 {
 	//水星（ふたご座）で星を14個集めたら次へ移行
-	if (g_StarCount == GEMINIMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		//ふたご座のスキル開放
 		g_Gemini = true;
 		//ふたご座のクリア表記
 		g_Gemini_clear = true;
 		g_Gemini_Max = true;
+
+		g_stage_clear = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
@@ -174,9 +178,30 @@ void CSceneMercuryGemini::Scene()
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
 	}
+
+	ClearCheck(g_stage_clear);
+
 }
 
+//クリアチェック
+void CSceneMercuryGemini::ClearCheck(bool a)
+{
+	//クリアしたなら星座完成画像貼り付け
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
+		}
+	}
+}

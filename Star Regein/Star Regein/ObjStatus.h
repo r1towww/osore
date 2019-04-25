@@ -7,7 +7,7 @@ using namespace GameL;
 
 #define STATUS_PX 24.0f	//ステータス表示位置のX位置調整用
 #define STATUS_PY 0.0f	//ステータス表示位置のY位置調整用
-#define STATUS_BACK_PX 140.0f	//ステータス背景表示位置のX位置調整用
+#define STATUS_BACK_PX 260.0f	//ステータス背景表示位置のX位置調整用
 #define STATUS_BACK_PY 0.0f		//ステータス背景表示位置のY位置調整用
 
 //オブジェクト：ブロック＆背景

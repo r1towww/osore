@@ -72,8 +72,8 @@ void CObjSkillLibra::Action()
 		m_ani = 0;
 	}
 
-	//HPが50より大きくなったら
-	if (g_hp > 50.0f || g_skill != Libra)
+	//HPが50より大きくなる、または別のスキルが選択されたら
+	if (g_skill != Libra)
 	{
 		this->SetStatus(false);		//削除
 	}
@@ -86,6 +86,7 @@ void CObjSkillLibra::Draw()
 	//描画カラー情報
 	float r[4] = { 1.0f,0.0f,0.0f,0.5f };
 	float y[4] = { 1.0f,1.0f,0.0f,0.5f };
+	float c[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F dst;	//描画先表示位置
 
@@ -100,4 +101,6 @@ void CObjSkillLibra::Draw()
 		Draw::Draw(14, &m_eff, &dst, r, 0.0f);
 	else if (g_hp <= 50.0f)
 		Draw::Draw(14, &m_eff, &dst, y, 0.0f);
+	else 
+		Draw::Draw(14, &m_eff, &dst, c, 0.0f);
 }

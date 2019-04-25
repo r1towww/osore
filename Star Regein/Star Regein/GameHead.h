@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_LIBRA,
 	OBJ_LEO,
 
+	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
 
@@ -207,6 +208,10 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
+
+extern bool g_gemini_check; //サブ機の生成の為の値
+
+extern bool g_geminiattck_check; //双子座スキル弾丸制御
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
@@ -214,6 +219,8 @@ extern float  g_Leo_cnt;//獅子座スタンカウント
 extern bool g_stan_cow_flag[20];//スタン個別認識用
 
 //各星座の取得情報
+extern bool g_stage_clear;
+
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
@@ -233,6 +240,7 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+extern bool g_move_stop_flag;//主人公の操作制御用フラグ
 
 //各星座の星を集めきったかどうか
 extern bool g_Earth_Max; 
@@ -287,6 +295,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
+#include "ObjMenu.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"

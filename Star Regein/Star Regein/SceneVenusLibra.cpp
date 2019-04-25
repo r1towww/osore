@@ -75,6 +75,8 @@ void CSceneVenusLibra::InitScene()
 
 	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
 
+	Draw::LoadImageW(L"ステージクリア画像_金星_天秤座.png", 18, TEX_SIZE_2048);
+
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ブラックホール.png", 30, TEX_SIZE_1024);
@@ -147,6 +149,7 @@ void CSceneVenusLibra::Scene()
 		g_Libra = true;		//スキル（天秤座）をオンにする
 		//てんびん座をクリア表示
 		g_Libra_clear = true;
+		g_stage_clear = true;
 		g_Libra_Max = true;
 		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
@@ -178,6 +181,24 @@ void CSceneVenusLibra::Scene()
 			Scene::SetScene(new CSceneStageChoice());//ステージ選択に移行
 		}
 		
+		ClearCheck(g_stage_clear);
 	}
 }
 
+void CSceneVenusLibra::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
+		}
+	}
+}

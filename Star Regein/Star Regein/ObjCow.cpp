@@ -289,7 +289,7 @@ void CObjCow::Action()
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER) ;//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
@@ -297,10 +297,7 @@ void CObjCow::Action()
 			if (hit_data[i] == nullptr)
 				continue;
 
-
 			float r = hit_data[i]->r;
-
-
 
 			if ((r < 45 && r >= 0) || r > 315)
 			{
@@ -380,6 +377,7 @@ void CObjCow::Action()
 		//ヒット判定on
 		g_stan_cow_flag[m_cow_id] = true;
 	}
+
 	//しし座のヒット判定がonの時スタン
 	if (g_stan_cow_flag[m_cow_id] == true)
 	{
@@ -389,8 +387,9 @@ void CObjCow::Action()
 			g_Leo_cnt = 0.0f;
 			g_stan_cow_flag[m_cow_id] = false;
 		}
+
 	}
-	
+
 
 
 	if (m_f == true)

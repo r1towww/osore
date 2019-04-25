@@ -21,6 +21,7 @@ using namespace GameL;
 CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
+	m_clear_f == false;
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
 }
@@ -59,6 +60,7 @@ void CSceneVenusTaurus::InitScene()
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"主人公斬撃アニメーション.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"ステージクリア画像_金星_牡牛座.png", 16, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
@@ -145,6 +147,7 @@ void CSceneVenusTaurus::Scene()
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
 		//おうし座にクリア表記
 		g_Taurus_clear = true;
+		g_stage_clear = true;
 		g_Taurus_Max = true;
 		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
@@ -176,7 +179,29 @@ void CSceneVenusTaurus::Scene()
 			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
+
 	}
+
+	ClearCheck(g_stage_clear);
+
+
 }
 
+void CSceneVenusTaurus::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (m_clear_f==true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f=true;
+		}
+	}
+}
 

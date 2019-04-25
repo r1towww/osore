@@ -71,11 +71,13 @@ void CObjWoman::Init()
 //アクション
 void CObjWoman::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
 	//チュートリアルフラグが立っていない場合動く
-	if (g_tutorial_flag == false)
+	if (g_tutorial_flag == false&&g_stage_clear==false)
 	{
-
-
 		//ブロックとの当たり判定実行
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 		pb->BlockHit(&m_px, &m_py, false,

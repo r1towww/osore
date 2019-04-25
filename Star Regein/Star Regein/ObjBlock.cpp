@@ -41,6 +41,17 @@ void CObjBlock::Init()
 		g_block = 11;		//11をセット
 		g_asteroid = 14;	//14をセット
 	}
+
+	//ステージクリアですべてのサイズを小さくする
+	if (g_stage_clear == true)
+	{
+		m_allsize = 12.0f;
+	}
+	else
+	{
+		m_allsize = 64.0f;
+	}
+	cnt = 0;
 	m_blue_c = 0;
 	m_red_c = 0;
 	m_woman_c = 0;
@@ -176,7 +187,6 @@ void CObjBlock::Init()
 			}
 		}
 	}
-
 	else if (g_stage == SunLeo)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
@@ -205,6 +215,7 @@ void CObjBlock::Init()
 	}
 
 
+
 	//出現
 	for (int i = 0; i < MAPSIZE; i++)
 	{
@@ -212,12 +223,20 @@ void CObjBlock::Init()
 		{
 			if (m_map[i][j] == 3)
 			{
-				//主人公オブジェクト作成
-				CObjHero* obj = new CObjHero(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-				Objs::InsertObj(obj, OBJ_HERO, 10);//マネージャに登録
+				if (g_stage_clear == true)
+				{
+					;
+				}
+				else
+				{
+					//主人公オブジェクト作成
+					CObjHero* obj = new CObjHero(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+					Objs::InsertObj(obj, OBJ_HERO, 10);//マネージャに登録
 
-				m_scrollx = -j * MAPSIZE;
-				m_scrolly = -i * MAPSIZE;
+					m_scrollx = -j * MAPSIZE;
+					m_scrolly = -i * MAPSIZE;
+				}
+
 			}
 			if (m_map[i][j] == 2)
 			{
@@ -291,7 +310,7 @@ void CObjBlock::Init()
 		m_red = 1.0f;  m_green = 2.0f;  m_blue = 2.0f;
 	}
 	else if (g_stage == SunLeo) {		//太陽の場合
-			m_red = 1.0f;  m_green = 1.0f;  m_blue = 1.0f;
+			m_red = 2.0f;  m_green = 1.0f;  m_blue = 1.0f;
 		}
 
 }
@@ -310,6 +329,25 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * HERO_VEC;
 
+	//クリアしたならマップを再表示させる
+	if (g_stage_clear == true)
+	{
+		if (cnt >= 1)
+		{
+			;
+		}
+		else
+		{
+			Init();
+			cnt++;
+		}
+	}
+
+	//背景を回転させる
+	//m_roll += 0.1f;
+	//if (m_roll == 360.0f) {	//1回転した際
+	//	m_roll = 0.0f;		//0.0fに値を戻す
+	//}
 }
 
 //ドロー
@@ -351,8 +389,8 @@ void CObjBlock::Draw()
 				//表示位置の設定
 				dst.m_top    = i*ALLSIZE + m_scrolly;
 				dst.m_left   = j*ALLSIZE + m_scrollx;
-				dst.m_right  = dst.m_left + ALLSIZE ;
-				dst.m_bottom = dst.m_top  + ALLSIZE ;
+				dst.m_right  = dst.m_left + ALLSIZE;
+				dst.m_bottom = dst.m_top  + ALLSIZE;
 				if (m_map[i][j] == 1 || m_map[i][j] == g_block)//隕石、ランダム隕石用
 				{
 					//切り取り位置の設定
@@ -401,68 +439,75 @@ void CObjBlock::BlockHit
 	{
 		for (int j = 0; j < MAPSIZE; j++)
 		{
-			if (m_map[i][j] == 1  || m_map[i][j] == 99
-			 || m_map[i][j] == g_block)
+			if (m_map[i][j] == 1 || m_map[i][j] == 99
+				|| m_map[i][j] == g_block)
 			{
-				//要素番号を座標に変更
-				float bx = j*ALLSIZE;
-				float by = i*ALLSIZE;
-
-				//スクロールの影響
-				float scrollx = scroll_on ? m_scrollx : 0;
-				float scrolly = scroll_on ? m_scrolly : 0;
-
-				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scrollx) + HITBOXSIZE > bx) && (*x + (-scrollx) < bx + HITBOXSIZE) && (*y + (-scrolly) + HITBOXSIZE > by) && (*y + (-scrolly) < by + HITBOXSIZE))
+				if (g_stage_clear == false)
 				{
-					//上下左右判定
+					//要素番号を座標に変更
+					float bx = j*ALLSIZE;
+					float by = i*ALLSIZE;
 
-					//Vectorの作成
-					float rvx = (*x + (-scrollx)) - bx;
-					float rvy = (*y + (-scrolly)) - by;
+					//スクロールの影響
+					float scrollx = scroll_on ? m_scrollx : 0;
+					float scrolly = scroll_on ? m_scrolly : 0;
 
-					//長さを求める
-					float len = sqrt(rvx*rvx + rvy*rvy);
-
-					//角度を求める
-					float r = atan2(rvy, rvx);
-					r = r*180.0f / 3.14f;
-
-					if (r <= 0.0f)
-						r = abs(r);
-					else
-						r = 360.0f - abs(r);
-
-					//lenがある一定の長さのより短い場合判定に入る
-					if (len < 88.0f)
+					//オブジェクトとブロックの当たり判定
+					if ((*x + (-scrollx) + HITBOXSIZE > bx) && (*x + (-scrollx) < bx + HITBOXSIZE) && (*y + (-scrolly) + HITBOXSIZE > by) && (*y + (-scrolly) < by + HITBOXSIZE))
 					{
-						//角度で上下左右を判定
-						if ((r < 45 && r >= 0) || r > 315)
-						{
-							*right = true;//オブジェクトの左部分が衝突している
-							*x = bx + HITBOXSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
-							*vx = 0.15f;//-VX*反発係数
-						}
+						//上下左右判定
 
-						if (r > 45 && r < 135)
+						//Vectorの作成
+						float rvx = (*x + (-scrollx)) - bx;
+						float rvy = (*y + (-scrolly)) - by;
+
+						//長さを求める
+						float len = sqrt(rvx*rvx + rvy*rvy);
+
+						//角度を求める
+						float r = atan2(rvy, rvx);
+						r = r*180.0f / 3.14f;
+
+						if (r <= 0.0f)
+							r = abs(r);
+						else
+							r = 360.0f - abs(r);
+
+						//lenがある一定の長さのより短い場合判定に入る
+						if (len < 88.0f)
 						{
-							*down = true;//オブジェクトの下の部分が衝突している
-							*y = by - HITBOXSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
-							*vy = -0.15f;
-						}
-						if (r > 135 && r < 225)
-						{
-							*left = true;//オブジェクトの右部分が衝突している
-							*x = bx - HITBOXSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
-							*vx = -0.15f;//-VX*反発係数
-						}
-						if (r > 225 && r < 315)
-						{
-							*up = true;//オブジェクトの上の部分が衝突している
-							*y = by + HITBOXSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
-							*vy = 0.15f;
+							//角度で上下左右を判定
+							if ((r < 45 && r >= 0) || r > 315)
+							{
+								*right = true;//オブジェクトの左部分が衝突している
+								*x = bx + HITBOXSIZE + (scrollx);//ブロックの位置+オブジェクトの幅
+								*vx = 0.15f;//-VX*反発係数
+							}
+
+							if (r > 45 && r < 135)
+							{
+								*down = true;//オブジェクトの下の部分が衝突している
+								*y = by - HITBOXSIZE + (scrolly);//ブロックの位置-オブジェクトの幅
+								*vy = -0.15f;
+							}
+							if (r > 135 && r < 225)
+							{
+								*left = true;//オブジェクトの右部分が衝突している
+								*x = bx - HITBOXSIZE + (scrollx);//ブロックの位置-オブジェクトの幅
+								*vx = -0.15f;//-VX*反発係数
+							}
+							if (r > 225 && r < 315)
+							{
+								*up = true;//オブジェクトの上の部分が衝突している
+								*y = by + HITBOXSIZE + (scrolly);//ブロックの位置+オブジェクトの幅							
+								*vy = 0.15f;
+							}
 						}
 					}
+				}
+				else
+				{
+					return;
 				}
 			}
 			

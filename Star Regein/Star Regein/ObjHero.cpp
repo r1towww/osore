@@ -12,7 +12,7 @@
 using namespace GameL;
 
 float g_posture;
-int g_skill = Taurus;
+int g_skill = NoSkill;
 int g_attack_power;
 
 
@@ -88,11 +88,16 @@ void CObjHero::Init()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
+	else
+	{
+		m_blackhole_num = 0;
+	}
 
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
 	m_libra_eff_f = false;
+	m_menu_key_f = false;
 
 	//火傷時主人公カラー変更用フラグ
 	m_burn_f =false;
@@ -118,18 +123,15 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	//チュートリアルフラグが立っていないとき動くようにする
-	if (g_tutorial_flag == false)
+	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
+	if (g_tutorial_flag == true || g_move_stop_flag == true)
 	{
+		return;
+	}
 		//移動ベクトルの破棄
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 
-		//デバック用
-		if (Input::GetVKey('O'))
-		{
-			Scene::SetScene(new CSceneStageChoice());
-		}
 		//デバック用
 		if (Input::GetVKey('L'))
 		{
@@ -266,6 +268,14 @@ void CObjHero::Action()
 		//天秤座の場合（パッシブ）
 		if (g_skill == Libra)
 		{
+			//エフェクトを１度だけ出すようにする
+			if (m_libra_eff_f == false)
+			{
+				m_libra_eff_f = true;	//trueにして入らない用に
+				//天秤エフェクトの作成
+				CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+				Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+			}
 			//残りHPに応じて攻撃力を変更
 			if (g_hp <= 20.0f)	//20.0f以下
 			{
@@ -273,20 +283,11 @@ void CObjHero::Action()
 			}
 			else if (g_hp <= 50.0f) //50.0f以下
 			{
-				//エフェクトを１度だけ出すようにする
-				if (m_libra_eff_f == false)
-				{
-					m_libra_eff_f = true;	//trueにして入らない用に
-					//天秤エフェクトの作成
-					CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-					Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
-				}
-				g_attack_power = 2;	//攻撃力変更
+				g_attack_power = 3;	//攻撃力変更
 			}
-			else	//それ以外（50.0fより大きい場合）
+			else if(g_hp > 50.0f)//それ以外（50.0fより大きい場合）
 			{
-				m_libra_eff_f = false;	//フラグを戻す
-				g_attack_power = 1;	//攻撃力変更
+				g_attack_power = 2;	//攻撃力変更
 			}
 		}
 		else
@@ -299,34 +300,20 @@ void CObjHero::Action()
 		{
 			if (m_key_f == true)
 			{
-
-				//天秤座の場合
-				if (g_skill == Libra)
-				{
-					//if (g_hp < g_max_hp && g_mp > 25.0f)
-					//{
-					//	//天秤エフェクトの作成
-					//	CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-					//	Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
-
-					//	g_mp -= 25.0f;	//mp消費
-					//	g_hp += 20.0f;	//hp回復
-					//}
-					
-				}
 				//双子座の場合
-				else if (g_skill == Gemini && g_gemini_check==false)
+				else if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 					//サブ機オブジェクト作成
-					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx()-20,m_py - block->GetScrolly()-5);
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					g_mp -= g_max_mp;	//mp消費
 					g_gemini_check = true;
 				}
 				//乙女座の場合
-				else if (g_skill == Virgo && g_mp >= 10.0f)
+				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -339,7 +326,7 @@ void CObjHero::Action()
 
 				}
 				//獅子座の場合
-				else if (g_skill == Leo)
+				else if (g_skill == Leo && g_Leo == true)
 				{
 					//スタンオブジェクト作成
 					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
@@ -349,7 +336,7 @@ void CObjHero::Action()
 				m_key_f = false;
 			}
 		}
-		//Qキーが入力された場合
+		//Cキーが入力された場合
 		else if (Input::GetVKey('C'))
 		{
 			if (m_key_f == true)
@@ -414,7 +401,26 @@ void CObjHero::Action()
 			m_help_key_f = true;
 		}
 
+		//Qキーが入力された場合
+		if (Input::GetVKey('Q'))
+		{
+			if (m_menu_key_f == true)
+			{
+				//ベクトルを０にする
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+				//Menuオブジェクトを作成
+				CObjMenu *objmenu = new CObjMenu();
+				Objs::InsertObj(objmenu, OBJ_MENU, 150);
+				g_move_stop_flag = true;	//ストップフラグをオン
 
+				m_menu_key_f = false;
+			}
+		}
+		else
+		{
+			m_menu_key_f = true;
+		}
 			//HitBoxの内容を更新
 		CHitBox*hit = Hits::GetHitBox(this);
 
@@ -645,11 +651,6 @@ void CObjHero::Action()
 			Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 			Scene::SetScene(new CSceneGameOver());
 		}
-	}
-	else
-	{
-		return;
-	}
 }
 
 
@@ -677,13 +678,22 @@ void CObjHero::Draw()
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
-
-	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
-
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top    = 0.0f	 + m_py;
+		dst.m_left   = 80.0f   + m_px;
+		dst.m_right  = 0.0f   + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 
@@ -693,6 +703,22 @@ void CObjHero::Draw()
 	else
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 80.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 
 	//ダッシュフラグがオンの場合
 	if (m_dash_flag == true)

@@ -19,11 +19,6 @@ void CObjHelp::Init()
 //アクション
 void CObjHelp::Action()
 {
-
-
-
-
-
 	//Hキーが話された場合
 	if (Input::GetVKey('H') == false)
 	{
@@ -76,22 +71,30 @@ void CObjHelp::Draw()
 	src.m_right  = 300.0f + (g_skill * 300.0f);
 	src.m_bottom = 200.0f;
 	//選択中のスキルによって説明文を変更
+	if (g_skill == NoSkill)
+	{
+		//説明文
+		Font::StrDraw(L"*各星座スキル*    発動条件", 310, 320, 25, c);
+		Font::StrDraw(L"スキルの説明を見ることができます。", 315, 350, 25, c);
+		Font::StrDraw(L"星座をセットしてHキーを入力。", 315, 380, 25, c);
+		Font::StrDraw(L"「スキルを使いこなそう。」", 315, 410, 25, c);
+	}
 	if (g_skill == Taurus)	//牡牛座
 	{
 		//説明文
 		Font::StrDraw(L"*牡牛座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
 		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 315, 350, 25, c);
 		Font::StrDraw(L"ダッシュが可能！！", 315, 380, 25, c);
-		Font::StrDraw(L"「ダッシュ！ダッシュ！ダッシュ！」", 315, 410, 25, c);
+		Font::StrDraw(L"「大きな岩も壊せそう。」", 315, 410, 25, c);
 	}
 	else if (g_skill == Libra)	//天秤座
 	{
 		//説明文
-		Font::StrDraw(L"*天秤座スキル*  HP減少によって発動", 310, 320, 25, c);
-		Font::StrDraw(L"HPが減ると攻撃力UP！！", 315, 350, 25, c);
-		Font::StrDraw(L"自動的に効果は発揮されるぞ！", 315, 380, 25, c);
-		Font::StrDraw(L"「自分の命は大切に。」", 315, 410, 25, c);
-
+		Font::StrDraw(L"*天秤座スキル*    選択中に発動", 310, 320, 25, c);
+		Font::StrDraw(L"セットすると攻撃力UP！！", 315, 350, 25, c);
+		Font::StrDraw(L"HP減少によって攻撃力は変動し、", 315, 380, 25, c);
+		Font::StrDraw(L"自動的に効果は発揮されるぞ！", 315, 410, 25, c);
+		Font::StrDraw(L"「自分の命は大切に。」", 315, 440, 25, c);
 	}
 	else if (g_skill == Gemini)	//双子座
 	{
@@ -121,10 +124,10 @@ void CObjHelp::Draw()
 
 	}
 	//表示位置の設定
-	dst.m_top    = 290.0f;
-	dst.m_left   = 80.0f;
+	dst.m_top    = 280.0f;
+	dst.m_left   = 40.0f;
 	dst.m_right  = 280.0f;
-	dst.m_bottom = 490.0f;
+	dst.m_bottom = 480.0f;
 	//表示
 	Draw::Draw(13, &src, &dst, c, 0.0f);
 
