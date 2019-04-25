@@ -59,21 +59,21 @@ void CObjMessage::Draw()
 	Font::StrDraw(L"H:ヘルプ", 460, 33, 21, c);	//MP
 
 
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 232.0f;
-		src.m_bottom = 203.0f;
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 232.0f;
+	src.m_bottom = 203.0f;
 
-		//表示位置の設定
-		dst.m_top = 16.0f;
-		dst.m_left = 365.0f;
-		dst.m_right = 395.0f;
-		dst.m_bottom = 46.0f;
+	//表示位置の設定
+	dst.m_top = 16.0f;
+	dst.m_left = 365.0f;
+	dst.m_right = 395.0f;
+	dst.m_bottom = 46.0f;
 
-		//描画
-		Draw::Draw(6, &src, &dst, c, 0.0f);
-	}
+	//描画
+	Draw::Draw(6, &src, &dst, c, 0.0f);
+	
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)
 	{

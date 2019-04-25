@@ -460,4 +460,3 @@ void CObjMiniMap::Draw()
 			}
 		}
 	}
-}

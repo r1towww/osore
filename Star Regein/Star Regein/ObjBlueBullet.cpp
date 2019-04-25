@@ -36,6 +36,10 @@ void CObjBlueBullet::Init()
 //アクション
 void CObjBlueBullet::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
 	m_time--;
 
 	m_ani_time += ANITIME;
