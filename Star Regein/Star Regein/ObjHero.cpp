@@ -64,6 +64,11 @@ void CObjHero::Init()
 	//ＭＰリジェネカウント用初期化
 	m_regene_time = 0;
 
+	//火傷継続時間
+	m_burn_time = 0;
+	//火傷合計継続時間
+	m_burn_max_time = 0;
+
 	//キーフラグの初期化
 	m_key_f = true;
 	m_help_key_f = true;
@@ -77,6 +82,9 @@ void CObjHero::Init()
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
+
+	//火傷時主人公カラー変更用フラグ
+	m_burn_f =false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -462,8 +470,34 @@ void CObjHero::Action()
 			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
+			//もし火傷中に再度攻撃を喰らった時継続時間初期化
+			m_burn_max_time = 0;
+			m_burn_time = 0;
+
+			m_burn_f = true;
 			m_eff_flag = true;
 
+		}
+
+		//フラグがオンのとき火傷状態になり、持続ダメージ
+		if (m_burn_f == true)
+		{
+			m_burn_max_time++;
+			if (m_burn_time > 50)
+			{
+				g_hp -= 5.0f;
+				m_burn_time = 0;
+			}
+			else
+			{
+				m_burn_time++;
+			}
+
+			if (m_burn_max_time >= 250)
+			{
+				m_burn_max_time = 0;
+				m_burn_f = false;
+			}
 		}
 
 		if (m_eff_flag == true)
@@ -573,6 +607,7 @@ void CObjHero::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
+	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -594,6 +629,13 @@ void CObjHero::Draw()
 
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
+
+	//火傷状態のとき主人公を赤色に
+	if (m_burn_f == true)
+		Draw::Draw(1, &src, &dst, c2, 0.0f);
+	else
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+
 
 	//ダッシュフラグがオンの場合
 	if (m_dash_flag == true)

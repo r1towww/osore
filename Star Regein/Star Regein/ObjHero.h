@@ -59,10 +59,15 @@ private:
 	int m_MP_time;//ＭＰ減少カウント
 	int m_regene_time;//ＭＰリジェネカウント
 
+	int m_burn_time;//火傷間隔タイム
+	int m_burn_max_time;//火傷合計継続時間
+
 	bool m_dash_flag;  //ダッシュフラグ
 	bool m_move_flag;  //移動フラグ
 
 	bool m_a_flag;//攻撃制御用
+
+	bool m_burn_f;//火傷時主人公カラー変更用フラグ
 
 	//blockとの衝突状態確認用
 	bool m_hit_up;
