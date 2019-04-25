@@ -22,8 +22,6 @@ public:
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
 
-	//int GetID() { return count; } //‹‚Ì¯•Ê”Ô†
-
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }

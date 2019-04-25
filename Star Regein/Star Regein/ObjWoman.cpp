@@ -380,5 +380,5 @@ void CObjWoman::Draw()
 
 
 	//•`‰æ
-	Draw::Draw(21, &src, &dst, c, 0.0f);
+	Draw::Draw(22, &src, &dst, c, 0.0f);
 }

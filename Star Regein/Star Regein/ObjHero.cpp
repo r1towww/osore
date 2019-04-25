@@ -506,7 +506,10 @@ void CObjHero::Action()
 						m_vy = -10.0f;//したに移動させる
 					}
 				}
-				
+
+				//乙女の弾丸と当たった場合MP減少
+				if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
+					g_mp -= 25.0f;
 
 				//ダメージ音を鳴らす
 				Audio::Start(5);
@@ -518,6 +521,7 @@ void CObjHero::Action()
 			}
 		}
 
+		//獅子と当たった場合火傷状態を付与
 		if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
 		{
 			//敵が主人公とどの角度で当たっているかを確認
@@ -532,7 +536,6 @@ void CObjHero::Action()
 			m_eff_flag = true;
 
 		}
-
 		//フラグがオンのとき火傷状態になり、持続ダメージ
 		if (m_burn_f == true)
 		{

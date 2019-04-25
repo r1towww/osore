@@ -273,9 +273,9 @@ void CObjMiniMap::Draw()
 			}
 		}
 
-		if (g_stage == EarthStar)
+		if (g_stage == MercuryVirgo)
 		{
-			for (int i = 0; i < 4; i++)//“G‚Ì”•ª‰ñ‚·
+			for (int i = 0; i < 16; i++)//“G‚Ì”•ª‰ñ‚·
 			{
 				float wx = *g_woman_x[i];
 				float wy = *g_woman_y[i];

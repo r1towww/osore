@@ -70,6 +70,8 @@ void CObjBlock::Init()
 
 					g_cow_d_flag[m_c_c] = true;
 
+					g_stan_cow_flag[m_c_c] = false;
+
 					m_c_c++;
 
 					Objs::InsertObj(cow, OBJ_COW, 10);
@@ -77,7 +79,7 @@ void CObjBlock::Init()
 			}
 		}
 	}
-	else if (g_stage == EarthStar)
+	else if (g_stage == MercuryVirgo)
 	{
 		for (int i = 0; i < MAPSIZE; i++)
 		{

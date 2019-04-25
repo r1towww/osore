@@ -210,8 +210,8 @@ extern int g_skill;		   //各星座スキルの値
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
-extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
+extern bool g_stan_cow_flag[20];//スタン個別認識用
 
 //各星座の取得情報
 extern bool g_Taurus;	//牡牛座	
@@ -306,7 +306,6 @@ extern int g_cow_id[20];//牛の識別ID
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
-#include "SceneMain.h"
 #include "SceneEarth.h"
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"

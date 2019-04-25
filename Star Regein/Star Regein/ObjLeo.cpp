@@ -215,7 +215,6 @@ void CObjLeo::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-				g_Leo_hit_flag = true;
 
 				//Šp“x‚Åã‰º¶‰E‚ğ”»’è
 				if ((r <= 45 && r >= 0) || r >= 315)

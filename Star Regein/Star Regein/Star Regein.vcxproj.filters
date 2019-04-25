@@ -43,9 +43,6 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
@@ -246,9 +243,6 @@
     </ClInclude>
     <ClInclude Include="GameHead.h">
       <Filter>ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlock.h">
       <Filter>ソースファイル\マップ</Filter>

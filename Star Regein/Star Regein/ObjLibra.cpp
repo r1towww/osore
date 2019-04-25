@@ -300,5 +300,5 @@ void CObjLibra::Draw()
 
 
 	//•`‰æ
-	Draw::Draw(23, &src, &dst, c, 0.0f);
+	Draw::Draw(24, &src, &dst, c, 0.0f);
 }

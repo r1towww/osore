@@ -176,7 +176,6 @@
     <ClCompile Include="SceneSunLeo.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
     <ClCompile Include="ObjSkillTwinsB.cpp">
@@ -256,7 +255,6 @@
     <ClInclude Include="SceneSunLeo.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
-    <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneVenusLibra.h" />
     <ClInclude Include="SceneVenusTaurus.h" />
     <ClInclude Include="UtilityModule.h" />
