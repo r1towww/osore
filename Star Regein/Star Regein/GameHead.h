@@ -185,6 +185,7 @@ extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
 extern float g_max_mp; //最大ＭＰ
+extern int g_attack_power;	//主人公の攻撃力
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
@@ -210,7 +211,6 @@ extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
-
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座

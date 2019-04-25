@@ -13,7 +13,7 @@ using namespace GameL;
 
 float g_posture;
 int g_skill = Taurus;
-
+int g_attack_power;
 
 
 CObjHero::CObjHero(float x, float y)
@@ -74,7 +74,8 @@ void CObjHero::Init()
 
 	//攻撃制御フラグ
 	m_a_flag = true;
-
+	//攻撃力の初期化
+	g_attack_power = 1;
 	//ブラックホールの数を入れる
 	if (g_stage == VenusLibra) {	//天秤座
 		m_blackhole_num = 4;	
@@ -86,6 +87,7 @@ void CObjHero::Init()
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
+	m_libra_eff_f = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -120,7 +122,16 @@ void CObjHero::Action()
 		{
 			Scene::SetScene(new CSceneStageChoice());
 		}
-
+		//デバック用
+		if (Input::GetVKey('L'))
+		{
+			g_hp -= 1.0f;
+		}
+		//デバック用
+		if (Input::GetVKey('K'))
+		{
+			g_hp += 1.0f;
+		}
 		//移動系統情報--------------------------------------------------
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -244,6 +255,37 @@ void CObjHero::Action()
 			m_speed_power = NORMAL_SPEED;
 		}
 
+		//天秤座の場合（パッシブ）
+		if (g_skill == Libra)
+		{
+			//残りHPに応じて攻撃力を変更
+			if (g_hp <= 20.0f)	//20.0f以下
+			{
+				g_attack_power = 5;	//攻撃力変更
+			}
+			else if (g_hp <= 50.0f) //50.0f以下
+			{
+				//エフェクトを１度だけ出すようにする
+				if (m_libra_eff_f == false)
+				{
+					m_libra_eff_f = true;	//trueにして入らない用に
+					//天秤エフェクトの作成
+					CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+				}
+				g_attack_power = 2;	//攻撃力変更
+			}
+			else	//それ以外（50.0fより大きい場合）
+			{
+				m_libra_eff_f = false;	//フラグを戻す
+				g_attack_power = 1;	//攻撃力変更
+			}
+		}
+		else
+		{
+			m_libra_eff_f = false;	//フラグを戻す
+		}
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -253,15 +295,16 @@ void CObjHero::Action()
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
-					if (g_hp < g_max_hp && g_mp > 25.0f)
-					{
-						//天秤エフェクトの作成
-						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+					//if (g_hp < g_max_hp && g_mp > 25.0f)
+					//{
+					//	//天秤エフェクトの作成
+					//	CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					//	Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 
-						g_mp -= 25.0f;	//mp消費
-						g_hp += 20.0f;	//hp回復
-					}
+					//	g_mp -= 25.0f;	//mp消費
+					//	g_hp += 20.0f;	//hp回復
+					//}
+					
 				}
 				//双子座の場合
 				else if (g_skill == Gemini && g_gemini_check==false)
@@ -329,7 +372,7 @@ void CObjHero::Action()
 		}
 
 
-		//MPが50以下になったら一定間隔で増える
+		//MPが50以下になったら一定間隔で増える（リジェネ）
 		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)

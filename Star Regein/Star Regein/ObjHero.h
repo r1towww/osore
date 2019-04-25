@@ -43,14 +43,14 @@ class CObjHero :public CObj
 		int m_ani_time; //アニメーションフレーム動作間隔
 		int m_ani_frame;//描画フレーム
 
-	int	 m_ani;			//アニメーション用
-	int  m_ani2;
-	int	 m_eff_time;	//アニメーション間隔タイム
-	int  m_eff_time2;
-	RECT_F m_eff;		//エフェクト描画用
-	RECT_F m_eff2;		//獅子攻撃エフェクト描画用
+		int	 m_ani;			//アニメーション用
+		int  m_ani2;
+		int	 m_eff_time;	//アニメーション間隔タイム
+		int  m_eff_time2;
+		RECT_F m_eff;		//エフェクト描画用
+		RECT_F m_eff2;		//獅子攻撃エフェクト描画用
 
-
+		bool m_libra_eff_f;	//天秤座スキルエフェクト用フラグ
 		int m_f;//攻撃制御用
 		bool m_key_f;
 		bool m_help_key_f;	//helpキー用のフラグ
@@ -72,7 +72,7 @@ class CObjHero :public CObj
 
 		bool m_invincible_flag;//無敵フラグ
 
-	bool m_eff_flag;
+		bool m_eff_flag;
 
 	
 };

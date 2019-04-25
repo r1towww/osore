@@ -82,23 +82,43 @@ void CObjHelp::Draw()
 		Font::StrDraw(L"*牡牛座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
 		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 315, 350, 25, c);
 		Font::StrDraw(L"ダッシュが可能！！", 315, 380, 25, c);
-		Font::StrDraw(L"ダッシュ！ダッシュ！ダッシュ！！", 315, 410, 25, c);
+		Font::StrDraw(L"「ダッシュ！ダッシュ！ダッシュ！」", 315, 410, 25, c);
 	}
 	else if (g_skill == Libra)	//天秤座
 	{
-		
+		//説明文
+		Font::StrDraw(L"*天秤座スキル*  HP減少によって発動", 310, 320, 25, c);
+		Font::StrDraw(L"HPが減ると攻撃力UP！！", 315, 350, 25, c);
+		Font::StrDraw(L"自動的に効果は発揮されるぞ！", 315, 380, 25, c);
+		Font::StrDraw(L"「自分の命は大切に。」", 315, 410, 25, c);
+
 	}
 	else if (g_skill == Gemini)	//双子座
 	{
-		
+		//説明文
+		Font::StrDraw(L"*双子座スキル*    MP消費 10ゲージ", 310, 320, 25, c);
+		Font::StrDraw(L"共に戦うサブ機を召喚！！", 315, 350, 25, c);
+		Font::StrDraw(L"最大1体までしか召喚できないぞ！", 315, 380, 25, c);
+		Font::StrDraw(L"「仲間は大事だよ。」", 315, 410, 25, c);
+
 	}
 	else if (g_skill == Virgo)	//乙女座
 	{
-		
+		//説明文
+		Font::StrDraw(L"*乙女座スキル*    MP消費 5ゲージ", 310, 320, 25, c);
+		Font::StrDraw(L"HPを吸収するハート弾を発射！", 315, 350, 25, c);
+		Font::StrDraw(L"向いている方向に飛んでいくぞ！", 315, 380, 25, c);
+		Font::StrDraw(L"「少し分けてもらうね...」", 315, 410, 25, c);
+
 	}
 	else if (g_skill == Leo)	//獅子座
 	{
-		
+		//説明文
+		Font::StrDraw(L"*獅子座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
+		Font::StrDraw(L"", 315, 350, 25, c);
+		Font::StrDraw(L"", 315, 380, 25, c);
+		Font::StrDraw(L"", 315, 410, 25, c);
+
 	}
 	//表示位置の設定
 	dst.m_top    = 290.0f;

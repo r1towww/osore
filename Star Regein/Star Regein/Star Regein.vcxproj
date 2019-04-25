@@ -162,7 +162,7 @@
     <ClCompile Include="ObjTextBox.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTutorial.cpp" />
-    <ClCompile Include="ObjTwinsBule.cpp" />
+    <ClCompile Include="ObjTwinsBlue.cpp" />
     <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="ObjWoman.cpp" />

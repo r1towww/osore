@@ -41,10 +41,6 @@ void CObjBlock::Init()
 		g_block = 11;		//11をセット
 		g_asteroid = 14;	//14をセット
 	}
-
-
-	m_roll = 0.0f;
-
 	m_blue_c = 0;
 	m_red_c = 0;
 	m_woman_c = 0;
@@ -312,11 +308,6 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * HERO_VEC;
 
-	//背景を回転させる
-	//m_roll += 0.1f;
-	//if (m_roll == 360.0f) {	//1回転した際
-	//	m_roll = 0.0f;		//0.0fに値を戻す
-	//}
 }
 
 //ドロー
@@ -358,8 +349,8 @@ void CObjBlock::Draw()
 				//表示位置の設定
 				dst.m_top    = i*ALLSIZE + m_scrolly;
 				dst.m_left   = j*ALLSIZE + m_scrollx;
-				dst.m_right  = dst.m_left + ALLSIZE;
-				dst.m_bottom = dst.m_top  + ALLSIZE;
+				dst.m_right  = dst.m_left + ALLSIZE ;
+				dst.m_bottom = dst.m_top  + ALLSIZE ;
 				if (m_map[i][j] == 1 || m_map[i][j] == g_block)//隕石、ランダム隕石用
 				{
 					//切り取り位置の設定

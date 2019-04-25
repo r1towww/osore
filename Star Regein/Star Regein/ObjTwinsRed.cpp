@@ -327,7 +327,7 @@ void CObjTwinsRed::Action()
 				}
 			}
 
-			m_hp -= 1;
+			m_hp -= g_attack_power;	//hp‚ðŽålŒö‚ÌUŒ‚—Í•ªŒ¸‚ç‚·
 			m_f = true;
 			m_key_f = true;
 			hit->SetInvincibility(true);

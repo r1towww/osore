@@ -124,9 +124,6 @@
     <ClCompile Include="ObjCow.cpp">
       <Filter>ソースファイル\各惑星敵\牛</Filter>
     </ClCompile>
-    <ClCompile Include="ObjTwinsBule.cpp">
-      <Filter>ソースファイル\各惑星敵\双子</Filter>
-    </ClCompile>
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClCompile>
@@ -192,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="ObjBreakBigRock.cpp">
       <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsBlue.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

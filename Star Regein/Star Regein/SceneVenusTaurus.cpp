@@ -70,7 +70,7 @@ void CSceneVenusTaurus::InitScene()
 
 	
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
-	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
+	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
 
