@@ -21,6 +21,8 @@ bool g_Gemini_clear= CLEARF;	//ëoéqç¿
 bool g_Virgo_clear= CLEARF;	//â≥èóç¿
 bool g_Leo_clear= CLEARF;	//éÇéqç¿
 
+bool g_geminiattack_check = false;
+
 bool g_gemini_check = false;
 bool g_tutorial_flag = false;
 bool g_move_stop_flag = false;

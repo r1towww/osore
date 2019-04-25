@@ -19,7 +19,6 @@ bool g_woman_d_flag[20];//乙女削除フラグ
 bool g_libra_d_flag[20];//天秤削除フラグ
 bool g_leo_d_flag[50];//獅子削除フラグ
 
-
 int g_map[MAPSIZE][MAPSIZE];
 
 CObjMiniMap::CObjMiniMap(int map[MAPSIZE][MAPSIZE])
@@ -317,17 +316,19 @@ void CObjMiniMap::Draw()
 							dst.m_right = dst.m_left + m_blocksize;
 							dst.m_bottom = dst.m_top + m_blocksize;
 
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-						}
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+
+						g_geminiattck_check = true;
 					}
 				}
 			}
+		}
 
 			if (g_stage == MercuryGemini)
 			{
@@ -351,20 +352,22 @@ void CObjMiniMap::Draw()
 							dst.m_right = dst.m_left + m_blocksize;
 							dst.m_bottom = dst.m_top + m_blocksize;
 
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-						}
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+
+						g_geminiattck_check = true;
 					}
 				}
-				for (int i = 0; i < 7; i++)//敵の数分回す
-				{
-					float rx = *g_twinsred_x[i];
-					float ry = *g_twinsred_y[i];
+			}
+			for (int i = 0; i < 7; i++)//敵の数分回す
+			{
+				float rx = *g_twinsred_x[i];
+				float ry = *g_twinsred_y[i];
 
 
 					if (g_red_d_flag[i] == true)
@@ -381,17 +384,19 @@ void CObjMiniMap::Draw()
 							dst.m_right = dst.m_left + m_blocksize;
 							dst.m_bottom = dst.m_top + m_blocksize;
 
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-						}
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+
+						g_geminiattck_check = true;
 					}
 				}
 			}
+		}
 
 			if (g_stage == VenusTaurus)
 			{
@@ -414,17 +419,19 @@ void CObjMiniMap::Draw()
 							dst.m_right = dst.m_left + m_blocksize;
 							dst.m_bottom = dst.m_top + m_blocksize;
 
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-						}
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+
+						g_geminiattck_check = true;
 					}
 				}
 			}
+		}
 
 			if (g_stage == SunLeo)
 			{
@@ -447,14 +454,14 @@ void CObjMiniMap::Draw()
 							dst.m_right = dst.m_left + m_blocksize;
 							dst.m_bottom = dst.m_top + m_blocksize;
 
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-						}
+						//切り取り位置の設定
+						src.m_top = 0.0f;
+						src.m_left = 50.0f;
+						src.m_right = 100.0f;
+						src.m_bottom = 50.0f;
+						//描画
+						Draw::Draw(9, &src, &dst, c, 0.0f);
+						g_geminiattck_check = true;
 					}
 				}
 			}

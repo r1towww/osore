@@ -205,10 +205,6 @@ void CObjCow::Action()
 			m_vy = sin(3.14 / 180 * ar) * 2;
 		}
 	}
-	else
-	{
-
-	}
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -330,7 +326,7 @@ void CObjCow::Action()
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER) ;//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
@@ -338,10 +334,7 @@ void CObjCow::Action()
 			if (hit_data[i] == nullptr)
 				continue;
 
-
 			float r = hit_data[i]->r;
-
-
 
 			if ((r < 45 && r >= 0) || r > 315)
 			{
@@ -434,7 +427,47 @@ void CObjCow::Action()
 			
 		}
 	}
-	
+
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_SUB) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		for (int i = 0; i < hit->GetCount(); i++)
+		{
+			//攻撃の左右に当たったら
+			if (hit_data[i] == nullptr)
+				continue;
+
+			float r = hit_data[i]->r;
+
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -20.0f;//左に移動させる
+			}
+			if (r >= 45 && r < 135)
+			{
+				m_vy = 20.0f;//上に移動させる
+			}
+			if (r >= 135 && r < 225)
+			{
+				m_vx = 20.0f;//右に移動させる
+			}
+			if (r >= 225 && r < 315)
+			{
+				m_vy = -20.0f;//したに移動させる
+			}
+		}
+
+		m_hp -= 1;
+		m_f = true;
+		m_key_f = true;
+		hit->SetInvincibility(true);
+
+	}
+
 	//しし座のヒット判定がonの時スタン
 	if (g_Leo_hit_flag == true)
 	{

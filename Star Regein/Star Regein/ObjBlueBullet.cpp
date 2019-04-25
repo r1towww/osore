@@ -22,8 +22,14 @@ void CObjBlueBullet::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 2;
+	m_ani = 0;
+	m_ani_stop = 0;
 
 	m_time = 300;
+	m_del = false;
+
+	m_vx = cos(3.14f / 180.0f*m_r);
+	m_vy = sin(3.14f / 180.0f*m_r);
 
 	m_ani_max_time = 7;	//アニメーション間隔幅
 
@@ -40,6 +46,22 @@ void CObjBlueBullet::Action()
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
 
+	//大から小
+	RECT_F ani_src[12] =
+	{
+		{ 0,   0,    32, 32 },
+		{ 0,  32,    64, 32 },
+		{ 0,  64,    96, 32 },
+		{ 0,  96,   128, 32 },
+		{ 0, 128,   160, 32 },
+		{ 0, 160,   192, 32 },
+		{ 0, 192,   224, 32 },
+		{ 0, 224,   256, 32 },
+		{ 0, 256,   288, 32 },
+		{ 0, 288,   320, 32 },
+		{ 0, 320,   352, 32 },
+	};
+
 	m_time--;
 
 	m_ani_time += ANITIME;
@@ -49,6 +71,7 @@ void CObjBlueBullet::Action()
 	//移動
 	m_x += m_vx * m_speed;
 	m_y -= m_vy * m_speed;
+
 
 	//アニメーション用
 	if (m_ani_time > m_ani_max_time)
@@ -67,8 +90,8 @@ void CObjBlueBullet::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());			//HitBoxの位置を敵機弾丸の位置に更新
 
-	//主人公機オブジェクトと接触したら弾丸削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit ->CheckElementHit(ELEMENT_BLOCK) || m_time <= 0)
+																				//主人公機オブジェクトと接触したら弾丸削除
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckElementHit(ELEMENT_BLOCK) || m_time <= 150)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
@@ -93,18 +116,19 @@ void CObjBlueBullet::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//切り取り位置の設定
-	src.m_top = 16.0f;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 16);
-	src.m_right = 16.0f + (AniData[m_ani_frame] * 16);
-	src.m_bottom = 32.0f;
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_y + block->GetScrolly();
-	dst.m_left = 0.0f + m_x + block->GetScrollx();
-	dst.m_right = 25.0f + m_x + block->GetScrollx();
-	dst.m_bottom = 25.0f + m_y + block->GetScrolly();
+		//切り取り位置の設定
+		src.m_top = 16.0f;
+		src.m_left = 0.0f + (AniData[m_ani_frame] * 16);
+		src.m_right = 16.0f + (AniData[m_ani_frame] * 16);
+		src.m_bottom = 32.0f;
 
-	//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
-	Draw::Draw(16, &src, &dst, c, 0);
+		//表示位置の設定
+		dst.m_top = 0.0f + m_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x + block->GetScrollx();
+		dst.m_right = 25.0f + m_x + block->GetScrollx();
+		dst.m_bottom = 25.0f + m_y + block->GetScrolly();
+
+		//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
+		Draw::Draw(16, &src, &dst, c, 0);
 }

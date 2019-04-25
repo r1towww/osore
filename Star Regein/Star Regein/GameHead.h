@@ -208,6 +208,10 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
+
+extern bool g_gemini_check; //サブ機の生成の為の値
+
+extern bool g_geminiattck_check; //双子座スキル弾丸制御
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
