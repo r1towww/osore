@@ -65,7 +65,7 @@ void CObjStatus::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float hpc[4] = { m_red,m_gleen,m_blue,1.0f };
-	float mpc[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float mpc[4] = { 0.0f,0.0f,1.0f,1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置

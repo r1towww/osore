@@ -50,13 +50,14 @@ class CObjBlock : public CObj
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用
-		float m_roll;			//背景回転用
+
 		int m_f;//主人公消滅時のエラー回避用
 		int cnt;
 		float m_allsize;
 		bool m_Atypef;
 
 		int m_rand;	//マップのランダム化用
+		int m_block_rand;	//障害物ブロックのランダム化用
 
 		//惑星ごとの背景カラー情報
 		float m_red;	//赤

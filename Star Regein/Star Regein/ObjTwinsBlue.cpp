@@ -168,12 +168,46 @@ void CObjTwinsBlue::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
-		//敵とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		//主人公とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+		{
+			//主人公がブロックとどの角度で当たっているのかを確認
+			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			float r = 0;
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (hit_data[i] != nullptr)
+				{
+					r = hit_data[i]->r;
+
+
+					//角度で上下左右を判定
+					if ((r <= 45 && r >= 0) || r >= 315)
+					{
+						m_vx = -0.15f; //右
+					}
+					if (r > 45 && r < 135)
+					{
+						m_vy = 0.15f;//上
+					}
+					if (r >= 135 && r < 225)
+					{
+						m_vx = 0.15f;//左
+					}
+					if (r >= 225 && r < 315)
+					{
+						m_vy = -0.15f; //下
+					}
+				}
+			}
+		}
+
+		if (hit->CheckElementHit(ELEMENT_NULL) == true)
 		{
 			//敵がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
 			hit_data = hit->SearchElementHit(ELEMENT_NULL);
 			float r = 0;
 
@@ -238,7 +272,7 @@ void CObjTwinsBlue::Action()
 				}
 			}
 
-			m_hp -= 1;
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_key_f = true;
 			hit->SetInvincibility(true);

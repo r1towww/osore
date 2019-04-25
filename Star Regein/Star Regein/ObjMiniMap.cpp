@@ -127,73 +127,100 @@ void CObjMiniMap::Draw()
 					dst.m_right = dst.m_left + m_blocksize;
 					dst.m_bottom = dst.m_top + m_blocksize;
 
-					if (g_map[i][j] == 1)//隕石
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 40.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == 2)//星（取得前）
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 410.0f;
-						src.m_right = 440.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == 4)//星（取得後）
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 110.0f;
-						src.m_right = 140.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == 7)//ブラックホール
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 260.0f;
-						src.m_right = 290.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == 8)//ホワイトホール
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 310.0f;
-						src.m_right = 340.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == g_block)//隕石
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 40.0f;
-						src.m_bottom = 50.0f;
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-					if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
-					{
-						//切り取り位置の設定
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = 40.0f;
-						src.m_bottom = 50.0f;
+				if (g_map[i][j] == 1)//隕石
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 2)//星（取得前）
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 410.0f;
+					src.m_right  = 440.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 4)//星（取得後）
+				{
+					//切り取り位置の設定
+					src.m_top = 0.0f;
+					src.m_left = 110.0f;
+					src.m_right = 140.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 7)//ブラックホール
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 260.0f;
+					src.m_right  = 290.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 8)//ホワイトホール
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 310.0f;
+					src.m_right  = 340.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == g_block)//隕石
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 15)//壊れる隕石
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == 16)//壊れる隕石（大）
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 460.0f;
+					src.m_right  = 490.0f;
+					src.m_bottom = 50.0f;
+
+					//表示位置の設定
+					dst.m_top    = i*m_blocksize + m_uisize_y + 2.0f;
+					dst.m_left   = j*m_blocksize + m_uisize_x ;
+					dst.m_right  = dst.m_left + m_blocksize * 2.8;
+					dst.m_bottom = dst.m_top + m_blocksize * 2.0f;
+
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
+				}
+				if (g_map[i][j] == g_asteroid || g_map[i][j] == 6)//小惑星
+				{
+					//切り取り位置の設定
+					src.m_top    = 0.0f;
+					src.m_left   = 0.0f;
+					src.m_right  = 40.0f;
+					src.m_bottom = 50.0f;
 
 						//表示位置の設定
 						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
@@ -201,20 +228,19 @@ void CObjMiniMap::Draw()
 						dst.m_right = dst.m_left + m_blocksize * 1.8;
 						dst.m_bottom = dst.m_top + m_blocksize * 1.8;
 
-						//描画
-						Draw::Draw(9, &src, &dst, c, 0.0f);
-					}
-
+					//描画
+					Draw::Draw(9, &src, &dst, c, 0.0f);
 				}
 			}
 		}
-		//主人公の情報を取得
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		if (hero != nullptr)
-		{
-			//主人公の位置を取得
-			float hx = hero->GetX();
-			float hy = hero->GetY();
+	}
+	//主人公の情報を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	if (hero != nullptr)
+	{
+		//主人公の位置を取得
+		float hx = hero->GetX();
+		float hy = hero->GetY();
 
 			//ブロック情報を持ってくる
 			CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

@@ -160,13 +160,12 @@ void CObjLibra::Action()
 		CHitBox*hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
-		//敵とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true || hit->CheckElementHit(ELEMENT_NULL) == true)
+		//主人公とBLOCK系統との当たり判定
+		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
 		{
-			//敵がブロックとどの角度で当たっているのかを確認
+			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-			hit_data = hit->SearchElementHit(ELEMENT_NULL);
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)
@@ -230,7 +229,7 @@ void CObjLibra::Action()
 				}
 			}
 
-			m_hp -= 1;
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_key_f = true;
 			hit->SetInvincibility(true);

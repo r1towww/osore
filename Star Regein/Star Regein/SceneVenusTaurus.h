@@ -20,5 +20,7 @@ class CSceneVenusTaurus :public CScene
 
 private:
 		bool m_clear_f;//ˆê‰ñˆ—ê—p
+		float Item_cnt;
+
 };
 

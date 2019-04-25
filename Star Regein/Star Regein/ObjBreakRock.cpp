@@ -10,10 +10,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBreakRock::CObjBreakRock(float x, float y)
+CObjBreakRock::CObjBreakRock(float x, float y,int i, int j)
 {
 	m_px = x;		//位置
 	m_py = y;
+	m_i = i;	//作成時にマップ上の座標を取得
+	m_j = j;	
 }
 
 //イニシャライズ
@@ -27,7 +29,7 @@ void CObjBreakRock::Init()
 	m_eff.m_bottom = 200;
 	m_eff_flag = false;		//エフェクト開始用フラグ
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 64.0f, 64.0f, ELEMENT_BLOCK, OBJ_BREAKROCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, 64.0f, 64.0f, ELEMENT_BLOCK, OBJ_BREAK_ROCK, 1);
 }
 
 //アクション

@@ -18,6 +18,8 @@ class CSceneEarth :public CScene
 		void Scene();     //実行中メソッド
 		void ClearCheck(bool a);
 	private:
+		float Item_cnt;
+	
 
 		int cnt;
 };

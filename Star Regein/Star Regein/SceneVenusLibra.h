@@ -19,5 +19,6 @@ class CSceneVenusLibra :public CScene
 		void ClearCheck(bool a);
 	private:
 		bool m_clear_f;
+		float Item_cnt;
 };
 

@@ -13,7 +13,7 @@ using namespace GameL;
 
 float g_posture;
 int g_skill = Taurus;
-
+int g_attack_power;
 
 
 CObjHero::CObjHero(float x, float y)
@@ -74,17 +74,37 @@ void CObjHero::Init()
 
 	//攻撃制御フラグ
 	m_a_flag = true;
+	//攻撃力の初期化
+	g_attack_power = 1;
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;	
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+
+
+	//獅子攻撃ヒットフラグ
+	m_eff_flag = false;
+	m_libra_eff_f = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 	m_ani = 0;			//アニメーション用
+	m_ani2 = 0;
 	m_ani_time = 0;		//アニメーション間隔タイム
 	m_eff_time = 0;
+	m_eff_time2 = 0;
 	m_eff.m_top    = 0;		//エフェクトの初期化
 	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
 	m_eff.m_bottom = 240;
+	m_eff2.m_top = 0;		//エフェクトの初期化
+	m_eff2.m_left = 0;
+	m_eff2.m_right = 192;
+	m_eff2.m_bottom = 192;
 }
 
 //アクション
@@ -102,7 +122,16 @@ void CObjHero::Action()
 		{
 			Scene::SetScene(new CSceneStageChoice());
 		}
-
+		//デバック用
+		if (Input::GetVKey('L'))
+		{
+			g_hp -= 1.0f;
+		}
+		//デバック用
+		if (Input::GetVKey('K'))
+		{
+			g_hp += 1.0f;
+		}
 		//移動系統情報--------------------------------------------------
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -214,6 +243,7 @@ void CObjHero::Action()
 			if (m_ani == 5)
 			{
 				m_ani = 0;
+				m_eff_time = 0;
 			}
 
 			//-----------------------------------------------
@@ -225,6 +255,37 @@ void CObjHero::Action()
 			m_speed_power = NORMAL_SPEED;
 		}
 
+		//天秤座の場合（パッシブ）
+		if (g_skill == Libra)
+		{
+			//残りHPに応じて攻撃力を変更
+			if (g_hp <= 20.0f)	//20.0f以下
+			{
+				g_attack_power = 5;	//攻撃力変更
+			}
+			else if (g_hp <= 50.0f) //50.0f以下
+			{
+				//エフェクトを１度だけ出すようにする
+				if (m_libra_eff_f == false)
+				{
+					m_libra_eff_f = true;	//trueにして入らない用に
+					//天秤エフェクトの作成
+					CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+				}
+				g_attack_power = 2;	//攻撃力変更
+			}
+			else	//それ以外（50.0fより大きい場合）
+			{
+				m_libra_eff_f = false;	//フラグを戻す
+				g_attack_power = 1;	//攻撃力変更
+			}
+		}
+		else
+		{
+			m_libra_eff_f = false;	//フラグを戻す
+		}
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -234,15 +295,16 @@ void CObjHero::Action()
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
-					if (g_hp < g_max_hp && g_mp > 25.0f)
-					{
-						//天秤エフェクトの作成
-						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+					//if (g_hp < g_max_hp && g_mp > 25.0f)
+					//{
+					//	//天秤エフェクトの作成
+					//	CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					//	Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 
-						g_mp -= 25.0f;	//mp消費
-						g_hp += 20.0f;	//hp回復
-					}
+					//	g_mp -= 25.0f;	//mp消費
+					//	g_hp += 20.0f;	//hp回復
+					//}
+					
 				}
 				//双子座の場合
 				else if (g_skill == Gemini && g_gemini_check==false)
@@ -293,6 +355,8 @@ void CObjHero::Action()
 			m_key_f = true;
 		}
 
+	
+
 		//HPが最大を超えないようにする（回復スキル）
 		if (g_hp >= g_max_hp)	//HPが最大を超えたら
 		{
@@ -310,7 +374,7 @@ void CObjHero::Action()
 		}
 
 
-		//MPが50以下になったら一定間隔で増える
+		//MPが50以下になったら一定間隔で増える（リジェネ）
 		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)
@@ -352,7 +416,7 @@ void CObjHero::Action()
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//ブラックホールの数forループを回す
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < m_blackhole_num; i++)
 		{
 			//ブラックホールと当たった場合
 			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
@@ -371,7 +435,7 @@ void CObjHero::Action()
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)
@@ -443,6 +507,59 @@ void CObjHero::Action()
 				m_f = true;
 				m_key_f = true;
 				m_invincible_flag = true;
+			}
+		}
+
+		if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			m_eff_flag = true;
+
+		}
+
+		if (m_eff_flag == true)
+		{
+			//エフェクト用
+			RECT_F ani_src2[15] =
+			{
+				{ 0,    0,  192, 192 },
+				{ 0,  192,  384, 192 },
+				{ 0,  384,  576, 192 },
+				{ 0,  576,  768, 192 },
+				{ 0,  768,  960, 192 },
+				{ 192,    0,  192, 384 },
+				{ 192,  192,  384, 384 },
+				{ 192,  384,  576, 384 },
+				{ 192,  576,  768, 384 },
+				{ 192,  768,  960, 384 },
+				{ 384,    0,  384, 576 },
+				{ 384,  192,  384, 384 },
+				{ 384,  384,  576, 384 },
+				{ 384,  576,  768, 384 },
+				{ 384,  768,  960, 384 },
+			};
+			//アニメーションのコマ間隔制御
+			if (m_eff_time2 > 2)
+			{
+				m_ani2++;		//アニメーションのコマを1つ進める
+				m_eff_time2 = 0;
+
+				m_eff2 = ani_src2[m_ani2];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_eff_time2++;
+			}
+			// 14番目（画像最後）まで進んだら、0に戻す
+			if (m_ani2 == 14)
+			{
+				m_ani2 = 0;
+				m_eff_time2 = 0;
+
+				m_eff_flag = false;
 			}
 		}
 
@@ -572,6 +689,17 @@ void CObjHero::Draw()
 	else
 	{
 		m_ani = 0;
+	}
+
+	if (m_eff_flag == true)
+	{
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 0.0f + m_px;
+		dst.m_right = 94.0f + m_px;
+		dst.m_bottom = 94.0f + m_py;
+		//描画
+		Draw::Draw(18, &m_eff2, &dst, c, 90.0f);
 	}
 
 }
