@@ -69,7 +69,7 @@ void CObjStageChoice::Draw()
 	Draw::Draw(3, &src, &dst, c, 0.0f);
 	if (g_Earth_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 10, 400, 40, y);
+		Font::StrDraw(L"CLEAR!", 10, 410, 40, y);
 	}
 
 	//----------------------------------------
@@ -92,7 +92,7 @@ void CObjStageChoice::Draw()
 	Draw::Draw(4, &src, &dst, c, 0.0f);
 	if (g_Venus_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 220, 350, 40, y);
+		Font::StrDraw(L"CLEAR!", 220, 310, 40, y);
 	}
 
 	//----------------------------------------

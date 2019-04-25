@@ -13,7 +13,7 @@ using namespace GameL;
 
 float g_posture;
 int g_skill = Taurus;
-
+int g_attack_power;
 
 
 CObjHero::CObjHero(float x, float y)
@@ -79,9 +79,20 @@ void CObjHero::Init()
 
 	//攻撃制御フラグ
 	m_a_flag = true;
+	//攻撃力の初期化
+	g_attack_power = 1;
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;	
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
+	m_libra_eff_f = false;
 
 	//火傷時主人公カラー変更用フラグ
 	m_burn_f =false;
@@ -119,7 +130,16 @@ void CObjHero::Action()
 		{
 			Scene::SetScene(new CSceneStageChoice());
 		}
-
+		//デバック用
+		if (Input::GetVKey('L'))
+		{
+			g_hp -= 1.0f;
+		}
+		//デバック用
+		if (Input::GetVKey('K'))
+		{
+			g_hp += 1.0f;
+		}
 		//移動系統情報--------------------------------------------------
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -243,6 +263,37 @@ void CObjHero::Action()
 			m_speed_power = NORMAL_SPEED;
 		}
 
+		//天秤座の場合（パッシブ）
+		if (g_skill == Libra)
+		{
+			//残りHPに応じて攻撃力を変更
+			if (g_hp <= 20.0f)	//20.0f以下
+			{
+				g_attack_power = 5;	//攻撃力変更
+			}
+			else if (g_hp <= 50.0f) //50.0f以下
+			{
+				//エフェクトを１度だけ出すようにする
+				if (m_libra_eff_f == false)
+				{
+					m_libra_eff_f = true;	//trueにして入らない用に
+					//天秤エフェクトの作成
+					CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+				}
+				g_attack_power = 2;	//攻撃力変更
+			}
+			else	//それ以外（50.0fより大きい場合）
+			{
+				m_libra_eff_f = false;	//フラグを戻す
+				g_attack_power = 1;	//攻撃力変更
+			}
+		}
+		else
+		{
+			m_libra_eff_f = false;	//フラグを戻す
+		}
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
@@ -252,15 +303,16 @@ void CObjHero::Action()
 				//天秤座の場合
 				if (g_skill == Libra)
 				{
-					if (g_hp < g_max_hp && g_mp > 25.0f)
-					{
-						//天秤エフェクトの作成
-						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+					//if (g_hp < g_max_hp && g_mp > 25.0f)
+					//{
+					//	//天秤エフェクトの作成
+					//	CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+					//	Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 
-						g_mp -= 25.0f;	//mp消費
-						g_hp += 20.0f;	//hp回復
-					}
+					//	g_mp -= 25.0f;	//mp消費
+					//	g_hp += 20.0f;	//hp回復
+					//}
+					
 				}
 				//双子座の場合
 				else if (g_skill == Gemini && g_gemini_check==false)
@@ -311,6 +363,8 @@ void CObjHero::Action()
 			m_key_f = true;
 		}
 
+	
+
 		//HPが最大を超えないようにする（回復スキル）
 		if (g_hp >= g_max_hp)	//HPが最大を超えたら
 		{
@@ -328,7 +382,7 @@ void CObjHero::Action()
 		}
 
 
-		//MPが50以下になったら一定間隔で増える
+		//MPが50以下になったら一定間隔で増える（リジェネ）
 		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)
@@ -370,7 +424,7 @@ void CObjHero::Action()
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//ブラックホールの数forループを回す
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < m_blackhole_num; i++)
 		{
 			//ブラックホールと当たった場合
 			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
@@ -389,7 +443,7 @@ void CObjHero::Action()
 		{
 			//主人公がブロックとどの角度で当たっているのかを確認
 			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 			float r = 0;
 
 			for (int i = 0; i < 10; i++)

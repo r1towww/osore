@@ -28,7 +28,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
-	
+	m_block_rand = 0;	//障害物ブロックのランダム化用
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
 	if (m_rand == 0)
@@ -41,10 +41,6 @@ void CObjBlock::Init()
 		g_block = 11;		//11をセット
 		g_asteroid = 14;	//14をセット
 	}
-
-
-	m_roll = 0.0f;
-
 	m_blue_c = 0;
 	m_red_c = 0;
 	m_woman_c = 0;
@@ -270,8 +266,14 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 15)
 			{
 				//ブレイクロックオブジェクト作成
-				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-				Objs::InsertObj(objbrock, OBJ_BREAKROCK, 9);//マネージャに登録
+				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				Objs::InsertObj(objbrock, OBJ_BREAK_ROCK, 9);//マネージャに登録
+			}
+			if (m_map[i][j] == 16)
+			{
+				//ブレイクビックロックオブジェクト作成
+				CObjBreakBigRock* objbbrock = new CObjBreakBigRock(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				Objs::InsertObj(objbbrock, OBJ_BREAK_BIGROCK, 9);//マネージャに登録
 			}
 		}
 	}
@@ -306,11 +308,6 @@ void CObjBlock::Action()
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * HERO_VEC;
 
-	//背景を回転させる
-	//m_roll += 0.1f;
-	//if (m_roll == 360.0f) {	//1回転した際
-	//	m_roll = 0.0f;		//0.0fに値を戻す
-	//}
 }
 
 //ドロー
@@ -318,6 +315,9 @@ void CObjBlock::Draw()
 {
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };		//通常カラー
+	float r[4] = { 1.0f,0.7f,0.7f,1.0f };		//レッドカラー
+	float b[4] = { 0.7f,0.7f,1.0f,1.0f };		//ブルーカラー
+
 	float backc[4] = { m_red,m_green,m_blue,1.0f };	//背景カラー
 
 	RECT_F src;	//描画元切り取り位置
@@ -349,8 +349,8 @@ void CObjBlock::Draw()
 				//表示位置の設定
 				dst.m_top    = i*ALLSIZE + m_scrolly;
 				dst.m_left   = j*ALLSIZE + m_scrollx;
-				dst.m_right  = dst.m_left + ALLSIZE;
-				dst.m_bottom = dst.m_top  + ALLSIZE;
+				dst.m_right  = dst.m_left + ALLSIZE ;
+				dst.m_bottom = dst.m_top  + ALLSIZE ;
 				if (m_map[i][j] == 1 || m_map[i][j] == g_block)//隕石、ランダム隕石用
 				{
 					//切り取り位置の設定
