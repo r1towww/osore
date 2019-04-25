@@ -54,7 +54,6 @@ void CObjLeo::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	g_Leo_hit_flag = false;
 	g_Leo_cnt = 0.0f;
 
 	m_btime = 0;
@@ -345,7 +344,6 @@ void CObjLeo::Action()
 
 
 			float r = hit_data[i]->r;
-			g_Leo_hit_flag = true;
 
 
 			if ((r < 45 && r >= 0) || r > 315)
@@ -364,22 +362,6 @@ void CObjLeo::Action()
 			if (r >= 225 && r < 315)
 			{
 				m_vy = -20.0f;//したに移動させる
-			}
-
-
-			//獅子座スキルヒットフラグがオンならスタンさせ
-			//カウントを進め、一定数になればスタン解除
-
-			if (g_Leo_hit_flag == true)
-			{
-				m_vx = 0.0f;
-				m_vy = 0.0f;
-
-				if (g_Leo_cnt >= 10)
-				{
-					g_Leo_hit_flag == false;
-				}
-
 			}
 
 		}

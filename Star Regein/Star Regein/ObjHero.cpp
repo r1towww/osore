@@ -301,7 +301,7 @@ void CObjHero::Action()
 			if (m_key_f == true)
 			{
 				//双子座の場合
-				else if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
+				if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
