@@ -75,6 +75,11 @@ void CObjLeo::Init()
 //アクション
 void CObjLeo::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true)
+		return;	//行動を制御
+
+
 	m_btime++;
 
 	if (m_ani_time > m_ani_max_time)
@@ -275,7 +280,7 @@ void CObjLeo::Action()
 			}
 		}
 
-		m_hp -= 1;
+		m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);

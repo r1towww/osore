@@ -16,7 +16,11 @@ class CSceneVenusTaurus :public CScene
 		~CSceneVenusTaurus();
 		void InitScene(); //初期化メソッド
 		void Scene();     //実行中メソッド
-	private:
+		void ClearCheck(bool a);
+
+private:
+		bool m_clear_f;//一回処理専用
+		float Item_cnt;
 
 };
 

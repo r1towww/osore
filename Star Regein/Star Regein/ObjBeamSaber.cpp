@@ -52,11 +52,13 @@ void CObjBeamSaber::Init()
 	}
 	else if (g_posture == HERO_RIGHT) //右
 	{
-		m_angle = 180.0f;  //角度調整
-		m_pos_x = 50.0f;   //X軸調整
-		m_pos_y = 10.0f;   //Y軸調整
+		m_angle = 180.0f;		//角度調整
+		m_pos_x = 50.0f;	//X軸調整
+		m_pos_y = 10.0f;		//Y軸調整
 	}
-	Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 1);
+
+	Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 60.0f, 60.0f, ELEMENT_BEAMSABER, OBJ_BEAMSABER, 11);
+
 }
 
 //アクション
@@ -109,6 +111,8 @@ void CObjBeamSaber::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float r[4] = { 1.0f,0.3f,0.3f,1.0f };
+	float y[4] = { 1.0f,0.7f,0.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -128,5 +132,11 @@ void CObjBeamSaber::Draw()
 
 
 	//表示
-	Draw::Draw(2, &src, &dst, c, m_angle);
+	if(g_hp <= 20.0f && g_skill == Libra)
+		Draw::Draw(2, &src, &dst, r, m_angle);
+	else if(g_hp <= 50.0f && g_skill == Libra)
+		Draw::Draw(2, &src, &dst, y, m_angle);
+	else 
+		Draw::Draw(2, &src, &dst, c, m_angle);
+
 }

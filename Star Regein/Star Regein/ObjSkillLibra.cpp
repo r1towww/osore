@@ -25,8 +25,8 @@ void CObjSkillLibra::Init()
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
 	m_eff.m_top    =   0;
 	m_eff.m_left   =   0;
-	m_eff.m_right  = 200;
-	m_eff.m_bottom = 200;
+	m_eff.m_right  = 192;
+	m_eff.m_bottom = 192;
 }
 
 //アクション
@@ -34,21 +34,28 @@ void CObjSkillLibra::Action()
 {
 	
 	//エフェクト用
-	RECT_F ani_src[8] =
+	RECT_F ani_src[15] =
 	{
-		{ 0,    0,   200, 200 },
-		{ 0,  200,   400, 200 },
-		{ 0,  400,   600, 200 },
-		{ 0,  600,   800, 200 },
-		{ 0,  800,  1000, 200 },
-		{ 0, 1000,  1200, 200 },
-		{ 0, 1200,  1400, 200 },
-		{ 0, 1400,  1600, 200 },
+		{   0,   0, 192, 192 },
+		{   0, 192, 384, 192 },
+		{   0, 384, 576, 192 },
+		{   0, 576, 768, 192 },
+		{   0, 768, 960, 192 },
+		{ 192,   0, 192, 384 },
+		{ 192, 192, 384, 384 },
+		{ 192, 384, 576, 384 },
+		{ 192, 576, 768, 384 },
+		{ 192, 768, 960, 384 },
+		{ 384,   0, 192, 576 },
+		{ 384, 192, 384, 576 },
+		{ 384, 384, 576, 576 },
+		{ 384, 576, 768, 576 },
+		{ 384, 768, 960, 576 },
 	};
 
 
 	//アニメーションのコマ間隔制御
-	if (m_ani_time > 2)
+	if (m_ani_time > 3)
 	{
 		m_ani++;		//アニメーションのコマを1つ進める
 		m_ani_time = 0;
@@ -59,10 +66,16 @@ void CObjSkillLibra::Action()
 	{
 		m_ani_time++;
 	}
-	//８番目（画像最後）まで進んだら、削除
-	if (m_ani == 8)
+	//８番目（画像最後）まで進んだら、0番目に戻す
+	if (m_ani == 14)
 	{
-		this->SetStatus(false);
+		m_ani = 0;
+	}
+
+	//HPが50より大きくなる、または別のスキルが選択されたら
+	if (g_skill != Libra)
+	{
+		this->SetStatus(false);		//削除
 	}
 
 }
@@ -71,7 +84,9 @@ void CObjSkillLibra::Action()
 void CObjSkillLibra::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float r[4] = { 1.0f,0.0f,0.0f,0.5f };
+	float y[4] = { 1.0f,1.0f,0.0f,0.5f };
+	float c[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F dst;	//描画先表示位置
 
@@ -82,5 +97,10 @@ void CObjSkillLibra::Draw()
 	dst.m_bottom = 80.0f + m_y;
 
 	//描画
-	Draw::Draw(14, &m_eff, &dst, c, 0.0f);
+	if(g_hp <= 20.0f)
+		Draw::Draw(14, &m_eff, &dst, r, 0.0f);
+	else if (g_hp <= 50.0f)
+		Draw::Draw(14, &m_eff, &dst, y, 0.0f);
+	else 
+		Draw::Draw(14, &m_eff, &dst, c, 0.0f);
 }

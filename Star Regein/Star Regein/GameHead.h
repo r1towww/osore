@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_LIBRA,
 	OBJ_LEO,
 
+	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
 
@@ -56,10 +57,12 @@ enum OBJ_NAME
 	OBJ_SKILL_BULLET,
 
 	OBJ_STATUS,
+	OBJ_SKILL_ITEM,
 
 
 };
 //------------------------------------------------
+
 
 //当たり判定属性----------------------------------
 enum HIT_ELEMENTS
@@ -84,6 +87,8 @@ enum HIT_ELEMENTS
 	ELEMENT_SUB,
 	ELEMENT_SKILL_VIRGO,
 	ELEMENT_SKILL_LEO,
+
+	ELEMENT_SKILL_ITEM,
 };
 //------------------------------------------------
 
@@ -185,6 +190,7 @@ extern float g_hp;     //今のＨＰ
 extern float g_max_hp; //最大ＨＰ
 extern float g_mp;     //今のＭＰ
 extern float g_max_mp; //最大ＭＰ
+extern int g_attack_power;	//主人公の攻撃力
 
 extern bool g_key_flag;	//キー入力制御フラグ
 
@@ -206,11 +212,14 @@ extern int g_skill;		   //各星座スキルの値
 extern bool g_gemini_check; //サブ機の生成の為の値
 
 extern bool g_geminiattck_check; //双子座スキル弾丸制御
+extern bool g_gemini_check; //サブ機の弾丸生成の為の値
+extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
 extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
 
 //各星座の取得情報
+extern bool g_stage_clear;
 
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
@@ -231,6 +240,21 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+extern bool g_move_stop_flag;//主人公の操作制御用フラグ
+
+//各星座の星を集めきったかどうか
+extern bool g_Earth_Max; 
+extern bool g_Taurus_Max;
+extern bool g_Libra_Max;
+extern bool g_Gemini_Max;
+extern bool g_Virgo_Max;
+extern bool g_Leo_Max;
+
+extern bool g_Make_Item;//アイテムが生成されたかどうか
+
+
+
+extern int g_cow_id[20];//牛の識別ID
 
 
 //------------------------------------------------
@@ -271,6 +295,7 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
+#include "ObjMenu.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
@@ -282,6 +307,8 @@ extern bool g_tutorial_flag;//チュートリアルの表示制御用
 #include "ObjSkillVirgo.h"
 #include "ObjSkillBullet.h"
 #include "ObjSkillLeo.h"
+
+#include "ObjSkillItem.h"
 
 
 

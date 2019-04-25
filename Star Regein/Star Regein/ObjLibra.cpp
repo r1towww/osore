@@ -72,6 +72,10 @@ void CObjLibra::Init()
 //アクション
 void CObjLibra::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true)
+		return;	//行動を制御
+
 	//チュートリアルフラグが立っていない場合動く
 	if (g_tutorial_flag == false)
 	{
@@ -229,7 +233,7 @@ void CObjLibra::Action()
 				}
 			}
 
-			m_hp -= 1;
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_key_f = true;
 			hit->SetInvincibility(true);

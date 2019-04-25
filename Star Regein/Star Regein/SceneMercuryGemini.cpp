@@ -20,7 +20,8 @@ using namespace GameL;
 CSceneMercuryGemini::CSceneMercuryGemini()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
-
+	Item_cnt = 0.0f;
+	g_Make_Item = false;
 }
 
 //デストラクタ
@@ -66,11 +67,13 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
-	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
+	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+	
+	Draw::LoadImageW(L"ステージクリア画像_水星_双子座.png", 18, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
@@ -99,7 +102,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
+	//Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
@@ -127,23 +130,74 @@ void CSceneMercuryGemini::InitScene()
 		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
 	}
 
+	
+
 }
 
 //実行中メソッド
 void CSceneMercuryGemini::Scene()
 {
 	//水星（ふたご座）で星を14個集めたら次へ移行
-	if (g_StarCount == GEMINIMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		//ふたご座のスキル開放
 		g_Gemini = true;
 		//ふたご座のクリア表記
 		g_Gemini_clear = true;
+		g_Gemini_Max = true;
+
+		g_stage_clear = true;
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
 			g_Mercury_clear = true;
 		}
-		Scene::SetScene(new CSceneStageClear());	//ゲームクリアに移行
+
+
+		//星を集めきったら
+		if (g_Gemini_Max == true)
+		{
+			if (Item_cnt >= 1)
+			{
+				//一回作成されると終了
+				;
+			}
+			else
+			{
+				//スキルアイテムオブジェクト作成
+				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				Item_cnt++;
+			}
+		}
+		//スキルアイテムを獲得したら
+		if (g_skill_item_flag == true)
+		{
+			g_skill_item_flag = false;
+		}
+
+	}
+
+	ClearCheck(g_stage_clear);
+
+}
+
+//クリアチェック
+void CSceneMercuryGemini::ClearCheck(bool a)
+{
+	//クリアしたなら星座完成画像貼り付け
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
+		}
 	}
 }

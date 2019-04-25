@@ -12,8 +12,8 @@
 using namespace GameL;
 
 float g_posture;
-int g_skill = Taurus;
-
+int g_skill = NoSkill;
+int g_attack_power;
 
 
 CObjHero::CObjHero(float x, float y)
@@ -64,6 +64,11 @@ void CObjHero::Init()
 	//ＭＰリジェネカウント用初期化
 	m_regene_time = 0;
 
+	//火傷継続時間
+	m_burn_time = 0;
+	//火傷合計継続時間
+	m_burn_max_time = 0;
+
 	//キーフラグの初期化
 	m_key_f = true;
 	m_help_key_f = true;
@@ -74,7 +79,8 @@ void CObjHero::Init()
 
 	//攻撃制御フラグ
 	m_a_flag = true;
-
+	//攻撃力の初期化
+	g_attack_power = 1;
 	//ブラックホールの数を入れる
 	if (g_stage == VenusLibra) {	//天秤座
 		m_blackhole_num = 4;	
@@ -82,10 +88,19 @@ void CObjHero::Init()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
+	else
+	{
+		m_blackhole_num = 0;
+	}
 
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
+	m_libra_eff_f = false;
+	m_menu_key_f = false;
+
+	//火傷時主人公カラー変更用フラグ
+	m_burn_f =false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -108,19 +123,25 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	//チュートリアルフラグが立っていないとき動くようにする
-	if (g_tutorial_flag == false)
+	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
+	if (g_tutorial_flag == true || g_move_stop_flag == true)
 	{
+		return;
+	}
 		//移動ベクトルの破棄
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 
 		//デバック用
-		if (Input::GetVKey('O'))
+		if (Input::GetVKey('L'))
 		{
-			Scene::SetScene(new CSceneStageChoice());
+			g_hp -= 1.0f;
 		}
-
+		//デバック用
+		if (Input::GetVKey('K'))
+		{
+			g_hp += 1.0f;
+		}
 		//移動系統情報--------------------------------------------------
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -244,25 +265,41 @@ void CObjHero::Action()
 			m_speed_power = NORMAL_SPEED;
 		}
 
+		//天秤座の場合（パッシブ）
+		if (g_skill == Libra)
+		{
+			//エフェクトを１度だけ出すようにする
+			if (m_libra_eff_f == false)
+			{
+				m_libra_eff_f = true;	//trueにして入らない用に
+				//天秤エフェクトの作成
+				CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+				Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+			}
+			//残りHPに応じて攻撃力を変更
+			if (g_hp <= 20.0f)	//20.0f以下
+			{
+				g_attack_power = 5;	//攻撃力変更
+			}
+			else if (g_hp <= 50.0f) //50.0f以下
+			{
+				g_attack_power = 3;	//攻撃力変更
+			}
+			else if(g_hp > 50.0f)//それ以外（50.0fより大きい場合）
+			{
+				g_attack_power = 2;	//攻撃力変更
+			}
+		}
+		else
+		{
+			m_libra_eff_f = false;	//フラグを戻す
+		}
+
 		//Xキーが入力された場合、スキルを使用
 		if (Input::GetVKey('X'))
 		{
 			if (m_key_f == true)
 			{
-
-				//天秤座の場合
-				if (g_skill == Libra)
-				{
-					if (g_hp < g_max_hp && g_mp > 25.0f)
-					{
-						//天秤エフェクトの作成
-						CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-						Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
-
-						g_mp -= 25.0f;	//mp消費
-						g_hp += 20.0f;	//hp回復
-					}
-				}
 				//双子座の場合
 				else if (g_skill == Gemini && g_gemini_check==false && g_max_mp)
 				{
@@ -276,7 +313,7 @@ void CObjHero::Action()
 					g_gemini_check = true;
 				}
 				//乙女座の場合
-				else if (g_skill == Virgo && g_mp >= 10.0f)
+				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true)
 				{
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -289,7 +326,7 @@ void CObjHero::Action()
 
 				}
 				//獅子座の場合
-				else if (g_skill == Leo)
+				else if (g_skill == Leo && g_Leo == true)
 				{
 					//スタンオブジェクト作成
 					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
@@ -299,7 +336,7 @@ void CObjHero::Action()
 				m_key_f = false;
 			}
 		}
-		//Qキーが入力された場合
+		//Cキーが入力された場合
 		else if (Input::GetVKey('C'))
 		{
 			if (m_key_f == true)
@@ -312,6 +349,8 @@ void CObjHero::Action()
 		{
 			m_key_f = true;
 		}
+
+	
 
 		//HPが最大を超えないようにする（回復スキル）
 		if (g_hp >= g_max_hp)	//HPが最大を超えたら
@@ -330,7 +369,7 @@ void CObjHero::Action()
 		}
 
 
-		//MPが50以下になったら一定間隔で増える
+		//MPが50以下になったら一定間隔で増える（リジェネ）
 		if (m_dash_flag == false)//ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)
@@ -362,7 +401,26 @@ void CObjHero::Action()
 			m_help_key_f = true;
 		}
 
+		//Qキーが入力された場合
+		if (Input::GetVKey('Q'))
+		{
+			if (m_menu_key_f == true)
+			{
+				//ベクトルを０にする
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+				//Menuオブジェクトを作成
+				CObjMenu *objmenu = new CObjMenu();
+				Objs::InsertObj(objmenu, OBJ_MENU, 150);
+				g_move_stop_flag = true;	//ストップフラグをオン
 
+				m_menu_key_f = false;
+			}
+		}
+		else
+		{
+			m_menu_key_f = true;
+		}
 			//HitBoxの内容を更新
 		CHitBox*hit = Hits::GetHitBox(this);
 
@@ -472,8 +530,34 @@ void CObjHero::Action()
 			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 			hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
+			//もし火傷中に再度攻撃を喰らった時継続時間初期化
+			m_burn_max_time = 0;
+			m_burn_time = 0;
+
+			m_burn_f = true;
 			m_eff_flag = true;
 
+		}
+
+		//フラグがオンのとき火傷状態になり、持続ダメージ
+		if (m_burn_f == true)
+		{
+			m_burn_max_time++;
+			if (m_burn_time > 50)
+			{
+				g_hp -= 5.0f;
+				m_burn_time = 0;
+			}
+			else
+			{
+				m_burn_time++;
+			}
+
+			if (m_burn_max_time >= 250)
+			{
+				m_burn_max_time = 0;
+				m_burn_f = false;
+			}
 		}
 
 		if (m_eff_flag == true)
@@ -564,11 +648,6 @@ void CObjHero::Action()
 			Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 			Scene::SetScene(new CSceneGameOver());
 		}
-	}
-	else
-	{
-		return;
-	}
 }
 
 
@@ -583,6 +662,7 @@ void CObjHero::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
+	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -595,15 +675,47 @@ void CObjHero::Draw()
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
-
-	//表示位置の設定
-	dst.m_top    =  0.0f + m_py;
-	dst.m_left   = 80.0f + m_px;
-	dst.m_right  =  0.0f + m_px;
-	dst.m_bottom = 80.0f + m_py;
-
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top    = 0.0f	 + m_py;
+		dst.m_left   = 80.0f   + m_px;
+		dst.m_right  = 0.0f   + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
+
+	//火傷状態のとき主人公を赤色に
+	if (m_burn_f == true)
+		Draw::Draw(1, &src, &dst, c2, 0.0f);
+	else
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+
+	if (g_stage_clear == false)
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 80.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 80.0f + m_py;
+	}
+	else
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 40.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 40.0f + m_py;
+	}
 
 	//ダッシュフラグがオンの場合
 	if (m_dash_flag == true)
