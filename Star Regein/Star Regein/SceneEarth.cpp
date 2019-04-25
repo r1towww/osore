@@ -16,6 +16,7 @@ int g_StarCount = 0;	//星を数える変数の初期化
 bool g_skill_item_flag;
 bool g_Make_Item;
 
+bool g_stage_clear = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -27,6 +28,7 @@ CSceneEarth::CSceneEarth()
 	Item_cnt = 0.0f;
 	g_skill_item_flag = false;
 	g_Make_Item = false;
+	cnt = 0;
 }
 
 //デストラクタ
@@ -78,7 +80,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
-	
+	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
+
 
 
 	//テスト用
@@ -137,6 +140,7 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
+
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == EARTHMAXSTAR)
 	{
@@ -145,6 +149,7 @@ void CSceneEarth::Scene()
 
 		//星を集めきるとオン
 		g_Earth_Max = true;
+		g_stage_clear = true;
 
 		if (g_Earth_Max == true)
 		{
@@ -167,10 +172,31 @@ void CSceneEarth::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 		
 	}
 
+
+ClearCheck(g_stage_clear);
+
+
+	
 }
 
+void CSceneEarth::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			cnt++;
+		}
+	}
+}

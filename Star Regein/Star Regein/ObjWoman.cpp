@@ -76,7 +76,7 @@ void CObjWoman::Action()
 		return;	//行動を制御
 
 	//チュートリアルフラグが立っていない場合動く
-	if (g_tutorial_flag == false)
+	if (g_tutorial_flag == false&&g_stage_clear==false)
 	{
 
 

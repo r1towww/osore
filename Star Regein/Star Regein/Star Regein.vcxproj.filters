@@ -205,6 +205,7 @@
     <ClCompile Include="ObjMenu.cpp">
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBreakRock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -414,6 +415,7 @@
     <ClInclude Include="ObjMenu.h">
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBreakRock.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">

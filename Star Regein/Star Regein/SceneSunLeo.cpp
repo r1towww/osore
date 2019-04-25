@@ -79,6 +79,7 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
 	Draw::LoadImageW(L"獅子攻撃エフェクト.png", 18, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ステージクリア画像_太陽.png", 19, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
@@ -146,6 +147,7 @@ void CSceneSunLeo::Scene()
 		g_Leo_Max = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
+		g_stage_clear = true;
 
 		//星を集めきったら
 		if (g_Leo_Max == true)
@@ -169,10 +171,30 @@ void CSceneSunLeo::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
 
+	}
+	ClearCheck(g_stage_clear);
+
+}
+//クリアチェック
+void CSceneSunLeo::ClearCheck(bool a)
+{
+	//クリアしたなら星座完成画像貼り付け
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
+		}
 	}
 }
 

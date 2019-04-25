@@ -72,6 +72,7 @@ void CSceneMercuryVirgo::InitScene()
 
 	Draw::LoadImageW(L"弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ステージクリア画像_水星_乙女座.png", 18, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
 
@@ -115,13 +116,15 @@ void CSceneMercuryVirgo::InitScene()
 void CSceneMercuryVirgo::Scene()
 {
 	//水星（乙女座）で星を15個集めたら次へ移行
-	if (g_StarCount == VIRGOMAXSTAR)
+	if (g_StarCount == 1)
 	{
 		//乙女座のスキル開放
 		g_Virgo = true;
 		//乙女座のクリア表記
 		g_Virgo_clear = true;
 		g_Virgo_Max = true;
+		g_stage_clear = true;
+
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
@@ -151,8 +154,29 @@ void CSceneMercuryVirgo::Scene()
 				g_skill_item_flag = false;
 				Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 			}
+		}
 
+		
+	}
+	ClearCheck(g_stage_clear);
 
+}
+//クリアチェック
+void CSceneMercuryVirgo::ClearCheck(bool a)
+{
+	//クリアしたなら星座完成画像貼り付け
+	if (a == true)
+	{
+		if (m_clear_f == true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f = true;
 		}
 	}
 }

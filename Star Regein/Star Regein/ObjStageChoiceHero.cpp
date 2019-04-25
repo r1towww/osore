@@ -163,39 +163,39 @@ void ObjStageChoiceHero::Action()
 				}
 				m_key_flag = false;
 
-			}
-			//水星へ
-			else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
-			{
-				if (g_Venus_clear == true)
-				{
-					//▼前シーンからZキー押し続けでこれを押さないように、
-					//このシーンに入って一度も押してない状態に移行しないと
-					//実行出来ないようにしている。
-					//水星に設定
-					g_stage = Mercury;
-					Audio::Start(1);
 				}
-				else
+				//水星へ
+				else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
 				{
-					;
+					//if (g_Venus_clear == false)
+					//{
+					//	//▼前シーンからZキー押し続けでこれを押さないように、
+					//	//このシーンに入って一度も押してない状態に移行しないと
+					//	//実行出来ないようにしている。
+					//	//水星に設定
+						g_stage = Mercury;
+						Audio::Start(1);
+					//}
+					//else
+					//{
+					//	;
+					//}
+					m_key_flag = false;
 				}
-				m_key_flag = false;
-			}
-			//太陽へ
-			else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
-			{
-				if (g_Mercury_clear == true)
+				//太陽へ
+				else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
 				{
-					Audio::Start(1);
-					//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
-					//太陽に設定
-					g_stage = Sun;
-				}
-				else
-				{
-				}
-				m_key_flag = false;
+					if (g_Mercury_clear == true)
+					{
+						Audio::Start(1);
+						//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
+						//太陽に設定
+						g_stage = Sun;
+					}
+					else
+					{
+					}
+					m_key_flag = false;
 
 			}
 		}

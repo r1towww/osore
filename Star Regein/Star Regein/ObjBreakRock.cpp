@@ -60,11 +60,11 @@ void CObjBreakRock::Action()
 			{   0,  384,  576, 192 },
 			{   0,  576,  768, 192 },
 			{   0,  768,  960, 192 },
-			{ 192,    0,  192, 384 },
-			{ 192,  192,  384, 384 },
-			{ 192,  384,  576, 384 },
-			{ 192,  576,  768, 384 },
-			{ 192,  768,  960, 384 },
+			{ 192,    0,  192, 400 },
+			{ 192,  192,  384, 400 },
+			{ 192,  384,  576, 400 },
+			{ 192,  576,  768, 400 },
+			{ 192,  768,  960, 400 },
 		};
 		//アニメーションのコマ間隔制御
 		if (m_ani_time > 2)
@@ -81,9 +81,8 @@ void CObjBreakRock::Action()
 		//9番目（画像最後）まで進んだら、削除
 		if (m_ani == 9)
 		{
-			g_map[m_i][m_j] = 0;	//マップ上の座標を0にして、マップに表示されなくする
-			Hits::DeleteHitBox(this);		//ヒットボックスの削除
-			this->SetStatus(false);			//描画の削除
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
 		}
 	}
 	//HitBoxの位置の変更
@@ -112,8 +111,8 @@ void CObjBreakRock::Draw()
 	//表示位置の設定
 	dst.m_top    = 0.0f + m_py + block->GetScrolly();	//描画に対してスクロールの影響を加える
 	dst.m_left   = 0.0f + m_px + block->GetScrollx();
-	dst.m_right  = ALLSIZE + m_px + block->GetScrollx();
-	dst.m_bottom = ALLSIZE + m_py + block->GetScrolly();
+	dst.m_right  = 64.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 	//描画
 	Draw::Draw(4, &src, &dst, c, 90.0f);
