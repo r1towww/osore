@@ -24,6 +24,9 @@ class CObjSkillLibra : public CObj
 
 		int	 m_ani;			//アニメーション用
 		int	 m_ani_time;	//アニメーション間隔タイム
+
+		int  m_persist_time;//mp消費間隔タイム
+
 		RECT_F m_eff;		//エフェクト描画用
 		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
 

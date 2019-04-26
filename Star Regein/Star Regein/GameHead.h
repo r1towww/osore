@@ -177,8 +177,8 @@ extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
 extern float* g_libra_x[20];//すべての天秤のX位置を把握する
 extern float* g_libra_y[20];//すべての天秤のY位置を把握する
-extern float* g_leo_x[50];//全ての獅子のX位置を把握する
-extern float* g_leo_y[50];//全ての獅子のY位置を把握する
+extern float* g_leo_x[60];//全ての獅子のX位置を把握する
+extern float* g_leo_y[60];//全ての獅子のY位置を把握する
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
@@ -199,7 +199,7 @@ extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
 extern bool g_libra_d_flag[20];//天秤削除フラグ
-extern bool g_leo_d_flag[50];//獅子削除フラグ
+extern bool g_leo_d_flag[60];//獅子削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -215,8 +215,13 @@ extern bool g_geminiattck_check; //双子座スキル弾丸制御
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
 
-extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
 extern float  g_Leo_cnt;//獅子座スタンカウント
+extern bool g_stan_cow_flag[20];//スタン牛個別認識用
+extern bool g_stan_blue_flag[20];//スタン双子（青）個別認識用
+extern bool g_stan_red_flag[20];//スタン双子（赤）個別認識用
+extern bool g_stan_woman_flag[20];//スタン乙女個別認識用
+extern bool g_stan_libra_flag[20];//スタン天秤個別認識用
+extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
 
 //各星座の取得情報
 extern bool g_stage_clear;
@@ -300,6 +305,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
+
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
@@ -313,7 +319,6 @@ extern int g_cow_id[20];//牛の識別ID
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
-#include "SceneMain.h"
 #include "SceneEarth.h"
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"

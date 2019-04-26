@@ -27,7 +27,7 @@ void CObjStageClear::Action()
 	else
 		m_keytime++;	//キー入力タイムを増やす
 
-	if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
+	if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 	{
 		g_stage_clear = false;
 		Scene::SetScene(new CSceneStageChoice());

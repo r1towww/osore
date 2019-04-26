@@ -69,7 +69,7 @@ void CObjSkill::Draw()
 
 		RECT_F src;	//描画元切り取り位置
 		RECT_F dst;	//描画先表示位置
-
+		
 		//切り取り位置の設定
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (300.0f * g_skill);		//スキルの値が変われば次の画像へ移行
@@ -83,6 +83,12 @@ void CObjSkill::Draw()
 		dst.m_bottom = 600.0f;
 
 		//描画
-		Draw::Draw(13, &src, &dst, c, 0.0f);
+		if (g_skill == NoSkill)
+		{
+
+		}
+		else {
+			Draw::Draw(13, &src, &dst, c, 0.0f);
+		}
 	}
 }

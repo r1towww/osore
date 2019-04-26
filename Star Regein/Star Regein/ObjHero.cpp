@@ -74,8 +74,8 @@ void CObjHero::Init()
 	m_help_key_f = true;
 	//ダッシュフラグ初期化
 	m_dash_flag = false;
-	//移動フラグ初期化
-	m_dash_flag = false;
+	m_cool_flag = false;
+	m_cool_time = 0;
 
 	//攻撃制御フラグ
 	m_a_flag = true;
@@ -146,7 +146,6 @@ void CObjHero::Action()
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vy -= m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_UP;
@@ -154,7 +153,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vy += m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_DOWN;
@@ -162,7 +160,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vx -= m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_LEFT;
@@ -170,7 +167,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vx += m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_RIGHT;
@@ -210,20 +206,18 @@ void CObjHero::Action()
 
 		//スキル系統情報-------------------------------------------------
 
+
+
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp > 10.0f && m_dash_flag==true)
+			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
-
-			if (m_move_flag == true)
-			{
 				m_MP_time++;
-				if (m_MP_time > 60)
+				if (m_MP_time > 3)
 				{
 					m_MP_time = 0;
-					g_mp -= 10.0f;
+					g_mp -= 1.0f;
 				}
-			}
 			m_speed_power = DASH_SPEED;
 
 			//ダッシュエフェクト用処理------------------------------
@@ -256,11 +250,24 @@ void CObjHero::Action()
 				m_eff_time = 0;
 			}
 
+			//MPが0になったら1ゲージ回復するまで使用不可
+			if (g_mp == 0.0f)
+				m_cool_flag = true;
+
+			if (m_cool_flag == true)
+			{
+				m_cool_time++;
+				if (m_cool_time >= 200)
+				{
+					m_cool_time = 0;
+					m_cool_flag = false;
+				}
+			}
+
 			//-----------------------------------------------
 		}
 		else//通常速度
 		{
-			m_move_flag = false;
 			m_dash_flag = false;
 			m_speed_power = NORMAL_SPEED;
 		}
@@ -301,22 +308,22 @@ void CObjHero::Action()
 			if (m_key_f == true)
 			{
 				//双子座の場合
-			if (g_skill == Gemini && g_gemini_check == false && g_max_mp)
-			{
-				//ブロック情報を持ってくる
-				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+				if (g_skill == Gemini && g_gemini_check==false && g_mp == g_max_mp)
+				{
+					//ブロック情報を持ってくる
+					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-				//サブ機オブジェクト作成
-				CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(), m_py - block->GetScrolly());
-				Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
-				g_mp -= g_max_mp;	//mp消費
-				g_gemini_check = true;
-			}
-			//乙女座の場合
-			else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true)
-			{
-				//ブロック情報を持ってくる
-				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+					//サブ機オブジェクト作成
+					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
+					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					g_mp -= g_max_mp;	//mp消費
+					g_gemini_check = true;
+				}
+				//乙女座の場合
+				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
+				{
+					//ブロック情報を持ってくる
+					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 				//ハート弾オブジェクト作成
 				CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
@@ -324,16 +331,17 @@ void CObjHero::Action()
 
 				g_mp -= 50.0f;	//mp消費
 
-			}
-			//獅子座の場合
-			else if (g_skill == Leo && g_Leo == true)
-			{
-				//スタンオブジェクト作成
-				CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
-				Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
+				}
+				//獅子座の場合
+				else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
+				{
+					//スタンオブジェクト作成
+					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
+					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
-			}
-			m_key_f = false;
+					g_mp -= 30.0f;
+				}
+				m_key_f = false;
 			}
 		}
 		//Cキーが入力された場合
@@ -370,7 +378,7 @@ void CObjHero::Action()
 
 
 		//MPが50以下になったら一定間隔で増える（リジェネ）
-		if (m_dash_flag == false)//ダッシュしていなかったら増える
+		if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
 		{
 			if (g_mp < 100.0f)
 			{
@@ -512,7 +520,10 @@ void CObjHero::Action()
 						m_vy = -10.0f;//したに移動させる
 					}
 				}
-				
+
+				//乙女の弾丸と当たった場合MP減少
+				if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
+					g_mp -= 25.0f;
 
 				//ダメージ音を鳴らす
 				Audio::Start(5);
@@ -524,6 +535,7 @@ void CObjHero::Action()
 			}
 		}
 
+		//獅子と当たった場合火傷状態を付与
 		if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
 		{
 			//敵が主人公とどの角度で当たっているかを確認
@@ -538,7 +550,6 @@ void CObjHero::Action()
 			m_eff_flag = true;
 
 		}
-
 		//フラグがオンのとき火傷状態になり、持続ダメージ
 		if (m_burn_f == true)
 		{

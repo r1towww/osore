@@ -31,7 +31,7 @@ CSceneGameOver::~CSceneGameOver()
 void CSceneGameOver::InitScene()
 
 {
-	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_1024);
+	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_1024);
 
 
 	//クリアオブジェクト作成

@@ -43,9 +43,6 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
@@ -175,9 +172,6 @@
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル\双子座</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClCompile>
@@ -195,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClCompile>
     <ClCompile Include="ObjTwinsBlue.cpp">
       <Filter>ソースファイル\各惑星敵\双子</Filter>
@@ -252,9 +249,6 @@
     </ClInclude>
     <ClInclude Include="GameHead.h">
       <Filter>ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlock.h">
       <Filter>ソースファイル\マップ</Filter>
@@ -388,9 +382,6 @@
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <Filter>ソースファイル\スキル\双子座</Filter>
-    </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
@@ -416,6 +407,12 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjBreakRock.h" />
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -507,6 +504,9 @@
     </Filter>
     <Filter Include="ソースファイル\スキル\天秤座">
       <UniqueIdentifier>{1ac3fdbb-7194-47d8-a9d3-2997780a8477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\アイテム">
+      <UniqueIdentifier>{ed9d311a-d4e5-42bd-811b-39495093a4ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
