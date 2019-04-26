@@ -14,8 +14,8 @@
 //使用するネームスペース
 using namespace GameL;
 
-float* g_leo_x[50];//全ての牛のX位置を把握する
-float* g_leo_y[50];//全ての牛のY位置を把握する
+float* g_leo_x[60];//全ての牛のX位置を把握する
+float* g_leo_y[60];//全ての牛のY位置を把握する
 
 
 CObjLeo::CObjLeo(float x, float y, int id)
@@ -54,7 +54,6 @@ void CObjLeo::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	g_Leo_hit_flag = false;
 	g_Leo_cnt = 0.0f;
 
 	m_btime = 0;
@@ -107,62 +106,70 @@ void CObjLeo::Action()
 		float hy = hero->GetY();
 	}
 
-	//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-	bool check;
-	check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-	if (check == true)
+	if (g_stan_leo_flag[m_leo_id] == false)
 	{
-		//主人公機が存在する場合、誘導角度の計算する
-		if (hero != nullptr)
+		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+		bool check;
+		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
+		if (check == true)
+		{
+			//主人公機が存在する場合、誘導角度の計算する
+			if (hero != nullptr)
+			{
+
+				float x;
+				float y;
+
+				x = 375 - (m_px + pb->GetScrollx());
+				y = 275 - (m_py + pb->GetScrolly());
+
+				float ar = GetAtan2Angle(x, y);
+
+				//敵の現在の向いている角度を取る
+				float br = GetAtan2Angle(m_vx, m_vy);
+
+				//角度で上下左右を判定
+				if ((ar < 45 && ar>0) || ar > 315)
+				{
+					//左
+					m_posture = 1.0f;
+					m_ani_time += 1;
+				}
+
+				if (ar > 45 && ar < 135)
+				{
+					//下
+					m_posture = 0.0f;
+					m_ani_time += 1;
+				}
+				if (ar > 135 && ar < 225)
+				{
+					//右
+					m_posture = 2.0f;
+					m_ani_time += 1;
+				}
+				if (ar > 225 && ar < 315)
+				{
+					//上
+					m_posture = 3.0f;
+					m_ani_time += 1;
+
+				}
+
+				//主人公機と敵角度があんまりにもかけ離れたら
+				m_vx = cos(3.14 / 180 * ar) * 2;
+				m_vy = sin(3.14 / 180 * ar) * 2;
+			}
+		}
+		else
 		{
 
-			float x;
-			float y;
-
-			x = 375 - (m_px + pb->GetScrollx());
-			y = 275 - (m_py + pb->GetScrolly());
-
-			float ar = GetAtan2Angle(x, y);
-
-			//敵の現在の向いている角度を取る
-			float br = GetAtan2Angle(m_vx, m_vy);
-
-			//角度で上下左右を判定
-			if ((ar < 45 && ar>0) || ar > 315)
-			{
-				//左
-				m_posture = 1.0f;
-				m_ani_time += 1;
-			}
-
-			if (ar > 45 && ar < 135)
-			{
-				//下
-				m_posture = 0.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 135 && ar < 225)
-			{
-				//右
-				m_posture = 2.0f;
-				m_ani_time += 1;
-			}
-			if (ar > 225 && ar < 315)
-			{
-				//上
-				m_posture = 3.0f;
-				m_ani_time += 1;
-
-			}
-
-			//主人公機と敵角度があんまりにもかけ離れたら
-			m_vx = cos(3.14 / 180 * ar) * 2;
-			m_vy = sin(3.14 / 180 * ar) * 2;
 		}
 	}
 	else
 	{
-
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 	}
 
 	//HitBoxの内容を更新
@@ -220,7 +227,6 @@ void CObjLeo::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-				g_Leo_hit_flag = true;
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -337,54 +343,19 @@ void CObjLeo::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+															//ヒット判定on
+		g_stan_leo_flag[m_leo_id] = true;
+	}
 
-		for (int i = 0; i < hit->GetCount(); i++)
+	//しし座のヒット判定がonの時スタン
+	if (g_stan_leo_flag[m_leo_id] == true)
+	{
+		g_Leo_cnt += 1.0f;
+		if (g_Leo_cnt >= 200.0f)
 		{
-			//攻撃の左右に当たったら
-			if (hit_data[i] == nullptr)
-				continue;
-
-
-			float r = hit_data[i]->r;
-			g_Leo_hit_flag = true;
-
-
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
-
-			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
-
-
-			//獅子座スキルヒットフラグがオンならスタンさせ
-			//カウントを進め、一定数になればスタン解除
-
-			if (g_Leo_hit_flag == true)
-			{
-				m_vx = 0.0f;
-				m_vy = 0.0f;
-
-				if (g_Leo_cnt >= 10)
-				{
-					g_Leo_hit_flag == false;
-				}
-
-			}
-
+			g_Leo_cnt = 0.0f;
+			g_stan_leo_flag[m_leo_id] = false;
 		}
-
 
 	}
 
