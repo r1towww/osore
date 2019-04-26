@@ -178,11 +178,13 @@ void CSceneMercuryGemini::Scene()
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
 		}
 
 	}
 
-	ClearCheck(g_stage_clear);
+	
 
 }
 

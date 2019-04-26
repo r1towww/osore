@@ -126,14 +126,14 @@ void ObjStageChoiceHero::Action()
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false)
+	if (Input::GetVKey('Z') == false || Input::GetVKey(VK_RETURN) == false)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
 
 
 	// Zキーを入力かつ、キーフラグがオンの時に実行
-	if (Input::GetVKey('Z') == true && g_key_flag == true)
+	if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 	{
 		if (m_key_flag == true)
 		{
@@ -235,7 +235,7 @@ void ObjStageChoiceHero::Draw()
 	{
 		Font::StrDraw(L"地球ステージ", 32, 32, 32, c);
 	}
-
+	
 	//地球をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2&&g_Earth_clear == false)
 	{

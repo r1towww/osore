@@ -163,7 +163,7 @@ void CSceneEarth::Scene()
 
 		//星を集めきるとオン
 		g_Earth_Max = true;
-		g_stage_clear = true;
+	
 
 		if (g_Earth_Max == true)
 		{
@@ -178,6 +178,7 @@ void CSceneEarth::Scene()
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
 				Item_cnt++;
+				
 			}
 		}
 
@@ -186,12 +187,14 @@ void CSceneEarth::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
 		}
 		
 	}
 
 
-ClearCheck(g_stage_clear);
+
 
 
 	
