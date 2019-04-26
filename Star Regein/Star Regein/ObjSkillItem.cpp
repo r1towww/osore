@@ -36,6 +36,8 @@ void CObjSkillItem::Init()
 
 	g_skill_item_flag = false;
 
+	m_eff_flag = false;
+
 	//当たり判定をセット
 	Hits::SetHitBox(this, m_x+80, m_y, 60.0f, 60.0f, ELEMENT_SKILL_ITEM, OBJ_SKILL_ITEM, 1);
 }
@@ -43,13 +45,49 @@ void CObjSkillItem::Init()
 //アクション
 void CObjSkillItem::Action()
 {
+	if (g_Earth_Max == true)
+	{
+		m_eff_flag = true;
 	
+		if (m_eff_flag == true)
+		{
+			//エフェクト用
+			RECT_F ani_src[5] =
+			{
+				{ 0,    0,  192, 192 },
+				{ 0,  192,  384, 192 },
+				{ 0,  384,  576, 192 },
+				{ 0,  576,  768, 192 },
+				{ 0,  768,  960, 192 },
+
+			};
+			//アニメーションのコマ間隔制御
+			if (m_ani_time > 2)
+			{
+				m_ani++;		//アニメーションのコマを1つ進める
+				m_ani_time = 0;
+
+				m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_ani_time++;
+			}
+			//9番目（画像最後）まで進んだら、削除
+			if (m_ani == 4)
+			{
+
+				Hits::DeleteHitBox(this);		//ヒットボックスの削除
+				this->SetStatus(false);			//描画の削除
+			}
+		}
+	}
 	
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	
 	//下に移動
-	m_vy += 0.01f;
+	m_vy += 0.05f;
 	m_y += m_vy;
 
 	//作成したHitBox更新用の入り口を取り出す
@@ -60,11 +98,10 @@ void CObjSkillItem::Action()
 
 	//主人公と当たったらオブジェクト削除し、スキルアイテムフラグをオン
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
-	{
-		
+	{		
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-		g_skill_item_flag = true;
+		g_skill_item_flag = true;  //スキルアイテムフラグオン
 	}
 	
 }
@@ -134,4 +171,18 @@ void CObjSkillItem::Draw()
 	dst.m_bottom = 80.0f + m_y;
 
 	Draw::Draw(13, &src, &dst, c, 0.0f);
+
+	//ブロック情報を持ってくる
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	if (m_eff_flag == true)
+	{
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_y + block->GetScrolly();	//描画に対してスクロールの影響を加える
+		dst.m_left = 70.0f + m_x + block->GetScrollx();
+		dst.m_right = 150.0f + m_x + block->GetScrollx();
+		dst.m_bottom = 80.0f + m_y + block->GetScrolly();
+		//描画
+		Draw::Draw(16, &m_eff, &dst, c, 90.0f);
+	}
 }
