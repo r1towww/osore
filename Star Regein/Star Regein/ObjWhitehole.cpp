@@ -104,3 +104,4 @@ void CObjWhitehole::Draw()
 }
 
 
+

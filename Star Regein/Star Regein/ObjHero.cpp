@@ -13,7 +13,7 @@ using namespace GameL;
 
 float g_posture;
 int g_skill = NoSkill;
-int g_attack_power;
+int g_attack_power = 1;
 
 
 CObjHero::CObjHero(float x, float y)

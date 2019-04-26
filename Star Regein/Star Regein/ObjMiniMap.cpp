@@ -34,6 +34,11 @@ void CObjMiniMap::Init()
 		m_smallsize = 7.0f;	//スモールサイズを7.0fで初期化
 		m_bigsize = 14.0f;	//ビッグサイズを14.0fで初期化
 	}
+	else if (g_stage == VenusTaurus || g_stage == VenusLibra) {	//牡牛座の場合
+		m_smallsize = 5.0f;	//スモールサイズを7.0fで初期化
+		m_bigsize = 10.0f;	//ビッグサイズを14.0fで初期化
+
+	}
 	else{	//それ以外の場合
 		m_smallsize = 4.0f;	//ステージサイズを4.0fで初期化
 		m_bigsize = 8.0f;	//ビッグサイズを8.0fで初期化
@@ -43,7 +48,6 @@ void CObjMiniMap::Init()
 	m_uisize_x = 590.0f, m_uisize_y = 10.0f;	//背景位置の初期化
 	m_backsize = 200.0f;	//背景のサイズの初期化
 	m_f = false;	//キー入力制御の初期化
-	m_alpha = 0.7f;	//アルファ値初期化
 
 	m_hint_f = false;	//ヒント表示用フラグの初期化
 
@@ -66,7 +70,6 @@ void CObjMiniMap::Action()
 				m_blocksize = m_bigsize;	//ブロックのサイズ変更	
 				m_uisize_x = 200.0f, m_uisize_y = 100.0f;	//マップの位置の変更
 				m_backsize = 400.0f;						//背景のサイズ変更
-				m_alpha = 1.0f;		//アルファ値変更
 			}
 			else						//大きい場合小さくする
 			{
@@ -74,7 +77,6 @@ void CObjMiniMap::Action()
 				m_blocksize = m_smallsize;		//ブロックのサイズ変更	
 				m_uisize_x = 590.0f, m_uisize_y = 10.0f;	//マップの位置の変更
 				m_backsize = 200.0f;						//背景のサイズ変更
-				m_alpha = 0.7f;		//アルファ値変更
 			}
 			m_f = false;
 		}
@@ -90,7 +92,7 @@ void CObjMiniMap::Action()
 void CObjMiniMap::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };	//基本カラー（半透明）
+	float c[4] = { 1.0f,1.0f,1.0f,0.7f };	//基本カラー（半透明）
 	float ac[4] = { 1.0f,1.0f,1.0f,1.0f };	//主人公カラー（非透明）
 
 	RECT_F src;	//描画元切り取り位置
@@ -296,6 +298,75 @@ void CObjMiniMap::Draw()
 				}
 			}
 
+			if (g_stage == VenusTaurus)
+			{
+				for (int i = 0; i < 10; i++)//敵の数分回す
+				{
+					float cx = *g_cow_x[i];
+					float cy = *g_cow_y[i];
+
+					if (g_cow_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+
+							g_geminiattck_check = true;
+						}
+					}
+				}
+			}
+			if (g_stage == VenusLibra)
+			{
+				for (int i = 0; i < 10; i++)//敵の数分回す
+				{
+					float lx = *g_libra_x[i];
+					float ly = *g_libra_y[i];
+
+					if (g_libra_d_flag[i] == true)
+					{
+						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+						bool check;
+						check = CheckWindow(lx + block->GetScrollx(), ly + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+						if (check == true)
+						{
+							//ミニマップに敵の位置を表示する
+							//表示位置の設定
+							dst.m_top = m_uisize_y + (ly / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_left = m_uisize_x + (lx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+							dst.m_right = dst.m_left + m_blocksize;
+							dst.m_bottom = dst.m_top + m_blocksize;
+
+							//切り取り位置の設定
+							src.m_top = 0.0f;
+							src.m_left = 50.0f;
+							src.m_right = 100.0f;
+							src.m_bottom = 50.0f;
+							//描画
+							Draw::Draw(9, &src, &dst, c, 0.0f);
+
+							g_geminiattck_check = true;
+						}
+					}
+				}
+			}
+
 			if (g_stage == MercuryVirgo)
 			{
 				for (int i = 0; i < 16; i++)//敵の数分回す
@@ -400,40 +471,7 @@ void CObjMiniMap::Draw()
 				}
 			}
 
-			if (g_stage == VenusTaurus)
-			{
-				for (int i = 0; i < 13; i++)//敵の数分回す
-				{
-					float cx = *g_cow_x[i];
-					float cy = *g_cow_y[i];
-
-					if (g_cow_d_flag[i] == true)
-					{
-						//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-						bool check;
-						check = CheckWindow(cx + block->GetScrollx(), cy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-						if (check == true)
-						{
-							//ミニマップに敵の位置を表示する
-							//表示位置の設定
-							dst.m_top = m_uisize_y + (cy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-							dst.m_left = m_uisize_x + (cx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-							dst.m_right = dst.m_left + m_blocksize;
-							dst.m_bottom = dst.m_top + m_blocksize;
-
-							//切り取り位置の設定
-							src.m_top = 0.0f;
-							src.m_left = 50.0f;
-							src.m_right = 100.0f;
-							src.m_bottom = 50.0f;
-							//描画
-							Draw::Draw(9, &src, &dst, c, 0.0f);
-
-							g_geminiattck_check = true;
-						}
-					}
-				}
-			}
+			
 
 			if (g_stage == SunLeo)
 			{
