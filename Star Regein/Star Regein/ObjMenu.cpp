@@ -44,7 +44,7 @@ void CObjMenu::Action()
 
 
 	//Zキーが押された場合
-	if (Input::GetVKey('Z') == true)
+	if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 	{
 		//０番の場合
 		if (m_key == 0)
@@ -58,6 +58,7 @@ void CObjMenu::Action()
 			g_move_stop_flag = false;	//ストップフラグをオフ
 			Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
 		}
+		g_key_flag = false;
 	}
 
 
