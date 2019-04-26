@@ -83,11 +83,11 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 
 
-	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
+	/*Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
-
+*/
 	Draw::LoadImageW(L"ミニマップ枠.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
@@ -103,10 +103,10 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
 
 
-	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
+	/*Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
-
+*/
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
