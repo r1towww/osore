@@ -58,6 +58,7 @@ void CObjMenu::Action()
 			g_move_stop_flag = false;	//ストップフラグをオフ
 			Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
 		}
+		g_key_flag = false;
 	}
 
 
