@@ -316,6 +316,9 @@ void CObjHero::Action()
 					//サブ機オブジェクト作成
 					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					//サブ機オブジェクト作成
+					CObjSkillGeminiB* objgb = new CObjSkillGeminiB(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+					Objs::InsertObj(objgb, OBJ_SKILL_GEMINIB, 20);
 					g_mp -= g_max_mp;	//mp消費
 					g_gemini_check = true;
 				}

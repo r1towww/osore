@@ -44,7 +44,7 @@ void CObjMenu::Action()
 
 
 	//ZƒL[‚ª‰Ÿ‚³‚ê‚½ê‡
-	if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN))
+	if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 	{
 		//‚O”Ô‚Ìê‡
 		if (m_key == 0)

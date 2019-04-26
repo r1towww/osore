@@ -147,7 +147,7 @@ void CSceneVenusTaurus::Scene()
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
 		//おうし座にクリア表記
 		g_Taurus_clear = true;
-		g_stage_clear = true;
+		
 		g_Taurus_Max = true;
 		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
@@ -176,13 +176,15 @@ void CSceneVenusTaurus::Scene()
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
+		
 		}
 
 
 	}
 
-	ClearCheck(g_stage_clear);
+
 
 
 }

@@ -151,6 +151,7 @@
     <ClCompile Include="ObjSkillGemini.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ObjskillgeminiB.cpp" />
     <ClCompile Include="ObjSkillItem.cpp" />
     <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillLibra.cpp" />
@@ -221,6 +222,7 @@
     </ClInclude>
     <ClInclude Include="ObjSkill.h" />
     <ClInclude Include="ObjSkillBullet.h" />
+    <ClInclude Include="ObjskillgeminiB.h" />
     <ClInclude Include="ObjSkillItem.h" />
     <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillGemini.h">

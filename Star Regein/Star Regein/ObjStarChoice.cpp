@@ -245,7 +245,7 @@ void CObjStarChoice::Action()
 		}
 	}
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false)
+	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
