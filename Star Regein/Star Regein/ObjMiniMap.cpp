@@ -114,20 +114,6 @@ void CObjMiniMap::Draw()
 		//”wŒi‚Ì•`‰æ
 		Draw::Draw(7, &src, &dst, c, 0.0f);
 
-		if (m_hint_f == true)
-		{
-
-
-
-
-
-
-		}
-		else
-		{
-
-		}
-
 
 
 
@@ -437,7 +423,7 @@ void CObjMiniMap::Draw()
 
 			if (g_stage == SunLeo)
 			{
-				for (int i = 0; i < 50; i++)//“G‚Ì”•ª‰ñ‚·
+				for (int i = 0; i < 40; i++)//“G‚Ì”•ª‰ñ‚·
 				{
 					float lx = *g_leo_x[i];
 					float ly = *g_leo_y[i];

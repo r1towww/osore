@@ -13,6 +13,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+bool g_tutorial__flag=false;
 
 //イニシャライズ
 void CObjTutorial::Init()
@@ -20,12 +21,13 @@ void CObjTutorial::Init()
 	g_tutorial_flag = true;
 
 	//キー入力用タイムの初期化
-	m_keytime = 0;
+	m_keytime = 0.f;
 
 	m_page = 0;		//渡されたページ数
 	m_sec = 0;		//秒数カウント
 	m_line = 0;		//行数カウント
 	m_f = true;
+	m_next_f = false;
 }
 
 //アクション
@@ -35,23 +37,6 @@ void CObjTutorial::Action()
 	if (m_page == m_p) 
 	{//渡されたページ数と現在のページ数が同じになったら
 		g_tutorial_flag = false;
-	}
-
-
-	//惑星が選択され、戦闘画面への移行の際
-	if (g_stage == EarthStar )
-	{
-
-		//画像が表示された際の、キー入力タイム処理
-		if (m_keytime >=300)
-			m_keytime = 300;	//タイムが50になった際、50で止める
-		else
-			m_keytime++;	//キー入力タイムを増やす
-
-	}
-	else
-	{
-		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
 	}
 
 	//Xキーを押してスキップ（移動キーを入力できなくしている）
@@ -136,7 +121,8 @@ void CObjTutorial::Draw()
 
 			if (m_p != 1)
 			{
-				if (Input::GetVKey('Z') == true)
+				//Z入力および制御フラグオンで次のぺージへ
+				if (Input::GetVKey('Z') == true&& m_next_f==true)
 				{
 					if (m_f == false)
 					{
@@ -148,6 +134,9 @@ void CObjTutorial::Draw()
 							m_page += 1;
 							m_line = 0;		//行数リセット
 							m_sec = 0;		//秒数リセット
+							m_next_f = false;
+							g_tutorial_next_flag = true;
+
 						}
 
 					}
@@ -217,8 +206,11 @@ void CObjTutorial::Draw()
 				dst.m_bottom = 575.0f;
 				//描画
 				Draw::Draw(41, &src, &dst, c, 0.0f);
+				m_next_f = true;
+
 			}
-			else { ; }
+			else 
+			{ ; }
 		}
 		Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
 

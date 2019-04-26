@@ -106,7 +106,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	//Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
+	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
