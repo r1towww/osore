@@ -110,7 +110,7 @@ void CObjStarChoice::Action()
 		m_Tra2 = 0.3f;
 		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && g_key_flag == true)		
+		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (g_stage == Earth)
 			{
@@ -180,7 +180,7 @@ void CObjStarChoice::Action()
 		m_Tra1 = 0.3f;
 		m_Tra3 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && g_key_flag == true)
+		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (g_stage == Venus)
 			{
@@ -221,7 +221,7 @@ void CObjStarChoice::Action()
 		m_Tra2 = 0.3f;
 		m_Tra1 = 0.3f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if (Input::GetVKey('Z') == true && g_key_flag == true)
+		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (m_key_flag == true)
 			{
