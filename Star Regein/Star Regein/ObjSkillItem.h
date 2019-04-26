@@ -22,4 +22,9 @@ private:
 
 	float m_vx;//移動量
 	float m_vy;
+
+	bool m_eff_flag;	//エフェクト用フラグ
+	int	 m_ani;			//アニメーション用
+	int	 m_ani_time;	//アニメーション間隔タイム
+	RECT_F m_eff;		//エフェクト描画用
 };

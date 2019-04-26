@@ -193,6 +193,9 @@
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClCompile>
     <ClCompile Include="ObjTwinsBlue.cpp">
       <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClCompile>
@@ -400,6 +403,7 @@
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
+    <ClInclude Include="ObjLeo.h" />
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
@@ -410,6 +414,9 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjBreakRock.h" />
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -501,6 +508,9 @@
     </Filter>
     <Filter Include="ソースファイル\スキル\天秤座">
       <UniqueIdentifier>{1ac3fdbb-7194-47d8-a9d3-2997780a8477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\アイテム">
+      <UniqueIdentifier>{ed9d311a-d4e5-42bd-811b-39495093a4ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
