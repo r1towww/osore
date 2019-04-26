@@ -35,7 +35,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -139,6 +139,7 @@
     <ClCompile Include="ObjHomingHeart.cpp" />
     <ClCompile Include="ObjLeo.cpp" />
     <ClCompile Include="ObjLibra.cpp" />
+    <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjMessage.cpp" />
     <ClCompile Include="ObjMeteo.cpp" />
     <ClCompile Include="ObjMiniMap.cpp" />
@@ -163,7 +164,7 @@
     <ClCompile Include="ObjTextBox.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="ObjTutorial.cpp" />
-    <ClCompile Include="ObjTwinsBule.cpp" />
+    <ClCompile Include="ObjTwinsBlue.cpp" />
     <ClCompile Include="ObjTwinsRed.cpp" />
     <ClCompile Include="ObjWhitehole.cpp" />
     <ClCompile Include="ObjWoman.cpp" />
@@ -176,12 +177,8 @@
     <ClCompile Include="SceneSunLeo.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="ObjHero.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneVenusLibra.cpp" />
     <ClCompile Include="SceneVenusTaurus.cpp" />
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +212,7 @@
     <ClInclude Include="ObjHomingHeart.h" />
     <ClInclude Include="ObjLeo.h" />
     <ClInclude Include="ObjLibra.h" />
+    <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjMessage.h" />
     <ClInclude Include="ObjMeteo.h" />
     <ClInclude Include="ObjMiniMap.h" />
@@ -225,9 +223,6 @@
     <ClInclude Include="ObjSkillBullet.h" />
     <ClInclude Include="ObjSkillItem.h" />
     <ClInclude Include="ObjSkillLeo.h" />
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -256,7 +251,6 @@
     <ClInclude Include="SceneSunLeo.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="ObjHero.h" />
-    <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneVenusLibra.h" />
     <ClInclude Include="SceneVenusTaurus.h" />
     <ClInclude Include="UtilityModule.h" />

@@ -8,33 +8,32 @@
 #include"GameL\UserData.h" 
 
 #include"GameHead.h"
-#include"ObjLeo.h"
+#include"ObjTwinsBlue.h"
 #include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-float* g_leo_x[60];//全ての牛のX位置を把握する
-float* g_leo_y[60];//全ての牛のY位置を把握する
+float* g_twinsblue_x[20];//全ての双子（青）のX位置を把握する
+float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
 
-
-CObjLeo::CObjLeo(float x, float y, int id)
+CObjTwinsBlue::CObjTwinsBlue(float x, float y,int id)
 {
 	m_px = x;	//位置
 	m_py = y;
 
-	m_leo_id = id;
+	m_blue_id = id;
 }
 
 
 
 //イニシャライズ
-void CObjLeo::Init()
+void CObjTwinsBlue::Init()
 {
 	m_hp = 5;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
+	m_posture = 0.0f;//正面(0.0f) 左(4.0f) 右(1.0f) 背面(2.0f)
 
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
@@ -45,7 +44,7 @@ void CObjLeo::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
-	//blockとの衝突状態確認用
+					//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -54,49 +53,53 @@ void CObjLeo::Init()
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
 
-	g_Leo_cnt = 0.0f;
 
-	m_btime = 0;
+	m_bullet_time = 250;
 
 	m_time = 30;
 
 	m_df = true;
-	count = 0;
 
 	alpha = 1.0;
 
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_LEO, 1);
+	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_BLUE, 1);
 }
 
 //アクション
-void CObjLeo::Action()
-{
+void CObjTwinsBlue::Action()
+{	
 	//行動が制御されている場合（メニュー画面）
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
 
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	m_btime++;
 
-	if (m_ani_time > m_ani_max_time)
+	//20°間隔で弾丸発射
+	m_bullet_time++;
+	if (m_bullet_time > 300 && m_hp > 0)
 	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
+		m_bullet_time = 0;
 
-	if (m_ani_frame == 3)
-	{
-		m_ani_frame = 1;
+		//6発同時発射
+		CObjBlueBullet*obj_b;
+		for (int i = 0; i < 360; i += 60)
+		{
+			//角度iで角度弾丸発射
+			obj_b = new CObjBlueBullet(m_px, m_py, i, 3.0f);
+			Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
+		}
 	}
 
 	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
+
+
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -106,11 +109,11 @@ void CObjLeo::Action()
 		float hy = hero->GetY();
 	}
 
-	if (g_stan_leo_flag[m_leo_id] == false)
+	if (g_stan_blue_flag[m_blue_id] == false)
 	{
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
-		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
+		check = CheckWindow(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
 		if (check == true)
 		{
 			//主人公機が存在する場合、誘導角度の計算する
@@ -125,21 +128,18 @@ void CObjLeo::Action()
 
 				float ar = GetAtan2Angle(x, y);
 
-				//敵の現在の向いている角度を取る
-				float br = GetAtan2Angle(m_vx, m_vy);
-
 				//角度で上下左右を判定
 				if ((ar < 45 && ar>0) || ar > 315)
 				{
 					//左
-					m_posture = 1.0f;
+					m_posture = 4.0f;
 					m_ani_time += 1;
 				}
 
 				if (ar > 45 && ar < 135)
 				{
 					//下
-					m_posture = 0.0f;
+					m_posture = 3.0f;
 					m_ani_time += 1;
 				}
 				if (ar > 135 && ar < 225)
@@ -151,14 +151,14 @@ void CObjLeo::Action()
 				if (ar > 225 && ar < 315)
 				{
 					//上
-					m_posture = 3.0f;
+					m_posture = 1.0f;
 					m_ani_time += 1;
 
 				}
 
 				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 2;
-				m_vy = sin(3.14 / 180 * ar) * 2;
+				m_vx = cos(3.14 / 180 * ar) * 1;
+				m_vy = sin(3.14 / 180 * ar) * 1;
 			}
 		}
 		else
@@ -174,8 +174,7 @@ void CObjLeo::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
-
+	hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
 	//主人公とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -213,13 +212,11 @@ void CObjLeo::Action()
 		}
 	}
 
-	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_NULL) == true)
 	{
 		//敵がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_NULL);
-
 		float r = 0;
 
 		for (int i = 0; i < 10; i++)
@@ -245,12 +242,11 @@ void CObjLeo::Action()
 				{
 					m_vy = -0.15f; //下
 				}
-
 			}
 		}
 	}
 
-	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	//ELEMENT_MAGICを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
@@ -263,9 +259,7 @@ void CObjLeo::Action()
 			if (hit_data[i] == nullptr)
 				continue;
 
-
 			float r = hit_data[i]->r;
-
 
 
 			if ((r < 45 && r >= 0) || r > 315)
@@ -292,8 +286,7 @@ void CObjLeo::Action()
 		hit->SetInvincibility(true);
 
 	}
-
-	//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+	//ELEMENT_SKILL_VIRGOを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
@@ -336,7 +329,6 @@ void CObjLeo::Action()
 
 	}
 
-
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
 	{
@@ -344,24 +336,64 @@ void CObjLeo::Action()
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 															//ヒット判定on
-		g_stan_leo_flag[m_leo_id] = true;
+		g_stan_blue_flag[m_blue_id] = true;
 	}
 
 	//しし座のヒット判定がonの時スタン
-	if (g_stan_leo_flag[m_leo_id] == true)
+	if (g_stan_blue_flag[m_blue_id] == true)
 	{
 		g_Leo_cnt += 1.0f;
 		if (g_Leo_cnt >= 200.0f)
 		{
 			g_Leo_cnt = 0.0f;
-			g_stan_leo_flag[m_leo_id] = false;
+			g_stan_blue_flag[m_blue_id] = false;
 		}
 
 	}
 
-	if (m_f == true)
-	{
-		m_time--;
+		//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SUB) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= 1;
+			m_f = true;
+			m_key_f = true;
+			hit->SetInvincibility(true);
+
+		}
+
+		if (m_f == true)
+		{
+			m_time--;
 
 	}
 
@@ -382,20 +414,15 @@ void CObjLeo::Action()
 	//HPが0になったら破棄
 	if (m_hp == 0)
 	{
-
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
-		g_leo_d_flag[m_leo_id] = false;
+		g_blue_d_flag[m_blue_id] = false;
 	}
-	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-
-
-
 }
 
 //ドロー
-void CObjLeo::Draw()
+void CObjTwinsBlue::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
@@ -406,22 +433,22 @@ void CObjLeo::Draw()
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
-			   //ブロック情報を持ってくる
+	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 48.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
-	src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
-	src.m_bottom = src.m_top + 48.0f;
+	src.m_top = 64.0f * m_posture;
+	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
+	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();
-	dst.m_left = 64.0f + m_px + block->GetScrollx();
+	dst.m_left = 80.0f + m_px + block->GetScrollx();
 	dst.m_right = 0.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+	dst.m_bottom = 80.0f + m_py + block->GetScrolly();
 
 
 	//描画
-	Draw::Draw(52, &src, &dst, c, 0.0f);
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 }

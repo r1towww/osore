@@ -21,6 +21,7 @@ using namespace GameL;
 CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//星を数える変数の初期化
+	m_clear_f == false;
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
 }
@@ -58,33 +59,39 @@ void CSceneVenusTaurus::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
-	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_512);
-	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
-	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_1024);
-	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
-	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
-	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
-	Draw::LoadImageW(L"blackhole.png", 30, TEX_SIZE_1024);
-	Draw::LoadImageW(L"whitehole.png", 31, TEX_SIZE_1024);
+	Draw::LoadImageW(L"主人公斬撃アニメーション.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"ステージクリア画像_金星_牡牛座.png", 16, TEX_SIZE_1024);
 
-	
-	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_2048);
-	Draw::LoadImageW(L"回復エフェクト.png", 14, TEX_SIZE_2048);
+	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
-
-	
 	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
-	Draw::LoadImageW(L"衝撃波.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"獅子座スキルエフェクト.png", 23, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"牛敵.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
+
+	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
+	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ブラックホール.png", 30, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ホワイトホール.png", 31, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"ミニマップ枠.png", 7, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
+	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
+	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
+
+	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -140,6 +147,7 @@ void CSceneVenusTaurus::Scene()
 		g_Taurus = true;		//スキル（牡牛座）をオンにする
 		//おうし座にクリア表記
 		g_Taurus_clear = true;
+		g_stage_clear = true;
 		g_Taurus_Max = true;
 		//もし、金星の星座をどちらもクリアしていたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
@@ -171,7 +179,29 @@ void CSceneVenusTaurus::Scene()
 			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 
+
 	}
+
+	ClearCheck(g_stage_clear);
+
+
 }
 
+void CSceneVenusTaurus::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (m_clear_f==true)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			m_clear_f=true;
+		}
+	}
+}
 

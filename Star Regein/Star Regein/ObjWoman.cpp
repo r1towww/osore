@@ -71,11 +71,13 @@ void CObjWoman::Init()
 //アクション
 void CObjWoman::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
 	//チュートリアルフラグが立っていない場合動く
-	if (g_tutorial_flag == false)
+	if (g_tutorial_flag == false&&g_stage_clear==false)
 	{
-
-
 		//ブロックとの当たり判定実行
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 		pb->BlockHit(&m_px, &m_py, false,
@@ -90,72 +92,80 @@ void CObjWoman::Action()
 			float hy = hero->GetY();
 		}
 
-		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-		bool check;
-		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-		if (check == true && m_hp > 0)
+		if (g_stan_woman_flag[m_woman_id] == false)
 		{
-			//ハート弾発射
-			m_bullet_time++;
-			if (m_bullet_time > 200)
+			//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+			bool check;
+			check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
+			if (check == true && m_hp > 0)
 			{
-				m_bullet_time = 0;
-				//ハート弾オブジェクト作成
-				CObjHomingHeart* objh = new CObjHomingHeart(m_px, m_py);
-				Objs::InsertObj(objh, OBJ_HOMING_HEART, 2);
+				//ハート弾発射
+				m_bullet_time++;
+				if (m_bullet_time > 200)
+				{
+					m_bullet_time = 0;
+					//ハート弾オブジェクト作成
+					CObjHomingHeart* objh = new CObjHomingHeart(m_px, m_py);
+					Objs::InsertObj(objh, OBJ_HOMING_HEART, 2);
+				}
+
+				//主人公機が存在する場合、誘導角度の計算する
+				if (hero != nullptr)
+				{
+
+					float x;
+					float y;
+
+					x = 375 - (m_px + pb->GetScrollx());
+					y = 275 - (m_py + pb->GetScrolly());
+
+					float ar = GetAtan2Angle(x, y);
+
+					//敵の現在の向いている角度を取る
+					float br = GetAtan2Angle(m_vx, m_vy);
+
+					//角度で上下左右を判定
+					if ((ar < 45 && ar>0) || ar > 315)
+					{
+						//左
+						m_posture = 1.0f;
+						m_ani_time += 1;
+					}
+
+					if (ar > 45 && ar < 135)
+					{
+						//下
+						m_posture = 0.0f;
+						m_ani_time += 1;
+					}
+					if (ar > 135 && ar < 225)
+					{
+						//右
+						m_posture = 2.0f;
+						m_ani_time += 1;
+					}
+					if (ar > 225 && ar < 315)
+					{
+						//上
+						m_posture = 3.0f;
+						m_ani_time += 1;
+
+					}
+
+					//主人公機と敵角度があんまりにもかけ離れたら
+					m_vx = cos(3.14 / 180 * ar) * 2;
+					m_vy = sin(3.14 / 180 * ar) * 2;
+				}
 			}
-
-			//主人公機が存在する場合、誘導角度の計算する
-			if (hero != nullptr)
+			else
 			{
 
-				float x;
-				float y;
-
-				x = 375 - (m_px + pb->GetScrollx());
-				y = 275 - (m_py + pb->GetScrolly());
-
-				float ar = GetAtan2Angle(x, y);
-
-				//敵の現在の向いている角度を取る
-				float br = GetAtan2Angle(m_vx, m_vy);
-
-				//角度で上下左右を判定
-				if ((ar < 45 && ar>0) || ar > 315)
-				{
-					//左
-					m_posture = 1.0f;
-					m_ani_time += 1;
-				}
-
-				if (ar > 45 && ar < 135)
-				{
-					//下
-					m_posture = 0.0f;
-					m_ani_time += 1;
-				}
-				if (ar > 135 && ar < 225)
-				{
-					//右
-					m_posture = 2.0f;
-					m_ani_time += 1;
-				}
-				if (ar > 225 && ar < 315)
-				{
-					//上
-					m_posture = 3.0f;
-					m_ani_time += 1;
-
-				}
-
-				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 2;
-				m_vy = sin(3.14 / 180 * ar) * 2;
 			}
 		}
 		else
 		{
-
+			m_vx = 0.0f;
+			m_vy = 0.0f;
 		}
 
 		//HitBoxの内容を更新
@@ -313,6 +323,27 @@ void CObjWoman::Action()
 			m_f = true;
 			m_key_f = true;
 			hit->SetInvincibility(true);
+		}
+
+		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+																//ヒット判定on
+			g_stan_woman_flag[m_woman_id] = true;
+		}
+
+		//しし座のヒット判定がonの時スタン
+		if (g_stan_woman_flag[m_woman_id] == true)
+		{
+			g_Leo_cnt += 1.0f;
+			if (g_Leo_cnt >= 200.0f)
+			{
+				g_Leo_cnt = 0.0f;
+				g_stan_woman_flag[m_woman_id] = false;
+			}
 
 		}
 
@@ -380,5 +411,5 @@ void CObjWoman::Draw()
 
 
 	//描画
-	Draw::Draw(21, &src, &dst, c, 0.0f);
+	Draw::Draw(22, &src, &dst, c, 0.0f);
 }

@@ -16,6 +16,7 @@ int g_StarCount = 0;	//星を数える変数の初期化
 bool g_skill_item_flag;
 bool g_Make_Item;
 
+bool g_stage_clear = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -27,6 +28,7 @@ CSceneEarth::CSceneEarth()
 	Item_cnt = 0.0f;
 	g_skill_item_flag = false;
 	g_Make_Item = false;
+	cnt = 0;
 }
 
 //デストラクタ
@@ -63,14 +65,32 @@ void CSceneEarth::InitScene()
 
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"斬撃アニメーション.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"牛.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"主人公斬撃アニメーション.png", 2, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
+	Draw::LoadImageW(L"獅子座スキルエフェクト.png", 23, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);;
+
+	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
+
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
-	Draw::LoadImageW(L"SpaceBack.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
-	Draw::LoadImageW(L"Background.png", 7, TEX_SIZE_2048);
+
+
+	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"ミニマップ枠.png", 7, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
-	Draw::LoadImageW(L"color.png", 9, TEX_SIZE_512);
+	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
 	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
@@ -83,10 +103,6 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
 
 
-	//テスト用
-	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ハート弾.png", 50, TEX_SIZE_512);
-	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -113,6 +129,10 @@ void CSceneEarth::InitScene()
 	CObjStatus* objstatus = new CObjStatus();
 	Objs::InsertObj(objstatus, OBJ_STATUS, 100);
 
+	//スキル切り替えオブジェクト作成
+	CObjSkill* objSkill = new CObjSkill();
+	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
@@ -135,6 +155,7 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
+
 	//テスト（地球で星を5個集めたら次へ移行）
 	if (g_StarCount == EARTHMAXSTAR)
 	{
@@ -143,6 +164,7 @@ void CSceneEarth::Scene()
 
 		//星を集めきるとオン
 		g_Earth_Max = true;
+		g_stage_clear = true;
 
 		if (g_Earth_Max == true)
 		{
@@ -165,10 +187,31 @@ void CSceneEarth::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
 		}
 		
 	}
 
+
+ClearCheck(g_stage_clear);
+
+
+	
 }
 
+void CSceneEarth::ClearCheck(bool a)
+{
+	if (a == true)
+	{
+		if (cnt >= 1)
+		{
+			return;
+		}
+		else
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			cnt++;
+		}
+	}
+}

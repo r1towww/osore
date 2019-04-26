@@ -29,10 +29,15 @@ private:
 	float m_posture;//姿勢
 	float alpha;
 	float m_ani_max_time;	//アニメーション動作間隔最大値
+	float m_angle;	//角度調整
+	float m_pos_x;	//X軸調整
+	float m_pos_y;	//Y軸調整
+
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 
+	int m_time;//双子座スキル消滅時間測定
 	int m_bullet_time;//弾丸発射時間測定
 
 	//blockとの衝突状態確認用
