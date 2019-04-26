@@ -409,7 +409,7 @@ void CObjCow::Action()
 	m_py += m_vy*1.0;
 
 	//HP‚ª0‚É‚È‚Á‚½‚ç”jŠü
-	if (m_hp == 0)
+	if (m_hp <= 0)
 	{
 
 		//“Gíœ
