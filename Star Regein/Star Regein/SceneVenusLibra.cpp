@@ -149,7 +149,7 @@ void CSceneVenusLibra::Scene()
 		g_Libra = true;		//スキル（天秤座）をオンにする
 		//てんびん座をクリア表示
 		g_Libra_clear = true;
-		g_stage_clear = true;
+	
 		g_Libra_Max = true;
 		//もし、金星の星座をどちらもクリアしたなら金星にクリア表示
 		if (g_Libra_clear == true && g_Taurus_clear == true)
@@ -178,10 +178,12 @@ void CSceneVenusLibra::Scene()
 		if (g_skill_item_flag == true)
 		{
 			g_skill_item_flag = false;
-			Scene::SetScene(new CSceneStageChoice());//ステージ選択に移行
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
+			
 		}
 		
-		ClearCheck(g_stage_clear);
+		
 	}
 }
 

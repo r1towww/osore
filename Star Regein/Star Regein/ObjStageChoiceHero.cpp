@@ -124,14 +124,14 @@ void ObjStageChoiceHero::Action()
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false)
+	if (Input::GetVKey('Z') == false || Input::GetVKey(VK_RETURN) == false)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
 
 
 	// Zキーを入力かつ、キーフラグがオンの時に実行
-	if (Input::GetVKey('Z') == true && g_key_flag == true)
+	if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 	{
 		if (m_key_flag == true)
 		{

@@ -133,7 +133,7 @@ void CSceneMercuryVirgo::Scene()
 		//乙女座のクリア表記
 		g_Virgo_clear = true;
 		g_Virgo_Max = true;
-		g_stage_clear = true;
+	
 
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
@@ -162,13 +162,15 @@ void CSceneMercuryVirgo::Scene()
 			{
 				//スキルアイテムフラグオフ
 				g_skill_item_flag = false;
-				Scene::SetScene(new CSceneStageClear());	//ゲームメインシーンに移行
+				g_stage_clear = true;
+				ClearCheck(g_stage_clear);
+				
 			}
 		}
 
 		
 	}
-	ClearCheck(g_stage_clear);
+	
 
 }
 //クリアチェック
