@@ -39,6 +39,8 @@ void ObjStageChoiceHero::Init()
 //アクション
 void ObjStageChoiceHero::Action()
 {
+	g_gemini_check = false;
+
 	//描画カラー情報
 	float c[4] = { 1.0f,0.0f,0.0f,1.0f };
 

@@ -40,6 +40,18 @@ void CObjSkillGeminiB::Init()
 
 	m_time = 1500;
 
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+	else
+	{
+		m_blackhole_num = 0;
+	}
+
 	alpha = 5.0;
 
 	m_pos_x = 0;//主人公と同じ方向に向くため
@@ -52,10 +64,6 @@ void CObjSkillGeminiB::Action()
 	//主人公とブロックの位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	CObjCow*cow = (CObjCow*)Objs::GetObj(OBJ_COW);
-	CObjWoman*woman = (CObjWoman*)Objs::GetObj(OBJ_WOMAN);
-	CObjTwinsRed*red = (CObjTwinsRed*)Objs::GetObj(OBJ_TWINS_RED);
-	CObjTwinsBlue*bule = (CObjTwinsBlue*)Objs::GetObj(OBJ_TWINS_BLUE);
 
 	if (g_posture == HERO_UP)  //上
 	{
@@ -116,11 +124,25 @@ void CObjSkillGeminiB::Action()
 			{
 				//サブ機弾丸オブジェクト作成
 				CObjSkillBullet* objB = new CObjSkillBullet(m_gx + m_pos_x, m_gy + m_pos_y, i);
-				Objs::InsertObj(objB, OBJ_SKILL_BULLET, 150);
+				Objs::InsertObj(objB, OBJ_SKILL_BULLET, 5);
 			}
 			g_geminiattck_check = false;
 		}
 	}
+
+
+	////ブラックホールの数forループを回す
+	//for (int i = 0; i < m_blackhole_num; i++)
+	//{
+	//	if (g_gemini_move == true)
+	//	{
+	//		//同じ値のホワイトホール位置に移動させる
+	//		pb->SetScrollx(-g_whitehole_x[i][0] + m_gx);
+	//		pb->SetScrolly(-g_whitehole_y[i][0] + m_gy);
+
+	//		g_gemini_move = false;
+	//	}
+	//}
 
 	//主人公の移動ベクトルを代入
 	m_vx = hero->GetVX()*HERO_VEC;
