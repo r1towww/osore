@@ -64,7 +64,8 @@ class CObjHero :public CObj
 	int m_burn_max_time;//火傷合計継続時間
 
 	bool m_dash_flag;  //ダッシュフラグ
-	bool m_move_flag;  //移動フラグ
+	bool m_cool_flag;  //ダッシュ制限用フラグ
+	int m_cool_time;
 
 		bool m_a_flag;//攻撃制御用
 
