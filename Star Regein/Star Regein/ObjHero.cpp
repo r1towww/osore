@@ -74,8 +74,8 @@ void CObjHero::Init()
 	m_help_key_f = true;
 	//ダッシュフラグ初期化
 	m_dash_flag = false;
-	//移動フラグ初期化
-	m_dash_flag = false;
+	m_cool_flag = false;
+	m_cool_time = 0;
 
 	//攻撃制御フラグ
 	m_a_flag = true;
@@ -146,7 +146,6 @@ void CObjHero::Action()
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vy -= m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_UP;
@@ -154,7 +153,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vy += m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_DOWN;
@@ -162,7 +160,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vx -= m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_LEFT;
@@ -170,7 +167,6 @@ void CObjHero::Action()
 		}
 		else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
 		{
-			m_move_flag = true;
 			m_vx += m_speed_power;
 			m_dash_flag = true;
 			g_posture = HERO_RIGHT;
@@ -210,20 +206,18 @@ void CObjHero::Action()
 
 		//スキル系統情報-------------------------------------------------
 
+
+
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp > 0.0f && m_dash_flag==true)
+			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
-
-			if (m_move_flag == true)
-			{
 				m_MP_time++;
 				if (m_MP_time > 3)
 				{
 					m_MP_time = 0;
 					g_mp -= 1.0f;
 				}
-			}
 			m_speed_power = DASH_SPEED;
 
 			//ダッシュエフェクト用処理------------------------------
@@ -256,11 +250,24 @@ void CObjHero::Action()
 				m_eff_time = 0;
 			}
 
+			//MPが0になったら1ゲージ回復するまで使用不可
+			if (g_mp == 0.0f)
+				m_cool_flag = true;
+
+			if (m_cool_flag == true)
+			{
+				m_cool_time++;
+				if (m_cool_time >= 200)
+				{
+					m_cool_time = 0;
+					m_cool_flag = false;
+				}
+			}
+
 			//-----------------------------------------------
 		}
 		else//通常速度
 		{
-			m_move_flag = false;
 			m_dash_flag = false;
 			m_speed_power = NORMAL_SPEED;
 		}

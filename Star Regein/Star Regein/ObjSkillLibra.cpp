@@ -76,10 +76,10 @@ void CObjSkillLibra::Action()
 	}
 
 	m_persist_time++;
-	if (m_persist_time > 60)
+	if (m_persist_time > 40)
 	{
 		m_persist_time = 0;
-		g_mp -= 10.0f;
+		g_mp -= 1.0f;
 	}
 
 	//MP‚ª0‚É‚È‚é‚©•Ê‚ÌƒXƒLƒ‹‚ª‘I‘ð‚³‚ê‚½‚ç
