@@ -89,7 +89,8 @@ void CObjSkillBullet::Action()
 	if (hit->CheckObjNameHit(OBJ_COW) != nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_BLUE) != nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
-		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr)//“–‚½‚Á‚Ä‚¢‚½‚çŽæ“¾  
+		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr ||
+		hit->CheckObjNameHit(OBJ_LIBRA) != nullptr)//“–‚½‚Á‚Ä‚¢‚½‚çŽæ“¾  
 	{
 		m_hit_flag = true;
 		m_vx = 0;
