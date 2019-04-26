@@ -19,7 +19,11 @@ void CObjStarChoice::Init()
 	m_Tra1 = 0.3f;
 	m_Tra2 = 0.3f;
 	m_Tra3 = 0.3f;
-	m_direction = DOWN;	//初期選択位置の初期化
+	m_Tra4 = 0.0f;
+	if(g_stage == Earth || g_stage == Sun)
+		m_direction = UP;	//初期選択位置の初期化
+	else if (g_stage == Venus || g_stage == Mercury)
+		m_direction = LEFT;
 
 	//キー入力用フラグの初期化
 	m_key_flag = true;
@@ -28,6 +32,8 @@ void CObjStarChoice::Init()
 //アクション
 void CObjStarChoice::Action()
 {
+	float c[4] = { 1.0f,1.0f,0.0f,1.0f };	//標準カラー
+
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
 	ObjStageChoiceHero* stageh = (ObjStageChoiceHero*)Objs::GetObj(OBJ_STAGECHOICEHERO);
@@ -36,7 +42,6 @@ void CObjStarChoice::Action()
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun)
 	{
 			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
-			stageh->SetAlpha(ALPHAUNDER);
 	}
 
 	//星座選択が地球または太陽の場合（星座が1つの場合）
@@ -50,6 +55,7 @@ void CObjStarChoice::Action()
 				Audio::Start(1);
 				m_direction = UP;	//UPをセット
 				m_key_flag = false;
+
 			}
 		}
 		//下キーを入力して選択
@@ -109,6 +115,7 @@ void CObjStarChoice::Action()
 		m_Tra1 = 1.0f;
 		m_Tra2 = 0.3f;
 		m_Tra3 = 0.3f;
+		m_Tra4 = 1.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
@@ -179,6 +186,7 @@ void CObjStarChoice::Action()
 		m_Tra2 = 1.0f;
 		m_Tra1 = 0.3f;
 		m_Tra3 = 0.3f;
+		m_Tra4 = 0.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
@@ -220,6 +228,7 @@ void CObjStarChoice::Action()
 		m_Tra3 = 1.0f;
 		m_Tra2 = 0.3f;
 		m_Tra1 = 0.3f;
+		m_Tra4 = 0.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
@@ -248,6 +257,8 @@ void CObjStarChoice::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,0.0f,m_Tra1 };	//標準カラー
 	//クリア用
+	float stage[4] = { 1.0f,1.0f,0.0f,m_Tra4 };
+
 	float left_clear[4] = { 1.0f,1.0f,0.0f,m_Tra1 };
 	float right_clear[4] = { 1.0f,1.0f,0.0f,m_Tra2 };
 
@@ -279,6 +290,8 @@ void CObjStarChoice::Draw()
 		dst.m_left   = 250.0f;
 		dst.m_right  = 550.0f;
 		dst.m_bottom = 390.0f;
+		Font::StrDraw(L"チュートリアルステージ", 64, 64, 32, stage);
+
 		//表示
 		Draw::Draw(7, &src, &dst, left, 0.0f);
 		if (g_Earth_clear == true)
