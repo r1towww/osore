@@ -73,7 +73,7 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
+
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);

@@ -126,7 +126,7 @@ void CSceneMercuryVirgo::InitScene()
 void CSceneMercuryVirgo::Scene()
 {
 	//水星（乙女座）で星を15個集めたら次へ移行
-	if (g_StarCount == 1)
+	if (g_StarCount == VIRGOMAXSTAR)
 	{
 		//乙女座のスキル開放
 		g_Virgo = true;

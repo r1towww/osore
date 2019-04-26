@@ -9,6 +9,7 @@
 #include "ObjTitle.h"
 
 #define CLEARF	true
+
 //各惑星・星座のクリア状況
 bool g_Earth_clear= CLEARF;	//地球	
 bool g_Venus_clear= CLEARF;	//金星
@@ -152,7 +153,7 @@ void CObjTitle::Draw()
 		Font::StrDraw(L"→ゲームスタート", 280, 300, 32, c);
 		Font::StrDraw(L"ゲーム終了", 280, 340, 32, c);
 		//Ｚキーで始める
-		if (Input::GetVKey('Z') == true)
+		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 		{
 			m_start = true;
 		}
@@ -163,7 +164,7 @@ void CObjTitle::Draw()
 		Font::StrDraw(L"ゲームスタート", 280, 300, 32, c);
 		Font::StrDraw(L"→ゲーム終了", 280, 340, 32, c);
 		//Zキーで終わる
-		if (Input::GetVKey('Z') == true)
+		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 		{
 			m_end = true;
 		}
