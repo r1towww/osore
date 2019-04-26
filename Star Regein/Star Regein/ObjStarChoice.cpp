@@ -222,25 +222,25 @@ void CObjStarChoice::Action()
 	}
 	//下のコマンドの明るさを変更
 	//下（戻る）を選択している際
-	else if (m_direction == DOWN)		
+	else if (m_direction == DOWN)
 	{
 		//透過率変更
 		m_Tra3 = 1.0f;
 		m_Tra2 = 0.3f;
 		m_Tra1 = 0.3f;
 		m_Tra4 = 0.0f;
-		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+		//キー入力フラグがオンの場合、入力を許可する
+		if ((Input::GetVKey('Z') == true && g_key_flag == true 
+		  || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (m_key_flag == true)
 			{
 				Audio::Start(1);
 				g_stage = Space;	//ステージをSpaceに設定
 				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
-				stageh->SetAlpha(ALPHAORIGIN);
 				m_key_flag = false;
 				g_key_flag = false;	//キーフラグをオフ
-				this->SetStatus(false);    //自身に削除命令を出す
+				this->SetStatus(false);
 			}
 		}
 	}

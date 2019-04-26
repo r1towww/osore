@@ -188,7 +188,6 @@ void ObjStageChoiceHero::Action()
 					if (g_Mercury_clear == true)
 					{
 						Audio::Start(1);
-						//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 						//太陽に設定
 						g_stage = Sun;
 					}

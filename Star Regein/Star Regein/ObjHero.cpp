@@ -81,17 +81,6 @@ void CObjHero::Init()
 	m_a_flag = true;
 	//攻撃力の初期化
 	g_attack_power = 1;
-	//ブラックホールの数を入れる
-	if (g_stage == VenusLibra) {	//天秤座
-		m_blackhole_num = 4;	
-	}
-	else if (g_stage == MercuryVirgo) {	//乙女座
-		m_blackhole_num = 2;
-	}
-	else
-	{
-		m_blackhole_num = 0;
-	}
 
 
 	//獅子攻撃ヒットフラグ
@@ -123,6 +112,19 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//ブラックホールの数を入れる
+	if (g_stage == VenusLibra) {	//天秤座
+		m_blackhole_num = 4;
+	}
+	else if (g_stage == MercuryVirgo) {	//乙女座
+		m_blackhole_num = 2;
+	}
+	else
+	{
+		m_blackhole_num = 0;
+	}
+
+
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
 	if (g_tutorial_flag == true || g_move_stop_flag == true)
 	{
