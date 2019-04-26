@@ -574,6 +574,12 @@ void CObjHero::Action()
 			}
 		}
 
+		//アイテムが作成されたら無敵にする
+		if (g_Make_Item == true)
+		{
+			m_invincible_flag = true;
+		}
+
 		if (m_eff_flag == true)
 		{
 			//エフェクト用

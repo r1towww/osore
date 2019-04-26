@@ -172,6 +172,7 @@ void CSceneEarth::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				g_Make_Item = true;
 				Item_cnt++;
 				
 			}

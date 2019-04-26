@@ -155,7 +155,7 @@ void CSceneSunLeo::Scene()
 		g_Leo_Max = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
-		g_stage_clear = true;
+		
 
 		//星を集めきったら
 		if (g_Leo_Max == true)
@@ -170,6 +170,7 @@ void CSceneSunLeo::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				g_Make_Item = true;
 				Item_cnt++;
 			}
 		}
@@ -179,11 +180,13 @@ void CSceneSunLeo::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
 		}
 
 
 	}
-	ClearCheck(g_stage_clear);
+	
 
 }
 //クリアチェック
