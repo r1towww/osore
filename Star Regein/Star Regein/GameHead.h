@@ -49,6 +49,7 @@ enum OBJ_NAME
 	OBJ_SKILL,
 	OBJ_SKILL_LIBRA,
 	OBJ_SKILL_GEMINI,
+	OBJ_SKILL_GEMINIB,
 	OBJ_SKILL_VIRGO,
 	OBJ_SKILL_LEO,
 
@@ -210,7 +211,7 @@ extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
 
 extern bool g_gemini_check; //サブ機の生成の為の値
-
+extern bool g_gemini_bullet_check; //双子座スキル弾丸
 extern bool g_geminiattck_check; //双子座スキル弾丸制御
 extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
@@ -245,6 +246,7 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+extern bool g_tutorial_next_flag;//チュートリアルのページ制御用
 extern bool g_move_stop_flag;//主人公の操作制御用フラグ
 
 //各星座の星を集めきったかどうか
@@ -308,6 +310,7 @@ extern int g_cow_id[20];//牛の識別ID
 
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
+#include "ObjskillgeminiB.h"
 #include "ObjSkillVirgo.h"
 #include "ObjSkillBullet.h"
 #include "ObjSkillLeo.h"

@@ -13,7 +13,7 @@ using namespace GameL;
 
 float g_posture;
 int g_skill = NoSkill;
-int g_attack_power;
+int g_attack_power = 1;
 
 
 CObjHero::CObjHero(float x, float y)
@@ -316,6 +316,9 @@ void CObjHero::Action()
 					//サブ機オブジェクト作成
 					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
 					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+					//サブ機オブジェクト作成
+					CObjSkillGeminiB* objgb = new CObjSkillGeminiB(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+					Objs::InsertObj(objgb, OBJ_SKILL_GEMINIB, 20);
 					g_mp -= g_max_mp;	//mp消費
 					g_gemini_check = true;
 				}
@@ -325,11 +328,11 @@ void CObjHero::Action()
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-					//ハート弾オブジェクト作成
-					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
-					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+				//ハート弾オブジェクト作成
+				CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+				Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 30.0f;	//mp消費
+				g_mp -= 50.0f;	//mp消費
 
 				}
 				//獅子座の場合

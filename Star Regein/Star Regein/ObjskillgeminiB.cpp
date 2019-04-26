@@ -8,23 +8,21 @@
 #include "GameL\HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjSkillGemini.h"
+#include "ObjSkillGeminiB.h"
 #include "UtilityModule.h"
 
 //使用するネームスペース
 
 using namespace GameL;
 
-bool g_geminiattck_check;
-
-CObjSkillGemini::CObjSkillGemini(float x, float y)
+CObjSkillGeminiB::CObjSkillGeminiB(float x, float y)
 {
 	m_gx = x;	//位置
 	m_gy = y;
 }
 
 //イニシャライズ
-void CObjSkillGemini::Init()
+void CObjSkillGeminiB::Init()
 {
 	m_vx = 0.0f;//移動xベクトル
 	m_vy = 0.0f;//移動yベクトル
@@ -37,7 +35,7 @@ void CObjSkillGemini::Init()
 
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
-	
+
 	m_bullet_time = 0;
 
 	m_time = 1500;
@@ -49,7 +47,7 @@ void CObjSkillGemini::Init()
 }
 
 //アクション
-void CObjSkillGemini::Action()
+void CObjSkillGeminiB::Action()
 {
 	//主人公とブロックの位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -61,31 +59,31 @@ void CObjSkillGemini::Action()
 
 	if (g_posture == HERO_UP)  //上
 	{
-		m_pos_x     = +40.0f;	//X軸調整
-		m_pos_y     = -5.0f;	//Y軸調整
+		m_pos_x = -35.0f;	//X軸調整
+		m_pos_y = -5.0f;	//Y軸調整
 		m_ani_time += 1;    //maxまで数える
-        m_posture   = 1.0f;   //姿勢
+		m_posture = 1.0f;   //姿勢
 	}
 	else if (g_posture == HERO_LEFT) //左
 	{
-		m_pos_x     = -15.0f;	//X軸調整
-		m_pos_y     = -20.0f;	//Y軸調整
+		m_pos_x = -15.0f;	//X軸調整
+		m_pos_y = +35.0f;	//Y軸調整
 		m_ani_time += 1;    //maxまで数える
-		m_posture   = 2.0f;   //姿勢
+		m_posture = 2.0f;   //姿勢
 	}
 	else if (g_posture == HERO_DOWN) //下
 	{
-		m_pos_x     = -25.0f;	//X軸調整
-		m_pos_y     = +40.0f;	//Y軸調整
+		m_pos_x = +35.0f;	//X軸調整
+		m_pos_y = +40.0f;	//Y軸調整
 		m_ani_time += 1;    //maxまで数える
-		m_posture   = 3.0f;   //姿勢
+		m_posture = 3.0f;   //姿勢
 	}
 	else if (g_posture == HERO_RIGHT) //右
 	{
-		m_pos_x     = +35.0f;   //X軸調整
-		m_pos_y     = +45.0f;   //Y軸調整
+		m_pos_x = +35.0f;   //X軸調整
+		m_pos_y = -20.0f;   //Y軸調整
 		m_ani_time += 1;    //maxまで数える
-		m_posture   = 4.0f;   //姿勢
+		m_posture = 4.0f;   //姿勢
 	}
 	//timeの方が大きくなると初期化フレームを進める
 	if (m_ani_time > m_ani_max_time)
@@ -99,19 +97,19 @@ void CObjSkillGemini::Action()
 		m_ani_frame = 0;
 	}
 
-	if (g_geminiattck_check ==true)
+	if (g_geminiattck_check == true)
 	{
 		//20°間隔で弾丸発射
 		m_bullet_time++;
 
-		if (m_bullet_time > 350)
+		if (m_bullet_time > 200)
 		{
 			m_bullet_time = 0;
 
 			//ブロック情報を持ってくる
 			CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-			g_gemini_bullet_check = false;
+			g_gemini_bullet_check = true;
 
 			//10発同時発射
 			for (int i = 0; i < 360; i += 36)
@@ -125,8 +123,8 @@ void CObjSkillGemini::Action()
 	}
 
 	//主人公の移動ベクトルを代入
-	 m_vx = hero->GetVX()*HERO_VEC;
-	 m_vy = hero->GetVY()*HERO_VEC;
+	m_vx = hero->GetVX()*HERO_VEC;
+	m_vy = hero->GetVY()*HERO_VEC;
 
 	//位置の更新
 	m_gx += m_vx;
@@ -144,7 +142,7 @@ void CObjSkillGemini::Action()
 }
 
 //ドロー
-void CObjSkillGemini::Draw()
+void CObjSkillGeminiB::Draw()
 {
 	//アニメーション
 	int AniData[4] =
@@ -156,21 +154,21 @@ void CObjSkillGemini::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-	//ブロック情報を持ってくる
+				//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top    = 64.0f * m_posture;
-	src.m_left   = 0.0f  + (AniData[m_ani_frame] * 64);
-	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_top = 64.0f * m_posture;
+	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
+	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_gy + m_pos_y + block->GetScrolly();
-	dst.m_left   = 70.0f + m_gx + m_pos_x + block->GetScrollx();
-	dst.m_right  =  0.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_top = 0.0f + m_gy + m_pos_y + block->GetScrolly();
+	dst.m_left = 70.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_right = 0.0f + m_gx + m_pos_x + block->GetScrollx();
 	dst.m_bottom = 70.0f + m_gy + m_pos_y + block->GetScrolly();
 
 	//表示
-	Draw::Draw(21, &src, &dst, c, 0.0f);
+	Draw::Draw(20, &src, &dst, c, 0.0f);
 }

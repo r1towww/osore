@@ -12,7 +12,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-
 //コンストラクタ
 CObjSkillBullet::CObjSkillBullet(float x, float y, float r)
 {
@@ -119,6 +118,7 @@ void CObjSkillBullet::Action()
 				Hits::DeleteHitBox(this);
 
 			}
+
 		}
 		else
 		{
@@ -174,12 +174,30 @@ void CObjSkillBullet::Draw()
 		//表示
 		Draw::Draw(51, &m_eff, &dst, c, 0.0f);
 	}
-	else {
+	else if (g_gemini_bullet_check == false)
+	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
 		src.m_right = 16.0f;
 		src.m_bottom = 16.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_gy + block->GetScrolly();
+		dst.m_left = 0.0f + m_gx + block->GetScrollx();
+		dst.m_right = 25.0f + m_gx + block->GetScrollx();
+		dst.m_bottom = 25.0f + m_gy + block->GetScrolly();
+
+		//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
+		Draw::Draw(16, &src, &dst, c, 0);
+	}
+	else if (g_gemini_bullet_check == true)
+	{
+		//切り取り位置の設定
+		src.m_top = 16.0f;
+		src.m_left = 0.0f;
+		src.m_right = 16.0f;
+		src.m_bottom = 32.0f;
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_gy + block->GetScrolly();

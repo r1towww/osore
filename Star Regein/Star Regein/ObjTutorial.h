@@ -21,7 +21,8 @@ private:
 	int m_page;		//ページ数
 	int m_p;		//渡されたページ数
 	int m_sec;		//セコンド(秒)
-	int m_keytime;	//キー入力ができるまでの時間
+	float m_keytime;	//キー入力ができるまでの時間
+	bool m_next_f;
 	int m_line;		//行数
 	bool m_f;
 

@@ -203,6 +203,9 @@
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
     <ClCompile Include="ObjBreakRock.cpp" />
+    <ClCompile Include="ObjskillgeminiB.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -412,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="ObjLeo.h">
       <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjskillgeminiB.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
