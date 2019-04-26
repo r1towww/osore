@@ -74,16 +74,10 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 	Draw::LoadImageW(L"獅子座スキルエフェクト.png", 23, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
-	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);;
-
-	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
-
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 
-
-	/*Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
@@ -92,15 +86,11 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"ミニマップ背景.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
-	Draw::LoadImageW(L"MP.png", 11, TEX_SIZE_2048);
-	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"スキル総合.png", 13, TEX_SIZE_1024);
+	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	
 
-	Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
+	//Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
 
 
 	/*Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
