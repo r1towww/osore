@@ -172,9 +172,6 @@
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル\双子座</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkillGemini.cpp">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClCompile>
@@ -385,9 +382,6 @@
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <Filter>ソースファイル\スキル\双子座</Filter>
-    </ClInclude>
     <ClInclude Include="ObjSkillGemini.h">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
@@ -403,7 +397,6 @@
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjLeo.h" />
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
@@ -416,6 +409,9 @@
     <ClInclude Include="ObjBreakRock.h" />
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

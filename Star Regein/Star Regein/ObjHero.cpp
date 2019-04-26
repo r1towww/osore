@@ -325,11 +325,11 @@ void CObjHero::Action()
 					//ブロック情報を持ってくる
 					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-					//ハート弾オブジェクト作成
-					CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
-					Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+				//ハート弾オブジェクト作成
+				CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+				Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
 
-					g_mp -= 30.0f;	//mp消費
+				g_mp -= 50.0f;	//mp消費
 
 				}
 				//獅子座の場合

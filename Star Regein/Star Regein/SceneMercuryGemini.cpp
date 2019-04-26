@@ -106,7 +106,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//MiniMapオブジェクト作成
 	CObjMiniMap* objminimap = new CObjMiniMap(map);
-	//Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
+	Objs::InsertObj(objminimap, OBJ_MINIMAP, 100);
 
 	//メッセージオブジェクト作成
 	CObjMessage* objmes = new CObjMessage();
@@ -142,7 +142,7 @@ void CSceneMercuryGemini::InitScene()
 void CSceneMercuryGemini::Scene()
 {
 	//水星（ふたご座）で星を14個集めたら次へ移行
-	if (g_StarCount == 1)
+	if (g_StarCount == GEMINIMAXSTAR)
 	{
 		//ふたご座のスキル開放
 		g_Gemini = true;
