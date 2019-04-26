@@ -193,12 +193,12 @@
     <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillItem.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjLeo.cpp" />
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,12 +397,12 @@
     <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillItem.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjLeo.h" />
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +492,9 @@
     </Filter>
     <Filter Include="ソースファイル\スキル\乙女座">
       <UniqueIdentifier>{35da95ca-d704-4b48-bc3d-08a816469f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\アイテム">
+      <UniqueIdentifier>{ed9d311a-d4e5-42bd-811b-39495093a4ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

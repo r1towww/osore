@@ -80,6 +80,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	
 
+	Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
+
 
 	//テスト用
 	Draw::LoadImageW(L"乙女.png", 21, TEX_SIZE_512);
