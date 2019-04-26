@@ -103,6 +103,10 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
 
 
+	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
