@@ -301,7 +301,6 @@ extern int g_cow_id[20];//‹‚Ì¯•ÊID
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
 
-#include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
 #include "ObjSkillVirgo.h"
