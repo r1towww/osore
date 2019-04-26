@@ -206,22 +206,11 @@ void CObjHero::Action()
 
 		//スキル系統情報-------------------------------------------------
 
-		if (g_mp == 0.0f)
-			m_cool_flag = true;
 
-		if (m_cool_flag == true)
-		{
-			m_cool_time++;
-			if (m_cool_time >= 200)
-			{
-				m_cool_time = 0;
-				m_cool_flag = false;
-			}
-		}
 
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && g_mp > 0.0f && m_dash_flag==true && m_cool_flag == false)
+			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 				m_MP_time++;
 				if (m_MP_time > 3)
@@ -259,6 +248,20 @@ void CObjHero::Action()
 			{
 				m_ani = 0;
 				m_eff_time = 0;
+			}
+
+			//MPが0になったら1ゲージ回復するまで使用不可
+			if (g_mp == 0.0f)
+				m_cool_flag = true;
+
+			if (m_cool_flag == true)
+			{
+				m_cool_time++;
+				if (m_cool_time >= 200)
+				{
+					m_cool_time = 0;
+					m_cool_flag = false;
+				}
 			}
 
 			//-----------------------------------------------
