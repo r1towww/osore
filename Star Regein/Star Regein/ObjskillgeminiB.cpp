@@ -134,8 +134,8 @@ void CObjSkillGeminiB::Action()
 	if (g_gemini_move == true)
 	{
 		//ŽålŒö‚ÌˆÊ’u‚ð‘ã“ü
-		m_gx = hero->GetX();
-		m_gy = hero->GetY();
+		m_gx = hero->GetX() - pb->GetScrollx();
+		m_gy = hero->GetY() - pb->GetScrolly();
 	}
 	else
 	{
