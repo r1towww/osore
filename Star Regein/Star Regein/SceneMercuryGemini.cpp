@@ -202,7 +202,7 @@ void CSceneMercuryGemini::ClearCheck(bool a)
 		{
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
-			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
 			m_clear_f = true;
 		}
 	}

@@ -55,8 +55,8 @@ void CObjMessage::Draw()
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
 	Font::StrDraw(STAR, 400, 20, 25, sc);//メッセージを表示
 
-	Font::StrDraw(L"Q:メニュー", 460, 12, 21, c);	//HP
-	Font::StrDraw(L"H:ヘルプ", 460, 33, 21, c);	//MP
+	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//HP
+	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//MP
 
 
 	//切り取り位置の設定
