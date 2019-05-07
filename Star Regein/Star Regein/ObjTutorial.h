@@ -25,5 +25,6 @@ private:
 	bool m_next_f;
 	int m_line;		//s”
 	bool m_f;
+	int m_blink;
 
 };

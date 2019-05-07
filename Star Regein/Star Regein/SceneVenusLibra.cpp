@@ -75,7 +75,7 @@ void CSceneVenusLibra::InitScene()
 
 	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
 
-	Draw::LoadImageW(L"ステージクリア画像_金星_天秤座.png", 18, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ステージクリア画像_金星_天秤座.png", 60, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);

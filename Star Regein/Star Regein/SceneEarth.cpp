@@ -82,7 +82,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 
-	Draw::LoadImageW(L"ステージクリア画像_地球.png", 16, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ステージクリア画像_地球.png", 60, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"宇宙背景.png", 5, TEX_SIZE_1024);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);

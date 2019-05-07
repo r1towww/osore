@@ -268,8 +268,8 @@ void CObjTextBox::Draw()
 			else if (m_text == 1)
 			{
 				Font::StrDraw(L"獅子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"周囲の敵をマヒさせるスキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"周囲の敵をマヒさせるスキルを", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 			else if (m_text == 2)

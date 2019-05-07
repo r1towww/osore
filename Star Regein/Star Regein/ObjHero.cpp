@@ -119,7 +119,7 @@ void CObjHero::Action()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
-	else if (g_stage == Leo) {	//獅子座
+	else if (g_stage == SunLeo) {	//獅子座
 		m_blackhole_num = 1;
 	}
 	else
@@ -401,20 +401,26 @@ void CObjHero::Action()
 
 		//----------------------------------------------------------------
 
-		//Hキーが入力された場合
-		if (Input::GetVKey('H'))
+		//ヘルプの情報を持ってくる
+		CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
+		//ヘルプオブジェクトが存在する場合、入力の許可
+		if (objhelp == nullptr)
 		{
-			if (m_help_key_f == true)
+			//Hキーが入力された場合
+			if (Input::GetVKey('H'))
 			{
-				//HELPオブジェクトを作成
-				CObjHelp *objhelp = new CObjHelp();
-				Objs::InsertObj(objhelp, OBJ_HELP, 150);
-				m_help_key_f = false;
+				if (m_help_key_f == true)
+				{
+					//HELPオブジェクトを作成
+					CObjHelp *objhelp = new CObjHelp();
+					Objs::InsertObj(objhelp, OBJ_HELP, 150);
+					m_help_key_f = false;
+				}
 			}
-		}
-		else
-		{
-			m_help_key_f = true;
+			else
+			{
+				m_help_key_f = true;
+			}
 		}
 
 		//Qキーが入力された場合
