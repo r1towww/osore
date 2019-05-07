@@ -130,23 +130,19 @@ void CObjSkillGeminiB::Action()
 		}
 	}
 
-
-	////ブラックホールの数forループを回す
-	//for (int i = 0; i < m_blackhole_num; i++)
-	//{
-	//	if (g_gemini_move == true)
-	//	{
-	//		//同じ値のホワイトホール位置に移動させる
-	//		pb->SetScrollx(-g_whitehole_x[i][0] + m_gx);
-	//		pb->SetScrolly(-g_whitehole_y[i][0] + m_gy);
-
-	//		g_gemini_move = false;
-	//	}
-	//}
-
-	//主人公の移動ベクトルを代入
-	m_vx = hero->GetVX()*HERO_VEC;
-	m_vy = hero->GetVY()*HERO_VEC;
+	//ブラックホールに入ったとき
+	if (g_gemini_move == true)
+	{
+		//主人公の位置を代入
+		m_gx = hero->GetX() - pb->GetScrollx();
+		m_gy = hero->GetY() - pb->GetScrolly();
+	}
+	else
+	{
+		//主人公の移動ベクトルを代入
+		m_vx = hero->GetVX()*HERO_VEC;
+		m_vy = hero->GetVY()*HERO_VEC;
+	}
 
 	//位置の更新
 	m_gx += m_vx;
@@ -159,8 +155,6 @@ void CObjSkillGeminiB::Action()
 		this->SetStatus(false);
 		g_gemini_check = false;
 	}
-
-
 }
 
 //ドロー

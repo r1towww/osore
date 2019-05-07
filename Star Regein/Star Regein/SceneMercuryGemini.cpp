@@ -150,7 +150,7 @@ void CSceneMercuryGemini::Scene()
 		g_Gemini_clear = true;
 		g_Gemini_Max = true;
 
-		g_stage_clear = true;
+		
 		//もし、水星の星座をどちらもクリアしていたら水星をクリア表記
 		if (g_Gemini_clear == true && g_Virgo_clear == true)
 		{
@@ -171,6 +171,7 @@ void CSceneMercuryGemini::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				g_Make_Item = true;
 				Item_cnt++;
 			}
 		}
@@ -191,7 +192,6 @@ void CSceneMercuryGemini::Scene()
 //クリアチェック
 void CSceneMercuryGemini::ClearCheck(bool a)
 {
-	//クリアしたなら星座完成画像貼り付け
 	if (a == true)
 	{
 		if (m_clear_f == true)
