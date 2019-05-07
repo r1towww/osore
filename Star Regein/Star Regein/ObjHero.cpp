@@ -251,27 +251,25 @@ void CObjHero::Action()
 				m_ani = 0;
 				m_eff_time = 0;
 			}
-
-			//MPが0になったら1ゲージ回復するまで使用不可
-			if (g_mp == 0.0f)
-				m_cool_flag = true;
-
-			if (m_cool_flag == true)
-			{
-				m_cool_time++;
-				if (m_cool_time >= 200)
-				{
-					m_cool_time = 0;
-					m_cool_flag = false;
-				}
-			}
-
-			//-----------------------------------------------
 		}
 		else//通常速度
 		{
 			m_dash_flag = false;
 			m_speed_power = NORMAL_SPEED;
+		}
+
+		//MPが0になったら1ゲージ回復するまで使用不可
+		if (g_mp == 0.0f)
+			m_cool_flag = true;
+
+		if (m_cool_flag == true)
+		{
+			m_cool_time++;
+			if (m_cool_time >= 200)
+			{
+				m_cool_time = 0;
+				m_cool_flag = false;
+			}
 		}
 
 		//天秤座の場合（パッシブ）
@@ -561,9 +559,9 @@ void CObjHero::Action()
 		if (m_burn_f == true)
 		{
 			m_burn_max_time++;
-			if (m_burn_time > 50)
+			if (m_burn_time >= 50)
 			{
-				g_hp -= 5.0f;
+				g_hp -= 2.0f;
 				m_burn_time = 0;
 			}
 			else
@@ -571,7 +569,7 @@ void CObjHero::Action()
 				m_burn_time++;
 			}
 
-			if (m_burn_max_time >= 250)
+			if (m_burn_max_time > 300)
 			{
 				m_burn_max_time = 0;
 				m_burn_f = false;
