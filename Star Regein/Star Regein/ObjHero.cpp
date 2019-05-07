@@ -119,6 +119,9 @@ void CObjHero::Action()
 	else if (g_stage == MercuryVirgo) {	//â≥èóç¿
 		m_blackhole_num = 2;
 	}
+	else if (g_stage == Leo) {	//éÇéqç¿
+		m_blackhole_num = 1;
+	}
 	else
 	{
 		m_blackhole_num = 0;
