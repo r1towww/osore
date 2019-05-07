@@ -73,6 +73,8 @@ void CSceneSunLeo::InitScene()
 	Draw::LoadImageW(L"着弾アニメーション.png", 51, TEX_SIZE_512);
 	Draw::LoadImageW(L"獅子座スキルエフェクト.png", 23, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
+
 	Draw::LoadImageW(L"双子1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"獅子.png", 52, TEX_SIZE_512);

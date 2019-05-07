@@ -8,7 +8,7 @@
 #include "GameHead.h"
 #include "ObjTitle.h"
 
-#define CLEARF	false
+#define CLEARF	true
 
 //各惑星・星座のクリア状況
 bool g_Earth_clear= CLEARF;	//地球	
@@ -24,6 +24,7 @@ bool g_Leo_clear= CLEARF;	//獅子座
 
 bool g_geminiattack_check = false;
 bool g_gemini_bullet_check = false;
+bool g_gemini_move = false;
 bool g_gemini_check = false;
 bool g_tutorial_flag = false;
 bool g_move_stop_flag = false;

@@ -21,6 +21,7 @@ CSceneStageChoice::CSceneStageChoice()
 {
 	g_hp = g_max_hp;	//hpを最大hpで初期化
 	g_skill = NoSkill;	//スキルの値を牡牛座で初期化
+	g_blackhole_cnt = 0;//ブラックホールのカウントの初期化
 }
 
 //デストラクタ
@@ -54,12 +55,13 @@ void CSceneStageChoice::InitScene()
 	ObjStageChoiceHero* oh = new ObjStageChoiceHero(g_stage_px,g_stage_py);
 	Objs::InsertObj(oh, OBJ_STAGECHOICEHERO, 10);
 
-	////ステージ選択(星座)オブジェクト作成
-	//CObjStarChoice* star = new CObjStarChoice();
-	//Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+	//ステージ選択(星座)オブジェクト作成
+	CObjStarChoice* star = new CObjStarChoice();
+	Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 }
 
 //ゲームタイトル実行中メソッド
 void CSceneStageChoice::Scene()
 {
+
 }

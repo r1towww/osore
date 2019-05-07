@@ -194,6 +194,7 @@ extern float g_max_mp; //最大ＭＰ
 extern int g_attack_power;	//主人公の攻撃力
 
 extern bool g_key_flag;	//キー入力制御フラグ
+extern bool g_gemini_move;//双子座ブラックホール移動
 
 extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
@@ -343,7 +344,10 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneEarth			地球
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
-	
+	CSceneMercuryGemini	水星（双子座）
+	CSceneMercuryVirgo	水星（乙女座）
+	CSceneSunLeo		太陽（獅子座）
+
 */
 #define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

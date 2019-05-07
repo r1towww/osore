@@ -38,6 +38,7 @@ private:
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 
+	int m_blackhole_num;	//惑星ごとのブラックホールの数の値を入れる
 	int m_time;//双子座スキル消滅時間測定
 	int m_bullet_time;//弾丸発射時間測定
 

@@ -39,6 +39,8 @@ void ObjStageChoiceHero::Init()
 //アクション
 void ObjStageChoiceHero::Action()
 {
+	g_gemini_check = false;
+
 	//描画カラー情報
 	float c[4] = { 1.0f,0.0f,0.0f,1.0f };
 
@@ -188,7 +190,6 @@ void ObjStageChoiceHero::Action()
 					if (g_Mercury_clear == true)
 					{
 						Audio::Start(1);
-						//仮でタイトルに行くようにしてるからあとでちゃんと太陽にしておいてね
 						//太陽に設定
 						g_stage = Sun;
 					}

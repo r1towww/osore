@@ -299,8 +299,7 @@ void CObjBlock::Init()
 
 				m_w_c++;
 
-				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE + g_whitehole_cnt, 9);//マネージャに登録
-				g_whitehole_cnt++;
+				Objs::InsertObj(objawhitehole, OBJ_WHITEHOLE , 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 15)
 			{
