@@ -126,6 +126,8 @@ void CObjHero::Action()
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
 	if (g_tutorial_flag == true || g_move_stop_flag == true)
 	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 		return;
 	}
 		//移動ベクトルの破棄

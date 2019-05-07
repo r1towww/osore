@@ -170,7 +170,7 @@ void CSceneSunLeo::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-				g_Make_Item = true;
+				g_Make_Item = true; //アイテム作成フラグオン
 				Item_cnt++;
 			}
 		}

@@ -124,6 +124,7 @@ void CObjSkillGemini::Action()
 		}
 	}
 
+	
 	//主人公の移動ベクトルを代入
 	 m_vx = hero->GetVX()*HERO_VEC;
 	 m_vy = hero->GetVY()*HERO_VEC;
