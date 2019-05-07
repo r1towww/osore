@@ -132,10 +132,10 @@ void CSceneSunLeo::InitScene()
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
 
 	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
 	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
+	CObjTutorial* objtutorial = new CObjTutorial(1, 3);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
 	if (g_tutorial_flag == true)
@@ -157,7 +157,7 @@ void CSceneSunLeo::Scene()
 		g_Leo_Max = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
-		g_stage_clear = true;
+		
 
 		//星を集めきったら
 		if (g_Leo_Max == true)
@@ -172,6 +172,7 @@ void CSceneSunLeo::Scene()
 				//スキルアイテムオブジェクト作成
 				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
 				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+				g_Make_Item = true; //アイテム作成フラグオン
 				Item_cnt++;
 			}
 		}
@@ -181,11 +182,13 @@ void CSceneSunLeo::Scene()
 		{
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
+			g_stage_clear = true;
+			ClearCheck(g_stage_clear);
 		}
 
 
 	}
-	ClearCheck(g_stage_clear);
+	
 
 }
 //クリアチェック

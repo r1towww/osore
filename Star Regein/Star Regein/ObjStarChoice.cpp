@@ -44,6 +44,8 @@ void CObjStarChoice::Action()
 			stagec->SetAlpha(ALPHAUNDER);	//アルファ値の変更
 	}
 
+	
+
 	//星座選択が地球または太陽の場合（星座が1つの場合）
 	if (g_stage == Earth || g_stage == Sun)
 	{
@@ -117,7 +119,7 @@ void CObjStarChoice::Action()
 		m_Tra3 = 0.3f;
 		m_Tra4 = 1.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+		if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (g_stage == Earth)
 			{
@@ -172,7 +174,6 @@ void CObjStarChoice::Action()
 					Scene::SetScene(new CSceneSunLeo());
 				}
 			}
-
 			else
 				m_key_flag = true;
 		}
@@ -188,7 +189,7 @@ void CObjStarChoice::Action()
 		m_Tra3 = 0.3f;
 		m_Tra4 = 0.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+		if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
 			if (g_stage == Venus)
 			{
@@ -235,11 +236,10 @@ void CObjStarChoice::Action()
 		{
 			if (m_key_flag == true)
 			{
+				g_key_flag = false;	//キーフラグをオフ
 				Audio::Start(1);
 				g_stage = Space;	//ステージをSpaceに設定
 				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
-				m_key_flag = false;
-				g_key_flag = false;	//キーフラグをオフ
 				this->SetStatus(false);
 			}
 		}
@@ -249,6 +249,7 @@ void CObjStarChoice::Action()
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
+	
 }
 
 //ドロー

@@ -119,6 +119,9 @@ void CObjHero::Action()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
+	else if (g_stage == Leo) {	//獅子座
+		m_blackhole_num = 1;
+	}
 	else
 	{
 		m_blackhole_num = 0;
@@ -128,6 +131,8 @@ void CObjHero::Action()
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
 	if (g_tutorial_flag == true || g_move_stop_flag == true)
 	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
 		return;
 	}
 		//移動ベクトルの破棄
@@ -574,6 +579,12 @@ void CObjHero::Action()
 				m_burn_max_time = 0;
 				m_burn_f = false;
 			}
+		}
+
+		//アイテムが作成されたら無敵にする
+		if (g_Make_Item == true)
+		{
+			m_invincible_flag = true;
 		}
 
 		if (m_eff_flag == true)

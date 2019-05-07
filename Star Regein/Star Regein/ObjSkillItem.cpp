@@ -29,7 +29,7 @@ CObjSkillItem::CObjSkillItem(float x, float y)
 //イニシャライズ
 void CObjSkillItem::Init()
 {
-	
+
 
 	m_vx = 0.0f;
 	m_vy = 0.0f;
@@ -38,18 +38,20 @@ void CObjSkillItem::Init()
 
 	m_eff_flag = false;
 
+	g_move_stop_flag = false;
+
 	//当たり判定をセット
-	Hits::SetHitBox(this, m_x+80, m_y, 60.0f, 60.0f, ELEMENT_SKILL_ITEM, OBJ_SKILL_ITEM, 1);
+	Hits::SetHitBox(this, m_x + 80, m_y, 60.0f, 60.0f, ELEMENT_SKILL_ITEM, OBJ_SKILL_ITEM, 1);
 }
 
 //アクション
 void CObjSkillItem::Action()
 {
-	
-	
+
+
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
-	
+
 	//下に移動
 	m_vy += 0.05f;
 	m_y += m_vy;
@@ -57,17 +59,25 @@ void CObjSkillItem::Action()
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(m_x + 80, m_y);//入り口から新しい位置（主人公の位置）情報に置き換える
 
+	//アイテム作成フラグがオンなら移動できなくする
+	if (g_Make_Item == true)
+	{
+		g_move_stop_flag = true;
+	}
 
-	
+
 
 	//主人公と当たったらオブジェクト削除し、スキルアイテムフラグをオン
 	if (hit->CheckElementHit(ELEMENT_PLAYER) == true)
-	{		
+	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 		g_skill_item_flag = true;  //スキルアイテムフラグオン
+		g_move_stop_flag = false;
 	}
-	
+
+
+
 }
 
 //ドロー
@@ -88,7 +98,7 @@ void CObjSkillItem::Draw()
 		src.m_right = 300.0f;
 		src.m_bottom = 200.0f;
 	}
-	if (g_Taurus_Max==true)//牡牛座
+	if (g_Taurus_Max == true)//牡牛座
 	{
 		//切り取り位置の設定
 		src.m_top = 0.0f;
@@ -102,7 +112,7 @@ void CObjSkillItem::Draw()
 		src.m_top = 0.0f;
 		src.m_left = 600.0f;
 		src.m_right = 900.0f;
-		src.m_bottom = 200.0f;	
+		src.m_bottom = 200.0f;
 	}
 	if (g_Gemini_Max == true)//双子座
 	{
@@ -136,5 +146,5 @@ void CObjSkillItem::Draw()
 
 	Draw::Draw(13, &src, &dst, c, 0.0f);
 
-	
+
 }

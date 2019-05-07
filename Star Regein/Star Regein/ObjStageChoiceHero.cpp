@@ -32,18 +32,12 @@ void ObjStageChoiceHero::Init()
 
 	m_alpha = ALPHAORIGIN;
 
-	m_key_flag = true;
-
 }
 
 //アクション
 void ObjStageChoiceHero::Action()
 {
 	g_gemini_check = false;
-
-	//描画カラー情報
-	float c[4] = { 1.0f,0.0f,0.0f,1.0f };
-
 	//星座選択時に入力制御する
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun) {
 		return;
@@ -109,7 +103,7 @@ void ObjStageChoiceHero::Action()
 		m_ani_frame = 1;	//静止フレームにする
 		m_ani_time = 0;		//アニメーション時間リセット
 	}
-		
+
 	//アニメーション用
 	if (m_ani_time > 4)
 	{
@@ -124,91 +118,79 @@ void ObjStageChoiceHero::Action()
 
 	//ステージ選択画面の情報を取得
 	CObjStageChoice* stagec = (CObjStageChoice*)Objs::GetObj(OBJ_STAGECHOICE);
+	//ステージ選択(星座)オブジェクト作成
+	CObjStarChoice* star = new CObjStarChoice();
 
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false || Input::GetVKey(VK_RETURN) == false)
+	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
 
 
 	// Zキーを入力かつ、キーフラグがオンの時に実行
-	if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+	if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 	{
-		if (m_key_flag == true)
+		//地球へ
+		if (g_stage_px >= EarthX && g_stage_px <= EarthX2 && g_stage_py >= EarthY&&g_stage_py <= EarthY2)
 		{
-			//地球へ
-			if (g_stage_px >= EarthX && g_stage_px <= EarthX2 && g_stage_py >= EarthY&&g_stage_py <= EarthY2)
+			//▼前シーンからZキー押し続けでこれを押さないように、
+			//このシーンに入って一度も押してない状態に移行しないと
+			//実行出来ないようにしている。
+			g_stage = Earth;	//ステージの値を地球に変更
+			Audio::Start(1);
+			g_key_flag = false;	//キーフラグをオフ
+			//ステージ選択(星座)オブジェクト作成
+			CObjStarChoice* star = new CObjStarChoice();
+
+			Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+		}
+		//金星へ
+		else if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2)
+		{
+			if (g_Earth_clear == true)
 			{
 				//▼前シーンからZキー押し続けでこれを押さないように、
 				//このシーンに入って一度も押してない状態に移行しないと
 				//実行出来ないようにしている。
-				g_stage = Earth;	//ステージの値を地球に変更
+				//金星に設定
+				g_stage = Venus;
 				Audio::Start(1);
-				m_key_flag = false;
-			}
-			//金星へ
-			else if (g_stage_px >= VenusX && g_stage_px <= VenusX2 && g_stage_py >= VenusY&&g_stage_py <= VenusY2)
-			{
-				if (g_Earth_clear == true)
-				{
-					//▼前シーンからZキー押し続けでこれを押さないように、
-					//このシーンに入って一度も押してない状態に移行しないと
-					//実行出来ないようにしている。
-					//金星に設定
-					g_stage = Venus;
-					Audio::Start(1);
-				}
-				else
-				{
-					;
-				}
-				m_key_flag = false;
-
-				}
-				//水星へ
-				else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
-				{
-					if (g_Venus_clear == true)
-					{
-					//	//▼前シーンからZキー押し続けでこれを押さないように、
-					//	//このシーンに入って一度も押してない状態に移行しないと
-					//	//実行出来ないようにしている。
-					//	//水星に設定
-						g_stage = Mercury;
-						Audio::Start(1);
-					}
-					else
-					{
-						;
-					}
-					m_key_flag = false;
-				}
-				//太陽へ
-				else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
-				{
-					if (g_Mercury_clear == true)
-					{
-						Audio::Start(1);
-						//太陽に設定
-						g_stage = Sun;
-					}
-					else
-					{
-					}
-					m_key_flag = false;
-
+				g_key_flag = false;	//キーフラグをオフ
+				//ステージ選択(星座)オブジェクト作成
+				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 			}
 		}
-		g_key_flag = false;	//キーフラグをオフ
-		//ステージ選択(星座)オブジェクト作成
-		CObjStarChoice* star = new CObjStarChoice();
-		Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+		//水星へ
+		else if (g_stage_px >= MercuryX && g_stage_px <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py <= MercuryY2)
+		{
+			if (g_Venus_clear == true)
+			{
+				//	//▼前シーンからZキー押し続けでこれを押さないように、
+				//	//このシーンに入って一度も押してない状態に移行しないと
+				//	//実行出来ないようにしている。
+				//	//水星に設定
+				g_stage = Mercury;
+				Audio::Start(1);
+				g_key_flag = false;	//キーフラグをオフ
+				//ステージ選択(星座)オブジェクト作成
+				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+			}
+		}
+		//太陽へ
+		else if (g_stage_px >= SunX && g_stage_px <= SunX2 && g_stage_py >= SunY&&g_stage_py <= SunY2)
+		{
+			if (g_Mercury_clear == true)
+			{
+				Audio::Start(1);
+				//太陽に設定
+				g_stage = Sun;
+				g_key_flag = false;	//キーフラグをオフ
+				//ステージ選択(星座)オブジェクト作成
+				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+			}
+		}
 	}
-	else
-		m_key_flag = true;
-
-
 
 	//位置の更新
 	g_stage_px += m_vx;
