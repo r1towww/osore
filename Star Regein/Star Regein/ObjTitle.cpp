@@ -55,8 +55,8 @@ bool g_Leo    = CLEARF;	//獅子座
 bool g_key_flag = false;	//キー入力制御フラグ
 
 //ステージ選択画面の主人公の位置（初期位置）
-float g_stage_px = 50;  //ステージ選択時の位置X
-float g_stage_py = 500;  //ステージ選択時の位置Y
+float g_stage_px = 55;  //ステージ選択時の位置X
+float g_stage_py = 420;  //ステージ選択時の位置Y
 
 //イニシャライズ
 void CObjTitle::Init()
@@ -65,7 +65,8 @@ void CObjTitle::Init()
 	m_down=false;
 	m_start=false;
 	m_end=false;
-
+	m_time = true;
+	m_Tra = 1.0f;
 	m_key_flag =true;	//キー制御フラグ
 }
 
@@ -88,7 +89,7 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 1,1,1,1 };
+	float c[4] = { 1,1,1,m_Tra };
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
@@ -136,18 +137,30 @@ void CObjTitle::Draw()
 	//ゲーム開始
 	if (m_start == true)
 	{
-		//シーン遷移音
-		Audio::Start(2);
-		Sleep(500);
-		Scene::SetScene(new CSceneStageChoice());
+		if (m_time == true)
+		{
+			Audio::Start(2);
+			m_time = false;
+		}
+		m_Tra -= 0.03;
+		if (m_Tra <= 0.0f)
+		{
+			Scene::SetScene(new CSceneStageChoice());
+		}
 	}
 	//ゲーム終了
 	if (m_end == true)
 	{
-		//シーン遷移音
-		Audio::Start(1);
-		Sleep(500);
-		exit(4);
+		if (m_time == true)
+		{
+			Audio::Start(2);
+			m_time = false;
+		}
+		m_Tra -= 0.03;
+		if (m_Tra <= 0.0f)
+		{
+			exit(4);
+		}
 	}
 	//カーソルが動く
 	if (m_up == true)

@@ -93,6 +93,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"ボス.png", 33, TEX_SIZE_512);
 	
 
 	//Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
@@ -112,6 +114,9 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 
+	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(8);
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 1);

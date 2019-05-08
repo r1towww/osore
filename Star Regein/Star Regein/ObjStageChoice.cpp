@@ -17,12 +17,20 @@ using namespace GameL;
 void CObjStageChoice::Init()
 {
 	m_alpha = ALPHAORIGIN;		//アルファ値の初期化
+	m_time = true;
 }
 
 //アクション
 void CObjStageChoice::Action()
 {
-
+	if (m_alpha >= 1.0f)
+	{
+		m_alpha = 1.0f;
+	}
+	else
+	{
+		m_alpha += 0.03f;
+	}
 }
 
 //ドロー
@@ -55,21 +63,21 @@ void CObjStageChoice::Draw()
 	//地球------------------------------------
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 300.0f;
-	src.m_bottom = 283.0f;
+	src.m_left   = 660.0f;
+	src.m_right  = 880.0f;
+	src.m_bottom = 220.0f;
 
 	//表示位置の設定
-	dst.m_top    = 450.0f;
-	dst.m_left   = 0.0f;
-	dst.m_right  = 150.0f;
-	dst.m_bottom = 600.0f;
+	dst.m_top    = 380.0f;
+	dst.m_left   = 15.0f;
+	dst.m_right  = 175.0f;
+	dst.m_bottom = 550.0f;
 
 	//表示
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	Draw::Draw(8, &src, &dst, c, 0.0f);
 	if (g_Earth_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 10, 410, 40, y);
+		Font::StrDraw(L"CLEAR!", 40, 550, 40, y);
 	}
 
 	//----------------------------------------
@@ -77,22 +85,22 @@ void CObjStageChoice::Draw()
 	//金星------------------------------------
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 303.0f;
-	src.m_bottom = 303.0f;
+	src.m_left   = 440.0f;
+	src.m_right  = 660.0f;
+	src.m_bottom = 220.0f;
 
 	//表示位置の設定
-	dst.m_top    = 350.0f;
+	dst.m_top    = 250.0f;
 	dst.m_left   = 200.0f;
-	dst.m_right  = 350.0f;
-	dst.m_bottom = 500.0f;
+	dst.m_right  = 400.0f;
+	dst.m_bottom = 450.0f;
 
 
 	//表示
-	Draw::Draw(4, &src, &dst, c, 0.0f);
+	Draw::Draw(8, &src, &dst, c, 0.0f);
 	if (g_Venus_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 220, 310, 40, y);
+		Font::StrDraw(L"CLEAR!", 245, 450, 40, y);
 	}
 
 	//----------------------------------------
@@ -100,21 +108,21 @@ void CObjStageChoice::Draw()
 	//水星------------------------------------
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
-	src.m_left   = 0.0f;
-	src.m_right  = 325.0f;
-	src.m_bottom = 325.0f;
+	src.m_left   = 220.0f;
+	src.m_right  = 440.0f;
+	src.m_bottom = 220.0f;
 
 	//表示位置の設定
-	dst.m_top    = 180.0f;
-	dst.m_left   = 450.0f;
-	dst.m_right  = 600.0f;
-	dst.m_bottom = 330.0f;
+	dst.m_top    = 150.0f;
+	dst.m_left   = 410.0f;
+	dst.m_right  = 560.0f;
+	dst.m_bottom = 300.0f;
 
 	//表示
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	Draw::Draw(8, &src, &dst, c, 0.0f);
 	if (g_Mercury_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 470, 150, 40, y);
+		Font::StrDraw(L"CLEAR!", 435, 300, 40, y);
 	}
 
 	//----------------------------------------
@@ -123,20 +131,20 @@ void CObjStageChoice::Draw()
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
 	src.m_left   = 0.0f;
-	src.m_right  = 335.0f;
-	src.m_bottom = 350.0f;
+	src.m_right  = 220.0f;
+	src.m_bottom = 220.0f;
 
 	//表示位置の設定
-	dst.m_top    = 0.0f;
-	dst.m_left   = 650.0f;
-	dst.m_right  = 800.0f;
-	dst.m_bottom = 150.0f;
+	dst.m_top    = -150.0f;
+	dst.m_left   = 550.0f;
+	dst.m_right  = 900.0f;
+	dst.m_bottom = 200.0f;
 
 	//表示
-	Draw::Draw(6, &src, &dst, c, 0.0f);
+	Draw::Draw(8, &src, &dst, c, 0.0f);
 	if (g_Sun_clear == true)
 	{
-		Font::StrDraw(L"CLEAR!", 680, 150, 40, y);
+		Font::StrDraw(L"CLEAR!", 650, 180, 40, y);
 	}
 
 	//----------------------------------------

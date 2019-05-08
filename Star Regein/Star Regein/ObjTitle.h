@@ -18,6 +18,7 @@ private:
 	bool m_down;
 	bool m_start;
 	bool m_end;
-
+	float m_Tra;
+	bool m_time;
 	bool m_key_flag;	//キー制御フラグ
 };

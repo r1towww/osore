@@ -240,7 +240,6 @@ void CObjLibra::Action()
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
-
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -249,7 +248,7 @@ void CObjLibra::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-															//ヒット判定on
+		//ヒット判定on
 		g_stan_libra_flag[m_libra_id] = true;
 	}
 
@@ -308,12 +307,15 @@ void CObjLibra::Action()
 	if (m_f == true)
 	{
 		m_time--;
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+
 
 	}
 
 	if (m_time <= 0)
 	{
-		m_f = false;
 		hit->SetInvincibility(false);
 
 		m_time = 30;
@@ -321,9 +323,6 @@ void CObjLibra::Action()
 	}
 
 
-	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
 
 	//HPが0になったら破棄
 	if (m_hp == 0)
