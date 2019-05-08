@@ -206,6 +206,9 @@
     <ClCompile Include="ObjskillgeminiB.cpp">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBoss.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -419,6 +422,9 @@
     <ClInclude Include="ObjskillgeminiB.h">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
+    <ClInclude Include="ObjBoss.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -513,6 +519,9 @@
     </Filter>
     <Filter Include="ソースファイル\スキル\アイテム">
       <UniqueIdentifier>{ed9d311a-d4e5-42bd-811b-39495093a4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\ボス">
+      <UniqueIdentifier>{839ccfbe-90da-4347-99e0-d27f4ff701b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

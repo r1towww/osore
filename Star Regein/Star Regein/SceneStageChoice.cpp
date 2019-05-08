@@ -39,6 +39,7 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択金星.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択水星.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
+	Draw::LoadImageW(L"惑星.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 7, TEX_SIZE_1024);
 
 
