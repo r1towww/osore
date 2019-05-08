@@ -107,7 +107,7 @@ void CObjWoman::Action()
 					m_bullet_time = 0;
 					//ハート弾オブジェクト作成
 					CObjHomingHeart* objh = new CObjHomingHeart(m_px, m_py);
-					Objs::InsertObj(objh, OBJ_HOMING_HEART, 2);
+					Objs::InsertObj(objh, OBJ_HOMING_HEART, 100);
 				}
 
 				//主人公機が存在する場合、誘導角度の計算する

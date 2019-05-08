@@ -5,22 +5,22 @@
 using namespace GameL;
 
 //¯ÀˆÊ’uŠÖ˜A’è”----------
-#define EarthX	  0
-#define EarthY	  380
-#define EarthX2	  100
-#define EarthY2	  800
-#define VenusX	  180
-#define VenusX2	  320
-#define VenusY	  300
-#define VenusY2	  445
-#define MercuryX  420
+#define EarthX	  5
+#define EarthX2	  185
+#define EarthY	  370
+#define EarthY2	  560
+#define VenusX	  210
+#define VenusX2	  410
+#define VenusY	  240
+#define VenusY2	  460
+#define MercuryX  400
 #define MercuryX2 570
-#define MercuryY  120
-#define MercuryY2 270
-#define SunX	  615
-#define SunX2	  800
-#define SunY	  0
-#define SunY2	  90
+#define MercuryY  140
+#define MercuryY2 310
+#define SunX	  550
+#define SunX2	  900
+#define SunY	  -100
+#define SunY2	  200
 
 #define ALPHAORIGIN	0.0f
 #define ALPHAUNDER 0.3f

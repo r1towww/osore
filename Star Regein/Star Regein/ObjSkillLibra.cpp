@@ -56,7 +56,6 @@ void CObjSkillLibra::Action()
 		{ 384, 768, 960, 576 },
 	};
 
-
 	//アニメーションのコマ間隔制御
 	if (m_ani_time > 3)
 	{
@@ -76,6 +75,7 @@ void CObjSkillLibra::Action()
 	}
 
 	m_persist_time++;
+	
 	if (m_persist_time > 40)
 	{
 		m_persist_time = 0;

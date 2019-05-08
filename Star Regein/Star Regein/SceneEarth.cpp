@@ -93,6 +93,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"ボス.png", 33, TEX_SIZE_512);
 	
 
 	//Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
