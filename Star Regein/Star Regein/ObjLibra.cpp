@@ -248,7 +248,7 @@ void CObjLibra::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-															//ヒット判定on
+		//ヒット判定on
 		g_stan_libra_flag[m_libra_id] = true;
 	}
 

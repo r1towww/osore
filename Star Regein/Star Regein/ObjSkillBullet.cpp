@@ -70,10 +70,6 @@ void CObjSkillBullet::Action()
 
 	//------------双子座弾丸----------------
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	CObjCow*cow = (CObjCow*)Objs::GetObj(OBJ_COW);
-	CObjWoman*woman = (CObjWoman*)Objs::GetObj(OBJ_WOMAN);
-	CObjTwinsRed*red = (CObjTwinsRed*)Objs::GetObj(OBJ_TWINS_RED);
-	CObjTwinsBlue*bule = (CObjTwinsBlue*)Objs::GetObj(OBJ_TWINS_BLUE);
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -90,6 +86,7 @@ void CObjSkillBullet::Action()
 		hit->CheckObjNameHit(OBJ_TWINS_BLUE) != nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
 		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr ||
+		hit->CheckObjNameHit(OBJ_LEO) != nullptr ||
 		hit->CheckObjNameHit(OBJ_LIBRA) != nullptr)//当たっていたら取得  
 	{
 		m_hit_flag = true;
@@ -152,7 +149,7 @@ void CObjSkillBullet::Draw()
 	RECT_F dst; //描画先表示位置
 
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
+	//弾丸が当たったときの画像描画
 	if (m_hit_flag == true)
 	{
 		//切り取り位置の設定
@@ -170,6 +167,7 @@ void CObjSkillBullet::Draw()
 		//表示
 		Draw::Draw(51, &m_eff, &dst, c, 0.0f);
 	}
+	//
 	else if (g_gemini_bullet_check == false)
 	{
 		//切り取り位置の設定
