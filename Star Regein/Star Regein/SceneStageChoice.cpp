@@ -46,7 +46,9 @@ void CSceneStageChoice::InitScene()
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
 
-	
+	Audio::LoadAudio(3, L"ステージ選択_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(3);
 	//ステージ選択オブジェクト作成
 	CObjStageChoice* o = new CObjStageChoice();
 	Objs::InsertObj(o, OBJ_STAGECHOICE, 0);

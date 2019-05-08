@@ -112,6 +112,16 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//シーン切り替えに使用
+	if (m_alpha >= 1.0f)
+	{
+		m_alpha = 1.0f;
+	}
+	else
+	{
+		m_alpha += 0.03;
+	}
+
 	//ブラックホールの数を入れる
 	if (g_stage == VenusLibra) {	//天秤座
 		m_blackhole_num = 4;
