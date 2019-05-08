@@ -135,554 +135,552 @@ void CObjHero::Action()
 		m_vy = 0.0f;
 		return;
 	}
-		//移動ベクトルの破棄
-		m_vx = 0.0f;
-		m_vy = 0.0f;
+	//移動ベクトルの破棄
+	m_vx = 0.0f;
+	m_vy = 0.0f;
 
-		//デバック用
-		if (Input::GetVKey('L'))
+	//デバック用
+	if (Input::GetVKey('L'))
+	{
+		g_hp -= 1.0f;
+	}
+	//デバック用
+	if (Input::GetVKey('K'))
+	{
+		g_hp += 1.0f;
+	}
+	//移動系統情報--------------------------------------------------
+
+	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
+	{
+		m_vy -= m_speed_power;
+		m_dash_flag = true;
+		g_posture = HERO_UP;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
+	{
+		m_vy += m_speed_power;
+		m_dash_flag = true;
+		g_posture = HERO_DOWN;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
+	{
+		m_vx -= m_speed_power;
+		m_dash_flag = true;
+		g_posture = HERO_LEFT;
+		m_ani_time += ANITIME;
+	}
+	else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
+	{
+		m_vx += m_speed_power;
+		m_dash_flag = true;
+		g_posture = HERO_RIGHT;
+		m_ani_time += ANITIME;
+	}
+	else//移動キーの入力が無い場合
+	{
+		//押していないときに初期化
+		m_dash_flag = false;
+		m_ani_frame = 1;	//静止フレームにする
+		m_ani_time = 0;		//アニメーション時間リセット
+	}
+
+	//---------------------------------------------------------------
+
+	//通常攻撃情報---------------------------------------------------
+
+		//Zキーが入力された場合	
+	if (Input::GetVKey('Z'))
+	{
+		if (m_a_flag == true)
 		{
-			g_hp -= 1.0f;
+			//ビームサーベルオブジェクト作成
+			CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
+			Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
+
+			m_a_flag = false;
 		}
-		//デバック用
-		if (Input::GetVKey('K'))
+	}
+	else
+	{
+		m_a_flag = true;
+	}
+
+
+	//---------------------------------------------------------------
+
+	//スキル系統情報-------------------------------------------------
+
+
+
+		//Shiftキーが入力されたらダッシュ
+	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+		&& g_Taurus == true && m_dash_flag == true && m_cool_flag == false)
+	{
+		m_MP_time++;
+		if (m_MP_time > 3)
 		{
-			g_hp += 1.0f;
+			m_MP_time = 0;
+			g_mp -= 1.0f;
 		}
-		//移動系統情報--------------------------------------------------
+		m_speed_power = DASH_SPEED;
 
-		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
+		//ダッシュエフェクト用処理------------------------------
+		RECT_F ani_src[6] =
 		{
-			m_vy -= m_speed_power;
-			m_dash_flag = true;
-			g_posture = HERO_UP;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_DOWN))//矢印キー（下）が入力されたとき
+			{   0,    0,  240, 240 },
+			{   0,  240,  480, 240 },
+			{   0,  480,  720, 240 },
+			{ 240,    0,  240, 480 },
+			{ 240,  240,  480, 480 },
+			{ 240,  480,  720, 480 },
+		};
+
+		//ダッシュエフェクトのコマ間隔制御
+		if (m_eff_time > 4)
 		{
-			m_vy += m_speed_power;
-			m_dash_flag = true;
-			g_posture = HERO_DOWN;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
-		{
-			m_vx -= m_speed_power;
-			m_dash_flag = true;
-			g_posture = HERO_LEFT;
-			m_ani_time += ANITIME;
-		}
-		else if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
-		{
-			m_vx += m_speed_power;
-			m_dash_flag = true;
-			g_posture = HERO_RIGHT;
-			m_ani_time += ANITIME;
-		}
-		else//移動キーの入力が無い場合
-		{
-			//押していないときに初期化
-			m_dash_flag = false;
-			m_ani_frame = 1;	//静止フレームにする
-			m_ani_time = 0;		//アニメーション時間リセット
-		}
+			m_ani++;		//ダッシュエフェクトのコマを1つ進める
+			m_eff_time = 0;
 
-		//---------------------------------------------------------------
-
-		//通常攻撃情報---------------------------------------------------
-
-			//Zキーが入力された場合	
-		if (Input::GetVKey('Z'))
-		{
-			if (m_a_flag == true)
-			{
-				//ビームサーベルオブジェクト作成
-				CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
-				Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
-
-				m_a_flag = false;
-			}
-		}
-		else
-		{
-			m_a_flag = true;
-		}
-
-
-		//---------------------------------------------------------------
-
-		//スキル系統情報-------------------------------------------------
-
-
-
-			//Shiftキーが入力されたらダッシュ
-		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
-		{
-				m_MP_time++;
-				if (m_MP_time > 3)
-				{
-					m_MP_time = 0;
-					g_mp -= 1.0f;
-				}
-			m_speed_power = DASH_SPEED;
-
-			//ダッシュエフェクト用処理------------------------------
-			RECT_F ani_src[6] =
-			{
-				{   0,    0,  240, 240 },
-				{   0,  240,  480, 240 },
-				{   0,  480,  720, 240 },
-				{ 240,    0,  240, 480 },
-				{ 240,  240,  480, 480 },
-				{ 240,  480,  720, 480 },
-			};
-
-			//ダッシュエフェクトのコマ間隔制御
-			if (m_eff_time > 4)
-			{
-				m_ani++;		//ダッシュエフェクトのコマを1つ進める
-				m_eff_time = 0;
-
-				m_eff = ani_src[m_ani];//ダッシュエフェクトのRECT配列からm_ani番目のRECT情報取得
-			}
-			else
-			{
-				m_eff_time++;	//エフェクトタイムをプラス
-			}
-			// 5番目（画像最後）まで進んだら、0に戻す
-			if (m_ani == 5)
-			{
-				m_ani = 0;
-				m_eff_time = 0;
-			}
-		}
-		else//通常速度
-		{
-			m_dash_flag = false;
-			m_speed_power = NORMAL_SPEED;
-		}
-
-		//MPが0になったら1ゲージ回復するまで使用不可
-		if (g_mp == 0.0f)
-			m_cool_flag = true;
-
-		if (m_cool_flag == true)
-		{
-			m_cool_time++;
-			if (m_cool_time >= 200)
-			{
-				m_cool_time = 0;
-				m_cool_flag = false;
-			}
-		}
-
-		//天秤座の場合（パッシブ）
-		if (g_skill == Libra)
-		{
-			//エフェクトを１度だけ出すようにする
-			if (m_libra_eff_f == false)
-			{
-				m_libra_eff_f = true;	//trueにして入らない用に
-				//天秤エフェクトの作成
-				CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
-				Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
-			}
-			//残りHPに応じて攻撃力を変更
-			if (g_hp <= 20.0f)	//20.0f以下
-			{
-				g_attack_power = 5;	//攻撃力変更
-			}
-			else if (g_hp <= 50.0f) //50.0f以下
-			{
-				g_attack_power = 3;	//攻撃力変更
-			}
-			else if(g_hp > 50.0f)//それ以外（50.0fより大きい場合）
-			{
-				g_attack_power = 2;	//攻撃力変更
-			}
+			m_eff = ani_src[m_ani];//ダッシュエフェクトのRECT配列からm_ani番目のRECT情報取得
 		}
 		else
 		{
-			m_libra_eff_f = false;	//フラグを戻す
+			m_eff_time++;	//エフェクトタイムをプラス
 		}
-
-		//Xキーが入力された場合、スキルを使用
-		if (Input::GetVKey('X'))
+		// 5番目（画像最後）まで進んだら、0に戻す
+		if (m_ani == 5)
 		{
-			if (m_key_f == true)
-			{
-				//双子座の場合
-				if (g_skill == Gemini && g_gemini_check==false && g_mp == g_max_mp)
-				{
-					//ブロック情報を持ってくる
-					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			m_ani = 0;
+			m_eff_time = 0;
+		}
+	}
+	else//通常速度
+	{
+		m_dash_flag = false;
+		m_speed_power = NORMAL_SPEED;
+	}
 
-					//サブ機オブジェクト作成
-					CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(),m_py - block->GetScrolly());
-					Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
-					//サブ機オブジェクト作成
-					CObjSkillGeminiB* objgb = new CObjSkillGeminiB(m_px - block->GetScrollx(), m_py - block->GetScrolly());
-					Objs::InsertObj(objgb, OBJ_SKILL_GEMINIB, 20);
-					g_mp -= g_max_mp;	//mp消費
-					g_gemini_check = true;
-				}
-				//乙女座の場合
-				else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
-				{
-					//ブロック情報を持ってくる
-					CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//MPが0になったら1ゲージ回復するまで使用不可
+	if (g_mp == 0.0f)
+		m_cool_flag = true;
+
+	if (m_cool_flag == true)
+	{
+		m_cool_time++;
+		if (m_cool_time >= 200)
+		{
+			m_cool_time = 0;
+			m_cool_flag = false;
+		}
+	}
+
+	//天秤座の場合（パッシブ）
+	if (g_skill == Libra)
+	{
+		//エフェクトを１度だけ出すようにする
+		if (m_libra_eff_f == false)
+		{
+			m_libra_eff_f = true;	//trueにして入らない用に
+			//天秤エフェクトの作成
+			CObjSkillLibra* libra = new CObjSkillLibra(m_px, m_py);
+			Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
+		}
+		//残りHPに応じて攻撃力を変更
+		if (g_hp <= 20.0f)	//20.0f以下
+		{
+			g_attack_power = 5;	//攻撃力変更
+		}
+		else if (g_hp <= 50.0f) //50.0f以下
+		{
+			g_attack_power = 3;	//攻撃力変更
+		}
+		else if (g_hp > 50.0f)//それ以外（50.0fより大きい場合）
+		{
+			g_attack_power = 2;	//攻撃力変更
+		}
+	}
+	else
+	{
+		m_libra_eff_f = false;	//フラグを戻す
+	}
+
+	//Xキーが入力された場合、スキルを使用
+	if (Input::GetVKey('X'))
+	{
+		if (m_key_f == true)
+		{
+			//双子座の場合
+			if (g_skill == Gemini && g_gemini_check == false && g_mp == g_max_mp)
+			{
+				//ブロック情報を持ってくる
+				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+				//サブ機オブジェクト作成
+				CObjSkillGemini* objg = new CObjSkillGemini(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+				Objs::InsertObj(objg, OBJ_SKILL_GEMINI, 20);
+				//サブ機オブジェクト作成
+				CObjSkillGeminiB* objgb = new CObjSkillGeminiB(m_px - block->GetScrollx(), m_py - block->GetScrolly());
+				Objs::InsertObj(objgb, OBJ_SKILL_GEMINIB, 20);
+				g_mp -= g_max_mp;	//mp消費
+				g_gemini_check = true;
+			}
+			//乙女座の場合
+			else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
+			{
+				//ブロック情報を持ってくる
+				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 				//ハート弾オブジェクト作成
 				CObjSkillVirgo* objv = new CObjSkillVirgo(m_px - block->GetScrollx(), m_py - block->GetScrolly());
-				Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 2);
+				Objs::InsertObj(objv, OBJ_SKILL_VIRGO, 100);
 
 				g_mp -= 50.0f;	//mp消費
 
-				}
-				//獅子座の場合
-				else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
-				{
-					//スタンオブジェクト作成
-					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
-					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
+			}
+			//獅子座の場合
+			else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
+			{
+				//スタンオブジェクト作成
+				CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
+				Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
-					g_mp -= 30.0f;
-				}
-				m_key_f = false;
+				g_mp -= 30.0f;
+			}
+			m_key_f = false;
+		}
+	}
+	//Cキーが入力された場合
+	else if (Input::GetVKey('C'))
+	{
+		if (m_key_f == true)
+		{
+			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
+			m_key_f = false;
+		}
+	}
+	else
+	{
+		m_key_f = true;
+	}
+
+
+
+	//HPが最大を超えないようにする（回復スキル）
+	if (g_hp >= g_max_hp)	//HPが最大を超えたら
+	{
+		g_hp = g_max_hp;	//最大HPに戻す
+	}
+	//MPが最大を超えないようにする（リジェネ）
+	if (g_mp >= g_max_mp)	//MPが最大を超えたら
+	{
+		g_mp = g_max_mp;	//最大MPに戻す
+	}
+	//MPが0を下回らないようにする（スキルによるMPのオーバー）
+	if (g_mp <= 0.0f)
+	{
+		g_mp = 0.0f;	//0に戻す
+	}
+
+
+	//MPが50以下になったら一定間隔で増える（リジェネ）
+	if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
+	{
+		if (g_mp < 100.0f)
+		{
+			m_regene_time++;
+			if (m_regene_time > 15)
+			{
+				m_regene_time = 0;
+				g_mp += 1.0f;
 			}
 		}
-		//Cキーが入力された場合
-		else if (Input::GetVKey('C'))
+	}
+
+	//----------------------------------------------------------------
+
+	//ヘルプの情報を持ってくる
+	CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
+	//ヘルプオブジェクトが存在する場合、入力の許可
+	if (objhelp == nullptr)
+	{
+		//Hキーが入力された場合
+		if (Input::GetVKey('H'))
 		{
-			if (m_key_f == true)
+			if (m_help_key_f == true)
 			{
-				g_skill += NEXTSKILL;	//スキルの画像を次へ送る
-				m_key_f = false;
+				//HELPオブジェクトを作成
+				CObjHelp *objhelp = new CObjHelp();
+				Objs::InsertObj(objhelp, OBJ_HELP, 150);
+				m_help_key_f = false;
 			}
 		}
 		else
 		{
-			m_key_f = true;
+			m_help_key_f = true;
 		}
+	}
 
-	
-
-		//HPが最大を超えないようにする（回復スキル）
-		if (g_hp >= g_max_hp)	//HPが最大を超えたら
+	//Qキーが入力された場合
+	if (Input::GetVKey('Q'))
+	{
+		if (m_menu_key_f == true)
 		{
-			g_hp = g_max_hp;	//最大HPに戻す
+			//ベクトルを０にする
+			m_vx = 0.0f;
+			m_vy = 0.0f;
+			//Menuオブジェクトを作成
+			CObjMenu *objmenu = new CObjMenu();
+			Objs::InsertObj(objmenu, OBJ_MENU, 150);
+			g_move_stop_flag = true;	//ストップフラグをオン
+
+			m_menu_key_f = false;
 		}
-		//MPが最大を超えないようにする（リジェネ）
-		if (g_mp >= g_max_mp)	//MPが最大を超えたら
-		{
-			g_mp = g_max_mp;	//最大MPに戻す
-		}
-		//MPが0を下回らないようにする（スキルによるMPのオーバー）
-		if (g_mp <= 0.0f)
-		{
-			g_mp = 0.0f;	//0に戻す
-		}
+	}
+	else
+	{
+		m_menu_key_f = true;
+	}
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
 
+	//ブラックホールの情報を持ってくる
+	CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
 
-		//MPが50以下になったら一定間隔で増える（リジェネ）
-		if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//ブラックホールの数forループを回す
+	for (int i = 0; i < m_blackhole_num; i++)
+	{
+		//ブラックホールと当たった場合
+		if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
 		{
-			if (g_mp < 100.0f)
+			//ワープ音
+			Audio::Start(7);
+
+			//同じ値のホワイトホール位置に移動させる
+			block->SetScrollx(-g_whitehole_x[i][0] + m_px);
+			block->SetScrolly(-g_whitehole_y[i][0] + m_py);
+
+			g_gemini_move = true;
+		}
+	}
+
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
 			{
-				m_regene_time++;
-				if (m_regene_time > 15)
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
 				{
-					m_regene_time = 0;
-					g_mp += 1.0f;
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
 				}
 			}
 		}
-
-		//----------------------------------------------------------------
-
-		//ヘルプの情報を持ってくる
-		CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
-		//ヘルプオブジェクトが存在する場合、入力の許可
-		if (objhelp == nullptr)
-		{
-			//Hキーが入力された場合
-			if (Input::GetVKey('H'))
-			{
-				if (m_help_key_f == true)
-				{
-					//HELPオブジェクトを作成
-					CObjHelp *objhelp = new CObjHelp();
-					Objs::InsertObj(objhelp, OBJ_HELP, 150);
-					m_help_key_f = false;
-				}
-			}
-			else
-			{
-				m_help_key_f = true;
-			}
-		}
-
-		//Qキーが入力された場合
-		if (Input::GetVKey('Q'))
-		{
-			if (m_menu_key_f == true)
-			{
-				//ベクトルを０にする
-				m_vx = 0.0f;
-				m_vy = 0.0f;
-				//Menuオブジェクトを作成
-				CObjMenu *objmenu = new CObjMenu();
-				Objs::InsertObj(objmenu, OBJ_MENU, 150);
-				g_move_stop_flag = true;	//ストップフラグをオン
-
-				m_menu_key_f = false;
-			}
-		}
-		else
-		{
-			m_menu_key_f = true;
-		}
-			//HitBoxの内容を更新
-		CHitBox*hit = Hits::GetHitBox(this);
-
-		//ブラックホールの情報を持ってくる
-		CObjBlackhole* blackhole = (CObjBlackhole*)Objs::GetObj(OBJ_BLACKHOLE);
-
-		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		//ブラックホールの数forループを回す
-		for (int i = 0; i < m_blackhole_num; i++)
-		{
-			//ブラックホールと当たった場合
-			if (hit->CheckObjNameHit(OBJ_BLACKHOLE + i) != nullptr)
-			{
-				//ワープ音
-				Audio::Start(7);
-
-				//同じ値のホワイトホール位置に移動させる
-				block->SetScrollx(-g_whitehole_x[i][0] + m_px);
-				block->SetScrolly(-g_whitehole_y[i][0] + m_py);
-
-				g_gemini_move = true;
-			}
-		}
-
-		//主人公とBLOCK系統との当たり判定
-		if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
-		{
-			//主人公がブロックとどの角度で当たっているのかを確認
-			HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-			float r = 0;
-
-			for (int i = 0; i < 10; i++)
-			{
-				if (hit_data[i] != nullptr)
-				{
-					r = hit_data[i]->r;
-
-					//角度で上下左右を判定
-					if ((r <= 45 && r >= 0) || r >= 315)
-					{
-						m_vx = -0.15f; //右
-					}
-					if (r > 45 && r < 135)
-					{
-						m_vy = 0.15f;//上
-					}
-					if (r >= 135 && r < 225)
-					{
-						m_vx = 0.15f;//左
-					}
-					if (r >= 225 && r < 315)
-					{
-						m_vy = -0.15f; //下
-					}
-				}
-			}
-		}
+	}
 
 
-		if (m_invincible_flag == false)
-		{
-			if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
-			{
-				//敵が主人公とどの角度で当たっているかを確認
-				HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-				hit_data = hit->SearchElementHit(ELEMENT_NULL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-				for (int i = 0; i < 10; i++)
-				{
-					if (hit_data[i] == nullptr)
-						continue;
-
-					float r = hit_data[i]->r;
-
-					if ((r < 45 && r >= 0) || r > 315)
-					{
-						m_vx = -10.0f;//左に移動させる
-					}
-					if (r >= 45 && r < 135)
-					{
-						m_vy = 10.0f;//上に移動させる
-					}
-					if (r >= 135 && r < 225)
-					{
-						m_vx = 10.0f;//右に移動させる
-					}
-					if (r >= 225 && r < 315)
-					{
-						m_vy = -10.0f;//したに移動させる
-					}
-				}
-
-				//乙女の弾丸と当たった場合MP減少
-				if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
-					g_mp -= 25.0f;
-
-				//ダメージ音を鳴らす
-				Audio::Start(5);
-
-				g_hp -= 10.0f;
-				m_f = true;
-				m_key_f = true;
-				m_invincible_flag = true;
-			}
-		}
-
-		//獅子と当たった場合火傷状態を付与
-		if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
+	if (m_invincible_flag == false)
+	{
+		if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)
 		{
 			//敵が主人公とどの角度で当たっているかを確認
 			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+			hit_data = hit->SearchElementHit(ELEMENT_NULL);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-			//もし火傷中に再度攻撃を喰らった時継続時間初期化
-			m_burn_max_time = 0;
-			m_burn_time = 0;
-
-			m_burn_f = true;
-			m_eff_flag = true;
-
-		}
-		//フラグがオンのとき火傷状態になり、持続ダメージ
-		if (m_burn_f == true)
-		{
-			m_burn_max_time++;
-			if (m_burn_time >= 50)
+			for (int i = 0; i < 10; i++)
 			{
-				g_hp -= 2.0f;
-				m_burn_time = 0;
-			}
-			else
-			{
-				m_burn_time++;
+				if (hit_data[i] == nullptr)
+					continue;
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -10.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 10.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 10.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -10.0f;//したに移動させる
+				}
 			}
 
-			if (m_burn_max_time > 300)
-			{
-				m_burn_max_time = 0;
-				m_burn_f = false;
-			}
-		}
+			//乙女の弾丸と当たった場合MP減少
+			if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
+				g_mp -= 25.0f;
 
-		//アイテムが作成されたら無敵にする
-		if (g_Make_Item == true)
-		{
+			//ダメージ音を鳴らす
+			Audio::Start(5);
+
+			g_hp -= 10.0f;
+			m_f = true;
+			m_key_f = true;
 			m_invincible_flag = true;
 		}
+	}
 
-		if (m_eff_flag == true)
+	//獅子と当たった場合火傷状態を付与
+	if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		//もし火傷中に再度攻撃を喰らった時継続時間初期化
+		m_burn_max_time = 0;
+		m_burn_time = 0;
+
+		m_burn_f = true;
+		m_eff_flag = true;
+
+	}
+	//フラグがオンのとき火傷状態になり、持続ダメージ
+	if (m_burn_f == true)
+	{
+		m_burn_max_time++;
+		if (m_burn_time >= 50)
 		{
-			//エフェクト用
-			RECT_F ani_src2[15] =
-			{
-				{ 0,    0,  192, 192 },
-				{ 0,  192,  384, 192 },
-				{ 0,  384,  576, 192 },
-				{ 0,  576,  768, 192 },
-				{ 0,  768,  960, 192 },
-				{ 192,    0,  192, 384 },
-				{ 192,  192,  384, 384 },
-				{ 192,  384,  576, 384 },
-				{ 192,  576,  768, 384 },
-				{ 192,  768,  960, 384 },
-				{ 384,    0,  384, 576 },
-				{ 384,  192,  384, 384 },
-				{ 384,  384,  576, 384 },
-				{ 384,  576,  768, 384 },
-				{ 384,  768,  960, 384 },
-			};
-			//アニメーションのコマ間隔制御
-			if (m_eff_time2 > 2)
-			{
-				m_ani2++;		//アニメーションのコマを1つ進める
-				m_eff_time2 = 0;
-
-				m_eff2 = ani_src2[m_ani2];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-			}
-			else
-			{
-				m_eff_time2++;
-			}
-			// 14番目（画像最後）まで進んだら、0に戻す
-			if (m_ani2 == 14)
-			{
-				m_ani2 = 0;
-				m_eff_time2 = 0;
-
-				m_eff_flag = false;
-			}
+			g_hp -= 2.0f;
+			m_burn_time = 0;
+		}
+		else
+		{
+			m_burn_time++;
 		}
 
-		if (m_f == true)
+		if (m_burn_max_time > 300)
 		{
-			m_time--;
-			m_alpha = ALPHAUNDER;
-
+			m_burn_max_time = 0;
+			m_burn_f = false;
 		}
-		if (m_time <= 0)
+	}
+
+	//アイテムが作成されたら無敵にする
+	if (g_Make_Item == true)
+	{
+		m_invincible_flag = true;
+	}
+
+	if (m_eff_flag == true)
+	{
+		//エフェクト用
+		RECT_F ani_src2[15] =
 		{
-			m_f = false;
-			m_invincible_flag = false;
-			m_alpha = ALPHAORIGIN;
-
-			m_time = 100;
-		}
-
-		//移動アニメーション用
-		if (m_ani_time > 4)
+			{ 0,    0,  192, 192 },
+			{ 0,  192,  384, 192 },
+			{ 0,  384,  576, 192 },
+			{ 0,  576,  768, 192 },
+			{ 0,  768,  960, 192 },
+			{ 192,    0,  192, 384 },
+			{ 192,  192,  384, 384 },
+			{ 192,  384,  576, 384 },
+			{ 192,  576,  768, 384 },
+			{ 192,  768,  960, 384 },
+			{ 384,    0,  384, 576 },
+			{ 384,  192,  384, 384 },
+			{ 384,  384,  576, 384 },
+			{ 384,  576,  768, 384 },
+			{ 384,  768,  960, 384 },
+		};
+		//アニメーションのコマ間隔制御
+		if (m_eff_time2 > 2)
 		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
+			m_ani2++;		//アニメーションのコマを1つ進める
+			m_eff_time2 = 0;
+
+			m_eff2 = ani_src2[m_ani2];//アニメーションのRECT配列からm_ani番目のRECT情報取得
 		}
-		if (m_ani_frame == 4)
+		else
 		{
-			m_ani_frame = 0;
+			m_eff_time2++;
 		}
-
-
-		//位置の更新
-		m_px += m_vx;
-		m_py += m_vy;
-		//ブロックとの当たり判定実行	
-		block->BlockHit(&m_px, &m_py, true,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
-		);
-
-		//作成したHitBox更新用の入り口を取り出す
-		hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
-
-		//HPが０になったら削除
-		if (g_hp <= 0.0f)
+		// 14番目（画像最後）まで進んだら、0に戻す
+		if (m_ani2 == 14)
 		{
-			this->SetStatus(false);    //自身に削除命令を出す
-			Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-			Scene::SetScene(new CSceneGameOver());
+			m_ani2 = 0;
+			m_eff_time2 = 0;
+
+			m_eff_flag = false;
 		}
+	}
+
+	if (m_f == true)
+	{
+		m_time--;
+		m_alpha = ALPHAUNDER;
+
+	}
+	if (m_time <= 0)
+	{
+		m_f = false;
+		m_invincible_flag = false;
+		m_alpha = ALPHAORIGIN;
+
+		m_time = 100;
+	}
+
+	//移動アニメーション用
+	if (m_ani_time > 4)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
+
+	//位置の更新
+	m_px += m_vx;
+	m_py += m_vy;
+	//ブロックとの当たり判定実行	
+	block->BlockHit(&m_px, &m_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+	);
+
+	//作成したHitBox更新用の入り口を取り出す
+	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
+
+	//HPが０になったら削除
+	if (g_hp <= 0.0f)
+	{
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		Scene::SetScene(new CSceneGameOver());
+	}
 }
-
 
 //ドロー
 void CObjHero::Draw()

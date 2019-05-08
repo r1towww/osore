@@ -150,6 +150,7 @@ void CObjSkillGeminiB::Action()
 
 	m_time--;
 
+	//タイムが0未満になると弾丸削除
 	if (m_time < 0)
 	{
 		this->SetStatus(false);
@@ -170,19 +171,19 @@ void CObjSkillGeminiB::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-				//ブロック情報を持ってくる
+	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+	src.m_top    = 64.0f * m_posture;
+	src.m_left   = 0.0f + (AniData[m_ani_frame] * 64);
+	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_gy + m_pos_y + block->GetScrolly();
-	dst.m_left = 70.0f + m_gx + m_pos_x + block->GetScrollx();
-	dst.m_right = 0.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_top    = 0.0f + m_gy + m_pos_y + block->GetScrolly();
+	dst.m_left   = 70.0f + m_gx + m_pos_x + block->GetScrollx();
+	dst.m_right  = 0.0f + m_gx + m_pos_x + block->GetScrollx();
 	dst.m_bottom = 70.0f + m_gy + m_pos_y + block->GetScrolly();
 
 	//表示
