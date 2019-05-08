@@ -127,13 +127,8 @@ void CObjSkillBullet::Action()
 		}
 	}
 
-	if (hit->CheckElementHit(ELEMENT_BLOCK))
-	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-	}
+	if (m_time >= 100)
 
-	if (m_time >= 100 || hit->CheckElementHit(ELEMENT_BLOCK))
 	{
 		m_time = 0.0f;
 

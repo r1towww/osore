@@ -197,13 +197,13 @@ void CObjTutorial::Draw()
 			if (m_line <= 3 || m_p == 1)
 			{//・・・ーーーーーーーーーーーーーーーー
 				dst.m_top = 540.0f;
-				//if (m_line > 2 || m_p == 1)//３行目以降、動作
-				//	if (m_blink <= 160)//表示位置を段階的に変更
-				//		dst.m_left = 780.0f;
-				//	else if (m_blink <= 250)
-				//		dst.m_left = 600.0f;
-				//	else { dst.m_left = 600.0f; m_blink = 0; m_sec = 0; }//カウントを０にして、元に戻す
-				//else
+				if (m_line > 2 || m_p == 1)//３行目以降、動作
+					if (m_blink <= 160)//表示位置を段階的に変更
+						dst.m_left = 780.0f;
+					else if (m_blink <= 250)
+						dst.m_left = 600.0f;
+					else { dst.m_left = 600.0f; m_blink = 0; m_sec = 0; }//カウントを０にして、元に戻す
+				else
 					dst.m_left = 780.0f;
 				dst.m_right = 750.0f;
 				dst.m_bottom = 575.0f;
