@@ -167,7 +167,7 @@ typedef enum Skill
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
 
-extern int g_StarCount;	//星を数える変数
+extern int   g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
 extern float* g_cow_y[20];//全ての牛のY位置を把握する
@@ -186,13 +186,13 @@ extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
-extern int g_blackhole_cnt;			//ブラックホールのカウント用
-extern int g_whitehole_cnt;
-extern float g_hp;     //今のＨＰ
-extern float g_max_hp; //最大ＨＰ
-extern float g_mp;     //今のＭＰ
-extern float g_max_mp; //最大ＭＰ
-extern int g_attack_power;	//主人公の攻撃力
+extern int    g_blackhole_cnt;		//ブラックホールのカウント用
+extern int    g_whitehole_cnt;
+extern float  g_hp;     //今のＨＰ
+extern float  g_max_hp; //最大ＨＰ
+extern float  g_mp;     //今のＭＰ
+extern float  g_max_mp; //最大ＭＰ
+extern int    g_attack_power;	//主人公の攻撃力
 
 extern bool g_key_flag;	//キー入力制御フラグ
 extern bool g_gemini_move;//双子座ブラックホール移動
@@ -212,11 +212,11 @@ extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
 
-extern bool g_gemini_check; //サブ機の生成の為の値
-extern bool g_gemini_bullet_check; //双子座スキル弾丸
-extern bool g_geminiattck_check; //双子座スキル弾丸制御
-extern bool g_gemini_check; //サブ機の弾丸生成の為の値
-extern bool g_skill_item_flag;        //スキルアイテム所持フラグ
+extern bool g_gemini_check;       //サブ機の生成の為の値
+extern bool g_gemini_bullet_check;//双子座スキル弾丸
+extern bool g_geminiattck_check;  //双子座スキル弾丸制御
+extern bool g_gemini_check;       //サブ機の弾丸生成の為の値
+extern bool g_skill_item_flag;    //スキルアイテム所持フラグ
 
 extern float  g_Leo_cnt;//獅子座スタンカウント
 extern bool g_stan_cow_flag[20];//スタン牛個別認識用

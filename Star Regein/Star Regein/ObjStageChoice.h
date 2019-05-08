@@ -22,7 +22,7 @@ using namespace GameL;
 #define SunY	  -100
 #define SunY2	  200
 
-#define ALPHAORIGIN	1.0f
+#define ALPHAORIGIN	0.0f
 #define ALPHAUNDER 0.3f
 
 //オブジェクト：タイトル
@@ -38,5 +38,6 @@ class CObjStageChoice :public CObj
 		void SetAlpha(float a) { m_alpha = a; }	//アルファ値をセットする関数
 
 	private:
+		bool m_time;
 		float m_alpha;	//背景透明度
 };

@@ -29,14 +29,25 @@ void ObjStageChoiceHero::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 1;
-
+	m_time = false;
 	m_alpha = ALPHAORIGIN;
 
 }
 
+
 //アクション
 void ObjStageChoiceHero::Action()
 {
+	//シーン切り替え用
+	if (m_alpha >= 1.0f)
+	{
+		m_alpha = 1.0f;
+	}
+	else
+	{
+		m_alpha += 0.03f;
+	}
+
 	g_gemini_check = false;
 	//星座選択時に入力制御する
 	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun) {
