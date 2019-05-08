@@ -167,40 +167,40 @@ void CObjLibra::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
-	//主人公とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
-	{
-		//主人公がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-		float r = 0;
+	////主人公とBLOCK系統との当たり判定
+	//if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	//{
+	//	//主人公がブロックとどの角度で当たっているのかを確認
+	//	HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+	//	hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+	//	float r = 0;
 
-		for (int i = 0; i < 10; i++)
-		{
-			if (hit_data[i] != nullptr)
-			{
-				r = hit_data[i]->r;
+	//	for (int i = 0; i < 10; i++)
+	//	{
+	//		if (hit_data[i] != nullptr)
+	//		{
+	//			r = hit_data[i]->r;
 
-				//角度で上下左右を判定
-				if ((r <= 45 && r >= 0) || r >= 315)
-				{
-					m_vx = -0.15f; //右
-				}
-				if (r > 45 && r < 135)
-				{
-					m_vy = 0.15f;//上
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 0.15f;//左
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -0.15f; //下
-				}
-			}
-		}
-	}
+	//			//角度で上下左右を判定
+	//			if ((r <= 45 && r >= 0) || r >= 315)
+	//			{
+	//				m_vx = -0.15f; //右
+	//			}
+	//			if (r > 45 && r < 135)
+	//			{
+	//				m_vy = 0.15f;//上
+	//			}
+	//			if (r >= 135 && r < 225)
+	//			{
+	//				m_vx = 0.15f;//左
+	//			}
+	//			if (r >= 225 && r < 315)
+	//			{
+	//				m_vy = -0.15f; //下
+	//			}
+	//		}
+	//	}
+	//}
 
 	//ELEMENT_MAGICを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
@@ -240,7 +240,6 @@ void CObjLibra::Action()
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
-
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -308,12 +307,15 @@ void CObjLibra::Action()
 	if (m_f == true)
 	{
 		m_time--;
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+
 
 	}
 
 	if (m_time <= 0)
 	{
-		m_f = false;
 		hit->SetInvincibility(false);
 
 		m_time = 30;
@@ -321,9 +323,6 @@ void CObjLibra::Action()
 	}
 
 
-	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
 
 	//HPが0になったら破棄
 	if (m_hp == 0)
