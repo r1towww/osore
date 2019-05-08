@@ -81,7 +81,7 @@ void CSceneSunLeo::InitScene()
 
 	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
 	Draw::LoadImageW(L"獅子攻撃エフェクト.png", 18, TEX_SIZE_2048);
-	Draw::LoadImageW(L"ステージクリア画像_太陽.png", 19, TEX_SIZE_2048);
+	Draw::LoadImageW(L"ステージクリア画像_太陽.png", 60, TEX_SIZE_2048);
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
@@ -132,10 +132,10 @@ void CSceneSunLeo::InitScene()
 	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
 
 	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
 	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 7);
+	CObjTutorial* objtutorial = new CObjTutorial(1, 3);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
 	if (g_tutorial_flag == true)
@@ -205,7 +205,7 @@ void CSceneSunLeo::ClearCheck(bool a)
 		{
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
-			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
 			m_clear_f = true;
 		}
 	}

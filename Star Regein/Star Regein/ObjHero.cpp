@@ -119,6 +119,9 @@ void CObjHero::Action()
 	else if (g_stage == MercuryVirgo) {	//乙女座
 		m_blackhole_num = 2;
 	}
+	else if (g_stage == SunLeo) {	//獅子座
+		m_blackhole_num = 1;
+	}
 	else
 	{
 		m_blackhole_num = 0;
@@ -253,27 +256,25 @@ void CObjHero::Action()
 				m_ani = 0;
 				m_eff_time = 0;
 			}
-
-			//MPが0になったら1ゲージ回復するまで使用不可
-			if (g_mp == 0.0f)
-				m_cool_flag = true;
-
-			if (m_cool_flag == true)
-			{
-				m_cool_time++;
-				if (m_cool_time >= 200)
-				{
-					m_cool_time = 0;
-					m_cool_flag = false;
-				}
-			}
-
-			//-----------------------------------------------
 		}
 		else//通常速度
 		{
 			m_dash_flag = false;
 			m_speed_power = NORMAL_SPEED;
+		}
+
+		//MPが0になったら1ゲージ回復するまで使用不可
+		if (g_mp == 0.0f)
+			m_cool_flag = true;
+
+		if (m_cool_flag == true)
+		{
+			m_cool_time++;
+			if (m_cool_time >= 200)
+			{
+				m_cool_time = 0;
+				m_cool_flag = false;
+			}
 		}
 
 		//天秤座の場合（パッシブ）
@@ -400,20 +401,26 @@ void CObjHero::Action()
 
 		//----------------------------------------------------------------
 
-		//Hキーが入力された場合
-		if (Input::GetVKey('H'))
+		//ヘルプの情報を持ってくる
+		CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
+		//ヘルプオブジェクトが存在する場合、入力の許可
+		if (objhelp == nullptr)
 		{
-			if (m_help_key_f == true)
+			//Hキーが入力された場合
+			if (Input::GetVKey('H'))
 			{
-				//HELPオブジェクトを作成
-				CObjHelp *objhelp = new CObjHelp();
-				Objs::InsertObj(objhelp, OBJ_HELP, 150);
-				m_help_key_f = false;
+				if (m_help_key_f == true)
+				{
+					//HELPオブジェクトを作成
+					CObjHelp *objhelp = new CObjHelp();
+					Objs::InsertObj(objhelp, OBJ_HELP, 150);
+					m_help_key_f = false;
+				}
 			}
-		}
-		else
-		{
-			m_help_key_f = true;
+			else
+			{
+				m_help_key_f = true;
+			}
 		}
 
 		//Qキーが入力された場合
@@ -563,9 +570,9 @@ void CObjHero::Action()
 		if (m_burn_f == true)
 		{
 			m_burn_max_time++;
-			if (m_burn_time > 50)
+			if (m_burn_time >= 50)
 			{
-				g_hp -= 5.0f;
+				g_hp -= 2.0f;
 				m_burn_time = 0;
 			}
 			else
@@ -573,7 +580,7 @@ void CObjHero::Action()
 				m_burn_time++;
 			}
 
-			if (m_burn_max_time >= 250)
+			if (m_burn_max_time > 300)
 			{
 				m_burn_max_time = 0;
 				m_burn_f = false;

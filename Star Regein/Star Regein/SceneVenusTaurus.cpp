@@ -60,7 +60,7 @@ void CSceneVenusTaurus::InitScene()
 	//グラフィック読み込み
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"主人公斬撃アニメーション.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"ステージクリア画像_金星_牡牛座.png", 25, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ステージクリア画像_金星_牡牛座.png", 60, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
@@ -204,7 +204,7 @@ void CSceneVenusTaurus::ClearCheck(bool a)
 		{
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
-			Objs::InsertObj(objs, OBJ_STAGECLEAR, 100);
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
 			m_clear_f=true;
 		}
 	}

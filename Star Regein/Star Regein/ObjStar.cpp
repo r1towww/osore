@@ -61,7 +61,7 @@ void CObjStar::Action()
 		{
 			//スター獲得音
 			Audio::Start(6);
-			g_hp += 10.f;
+			g_hp += 5.0f;	//星を回収した際、HPを0.5ゲージ回復
 			m_ani_flag = true;//アニメーション開始
 			hit->SetInvincibility(true);	//触れられなくする
 			m_GetStar = true;			//取得した際、色を変える為にフラグをオンにする

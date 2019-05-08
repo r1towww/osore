@@ -42,39 +42,18 @@ void CObjStageClear::Draw()
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
-	if (g_stage == EarthStar)
-	{
-		//地球------------------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
+	
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 790.0f;
+	src.m_bottom = 590.0f;
 
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-		//表示
-		Draw::Draw(16, &src, &dst, c, 0.0f);
-		//----------------------------------------
-	}
-	if (g_stage == VenusTaurus)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
+	//表示位置の設定
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 800.0f;
+	dst.m_bottom = 600.0f;
 
 		//表示
 		Draw::Draw(25, &src, &dst, c, 0.0f);

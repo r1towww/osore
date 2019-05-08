@@ -25,6 +25,7 @@ void CObjTutorial::Init()
 
 	m_page = 0;		//渡されたページ数
 	m_sec = 0;		//秒数カウント
+	m_blink = 0;
 	m_line = 0;		//行数カウント
 	m_f = true;
 	m_next_f = false;
@@ -106,11 +107,13 @@ void CObjTutorial::Draw()
 			if (m_sec <= 715)
 			{//715(コメントの幅)まで時間経過
 				m_sec += 20;	   //文字の表示スピード---------------------
+				m_blink += 10;
 			}				   //幅を超えると、行数を+1
 			else
 			{
 				m_line += 1;
 				m_sec = 0;
+				m_blink = 0;
 			}
 
 			//切り取り位置の設定(画像の黒い部分に設定)
@@ -195,11 +198,11 @@ void CObjTutorial::Draw()
 			{//・・・ーーーーーーーーーーーーーーーー
 				dst.m_top = 540.0f;
 				if (m_line > 2 || m_p == 1)//３行目以降、動作
-					if (m_sec <= 160)//表示位置を段階的に変更
+					if (m_blink <= 160)//表示位置を段階的に変更
 						dst.m_left = 780.0f;
-					else if (m_sec <= 250)
+					else if (m_blink <= 250)
 						dst.m_left = 600.0f;
-					else { dst.m_left = 600.0f; m_sec = 0; }//カウントを０にして、元に戻す
+					else { dst.m_left = 600.0f; m_blink = 0; m_sec = 0; }//カウントを０にして、元に戻す
 				else
 					dst.m_left = 780.0f;
 				dst.m_right = 750.0f;

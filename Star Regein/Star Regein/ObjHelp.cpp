@@ -14,18 +14,23 @@ using namespace GameL;
 //イニシャライズ
 void CObjHelp::Init()
 {
+	m_f = false;	//フラグの初期化
 }
 
 //アクション
 void CObjHelp::Action()
 {
-	//Hキーが話された場合
+	//Hキーが離された場合
 	if (Input::GetVKey('H') == false)
 	{
-		this->SetStatus(false);
+		m_f = true;	//フラグをオン
 	}
 
-
+	//Hキーが押され、フラグがオンの場合
+	if (Input::GetVKey('H') == true && m_f == true)
+	{
+		this->SetStatus(false);	//削除
+	}
 
 }
 
