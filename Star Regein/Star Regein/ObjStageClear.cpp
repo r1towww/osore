@@ -77,7 +77,7 @@ void CObjStageClear::Draw()
 		dst.m_bottom = 600.0f;
 
 		//•\Ž¦
-		Draw::Draw(16, &src, &dst, c, 0.0f);
+		Draw::Draw(25, &src, &dst, c, 0.0f);
 		//---------------------------------------
 	}
 	if (g_stage == VenusLibra)
