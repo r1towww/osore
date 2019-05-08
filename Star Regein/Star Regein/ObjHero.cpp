@@ -159,6 +159,13 @@ void CObjHero::Action()
 		{
 			g_hp += 1.0f;
 		}
+		if (Input::GetVKey('W'))
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+		}
+
 		//移動系統情報--------------------------------------------------
 
 		if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
@@ -421,6 +428,7 @@ void CObjHero::Action()
 			{
 				if (m_help_key_f == true)
 				{
+					Audio::Start(1);	//エフェクト音を鳴らす
 					//HELPオブジェクトを作成
 					CObjHelp *objhelp = new CObjHelp();
 					Objs::InsertObj(objhelp, OBJ_HELP, 150);
@@ -438,6 +446,7 @@ void CObjHero::Action()
 		{
 			if (m_menu_key_f == true)
 			{
+				Audio::Start(1);	//エフェクト音を鳴らす
 				//ベクトルを０にする
 				m_vx = 0.0f;
 				m_vy = 0.0f;
@@ -553,7 +562,7 @@ void CObjHero::Action()
 
 				//ダメージ音を鳴らす
 				Audio::Start(5);
-
+				g_no_damage = true;	//ノーダメージフラグをオンにする
 				g_hp -= 10.0f;
 				m_f = true;
 				m_key_f = true;

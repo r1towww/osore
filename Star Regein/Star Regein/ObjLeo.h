@@ -69,5 +69,6 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+	bool m_kill_f;	//キルカウント用フラグ
 
 };

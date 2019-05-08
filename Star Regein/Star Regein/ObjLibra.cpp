@@ -52,7 +52,7 @@ void CObjLibra::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
-
+	m_kill_f = false;	//キルカウント用フラグの初期化
 
 	m_bullet_time = 100;
 
@@ -328,6 +328,12 @@ void CObjLibra::Action()
 	//HPが0になったら破棄
 	if (m_hp == 0)
 	{
+		//フラグがオフの場合
+		if (m_kill_f == false)
+		{
+			g_kill_cnt++;	//キルカウントを増やす
+			m_kill_f = true;//フラグをオンにして入らないようにする
+		}
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);

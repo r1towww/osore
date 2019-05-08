@@ -58,6 +58,9 @@ bool g_key_flag = false;	//キー入力制御フラグ
 float g_stage_px = 50;  //ステージ選択時の位置X
 float g_stage_py = 500;  //ステージ選択時の位置Y
 
+int g_kill_cnt = 0;	//敵殲滅用変数の初期化
+bool g_no_damage = false;	//ノーダメージクリア用変数の初期化
+
 //イニシャライズ
 void CObjTitle::Init()
 {

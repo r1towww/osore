@@ -42,6 +42,7 @@ void CObjMessage::Action()
 void CObjMessage::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//メッセージフォントカラー
+	float ckey[4] = { 1.0f,1.0f,1.0f,0.7f };	//メッセージフォントカラー
 
 	float sc[4] = { 1.0f,1.0f,0.4f,1.0f };
 	float b[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -55,9 +56,10 @@ void CObjMessage::Draw()
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
 	Font::StrDraw(STAR, 400, 20, 25, sc);//メッセージを表示
 
-	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//HP
-	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//MP
+	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//メニュー
+	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//ヘルプ
 
+	Font::StrDraw(L"Cで切り替え", 660, 420, 21, ckey);	//スキル切り替えキー
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
@@ -71,8 +73,8 @@ void CObjMessage::Draw()
 	dst.m_right = 395.0f;
 	dst.m_bottom = 46.0f;
 
-		//描画
-		Draw::Draw(6, &src, &dst, c, 0.0f);
+	//描画
+	Draw::Draw(6, &src, &dst, c, 0.0f);
 	
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)

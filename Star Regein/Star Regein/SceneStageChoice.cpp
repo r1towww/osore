@@ -22,6 +22,8 @@ CSceneStageChoice::CSceneStageChoice()
 	g_hp = g_max_hp;	//hpを最大hpで初期化
 	g_skill = NoSkill;	//スキルの値を牡牛座で初期化
 	g_blackhole_cnt = 0;//ブラックホールのカウントの初期化
+
+
 }
 
 //デストラクタ

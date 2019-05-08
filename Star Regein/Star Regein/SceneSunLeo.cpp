@@ -129,7 +129,7 @@ void CSceneSunLeo::InitScene()
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
-	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);

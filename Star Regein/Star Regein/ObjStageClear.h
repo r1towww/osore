@@ -14,5 +14,10 @@ class CObjStageClear :public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 	private:
-		int m_keytime;	//キー入力タイム用変数	
+		float m_alpha1;
+		float m_alpha2;
+		float m_alpha3;
+		float m_alpha4;
+
+
 };

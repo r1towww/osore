@@ -5,6 +5,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
 #include "GameHead.h"
+#include "GameL/Audio.h"
 
 #include "ObjHelp.h"
 
@@ -27,8 +28,9 @@ void CObjHelp::Action()
 	}
 
 	//Hキーが押され、フラグがオンの場合
-	if (Input::GetVKey('H') == true && m_f == true)
+	if (Input::GetVKey('H') == true && m_f == true || Input::GetVKey('Q') == true)
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		this->SetStatus(false);	//削除
 	}
 
