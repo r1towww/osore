@@ -329,7 +329,8 @@ void CObjLeo::Action()
 			}
 		}
 
-		m_hp -= g_attack_power;
+		m_hp -= g_attack_power;	//hp‚ðŽålŒö‚ÌUŒ‚—Í•ªŒ¸‚ç‚·
+
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);

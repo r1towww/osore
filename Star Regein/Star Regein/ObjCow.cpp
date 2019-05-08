@@ -62,9 +62,19 @@ void CObjCow::Init()
 
 	alpha = 1.0;
 
+	m_eff.m_top = 0;
+	m_eff.m_left = 0;
+	m_eff.m_right = 192;
+	m_eff.m_bottom = 192;
+	m_ani = 0;
+	m_ani_delete = 0;
+	m_ani_stop = 0;
+
+	m_cow_delete = false;
+
 	srand(time(NULL));
 
-	
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
@@ -72,13 +82,23 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
+	
+	//消滅アニメーション
+	RECT_F ani_src[5] =
+	{
+		{ 0,   0,   192, 192 },
+		{ 0,  192,  384, 192 },
+		{ 0,  384,  576, 192 },
+		{ 0,  576,  768, 192 },
+		{ 0,  768,  960, 192 },
+	};
 
+	//移動アニメーション
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
 	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 1;
@@ -182,7 +202,7 @@ void CObjCow::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-				
+
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -273,7 +293,7 @@ void CObjCow::Action()
 				{
 					m_vy = -0.15f; //下
 				}
-			
+
 			}
 		}
 	}
@@ -283,7 +303,7 @@ void CObjCow::Action()
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER) ;//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
@@ -355,6 +375,7 @@ void CObjCow::Action()
 		}
 
 		m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+
 		m_f = true;
 		m_key_f = true;
 		hit->SetInvincibility(true);
@@ -446,11 +467,39 @@ void CObjCow::Action()
 	//HPが0になったら破棄
 	if (m_hp <= 0)
 	{
-
+		m_cow_delete = true;
+	
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_cow_id] = false;
+	}
+
+    if (m_cow_delete == true)
+	{
+		//アニメーションのコマ間隔制御
+		if (m_ani_delete > 0)
+		{
+
+			m_ani++;	//アニメーションのコマを１つ進める
+			m_ani_delete = 0;
+
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			m_ani_stop++;
+			if (m_ani_stop >= 5)
+			{
+				m_eff.m_top = 0;
+				m_eff.m_left = 0;
+				m_eff.m_right = 192;
+				m_eff.m_bottom = 192;
+
+
+			}
+		}
+		else
+		{
+			m_ani_delete++;
+		}
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
@@ -473,19 +522,42 @@ void CObjCow::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//切り取り位置の設定
-	src.m_top = 48.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
-	src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
-	src.m_bottom = src.m_top + 48.0f;
-
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrolly();
-	dst.m_left = 64.0f + m_px + block->GetScrollx();
-	dst.m_right = 0.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 
-	//描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	if (m_cow_delete == false)
+	{
+		//切り取り位置の設定
+		src.m_top = 48.0f * m_posture;
+		src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
+		src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
+		src.m_bottom = src.m_top + 48.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 64.0f + m_px + block->GetScrollx();
+		dst.m_right = 0.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+
+
+		//描画
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+	}
+	else if (m_cow_delete == true)
+	{
+		//消滅アニメーション
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 192.0f;
+		src.m_bottom = 192.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 0.0f + m_px + block->GetScrollx();
+		dst.m_right = 64.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+
+		//表示
+		Draw::Draw(70, &m_eff, &dst, c, 0.0f);
+	}
 }

@@ -213,8 +213,6 @@ void CObjHero::Action()
 
 		//スキル系統情報-------------------------------------------------
 
-
-
 			//Shiftキーが入力されたらダッシュ
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
@@ -347,7 +345,7 @@ void CObjHero::Action()
 					CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
 					Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
 
-					g_mp -= 30.0f;
+					g_mp -= 30.0f;//mp消費
 				}
 				m_key_f = false;
 			}
