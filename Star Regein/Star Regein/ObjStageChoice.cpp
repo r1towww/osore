@@ -17,12 +17,20 @@ using namespace GameL;
 void CObjStageChoice::Init()
 {
 	m_alpha = ALPHAORIGIN;		//アルファ値の初期化
+	m_time = true;
 }
 
 //アクション
 void CObjStageChoice::Action()
 {
-
+	if (m_alpha >= 1.0f)
+	{
+		m_alpha = 1.0f;
+	}
+	else
+	{
+		m_alpha += 0.03f;
+	}
 }
 
 //ドロー
