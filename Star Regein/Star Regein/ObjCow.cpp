@@ -21,8 +21,8 @@ float g_Leo_cnt;
 
 CObjCow::CObjCow(float x, float y, int id)
 {
-	m_px = x;	//位置
-	m_py = y;
+	m_px = x + 375.0f;	//位置
+	m_py = y + 275.0f;
 
 	m_cow_id = id;
 	g_enemy_cnt++;	//敵の総数のカウント
@@ -76,7 +76,6 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
-
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;

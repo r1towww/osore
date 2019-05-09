@@ -4,6 +4,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "ObjMiniMap.h"
@@ -64,6 +65,7 @@ void CObjMiniMap::Action()
 		//キー入力制御
 		if (m_f == true)
 		{
+			Audio::Start(1);	//エフェクト音を鳴らす
 			//マップサイズの変更
 			if (m_blocksize == m_smallsize)	//小さい場合大きくする
 			{
