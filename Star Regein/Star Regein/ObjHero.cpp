@@ -375,6 +375,7 @@ void CObjHero::Action()
 	{
 		if (m_key_f == true)
 		{
+			Audio::Start(1);	//エフェクト音を鳴らす
 			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
 			m_key_f = false;
 		}

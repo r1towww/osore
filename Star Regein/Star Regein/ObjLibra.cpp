@@ -19,8 +19,8 @@ float* g_libra_y[20];
 
 CObjLibra::CObjLibra(float x, float y, int id)
 {
-	m_px = x;	//位置
-	m_py = y;
+	m_px = x + 375.0f;	//位置
+	m_py = y + 275.0f;
 
 	m_libra_id = id;
 	g_enemy_cnt++;	//敵の総数のカウント

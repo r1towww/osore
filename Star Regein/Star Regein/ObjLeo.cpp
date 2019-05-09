@@ -20,8 +20,8 @@ float* g_leo_y[60];//全ての牛のY位置を把握する
 
 CObjLeo::CObjLeo(float x, float y, int id)
 {
-	m_px = x;	//位置
-	m_py = y;
+	m_px = x + 375.0f;	//位置
+	m_py = y + 275.0f;
 
 	m_leo_id = id;
 	g_enemy_cnt++;	//敵の総数のカウント
