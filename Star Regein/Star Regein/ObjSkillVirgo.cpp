@@ -133,21 +133,27 @@ void CObjSkillVirgo::Action()
 
 
 	//各敵と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_COW) != nullptr       ||
+	if (hit->CheckObjNameHit(OBJ_COW) != nullptr   ||
+		hit->CheckObjNameHit(OBJ_LIBRA) != nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_BLUE) !=nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
-		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr)//当たっていたら取得  
+		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr ||
+		hit->CheckObjNameHit(OBJ_LEO) != nullptr)//当たっていたら取得  
 	{
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;
 		m_vy = 0.0f;
 
 		//HPが減っていたら30回復
-		if (g_hp <= 100)
+		if (g_hp < 100.0f)
 		{
-
-			g_hp += 30;
-
+			//70.0f以上の場合
+			if (g_hp >= 70.0f) {
+				g_hp = g_max_hp;	//最大まで回復させる
+			}
+			else{	
+				g_hp += 30.0f;	//それ以外は30.0f回復させる
+			}
 		}
 
 	}

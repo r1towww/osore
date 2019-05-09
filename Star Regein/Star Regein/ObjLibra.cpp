@@ -23,6 +23,7 @@ CObjLibra::CObjLibra(float x, float y, int id)
 	m_py = y;
 
 	m_libra_id = id;
+	g_enemy_cnt++;	//“G‚Ì‘”‚ÌƒJƒEƒ“ƒg
 }
 
 

@@ -25,6 +25,7 @@ CObjCow::CObjCow(float x, float y, int id)
 	m_py = y;
 
 	m_cow_id = id;
+	g_enemy_cnt++;	//敵の総数のカウント
 }
 
 //イニシャライズ

@@ -262,6 +262,7 @@ extern bool g_Leo_Max;
 
 extern bool g_Make_Item;//アイテムが生成されたかどうか
 
+extern int g_enemy_cnt;	//敵の総数のカウント用
 extern int g_kill_cnt;	//敵を倒した数
 extern bool g_no_damage;	//攻撃を受けたかどうかのフラグ
 

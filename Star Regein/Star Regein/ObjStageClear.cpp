@@ -31,6 +31,7 @@ void CObjStageClear::Action()
 		g_stage_clear = false;
 		Scene::SetScene(new CSceneStageChoice());
 	}
+
 	//タイムを60になるまでプラス
 	m_time++;
 	if (m_time >= 60)
@@ -68,6 +69,7 @@ void CObjStageClear::Draw()
 	float c4[4] = { 1.0f,1.0f,0.0f,m_alpha4 };
 
 	float y[4] = { 1.0f,1.0f,0.0f,1.0f };
+
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 	
@@ -101,17 +103,17 @@ void CObjStageClear::Draw()
 	{
 		Font::StrDraw(L"地球をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：無し", 15, 280, 21, c2);
-		if(g_kill_cnt > 0)
-			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
-		if(g_no_damage == false)
-			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
 
 	}
 	else if (g_stage == VenusTaurus)
 	{
 		Font::StrDraw(L"牡牛座をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：牡牛座", 15, 280, 21, c2);
-		if (g_kill_cnt > 0)
+		if (g_kill_cnt == g_enemy_cnt)
+			Font::StrDraw(L"敵を全滅させた！", 15, 310, 21, c3);
+		else if (g_kill_cnt == 0)
+			Font::StrDraw(L"誰も倒さなかった！", 15, 310, 21, c3);
+		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
 		if (g_no_damage == false)
 			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
@@ -120,7 +122,11 @@ void CObjStageClear::Draw()
 	{
 		Font::StrDraw(L"天秤座をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：天秤座", 15, 280, 21, c2);
-		if (g_kill_cnt > 0)
+		if (g_kill_cnt == g_enemy_cnt)
+			Font::StrDraw(L"敵を全滅させた！", 15, 310, 21, c3);
+		else if (g_kill_cnt == 0)
+			Font::StrDraw(L"誰も倒さなかった！", 15, 310, 21, c3);
+		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
 		if (g_no_damage == false)
 			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
@@ -129,7 +135,11 @@ void CObjStageClear::Draw()
 	{
 		Font::StrDraw(L"双子座をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：双子座", 15, 280, 21, c2);
-		if (g_kill_cnt > 0)
+		if (g_kill_cnt == g_enemy_cnt)
+			Font::StrDraw(L"敵を全滅させた！", 15, 310, 21, c3);
+		else if (g_kill_cnt == 0)
+			Font::StrDraw(L"誰も倒さなかった！", 15, 310, 21, c3);
+		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
 		if (g_no_damage == false)
 			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
@@ -138,7 +148,11 @@ void CObjStageClear::Draw()
 	{
 		Font::StrDraw(L"乙女座をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：乙女座", 15, 280, 21, c2);
-		if (g_kill_cnt > 0)
+		if (g_kill_cnt == g_enemy_cnt)
+			Font::StrDraw(L"敵を全滅させた！", 15, 310, 21, c3);
+		else if (g_kill_cnt == 0)
+			Font::StrDraw(L"誰も倒さなかった！", 15, 310, 21, c3);
+		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
 		if (g_no_damage == false)
 			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
@@ -147,7 +161,11 @@ void CObjStageClear::Draw()
 	{
 		Font::StrDraw(L"獅子座をクリアした！", 15, 250, 21, c1);
 		Font::StrDraw(L"取得したスキル：獅子座", 15, 280, 21, c2);
-		if (g_kill_cnt > 0)
+		if (g_kill_cnt == g_enemy_cnt)
+			Font::StrDraw(L"敵を全滅させた！", 15, 310, 21, c3);
+		else if (g_kill_cnt == 0)
+			Font::StrDraw(L"誰も倒さなかった！", 15, 310, 21, c3);
+		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 310, 21, c3);
 		if (g_no_damage == false)
 			Font::StrDraw(L"ノーダメージクリア！", 15, 340, 21, c4);
