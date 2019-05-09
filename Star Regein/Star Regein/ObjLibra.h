@@ -63,10 +63,13 @@ private:
 	bool m_movex;//左右
 	bool m_movey;//上下
 
+	bool m_move;//移動フラグ
+
 	bool m_do_f;//敵攻撃フラグ
 
 	bool m_df;//ミニマップからの削除フラグ
 
 	bool m_kill_f;	//キルカウント用フラグ
+
 
 };

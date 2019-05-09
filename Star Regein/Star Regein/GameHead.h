@@ -225,6 +225,7 @@ extern bool g_stan_red_flag[20];//スタン双子（赤）個別認識用
 extern bool g_stan_woman_flag[20];//スタン乙女個別認識用
 extern bool g_stan_libra_flag[20];//スタン天秤個別認識用
 extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
+extern bool g_move_libra_flag[20];//天秤座動かすためのもの
 
 //各星座の取得情報
 extern bool g_stage_clear;
