@@ -59,7 +59,8 @@ void CObjMessage::Draw()
 	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//メニュー
 	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//ヘルプ
 
-	Font::StrDraw(L"Cで切り替え", 660, 420, 21, ckey);	//スキル切り替えキー
+	if(g_Taurus == true)
+		Font::StrDraw(L"Cで切り替え", 645, 420, 21, ckey);	//スキル切り替えキー
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
@@ -79,12 +80,19 @@ void CObjMessage::Draw()
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)
 	{
-		m_time++;	//timeをプラスしている時だけメッセージを表示
-		swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
-		Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
-		if (m_time == 100) {
-			m_memory = g_StarCount;	//現在の星の数を代入
-			m_time = 0;	//timeの初期化
+		//最後の星を取得した際
+		if (m_MaxStar == g_StarCount) {
+			Font::StrDraw(L"最後の星を取得！", 150, 240, 25, sc);	//別のメッセージを作成
+		}
+		else
+		{
+			m_time++;	//timeをプラスしている時だけメッセージを表示
+			swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
+			Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
+			if (m_time == 100) {
+				m_memory = g_StarCount;	//現在の星の数を代入
+				m_time = 0;	//timeの初期化
+			}
 		}
 	}
 

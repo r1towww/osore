@@ -137,9 +137,10 @@ void CObjHero::Action()
 		m_blackhole_num = 0;
 	}
 
-
+	//ステージクリアの情報を持ってくる
+	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
-	if (g_tutorial_flag == true || g_move_stop_flag == true)
+	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -374,6 +375,7 @@ void CObjHero::Action()
 	{
 		if (m_key_f == true)
 		{
+			Audio::Start(1);	//エフェクト音を鳴らす
 			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
 			m_key_f = false;
 		}

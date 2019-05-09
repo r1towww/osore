@@ -22,7 +22,7 @@ using namespace GameL;
 #define SunY	  -100
 #define SunY2	  200
 
-#define ALPHAORIGIN	0.0f
+#define ALPHAORIGIN	1.0f
 #define ALPHAUNDER 0.3f
 
 //オブジェクト：タイトル

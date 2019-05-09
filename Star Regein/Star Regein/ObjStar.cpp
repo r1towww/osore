@@ -10,12 +10,13 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjStar::CObjStar(float x, float y ,int i,int j)
+CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 {
 	m_px = x;		//位置
 	m_py = y;
 	m_i = i;
 	m_j = j;
+
 
 }
 
@@ -93,11 +94,6 @@ void CObjStar::Action()
 			{
 				m_ani_time++;
 			}
-			////3コマ目突入後、0コマ目に戻す事でアニメーションを無限ループさせる。
-			//if (m_ani == 3)
-			//{
-			//	m_ani = 0;
-			//}
 
 		}
 		//ブロック情報を持ってくる
@@ -108,10 +104,7 @@ void CObjStar::Action()
 	}
 	else
 	{
-
-
 		Hits::DeleteHitBox(this);
-
 	}
 }
 

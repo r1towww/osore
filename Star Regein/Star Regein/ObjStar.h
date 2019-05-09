@@ -10,7 +10,7 @@ using namespace GameL;
 class CObjStar : public CObj
 {
 	public:
-		CObjStar(float x, float y, int i, int j);
+		CObjStar(float x, float y, int i, int j,int id);
 		~CObjStar() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション

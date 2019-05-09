@@ -44,7 +44,9 @@ void CObjTutorial::Action()
 	if (Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false 
 									&& Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_RIGHT) == false )
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		g_tutorial_flag = false;
+		this->SetStatus(false);
 	}
 	
 }

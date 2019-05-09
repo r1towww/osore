@@ -28,7 +28,7 @@ void CObjHelp::Action()
 	}
 
 	//Hキーが押され、フラグがオンの場合
-	if (Input::GetVKey('H') == true && m_f == true || Input::GetVKey('Q') == true)
+	if (Input::GetVKey('H') == true && m_f == true || Input::GetVKey('Q') == true || Input::GetVKey('M') == true)
 	{
 		Audio::Start(1);	//エフェクト音を鳴らす
 		this->SetStatus(false);	//削除
@@ -97,7 +97,7 @@ void CObjHelp::Draw()
 	else if (g_skill == Libra)	//天秤座
 	{
 		//説明文
-		Font::StrDraw(L"*天秤座スキル*    選択中に発動", 310, 320, 25, c);
+		Font::StrDraw(L"*天秤座スキル*    徐々にMPを消費", 310, 320, 25, c);
 		Font::StrDraw(L"セットすると攻撃力UP！！", 315, 350, 25, c);
 		Font::StrDraw(L"HP減少によって攻撃力は変動し、", 315, 380, 25, c);
 		Font::StrDraw(L"自動的に効果は発揮されるぞ！", 315, 410, 25, c);
@@ -124,10 +124,10 @@ void CObjHelp::Draw()
 	else if (g_skill == Leo)	//獅子座
 	{
 		//説明文
-		Font::StrDraw(L"*獅子座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
-		Font::StrDraw(L"", 315, 350, 25, c);
-		Font::StrDraw(L"", 315, 380, 25, c);
-		Font::StrDraw(L"", 315, 410, 25, c);
+		Font::StrDraw(L"*獅子座スキル*    MP消費 3ゲージ", 310, 320, 25, c);
+		Font::StrDraw(L"主人公周囲の敵をスタン！", 315, 350, 25, c);
+		Font::StrDraw(L"使いすぎには注意！", 315, 380, 25, c);
+		Font::StrDraw(L"「獅子の力を借りよう。」", 315, 410, 25, c);
 
 	}
 	//表示位置の設定
