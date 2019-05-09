@@ -423,8 +423,6 @@ void CObjStarChoice::Draw()
 			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
 
-		Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
-
 	}
 	
 
