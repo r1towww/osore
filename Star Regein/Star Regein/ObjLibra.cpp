@@ -310,10 +310,7 @@ void CObjLibra::Action()
 		//ˆÊ’u‚ÌXV
 		m_px += m_vx*2.0;
 		m_py += m_vy*2.0;
-
-
 	}
-
 	if (m_time <= 0)
 	{
 		hit->SetInvincibility(false);
@@ -321,8 +318,6 @@ void CObjLibra::Action()
 		m_time = 30;
 
 	}
-
-
 
 	//HP‚ª0‚É‚È‚Á‚½‚ç”jŠü
 	if (m_hp == 0)

@@ -36,6 +36,7 @@ void CObjCow::Init()
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
 	m_ani_time = 0;
+	m_ani_timeB = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
@@ -64,7 +65,7 @@ void CObjCow::Init()
 
 	srand(time(NULL));
 
-	
+
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
@@ -72,12 +73,25 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
+	//混乱エフェクトのアニメーション
+	RECT_F ani_src[6] =
+		//1536
+		//264
+	{
+		{ 0,   0,     256 , 264 },
+		{ 0,  256,    512 , 264 },
+		{ 0,  512,    768 , 264 },
+		{ 0,  768,   1024 , 264 },
+		{ 0, 1024,   1280 , 264 },
+		{ 0, 1280,   1536 , 264 },
+	};
 
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
+
 
 	if (m_ani_frame == 3)
 	{
@@ -182,7 +196,7 @@ void CObjCow::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-				
+
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -273,7 +287,7 @@ void CObjCow::Action()
 				{
 					m_vy = -0.15f; //下
 				}
-			
+
 			}
 		}
 	}
@@ -283,7 +297,7 @@ void CObjCow::Action()
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER) ;//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
 		for (int i = 0; i < hit->GetCount(); i++)
 		{
@@ -414,13 +428,38 @@ void CObjCow::Action()
 	//しし座のヒット判定がonの時スタン
 	if (g_stan_cow_flag[m_cow_id] == true)
 	{
+
 		g_Leo_cnt += 1.0f;
-		if (g_Leo_cnt >= 200.0f)
+
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_timeB < 0)
 		{
-			g_Leo_cnt = 0.0f;
-			g_stan_cow_flag[m_cow_id] = false;
+
+			m_ani_frame++;	//アニメーションのコマを１つ進める
+			m_ani_timeB = 10;
+
+			m_ani_stop++;
+
+			if (m_ani_stop >= 6)
+			{
+				m_eff.m_top = 0;
+				m_eff.m_left = 0;
+				m_eff.m_right = 258;
+				m_eff.m_bottom = 264;
+
+			}
+			if (g_Leo_cnt >= 200.0f)
+			{
+				g_Leo_cnt = 0.0f;
+				g_stan_cow_flag[m_cow_id] = false;
+			}
 		}
 
+		else
+		{
+			m_ani_timeB--;
+		}
 	}
 
 	if (m_f == true)
@@ -464,8 +503,13 @@ void CObjCow::Draw()
 	int AniData[4] =
 	{ 1,0,2,0, };
 
+	int AniDataB[6] =
+	{ 0,1,2,3,4,0 };
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+
+	float cB[4] = { 1.0f,1.0f,1.0f,10.0f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
@@ -488,4 +532,28 @@ void CObjCow::Draw()
 
 	//描画
 	Draw::Draw(3, &src, &dst, c, 0.0f);
+
+	if (g_stan_cow_flag[m_cow_id] == true)
+	{
+		RECT_F src;//描画元切り取り位置
+		RECT_F dst;//描画先表示位置
+
+		//ブロック情報を持ってくる
+		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		//切り取り位置の設定
+		src.m_top = 0.0f * m_posture;
+		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 256);
+		src.m_right = 256.0f + (AniDataB[m_ani_frame] * 256);
+		src.m_bottom = src.m_top + 264.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 64.0f + m_px + block->GetScrollx();
+		dst.m_right = 0.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+
+		//描画
+		Draw::Draw(49, &src, &dst, cB, 0.0f);
+	}
 }
