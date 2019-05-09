@@ -90,6 +90,7 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);

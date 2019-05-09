@@ -66,11 +66,12 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
-	bool m_cow_delete;
+	bool m_cow_delete; //牛削除フラグ
 
-	int	   m_ani;		//チャージアニメーション用
-	RECT_F m_eff;		//チャージエフェクト描画用
-	int m_ani_stop;
+	//消滅アニメーション用
+	int m_ani_count;
 	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
 	
 };

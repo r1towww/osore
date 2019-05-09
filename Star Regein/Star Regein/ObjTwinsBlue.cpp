@@ -62,6 +62,16 @@ void CObjTwinsBlue::Init()
 
 	alpha = 1.0;
 
+	//消滅アニメーション用
+	m_ani_delete = 0;
+	m_ani_count = 0;
+	m_ani_max_count = 10;
+	m_ani_frame_delete = 1;
+
+	//牛削除フラグ
+	m_twinsblue_delete = false;
+
+
 	srand(time(NULL));
 
 	//当たり判定用のHitBoxを作成
@@ -411,14 +421,35 @@ void CObjTwinsBlue::Action()
 	m_px += m_vx*1.0;
 	m_py += m_vy*1.0;
 
+
 	//HPが0になったら破棄
 	if (m_hp <= 0)
 	{
+		//双子青削除フラグ
+		m_twinsblue_delete = true;
+	};
+	// 消滅アニメーションのコマを進める
+	if (m_twinsblue_delete == true)
+	{
+		m_ani_count += 1;
+	}
+	//消滅アニメーション
+	if (m_ani_count > m_ani_max_count)
+	{
+		m_ani_frame_delete += 1;
+		m_ani_count = 0;
+	}
+	if (m_ani_frame_delete == 4)
+	{
+		m_ani_frame_delete = 0;
 		//敵削除
 		alpha = 0.0f;
 		hit->SetInvincibility(true);
-		g_blue_d_flag[m_blue_id] = false;
+		g_cow_d_flag[m_blue_id] = false;
+		this->SetStatus(false);    //自身に削除命令を出す
 	}
+
+
 }
 
 //ドロー
@@ -426,9 +457,12 @@ void CObjTwinsBlue::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
+	int DeleteData[4] =
+	{ 1,2,3,4, };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
@@ -436,19 +470,39 @@ void CObjTwinsBlue::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//切り取り位置の設定
-	src.m_top = 64.0f * m_posture;
-	src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-	src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
-	src.m_bottom = src.m_top + 64.0f;
+	if (m_twinsblue_delete == false)
+	{
+		//切り取り位置の設定
+		src.m_top = 64.0f * m_posture;
+		src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
+		src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
+		src.m_bottom = src.m_top + 64.0f;
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py + block->GetScrolly();
-	dst.m_left = 80.0f + m_px + block->GetScrollx();
-	dst.m_right = 0.0f + m_px + block->GetScrollx();
-	dst.m_bottom = 80.0f + m_py + block->GetScrolly();
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 80.0f + m_px + block->GetScrollx();
+		dst.m_right = 0.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 80.0f + m_py + block->GetScrolly();
 
+		//描画
+		Draw::Draw(20, &src, &dst, c, 0.0f);
+	}
+	else if (m_twinsblue_delete == true)
+	{
+		//消滅アニメーション
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + (DeleteData[m_ani_frame_delete] * 192);
+		src.m_right = 192.0f + (DeleteData[m_ani_frame_delete] * 192);
+		src.m_bottom = src.m_top + 192.0f;
 
-	//描画
-	Draw::Draw(20, &src, &dst, c, 0.0f);
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 0.0f + m_px + block->GetScrollx();
+		dst.m_right = 64.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+
+		//表示
+		Draw::Draw(80, &src, &dst, d, 0.0f);
+	}
 }

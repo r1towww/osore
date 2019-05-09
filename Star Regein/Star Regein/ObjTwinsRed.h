@@ -66,5 +66,13 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+	bool m_twinsred_delete;
+
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
+
+
 
 };

@@ -67,5 +67,14 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+	bool m_woman_delete; //乙女削除フラグ
+
+	//消滅アニメーション用
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
+
+
 
 };
