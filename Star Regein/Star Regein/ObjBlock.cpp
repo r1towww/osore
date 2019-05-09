@@ -23,6 +23,7 @@ bool g_stan_red_flag[20];//スタン双子（赤）個別認識用
 bool g_stan_woman_flag[20];//スタン乙女個別認識用
 bool g_stan_libra_flag[20];//スタン天秤個別認識用
 bool g_stan_leo_flag[60];//スタン獅子個別認識用
+bool g_stan_boss_flag;//スタンボス用
 
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
@@ -231,6 +232,32 @@ void CObjBlock::Init()
 			}
 		}
 	}
+	else if (g_stage == EarthStar)
+	{
+		for (int i = 0; i < MAPSIZE; i++)
+		{
+			for (int j = 0; j < MAPSIZE; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
+					//ボスオブジェクト作成
+					CObjBoss* boss = new CObjBoss(j*MAPSIZE, i*MAPSIZE);
+					//敵の位置を取得
+					float* bossx = boss->GetPX();
+					float* bossy = boss->GetPY();
+
+					g_boss_x = boss->GetPX();
+					g_boss_y = boss->GetPY();
+
+					g_boss_d_flag = true;
+
+					g_stan_boss_flag = false;
+
+					Objs::InsertObj(boss, OBJ_BOSS, 10);
+				}
+			}
+		}
+	}
 
 
 
@@ -249,7 +276,7 @@ void CObjBlock::Init()
 				{
 					//主人公オブジェクト作成
 					CObjHero* obj = new CObjHero(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
-					Objs::InsertObj(obj, OBJ_HERO, 10);//マネージャに登録
+					Objs::InsertObj(obj, OBJ_HERO, 11);//マネージャに登録
 
 					m_scrollx = -j * MAPSIZE;
 					m_scrolly = -i * MAPSIZE;

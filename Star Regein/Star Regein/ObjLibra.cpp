@@ -56,12 +56,14 @@ void CObjLibra::Init()
 
 	m_bullet_time = 100;
 
+	m_invincible_flag = false;
+
 	m_time = 30;
 
 	m_df = true;
 	count = 0;
 
-	alpha = 1.0;
+	m_alpha = 1.0;
 
 	srand(time(NULL));
 
@@ -202,44 +204,130 @@ void CObjLibra::Action()
 		}
 	}
 
-	//ELEMENT_MAGICを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
+
+
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	if (m_invincible_flag == false)
 	{
-		//敵が主人公とどの角度で当たっているかを確認
-		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
+		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 		{
-			//攻撃の左右に当たったら
-			if (hit_data[i] == nullptr)
-				continue;
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-			float r = hit_data[i]->r;
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
 
+				float r = hit_data[i]->r;
 
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
 			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
+
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
 		}
 
-		m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
-		m_f = true;
-		m_key_f = true;
-		hit->SetInvincibility(true);
+		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
+
+		//ELEMENT_SUBを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SUB) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= 1;
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -248,7 +336,7 @@ void CObjLibra::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-		//ヒット判定on
+															//ヒット判定on
 		g_stan_libra_flag[m_libra_id] = true;
 	}
 
@@ -264,49 +352,10 @@ void CObjLibra::Action()
 
 	}
 
-	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_SUB) == true)
-	{
-		//敵が主人公とどの角度で当たっているかを確認
-		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			//攻撃の左右に当たったら
-			if (hit_data[i] == nullptr)
-				continue;
-
-			float r = hit_data[i]->r;
-
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
-			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
-		}
-
-		m_hp -= 1;
-		m_f = true;
-		m_key_f = true;
-		hit->SetInvincibility(true);
-
-	}
-
 	if (m_f == true)
 	{
 		m_time--;
+		m_alpha = ALPHAUNDER;
 		//位置の更新
 		m_px += m_vx*2.0;
 		m_py += m_vy*2.0;
@@ -316,7 +365,9 @@ void CObjLibra::Action()
 
 	if (m_time <= 0)
 	{
-		hit->SetInvincibility(false);
+		m_f = false;
+		m_invincible_flag = false;
+		m_alpha = ALPHAORIGIN;
 
 		m_time = 30;
 
@@ -334,7 +385,7 @@ void CObjLibra::Action()
 			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
 		//敵削除
-		alpha = 0.0f;
+		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_libra_d_flag[m_libra_id] = false;
 	}
@@ -348,7 +399,7 @@ void CObjLibra::Draw()
 	{ 1,0,2,0, };
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
