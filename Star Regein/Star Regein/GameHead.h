@@ -229,6 +229,7 @@ extern bool g_stan_woman_flag[20];//スタン乙女個別認識用
 extern bool g_stan_libra_flag[20];//スタン天秤個別認識用
 extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
 extern bool g_stan_boss_flag;//スタンボス用
+extern bool g_move_libra_flag[20];//天秤座動かすためのもの
 
 //各星座の取得情報
 extern bool g_stage_clear;
@@ -265,6 +266,7 @@ extern bool g_Leo_Max;
 
 extern bool g_Make_Item;//アイテムが生成されたかどうか
 
+extern int g_enemy_cnt;	//敵の総数のカウント用
 extern int g_kill_cnt;	//敵を倒した数
 extern bool g_no_damage;	//攻撃を受けたかどうかのフラグ
 

@@ -23,6 +23,7 @@ CObjTwinsRed::CObjTwinsRed(float x, float y,int id)
 	m_py = y;
 
 	m_red_id = id;
+	g_enemy_cnt++;	//“G‚Ì‘”‚ÌƒJƒEƒ“ƒg
 }
 
 

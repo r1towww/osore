@@ -23,6 +23,7 @@ CObjLibra::CObjLibra(float x, float y, int id)
 	m_py = y;
 
 	m_libra_id = id;
+	g_enemy_cnt++;	//敵の総数のカウント
 }
 
 
@@ -52,6 +53,7 @@ void CObjLibra::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
+	m_move = false;
 	m_kill_f = false;	//キルカウント用フラグの初期化
 
 	m_bullet_time = 100;
@@ -156,7 +158,7 @@ void CObjLibra::Action()
 		}
 		else
 		{
-
+			;
 		}
 	}
 	else
@@ -165,6 +167,18 @@ void CObjLibra::Action()
 		m_vy = 0.0f;
 	}
 
+	//攻撃を受けると永遠に追い掛け回すようにする
+	if (g_move_libra_flag[m_libra_id] == false)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+	}
+	else
+	{
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+	}
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
@@ -352,6 +366,7 @@ void CObjLibra::Action()
 
 	}
 
+	//無敵時間を与え、なおかつ2倍の速度で追い掛け回す
 	if (m_f == true)
 	{
 		m_time--;
@@ -360,9 +375,13 @@ void CObjLibra::Action()
 		m_px += m_vx*2.0;
 		m_py += m_vy*2.0;
 
+		for (int i = 0; i < 20; i++)
+		{
+			g_move_libra_flag[i] = true;
+		}
 
 	}
-
+	//一定時間で無敵解除
 	if (m_time <= 0)
 	{
 		m_f = false;
@@ -370,9 +389,7 @@ void CObjLibra::Action()
 		m_alpha = ALPHAORIGIN;
 
 		m_time = 30;
-
 	}
-
 
 
 	//HPが0になったら破棄
@@ -389,7 +406,7 @@ void CObjLibra::Action()
 		hit->SetInvincibility(true);
 		g_libra_d_flag[m_libra_id] = false;
 	}
-	
+
 }
 
 //ドロー

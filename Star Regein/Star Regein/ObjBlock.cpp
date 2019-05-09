@@ -24,6 +24,7 @@ bool g_stan_woman_flag[20];//スタン乙女個別認識用
 bool g_stan_libra_flag[20];//スタン天秤個別認識用
 bool g_stan_leo_flag[60];//スタン獅子個別認識用
 bool g_stan_boss_flag;//スタンボス用
+bool g_move_libra_flag[20];//ダメージで動かす判定
 
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
 {
@@ -196,6 +197,8 @@ void CObjBlock::Init()
 					g_libra_d_flag[m_libra_c] = true;
 
 					g_stan_libra_flag[m_libra_c] = false;
+
+					g_move_libra_flag[m_libra_c] = false;
 
 					m_libra_c++;
 

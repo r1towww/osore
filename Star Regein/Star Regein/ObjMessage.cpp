@@ -59,7 +59,8 @@ void CObjMessage::Draw()
 	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//メニュー
 	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//ヘルプ
 
-	Font::StrDraw(L"Cで切り替え", 660, 420, 21, ckey);	//スキル切り替えキー
+	if(g_Taurus == true)
+		Font::StrDraw(L"Cで切り替え", 645, 420, 21, ckey);	//スキル切り替えキー
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
