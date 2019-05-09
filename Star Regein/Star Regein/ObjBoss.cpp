@@ -13,12 +13,12 @@
 
 //使用するネームスペース
 using namespace GameL;
-
-float* g_cow_x[20];//全ての牛のX位置を把握する
-float* g_cow_y[20];//全ての牛のY位置を把握する
-float g_Leo_cnt;
-
-
+//
+//float* g_cow_x[20];//全ての牛のX位置を把握する
+//float* g_cow_y[20];//全ての牛のY位置を把握する
+//float g_Leo_cnt;
+//
+//
 CObjBoss::CObjBoss(float x, float y)
 {
 	m_px = x;	//位置

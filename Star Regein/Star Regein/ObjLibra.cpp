@@ -52,6 +52,7 @@ void CObjLibra::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
+	m_move = false;
 	m_kill_f = false;	//キルカウント用フラグの初期化
 
 	m_bullet_time = 100;
@@ -154,7 +155,7 @@ void CObjLibra::Action()
 		}
 		else
 		{
-
+			;
 		}
 	}
 	else
@@ -163,6 +164,18 @@ void CObjLibra::Action()
 		m_vy = 0.0f;
 	}
 
+	//攻撃を受けると永遠に追い掛け回すようにする
+	if (g_move_libra_flag[m_libra_id] == false)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+	}
+	else
+	{
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+	}
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
@@ -202,14 +215,14 @@ void CObjLibra::Action()
 		}
 	}
 
-	//ELEMENT_MAGICを持つオブジェクトと接触したら
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-		for (int i = 0; i < hit->GetCount(); i++)
+		/*for (int i = 0; i < hit->GetCount(); i++)
 		{
 			//攻撃の左右に当たったら
 			if (hit_data[i] == nullptr)
@@ -235,11 +248,13 @@ void CObjLibra::Action()
 				m_vy = -20.0f;//したに移動させる
 			}
 		}
-
+		*/
 		m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
-		m_f = true;
+		m_f = true;//敵を動かす判定フラグ
+		m_move = true;//全員動かすためのフラグ
 		m_key_f = true;
 		hit->SetInvincibility(true);
+
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -264,7 +279,7 @@ void CObjLibra::Action()
 
 	}
 
-	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	//ELEMENT_SUBを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_SUB) == true)
 	{
 		//敵が主人公とどの角度で当たっているかを確認
@@ -304,24 +319,23 @@ void CObjLibra::Action()
 
 	}
 
+	//無敵時間を与え、なおかつ2倍の速度で追い掛け回す
 	if (m_f == true)
 	{
 		m_time--;
-		//位置の更新
-		m_px += m_vx*2.0;
-		m_py += m_vy*2.0;
-
+		for (int i = 0; i < 20; i++)
+		{
+			g_move_libra_flag[i] = true;
+		}
 
 	}
-
+	//一定時間で無敵解除
 	if (m_time <= 0)
 	{
 		hit->SetInvincibility(false);
 
 		m_time = 30;
-
 	}
-
 
 
 	//HPが0になったら破棄
@@ -338,7 +352,7 @@ void CObjLibra::Action()
 		hit->SetInvincibility(true);
 		g_libra_d_flag[m_libra_id] = false;
 	}
-	
+
 }
 
 //ドロー
