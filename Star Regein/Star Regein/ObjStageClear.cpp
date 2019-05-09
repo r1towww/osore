@@ -15,6 +15,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageClear::Init()
 {
+	m_time = 0;	//描画までのタイム感覚の初期化
 	//アルファ値の初期化
 	m_alpha1 = 0.0f;
 	m_alpha2 = 0.0f;
@@ -30,10 +31,16 @@ void CObjStageClear::Action()
 		g_stage_clear = false;
 		Scene::SetScene(new CSceneStageChoice());
 	}
-	m_alpha1 += 0.05f;
-	if (m_alpha1 >= 1.0f)
-		m_alpha1 = 1.0f;
-	if (m_alpha1 == 1.0f) {
+	//タイムを60になるまでプラス
+	m_time++;
+	if (m_time >= 60)
+		m_time = 60;
+	if (m_time == 60) {	//タイムが100になったらアルファ値を増やす
+		m_alpha1 += 0.05f;
+		if (m_alpha1 >= 1.0f)
+			m_alpha1 = 1.0f;	//1.0fになったら次へ
+	}
+	if (m_alpha1 == 1.0f) {	//メッセージ分繰り返す
 		m_alpha2 += 0.05f;
 		if (m_alpha2 >= 1.0f)
 			m_alpha2 = 1.0f;

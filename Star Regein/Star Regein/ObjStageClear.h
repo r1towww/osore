@@ -14,6 +14,8 @@ class CObjStageClear :public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 	private:
+		int m_time;	//表示までの時間間隔
+		//各メッセージの透明度用変数
 		float m_alpha1;
 		float m_alpha2;
 		float m_alpha3;
