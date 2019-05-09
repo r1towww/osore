@@ -102,6 +102,13 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(5, L"手足・殴る、蹴る09.wav", EFFECT);		//ダメージSE
 	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
+	Audio::LoadAudio(9, L"ステージクリア.wav", EFFECT);
+	Audio::LoadAudio(10, L"ゲームオーバー.wav", EFFECT);
+
+	//BGM
+	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(8);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -204,6 +211,8 @@ void CSceneMercuryVirgo::ClearCheck(bool a)
 		}
 		else
 		{
+			Audio::Start(9);
+
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);

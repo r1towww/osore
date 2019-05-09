@@ -251,7 +251,7 @@ void CObjBlock::Init()
 				else
 				{
 					//主人公オブジェクト作成
-					CObjHero* obj = new CObjHero(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+					CObjHero* obj = new CObjHero(j*m_allsize, i*m_allsize);//オブジェクト作成
 					Objs::InsertObj(obj, OBJ_HERO, 10);//マネージャに登録
 
 					m_scrollx = -j * MAPSIZE;
@@ -262,20 +262,20 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 2)
 			{
 				//星オブジェクト作成
-				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				CObjStar* objstar = new CObjStar(j*m_allsize, i*m_allsize,i,j);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 5);//マネージャに登録
 
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)
 			{
 				//小惑星オブジェクト作成
-				CObjAsteroid* objasteroid = new CObjAsteroid(j*ALLSIZE, i*ALLSIZE);//オブジェクト作成
+				CObjAsteroid* objasteroid = new CObjAsteroid(j*m_allsize, i*m_allsize);//オブジェクト作成
 				Objs::InsertObj(objasteroid, OBJ_ASTEROID, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 7)
 			{
 				//ブラックホールオブジェクト作成
-				CObjBlackhole* objablackhole = new CObjBlackhole(j*ALLSIZE, i*ALLSIZE, m_b_c);//オブジェクト作成
+				CObjBlackhole* objablackhole = new CObjBlackhole(j*m_allsize, i*m_allsize, m_b_c);//オブジェクト作成
 				
 				//ブラックホールの位置を取得
 				float* bx = objablackhole->GetBX();
@@ -292,7 +292,7 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 8)
 			{
 				//ホワイトホールオブジェクト作成
-				CObjWhitehole* objawhitehole = new CObjWhitehole(j*ALLSIZE, i*ALLSIZE, m_w_c);//オブジェクト作成
+				CObjWhitehole* objawhitehole = new CObjWhitehole(j*m_allsize, i*m_allsize, m_w_c);//オブジェクト作成
 				//ブラックホールの位置を取得
 				float* bx = objawhitehole->GetWX();
 				float* by = objawhitehole->GetWY();
@@ -307,13 +307,13 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 15)
 			{
 				//ブレイクロックオブジェクト作成
-				CObjBreakRock* objbrock = new CObjBreakRock(j*ALLSIZE, i*ALLSIZE,i,j);//オブジェクト作成
+				CObjBreakRock* objbrock = new CObjBreakRock(j*m_allsize, i*m_allsize,i,j);//オブジェクト作成
 				Objs::InsertObj(objbrock, OBJ_BREAK_ROCK, 9);//マネージャに登録
 			}
 			if (m_map[i][j] == 16)
 			{
 				//ブレイクビックロックオブジェクト作成
-				CObjBreakBigRock* objbbrock = new CObjBreakBigRock(j*ALLSIZE, i*ALLSIZE, i, j);//オブジェクト作成
+				CObjBreakBigRock* objbbrock = new CObjBreakBigRock(j*m_allsize, i*m_allsize, i, j);//オブジェクト作成
 				Objs::InsertObj(objbbrock, OBJ_BREAK_BIGROCK, 9);//マネージャに登録
 			}
 		}
@@ -407,10 +407,10 @@ void CObjBlock::Draw()
 			if (m_map[i][j] >= 0)
 			{
 				//表示位置の設定
-				dst.m_top    = i*ALLSIZE + m_scrolly;
-				dst.m_left   = j*ALLSIZE + m_scrollx;
-				dst.m_right  = dst.m_left + ALLSIZE;
-				dst.m_bottom = dst.m_top  + ALLSIZE;
+				dst.m_top    = i*m_allsize + m_scrolly;
+				dst.m_left   = j*m_allsize + m_scrollx;
+				dst.m_right  = dst.m_left + m_allsize;
+				dst.m_bottom = dst.m_top  + m_allsize;
 				if (m_map[i][j] == 1 || m_map[i][j] == g_block)//隕石、ランダム隕石用
 				{
 					//切り取り位置の設定
@@ -465,8 +465,8 @@ void CObjBlock::BlockHit
 				if (g_stage_clear == false)
 				{
 					//要素番号を座標に変更
-					float bx = j*ALLSIZE;
-					float by = i*ALLSIZE;
+					float bx = j*m_allsize;
+					float by = i*m_allsize;
 
 					//スクロールの影響
 					float scrollx = scroll_on ? m_scrollx : 0;
