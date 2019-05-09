@@ -130,7 +130,7 @@
     <ClCompile Include="ObjAsteroid.cpp" />
     <ClCompile Include="ObjBlackhole.cpp" />
     <ClCompile Include="ObjBoss.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ObjBreakBigRock.cpp" />
     <ClCompile Include="ObjBreakRock.cpp" />
@@ -206,7 +206,7 @@
     </ClInclude>
     <ClInclude Include="ObjBlackhole.h" />
     <ClInclude Include="ObjBoss.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="ObjBreakBigRock.h" />
     <ClInclude Include="ObjBreakRock.h" />
