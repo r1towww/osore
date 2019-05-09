@@ -35,6 +35,8 @@ void CObjBoss::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
+	m_warp_time = 300;
+
 	m_speed_power = 2.0f;//通常速度
 	m_ani_max_time = 15;	//アニメーション間隔幅
 
@@ -72,6 +74,8 @@ void CObjBoss::Init()
 void CObjBoss::Action()
 {
 
+	m_warp_time--;
+
 	m_ani_time++;
 
 	if (m_ani_time > m_ani_max_time)
@@ -83,6 +87,13 @@ void CObjBoss::Action()
 	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 0;
+	}
+
+	//時間経過でランダムにワープ
+	if (m_warp_time <= 0)
+	{
+		//m_px = ;
+		//m_py = ;
 	}
 
 	//ブロックとの当たり判定実行
@@ -218,36 +229,6 @@ void CObjBoss::Action()
 	{
 		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
-			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
-
-				float r = hit_data[i]->r;
-
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -20.0f;//左に移動させる
-				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
-			}
-
 			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_invincible_flag = true;
@@ -258,37 +239,6 @@ void CObjBoss::Action()
 		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
 		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
-			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
-
-
-				float r = hit_data[i]->r;
-
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -20.0f;//左に移動させる
-				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
-			}
-
 			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_invincible_flag = true;
@@ -299,36 +249,6 @@ void CObjBoss::Action()
 		//ELEMENT_SUBを持つオブジェクトと接触したら
 		if (hit->CheckElementHit(ELEMENT_SUB) == true)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
-			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
-
-				float r = hit_data[i]->r;
-
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -20.0f;//左に移動させる
-				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
-			}
-
 			m_hp -= 1;
 			m_f = true;
 			m_invincible_flag = true;

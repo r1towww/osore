@@ -16,6 +16,8 @@ using namespace GameL;
 void CObjGameOver::Init()
 {
 	m_keytime = 0;	//キー入力タイムの初期化
+	Audio::Start(1);
+
 }
 
 //アクション
