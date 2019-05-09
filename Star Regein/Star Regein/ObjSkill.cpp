@@ -82,13 +82,15 @@ void CObjSkill::Draw()
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
 
-		//•`‰æ
-		if (g_skill == NoSkill)
-		{
+		////•`‰æ
+		//if (g_skill == NoSkill)
+		//{
 
-		}
-		else {
-			Draw::Draw(13, &src, &dst, c, 0.0f);
-		}
+		//}
+		//else {
+		//	Draw::Draw(13, &src, &dst, c, 0.0f);
+		//}
+		Draw::Draw(13, &src, &dst, c, 0.0f);
+
 	}
 }

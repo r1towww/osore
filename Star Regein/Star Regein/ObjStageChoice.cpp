@@ -16,6 +16,10 @@ using namespace GameL;
 //イニシャライズ
 void CObjStageChoice::Init()
 {
+	g_no_damage = false;	//ノーダメージクリア用変数の初期化
+	g_kill_cnt = 0;			//敵殲滅数の初期化
+	g_enemy_cnt = 0;		//敵カウント数の初期化
+
 	m_alpha = ALPHAORIGIN;		//アルファ値の初期化
 	m_time = true;
 }

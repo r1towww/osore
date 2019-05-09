@@ -122,16 +122,16 @@
       <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClCompile>
     <ClCompile Include="ObjAsteroid.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBlackhole.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
     <ClCompile Include="ObjWhitehole.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト\Hole</Filter>
     </ClCompile>
     <ClCompile Include="ObjStar.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="GameL\SceneObjManager.cpp">
       <Filter>リソースファイル</Filter>
@@ -146,7 +146,7 @@
       <Filter>ソースファイル\タイトル</Filter>
     </ClCompile>
     <ClCompile Include="ObjMeteo.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="SceneStageClear.cpp">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
@@ -164,10 +164,10 @@
       <Filter>ソースファイル\UI</Filter>
     </ClCompile>
     <ClCompile Include="ObjBreakRock.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjBreakBigRock.cpp">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
@@ -338,16 +338,16 @@
       <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClInclude>
     <ClInclude Include="ObjAsteroid.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlackhole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjWhitehole.h">
-      <Filter>ソースファイル\ゲームオブジェクト\Hole</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト\Hole</Filter>
     </ClInclude>
     <ClInclude Include="ObjStar.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="GameL\SceneObjManager.h">
       <Filter>リソースファイル</Filter>
@@ -362,7 +362,7 @@
       <Filter>ソースファイル\タイトル</Filter>
     </ClInclude>
     <ClInclude Include="ObjMeteo.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="SceneStageClear.h">
       <Filter>ソースファイル\STAGE　CLEAR</Filter>
@@ -380,10 +380,10 @@
       <Filter>ソースファイル\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjBreakRock.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjBreakBigRock.h">
-      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+      <Filter>ソースファイル\スキル\ゲームオブジェクト</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
@@ -439,9 +439,6 @@
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{2c03d728-5e68-45bb-a1f3-ab49fe3738aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ゲームオブジェクト">
-      <UniqueIdentifier>{4a6cddb7-9e8c-4e81-89d6-5acbbb25f133}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\UI">
       <UniqueIdentifier>{ac6dee42-2c1f-40c7-88e9-8086016db91e}</UniqueIdentifier>
     </Filter>
@@ -496,9 +493,6 @@
     <Filter Include="ソースファイル\各惑星敵\天秤">
       <UniqueIdentifier>{3e90780b-9020-4022-82de-850371e4facf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
-      <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\タイトル">
       <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
     </Filter>
@@ -522,6 +516,12 @@
     </Filter>
     <Filter Include="ソースファイル\各惑星敵\ボス">
       <UniqueIdentifier>{839ccfbe-90da-4347-99e0-d27f4ff701b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\ゲームオブジェクト">
+      <UniqueIdentifier>{4a6cddb7-9e8c-4e81-89d6-5acbbb25f133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\ゲームオブジェクト\Hole">
+      <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
 #include "GameHead.h"
+#include "GameL/Audio.h"
 
 #include "ObjMenu.h"
 
@@ -14,8 +15,11 @@ using namespace GameL;
 //イニシャライズ
 void CObjMenu::Init()
 {
+	//選択キーを0（右）で初期化
 	m_key = 0;
+	//キーフラグの初期化
 	m_key_f = false;
+	m_choice_key_f = false;	
 }
 
 //アクション
@@ -29,23 +33,29 @@ void CObjMenu::Action()
 	//Qキーが再度押された場合
 	if (Input::GetVKey('Q') == true && m_key_f == true)
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		g_move_stop_flag = false;	//ストップフラグをオフ
 		this->SetStatus(false);		//オブジェクトを削除
 	}
 
-	if (Input::GetVKey(VK_RIGHT))//矢印キー（右）が入力されたとき
+	if (Input::GetVKey(VK_RIGHT) && m_choice_key_f == true)//キーフラグがオンの状態で、矢印キー（右）が入力されたとき
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		m_key = 0;	//０番をセット
+		m_choice_key_f = false;	//フラグをオン
 	}
-	else if (Input::GetVKey(VK_LEFT))//矢印キー（左）が入力されたとき
+	else if (Input::GetVKey(VK_LEFT) && m_choice_key_f == false)//キーフラグがオフの状態で、矢印キー（左）が入力されたとき
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		m_key = 1;	//１番をセット
+		m_choice_key_f = true;	//フラグをオン
 	}
 
 
 	//Zキーが押された場合
 	if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 	{
+		Audio::Start(2);	//エフェクト音を鳴らす
 		//０番の場合
 		if (m_key == 0)
 		{

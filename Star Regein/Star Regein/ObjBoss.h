@@ -34,7 +34,7 @@ private:
 	float m_vx;		//移動ベクトル
 	float m_vy;
 	float m_posture;//姿勢
-	float alpha;
+	float m_alpha;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
@@ -58,6 +58,9 @@ private:
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
+
+	bool m_invincible_flag;//無敵フラグ
+
 	//移動用の向き制御用
 	bool m_movex;//左右
 	bool m_movey;//上下

@@ -23,6 +23,7 @@ CObjWoman::CObjWoman(float x, float y,int id)
 	m_py = y;
 
 	m_woman_id = id;
+	g_enemy_cnt++;	//敵の総数のカウント
 }
 
 
@@ -52,15 +53,18 @@ void CObjWoman::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
+	m_kill_f = false;	//キルカウント用フラグの初期化
 
 	m_bullet_time = 100;
+
+	m_invincible_flag = false;
 
 	m_time = 30;
 
 	m_df = true;
 	count = 0;
 
-	alpha = 1.0;
+	m_alpha = 1.0;
 
 
 	//消滅アニメーション用
@@ -253,126 +257,128 @@ void CObjWoman::Action()
 			}
 		}
 
-		//ELEMENT_MAGICを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
+		//ELEMENT_SUBを持つオブジェクトと接触したら
+		if (m_invincible_flag == false)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
+			if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
+				//敵が主人公とどの角度で当たっているかを確認
+				HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+				hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-				float r = hit_data[i]->r;
+				for (int i = 0; i < hit->GetCount(); i++)
+				{
+					//攻撃の左右に当たったら
+					if (hit_data[i] == nullptr)
+						continue;
 
+					float r = hit_data[i]->r;
 
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -20.0f;//左に移動させる
+					if ((r < 45 && r >= 0) || r > 315)
+					{
+						m_vx = -20.0f;//左に移動させる
+					}
+					if (r >= 45 && r < 135)
+					{
+						m_vy = 20.0f;//上に移動させる
+					}
+					if (r >= 135 && r < 225)
+					{
+						m_vx = 20.0f;//右に移動させる
+					}
+					if (r >= 225 && r < 315)
+					{
+						m_vy = -20.0f;//したに移動させる
+					}
 				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
+
+				m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+				m_f = true;
+				m_invincible_flag = true;
+				m_key_f = true;
+
 			}
 
-			m_hp -= 1;
-			m_f = true;
-			m_key_f = true;
-			hit->SetInvincibility(true);
-
-		}
-		//ELEMENT_SKILL_VIRGOを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
-		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
+			//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+			if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
 			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
+				//敵が主人公とどの角度で当たっているかを確認
+				HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+				hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-
-				float r = hit_data[i]->r;
-
-
-
-				if ((r < 45 && r >= 0) || r > 315)
+				for (int i = 0; i < hit->GetCount(); i++)
 				{
-					m_vx = -20.0f;//左に移動させる
+					//攻撃の左右に当たったら
+					if (hit_data[i] == nullptr)
+						continue;
+
+
+					float r = hit_data[i]->r;
+
+					if ((r < 45 && r >= 0) || r > 315)
+					{
+						m_vx = -20.0f;//左に移動させる
+					}
+					if (r >= 45 && r < 135)
+					{
+						m_vy = 20.0f;//上に移動させる
+					}
+					if (r >= 135 && r < 225)
+					{
+						m_vx = 20.0f;//右に移動させる
+					}
+					if (r >= 225 && r < 315)
+					{
+						m_vy = -20.0f;//したに移動させる
+					}
 				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
+
+				m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+				m_f = true;
+				m_invincible_flag = true;
+				m_key_f = true;
+
 			}
 
-			m_hp -= 1;
-			m_f = true;
-			m_key_f = true;
-			hit->SetInvincibility(true);
-		}
-
-		//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_SUB) == true)
-		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-			for (int i = 0; i < hit->GetCount(); i++)
+			//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+			if (hit->CheckElementHit(ELEMENT_SUB) == true)
 			{
-				//攻撃の左右に当たったら
-				if (hit_data[i] == nullptr)
-					continue;
+				//敵が主人公とどの角度で当たっているかを確認
+				HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+				hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-				float r = hit_data[i]->r;
+				for (int i = 0; i < hit->GetCount(); i++)
+				{
+					//攻撃の左右に当たったら
+					if (hit_data[i] == nullptr)
+						continue;
 
-				if ((r < 45 && r >= 0) || r > 315)
-				{
-					m_vx = -20.0f;//左に移動させる
+					float r = hit_data[i]->r;
+
+					if ((r < 45 && r >= 0) || r > 315)
+					{
+						m_vx = -20.0f;//左に移動させる
+					}
+					if (r >= 45 && r < 135)
+					{
+						m_vy = 20.0f;//上に移動させる
+					}
+					if (r >= 135 && r < 225)
+					{
+						m_vx = 20.0f;//右に移動させる
+					}
+					if (r >= 225 && r < 315)
+					{
+						m_vy = -20.0f;//したに移動させる
+					}
 				}
-				if (r >= 45 && r < 135)
-				{
-					m_vy = 20.0f;//上に移動させる
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 20.0f;//右に移動させる
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -20.0f;//したに移動させる
-				}
+
+				m_hp -= 1;
+				m_f = true;
+				m_invincible_flag = true;
+				m_key_f = true;
+
 			}
-
-			m_hp -= 1;
-			m_f = true;
-			m_key_f = true;
-			hit->SetInvincibility(true);
-
 		}
 
 		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -400,16 +406,16 @@ void CObjWoman::Action()
 		if (m_f == true)
 		{
 			m_time--;
+			m_alpha = ALPHAUNDER;
 
 		}
-
 		if (m_time <= 0)
 		{
 			m_f = false;
-			hit->SetInvincibility(false);
+			m_invincible_flag = false;
+			m_alpha = ALPHAORIGIN;
 
 			m_time = 30;
-
 		}
 
 
@@ -438,8 +444,14 @@ void CObjWoman::Action()
 		if (m_ani_frame_delete == 4)
 		{
 			m_ani_frame_delete = 0;
+			//フラグがオフの場合
+			if (m_kill_f == false)
+			{
+				g_kill_cnt++;	//キルカウントを増やす
+				m_kill_f = true;//フラグをオンにして入らないようにする
+			}
 			//敵削除
-			alpha = 0.0f;
+			m_alpha = 0.0f;
 			hit->SetInvincibility(true);
 			g_cow_d_flag[m_woman_id] = false;
 			this->SetStatus(false);    //自身に削除命令を出す

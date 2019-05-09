@@ -273,11 +273,12 @@ void CObjStarChoice::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 	
+				//戻るコマンド表示
+	Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 	//地球選択時に表示される画像
 	if (g_stage == Earth)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
+		
 
 		//地球選択用の画像
 		//切り取り位置の設定
@@ -303,8 +304,6 @@ void CObjStarChoice::Draw()
 	//金星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Venus)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 
 		//牡牛座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
@@ -352,8 +351,6 @@ void CObjStarChoice::Draw()
 	//水星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Mercury)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", 380, 500, 25, down);
 
 		//双子座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
@@ -400,10 +397,6 @@ void CObjStarChoice::Draw()
 	}
 	else if(g_stage == Sun)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
-
-		//獅子座---------------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 1500.0f;
@@ -422,8 +415,6 @@ void CObjStarChoice::Draw()
 		{
 			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
-
-		Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 
 	}
 	

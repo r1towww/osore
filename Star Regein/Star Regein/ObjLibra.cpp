@@ -19,10 +19,11 @@ float* g_libra_y[20];
 
 CObjLibra::CObjLibra(float x, float y, int id)
 {
-	m_px = x;	//位置
-	m_py = y;
+	m_px = x + 375.0f;	//位置
+	m_py = y + 275.0f;
 
 	m_libra_id = id;
+	g_enemy_cnt++;	//敵の総数のカウント
 }
 
 
@@ -52,16 +53,19 @@ void CObjLibra::Init()
 
 	m_key_f = false;		//無敵時間行動制御
 	m_f = false;
-
+	m_move = false;
+	m_kill_f = false;	//キルカウント用フラグの初期化
 
 	m_bullet_time = 100;
+
+	m_invincible_flag = false;
 
 	m_time = 30;
 
 	m_df = true;
 	count = 0;
 
-	alpha = 1.0;
+	m_alpha = 1.0;
 
 
 	//消滅アニメーション用
@@ -165,7 +169,7 @@ void CObjLibra::Action()
 		}
 		else
 		{
-
+			;
 		}
 	}
 	else
@@ -174,6 +178,18 @@ void CObjLibra::Action()
 		m_vy = 0.0f;
 	}
 
+	//攻撃を受けると永遠に追い掛け回すようにする
+	if (g_move_libra_flag[m_libra_id] == false)
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+	}
+	else
+	{
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+	}
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
@@ -213,44 +229,130 @@ void CObjLibra::Action()
 		}
 	}
 
-	//ELEMENT_MAGICを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
+
+
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	if (m_invincible_flag == false)
 	{
-		//敵が主人公とどの角度で当たっているかを確認
-		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
+		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 		{
-			//攻撃の左右に当たったら
-			if (hit_data[i] == nullptr)
-				continue;
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_BEAMSABER);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 
-			float r = hit_data[i]->r;
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
 
+				float r = hit_data[i]->r;
 
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
 			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
+
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
 		}
 
-		m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
-		m_f = true;
-		m_key_f = true;
-		hit->SetInvincibility(true);
+		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SKILL_VIRGO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
+
+		//ELEMENT_SUBを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SUB) == true)
+		{
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+			for (int i = 0; i < hit->GetCount(); i++)
+			{
+				//攻撃の左右に当たったら
+				if (hit_data[i] == nullptr)
+					continue;
+
+				float r = hit_data[i]->r;
+
+				if ((r < 45 && r >= 0) || r > 315)
+				{
+					m_vx = -20.0f;//左に移動させる
+				}
+				if (r >= 45 && r < 135)
+				{
+					m_vy = 20.0f;//上に移動させる
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 20.0f;//右に移動させる
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -20.0f;//したに移動させる
+				}
+			}
+
+			m_hp -= 1;
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -259,7 +361,7 @@ void CObjLibra::Action()
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-		//ヒット判定on
+															//ヒット判定on
 		g_stan_libra_flag[m_libra_id] = true;
 	}
 
@@ -275,64 +377,30 @@ void CObjLibra::Action()
 
 	}
 
-	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_SUB) == true)
-	{
-		//敵が主人公とどの角度で当たっているかを確認
-		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_SUB);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-
-		for (int i = 0; i < hit->GetCount(); i++)
-		{
-			//攻撃の左右に当たったら
-			if (hit_data[i] == nullptr)
-				continue;
-
-			float r = hit_data[i]->r;
-
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx = -20.0f;//左に移動させる
-			}
-			if (r >= 45 && r < 135)
-			{
-				m_vy = 20.0f;//上に移動させる
-			}
-			if (r >= 135 && r < 225)
-			{
-				m_vx = 20.0f;//右に移動させる
-			}
-			if (r >= 225 && r < 315)
-			{
-				m_vy = -20.0f;//したに移動させる
-			}
-		}
-
-		m_hp -= 1;
-		m_f = true;
-		m_key_f = true;
-		hit->SetInvincibility(true);
-
-	}
-
+	//無敵時間を与え、なおかつ2倍の速度で追い掛け回す
 	if (m_f == true)
 	{
 		m_time--;
+		m_alpha = ALPHAUNDER;
 		//位置の更新
 		m_px += m_vx*2.0;
 		m_py += m_vy*2.0;
 
+		for (int i = 0; i < 20; i++)
+		{
+			g_move_libra_flag[i] = true;
+		}
 
 	}
-
+	//一定時間で無敵解除
 	if (m_time <= 0)
 	{
-		hit->SetInvincibility(false);
+		m_f = false;
+		m_invincible_flag = false;
+		m_alpha = ALPHAORIGIN;
 
 		m_time = 30;
-
 	}
-
 
 
 	//HPが0になったら破棄
@@ -355,14 +423,19 @@ void CObjLibra::Action()
 	if (m_ani_frame_delete == 4)
 	{
 		m_ani_frame_delete = 0;
+		//フラグがオフの場合
+		if (m_kill_f == false)
+		{
+			g_kill_cnt++;	//キルカウントを増やす
+			m_kill_f = true;//フラグをオンにして入らないようにする
+		}
 		//敵削除
-		alpha = 0.0f;
+		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_libra_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 
-	
 }
 
 //ドロー

@@ -145,9 +145,15 @@ void CObjSkillVirgo::Action()
 		m_vy = 0.0f;
 
 		//HP‚ªŒ¸‚Á‚Ä‚¢‚½‚ç30‰ñ•œ
-		if (g_hp <= 100)
+		if (g_hp < 100.0f)
 		{
-			g_hp += 30;
+			//70.0fˆÈã‚Ìê‡
+			if (g_hp >= 70.0f) {
+				g_hp = g_max_hp;	//Å‘å‚Ü‚Å‰ñ•œ‚³‚¹‚é
+			}
+			else{	
+				g_hp += 30.0f;	//‚»‚êˆÈŠO‚Í30.0f‰ñ•œ‚³‚¹‚é
+			}
 		}
 
 	}
