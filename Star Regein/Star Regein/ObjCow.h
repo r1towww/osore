@@ -43,7 +43,6 @@ private:
 	int m_cow_id;
 
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
@@ -65,6 +64,8 @@ private:
 	bool m_movey;//上下
 
 	bool m_do_f;//敵攻撃フラグ
+
+	bool m_f;//無敵時間
 
 	bool m_df;//ミニマップからの削除フラグ
 

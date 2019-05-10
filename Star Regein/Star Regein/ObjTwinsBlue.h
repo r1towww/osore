@@ -39,7 +39,6 @@ private:
 	int m_hp;//体力
 
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
@@ -48,6 +47,7 @@ private:
 
 	int m_blue_id;
 
+	bool m_f;//無敵時間
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値

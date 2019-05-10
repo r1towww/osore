@@ -45,7 +45,6 @@ private:
 	int m_leo_id;
 
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
@@ -57,6 +56,8 @@ private:
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
 	bool m_invincible_flag;//無敵フラグ
+
+	bool m_f;//無敵時間
 
 							//blockとの衝突状態確認用
 	bool m_hit_up;
