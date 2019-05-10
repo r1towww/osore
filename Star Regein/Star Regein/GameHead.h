@@ -184,6 +184,8 @@ extern float* g_leo_x[60];//全ての獅子のX位置を把握する
 extern float* g_leo_y[60];//全ての獅子のY位置を把握する
 extern float* g_boss_x;//ボスのX位置を把握する
 extern float* g_boss_y;//ボスのY位置を把握する
+extern float g_star_x[5];
+extern float g_star_y[5];
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
