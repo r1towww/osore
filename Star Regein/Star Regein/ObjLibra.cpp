@@ -447,7 +447,7 @@ void CObjLibra::Draw()
 	{ 1,2,3,4, };
 
 	//•`‰æƒJƒ‰[î•ñ
-	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;//•`‰æŒ³Ø‚èæ‚èˆÊ’u

@@ -225,7 +225,12 @@ void ObjStageChoiceHero::Draw()
 	//地球
 	if (g_stage_px >= EarthX && g_stage_px + 80.0f <= EarthX2 && g_stage_py >= EarthY&&g_stage_py + 80.0f <= EarthY2)
 	{
-		Font::StrDraw(L"地球ステージ", 32, 32, 32, c);
+		if (g_Sun_clear == true)
+		{
+			Font::StrDraw(L"地球ステージ", 32, 32, 32, red);
+		}
+		else
+			Font::StrDraw(L"地球ステージ", 32, 32, 32, c);
 	}
 	
 	//地球をクリアしていない場合このメッセージを表示する
