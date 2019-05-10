@@ -36,6 +36,7 @@ void CObjWoman::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
+	m_ani_timeB = 0;
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
@@ -85,12 +86,28 @@ void CObjWoman::Init()
 //アクション
 void CObjWoman::Action()
 {
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
+	}
+
 	//行動が制御されている場合（メニュー画面）
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
 
 	//チュートリアルフラグが立っていない場合動く
-	if (g_tutorial_flag == false&&g_stage_clear==false)
+	if (g_tutorial_flag == false && g_stage_clear == false)
 	{
 		//ブロックとの当たり判定実行
 		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -391,16 +408,30 @@ void CObjWoman::Action()
 			g_stan_woman_flag[m_woman_id] = true;
 		}
 
+
 		//しし座のヒット判定がonの時スタン
 		if (g_stan_woman_flag[m_woman_id] == true)
 		{
 			g_Leo_cnt += 1.0f;
-			if (g_Leo_cnt >= 200.0f)
-			{
-				g_Leo_cnt = 0.0f;
-				g_stan_woman_flag[m_woman_id] = false;
-			}
 
+			//アニメーションのコマ間隔制御
+			if (m_ani_timeB < 0)
+			{
+
+				m_ani_frame++;	//アニメーションのコマを１つ進める
+				m_ani_timeB = 10;
+
+				if (g_Leo_cnt >= 200.0f)
+				{
+					g_Leo_cnt = 0.0f;
+					g_stan_woman_flag[m_woman_id] = false;
+				}
+
+			}
+			else
+			{
+				m_ani_timeB--;
+			}
 		}
 
 		if (m_f == true)
@@ -466,22 +497,27 @@ void CObjWoman::Action()
 //ドロー
 void CObjWoman::Draw()
 {
+	//移動アニメーション
 	int AniData[4] =
 	{ 1,0,2,0, };
+	//死亡アニメーション
 	int DeleteData[4] =
 	{ 1,2,3,4, };
-
+	//スタンアニメーション
+	int AniDataB[6] =
+	{ 0,1,2,3,4,0 };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 
 	if (m_woman_delete == false)
 	{
@@ -517,5 +553,28 @@ void CObjWoman::Draw()
 
 		//表示
 		Draw::Draw(80, &src, &dst, d, 0.0f);
+	}
+	if (g_stan_woman_flag[m_woman_id] == true)
+	{
+		RECT_F src;//描画元切り取り位置
+		RECT_F dst;//描画先表示位置
+
+				   //ブロック情報を持ってくる
+		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		//切り取り位置の設定
+		src.m_top = 0.0f * m_posture;
+		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_bottom = src.m_top + 192.0f;
+
+		//表示位置の設定
+		dst.m_top    = -20.0f + m_py + block->GetScrolly();
+		dst.m_left   = 64.0f + m_px + block->GetScrollx();
+		dst.m_right  =-40.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 50.0f + m_py + block->GetScrolly();
+
+		//描画
+		Draw::Draw(49, &src, &dst, cB, 0.0f);
 	}
 }

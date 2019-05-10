@@ -43,6 +43,7 @@ private:
 
 	int m_libra_id;
 
+	int m_ani_timeB;
 	int m_time;//無敵時間測定
 	int m_bullet_time;//ハート弾発射時間測定
 	int m_f;//無敵時間
@@ -62,6 +63,11 @@ private:
 	bool m_hit_left;
 	bool m_hit_right;
 	//移動用の向き制御用
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
+
 	bool m_movex;//左右
 	bool m_movey;//上下
 

@@ -117,7 +117,8 @@ void CObjBlueBullet::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 
-		//Ø‚èæ‚èˆÊ’u‚Ìİ’è
+	
+	//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 		src.m_top = 16.0f;
 		src.m_left = 0.0f + (AniData[m_ani_frame] * 16);
 		src.m_right = 16.0f + (AniData[m_ani_frame] * 16);

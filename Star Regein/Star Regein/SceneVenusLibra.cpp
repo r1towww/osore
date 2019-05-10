@@ -73,6 +73,8 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"天秤座敵.png", 24, TEX_SIZE_128);
 
+	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
 
 	Draw::LoadImageW(L"ステージクリア画像_金星_天秤座.png", 60, TEX_SIZE_2048);
