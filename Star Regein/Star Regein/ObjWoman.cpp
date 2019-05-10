@@ -410,28 +410,29 @@ void CObjWoman::Action()
 			}
 
 
-		//しし座のヒット判定がonの時スタン
-		if (g_stan_woman_flag[m_woman_id] == true)
-		{
-			g_Leo_cnt += 1.0f;
-
-			//アニメーションのコマ間隔制御
-			if (m_ani_timeB < 0)
+			//しし座のヒット判定がonの時スタン
+			if (g_stan_woman_flag[m_woman_id] == true)
 			{
+				g_Leo_cnt += 1.0f;
 
-				m_ani_frame++;	//アニメーションのコマを１つ進める
-				m_ani_timeB = 10;
-
-				if (g_Leo_cnt >= 200.0f)
+				//アニメーションのコマ間隔制御
+				if (m_ani_timeB < 0)
 				{
-					g_Leo_cnt = 0.0f;
-					g_stan_woman_flag[m_woman_id] = false;
-				}
 
-			}
-			else
-			{
-				m_ani_timeB--;
+					m_ani_frame++;	//アニメーションのコマを１つ進める
+					m_ani_timeB = 10;
+
+					if (g_Leo_cnt >= 200.0f)
+					{
+						g_Leo_cnt = 0.0f;
+						g_stan_woman_flag[m_woman_id] = false;
+					}
+
+				}
+				else
+				{
+					m_ani_timeB--;
+				}
 			}
 		}
 

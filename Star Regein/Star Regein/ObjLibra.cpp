@@ -325,106 +325,107 @@ void CObjLibra::Action()
 		}
 
 
-	//しし座のヒット判定がonの時スタン
-	if (g_stan_libra_flag[m_libra_id] == true)
-	{
-		g_Leo_cnt += 1.0f;
-
-		//アニメーションのコマ間隔制御
-		if (m_ani_timeB < 0)
+		//しし座のヒット判定がonの時スタン
+		if (g_stan_libra_flag[m_libra_id] == true)
 		{
+			g_Leo_cnt += 1.0f;
 
-			m_ani_frame++;	//アニメーションのコマを１つ進める
-			m_ani_timeB = 10;
-
-			if (g_Leo_cnt >= 200.0f)
+			//アニメーションのコマ間隔制御
+			if (m_ani_timeB < 0)
 			{
-				g_Leo_cnt = 0.0f;
-				g_stan_libra_flag[m_libra_id] = false;
+
+				m_ani_frame++;	//アニメーションのコマを１つ進める
+				m_ani_timeB = 10;
+
+				if (g_Leo_cnt >= 200.0f)
+				{
+					g_Leo_cnt = 0.0f;
+					g_stan_libra_flag[m_libra_id] = false;
+				}
+
+			}
+			else
+			{
+				m_ani_timeB--;
+			}
+		}
+	}
+
+		if (m_f == true)
+		{
+			m_time--;
+			m_alpha = ALPHAUNDER;
+		}
+
+		//一定時間で無敵解除
+		if (m_time <= 0)
+		{
+			m_move_f = true;
+			m_f = false;
+			m_invincible_flag = false;
+			m_alpha = ALPHAORIGIN;
+
+			m_time = 30;
+		}
+
+
+
+		//主人公の位置を取得
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		if (hero != nullptr)
+		{
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+		}
+
+		if (g_stan_libra_flag[m_libra_id] == false)
+		{
+			//全員2倍の速度で追い掛け回す
+			if (m_move_f == true)
+			{
+
 			}
 
 		}
-		else
+
+		//位置の更新
+		m_px += m_vx*2.0;
+		m_py += m_vy*2.0;
+
+
+		//HPが0になったら破棄
+		if (m_hp == 0)
 		{
-			m_ani_timeB--;
+			//天秤削除フラグ
+			m_libra_delete = true;
 		}
-	}
-
-	if (m_f == true)
-	{
-		m_time--;
-		m_alpha = ALPHAUNDER;
-	}
-
-	//一定時間で無敵解除
-	if (m_time <= 0)
-	{
-		m_move_f = true;
-		m_f = false;
-		m_invincible_flag = false;
-		m_alpha = ALPHAORIGIN;
-
-		m_time = 30;
-	}
-
-
-
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (hero != nullptr)
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-	}
-
-	if (g_stan_libra_flag[m_libra_id] == false)
-	{
-		//全員2倍の速度で追い掛け回す
-		if (m_move_f == true)
+		//消滅アニメーションのコマを進める
+		if (m_libra_delete == true)
 		{
-
+			m_ani_count += 1;
 		}
-
-	}
-
-	//位置の更新
-	m_px += m_vx*2.0;
-	m_py += m_vy*2.0;
-
-
-	//HPが0になったら破棄
-	if (m_hp == 0)
-	{
-		//天秤削除フラグ
-		m_libra_delete = true;
-	}
-	//消滅アニメーションのコマを進める
-	if (m_libra_delete == true)
-	{
-		m_ani_count += 1;
-	}
-	//消滅アニメーション
-	if (m_ani_count > m_ani_max_count)
-	{
-		m_ani_frame_delete += 1;
-		m_ani_count = 0;
-	}
-	if (m_ani_frame_delete == 4)
-	{
-		m_ani_frame_delete = 0;
-		//フラグがオフの場合
-		if (m_kill_f == false)
+		//消滅アニメーション
+		if (m_ani_count > m_ani_max_count)
 		{
-			g_kill_cnt++;	//キルカウントを増やす
-			m_kill_f = true;//フラグをオンにして入らないようにする
+			m_ani_frame_delete += 1;
+			m_ani_count = 0;
 		}
-		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
-		g_libra_d_flag[m_libra_id] = false;
-		this->SetStatus(false);    //自身に削除命令を出す
-	}
-
+		if (m_ani_frame_delete == 4)
+		{
+			m_ani_frame_delete = 0;
+			//フラグがオフの場合
+			if (m_kill_f == false)
+			{
+				g_kill_cnt++;	//キルカウントを増やす
+				m_kill_f = true;//フラグをオンにして入らないようにする
+			}
+			//敵削除
+			m_alpha = 0.0f;
+			hit->SetInvincibility(true);
+			g_libra_d_flag[m_libra_id] = false;
+			this->SetStatus(false);    //自身に削除命令を出す
+		}
+	
 }
 
 //ドロー
