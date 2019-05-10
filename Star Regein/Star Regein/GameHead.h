@@ -199,6 +199,7 @@ extern float  g_mp;     //今のＭＰ
 extern float  g_max_mp; //最大ＭＰ
 extern int    g_attack_power;	//主人公の攻撃力
 
+
 extern bool g_key_flag;	//キー入力制御フラグ
 extern bool g_gemini_move;//双子座ブラックホール移動
 
