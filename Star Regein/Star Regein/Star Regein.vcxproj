@@ -110,6 +110,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ObjED.cpp" />
+    <ClCompile Include="SceneED.cpp" />
     <ClCompile Include="ObjBlueBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -186,6 +188,8 @@
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ObjED.h" />
+    <ClInclude Include="SceneED.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />

@@ -46,6 +46,7 @@ enum OBJ_NAME
 	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
+	OBJ_ED,
 
 	OBJ_SKILL,
 	OBJ_SKILL_LIBRA,
@@ -314,6 +315,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
 #include "ObjMenu.h"
+#include "ObjED.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
@@ -345,6 +347,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "SceneStageChoice.h"
 #include "SceneStageClear.h"
 #include "SceneGameOver.h"
+#include "SceneED.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

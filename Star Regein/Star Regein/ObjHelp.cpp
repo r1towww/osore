@@ -66,7 +66,7 @@ void CObjHelp::Draw()
 	//説明用のメッセージの表示
 	Font::StrDraw(L"Zキー 前方に剣で攻撃", 75, 120, 27, c);	
 	Font::StrDraw(L"Xキー 選択中のスキル発動", 75, 155, 27, c);
-	Font::StrDraw(L"Cキー スキルの切り替え", 75, 190, 27, c);
+	Font::StrDraw(L"C,Vキー スキルの切り替え", 75, 190, 27, c);
 	Font::StrDraw(L"Mキー マップの表示", 75, 225, 27, c);
 
 

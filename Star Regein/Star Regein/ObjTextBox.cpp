@@ -27,7 +27,7 @@ void CObjTextBox::Action()
 {
 	//キータイムを超えるとZ可能
 	//Zキー入力
-	if (Input::GetVKey('Z') == true&& g_tutorial_next_flag ==true)
+	if (Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true&& g_tutorial_next_flag ==true)
 	{
 			
 		if (m_f == false)
@@ -260,7 +260,7 @@ void CObjTextBox::Draw()
 		{
 			if (m_text == 0)
 			{
-				Font::StrDraw(L"陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"ここ太陽では獅子座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
@@ -275,8 +275,21 @@ void CObjTextBox::Draw()
 			else if (m_text == 2)
 			{
 				Font::StrDraw(L"ここで獲得すべき星は全部で15個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"これまでに集めた星座たちを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"クリア目指して頑張りましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"ここにいる敵は、やけどを付与する", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"攻撃をしてきます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+			}
+			else if (m_text == 3)
+			{
+				Font::StrDraw(L"やけど状態では一定時間", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"ダメージを受けてしまいます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+			}
+			else if (m_text == 4)
+			{
+				Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"ここにいる敵は、やけどを付与する", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"攻撃をしてきます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 

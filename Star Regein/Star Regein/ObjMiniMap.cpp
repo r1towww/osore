@@ -311,7 +311,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -345,7 +345,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -381,7 +381,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -417,7 +417,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -449,7 +449,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -486,7 +486,7 @@ void CObjMiniMap::Draw()
 							//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//•`‰æ
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -518,7 +518,7 @@ void CObjMiniMap::Draw()
 						//Ø‚èæ‚èˆÊ’u‚Ìİ’è
 						src.m_top = 0.0f;
 						src.m_left = 50.0f;
-						src.m_right = 100.0f;
+						src.m_right = 95.0f;
 						src.m_bottom = 50.0f;
 						//•`‰æ
 						Draw::Draw(9, &src, &dst, c, 0.0f);

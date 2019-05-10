@@ -127,7 +127,7 @@ void CObjTutorial::Draw()
 			if (m_p != 1)
 			{
 				//Z入力および制御フラグオンで次のぺージへ
-				if (Input::GetVKey('Z') == true&& m_next_f==true)
+				if (Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true&& m_next_f==true)
 				{
 					if (m_f == false)
 					{
@@ -141,7 +141,6 @@ void CObjTutorial::Draw()
 							m_sec = 0;		//秒数リセット
 							m_next_f = false;
 							g_tutorial_next_flag = true;
-
 						}
 
 					}
