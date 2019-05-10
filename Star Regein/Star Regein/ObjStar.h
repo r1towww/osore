@@ -15,6 +15,8 @@ class CObjStar : public CObj
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
+		float* GetPX() { return &m_px; }
+		float* GetPY() { return &m_py; }
 		float GetX() { return m_px; }
 		float GetY() { return m_py; }
 	private:
