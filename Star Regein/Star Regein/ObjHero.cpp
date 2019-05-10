@@ -236,7 +236,7 @@ void CObjHero::Action()
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 				m_MP_time++;
-				if (m_MP_time > 3)
+				if (m_MP_time > 15)
 				{
 					m_MP_time = 0;
 					g_mp -= 1.0f;
