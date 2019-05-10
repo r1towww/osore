@@ -46,6 +46,7 @@ enum OBJ_NAME
 	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
+	OBJ_ED,
 
 	OBJ_SKILL,
 	OBJ_SKILL_LIBRA,
@@ -163,6 +164,16 @@ typedef enum Skill
 
 }Skill;
 
+typedef enum Skill_2
+{	/* スキルごとの値 */
+	Taurus_2=-5,		//牡牛座		-5
+	Libra_2,		//天秤座		-4
+	Gemini_2,		//双子座		-3
+	Virgo_2,		//乙女座		-2
+	Leo_2,		//獅子座		-1
+
+}Skill_2;
+
 
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
@@ -183,6 +194,8 @@ extern float* g_leo_x[60];//全ての獅子のX位置を把握する
 extern float* g_leo_y[60];//全ての獅子のY位置を把握する
 extern float* g_boss_x;//ボスのX位置を把握する
 extern float* g_boss_y;//ボスのY位置を把握する
+extern float g_star_x[5];
+extern float g_star_y[5];
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
@@ -195,6 +208,7 @@ extern float  g_max_hp; //最大ＨＰ
 extern float  g_mp;     //今のＭＰ
 extern float  g_max_mp; //最大ＭＰ
 extern int    g_attack_power;	//主人公の攻撃力
+
 
 extern bool g_key_flag;	//キー入力制御フラグ
 extern bool g_gemini_move;//双子座ブラックホール移動
@@ -314,6 +328,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
 #include "ObjMenu.h"
+#include "ObjED.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
@@ -345,6 +360,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "SceneStageChoice.h"
 #include "SceneStageClear.h"
 #include "SceneGameOver.h"
+#include "SceneED.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

@@ -59,6 +59,8 @@ void CSceneMercuryVirgo::InitScene()
 	Draw::LoadImageW(L"主人公.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"主人公斬撃アニメーション.png", 2, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"天秤座スキルエフェクト.png", 14, TEX_SIZE_2048);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
 	Draw::LoadImageW(L"岩砕きエフェクト.png", 17, TEX_SIZE_2048);

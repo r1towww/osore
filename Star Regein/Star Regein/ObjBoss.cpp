@@ -6,6 +6,7 @@
 #include"GameL\SceneManager.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\UserData.h" 
+#include<time.h>
 
 #include"GameHead.h"
 #include"ObjBoss.h"
@@ -56,6 +57,8 @@ void CObjBoss::Init()
 
 	m_time = 30;
 
+	m_rand = 0;
+
 	m_invincible_flag = false;
 
 	m_df = true;
@@ -65,9 +68,20 @@ void CObjBoss::Init()
 
 	srand(time(NULL));
 
+	//ワープアニメーション関連初期化
+	m_warp_eff.m_top = 0;	//エフェクト初期値の初期化
+	m_warp_eff.m_left = 0;
+	m_warp_eff.m_right = 192;
+	m_warp_eff.m_bottom = 192;
+
+	m_warp_ani = 0;			//アニメーション用
+	m_warp_ani_time = 0;		//アニメーション間隔タイム
+
+	m_warp_flag = false;
+
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_COW, 1);
 }
 
 //アクション
@@ -88,19 +102,64 @@ void CObjBoss::Action()
 	{
 		m_ani_frame = 0;
 	}
-
-	//時間経過でランダムにワープ
-	if (m_warp_time <= 0)
-	{
-		//m_px = ;
-		//m_py = ;
-	}
-
+	
+	
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
+
+	//時間経過でランダムにワープ
+	if (m_warp_time <= 0)
+	{
+		m_warp_flag = true;
+
+		//エフェクト用
+		RECT_F warp_ani_src[8] =
+		{
+			{ 0,   0,  192, 192 },
+			{ 0, 192,  384, 192 },
+			{ 0, 384,  576, 192 },
+			{ 0, 576,  768, 192 },
+			{ 0, 768,  960, 192 },
+			{ 192,   0,  192, 384 },
+			{ 192, 192,  384, 384 },
+			{ 192, 384,  576, 384 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_warp_ani_time > 2)
+		{
+			m_warp_ani++;		//アニメーションのコマを1つ進める
+			m_warp_ani_time = 0;
+
+			m_warp_eff = warp_ani_src[m_warp_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_warp_ani_time++;
+		}
+
+		if (m_warp_ani == 4)
+		{
+			srand(time(NULL));
+			//マップのランダム処理の初期化
+			m_rand = rand() % 5;
+
+			m_px = g_star_x[m_rand];
+			m_py = g_star_y[m_rand];
+		}
+
+		//7番目（画像最後）まで進んだら、0に戻す
+		if (m_warp_ani == 7)
+		{
+			m_warp_ani = 0;
+			m_warp_time = 300;
+			m_warp_flag = false;
+		}
+
+	}
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -112,7 +171,7 @@ void CObjBoss::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
+	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
 
 	//主人公とBLOCK系統との当たり判定
@@ -325,7 +384,7 @@ void CObjBoss::Draw()
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
-			   //ブロック情報を持ってくる
+	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
@@ -339,6 +398,16 @@ void CObjBoss::Draw()
 	dst.m_left = 160.0f + m_px + block->GetScrollx();
 	dst.m_right = 0.0f + m_px + block->GetScrollx();
 	dst.m_bottom = 160.0f + m_py + block->GetScrolly();
+
+	if (m_warp_flag == true)
+	{
+		//エフェクトの描画
+		Draw::Draw(34, &m_warp_eff, &dst, c,0.0f);
+	}
+	else
+	{
+		m_warp_ani = 0;
+	}
 
 
 	//描画

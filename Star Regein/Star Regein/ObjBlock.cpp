@@ -71,6 +71,7 @@ void CObjBlock::Init()
 	m_w_c = 0;
 	m_libra_c = 0;
 	m_leo_c = 0;
+	m_star_c = 0;
 
 	//敵出現
 	if (g_stage == VenusTaurus)
@@ -290,8 +291,18 @@ void CObjBlock::Init()
 			if (m_map[i][j] == 2)
 			{
 				//星オブジェクト作成
-				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j,1);//オブジェクト作成
+				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j,m_star_c);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 5);//マネージャに登録
+
+				if (g_stage == EarthStar)
+				{
+					//星の位置を取得
+
+					g_star_x[m_star_c] = objstar->GetX();
+					g_star_y[m_star_c] = objstar->GetY();
+
+					m_star_c++;
+				}
 
 			}
 			if (m_map[i][j] == g_asteroid || m_map[i][j] == 6)

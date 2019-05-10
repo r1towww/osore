@@ -44,8 +44,8 @@ private:
 
 	int m_leo_id;
 
+	int m_ani_timeB;
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
@@ -58,6 +58,8 @@ private:
 
 	bool m_invincible_flag;//無敵フラグ
 
+	bool m_f;//無敵時間
+
 							//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
@@ -66,6 +68,10 @@ private:
 	//移動用の向き制御用
 	bool m_movex;//左右
 	bool m_movey;//上下
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
 
 	bool m_do_f;//敵攻撃フラグ
 

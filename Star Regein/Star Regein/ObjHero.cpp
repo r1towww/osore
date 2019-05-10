@@ -239,7 +239,7 @@ void CObjHero::Action()
 	//スキル系統情報-------------------------------------------------
 
 			//Shiftキーが入力されたらダッシュ
-		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus||g_skill==Taurus_2
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 			//ダッシュエフェクト音フラグがオフの場合エフェクト音を鳴らす
@@ -249,7 +249,7 @@ void CObjHero::Action()
 				m_dash_eff_f = true;
 			}
 				m_MP_time++;
-				if (m_MP_time > 3)
+				if (m_MP_time > 15)
 				{
 					m_MP_time = 0;
 					g_mp -= 1.0f;
@@ -309,7 +309,7 @@ void CObjHero::Action()
 	}
 
 	//天秤座の場合（パッシブ）
-	if (g_skill == Libra)
+	if (g_skill == Libra||g_skill==Libra_2)
 	{
 		//エフェクトを１度だけ出すようにする
 		if (m_libra_eff_f == false)
@@ -344,7 +344,7 @@ void CObjHero::Action()
 		if (m_key_f == true)
 		{
 			//双子座の場合
-			if (g_skill == Gemini && g_gemini_check == false && g_mp == g_max_mp)
+			if (g_skill == Gemini ||g_skill==Gemini_2&& g_gemini_check == false && g_mp == g_max_mp)
 			{
 				//ブロック情報を持ってくる
 				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -359,7 +359,7 @@ void CObjHero::Action()
 				g_gemini_check = true;
 			}
 			//乙女座の場合
-			else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
+			else if (g_skill == Virgo||g_skill==Virgo_2 && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
 			{
 				//ブロック情報を持ってくる
 				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -372,7 +372,7 @@ void CObjHero::Action()
 
 			}
 			//獅子座の場合
-			else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
+			else if (g_skill == Leo||g_skill==Leo_2 && g_Leo == true && g_mp >= 30.0f)
 			{
 				//スタンオブジェクト作成
 				CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
@@ -385,6 +385,15 @@ void CObjHero::Action()
 	}
 	//Cキーが入力された場合
 	else if (Input::GetVKey('C'))
+	{
+		if (m_key_f == true)
+		{
+			Audio::Start(1);	//エフェクト音を鳴らす
+			g_skill -= NEXTSKILL;	//スキルの画像を次へ送る
+			m_key_f = false;
+		}
+	}
+	else if (Input::GetVKey('V'))
 	{
 		if (m_key_f == true)
 		{
@@ -736,10 +745,10 @@ void CObjHero::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top    = 64.0f * g_posture;
+	src.m_top    = 65.0f * g_posture;
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_bottom = src.m_top + 65.0f;
 	if (g_stage_clear == false)
 	{
 		//表示位置の設定

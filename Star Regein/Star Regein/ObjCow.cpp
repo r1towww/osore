@@ -37,6 +37,7 @@ void CObjCow::Init()
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
 	m_ani_time = 0;
+	m_ani_timeB = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
@@ -66,6 +67,7 @@ void CObjCow::Init()
 
 	m_alpha = 1.0;
 
+
 	
 	//消滅アニメーション用
 	m_ani_delete = 0;
@@ -86,10 +88,16 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
-	
-	//行動が制御されている場合（メニュー画面）
-	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
+	}
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -302,6 +310,7 @@ void CObjCow::Action()
 
 				float r = hit_data[i]->r;
 
+
 				if ((r < 45 && r >= 0) || r > 315)
 				{
 					m_vx = -20.0f;//左に移動させる
@@ -407,28 +416,54 @@ void CObjCow::Action()
 			m_key_f = true;
 
 		}
-	}
 
-	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
-	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
-	{
-		//敵が主人公とどの角度で当たっているかを確認
-		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-		//ヒット判定on
-		g_stan_cow_flag[m_cow_id] = true;
-	}
 
-	//しし座のヒット判定がonの時スタン
-	if (g_stan_cow_flag[m_cow_id] == true)
-	{
-		g_Leo_cnt += 1.0f;
-		if (g_Leo_cnt >= 200.0f)
+		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
 		{
-			g_Leo_cnt = 0.0f;
-			g_stan_cow_flag[m_cow_id] = false;
+			//敵が主人公とどの角度で当たっているかを確認
+			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+			hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+			//ヒット判定on
+			g_stan_cow_flag[m_cow_id] = true;
 		}
 
+		//しし座のヒット判定がonの時スタン
+		if (g_stan_cow_flag[m_cow_id] == true)
+		{
+
+			g_Leo_cnt += 1.0f;
+
+
+			//アニメーションのコマ間隔制御
+			if (m_ani_timeB < 0)
+			{
+
+				m_ani_frame++;	//アニメーションのコマを１つ進める
+				m_ani_timeB = 10;
+
+				m_ani_stop++;
+
+			if (m_ani_stop >= 10)
+			{
+				m_eff.m_top = 0;
+				m_eff.m_left = 0;
+				m_eff.m_right = 213;
+				m_eff.m_bottom = 192;
+
+				}
+				if (g_Leo_cnt >= 200.0f)
+				{
+					g_Leo_cnt = 0.0f;
+					g_stan_cow_flag[m_cow_id] = false;
+				}
+			}
+
+			else
+			{
+				m_ani_timeB--;
+			}
+		}
 	}
 
 	if (m_f == true)
@@ -512,18 +547,20 @@ void CObjCow::Draw()
 	int DeleteData[4] =
 	{1,2,3,4, };
 
+	int AniDataB[6] =
+	{ 0,1,2,3,4,0 };
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
+	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-
 
 	if (m_cow_delete == false)
 	{
@@ -560,5 +597,28 @@ void CObjCow::Draw()
 
 		//表示
 		Draw::Draw(80, &src, &dst, d, 0.0f);
+	}
+	if (g_stan_cow_flag[m_cow_id] == true)
+	{
+		RECT_F src;//描画元切り取り位置
+		RECT_F dst;//描画先表示位置
+
+				   //ブロック情報を持ってくる
+		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		//切り取り位置の設定
+		src.m_top = 0.0f * m_posture;
+		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_bottom = src.m_top + 192.0f;
+
+		//表示位置の設定
+		dst.m_top =   -5.0f + m_py + block->GetScrolly();
+		dst.m_left =   94.0f + m_px + block->GetScrollx();
+		dst.m_right = -30.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 85.0f + m_py + block->GetScrolly();
+
+		//描画
+		Draw::Draw(49, &src, &dst, cB, 0.0f);
 	}
 }
