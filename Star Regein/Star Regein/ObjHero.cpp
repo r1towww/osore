@@ -77,6 +77,8 @@ void CObjHero::Init()
 	m_cool_flag = false;
 	m_cool_time = 0;
 
+	m_dash_eff_f = false;
+
 	//攻撃制御フラグ
 	m_a_flag = true;
 	//攻撃力の初期化
@@ -160,6 +162,11 @@ void CObjHero::Action()
 		{
 			g_hp += 1.0f;
 		}
+		//デバック用
+		if (Input::GetVKey('J'))
+		{
+			g_mp += 1.0f;
+		}
 		if (Input::GetVKey('W'))
 		{
 			//オブジェクト作成
@@ -235,6 +242,12 @@ void CObjHero::Action()
 		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
+			//ダッシュエフェクト音フラグがオフの場合エフェクト音を鳴らす
+			if (m_dash_eff_f == false)
+			{
+				Audio::Start(11);
+				m_dash_eff_f = true;
+			}
 				m_MP_time++;
 				if (m_MP_time > 3)
 				{
@@ -274,7 +287,9 @@ void CObjHero::Action()
 		}
 	}
 	else//通常速度
-	{
+	{	
+		Audio::Stop(11);	//ダッシュをしていない際エフェクト音を止める
+		m_dash_eff_f = false;	//ダッシュエフェクト音フラグをオフにする(音が鳴るようにする)
 		m_dash_flag = false;
 		m_speed_power = NORMAL_SPEED;
 	}

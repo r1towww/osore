@@ -105,6 +105,12 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 	Audio::LoadAudio(9, L"ステージクリア.wav", EFFECT);
 	Audio::LoadAudio(10, L"ゲームオーバー.wav", EFFECT);
+	//各星座スキル用SE
+	Audio::LoadAudio(11, L"牡牛座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(12, L"天秤座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(13, L"双子座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);

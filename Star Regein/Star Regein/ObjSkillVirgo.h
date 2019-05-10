@@ -29,7 +29,8 @@ private:
 	int m_pos_x;	//ヒットボックスの向き用変数
 	int m_pos_y;
 	int m_angle;	//ハート弾の角度用変数
-
+	bool m_f;		//エフェクト音用フラグ
+	bool m_bullet_f;//着弾用フラグ
 	bool m_hit_flag;//着弾フラグ
 
 	int m_ani_time; //アニメーションフレーム動作間隔
