@@ -327,6 +327,7 @@ void CObjCow::Action()
 
 				float r = hit_data[i]->r;
 
+
 				if ((r < 45 && r >= 0) || r > 315)
 				{
 					m_vx = -20.0f;//¶‚ÉˆÚ“®‚³‚¹‚é

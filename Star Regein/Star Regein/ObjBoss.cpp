@@ -143,12 +143,12 @@ void CObjBoss::Action()
 
 		if (m_warp_ani == 4)
 		{
-			//srand(time(NULL));
-			////マップのランダム処理の初期化
-			//m_rand = rand() % 5;
+			srand(time(NULL));
+			//マップのランダム処理の初期化
+			m_rand = rand() % 5;
 
-			//m_px = g_star_x[m_rand];
-			//m_py = g_star_y[m_rand];
+			m_px = g_star_x[m_rand];
+			m_py = g_star_y[m_rand];
 		}
 
 		//7番目（画像最後）まで進んだら、0に戻す

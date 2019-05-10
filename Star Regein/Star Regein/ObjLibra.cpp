@@ -229,6 +229,43 @@ void CObjLibra::Action()
 		}
 	}
 
+	//敵とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_NULL) == true)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_NULL);
+
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+
+			}
+		}
+	}
+
 
 
 	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
@@ -272,6 +309,7 @@ void CObjLibra::Action()
 			m_key_f = true;
 
 		}
+
 
 		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
 		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
@@ -382,10 +420,7 @@ void CObjLibra::Action()
 	{
 		m_time--;
 		m_alpha = ALPHAUNDER;
-		//位置の更新
-		m_px += m_vx*2.0;
-		m_py += m_vy*2.0;
-
+		//敵の数分回して、全員trueにする
 		for (int i = 0; i < 20; i++)
 		{
 			g_move_libra_flag[i] = true;

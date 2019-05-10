@@ -192,18 +192,16 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 5)
 			{
-				Font::StrDraw(L"もし、先におうし座のダッシュスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"獲得しているなら、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"シフトキーで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"天秤座の敵は温厚で", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"基本的に戦う意思はないので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"平和にいきましょう…！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 
 			}
 			else if (m_text == 6)
 			{
-				Font::StrDraw(L"スキルを使うにはMP（青いゲージ）が必要です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"MPは時間経過で回復していくので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"どんどん使っていきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
+				Font::StrDraw(L"もし、攻撃してしまったら・・・", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"その時は頑張って生きてください・・・", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 			}
 		}
 		//ふたご座
@@ -287,9 +285,9 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 4)
 			{
-				Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここにいる敵は、やけどを付与する", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"攻撃をしてきます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"やけどは無効化できないので", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"スキルを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"攻略していきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 
