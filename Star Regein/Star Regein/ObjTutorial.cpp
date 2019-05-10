@@ -217,8 +217,14 @@ void CObjTutorial::Draw()
 			else 
 			{ ; }
 		}
-		Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
-
+		if (g_stage == EarthStar)
+		{
+			Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
+		}
+		else
+		{
+			Font::StrDraw(L"天の声", 10, 380, 30, c);
+		}
 
 
 

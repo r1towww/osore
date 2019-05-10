@@ -43,6 +43,10 @@ void CObjStageChoice::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float y[4] = { 1.0f,1.0f,0.0f,m_alpha };
+	float r[4] = { 1.0f,0.0f,0.0f,m_alpha };
+
+	//地球変更用
+	float E[4] = { 0.2f,0.2f,0.2f,m_alpha };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -77,9 +81,19 @@ void CObjStageChoice::Draw()
 	dst.m_right  = 175.0f;
 	dst.m_bottom = 550.0f;
 
-	//表示
-	Draw::Draw(8, &src, &dst, c, 0.0f);
-	if (g_Earth_clear == true)
+	//表示(太陽クリアで見た目変化)
+	if (g_Sun_clear == true)
+	{
+		Draw::Draw(8, &src, &dst, E, 0.0f);
+	}
+	else
+		Draw::Draw(8, &src, &dst, c, 0.0f);
+
+	if (g_Sun_clear == true)
+	{
+		;
+	}
+	else if (g_Earth_clear == true)
 	{
 		Font::StrDraw(L"CLEAR!", 40, 550, 40, y);
 	}
@@ -152,5 +166,12 @@ void CObjStageChoice::Draw()
 	}
 
 	//----------------------------------------
+
+	//太陽をクリアで地球にボスが出現したことを知らせるためのもの
+	if (g_Sun_clear == true)
+	{
+		Font::StrDraw(L"!!!!!", 40, 400, 40, r);
+
+	}
 
 }

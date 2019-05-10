@@ -323,7 +323,7 @@ void CObjMiniMap::Draw()
 			}
 			if (g_stage == VenusLibra)
 			{
-				for (int i = 0; i < 10; i++)//“G‚Ì”•ª‰ñ‚·
+				for (int i = 0; i < 20; i++)//“G‚Ì”•ª‰ñ‚·
 				{
 					float lx = *g_libra_x[i];
 					float ly = *g_libra_y[i];
@@ -464,7 +464,7 @@ void CObjMiniMap::Draw()
 
 			if (g_stage == SunLeo)
 			{
-				for (int i = 0; i < 40; i++)//“G‚Ì”•ª‰ñ‚·
+				for (int i = 0; i < 41; i++)//“G‚Ì”•ª‰ñ‚·
 				{
 					float lx = *g_leo_x[i];
 					float ly = *g_leo_y[i];

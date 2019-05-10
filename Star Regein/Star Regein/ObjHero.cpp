@@ -130,7 +130,7 @@ void CObjHero::Action()
 		m_blackhole_num = 2;
 	}
 	else if (g_stage == SunLeo) {	//éÇéqç¿
-		m_blackhole_num = 1;
+		m_blackhole_num = 2;
 	}
 	else
 	{
