@@ -86,19 +86,10 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
-
-	if (m_ani_frame == 3)
-	{
-		m_ani_frame = 1;
-	}
-
 	
-	
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -522,7 +513,7 @@ void CObjCow::Draw()
 	{1,2,3,4, };
 
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 

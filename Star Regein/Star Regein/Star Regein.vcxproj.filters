@@ -184,9 +184,6 @@
     <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillItem.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSkillLeo.cpp">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClCompile>
@@ -208,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,9 +400,6 @@
     <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル\双子座</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillItem.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjSkillLeo.h">
       <Filter>ソースファイル\スキル\獅子座</Filter>
     </ClInclude>
@@ -424,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="ObjBoss.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
