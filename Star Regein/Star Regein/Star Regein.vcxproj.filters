@@ -206,6 +206,12 @@
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
+    <ClCompile Include="SceneED.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjED.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
     <ClCompile Include="ObjSkillItem.cpp">
       <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClCompile>
@@ -421,6 +427,12 @@
     </ClInclude>
     <ClInclude Include="ObjBoss.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneED.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjED.h">
+      <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル\アイテム</Filter>
