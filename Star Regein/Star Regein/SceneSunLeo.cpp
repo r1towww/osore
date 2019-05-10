@@ -139,10 +139,10 @@ void CSceneSunLeo::InitScene()
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
 	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
 	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
 	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 3);
+	CObjTutorial* objtutorial = new CObjTutorial(1, 5);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
 	if (g_tutorial_flag == true)

@@ -327,6 +327,7 @@ void CObjCow::Action()
 
 				float r = hit_data[i]->r;
 
+
 				if ((r < 45 && r >= 0) || r > 315)
 				{
 					m_vx = -20.0f;//ç∂Ç…à⁄ìÆÇ≥ÇπÇÈ
@@ -616,7 +617,7 @@ void CObjCow::Draw()
 		//ï\é¶
 		Draw::Draw(80, &src, &dst, d, 0.0f);
 	}
-}
+
 	//ï`âÊ
 	Draw::Draw(3, &src, &dst, c, 0.0f);
 
