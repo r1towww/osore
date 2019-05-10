@@ -93,14 +93,14 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"HP.png", 10, TEX_SIZE_2048);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 13, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダッシュ.png", 15, TEX_SIZE_1024);
+
+	Draw::LoadImageW(L"ボス.png", 33, TEX_SIZE_512);
 	
-
-	//Draw::LoadImageW(L"キラキラ.png", 16, TEX_SIZE_1024);
-
-
 	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
 
 
 	//Audio
@@ -111,6 +111,8 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(5, L"手足・殴る、蹴る09.wav", EFFECT);		//ダメージSE
 	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
+	Audio::LoadAudio(9, L"ステージクリア.wav", EFFECT);
+	Audio::LoadAudio(10, L"ゲームオーバー.wav", EFFECT);
 
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
@@ -133,7 +135,7 @@ void CSceneEarth::InitScene()
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
-	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
@@ -214,6 +216,7 @@ void CSceneEarth::ClearCheck(bool a)
 		}
 		else
 		{
+			Audio::Start(9);
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);

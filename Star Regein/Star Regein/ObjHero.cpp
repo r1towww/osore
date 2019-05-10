@@ -130,16 +130,17 @@ void CObjHero::Action()
 		m_blackhole_num = 2;
 	}
 	else if (g_stage == SunLeo) {	//獅子座
-		m_blackhole_num = 1;
+		m_blackhole_num = 2;
 	}
 	else
 	{
 		m_blackhole_num = 0;
 	}
 
-
+	//ステージクリアの情報を持ってくる
+	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
-	if (g_tutorial_flag == true || g_move_stop_flag == true)
+	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -149,17 +150,24 @@ void CObjHero::Action()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-	//デバック用
-	if (Input::GetVKey('L'))
-	{
-		g_hp -= 1.0f;
-	}
-	//デバック用
-	if (Input::GetVKey('K'))
-	{
-		g_hp += 1.0f;
-	}
-	//移動系統情報--------------------------------------------------
+		//デバック用
+		if (Input::GetVKey('L'))
+		{
+			g_hp -= 1.0f;
+		}
+		//デバック用
+		if (Input::GetVKey('K'))
+		{
+			g_hp += 1.0f;
+		}
+		if (Input::GetVKey('W'))
+		{
+			//オブジェクト作成
+			CObjStageClear* objs = new CObjStageClear();
+			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+		}
+
+		//移動系統情報--------------------------------------------------
 
 	if (Input::GetVKey(VK_UP))//矢印キー（上）が入力されたとき
 	{
@@ -223,19 +231,17 @@ void CObjHero::Action()
 
 	//スキル系統情報-------------------------------------------------
 
-
-
-		//Shiftキーが入力されたらダッシュ
-	if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
-		&& g_Taurus == true && m_dash_flag == true && m_cool_flag == false)
-	{
-		m_MP_time++;
-		if (m_MP_time > 3)
+			//Shiftキーが入力されたらダッシュ
+		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
-			m_MP_time = 0;
-			g_mp -= 1.0f;
-		}
-		m_speed_power = DASH_SPEED;
+				m_MP_time++;
+				if (m_MP_time > 3)
+				{
+					m_MP_time = 0;
+					g_mp -= 1.0f;
+				}
+			m_speed_power = DASH_SPEED;
 
 		//ダッシュエフェクト用処理------------------------------
 		RECT_F ani_src[6] =
@@ -367,6 +373,7 @@ void CObjHero::Action()
 	{
 		if (m_key_f == true)
 		{
+			Audio::Start(1);	//エフェクト音を鳴らす
 			g_skill += NEXTSKILL;	//スキルの画像を次へ送る
 			m_key_f = false;
 		}
@@ -411,40 +418,42 @@ void CObjHero::Action()
 
 	//----------------------------------------------------------------
 
-	//ヘルプの情報を持ってくる
-	CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
-	//ヘルプオブジェクトが存在する場合、入力の許可
-	if (objhelp == nullptr)
-	{
-		//Hキーが入力された場合
-		if (Input::GetVKey('H'))
+		//ヘルプの情報を持ってくる
+		CObjHelp* objhelp = (CObjHelp*)Objs::GetObj(OBJ_HELP);
+		//ヘルプオブジェクトが存在する場合、入力の許可
+		if (objhelp == nullptr)
 		{
-			if (m_help_key_f == true)
+			//Hキーが入力された場合
+			if (Input::GetVKey('H'))
 			{
-				//HELPオブジェクトを作成
-				CObjHelp *objhelp = new CObjHelp();
-				Objs::InsertObj(objhelp, OBJ_HELP, 150);
-				m_help_key_f = false;
+				if (m_help_key_f == true)
+				{
+					Audio::Start(1);	//エフェクト音を鳴らす
+					//HELPオブジェクトを作成
+					CObjHelp *objhelp = new CObjHelp();
+					Objs::InsertObj(objhelp, OBJ_HELP, 150);
+					m_help_key_f = false;
+				}
+			}
+			else
+			{
+				m_help_key_f = true;
 			}
 		}
-		else
-		{
-			m_help_key_f = true;
-		}
-	}
 
-	//Qキーが入力された場合
-	if (Input::GetVKey('Q'))
-	{
-		if (m_menu_key_f == true)
+		//Qキーが入力された場合
+		if (Input::GetVKey('Q'))
 		{
-			//ベクトルを０にする
-			m_vx = 0.0f;
-			m_vy = 0.0f;
-			//Menuオブジェクトを作成
-			CObjMenu *objmenu = new CObjMenu();
-			Objs::InsertObj(objmenu, OBJ_MENU, 150);
-			g_move_stop_flag = true;	//ストップフラグをオン
+			if (m_menu_key_f == true)
+			{
+				Audio::Start(1);	//エフェクト音を鳴らす
+				//ベクトルを０にする
+				m_vx = 0.0f;
+				m_vy = 0.0f;
+				//Menuオブジェクトを作成
+				CObjMenu *objmenu = new CObjMenu();
+				Objs::InsertObj(objmenu, OBJ_MENU, 150);
+				g_move_stop_flag = true;	//ストップフラグをオン
 
 			m_menu_key_f = false;
 		}
@@ -551,15 +560,15 @@ void CObjHero::Action()
 			if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
 				g_mp -= 25.0f;
 
-			//ダメージ音を鳴らす
-			Audio::Start(5);
-
-			g_hp -= 10.0f;
-			m_f = true;
-			m_key_f = true;
-			m_invincible_flag = true;
+				//ダメージ音を鳴らす
+				Audio::Start(5);
+				g_no_damage = true;	//ノーダメージフラグをオンにする
+				g_hp -= 10.0f;
+				m_f = true;
+				m_key_f = true;
+				m_invincible_flag = true;
+			}
 		}
-	}
 
 	//獅子と当たった場合火傷状態を付与
 	if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)

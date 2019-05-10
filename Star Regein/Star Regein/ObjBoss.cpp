@@ -1,0 +1,346 @@
+//使用するヘッダーファイル
+#include <stdlib.h>
+#include <time.h>
+#include"GameL\DrawTexture.h"
+#include"GameL\WinInputs.h"
+#include"GameL\SceneManager.h"
+#include"GameL\HitBoxManager.h"
+#include"GameL\UserData.h" 
+
+#include"GameHead.h"
+#include"ObjBoss.h"
+#include "UtilityModule.h"
+
+//使用するネームスペース
+using namespace GameL;
+
+float* g_boss_x;
+float* g_boss_y;
+
+
+CObjBoss::CObjBoss(float x, float y)
+{
+	m_px = x;	//位置
+	m_py = y;
+}
+
+//イニシャライズ
+void CObjBoss::Init()
+{
+	m_hp = 40;        //体力
+	m_vx = 0.0f;	//移動ベクトル
+	m_vy = 0.0f;
+	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
+
+	m_ani_time = 0;
+	m_ani_frame = 0;	//静止フレームを初期にする
+
+	m_warp_time = 300;
+
+	m_speed_power = 2.0f;//通常速度
+	m_ani_max_time = 15;	//アニメーション間隔幅
+
+	m_movey = true; //true=正面　false=背面
+	m_movex = true;	//true=右　false=左
+
+	//blockとの衝突状態確認用
+	m_hit_up = false;
+	m_hit_down = false;
+	m_hit_left = false;
+	m_hit_right = false;
+
+	m_key_f = false;		//無敵時間行動制御
+	m_f = false;
+
+	g_Leo_cnt = 0.0f;
+
+	m_time = 30;
+
+	m_invincible_flag = false;
+
+	m_df = true;
+	count = 0;
+
+	m_alpha = 1.0;
+
+	srand(time(NULL));
+
+
+	//当たり判定用のHitBoxを作成
+	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
+}
+
+//アクション
+void CObjBoss::Action()
+{
+
+	m_warp_time--;
+
+	m_ani_time++;
+
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 0;
+	}
+
+	//時間経過でランダムにワープ
+	if (m_warp_time <= 0)
+	{
+		//m_px = ;
+		//m_py = ;
+	}
+
+	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py, false,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
+	);
+
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	if (hero != nullptr)
+	{
+		float hx = hero->GetX();
+		float hy = hero->GetY();
+	}
+
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
+	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
+
+
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
+
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
+
+	//敵とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_NULL) == true)
+	{
+		//敵がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_NULL);
+
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+
+			}
+		}
+	}
+
+	//ELEMENT_BEAMSABERを持つオブジェクトと接触したら
+	if (m_invincible_flag == false)
+	{
+		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
+		{
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
+
+		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
+		{
+			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
+
+		//ELEMENT_SUBを持つオブジェクトと接触したら
+		if (hit->CheckElementHit(ELEMENT_SUB) == true)
+		{
+			m_hp -= 1;
+			m_f = true;
+			m_invincible_flag = true;
+			m_key_f = true;
+
+		}
+	}
+
+		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		//ヒット判定on
+		g_stan_boss_flag = true;
+	}
+
+	//しし座のヒット判定がonの時スタン 
+	if (g_stan_boss_flag == true)
+	{
+		g_Leo_cnt += 1.0f;
+		if (g_Leo_cnt >= 200.0f)
+		{
+			g_Leo_cnt = 0.0f;
+			g_stan_boss_flag = false;
+		}
+
+	}
+
+	if (m_f == true)
+	{
+		m_time--;
+		m_alpha = ALPHAUNDER;
+
+	}
+	if (m_time <= 0)
+	{
+		m_f = false;
+		m_invincible_flag = false;
+		m_alpha = ALPHAORIGIN;
+
+		m_time = 30;
+	}
+
+
+	//位置の更新
+	m_px += m_vx*1.0;
+	m_py += m_vy*1.0;
+
+	//HPが0になったら破棄
+	if (m_hp <= 0)
+	{
+		//敵削除
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_boss_d_flag = false;
+	}
+	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
+
+
+
+}
+
+//ドロー
+void CObjBoss::Draw()
+{
+	int AniData[4] =
+	{ 1,0,2,0, };
+
+	//描画カラー情報
+	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
+
+	RECT_F src;//描画元切り取り位置
+	RECT_F dst;//描画先表示位置
+
+			   //ブロック情報を持ってくる
+	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//切り取り位置の設定
+	src.m_top = 80.0f * m_posture;
+	src.m_left = 0.0f + (AniData[m_ani_frame] * 80);
+	src.m_right = 80.0f + (AniData[m_ani_frame] * 80);
+	src.m_bottom = src.m_top + 80.0f;
+
+	//表示位置の設定
+	dst.m_top = 0.0f + m_py + block->GetScrolly();
+	dst.m_left = 160.0f + m_px + block->GetScrollx();
+	dst.m_right = 0.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 160.0f + m_py + block->GetScrolly();
+
+
+	//描画
+	Draw::Draw(33, &src, &dst, c, 0.0f);
+}

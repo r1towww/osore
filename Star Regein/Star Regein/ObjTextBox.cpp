@@ -59,12 +59,12 @@ void CObjTextBox::Draw()
 	if (g_tutorial_flag == true)
 	{
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
-		if (g_stage == Space)
+		if (g_stage == EarthStar)
 		{
-			;
+			Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 		}
 		else
-			Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
+			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
 
 	}
 	//チュートリアルフラグがオフで終了する
@@ -260,7 +260,7 @@ void CObjTextBox::Draw()
 		{
 			if (m_text == 0)
 			{
-				Font::StrDraw(L"最終ステージ太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"ここ太陽では獅子座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 

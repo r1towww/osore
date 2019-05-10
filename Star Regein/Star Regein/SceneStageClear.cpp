@@ -36,7 +36,6 @@ void CSceneStageClear::InitScene()
 	//クリアオブジェクト作成
 	CObjStageClear* oc = new CObjStageClear();
 	Objs::InsertObj(oc, OBJ_STAGECLEAR, 1);
-
 }
 //実行中メソッド
 void CSceneStageClear::Scene()

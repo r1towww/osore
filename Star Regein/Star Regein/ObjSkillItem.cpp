@@ -4,6 +4,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjSkillItem.h"
@@ -72,8 +73,9 @@ void CObjSkillItem::Action()
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+		Audio::Stop(8);
 		g_skill_item_flag = true;  //スキルアイテムフラグオン
-		g_move_stop_flag = false;
+		g_move_stop_flag = false;  
 	}
 
 

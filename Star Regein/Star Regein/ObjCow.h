@@ -34,7 +34,7 @@ private:
 	float m_vx;		//移動ベクトル
 	float m_vy;
 	float m_posture;//姿勢
-	float alpha;
+	float m_alpha;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
@@ -52,6 +52,8 @@ private:
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
+
+	bool m_invincible_flag;//無敵フラグ
 
 	//blockとの衝突状態確認用
 	bool m_hit_up;
@@ -71,5 +73,14 @@ private:
 	RECT_F m_eff;		//チャージエフェクト描画用
 	int m_ani_stop;
 
+	
+	bool m_kill_f;	//キルカウント用フラグ
+	bool m_cow_delete; //牛削除フラグ
+
+	//消滅アニメーション用
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
 	
 };

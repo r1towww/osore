@@ -187,7 +187,7 @@ void CObjStarChoice::Action()
 		m_Tra2 = 1.0f;
 		m_Tra1 = 0.3f;
 		m_Tra3 = 0.3f;
-		m_Tra4 = 0.0f;
+		m_Tra4 = 1.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
 		if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 		{
@@ -259,9 +259,12 @@ void CObjStarChoice::Draw()
 	float c[4] = { 1.0f,1.0f,0.0f,m_Tra1 };	//標準カラー
 	//クリア用
 	float stage[4] = { 1.0f,1.0f,0.0f,m_Tra4 };
+	float last_stage[4] = { 1.0f,0.0f,0.0f,m_Tra4 };
 
 	float left_clear[4] = { 1.0f,1.0f,0.0f,m_Tra1 };
 	float right_clear[4] = { 1.0f,1.0f,0.0f,m_Tra2 };
+
+	float E[4] = { 1.0f,0.0f,0.0f,m_Tra1 };
 
 	//左の星座
 	float left[4]  = { 1.0f,1.0f,1.0f,m_Tra1 };
@@ -273,11 +276,12 @@ void CObjStarChoice::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 	
+				//戻るコマンド表示
+	Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 	//地球選択時に表示される画像
 	if (g_stage == Earth)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
+		
 
 		//地球選択用の画像
 		//切り取り位置の設定
@@ -291,11 +295,29 @@ void CObjStarChoice::Draw()
 		dst.m_left   = 250.0f;
 		dst.m_right  = 550.0f;
 		dst.m_bottom = 390.0f;
-		Font::StrDraw(L"チュートリアルステージ", 64, 64, 32, stage);
+		//地球にラスボスを設置するんので、太陽をクリアしたらわかりやすく表示させる
+		if (g_Sun_clear == true)
+		{
+			Font::StrDraw(L"最終ステージ", 64, 64, 32, last_stage);
 
-		//表示
-		Draw::Draw(7, &src, &dst, left, 0.0f);
-		if (g_Earth_clear == true)
+		}
+		else
+			//カーソルを合わせると左上にステージ名表示
+			Font::StrDraw(L"チュートリアルステージ", 64, 64, 32, stage);
+
+		//表示(太陽クリアで見た目変化)
+		if (g_Sun_clear == true)
+		{
+			Draw::Draw(7, &src, &dst, E, 0.0f);
+		}
+		else
+			Draw::Draw(7, &src, &dst, left, 0.0f);
+
+		if (g_Sun_clear == true)
+		{
+			Font::StrDraw(L"CLEAR・・・?", 350, 400, 40, c);
+		}
+		else if (g_Earth_clear == true)
 		{
 			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
@@ -303,8 +325,6 @@ void CObjStarChoice::Draw()
 	//金星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Venus)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 
 		//牡牛座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
@@ -325,6 +345,7 @@ void CObjStarChoice::Draw()
 		{
 			Font::StrDraw(L"CLEAR!", 200, 400, 40, left_clear);
 		}
+
 		//-------------------------------------------------------------------------------
 		//天秤座---------------------------------------------------------------------
 		//切り取り位置の設定
@@ -338,22 +359,29 @@ void CObjStarChoice::Draw()
 		dst.m_left   = 400.0f;
 		dst.m_right  = 700.0f;
 		dst.m_bottom = 390.0f;
+
 		//表示
 		Draw::Draw(7, &src, &dst, right, 0.0f);
 		//てんびん座クリアでクリア表記
 		if (g_Libra_clear== true)
 		{
-			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+			Font::StrDraw(L"CLEAR!", 500, 400, 40, right_clear);
 		}
 
 		//----------------------------------------------------------------------------------
-
+		//カーソルを合わせると左上にステージ名表示
+		if (m_direction == LEFT)
+		{
+			Font::StrDraw(L"牡牛座ステージ", 64, 64, 32, stage);
+		}
+		else if (m_direction == RIGHT)
+		{
+			Font::StrDraw(L"天秤座ステージ", 64, 64, 32, stage);
+		}
 	}
 	//水星選択時に表示される画像---------------------------------------------------------
 	else if (g_stage == Mercury)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", 380, 500, 25, down);
 
 		//双子座の画像-----------------------------------------------------------------
 		//切り取り位置の設定
@@ -393,17 +421,22 @@ void CObjStarChoice::Draw()
 		//乙女座クリアでクリア表記
 		if (g_Virgo_clear == true)
 		{
-			Font::StrDraw(L"CLEAR!", 450, 400, 40, right_clear);
+			Font::StrDraw(L"CLEAR!", 500, 400, 40, right_clear);
+		}
+		//カーソルを合わせると左上にステージ名表示
+		if (m_direction == LEFT)
+		{
+			Font::StrDraw(L"双子座ステージ", 64, 64, 32, stage);
+		}
+		else if (m_direction == RIGHT)
+		{
+			Font::StrDraw(L"乙女座ステージ", 64, 64, 32, stage);
 		}
 
 		//----------------------------------------------------------------------------------
 	}
 	else if(g_stage == Sun)
 	{
-		//戻るコマンド表示
-		Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
-
-		//獅子座---------------------------------------------------------------------
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
 		src.m_left   = 1500.0f;
@@ -422,8 +455,7 @@ void CObjStarChoice::Draw()
 		{
 			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
-
-		Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
+		Font::StrDraw(L"獅子座ステージ", 64, 64, 32, stage);
 
 	}
 	

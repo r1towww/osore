@@ -76,6 +76,9 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
+	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+
+
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
@@ -103,6 +106,13 @@ void CSceneVenusTaurus::InitScene()
 	Audio::LoadAudio(5, L"手足・殴る、蹴る09.wav", EFFECT);		//ダメージSE
 	Audio::LoadAudio(6, L"星・キラーン06.wav", EFFECT);		//星取得時SE
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
+	Audio::LoadAudio(9, L"ステージクリア.wav", EFFECT);
+	Audio::LoadAudio(10, L"ゲームオーバー.wav", EFFECT);
+
+	//BGM
+	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(8);
 
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
@@ -122,7 +132,7 @@ void CSceneVenusTaurus::InitScene()
 
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
-	Objs::InsertObj(objSkill, OBJ_SKILL, 150);
+	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
 	//チュートリアル吹き出し作成
 	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
@@ -202,6 +212,8 @@ void CSceneVenusTaurus::ClearCheck(bool a)
 		}
 		else
 		{
+			Audio::Start(9);
+
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
