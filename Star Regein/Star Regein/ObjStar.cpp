@@ -10,13 +10,16 @@
 //使用するネームスペース
 using namespace GameL;
 
+float  g_star_x[5];
+float  g_star_y[5];
+
+
 CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 {
 	m_px = x;		//位置
 	m_py = y;
 	m_i = i;
 	m_j = j;
-
 
 }
 
@@ -40,6 +43,7 @@ void CObjStar::Init()
 //アクション
 void CObjStar::Action()
 {
+
 	if (g_stage_clear != true)
 	{
 		RECT_F ani_src[8] =
@@ -98,7 +102,6 @@ void CObjStar::Action()
 		}
 		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 		//HitBoxの位置の変更
 		hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
 	}

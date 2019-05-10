@@ -47,6 +47,7 @@ class CObjBlock : public CObj
 		int m_w_c;//ホワイトホールカウント用
 		int m_libra_c;//天秤カウント用
 		int m_leo_c;//獅子カウント用
+		int m_star_c;//星カウント用
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用

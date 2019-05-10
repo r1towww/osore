@@ -25,6 +25,11 @@ void CObjBlueBullet::Init()
 	m_ani = 0;
 	m_ani_stop = 0;
 
+
+	m_ani_time2 = 0;
+	m_ani_frame2 = 1;
+	m_ani_stop2 = 0;
+
 	m_time = 300;
 	m_del = false;
 
@@ -32,9 +37,13 @@ void CObjBlueBullet::Init()
 	m_vy = sin(3.14f / 180.0f*m_r);
 
 	m_ani_max_time = 7;	//アニメーション間隔幅
+	m_ani_max_time2 = 10;
 
 	m_vx = cos(3.14f / 180.0f*m_r);
 	m_vy = sin(3.14f / 180.0f*m_r);
+
+	m_hero_hit = false;
+
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_x, m_y, 25, 25, ELEMENT_ENEMY, OBJ_BLUE_BULLET, 1);
 }
@@ -66,6 +75,7 @@ void CObjBlueBullet::Action()
 
 	m_ani_time += ANITIME;
 
+
 	//弾丸実行処理　-----
 
 	//移動
@@ -79,7 +89,6 @@ void CObjBlueBullet::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
 	if (m_ani_frame == 5)
 	{
 		m_ani_frame = 0;
@@ -90,11 +99,36 @@ void CObjBlueBullet::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());			//HitBoxの位置を敵機弾丸の位置に更新
 
-																				//主人公機オブジェクトと接触したら弾丸削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr || hit->CheckElementHit(ELEMENT_BLOCK) || m_time <= 150)
+	//ブロックオブジェクトと接触か一定時間で弾丸削除
+	if ( hit->CheckElementHit(ELEMENT_BLOCK) || m_time <= 150)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	}
+	//主人公と接触したらアニメーションの後削除
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		m_hero_hit = true;
+	}
+
+	//主人公にヒットしたらコマを１つ進める
+	if (m_hero_hit == true)
+	{
+		m_ani_frame2 += ANITIME;
+	}
+
+	//アニメーション用
+	if (m_ani_time2 > m_ani_max_time2)
+	{
+		m_ani_frame2 += 1;
+		m_ani_time2 = 0;
+	}
+	if (m_ani_frame2 == 8)//最後のコマになると弾丸削除
+	{
+		m_ani_frame2 = 0;
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	
 	}
 }
 
@@ -107,6 +141,11 @@ void CObjBlueBullet::Draw()
 		2,1,0,1,2,
 	};
 
+	int HitAniData[11] =
+	{
+		1,2,3,4,5,6,7,8
+	};
+
 	//描写カラー情報　R=RED　G=Green　B=Blue　A=alpha（透過情報）
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -116,9 +155,9 @@ void CObjBlueBullet::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-
-	
-	//切り取り位置の設定
+	if (m_hero_hit == false)
+	{
+		//切り取り位置の設定
 		src.m_top = 16.0f;
 		src.m_left = 0.0f + (AniData[m_ani_frame] * 16);
 		src.m_right = 16.0f + (AniData[m_ani_frame] * 16);
@@ -132,4 +171,23 @@ void CObjBlueBullet::Draw()
 
 		//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
 		Draw::Draw(16, &src, &dst, c, 0);
+	}
+	else
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + (HitAniData[m_ani_frame2] * 72);
+		src.m_right = 72.0f + (HitAniData[m_ani_frame2] * 72);
+		src.m_bottom = 72.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_y + block->GetScrolly();
+		dst.m_left = 0.0f + m_x + block->GetScrollx();
+		dst.m_right = 80.0f + m_x + block->GetScrollx();
+		dst.m_bottom = 80.0f + m_y + block->GetScrolly();
+
+		//０番目に登録したグラフィックをsrc・dst・cの情報を元に描画
+		Draw::Draw(52, &src, &dst, c, 0);
+	
+	}
 }

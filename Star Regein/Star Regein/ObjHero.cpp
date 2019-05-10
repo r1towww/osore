@@ -236,7 +236,7 @@ void CObjHero::Action()
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 				m_MP_time++;
-				if (m_MP_time > 3)
+				if (m_MP_time > 15)
 				{
 					m_MP_time = 0;
 					g_mp -= 1.0f;
@@ -370,6 +370,15 @@ void CObjHero::Action()
 	}
 	//Cキーが入力された場合
 	else if (Input::GetVKey('C'))
+	{
+		if (m_key_f == true)
+		{
+			Audio::Start(1);	//エフェクト音を鳴らす
+			g_skill -= NEXTSKILL;	//スキルの画像を次へ送る
+			m_key_f = false;
+		}
+	}
+	else if (Input::GetVKey('V'))
 	{
 		if (m_key_f == true)
 		{
@@ -721,10 +730,10 @@ void CObjHero::Draw()
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//切り取り位置の設定
-	src.m_top    = 64.0f * g_posture;
+	src.m_top    = 65.0f * g_posture;
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_bottom = src.m_top + 65.0f;
 	if (g_stage_clear == false)
 	{
 		//表示位置の設定

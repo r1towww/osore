@@ -24,6 +24,7 @@ CObjWoman::CObjWoman(float x, float y,int id)
 
 	m_woman_id = id;
 	g_enemy_cnt++;	//“G‚Ì‘”‚ÌƒJƒEƒ“ƒg
+
 }
 
 

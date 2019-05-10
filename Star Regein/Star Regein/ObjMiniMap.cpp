@@ -311,7 +311,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -345,7 +345,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -381,7 +381,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -417,7 +417,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -449,7 +449,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -486,7 +486,7 @@ void CObjMiniMap::Draw()
 							//切り取り位置の設定
 							src.m_top = 0.0f;
 							src.m_left = 50.0f;
-							src.m_right = 100.0f;
+							src.m_right = 95.0f;
 							src.m_bottom = 50.0f;
 							//描画
 							Draw::Draw(9, &src, &dst, c, 0.0f);
@@ -503,11 +503,11 @@ void CObjMiniMap::Draw()
 
 				if (g_boss_d_flag == true)
 				{
-					//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
-					bool check;
-					check = CheckWindow(bossx + block->GetScrollx(), bossy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
-					if (check == true)
-					{
+					////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+					//bool check;
+					//check = CheckWindow(bossx + block->GetScrollx(), bossy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+					//if (check == true)
+					//{
 						//ミニマップに敵の位置を表示する
 						//表示位置の設定
 						dst.m_top = m_uisize_y + (bossy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
@@ -518,12 +518,12 @@ void CObjMiniMap::Draw()
 						//切り取り位置の設定
 						src.m_top = 0.0f;
 						src.m_left = 50.0f;
-						src.m_right = 100.0f;
+						src.m_right = 95.0f;
 						src.m_bottom = 50.0f;
 						//描画
 						Draw::Draw(9, &src, &dst, c, 0.0f);
 						g_geminiattck_check = true;
-					}
+					//}
 				}
 			}
 		}
