@@ -34,6 +34,7 @@ private:
 	float m_posture;//姿勢
 	float m_alpha;
 
+	int m_ani_timeB;
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
@@ -46,6 +47,10 @@ private:
 	int enemy_move;//敵移動
 	int m_bullet_time;//弾丸発射時間測定
 
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
 
 	int m_red_id;
 

@@ -79,6 +79,8 @@ void CSceneEarth::InitScene()
 
 	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
 
+	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 
