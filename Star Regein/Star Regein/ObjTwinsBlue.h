@@ -38,6 +38,7 @@ private:
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
 
+	int m_ani_timeB;
 	int m_time;//無敵時間測定
 	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
@@ -48,6 +49,9 @@ private:
 
 	int m_blue_id;
 
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値

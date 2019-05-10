@@ -67,6 +67,7 @@ void CObjCow::Init()
 
 	m_alpha = 1.0;
 
+
 	
 	//消滅アニメーション用
 	m_ani_delete = 0;
@@ -87,29 +88,11 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
-	//混乱エフェクトのアニメーション
-	RECT_F ani_src[6] =
-		//1536
-		//264
-	{
-		{ 0,   0,     256 , 264 },
-		{ 0,  256,    512 , 264 },
-		{ 0,  512,    768 , 264 },
-		{ 0,  768,   1024 , 264 },
-		{ 0, 1024,   1280 , 264 },
-		{ 0, 1280,   1536 , 264 },
-	};
-
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-	
-	//行動が制御されている場合（メニュー画面）
-	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
-
 
 	if (m_ani_frame == 3)
 	{
@@ -461,12 +444,12 @@ void CObjCow::Action()
 
 			m_ani_stop++;
 
-			if (m_ani_stop >= 6)
+			if (m_ani_stop >= 10)
 			{
 				m_eff.m_top = 0;
 				m_eff.m_left = 0;
-				m_eff.m_right = 258;
-				m_eff.m_bottom = 264;
+				m_eff.m_right = 213;
+				m_eff.m_bottom = 192;
 
 			}
 			if (g_Leo_cnt >= 200.0f)
@@ -570,16 +553,13 @@ void CObjCow::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-
-	float cB[4] = { 1.0f,1.0f,1.0f,10.0f };
+	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-
 
 	if (m_cow_delete == false)
 	{
@@ -617,29 +597,25 @@ void CObjCow::Draw()
 		//表示
 		Draw::Draw(80, &src, &dst, d, 0.0f);
 	}
-
-	//描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
-
 	if (g_stan_cow_flag[m_cow_id] == true)
 	{
 		RECT_F src;//描画元切り取り位置
 		RECT_F dst;//描画先表示位置
 
-		//ブロック情報を持ってくる
+				   //ブロック情報を持ってくる
 		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 		//切り取り位置の設定
 		src.m_top = 0.0f * m_posture;
-		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 256);
-		src.m_right = 256.0f + (AniDataB[m_ani_frame] * 256);
-		src.m_bottom = src.m_top + 264.0f;
+		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_bottom = src.m_top + 192.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 64.0f + m_px + block->GetScrollx();
-		dst.m_right = 0.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+		dst.m_top =   -5.0f + m_py + block->GetScrolly();
+		dst.m_left =   94.0f + m_px + block->GetScrollx();
+		dst.m_right = -30.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 85.0f + m_py + block->GetScrolly();
 
 		//描画
 		Draw::Draw(49, &src, &dst, cB, 0.0f);
