@@ -616,7 +616,7 @@ void CObjCow::Draw()
 		//•\Ž¦
 		Draw::Draw(80, &src, &dst, d, 0.0f);
 	}
-}
+
 	//•`‰æ
 	Draw::Draw(3, &src, &dst, c, 0.0f);
 
