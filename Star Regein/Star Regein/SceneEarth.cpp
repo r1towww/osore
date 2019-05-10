@@ -199,12 +199,6 @@ void CSceneEarth::Scene()
 		}
 		
 	}
-
-
-
-
-
-	
 }
 
 void CSceneEarth::ClearCheck(bool a)
