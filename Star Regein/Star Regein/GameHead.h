@@ -164,6 +164,16 @@ typedef enum Skill
 
 }Skill;
 
+typedef enum Skill_2
+{	/* スキルごとの値 */
+	Taurus_2=-5,		//牡牛座		-5
+	Libra_2,		//天秤座		-4
+	Gemini_2,		//双子座		-3
+	Virgo_2,		//乙女座		-2
+	Leo_2,		//獅子座		-1
+
+}Skill_2;
+
 
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
