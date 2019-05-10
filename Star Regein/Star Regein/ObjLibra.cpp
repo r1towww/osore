@@ -110,7 +110,7 @@ void CObjLibra::Action()
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
 		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
-		if (check == true && m_hp > 0)
+		if (check == true)
 		{
 			//ハート弾発射
 			m_bullet_time++;
@@ -169,7 +169,7 @@ void CObjLibra::Action()
 		}
 		else
 		{
-			;
+			
 		}
 	}
 	else
@@ -432,7 +432,7 @@ void CObjLibra::Action()
 		//敵削除
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
-		g_cow_d_flag[m_libra_id] = false;
+		g_libra_d_flag[m_libra_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 

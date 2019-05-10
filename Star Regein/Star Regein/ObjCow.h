@@ -48,7 +48,7 @@ private:
 	int count;
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
-
+	int m_ani_timeB;
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
@@ -68,6 +68,12 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
+
+	
 	bool m_kill_f;	//キルカウント用フラグ
 	bool m_cow_delete; //牛削除フラグ
 
