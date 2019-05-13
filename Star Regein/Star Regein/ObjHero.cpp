@@ -84,6 +84,8 @@ void CObjHero::Init()
 	//攻撃力の初期化
 	g_attack_power = 1;
 
+	//死亡フラグ
+	dead_flag = false;
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
@@ -98,9 +100,11 @@ void CObjHero::Init()
 
 	m_ani = 0;			//アニメーション用
 	m_ani2 = 0;
+	m_ani3 = 0;
 	m_ani_time = 0;		//アニメーション間隔タイム
 	m_eff_time = 0;
 	m_eff_time2 = 0;
+	m_eff_time3 = 0;
 	m_eff.m_top    = 0;		//エフェクトの初期化
 	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
@@ -109,6 +113,11 @@ void CObjHero::Init()
 	m_eff2.m_left = 0;
 	m_eff2.m_right = 192;
 	m_eff2.m_bottom = 192;
+	m_eff3.m_top = 0;		//死亡エフェクトの初期化
+	m_eff3.m_left = 0;
+	m_eff3.m_right = 192;
+	m_eff3.m_bottom = 192;
+
 }
 
 //アクション
@@ -717,11 +726,54 @@ void CObjHero::Action()
 	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
-	if (g_hp <= 0.0f)
+	if (g_hp == 0.0f)
 	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-		Scene::SetScene(new CSceneGameOver());
+		//this->SetStatus(false);    //自身に削除命令を出す
+		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	
+		dead_flag = true;
+	}
+
+
+	if (dead_flag == true)
+	{
+		//エフェクト用
+		RECT_F ani_src3[12] =
+		{
+			{ 0,    0,  192, 192 },
+			{ 0,  192,  384, 192 },
+			{ 0,  384,  576, 192 },
+			{ 0,  576,  768, 192 },
+			{ 0,  768,  960, 192 },
+			{ 192,    0,  192, 384 },
+			{ 192,  192,  384, 384 },
+			{ 192,  384,  576, 384 },
+			{ 192,  576,  768, 384 },
+			{ 192,  768,  960, 384 },
+			{ 384,    0,  384, 576 },
+			{ 384,  192,  384, 384 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_eff_time3 > 2)
+		{
+			m_ani3++;		//アニメーションのコマを1つ進める
+			m_eff_time3 = 0;
+
+			m_eff3 = ani_src3[m_ani3];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_eff_time3++;
+		}
+		// 12番目（画像最後）まで進んだら、0に戻す
+		if (m_ani3 == 12)
+		{
+			m_ani3 = 0;
+			m_eff_time3 = 0;
+
+			/*Scene::SetScene(new CSceneGameOver());*/
+		}
 	}
 }
 
@@ -737,6 +789,7 @@ void CObjHero::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
+	float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -806,7 +859,7 @@ void CObjHero::Draw()
 	{
 		m_ani = 0;
 	}
-
+	//スタン
 	if (m_eff_flag == true)
 	{
 		//エフェクト用表示位置の設定
@@ -816,6 +869,17 @@ void CObjHero::Draw()
 		dst.m_bottom = 94.0f + m_py;
 		//描画
 		Draw::Draw(18, &m_eff2, &dst, c, 90.0f);
+	}
+	if (dead_flag == true)
+	{
+		
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 0.0f + m_px;
+		dst.m_right = 94.0f + m_px;
+		dst.m_bottom = 94.0f + m_py;
+		//描画
+		Draw::Draw(90, &m_eff3, &dst, c3, 1.0f);
 	}
 
 }

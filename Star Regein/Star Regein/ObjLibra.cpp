@@ -425,7 +425,7 @@ void CObjLibra::Action()
 			g_libra_d_flag[m_libra_id] = false;
 			this->SetStatus(false);    //自身に削除命令を出す
 		}
-	}
+	
 }
 
 //ドロー
