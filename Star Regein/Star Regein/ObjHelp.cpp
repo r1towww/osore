@@ -90,7 +90,7 @@ void CObjHelp::Draw()
 	{
 		//説明文
 		Font::StrDraw(L"*牡牛座スキル*    MP消費 1ゲージ", 310, 320, 25, c);
-		Font::StrDraw(L"Shiftキーを押しながら移動すると、", 315, 350, 25, c);
+		Font::StrDraw(L"Xキーを押しながら移動すると、", 315, 350, 25, c);
 		Font::StrDraw(L"ダッシュが可能！！", 315, 380, 25, c);
 		Font::StrDraw(L"「大きな岩も壊せそう。」", 315, 410, 25, c);
 	}

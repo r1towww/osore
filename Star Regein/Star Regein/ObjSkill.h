@@ -6,7 +6,7 @@
 using namespace GameL;
 
 
-//オブジェクト：ブロック＆背景
+//オブジェクト：スキル
 class CObjSkill : public CObj
 {
 	public:
@@ -17,4 +17,8 @@ class CObjSkill : public CObj
 		void Draw();		//ドロー
 
 	private:
+		int m_memory;	//スキル比較用変数
+		int m_next;	//次のスキル用
+		int m_back;	//前のスキル用
+
 };

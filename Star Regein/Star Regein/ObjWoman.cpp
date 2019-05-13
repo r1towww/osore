@@ -92,12 +92,6 @@ void CObjWoman::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
-	//行動が制御されている場合（メニュー画面）
-	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
-
-
 	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 1;
@@ -434,65 +428,65 @@ void CObjWoman::Action()
 					m_ani_timeB--;
 				}
 			}
-		}
 
-		if (m_f == true)
-		{
-			m_time--;
-			m_alpha = ALPHAUNDER;
-
-		}
-		if (m_time <= 0)
-		{
-			m_f = false;
-			m_invincible_flag = false;
-			m_alpha = ALPHAORIGIN;
-
-			m_time = 30;
-		}
-
-
-		//位置の更新
-		m_px += m_vx*1.0;
-		m_py += m_vy*1.0;
-
-		//HPが0になったら破棄
-		if (m_hp <= 0)
-		{
-			//乙女削除フラグオン
-			m_woman_delete = true;
-		}
-
-		//消滅アニメーションのコマを進める
-		if (m_woman_delete == true)
-		{
-			m_ani_count += 1;
-		}
-		//消滅アニメーション
-		if (m_ani_count > m_ani_max_count)
-		{
-			m_ani_frame_delete += 1;
-			m_ani_count = 0;
-		}
-		if (m_ani_frame_delete == 4)
-		{
-			m_ani_frame_delete = 0;
-			//フラグがオフの場合
-			if (m_kill_f == false)
+			if (m_f == true)
 			{
-				g_kill_cnt++;	//キルカウントを増やす
-				m_kill_f = true;//フラグをオンにして入らないようにする
+				m_time--;
+				m_alpha = ALPHAUNDER;
+
 			}
-			//敵削除
-			m_alpha = 0.0f;
-			hit->SetInvincibility(true);
-			g_woman_d_flag[m_woman_id] = false;
-			this->SetStatus(false);    //自身に削除命令を出す
+			if (m_time <= 0)
+			{
+				m_f = false;
+				m_invincible_flag = false;
+				m_alpha = ALPHAORIGIN;
+
+				m_time = 30;
+			}
+
+
+			//位置の更新
+			m_px += m_vx*1.0;
+			m_py += m_vy*1.0;
+
+			//HPが0になったら破棄
+			if (m_hp <= 0)
+			{
+				//乙女削除フラグオン
+				m_woman_delete = true;
+			}
+
+			//消滅アニメーションのコマを進める
+			if (m_woman_delete == true)
+			{
+				m_ani_count += 1;
+			}
+			//消滅アニメーション
+			if (m_ani_count > m_ani_max_count)
+			{
+				m_ani_frame_delete += 1;
+				m_ani_count = 0;
+			}
+			if (m_ani_frame_delete == 4)
+			{
+				m_ani_frame_delete = 0;
+				//フラグがオフの場合
+				if (m_kill_f == false)
+				{
+					g_kill_cnt++;	//キルカウントを増やす
+					m_kill_f = true;//フラグをオンにして入らないようにする
+				}
+				//敵削除
+				m_alpha = 0.0f;
+				hit->SetInvincibility(true);
+				g_woman_d_flag[m_woman_id] = false;
+				this->SetStatus(false);    //自身に削除命令を出す
+			}
 		}
-	}
-	else
-	{
-		return;
+		else
+		{
+			return;
+		}
 	}
 }
 

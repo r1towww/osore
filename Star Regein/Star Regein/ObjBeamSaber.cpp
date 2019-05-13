@@ -117,7 +117,6 @@ void CObjBeamSaber::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
-
 	//切り取り位置の設定
 	src.m_top    =   0.0f;
 	src.m_left   =   0.0f + (AniData[m_ani_frame] * 192.0f);
@@ -129,7 +128,6 @@ void CObjBeamSaber::Draw()
 	dst.m_left   =  0.0f + m_x + m_pos_x;
 	dst.m_right  = 64.0f + m_x + m_pos_x;
 	dst.m_bottom = 64.0f + m_y + m_pos_y;
-
 
 	//表示
 	if(g_hp <= 20.0f && g_skill == Libra)

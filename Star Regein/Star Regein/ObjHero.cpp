@@ -84,6 +84,8 @@ void CObjHero::Init()
 	//攻撃力の初期化
 	g_attack_power = 1;
 
+	//死亡フラグ
+	dead_flag = false;
 
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
@@ -98,9 +100,11 @@ void CObjHero::Init()
 
 	m_ani = 0;			//アニメーション用
 	m_ani2 = 0;
+	m_ani3 = 0;
 	m_ani_time = 0;		//アニメーション間隔タイム
 	m_eff_time = 0;
 	m_eff_time2 = 0;
+	m_eff_time3 = 0;
 	m_eff.m_top    = 0;		//エフェクトの初期化
 	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
@@ -109,6 +113,11 @@ void CObjHero::Init()
 	m_eff2.m_left = 0;
 	m_eff2.m_right = 192;
 	m_eff2.m_bottom = 192;
+	m_eff3.m_top = 0;		//死亡エフェクトの初期化
+	m_eff3.m_left = 0;
+	m_eff3.m_right = 192;
+	m_eff3.m_bottom = 192;
+
 }
 
 //アクション
@@ -238,8 +247,8 @@ void CObjHero::Action()
 
 	//スキル系統情報-------------------------------------------------
 
-			//Shiftキーが入力されたらダッシュ
-		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus||g_skill==Taurus_2
+		//Xキーが入力されたらダッシュ
+		if (Input::GetVKey('X') && g_skill == Taurus
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 			//ダッシュエフェクト音フラグがオフの場合エフェクト音を鳴らす
@@ -309,7 +318,7 @@ void CObjHero::Action()
 	}
 
 	//天秤座の場合（パッシブ）
-	if (g_skill == Libra||g_skill==Libra_2)
+	if (g_skill == Libra)
 	{
 		//エフェクトを１度だけ出すようにする
 		if (m_libra_eff_f == false)
@@ -344,7 +353,7 @@ void CObjHero::Action()
 		if (m_key_f == true)
 		{
 			//双子座の場合
-			if (g_skill == Gemini ||g_skill==Gemini_2&& g_gemini_check == false && g_mp == g_max_mp)
+			if (g_skill == Gemini&& g_gemini_check == false && g_mp == g_max_mp)
 			{
 				//ブロック情報を持ってくる
 				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -359,7 +368,7 @@ void CObjHero::Action()
 				g_gemini_check = true;
 			}
 			//乙女座の場合
-			else if (g_skill == Virgo||g_skill==Virgo_2 && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
+			else if (g_skill == Virgo && g_mp >= 10.0f && g_Virgo == true && g_mp >= 30.0f)
 			{
 				//ブロック情報を持ってくる
 				CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -372,7 +381,7 @@ void CObjHero::Action()
 
 			}
 			//獅子座の場合
-			else if (g_skill == Leo||g_skill==Leo_2 && g_Leo == true && g_mp >= 30.0f)
+			else if (g_skill == Leo && g_Leo == true && g_mp >= 30.0f)
 			{
 				//スタンオブジェクト作成
 				CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
@@ -719,9 +728,55 @@ void CObjHero::Action()
 	//HPが０になったら削除
 	if (g_hp <= 0.0f)
 	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-		Scene::SetScene(new CSceneGameOver());
+		m_alpha = 0.0f;
+		dead_flag = true;
+		//this->SetStatus(false);    //自身に削除命令を出す
+		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+
+	}
+
+
+	if (dead_flag == true)
+	{
+		//エフェクト用
+		RECT_F ani_src3[12] =
+		{
+			{ 0,    0,  192, 192 },
+			{ 0,  192,  384, 192 },
+			{ 0,  384,  576, 192 },
+			{ 0,  576,  768, 192 },
+			{ 0,  768,  960, 192 },
+			{ 192,    0,  192, 384 },
+			{ 192,  192,  384, 384 },
+			{ 192,  384,  576, 384 },
+			{ 192,  576,  768, 384 },
+			{ 192,  768,  960, 384 },
+			{ 384,    0,  384, 576 },
+			{ 384,  192,  384, 384 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_eff_time3 > 2)
+		{
+			m_ani3++;		//アニメーションのコマを1つ進める
+			m_eff_time3 = 0;
+
+			m_eff3 = ani_src3[m_ani3];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_eff_time3++;
+		}
+		// 12番目（画像最後）まで進んだら、0に戻す
+		if (m_ani3 == 12)
+		{
+			m_ani3 = 0;
+			m_eff_time3 = 0;
+
+			dead_flag = false;
+
+			Scene::SetScene(new CSceneGameOver());
+		}
 	}
 }
 
@@ -737,6 +792,8 @@ void CObjHero::Draw()
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
+	float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
+	
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -806,7 +863,7 @@ void CObjHero::Draw()
 	{
 		m_ani = 0;
 	}
-
+	//スタン
 	if (m_eff_flag == true)
 	{
 		//エフェクト用表示位置の設定
@@ -816,6 +873,25 @@ void CObjHero::Draw()
 		dst.m_bottom = 94.0f + m_py;
 		//描画
 		Draw::Draw(18, &m_eff2, &dst, c, 90.0f);
+	}
+	if (dead_flag == true)
+	{
+
+		//透明の主人公を表示
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 80.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 80.0f + m_py;
+
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 0.0f + m_px;
+		dst.m_right = 94.0f + m_px;
+		dst.m_bottom = 94.0f + m_py;
+		//描画
+		Draw::Draw(35, &m_eff3, &dst, c3, 90.0f);
 	}
 
 }

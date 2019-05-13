@@ -97,6 +97,7 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 	
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -219,6 +220,7 @@ void CSceneVenusLibra::ClearCheck(bool a)
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+			g_move_stop_flag = true;
 			m_clear_f = true;
 
 		}

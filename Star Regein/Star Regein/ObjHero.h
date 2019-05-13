@@ -45,10 +45,13 @@ class CObjHero :public CObj
 
 		int	 m_ani;			//アニメーション用
 		int  m_ani2;
+		int  m_ani3;
 		int	 m_eff_time;	//アニメーション間隔タイム
 		int  m_eff_time2;
+		int  m_eff_time3;
 		RECT_F m_eff;		//エフェクト描画用
 		RECT_F m_eff2;		//獅子攻撃エフェクト描画用
+		RECT_F m_eff3;		//主人公死亡エフェクト描画用
 
 		bool m_libra_eff_f;	//天秤座スキルエフェクト用フラグ
 		bool m_menu_key_f;	//メニューキー用の制御フラグ
@@ -83,6 +86,7 @@ class CObjHero :public CObj
 
 		bool m_eff_flag;
 
+		bool dead_flag; //死亡フラグ
 	
 };
 

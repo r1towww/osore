@@ -6,7 +6,7 @@
 using namespace GameL;
 
 
-//オブジェクト：ブロック＆背景
+//オブジェクト：スキルアイテム
 class CObjSkillItem : public CObj
 {
 public:

@@ -505,9 +505,6 @@
     <Filter Include="ソースファイル\各惑星敵\双子">
       <UniqueIdentifier>{e989f6a9-a645-4883-9963-c60b3de7aa03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\各惑星敵\乙女">
-      <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\各惑星敵\天秤">
       <UniqueIdentifier>{3e90780b-9020-4022-82de-850371e4facf}</UniqueIdentifier>
     </Filter>
@@ -540,6 +537,9 @@
     </Filter>
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\乙女">
+      <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
