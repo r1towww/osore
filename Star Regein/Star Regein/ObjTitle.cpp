@@ -52,7 +52,7 @@ bool g_Taurus = CLEARF;	//牡牛座
 bool g_Libra  = CLEARF;	//天秤座
 bool g_Gemini = CLEARF;	//双子座
 bool g_Virgo  = CLEARF;	//乙女座
-bool g_Leo    = false;	//獅子座
+bool g_Leo    = CLEARF;	//獅子座
 bool g_key_flag = false;	//キー入力制御フラグ
 
 //ステージ選択画面の主人公の位置（初期位置）

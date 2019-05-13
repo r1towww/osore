@@ -30,55 +30,116 @@ using namespace GameL;
 //イニシャライズ
 void CObjSkill::Init()
 {
-
+	m_memory = g_skill;	//スキル比較変数の初期化
+	m_next = 0;	//スキル画像用変数の初期化
+	m_back = 0;	//スキル画像用変数の初期化
 }
 
 //アクション
 void CObjSkill::Action()
 {
-	//スキルの値が0を下回った場合
-	if (g_skill < NoSkill) {
-		g_skill = Leo;
+	//スキルを取得しているかどうかの確認（取得していない、値が上回る、下回る場合）
+	
+	//スキルの値が減った場合
+	if (g_skill < m_memory) {
+		//処理の前にNoSkillを下回っている場合があるので、先に書く
+		if (g_skill < NoSkill)	//スキルの値がNoSkillを下回った場合
+			g_skill = Leo;		//獅子座に変更	
 		if (g_Taurus == false && g_skill == Taurus)//牡牛座を取得していない場合
 			g_skill--;	//次の画像へ移す
-		else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
+		if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
 			g_skill--;	//次の画像へ移す
-		else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
+		if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
 			g_skill--;	//次の画像へ移す
-		else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
+		if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
 			g_skill--;	//次の画像へ移す
-		else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
+		if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
 			g_skill--;	//次の画像へ移す
-	}
-	//スキルの値が5を上回った場合
-	else if (g_skill > Leo) {	
-		g_skill = NoSkill;	//NoSkillに戻す
-		if (g_Taurus == false && g_skill == Taurus)//牡牛座を取得していない場合
-			g_skill++;	//次の画像へ移す
-		else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
-			g_skill++;	//次の画像へ移す
-		else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
-			g_skill++;	//次の画像へ移す
-		else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
-			g_skill++;	//次の画像へ移す
-		else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
-			g_skill++;	//次の画像へ移す
 	}
 	
+	//スキルの値が増えた場合
+	if (g_skill > m_memory) {
+		if (g_Taurus == false && g_skill == Taurus)//牡牛座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		//処理の後にLeoを上回っている場合があるので、後に書く
+		if (g_skill > Leo)	//スキルの値がLeoを上回った場合
+			g_skill = NoSkill;	//NoSkillに戻す
+	}
+	
+	//変わったスキルの値を、比較用メモリに保存しておく
+	m_memory = g_skill;
 
-
-
-
+	//画像の前後描画用
+	if (g_skill == NoSkill) {
+		if (g_Leo == true)
+			m_back = 0;
+		else
+			m_back = 1;
+		if (g_Taurus == true)
+			m_next = 0;
+		else
+			m_next = 1;
+	}
+	if (g_skill == Taurus) {
+		m_back = 0;
+		if (g_Libra == true)
+			m_next = 0;
+		else
+			m_next = 1;
+	}
+	if (g_skill == Libra) {
+		if (g_Taurus == true)
+			m_back = 0;
+		else
+			m_back = 1;
+		if (g_Gemini == true)
+			m_next = 0;
+		else
+			m_next = 1;
+	}
+	if (g_skill == Gemini) {
+		if (g_Libra == true)
+			m_back = 0;
+		else
+			m_back = 1;
+		if (g_Virgo == true)
+			m_next = 0;
+		else
+			m_next = 1;
+	}
+	if (g_skill == Virgo) {
+		if (g_Gemini == true)
+			m_back = 0;
+		else
+			m_back = 1;
+		if (g_Leo == true)
+			m_next = 0;
+		else
+			m_next = 1;
+	}
+	if (g_skill == Leo) {
+		if (g_Virgo == true)
+			m_back = 0;
+		else
+			m_back = 1;
+		m_next = 0;
+	}
 }
 
 //ドロー
 void CObjSkill::Draw()
 {
+	//クリアオブジェクトが作成されている際、描画の停止
 	if (g_stage_clear == false)
 	{
-		if (g_Taurus == false)
-			return;
-
 		//描画カラー情報
 		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 		float s[4] = { 1.0f,1.0f,1.0f,0.5f };
@@ -101,8 +162,8 @@ void CObjSkill::Draw()
 		//後ろにあるスキルを表示
 		//切り取り位置の設定
 		src.m_top = 0.0f;
-		src.m_left = 1500.0f + (300.0f * g_skill);		//スキルの値が変われば次の画像へ移行
-		src.m_right = 1800.0f + (300.0f * g_skill);
+		src.m_left = 1500.0f + (300.0f * (g_skill - m_back));		//スキルの値が変われば次の画像へ移行
+		src.m_right = 1800.0f + (300.0f * (g_skill - m_back));
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
@@ -115,8 +176,8 @@ void CObjSkill::Draw()
 		//前にあるスキルを表示
 		//切り取り位置の設定
 		src.m_top = 0.0f;
-		src.m_left = 300.0f + (300.0f * g_skill);		//スキルの値が変われば次の画像へ移行
-		src.m_right = 600.0f + (300.0f * g_skill);
+		src.m_left = 300.0f + (300.0f * (g_skill + m_next));		//スキルの値が変われば次の画像へ移行
+		src.m_right = 600.0f + (300.0f * (g_skill + m_next));
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
@@ -125,15 +186,6 @@ void CObjSkill::Draw()
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
 		Draw::Draw(13, &src, &dst, s, 0.0f);
-
-		////描画
-		//if (g_skill == NoSkill)
-		//{
-
-		//}
-		//else {
-		//	Draw::Draw(13, &src, &dst, c, 0.0f);
-		//}
 
 	}
 }

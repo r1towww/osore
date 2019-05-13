@@ -426,7 +426,7 @@ void CObjLibra::Action()
 			this->SetStatus(false);    //自身に削除命令を出す
 		}
 	}
-}
+
 
 //ドロー
 void CObjLibra::Draw()

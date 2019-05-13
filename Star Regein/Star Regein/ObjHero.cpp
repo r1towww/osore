@@ -238,8 +238,8 @@ void CObjHero::Action()
 
 	//スキル系統情報-------------------------------------------------
 
-			//Shiftキーが入力されたらダッシュ
-		if (Input::GetVKey(VK_SHIFT) && g_skill == Taurus
+		//Xキーが入力されたらダッシュ
+		if (Input::GetVKey('X') && g_skill == Taurus
 			&& g_Taurus == true && m_dash_flag==true && m_cool_flag == false)
 		{
 			//ダッシュエフェクト音フラグがオフの場合エフェクト音を鳴らす
