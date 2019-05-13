@@ -410,88 +410,89 @@ void CObjWoman::Action()
 			}
 
 
-		//しし座のヒット判定がonの時スタン
-		if (g_stan_woman_flag[m_woman_id] == true)
-		{
-			g_Leo_cnt += 1.0f;
-
-			//アニメーションのコマ間隔制御
-			if (m_ani_timeB < 0)
+			//しし座のヒット判定がonの時スタン
+			if (g_stan_woman_flag[m_woman_id] == true)
 			{
+				g_Leo_cnt += 1.0f;
 
-				m_ani_frame++;	//アニメーションのコマを１つ進める
-				m_ani_timeB = 10;
-
-				if (g_Leo_cnt >= 200.0f)
+				//アニメーションのコマ間隔制御
+				if (m_ani_timeB < 0)
 				{
-					g_Leo_cnt = 0.0f;
-					g_stan_woman_flag[m_woman_id] = false;
+
+					m_ani_frame++;	//アニメーションのコマを１つ進める
+					m_ani_timeB = 10;
+
+					if (g_Leo_cnt >= 200.0f)
+					{
+						g_Leo_cnt = 0.0f;
+						g_stan_woman_flag[m_woman_id] = false;
+					}
+
 				}
-
+				else
+				{
+					m_ani_timeB--;
+				}
 			}
-			else
+
+			if (m_f == true)
 			{
-				m_ani_timeB--;
+				m_time--;
+				m_alpha = ALPHAUNDER;
+
 			}
-		}
-
-		if (m_f == true)
-		{
-			m_time--;
-			m_alpha = ALPHAUNDER;
-
-		}
-		if (m_time <= 0)
-		{
-			m_f = false;
-			m_invincible_flag = false;
-			m_alpha = ALPHAORIGIN;
-
-			m_time = 30;
-		}
-
-
-		//位置の更新
-		m_px += m_vx*1.0;
-		m_py += m_vy*1.0;
-
-		//HPが0になったら破棄
-		if (m_hp <= 0)
-		{
-			//乙女削除フラグオン
-			m_woman_delete = true;
-		}
-
-		//消滅アニメーションのコマを進める
-		if (m_woman_delete == true)
-		{
-			m_ani_count += 1;
-		}
-		//消滅アニメーション
-		if (m_ani_count > m_ani_max_count)
-		{
-			m_ani_frame_delete += 1;
-			m_ani_count = 0;
-		}
-		if (m_ani_frame_delete == 4)
-		{
-			m_ani_frame_delete = 0;
-			//フラグがオフの場合
-			if (m_kill_f == false)
+			if (m_time <= 0)
 			{
-				g_kill_cnt++;	//キルカウントを増やす
-				m_kill_f = true;//フラグをオンにして入らないようにする
+				m_f = false;
+				m_invincible_flag = false;
+				m_alpha = ALPHAORIGIN;
+
+				m_time = 30;
 			}
-			//敵削除
-			m_alpha = 0.0f;
-			hit->SetInvincibility(true);
-			g_woman_d_flag[m_woman_id] = false;
-			this->SetStatus(false);    //自身に削除命令を出す
+
+
+			//位置の更新
+			m_px += m_vx*1.0;
+			m_py += m_vy*1.0;
+
+			//HPが0になったら破棄
+			if (m_hp <= 0)
+			{
+				//乙女削除フラグオン
+				m_woman_delete = true;
+			}
+
+			//消滅アニメーションのコマを進める
+			if (m_woman_delete == true)
+			{
+				m_ani_count += 1;
+			}
+			//消滅アニメーション
+			if (m_ani_count > m_ani_max_count)
+			{
+				m_ani_frame_delete += 1;
+				m_ani_count = 0;
+			}
+			if (m_ani_frame_delete == 4)
+			{
+				m_ani_frame_delete = 0;
+				//フラグがオフの場合
+				if (m_kill_f == false)
+				{
+					g_kill_cnt++;	//キルカウントを増やす
+					m_kill_f = true;//フラグをオンにして入らないようにする
+				}
+				//敵削除
+				m_alpha = 0.0f;
+				hit->SetInvincibility(true);
+				g_woman_d_flag[m_woman_id] = false;
+				this->SetStatus(false);    //自身に削除命令を出す
+			}
 		}
-	}
-	else
-	{
-		return;
+		else
+		{
+			return;
+		}
 	}
 }
 
