@@ -219,6 +219,7 @@ void CSceneVenusLibra::ClearCheck(bool a)
 			//オブジェクト作成
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+			g_move_stop_flag = true;
 			m_clear_f = true;
 
 		}

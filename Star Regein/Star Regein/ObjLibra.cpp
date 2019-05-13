@@ -110,82 +110,164 @@ void CObjLibra::Action()
 	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
-
-
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
-	//主人公とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	if (hero != nullptr)
 	{
-		//主人公がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
-		float r = 0;
-
-		for (int i = 0; i < 10; i++)
-		{
-			if (hit_data[i] != nullptr)
-			{
-				r = hit_data[i]->r;
-
-				//角度で上下左右を判定
-				if ((r <= 45 && r >= 0) || r >= 315)
-				{
-					m_vx = -0.15f; //右
-				}
-				if (r > 45 && r < 135)
-				{
-					m_vy = 0.15f;//上
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 0.15f;//左
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -0.15f; //下
-				}
-			}
-		}
+		float hx = hero->GetX();
+		float hy = hero->GetY();
 	}
 
-	//敵とBLOCK系統との当たり判定
-	if (hit->CheckElementHit(ELEMENT_NULL) == true)
+
+	if (g_stan_libra_flag[m_libra_id] == false)
 	{
-		//敵がブロックとどの角度で当たっているのかを確認
-		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		hit_data = hit->SearchElementHit(ELEMENT_NULL);
-
-		float r = 0;
-
-		for (int i = 0; i < 10; i++)
+		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+		bool check;
+		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
+		if (check == true)
 		{
-			if (hit_data[i] != nullptr)
+
+			//主人公機が存在する場合、誘導角度の計算する
+			if (hero != nullptr)
 			{
-				r = hit_data[i]->r;
+
+				float x;
+				float y;
+
+				x = 375 - (m_px + pb->GetScrollx());
+				y = 275 - (m_py + pb->GetScrolly());
+
+				float ar = GetAtan2Angle(x, y);
+
+				//敵の現在の向いている角度を取る
+				float br = GetAtan2Angle(m_vx, m_vy);
 
 				//角度で上下左右を判定
-				if ((r <= 45 && r >= 0) || r >= 315)
+				if ((ar < 45 && ar>0) || ar > 315)
 				{
-					m_vx = -0.15f; //右
-				}
-				if (r > 45 && r < 135)
-				{
-					m_vy = 0.15f;//上
-				}
-				if (r >= 135 && r < 225)
-				{
-					m_vx = 0.15f;//左
-				}
-				if (r >= 225 && r < 315)
-				{
-					m_vy = -0.15f; //下
+					//左
+					m_posture = 1.0f;
+					m_ani_time += 1;
 				}
 
+				if (ar > 45 && ar < 135)
+				{
+					//下
+					m_posture = 0.0f;
+					m_ani_time += 1;
+				}
+				if (ar > 135 && ar < 225)
+				{
+					//右
+					m_posture = 2.0f;
+					m_ani_time += 1;
+				}
+				if (ar > 225 && ar < 315)
+				{
+					//上
+					m_posture = 3.0f;
+					m_ani_time += 1;
+
+				}
+
+				//主人公機と敵角度があんまりにもかけ離れたら
+				m_vx = cos(3.14 / 180 * ar) * 2;
+				m_vy = sin(3.14 / 180 * ar) * 2;
+
+
 			}
+
+
+			//主人公とBLOCK系統との当たり判定
+			if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+			{
+				//主人公がブロックとどの角度で当たっているのかを確認
+				HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+				hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+				float r = 0;
+
+				for (int i = 0; i < 10; i++)
+				{
+					if (hit_data[i] != nullptr)
+					{
+						r = hit_data[i]->r;
+
+						//角度で上下左右を判定
+						if ((r <= 45 && r >= 0) || r >= 315)
+						{
+							m_vx = -0.15f; //右
+						}
+						if (r > 45 && r < 135)
+						{
+							m_vy = 0.15f;//上
+						}
+						if (r >= 135 && r < 225)
+						{
+							m_vx = 0.15f;//左
+						}
+						if (r >= 225 && r < 315)
+						{
+							m_vy = -0.15f; //下
+						}
+					}
+				}
+			}
+
+			//敵とBLOCK系統との当たり判定
+			if (hit->CheckElementHit(ELEMENT_NULL) == true)
+			{
+				//敵がブロックとどの角度で当たっているのかを確認
+				HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+				hit_data = hit->SearchElementHit(ELEMENT_NULL);
+
+				float r = 0;
+
+				for (int i = 0; i < 10; i++)
+				{
+					if (hit_data[i] != nullptr)
+					{
+						r = hit_data[i]->r;
+
+						//角度で上下左右を判定
+						if ((r <= 45 && r >= 0) || r >= 315)
+						{
+							m_vx = -0.15f; //右
+						}
+						if (r > 45 && r < 135)
+						{
+							m_vy = 0.15f;//上
+						}
+						if (r >= 135 && r < 225)
+						{
+							m_vx = 0.15f;//左
+						}
+						if (r >= 225 && r < 315)
+						{
+							m_vy = -0.15f; //下
+						}
+
+					}
+				}
+			}
+
+
 		}
+		if (g_move_libra_flag[m_libra_id] == true)
+		{
+			//位置の更新
+			m_px += m_vx*2.0;
+			m_py += m_vy*2.0;
+
+		}
+		else
+		{
+			;
+		}
+
 	}
 
 
@@ -351,80 +433,67 @@ void CObjLibra::Action()
 		}
 	}
 
-		if (m_f == true)
+	if (m_f == true)
+	{
+		m_time--;
+		m_alpha = ALPHAUNDER;
+		for (int i = 0; i < 20; i++)
 		{
-			m_time--;
-			m_alpha = ALPHAUNDER;
+			g_move_libra_flag[i] = true;
 		}
+	}
 
-		//一定時間で無敵解除
-		if (m_time <= 0)
+	//一定時間で無敵解除
+	if (m_time <= 0)
+	{
+		m_move_f = true;
+		m_f = false;
+		m_invincible_flag = false;
+		m_alpha = ALPHAORIGIN;
+		//for (int i = 0; i < 20; i++)
+		//{
+		//	g_move_libra_flag[i] = false;
+		//}
+
+		m_time = 30;
+	}
+
+
+
+
+
+	//HPが0になったら破棄
+	if (m_hp == 0)
+	{
+		//天秤削除フラグ
+		m_libra_delete = true;
+	}
+	//消滅アニメーションのコマを進める
+	if (m_libra_delete == true)
+	{
+		m_ani_count += 1;
+	}
+	//消滅アニメーション
+	if (m_ani_count > m_ani_max_count)
+	{
+		m_ani_frame_delete += 1;
+		m_ani_count = 0;
+	}
+	if (m_ani_frame_delete == 4)
+	{
+		m_ani_frame_delete = 0;
+		//フラグがオフの場合
+		if (m_kill_f == false)
 		{
-			m_move_f = true;
-			m_f = false;
-			m_invincible_flag = false;
-			m_alpha = ALPHAORIGIN;
-
-			m_time = 30;
+			g_kill_cnt++;	//キルカウントを増やす
+			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
-
-
-
-		//主人公の位置を取得
-		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-		if (hero != nullptr)
-		{
-			float hx = hero->GetX();
-			float hy = hero->GetY();
-		}
-
-		if (g_stan_libra_flag[m_libra_id] == false)
-		{
-			//全員2倍の速度で追い掛け回す
-			if (m_move_f == true)
-			{
-
-			}
-
-		}
-
-		//位置の更新
-		m_px += m_vx*2.0;
-		m_py += m_vy*2.0;
-
-
-		//HPが0になったら破棄
-		if (m_hp == 0)
-		{
-			//天秤削除フラグ
-			m_libra_delete = true;
-		}
-		//消滅アニメーションのコマを進める
-		if (m_libra_delete == true)
-		{
-			m_ani_count += 1;
-		}
-		//消滅アニメーション
-		if (m_ani_count > m_ani_max_count)
-		{
-			m_ani_frame_delete += 1;
-			m_ani_count = 0;
-		}
-		if (m_ani_frame_delete == 4)
-		{
-			m_ani_frame_delete = 0;
-			//フラグがオフの場合
-			if (m_kill_f == false)
-			{
-				g_kill_cnt++;	//キルカウントを増やす
-				m_kill_f = true;//フラグをオンにして入らないようにする
-			}
-			//敵削除
-			m_alpha = 0.0f;
-			hit->SetInvincibility(true);
-			g_libra_d_flag[m_libra_id] = false;
-			this->SetStatus(false);    //自身に削除命令を出す
-		}
+		//敵削除
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_libra_d_flag[m_libra_id] = false;
+		this->SetStatus(false);    //自身に削除命令を出す
+	}
 	
 }
 

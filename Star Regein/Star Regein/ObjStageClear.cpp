@@ -30,6 +30,7 @@ void CObjStageClear::Action()
 	if ((Input::GetVKey('Z') == true && m_alpha4 == 1.0f || Input::GetVKey(VK_RETURN) == true) && m_alpha4 == 1.0f)	//キー入力タイムが一定に達した場合、キー入力を許可する
 	{
 		g_stage_clear = false;
+		g_move_stop_flag = false;
 		Scene::SetScene(new CSceneStageChoice());
 	}
 

@@ -92,12 +92,6 @@ void CObjWoman::Action()
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
-	//行動が制御されている場合（メニュー画面）
-	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
-
-
 	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 1;
