@@ -6,6 +6,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjSkillGemini.h"
@@ -38,6 +39,8 @@ void CObjSkillGemini::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 	
+	m_f = false;	//エフェクト音フラグの初期化
+
 	m_bullet_time = 0;
 
 	m_time = 1500;
@@ -64,6 +67,13 @@ void CObjSkillGemini::Init()
 //アクション
 void CObjSkillGemini::Action()
 {
+	//フラグがオフの場合
+	if (m_f == false)
+	{
+		Audio::Start(13);	//SEを鳴らす
+		m_f = true;	//１度だけ回るようにフラグをオンにする
+	}
+
 	//主人公とブロックの位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

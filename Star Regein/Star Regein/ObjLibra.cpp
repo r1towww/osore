@@ -349,6 +349,7 @@ void CObjLibra::Action()
 				m_ani_timeB--;
 			}
 		}
+	}
 
 		if (m_f == true)
 		{

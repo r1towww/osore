@@ -38,6 +38,7 @@ void CObjBlock::Init()
 	srand(time(NULL));
 	//マップのランダム処理の初期化
 	m_rand = rand() % 2;
+
 	m_block_rand = 0;	//障害物ブロックのランダム化用
 	//数値を変えることでステージ上の障害物の位置を変更
 	//ランダムの値が0の場合
@@ -386,20 +387,6 @@ void CObjBlock::Action()
 
 	hero->SetY(275);
 	m_scrolly -= hero->GetVY() * HERO_VEC;
-
-	//クリアしたならマップを再表示させる
-	if (g_stage_clear == true)
-	{
-		if (cnt >= 1)
-		{
-			;
-		}
-		else
-		{
-			Init();
-			cnt++;
-		}
-	}
 
 	//背景を回転させる
 	//m_roll += 0.1f;

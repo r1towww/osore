@@ -20,8 +20,7 @@ class CObjSkillLibra : public CObj
 		int m_x;		//位置
 		int m_y;
 
-
-
+		bool m_f;		//エフェクト音用フラグ
 		int	 m_ani;			//アニメーション用
 		int	 m_ani_time;	//アニメーション間隔タイム
 

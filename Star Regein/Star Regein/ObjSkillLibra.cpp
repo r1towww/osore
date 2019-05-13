@@ -3,6 +3,7 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjSkillLibra.h"
@@ -24,6 +25,8 @@ void CObjSkillLibra::Init()
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
 
+	m_f = false;	//エフェクト音フラグの初期化
+
 	m_persist_time = 0;
 
 	m_eff.m_top    =   0;
@@ -35,7 +38,12 @@ void CObjSkillLibra::Init()
 //アクション
 void CObjSkillLibra::Action()
 {
-
+	//フラグがオフの場合
+	if (m_f == false)
+	{
+		Audio::Start(12);	//SEを鳴らす
+		m_f = true;	//１度だけ回るようにフラグをオンにする
+	}
 	//エフェクト用
 	RECT_F ani_src[15] =
 	{

@@ -33,6 +33,8 @@ private:
 	float m_pos_x;	//X軸調整
 	float m_pos_y;	//Y軸調整
 
+	bool m_f;		//エフェクト音用フラグ
+
 	int m_blackhole_num;	//惑星ごとのブラックホールの数の値を入れる
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
