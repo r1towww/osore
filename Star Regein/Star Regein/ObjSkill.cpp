@@ -36,21 +36,36 @@ void CObjSkill::Init()
 //アクション
 void CObjSkill::Action()
 {
-	//スキルを持っていない場合の処理
-	if (g_skill > Leo)	//獅子座の値を超えた場合
+	//スキルの値が0を下回った場合
+	if (g_skill < NoSkill) {
+		g_skill = Leo;
+		if (g_Taurus == false && g_skill == Taurus)//牡牛座を取得していない場合
+			g_skill--;	//次の画像へ移す
+		else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
+			g_skill--;	//次の画像へ移す
+		else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
+			g_skill--;	//次の画像へ移す
+		else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
+			g_skill--;	//次の画像へ移す
+		else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
+			g_skill--;	//次の画像へ移す
+	}
+	//スキルの値が5を上回った場合
+	else if (g_skill > Leo) {	
 		g_skill = NoSkill;	//NoSkillに戻す
-	else if (g_Taurus == false && g_skill == Taurus)
-		g_skill = NoSkill;	//NoSkillに戻す
-	else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
-		g_skill = NoSkill;	//NoSkillに戻す
-	else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
-		g_skill = NoSkill;	//NoSkillに戻す
-	else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
-		g_skill = NoSkill;	//NoSkillに戻す
-	else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
-		g_skill = NoSkill;	//NoSkillに戻す
-
+		if (g_Taurus == false && g_skill == Taurus)//牡牛座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		else if (g_Libra == false && g_skill == Libra)	//天秤座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		else if (g_Gemini == false && g_skill == Gemini)//双子座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		else if (g_Virgo == false && g_skill == Virgo)	//乙女座を取得していない場合
+			g_skill++;	//次の画像へ移す
+		else if (g_Leo == false && g_skill == Leo)		//獅子座を取得していない場合
+			g_skill++;	//次の画像へ移す
+	}
 	
+
 
 
 
