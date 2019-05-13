@@ -726,12 +726,13 @@ void CObjHero::Action()
 	hit->SetPos(m_px + 15, m_py + 15);//入り口から新しい位置（主人公の位置）情報に置き換える
 
 	//HPが０になったら削除
-	if (g_hp == 0.0f)
+	if (g_hp <= 0.0f)
 	{
+		m_alpha = 0.0f;
+		dead_flag = true;
 		//this->SetStatus(false);    //自身に削除命令を出す
 		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-	
-		dead_flag = true;
+
 	}
 
 
@@ -772,7 +773,9 @@ void CObjHero::Action()
 			m_ani3 = 0;
 			m_eff_time3 = 0;
 
-			/*Scene::SetScene(new CSceneGameOver());*/
+			dead_flag = false;
+
+			Scene::SetScene(new CSceneGameOver());
 		}
 	}
 }
@@ -790,6 +793,7 @@ void CObjHero::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
 	float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
+	
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
@@ -872,14 +876,22 @@ void CObjHero::Draw()
 	}
 	if (dead_flag == true)
 	{
-		
+
+		//透明の主人公を表示
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 80.0f + m_px;
+		dst.m_right = 0.0f + m_px;
+		dst.m_bottom = 80.0f + m_py;
+
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+
 		//エフェクト用表示位置の設定
 		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
 		dst.m_left = 0.0f + m_px;
 		dst.m_right = 94.0f + m_px;
 		dst.m_bottom = 94.0f + m_py;
 		//描画
-		Draw::Draw(90, &m_eff3, &dst, c3, 1.0f);
+		Draw::Draw(35, &m_eff3, &dst, c3, 90.0f);
 	}
 
 }
