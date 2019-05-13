@@ -516,7 +516,7 @@ void CObjCow::Action()
 		m_ani_frame_delete += 1;
 		m_ani_count = 0;
 	}
-	if (m_ani_frame_delete == 4)
+	if (m_ani_frame_delete == 3)
 	{
 		m_ani_frame_delete = 0;
 		//フラグがオフの場合
@@ -598,6 +598,9 @@ void CObjCow::Draw()
 		//表示
 		Draw::Draw(80, &src, &dst, d, 0.0f);
 	}
+
+
+
 	if (g_stan_cow_flag[m_cow_id] == true)
 	{
 		RECT_F src;//描画元切り取り位置
