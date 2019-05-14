@@ -20,11 +20,14 @@ void CObjStarChoice::Init()
 	m_Tra2 = 0.3f;
 	m_Tra3 = 0.3f;
 	m_Tra4 = 0.0f;
+	m_Tra5 = 0.0f;
 	if(g_stage == Earth || g_stage == Sun)
 		m_direction = UP;	//初期選択位置の初期化
 	else if (g_stage == Venus || g_stage == Mercury)
 		m_direction = LEFT;
 
+
+	m_push_flag = false;
 	//キー入力用フラグの初期化
 	m_key_flag = true;
 }
@@ -131,7 +134,7 @@ void CObjStarChoice::Action()
 					Sleep(500);
 					//ステージを地球に設定
 					g_stage = EarthStar;
-					Scene::SetScene(new CSceneEarth());
+					m_push_flag = true;
 				}
 			}
 			else if (g_stage == Venus)
@@ -145,7 +148,7 @@ void CObjStarChoice::Action()
 					//ステージを牡牛座に設定
 
 					g_stage = VenusTaurus;
-					Scene::SetScene(new CSceneVenusTaurus());
+					m_push_flag = true;
 				}
 			}
 			else if (g_stage == Mercury)
@@ -158,7 +161,7 @@ void CObjStarChoice::Action()
 					Sleep(500);
 					//ステージを双子座に設定
 					g_stage = MercuryGemini;
-					Scene::SetScene(new CSceneMercuryGemini());
+					m_push_flag = true;
 				}
 			}
 			else if (g_stage == Sun)
@@ -171,7 +174,7 @@ void CObjStarChoice::Action()
 					Sleep(500);
 					//ステージを双子座に設定
 					g_stage = SunLeo;
-					Scene::SetScene(new CSceneSunLeo());
+					m_push_flag = true;
 				}
 			}
 			else
@@ -201,7 +204,7 @@ void CObjStarChoice::Action()
 					Sleep(500);
 					//ステージを天秤座に設定
 					g_stage = VenusLibra;
-					Scene::SetScene(new CSceneVenusLibra());
+					m_push_flag = true;
 				}
 			}
 			else if (g_stage == Mercury)
@@ -214,7 +217,7 @@ void CObjStarChoice::Action()
 					Sleep(500);
 					//ステージを乙女座に設定
 					g_stage = MercuryVirgo;
-					Scene::SetScene(new CSceneMercuryVirgo());
+					m_push_flag = true;
 				}
 			}
 			else
@@ -241,6 +244,7 @@ void CObjStarChoice::Action()
 				g_stage = Space;	//ステージをSpaceに設定
 				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
 				this->SetStatus(false);
+				m_push_flag = true;
 			}
 		}
 	}
@@ -250,6 +254,41 @@ void CObjStarChoice::Action()
 		g_key_flag = true;	//離したらオンにする
 	}
 	
+	//Zキーが押されると徐々に暗転しながらシーン移行
+	if (m_push_flag == true)
+	{
+		m_Tra5 += 0.03;
+		if (m_Tra5 > 1)
+		{
+			if (g_stage == Earth)//地球
+			{
+				Scene::SetScene(new CSceneEarth());
+			}
+			else if (g_stage == VenusTaurus)//おうし座
+			{
+				Scene::SetScene(new CSceneVenusTaurus());
+			}
+			else if (g_stage == VenusLibra)//てんびん座
+			{
+				Scene::SetScene(new CSceneVenusLibra());
+			}
+			else if (g_stage == MercuryGemini)//ふたご座
+			{
+				Scene::SetScene(new CSceneMercuryGemini());
+			}
+			else if (g_stage == MercuryVirgo)//おとめ座
+			{
+				Scene::SetScene(new CSceneMercuryVirgo());
+			}
+			else if (g_stage == SunLeo)//太陽
+			{
+				Scene::SetScene(new CSceneSunLeo());
+			}
+		}
+
+	}
+
+
 }
 
 //ドロー
@@ -266,6 +305,8 @@ void CObjStarChoice::Draw()
 
 	float E[4] = { 1.0f,0.0f,0.0f,m_Tra1 };
 
+	float stage_change[4] = { 1.0f,1.0f,1.0f,m_Tra5 }; //ステージ移行
+
 	//左の星座
 	float left[4]  = { 1.0f,1.0f,1.0f,m_Tra1 };
 	//右の星座
@@ -278,11 +319,27 @@ void CObjStarChoice::Draw()
 	
 				//戻るコマンド表示
 	Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
+
+
+	if (m_push_flag == true)
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 350.0f;
+		src.m_right = 400.0f;
+		src.m_bottom = 50.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		Draw::Draw(9, &src, &dst, stage_change, 0.0f);
+	}
 	//地球選択時に表示される画像
 	if (g_stage == Earth)
 	{
-		
-
 		//地球選択用の画像
 		//切り取り位置の設定
 		src.m_top    = 0.0f;
@@ -456,9 +513,5 @@ void CObjStarChoice::Draw()
 			Font::StrDraw(L"CLEAR!", 350, 400, 40, c);
 		}
 		Font::StrDraw(L"獅子座ステージ", 64, 64, 32, stage);
-
 	}
-	
-
-
 }
