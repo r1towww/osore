@@ -31,6 +31,7 @@ CSceneStageClear::~CSceneStageClear()
 void CSceneStageClear::InitScene()
 {
 	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_1024);
 
 
 	//クリアオブジェクト作成

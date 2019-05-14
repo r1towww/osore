@@ -19,4 +19,6 @@ private:
 	int m_keytime;	//キー入力タイム用変数
 	bool m_Right;
 	bool m_Left;
+	float m_Tra;
+	bool m_push_flag;
 }; 
