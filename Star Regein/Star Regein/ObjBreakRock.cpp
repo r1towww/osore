@@ -3,6 +3,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjBreakRock.h"
@@ -49,6 +50,7 @@ void CObjBreakRock::Action()
 		//Hits::DeleteHitBox(this);
 
 		m_eff_flag = true;		//フラグをオンにして、エフェクトの開始
+
 	}
 	if (m_eff_flag == true)
 	{
@@ -78,9 +80,15 @@ void CObjBreakRock::Action()
 		{
 			m_ani_time++;	
 		}
+		if (m_ani == 0)
+		{
+			Audio::Start(18);
+
+		}
 		//9番目（画像最後）まで進んだら、削除
 		if (m_ani == 9)
 		{
+
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
 		}

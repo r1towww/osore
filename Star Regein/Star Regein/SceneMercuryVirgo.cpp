@@ -78,6 +78,8 @@ void CSceneMercuryVirgo::InitScene()
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
+	Draw::LoadImageW(L"星エフェクト.png", 99, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"ブラックホール.png", 30, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ホワイトホール.png", 31, TEX_SIZE_1024);
 
@@ -114,6 +116,9 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(13, L"双子座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
+	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(17, L"岩砕きSE.wav", EFFECT);
+	Audio::LoadAudio(18, L"岩砕き・破壊SE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);

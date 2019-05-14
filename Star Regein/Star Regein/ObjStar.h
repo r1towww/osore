@@ -27,7 +27,9 @@ class CObjStar : public CObj
 		float m_py;
 		int m_del;
 		int	   m_ani;		//チャージアニメーション用
-		int	   m_ani_time;	//チャージアニメーション間隔タイム
+		int m_ani_time;	//アニメーションフレーム動作間隔
+		int m_ani_frame;//描画フレーム
+
 		RECT_F m_eff;		//チャージエフェクト描画用
 		int m_ani_stop;
 		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
