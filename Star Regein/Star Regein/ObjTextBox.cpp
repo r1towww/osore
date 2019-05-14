@@ -12,12 +12,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+bool g_tutorial_next_flag = false;
 
 
 //イニシャライズ
 void CObjTextBox::Init()
 {
-	m_key_time = 0;
 	m_f = true;
 	m_text = 0;
 }
@@ -25,33 +25,20 @@ void CObjTextBox::Init()
 //アクション
 void CObjTextBox::Action()
 {
-	//惑星が選択され、戦闘画面への移行の際
-	if (g_stage == EarthStar)
-	{
-
-		//画像が表示された際の、キー入力タイム処理
-		if (m_key_time >= 300)
-			m_key_time = 300;	//タイムが50になった際、50で止める
-		else
-			m_key_time++;	//キー入力タイムを増やす
-
-	}
-	else
-	{
-		m_key_time = 0;	//それ以外の場合、キー入力タイムを0にする
-	}
-	//キータイムが300を超えるとZ可能
+	//キータイムを超えるとZ可能
 	//Zキー入力
-	if (Input::GetVKey('Z') == true)
+	if (Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true&& g_tutorial_next_flag ==true)
 	{
 			
 		if (m_f == false)
 		{
+			//チュートリアルフラグがオンのとき
 			if (g_tutorial_flag == true)
 			{
 				Audio::Start(1);
+				g_tutorial_next_flag = false;
+
 				m_text++;//テキストを進める
-				m_key_time = 0;//キータイムをリセットする
 				m_f = true;
 			}
 		}
@@ -72,12 +59,12 @@ void CObjTextBox::Draw()
 	if (g_tutorial_flag == true)
 	{
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
-		if (g_stage == Space)
+		if (g_stage == EarthStar)
 		{
-			;
+			Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 		}
 		else
-			Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
+			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
 
 	}
 	//チュートリアルフラグがオフで終了する
@@ -156,9 +143,9 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 5)
 			{
-				Font::StrDraw(L"もし、先にてんびん座のヒールスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"獲得しているなら、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"Xキーで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"もし、先にてんびん座のスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"獲得しているなら、天秤座のスキルを", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"セットすることで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 			}
 			else if (m_text == 6)
 			{
@@ -179,7 +166,8 @@ void CObjTextBox::Draw()
 			else if (m_text == 1)
 			{
 				Font::StrDraw(L"ここ、てんびん座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ヒール（回復）スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"HPに応じて攻撃力の変わるパッシブスキル", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"を取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 			else if (m_text == 2)
@@ -204,18 +192,16 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 5)
 			{
-				Font::StrDraw(L"もし、先におうし座のダッシュスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"獲得しているなら、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"シフトキーで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"天秤座の敵は温厚で", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"基本的に戦う意思はないので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"平和にいきましょう…！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 
 			}
 			else if (m_text == 6)
 			{
-				Font::StrDraw(L"スキルを使うにはMP（青いゲージ）が必要です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"MPは時間経過で回復していくので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"どんどん使っていきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
+				Font::StrDraw(L"もし、攻撃してしまったら・・・", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"その時は頑張って生きてください・・・", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 			}
 		}
 		//ふたご座
@@ -231,7 +217,7 @@ void CObjTextBox::Draw()
 			else if (m_text == 1)
 			{
 				Font::StrDraw(L"ここ、双子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"分身スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"サブ機出現スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
@@ -255,7 +241,7 @@ void CObjTextBox::Draw()
 			else if (m_text == 1)
 			{
 				Font::StrDraw(L"ここ、おとめ座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"遠距離攻撃スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"HP吸収遠距離攻撃スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
@@ -272,7 +258,7 @@ void CObjTextBox::Draw()
 		{
 			if (m_text == 0)
 			{
-				Font::StrDraw(L"最終ステージ太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"ここ太陽では獅子座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
@@ -280,15 +266,28 @@ void CObjTextBox::Draw()
 			else if (m_text == 1)
 			{
 				Font::StrDraw(L"獅子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"周囲の敵をマヒさせるスキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"周囲の敵をマヒさせるスキルを", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 			else if (m_text == 2)
 			{
 				Font::StrDraw(L"ここで獲得すべき星は全部で15個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"これまでに集めた星座たちを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"クリア目指して頑張りましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				Font::StrDraw(L"ここにいる敵は、やけどを付与する", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"攻撃をしてきます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+
+			}
+			else if (m_text == 3)
+			{
+				Font::StrDraw(L"やけど状態では一定時間", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"ダメージを受けてしまいます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+			}
+			else if (m_text == 4)
+			{
+				Font::StrDraw(L"やけどは無効化できないので", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				Font::StrDraw(L"スキルを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				Font::StrDraw(L"攻略していきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 			}
 

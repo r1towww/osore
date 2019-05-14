@@ -32,7 +32,10 @@ void CSceneTitle::InitScene()
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
 
-	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_512);
+	Audio::LoadAudio(3, L"タイトル_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(3);
+	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_512);
 
 
 	//タイトルオブジェクト作成

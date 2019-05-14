@@ -16,6 +16,8 @@ using namespace GameL;
 void CObjGameOver::Init()
 {
 	m_keytime = 0;	//キー入力タイムの初期化
+	Audio::Start(1);
+
 }
 
 //アクション
@@ -75,7 +77,7 @@ void CObjGameOver::Draw()
 	{
 		Font::StrDraw(L"◇ステージ選択へ戻る", 400, 400, 32, c);
 		//この状態でＺキーでステージ選択へ
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
+		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
 			Scene::SetScene(new CSceneStageChoice());
 		}
@@ -91,7 +93,7 @@ void CObjGameOver::Draw()
 	{
 		Font::StrDraw(L"◇タイトルに戻る", 100, 400, 32, c);
 		//この状態でＺキーでタイトルへ
-		if (Input::GetVKey('Z') == true && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
+		if ((Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
 			Scene::SetScene(new CSceneTitle());
 		}

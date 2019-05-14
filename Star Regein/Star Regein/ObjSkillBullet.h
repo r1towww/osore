@@ -4,11 +4,11 @@
 
 //使用するネームスペース
 using namespace GameL;
-//オブジェクト：ビームサーベル
+//オブジェクト：弾
 class CObjSkillBullet : public CObj
 {
 public:
-	CObjSkillBullet(float gx, float gy);
+	CObjSkillBullet(float gx, float gy,float r);
 	~CObjSkillBullet() {};
 	void Init();  //イニシャライズ
 	void Action();//アクション
@@ -17,6 +17,8 @@ private:
 
 	float m_gx;		//位置
 	float m_gy;
+
+	float m_r;     //角度
 
 	float m_vx;
 	float m_vy;

@@ -13,6 +13,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+bool g_tutorial__flag=false;
 
 //イニシャライズ
 void CObjTutorial::Init()
@@ -20,12 +21,14 @@ void CObjTutorial::Init()
 	g_tutorial_flag = true;
 
 	//キー入力用タイムの初期化
-	m_keytime = 0;
+	m_keytime = 0.f;
 
 	m_page = 0;		//渡されたページ数
 	m_sec = 0;		//秒数カウント
+	m_blink = 0;
 	m_line = 0;		//行数カウント
 	m_f = true;
+	m_next_f = false;
 }
 
 //アクション
@@ -37,28 +40,13 @@ void CObjTutorial::Action()
 		g_tutorial_flag = false;
 	}
 
-
-	//惑星が選択され、戦闘画面への移行の際
-	if (g_stage == EarthStar )
-	{
-
-		//画像が表示された際の、キー入力タイム処理
-		if (m_keytime >=300)
-			m_keytime = 300;	//タイムが50になった際、50で止める
-		else
-			m_keytime++;	//キー入力タイムを増やす
-
-	}
-	else
-	{
-		m_keytime = 0;	//それ以外の場合、キー入力タイムを0にする
-	}
-
 	//Xキーを押してスキップ（移動キーを入力できなくしている）
 	if (Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false 
 									&& Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_RIGHT) == false )
 	{
+		Audio::Start(1);	//エフェクト音を鳴らす
 		g_tutorial_flag = false;
+		this->SetStatus(false);
 	}
 	
 }
@@ -121,11 +109,13 @@ void CObjTutorial::Draw()
 			if (m_sec <= 715)
 			{//715(コメントの幅)まで時間経過
 				m_sec += 20;	   //文字の表示スピード---------------------
+				m_blink += 10;
 			}				   //幅を超えると、行数を+1
 			else
 			{
 				m_line += 1;
 				m_sec = 0;
+				m_blink = 0;
 			}
 
 			//切り取り位置の設定(画像の黒い部分に設定)
@@ -136,7 +126,8 @@ void CObjTutorial::Draw()
 
 			if (m_p != 1)
 			{
-				if (Input::GetVKey('Z') == true)
+				//Z入力および制御フラグオンで次のぺージへ
+				if (Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true&& m_next_f==true)
 				{
 					if (m_f == false)
 					{
@@ -148,6 +139,8 @@ void CObjTutorial::Draw()
 							m_page += 1;
 							m_line = 0;		//行数リセット
 							m_sec = 0;		//秒数リセット
+							m_next_f = false;
+							g_tutorial_next_flag = true;
 						}
 
 					}
@@ -206,22 +199,31 @@ void CObjTutorial::Draw()
 			{//・・・ーーーーーーーーーーーーーーーー
 				dst.m_top = 540.0f;
 				if (m_line > 2 || m_p == 1)//３行目以降、動作
-					if (m_sec <= 160)//表示位置を段階的に変更
+					if (m_blink <= 160)//表示位置を段階的に変更
 						dst.m_left = 780.0f;
-					else if (m_sec <= 250)
+					else if (m_blink <= 250)
 						dst.m_left = 600.0f;
-					else { dst.m_left = 600.0f; m_sec = 0; }//カウントを０にして、元に戻す
+					else { dst.m_left = 600.0f; m_blink = 0; m_sec = 0; }//カウントを０にして、元に戻す
 				else
 					dst.m_left = 780.0f;
 				dst.m_right = 750.0f;
 				dst.m_bottom = 575.0f;
 				//描画
 				Draw::Draw(41, &src, &dst, c, 0.0f);
-			}
-			else { ; }
-		}
-		Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
+				m_next_f = true;
 
+			}
+			else 
+			{ ; }
+		}
+		if (g_stage == EarthStar)
+		{
+			Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
+		}
+		else
+		{
+			Font::StrDraw(L"天の声", 10, 380, 30, c);
+		}
 
 
 

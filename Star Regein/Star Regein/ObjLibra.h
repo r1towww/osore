@@ -35,7 +35,7 @@ private:
 	float m_vx;		//移動ベクトル
 	float m_vy;
 	float m_posture;//姿勢
-	float alpha;
+	float m_alpha;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
@@ -43,31 +43,51 @@ private:
 
 	int m_libra_id;
 
+	int m_ani_timeB;
 	int m_time;//無敵時間測定
-	int m_bullet_time;//ハート弾発射時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
-	int e_time;//敵行動時間
-	int enemy_move;//敵移動
-
-	int m_btime;//一定行動のための時間測定
+	int m_e_time;//敵行動時間
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
-							//blockとの衝突状態確認用
+	bool m_invincible_flag;//無敵フラグ
+
+	bool m_f;//無敵時間
+
+	bool m_move_f;
+
+	//blockとの衝突状態確認用
 	bool m_hit_up;
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
 	//移動用の向き制御用
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
+
 	bool m_movex;//左右
 	bool m_movey;//上下
+
+	bool m_move;//移動フラグ
 
 	bool m_do_f;//敵攻撃フラグ
 
 	bool m_df;//ミニマップからの削除フラグ
+
+	bool m_libra_delete; //天秤削除フラグ
+
+	//消滅アニメーション用
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
+
+
+	bool m_kill_f;	//キルカウント用フラグ
 
 
 };

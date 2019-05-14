@@ -33,13 +33,11 @@ class ObjStageChoiceHero :public CObj
 		float m_speed_power; //スピードパワー
 
 		float m_alpha;
-
+		bool m_time;
 		int m_ani_time; //アニメーションフレーム動作間隔
 		int m_ani_frame;//描画フレーム
 
 		int m_f;//攻撃制御用
-
-		int m_time;
 
 		bool m_key_flag;	//キー入力制御フラグ
 

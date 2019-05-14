@@ -39,21 +39,26 @@ class CObjBlock : public CObj
 		int m_map[MAPSIZE][MAPSIZE];	//マップ情報a
 
 		int m_c_c;//牛カウント用
+		int m_rand_cow;
 		int m_blue_c;//双子（青）カウント用
 		int m_red_c;//双子（赤）カウント用
 		int m_woman_c;//乙女カウント用
 		int m_b_c;//ブラックホールカウント用
 		int m_w_c;//ホワイトホールカウント用
 		int m_libra_c;//天秤カウント用
+		int m_leo_c;//獅子カウント用
+		int m_star_c;//星カウント用
 
 		float m_scrollx;		//左右スクロール用
 		float m_scrolly;		//上下スクロール用
-		float m_roll;			//背景回転用
-		int m_f;//主人公消滅時のエラー回避用
 
+		int m_f;//主人公消滅時のエラー回避用
+		int cnt;
+		float m_allsize;
 		bool m_Atypef;
 
 		int m_rand;	//マップのランダム化用
+		int m_block_rand;	//障害物ブロックのランダム化用
 
 		//惑星ごとの背景カラー情報
 		float m_red;	//赤

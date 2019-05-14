@@ -20,7 +20,10 @@ using namespace GameL;
 CSceneStageChoice::CSceneStageChoice()
 {
 	g_hp = g_max_hp;	//hpを最大hpで初期化
-	g_skill = Taurus;	//スキルの値を牡牛座で初期化
+	g_skill = NoSkill;	//スキルの値を牡牛座で初期化
+	g_blackhole_cnt = 0;//ブラックホールのカウントの初期化
+
+
 }
 
 //デストラクタ
@@ -38,17 +41,17 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択金星.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択水星.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
-	Draw::LoadImageW(L"スキル総合.png", 7, TEX_SIZE_1024);
-	Draw::LoadImageW(L"box_blue.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_blue_t.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"box_mini.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"惑星.png", 8, TEX_SIZE_512);
+	Draw::LoadImageW(L"星座立ち絵総合.png", 7, TEX_SIZE_1024);
 
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
 
-	
+	Audio::LoadAudio(3, L"ステージ選択_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	Audio::Start(3);
 	//ステージ選択オブジェクト作成
 	CObjStageChoice* o = new CObjStageChoice();
 	Objs::InsertObj(o, OBJ_STAGECHOICE, 0);
@@ -56,13 +59,10 @@ void CSceneStageChoice::InitScene()
 	//ステージ選択用ヒーローオブジェクト作成
 	ObjStageChoiceHero* oh = new ObjStageChoiceHero(g_stage_px,g_stage_py);
 	Objs::InsertObj(oh, OBJ_STAGECHOICEHERO, 10);
-
-	////ステージ選択(星座)オブジェクト作成
-	//CObjStarChoice* star = new CObjStarChoice();
-	//Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 }
 
 //ゲームタイトル実行中メソッド
 void CSceneStageChoice::Scene()
 {
+
 }

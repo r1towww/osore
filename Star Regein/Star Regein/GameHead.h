@@ -27,6 +27,8 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE2,
 	OBJ_BLACKHOLE3,
 	OBJ_BLACKHOLE4,
+	OBJ_BREAK_ROCK,
+	OBJ_BREAK_BIGROCK,
 
 	OBJ_WHITEHOLE,
 
@@ -38,13 +40,19 @@ enum OBJ_NAME
 	OBJ_WOMAN,
 	OBJ_HOMING_HEART,
 	OBJ_LIBRA,
+	OBJ_LEO,
+	OBJ_BOSS,
+	OBJ_BEAM,
 
+	OBJ_MENU,
 	OBJ_HELP,
 	OBJ_BEAMSABER,
+	OBJ_ED,
 
 	OBJ_SKILL,
 	OBJ_SKILL_LIBRA,
 	OBJ_SKILL_GEMINI,
+	OBJ_SKILL_GEMINIB,
 	OBJ_SKILL_VIRGO,
 	OBJ_SKILL_LEO,
 
@@ -53,10 +61,12 @@ enum OBJ_NAME
 	OBJ_SKILL_BULLET,
 
 	OBJ_STATUS,
+	OBJ_SKILL_ITEM,
 
 
 };
 //------------------------------------------------
+
 
 //当たり判定属性----------------------------------
 enum HIT_ELEMENTS
@@ -81,6 +91,8 @@ enum HIT_ELEMENTS
 	ELEMENT_SUB,
 	ELEMENT_SKILL_VIRGO,
 	ELEMENT_SKILL_LEO,
+
+	ELEMENT_SKILL_ITEM,
 };
 //------------------------------------------------
 
@@ -94,7 +106,8 @@ struct UserData
 //------------------------------------------------
 
 
-//ゲーム内で使用されるグローバル変数・定数・列挙--
+//ゲーム内で使用されるグローバル変数・定数・列挙-------------------------------------------
+
 //定数
 #define MAPSIZE 50
 #define ALLSIZE 64.0f
@@ -156,7 +169,7 @@ typedef enum Skill
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
 
-extern int g_StarCount;	//星を数える変数
+extern int   g_StarCount;	//星を数える変数
 extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
 extern float* g_cow_y[20];//全ての牛のY位置を把握する
@@ -168,25 +181,37 @@ extern float* g_woman_x[20];//すべての乙女のX位置を把握する
 extern float* g_woman_y[20];//すべての乙女のY位置を把握する
 extern float* g_libra_x[20];//すべての天秤のX位置を把握する
 extern float* g_libra_y[20];//すべての天秤のY位置を把握する
+extern float* g_leo_x[60];//全ての獅子のX位置を把握する
+extern float* g_leo_y[60];//全ての獅子のY位置を把握する
+extern float* g_boss_x;//ボスのX位置を把握する
+extern float* g_boss_y;//ボスのY位置を把握する
+extern float g_star_x[5];
+extern float g_star_y[5];
 
 extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
-extern int g_blackhole_cnt;			//ブラックホールのカウント用
+extern int    g_blackhole_cnt;		//ブラックホールのカウント用
+extern int    g_whitehole_cnt;
+extern float  g_hp;     //今のＨＰ
+extern float  g_max_hp; //最大ＨＰ
+extern float  g_mp;     //今のＭＰ
+extern float  g_max_mp; //最大ＭＰ
+extern int    g_attack_power;	//主人公の攻撃力
 
-extern float g_hp;     //今のＨＰ
-extern float g_max_hp; //最大ＨＰ
-extern float g_mp;     //今のＭＰ
-extern float g_max_mp; //最大ＭＰ
 
 extern bool g_key_flag;	//キー入力制御フラグ
+extern bool g_gemini_move;//双子座ブラックホール移動
+
 
 extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
 extern bool g_woman_d_flag[20];//乙女削除フラグ
 extern bool g_libra_d_flag[20];//天秤削除フラグ
+extern bool g_leo_d_flag[60];//獅子削除フラグ
+extern bool g_boss_d_flag;//ボス削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -195,12 +220,25 @@ extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
 extern int g_mapsize;	   //マップのサイズ
 extern int g_stage;		   //今いるステージの値
 extern int g_skill;		   //各星座スキルの値
-extern bool g_gemini_check; //サブ機の弾丸生成の為の値
 
-extern bool g_Leo_hit_flag;//獅子座スキルヒットフラグ
-extern int  g_Leo_cnt;//獅子座スタンカウント
+extern bool g_gemini_check;       //サブ機の生成の為の値
+extern bool g_gemini_bullet_check;//双子座スキル弾丸
+extern bool g_geminiattck_check;  //双子座スキル弾丸制御
+extern bool g_gemini_check;       //サブ機の弾丸生成の為の値
+extern bool g_skill_item_flag;    //スキルアイテム所持フラグ
+
+extern float  g_Leo_cnt;//獅子座スタンカウント
+extern bool g_stan_cow_flag[20];//スタン牛個別認識用
+extern bool g_stan_blue_flag[20];//スタン双子（青）個別認識用
+extern bool g_stan_red_flag[20];//スタン双子（赤）個別認識用
+extern bool g_stan_woman_flag[20];//スタン乙女個別認識用
+extern bool g_stan_libra_flag[20];//スタン天秤個別認識用
+extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
+extern bool g_stan_boss_flag;//スタンボス用
+extern bool g_move_libra_flag[20];//天秤座動かすためのもの
 
 //各星座の取得情報
+extern bool g_stage_clear;
 
 extern bool g_Taurus;	//牡牛座	
 extern bool g_Libra;	//天秤座
@@ -221,6 +259,22 @@ extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
+extern bool g_tutorial_next_flag;//チュートリアルのページ制御用
+extern bool g_move_stop_flag;//主人公の操作制御用フラグ
+
+//各星座の星を集めきったかどうか
+extern bool g_Earth_Max; 
+extern bool g_Taurus_Max;
+extern bool g_Libra_Max;
+extern bool g_Gemini_Max;
+extern bool g_Virgo_Max;
+extern bool g_Leo_Max;
+
+extern bool g_Make_Item;//アイテムが生成されたかどうか
+
+extern int g_enemy_cnt;	//敵の総数のカウント用
+extern int g_kill_cnt;	//敵を倒した数
+extern bool g_no_damage;	//攻撃を受けたかどうかのフラグ
 
 extern int g_cow_id[20];//牛の識別ID
 
@@ -242,6 +296,9 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjWoman.h"
 #include "ObjHomingHeart.h"
 #include "ObjLibra.h"
+#include "ObjLeo.h"
+#include "ObjBoss.h"
+#include "ObjBeam.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
@@ -249,6 +306,8 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjAsteroid.h"
 #include "ObjBlackhole.h"
 #include "ObjWhitehole.h"
+#include "ObjBreakRock.h"
+#include "ObjBreakBigRock.h"
 
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
@@ -260,24 +319,27 @@ extern int g_cow_id[20];//牛の識別ID
 #include "ObjMessage.h"
 #include "ObjMiniMap.h"
 #include "ObjHelp.h"
+#include "ObjMenu.h"
+#include "ObjED.h"
 
 #include "ObjStatus.h"
 #include "ObjBeamSaber.h"
 #include "ObjSkill.h"
 
-#include "ObjSkillTwinsB.h"
 #include "ObjSkillLibra.h"
 #include "ObjSkillGemini.h"
+#include "ObjskillgeminiB.h"
 #include "ObjSkillVirgo.h"
 #include "ObjSkillBullet.h"
 #include "ObjSkillLeo.h"
+
+#include "ObjSkillItem.h"
 
 
 
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
-#include "SceneMain.h"
 #include "SceneEarth.h"
 #include "SceneVenusTaurus.h"
 #include "SceneVenusLibra.h"
@@ -290,6 +352,7 @@ extern int g_cow_id[20];//牛の識別ID
 #include "SceneStageChoice.h"
 #include "SceneStageClear.h"
 #include "SceneGameOver.h"
+#include "SceneED.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
@@ -299,7 +362,10 @@ extern int g_cow_id[20];//牛の識別ID
 	CSceneEarth			地球
 	CSceneVenusTaurus	金星（牡牛座）
 	CSceneVenusLibra	金星（天秤座）
-	
+	CSceneMercuryGemini	水星（双子座）
+	CSceneMercuryVirgo	水星（乙女座）
+	CSceneSunLeo		太陽（獅子座）
+
 */
 #define SET_GAME_START  CSceneTitle
 //-----------------------------------------------

@@ -43,9 +43,6 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBlock.cpp">
       <Filter>ソースファイル\マップ</Filter>
     </ClCompile>
@@ -88,18 +85,6 @@
     <ClCompile Include="ObjSkill.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillGemini.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillLibra.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillTwinsB.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSkillVirgo.cpp">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneEarth.cpp">
       <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
@@ -123,9 +108,6 @@
     </ClCompile>
     <ClCompile Include="ObjCow.cpp">
       <Filter>ソースファイル\各惑星敵\牛</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTwinsBule.cpp">
-      <Filter>ソースファイル\各惑星敵\双子</Filter>
     </ClCompile>
     <ClCompile Include="ObjTwinsRed.cpp">
       <Filter>ソースファイル\各惑星敵\双子</Filter>
@@ -172,7 +154,6 @@
     <ClCompile Include="ObjLibra.cpp">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClCompile>
-    <ClCompile Include="ObjSkillLeo.cpp" />
     <ClCompile Include="ObjSkillBullet.cpp">
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
@@ -181,6 +162,61 @@
     </ClCompile>
     <ClCompile Include="ObjHelp.cpp">
       <Filter>ソースファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBreakRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBreakBigRock.cpp">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillGemini.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLibra.cpp">
+      <Filter>ソースファイル\スキル\天秤座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillVirgo.cpp">
+      <Filter>ソースファイル\スキル\乙女座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillBullet.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillLeo.cpp">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSkillItem.cpp">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTwinsBlue.cpp">
+      <Filter>ソースファイル\各惑星敵\双子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLeo.cpp">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMenu.cpp">
+      <Filter>ソースファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBreakRock.cpp" />
+    <ClCompile Include="ObjskillgeminiB.cpp">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBoss.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneED.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjED.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBeam.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,9 +265,6 @@
     <ClInclude Include="GameHead.h">
       <Filter>ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBlock.h">
       <Filter>ソースファイル\マップ</Filter>
     </ClInclude>
@@ -272,18 +305,6 @@
       <Filter>ソースファイル\チュートリアル</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkill.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillGemini.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillLibra.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillTwinsB.h">
-      <Filter>ソースファイル\スキル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSkillVirgo.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="SceneEarth.h">
@@ -358,7 +379,6 @@
     <ClInclude Include="ObjLibra.h">
       <Filter>ソースファイル\各惑星敵\天秤</Filter>
     </ClInclude>
-    <ClInclude Include="ObjSkillLeo.h" />
     <ClInclude Include="ObjSkillBullet.h">
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
@@ -367,6 +387,61 @@
     </ClInclude>
     <ClInclude Include="ObjHelp.h">
       <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBreakRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBreakBigRock.h">
+      <Filter>ソースファイル\ゲームオブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillGemini.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLibra.h">
+      <Filter>ソースファイル\スキル\天秤座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillVirgo.h">
+      <Filter>ソースファイル\スキル\乙女座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillBullet.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSkillLeo.h">
+      <Filter>ソースファイル\スキル\獅子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMenu.h">
+      <Filter>ソースファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBreakRock.h" />
+    <ClInclude Include="ObjSkillItem.h">
+      <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLeo.h">
+      <Filter>ソースファイル\各惑星敵\獅子</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjskillgeminiB.h">
+      <Filter>ソースファイル\スキル\双子座</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBoss.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneED.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjED.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBeam.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +456,6 @@
     </Filter>
     <Filter Include="ソースファイル\主人公">
       <UniqueIdentifier>{2c03d728-5e68-45bb-a1f3-ab49fe3738aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\ゲームオブジェクト">
-      <UniqueIdentifier>{4a6cddb7-9e8c-4e81-89d6-5acbbb25f133}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\UI">
       <UniqueIdentifier>{ac6dee42-2c1f-40c7-88e9-8086016db91e}</UniqueIdentifier>
@@ -433,17 +505,41 @@
     <Filter Include="ソースファイル\各惑星敵\双子">
       <UniqueIdentifier>{e989f6a9-a645-4883-9963-c60b3de7aa03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\各惑星敵\乙女">
-      <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル\各惑星敵\天秤">
       <UniqueIdentifier>{3e90780b-9020-4022-82de-850371e4facf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\タイトル">
+      <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\双子座">
+      <UniqueIdentifier>{e304d6be-3823-48ee-a41c-61acf7a3f192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\獅子座">
+      <UniqueIdentifier>{acb956e5-9d4d-47bd-af7b-97195d00f8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\乙女座">
+      <UniqueIdentifier>{35da95ca-d704-4b48-bc3d-08a816469f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\獅子">
+      <UniqueIdentifier>{43af4a16-3257-4451-823c-ec2e4fd7fe86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\天秤座">
+      <UniqueIdentifier>{1ac3fdbb-7194-47d8-a9d3-2997780a8477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\スキル\アイテム">
+      <UniqueIdentifier>{ed9d311a-d4e5-42bd-811b-39495093a4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\各惑星敵\ボス">
+      <UniqueIdentifier>{839ccfbe-90da-4347-99e0-d27f4ff701b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ゲームオブジェクト">
+      <UniqueIdentifier>{4a6cddb7-9e8c-4e81-89d6-5acbbb25f133}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\ゲームオブジェクト\Hole">
       <UniqueIdentifier>{6e64c037-92aa-4e5a-841e-d5400b347b1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\タイトル">
-      <UniqueIdentifier>{4a93a307-14cd-46f3-961e-7115b0384a33}</UniqueIdentifier>
+    <Filter Include="ソースファイル\各惑星敵\乙女">
+      <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -41,8 +41,10 @@ void CObjMessage::Action()
 //ドロー
 void CObjMessage::Draw()
 {
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//メッセージフォントカラー
+	float ckey[4] = { 1.0f,1.0f,1.0f,0.7f };	//メッセージフォントカラー
 
-	float c[4] = { 1.0f,1.0f,0.4f,1.0f };	//メッセージフォントカラー
+	float sc[4] = { 1.0f,1.0f,0.4f,1.0f };
 	float b[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
@@ -52,32 +54,46 @@ void CObjMessage::Draw()
 	wchar_t STAR[128];	//星の数を常に表示する
 
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
-	Font::StrDraw(STAR, 400, 20, 25, c);//メッセージを表示
+	Font::StrDraw(STAR, 400, 20, 25, sc);//メッセージを表示
+
+	Font::StrDraw(L"Q:メニュー", 465, 12, 21, c);	//メニュー
+	Font::StrDraw(L"H:ヘルプ", 465, 33, 21, c);	//ヘルプ
+
+	if(g_Taurus == true)
+		Font::StrDraw(L"スキル切り替え", 580, 400, 20, ckey);	//スキル切り替えキー
+		Font::StrDraw(L"Cで左へ、Vで右へ", 570, 420, 21, ckey);	//スキル切り替えキー
 
 	//切り取り位置の設定
-	src.m_top    =   0.0f;
-	src.m_left   =   0.0f;
-	src.m_right  = 232.0f;
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 232.0f;
 	src.m_bottom = 203.0f;
 
 	//表示位置の設定
-	dst.m_top    = 16.0f;
-	dst.m_left   = 365.0f;
-	dst.m_right  = 395.0f;
+	dst.m_top = 16.0f;
+	dst.m_left = 365.0f;
+	dst.m_right = 395.0f;
 	dst.m_bottom = 46.0f;
 
 	//描画
 	Draw::Draw(6, &src, &dst, c, 0.0f);
-
+	
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)
 	{
-		m_time++;	//timeをプラスしている時だけメッセージを表示
-		swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
-		Font::StrDraw(STARMES, 150, 240, 25, c);//メッセージを表示
-		if (m_time == 100) {
-			m_memory = g_StarCount;	//現在の星の数を代入
-			m_time = 0;	//timeの初期化
+		//最後の星を取得した際
+		if (m_MaxStar == g_StarCount) {
+			Font::StrDraw(L"最後の星を取得！", 150, 240, 25, sc);	//別のメッセージを作成
+		}
+		else
+		{
+			m_time++;	//timeをプラスしている時だけメッセージを表示
+			swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
+			Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
+			if (m_time == 100) {
+				m_memory = g_StarCount;	//現在の星の数を代入
+				m_time = 0;	//timeの初期化
+			}
 		}
 	}
 

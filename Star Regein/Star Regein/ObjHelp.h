@@ -16,6 +16,6 @@ class CObjHelp :public CObj
 		void Draw();	//ドロー
 
 	private:
-
+		bool  m_f;//キー入力制御用フラグ
 };
 

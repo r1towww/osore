@@ -31,7 +31,7 @@ void CObjWhitehole::Init()
 	m_eff.m_right  = 192;
 	m_eff.m_bottom = 192;
 	
-	//“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
+	////“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
 	Hits::SetHitBox(this, m_px + 48.0f, m_py + 48.0f, 34.0f, 34.0f, ELEMENT_BLOCK, OBJ_WHITEHOLE, 1);
 
 }
@@ -102,5 +102,6 @@ void CObjWhitehole::Draw()
 	//•`‰æ
 	Draw::Draw(31, &m_eff, &dst, c, 90.0f);
 }
+
 
 

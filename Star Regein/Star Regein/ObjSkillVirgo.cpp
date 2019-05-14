@@ -3,8 +3,8 @@
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
-//使用するヘッダーファイル
 #include "GameHead.h"
 #include "ObjSkillVirgo.h"
 
@@ -31,7 +31,8 @@ void CObjSkillVirgo::Init()
 
 	//着弾フラグ初期化
 	m_hit_flag = false;
-
+	m_f = false;	//エフェクト音フラグの初期化
+	m_bullet_f = false;	//着弾SEフラグの初期化
 	//主人公の向きを取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_posture = hero->GetPos();
@@ -87,8 +88,16 @@ void CObjSkillVirgo::Init()
 //アクション
 void CObjSkillVirgo::Action()
 {
+	//フラグがオフの場合
+	if (m_f == false)
+	{
+		Audio::Start(14);	//SEを鳴らす
+		m_f = true;	//１度だけ回るようにフラグをオンにする
+	}
+
+
+
 	//着弾アニメーション
-	
 	RECT_F ani_src[12] =
 	{
 		{ 0,   0,    32, 32 },
@@ -132,16 +141,37 @@ void CObjSkillVirgo::Action()
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 
-	//主人公と当たっているか確認
-	if (hit->CheckObjNameHit(OBJ_COW) != nullptr       ||
-		hit->CheckObjNameHit(OBJ_TWINS_BLUE) !=nullptr ||
-		hit->CheckObjNameHit(OBJ_TWINS_RED) != nullptr ||
-		hit->CheckObjNameHit(OBJ_WOMAN) != nullptr     
-		)//当たっていたら取得
+	//各敵と当たっているか確認
+	if (hit->CheckObjNameHit(OBJ_COW)        != nullptr ||
+		hit->CheckObjNameHit(OBJ_LIBRA)      != nullptr ||
+		hit->CheckObjNameHit(OBJ_TWINS_BLUE) != nullptr ||
+		hit->CheckObjNameHit(OBJ_TWINS_RED)  != nullptr ||
+		hit->CheckObjNameHit(OBJ_WOMAN)      != nullptr ||
+		hit->CheckObjNameHit(OBJ_LEO)        != nullptr)//当たっていたら取得  
 	{
+		//フラグがオンの場合
+		if (m_bullet_f == false) {
+			Audio::Start(15);	//着弾SEを鳴らす
+			m_bullet_f = true;	//フラグをオンにして、１度だけ鳴らす
+		}
+
 		m_hit_flag = true;//アニメーション開始
 		m_vx = 0.0f;
 		m_vy = 0.0f;
+
+		//HPが減っていたら30回復
+		if (g_hp < 100.0f)
+		{
+			//70.0f以上の場合
+			if (g_hp >= 70.0f) {
+				g_hp = g_max_hp;	//最大まで回復させる
+			}
+			else{	
+				g_hp += 30.0f;	//それ以外は30.0f回復させる
+			}
+			
+		}
+		
 	}
 
 	if (m_hit_flag == true)

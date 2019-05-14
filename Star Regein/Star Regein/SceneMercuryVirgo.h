@@ -13,7 +13,11 @@ class CSceneMercuryVirgo :public CScene
 		~CSceneMercuryVirgo();
 		void InitScene(); //初期化メソッド
 		void Scene();     //実行中メソッド
+		void ClearCheck(bool a);
+
 	private:
+		float Item_cnt;
+		bool m_clear_f;
 
 };
 

@@ -31,9 +31,9 @@ void CObjBlackhole::Init()
 	m_eff.m_right  = 192;
 	m_eff.m_bottom = 192;
 
-	//当たり判定用のHitBoxを作成
+	////当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px + 48.0f, m_py + 48.0f, 34.0f, 34.0f, ELEMENT_FIELD, OBJ_BLACKHOLE + g_blackhole_cnt, 1);
-	//作成のたびにカウントを増やし、別のオブジェクトとする
+	////作成のたびにカウントを増やし、別のオブジェクトとする
 }
 
 //アクション

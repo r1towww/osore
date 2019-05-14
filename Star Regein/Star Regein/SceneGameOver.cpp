@@ -7,6 +7,7 @@
 #include "GameL\DrawTexture.h"
 #include "GameL\DrawFont.h"
 #include "GameL\UserData.h"
+#include "GameL\Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -31,7 +32,9 @@ CSceneGameOver::~CSceneGameOver()
 void CSceneGameOver::InitScene()
 
 {
-	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_1024);
+	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_1024);
+
+	Audio::LoadAudio(1, L"ゲームオーバー.wav", EFFECT);
 
 
 	//クリアオブジェクト作成

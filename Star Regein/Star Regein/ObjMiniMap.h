@@ -21,10 +21,9 @@ class CObjMiniMap : public CObj
 	private:
 		float m_blocksize,m_uisize_x, m_uisize_y;			//マップUIのサイズ
 		float m_backsize;	//背景のサイズ
-		float m_alpha;		//背景の透明度
 		float m_smallsize,m_bigsize;	//描画サイズ用の変数
 
-		int c;
+		bool m_hint_f;		//ヒント表示用フラグ
 
 		int m_f;//キー入力制御
 

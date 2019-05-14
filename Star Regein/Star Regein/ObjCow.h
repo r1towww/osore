@@ -22,8 +22,6 @@ public:
 	float GetVY() { return m_vy; }
 	float GetVX() { return m_vx; }
 
-	//int GetID() { return count; } //牛の識別番号
-
 	void SetX(float x) { m_px = x; }
 	void SetY(float y) { m_py = y; }
 	void SetVY(float vy) { m_vy = vy; }
@@ -36,7 +34,7 @@ private:
 	float m_vx;		//移動ベクトル
 	float m_vy;
 	float m_posture;//姿勢
-	float alpha;
+	float m_alpha;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
@@ -45,16 +43,16 @@ private:
 	int m_cow_id;
 
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
-
-	int m_btime;//一定行動のための時間測定
+	int m_ani_timeB;
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
+
+	bool m_invincible_flag;//無敵フラグ
 
 	//blockとの衝突状態確認用
 	bool m_hit_up;
@@ -67,7 +65,23 @@ private:
 
 	bool m_do_f;//敵攻撃フラグ
 
+	bool m_f;//無敵時間
+
 	bool m_df;//ミニマップからの削除フラグ
 
+
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
+
+	
+	bool m_kill_f;	//キルカウント用フラグ
+	bool m_cow_delete; //牛削除フラグ
+
+	//消滅アニメーション用
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
 	
 };

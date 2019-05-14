@@ -10,11 +10,13 @@ using namespace GameL;
 class CObjStar : public CObj
 {
 	public:
-		CObjStar(float x, float y, int i, int j);
+		CObjStar(float x, float y, int i, int j,int id);
 		~CObjStar() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
+		float* GetPX() { return &m_px; }
+		float* GetPY() { return &m_py; }
 		float GetX() { return m_px; }
 		float GetY() { return m_py; }
 	private:

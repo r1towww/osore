@@ -32,14 +32,14 @@ private:
 	float m_vx;		//移動ベクトル
 	float m_vy;
 	float m_posture;//姿勢
-	float alpha;
+	float m_alpha;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
 
+	int m_ani_timeB;
 	int m_time;//無敵時間測定
-	int m_f;//無敵時間
 	int m_key_f;//無敵時間行動制御
 	int count;
 	int e_time;//敵行動時間
@@ -48,10 +48,15 @@ private:
 
 	int m_blue_id;
 
-	int m_btime;//一定行動のための時間測定
+	int	   m_ani;		//チャージアニメーション用
+	RECT_F m_eff;		//チャージエフェクト描画用
+	int m_ani_stop;
+	bool m_f;//無敵時間
 
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
+
+	bool m_invincible_flag;//無敵フラグ
 
 							//blockとの衝突状態確認用
 	bool m_hit_up;
@@ -67,5 +72,13 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+	bool m_kill_f;	//キルカウント用フラグ
+
+	bool m_twinsblue_delete;
+
+	int m_ani_count;
+	int m_ani_delete;
+	int m_ani_max_count;
+	int m_ani_frame_delete;
 
 };

@@ -30,13 +30,12 @@ CSceneStageClear::~CSceneStageClear()
 //初期化メソッド
 void CSceneStageClear::InitScene()
 {
-	Draw::LoadImageW(L"SpaceBack.png", 1, TEX_SIZE_1024);
+	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_1024);
 
 
 	//クリアオブジェクト作成
 	CObjStageClear* oc = new CObjStageClear();
 	Objs::InsertObj(oc, OBJ_STAGECLEAR, 1);
-
 }
 //実行中メソッド
 void CSceneStageClear::Scene()
