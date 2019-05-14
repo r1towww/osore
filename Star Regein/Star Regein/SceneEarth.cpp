@@ -99,7 +99,7 @@ void CSceneEarth::InitScene()
 
 	Draw::LoadImageW(L"ボス.png", 33, TEX_SIZE_512);
 	Draw::LoadImageW(L"ワープ.png", 34, TEX_SIZE_1024);
-	Draw::LoadImageW(L"レーザー.png", 35, TEX_SIZE_1024);
+	Draw::LoadImageW(L"レーザー.png", 37, TEX_SIZE_1024);
 	Draw::LoadImageW(L"溜め1.png", 36, TEX_SIZE_1024);
 	
 	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
