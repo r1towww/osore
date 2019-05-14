@@ -396,40 +396,41 @@ void CObjLibra::Action()
 
 		}
 
-		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	}
+
+	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		//ヒット判定on
+		g_stan_libra_flag[m_libra_id] = true;
+	}
+
+
+	//しし座のヒット判定がonの時スタン
+	if (g_stan_libra_flag[m_libra_id] == true)
+	{
+		g_Leo_cnt += 1.0f;
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_timeB < 0)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-			//ヒット判定on
-			g_stan_libra_flag[m_libra_id] = true;
+
+			m_ani_frame++;	//アニメーションのコマを１つ進める
+			m_ani_timeB = 10;
+
+			if (g_Leo_cnt >= 200.0f)
+			{
+				g_Leo_cnt = 0.0f;
+				g_stan_libra_flag[m_libra_id] = false;
+			}
+
 		}
-
-
-		//しし座のヒット判定がonの時スタン
-		if (g_stan_libra_flag[m_libra_id] == true)
+		else
 		{
-			g_Leo_cnt += 1.0f;
-
-			//アニメーションのコマ間隔制御
-			if (m_ani_timeB < 0)
-			{
-
-				m_ani_frame++;	//アニメーションのコマを１つ進める
-				m_ani_timeB = 10;
-
-				if (g_Leo_cnt >= 200.0f)
-				{
-					g_Leo_cnt = 0.0f;
-					g_stan_libra_flag[m_libra_id] = false;
-				}
-
-			}
-			else
-			{
-				m_ani_timeB--;
-			}
+			m_ani_timeB--;
 		}
 	}
 
@@ -462,39 +463,38 @@ void CObjLibra::Action()
 
 
 
-		//HPが0になったら破棄
-		if (m_hp == 0)
+	//HPが0になったら破棄
+	if (m_hp == 0)
+	{
+		//天秤削除フラグ
+		m_libra_delete = true;
+	}
+	//消滅アニメーションのコマを進める
+	if (m_libra_delete == true)
+	{
+		m_ani_count += 1;
+	}
+	//消滅アニメーション
+	if (m_ani_count > m_ani_max_count)
+	{
+		m_ani_frame_delete += 1;
+		m_ani_count = 0;
+	}
+	if (m_ani_frame_delete == 4)
+	{
+		m_ani_frame_delete = 0;
+		//フラグがオフの場合
+		if (m_kill_f == false)
 		{
-			//天秤削除フラグ
-			m_libra_delete = true;
+			g_kill_cnt++;	//キルカウントを増やす
+			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
-		//消滅アニメーションのコマを進める
-		if (m_libra_delete == true)
-		{
-			m_ani_count += 1;
-		}
-		//消滅アニメーション
-		if (m_ani_count > m_ani_max_count)
-		{
-			m_ani_frame_delete += 1;
-			m_ani_count = 0;
-		}
-		if (m_ani_frame_delete == 4)
-		{
-			m_ani_frame_delete = 0;
-			//フラグがオフの場合
-			if (m_kill_f == false)
-			{
-				g_kill_cnt++;	//キルカウントを増やす
-				m_kill_f = true;//フラグをオンにして入らないようにする
-			}
-			//敵削除
-			m_alpha = 0.0f;
-			hit->SetInvincibility(true);
-			g_libra_d_flag[m_libra_id] = false;
-			this->SetStatus(false);    //自身に削除命令を出す
-		}
-	
+		//敵削除
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_libra_d_flag[m_libra_id] = false;
+		this->SetStatus(false);    //自身に削除命令を出す
+	}
 }
 
 //ドロー

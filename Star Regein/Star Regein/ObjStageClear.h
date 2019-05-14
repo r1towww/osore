@@ -20,6 +20,7 @@ class CObjStageClear :public CObj
 		float m_alpha2;
 		float m_alpha3;
 		float m_alpha4;
+		float m_Tra;
 
-
+		bool m_push_flag;
 };
