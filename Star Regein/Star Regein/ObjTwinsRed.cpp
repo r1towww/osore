@@ -397,28 +397,28 @@ void CObjTwinsRed::Action()
 			m_key_f = true;
 
 		}
+	}
 
-		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+															//ヒット判定on
+		g_stan_blue_flag[m_red_id] = true;
+	}
+
+	//しし座のヒット判定がonの時スタン
+	if (g_stan_blue_flag[m_red_id] == true)
+	{
+		g_Leo_cnt += 1.0f;
+		if (g_Leo_cnt >= 200.0f)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-																//ヒット判定on
-			g_stan_blue_flag[m_red_id] = true;
+			g_Leo_cnt = 0.0f;
+			g_stan_blue_flag[m_red_id] = false;
 		}
 
-		//しし座のヒット判定がonの時スタン
-		if (g_stan_blue_flag[m_red_id] == true)
-		{
-			g_Leo_cnt += 1.0f;
-			if (g_Leo_cnt >= 200.0f)
-			{
-				g_Leo_cnt = 0.0f;
-				g_stan_blue_flag[m_red_id] = false;
-			}
-
-		}
 	}
 
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
@@ -527,12 +527,11 @@ void CObjTwinsRed::Action()
 			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
 		//敵削除
-		m_alpha = 0.0f;
+		m_alpha = 0.0f;xxxxx
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_red_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
-
 }
 
 //ドロー
