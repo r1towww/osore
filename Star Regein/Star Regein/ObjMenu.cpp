@@ -70,9 +70,6 @@ void CObjMenu::Action()
 		}
 		g_key_flag = false;
 	}
-
-
-
 }
 
 //ƒhƒ[

@@ -201,8 +201,6 @@ void CSceneVenusLibra::Scene()
 			ClearCheck(g_stage_clear);
 			
 		}
-		
-		
 	}
 }
 
