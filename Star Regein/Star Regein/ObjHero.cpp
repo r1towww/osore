@@ -386,7 +386,7 @@ void CObjHero::Action()
 				//スタンオブジェクト作成
 				CObjSkillLeo* objl = new CObjSkillLeo(m_px, m_py);
 				Objs::InsertObj(objl, OBJ_SKILL_LEO, 20);
-
+				Audio::Start(16);
 				g_mp -= 30.0f;
 			}
 			m_key_f = false;

@@ -3,6 +3,7 @@
 #include "GameL\SceneManager.h"
 #include "GameL\SceneObjManager.h"
 #include "GameL\HitBoxManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjBreakBigRock.h"
@@ -54,6 +55,12 @@ void CObjBreakBigRock::Action()
 		m_cnt++;	//カウントを1プラスする
 		m_f = true;	//無敵フラグをオンにする
 		m_eff_flag = true;		//フラグをオンにして、エフェクトの開始
+		if (m_cnt == 3)
+		{
+			Audio::Start(18);
+		}
+		Audio::Start(17);
+
 	}
 	//フラグがオンの場合、エフェクトに移る
 	if (m_eff_flag == true)
