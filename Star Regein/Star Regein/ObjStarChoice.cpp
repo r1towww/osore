@@ -146,7 +146,6 @@ void CObjStarChoice::Action()
 					Audio::Start(2);
 					Sleep(500);
 					//ステージを牡牛座に設定
-
 					g_stage = VenusTaurus;
 					m_push_flag = true;
 				}
@@ -244,7 +243,7 @@ void CObjStarChoice::Action()
 				g_stage = Space;	//ステージをSpaceに設定
 				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
 				this->SetStatus(false);
-				m_push_flag = true;
+				
 			}
 		}
 	}
