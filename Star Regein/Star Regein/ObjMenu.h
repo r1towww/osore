@@ -19,5 +19,8 @@ class CObjMenu :public CObj
 		int m_key;	//キー入力用
 		bool m_key_f;	//キー入力制御フラグ
 		bool m_choice_key_f;	//選択用のキーフラグ
+		bool m_push_flag;
+		float m_Tra;
+
 };
 

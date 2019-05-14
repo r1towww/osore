@@ -17,7 +17,8 @@ void CObjGameOver::Init()
 {
 	m_keytime = 0;	//キー入力タイムの初期化
 	Audio::Start(1);
-
+	m_Tra = 1.0f;
+	m_push_flag = false;
 }
 
 //アクション
@@ -30,8 +31,8 @@ void CObjGameOver::Action()
 void CObjGameOver::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float bl [4] = { 1.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
+	float bl [4] = { 1.0f,0.0f,0.0f,m_Tra };
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
@@ -79,9 +80,8 @@ void CObjGameOver::Draw()
 		//この状態でＺキーでステージ選択へ
 		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
-			Scene::SetScene(new CSceneStageChoice());
+			m_push_flag = true;
 		}
-
 	}
 	else
 	{
@@ -95,14 +95,32 @@ void CObjGameOver::Draw()
 		//この状態でＺキーでタイトルへ
 		if ((Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
-			Scene::SetScene(new CSceneTitle());
+			m_push_flag = true;
 		}
-
 	}
 	else
 	{
 		//そうでなかったら最初のフォントを表示する
 		Font::StrDraw(L"タイトルに戻る", 100, 400, 32, c);
+	}
+
+	//Zキーが押されたら徐々に暗転しながらシーン移行
+	if (m_push_flag == true)
+	{
+		m_Tra -= 0.03;
+		if (m_Tra <= 0.0f)
+		{
+			if (m_Right == true)
+			{
+				//ステージ選択
+				Scene::SetScene(new CSceneStageChoice());
+			}
+			else if (m_Left == true)
+			{
+				//タイトル
+				Scene::SetScene(new CSceneTitle());
+			}
+		}
 	}
 
 }

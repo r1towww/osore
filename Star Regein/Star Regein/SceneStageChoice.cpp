@@ -43,6 +43,7 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"ステージ選択太陽.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"惑星.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"星座立ち絵総合.png", 7, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
 
 
 	//Audio

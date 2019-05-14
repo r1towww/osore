@@ -417,52 +417,41 @@ void CObjCow::Action()
 
 		}
 
+	}
+	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
+	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+		//ヒット判定on
+		g_stan_cow_flag[m_cow_id] = true;
+	}
 
-		//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
-		if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
+	//しし座のヒット判定がonの時スタン
+	if (g_stan_cow_flag[m_cow_id] == true)
+	{
+
+		g_Leo_cnt += 1.0f;
+
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_timeB < 0)
 		{
-			//敵が主人公とどの角度で当たっているかを確認
-			HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
-			hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
-			//ヒット判定on
-			g_stan_cow_flag[m_cow_id] = true;
+
+			m_ani_frame++;	//アニメーションのコマを１つ進める
+			m_ani_timeB = 10;
+
+			if (g_Leo_cnt >= 200.0f)
+			{
+				g_Leo_cnt = 0.0f;
+				g_stan_cow_flag[m_cow_id] = false;
+			}
 		}
 
-		//しし座のヒット判定がonの時スタン
-		if (g_stan_cow_flag[m_cow_id] == true)
+		else
 		{
-
-			g_Leo_cnt += 1.0f;
-
-
-			//アニメーションのコマ間隔制御
-			if (m_ani_timeB < 0)
-			{
-
-				m_ani_frame++;	//アニメーションのコマを１つ進める
-				m_ani_timeB = 10;
-
-				m_ani_stop++;
-
-			if (m_ani_stop >= 10)
-			{
-				m_eff.m_top = 0;
-				m_eff.m_left = 0;
-				m_eff.m_right = 213;
-				m_eff.m_bottom = 192;
-
-				}
-				if (g_Leo_cnt >= 200.0f)
-				{
-					g_Leo_cnt = 0.0f;
-					g_stan_cow_flag[m_cow_id] = false;
-				}
-			}
-
-			else
-			{
-				m_ani_timeB--;
-			}
+			m_ani_timeB--;
 		}
 	}
 
@@ -492,7 +481,7 @@ void CObjCow::Action()
 	{
 		//牛削除フラグ
 		m_cow_delete = true;
-	
+
 	};
 	//消滅アニメーションのコマを進める
 	if (m_cow_delete == true)
@@ -531,10 +520,6 @@ void CObjCow::Action()
 		g_cow_d_flag[m_cow_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
-	
-
-
-
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 }
 
