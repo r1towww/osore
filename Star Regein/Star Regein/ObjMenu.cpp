@@ -20,6 +20,7 @@ void CObjMenu::Init()
 	//キーフラグの初期化
 	m_key_f = false;
 	m_choice_key_f = false;	
+	m_Tra = 0.0f;
 }
 
 //アクション
@@ -66,10 +67,21 @@ void CObjMenu::Action()
 		else if (m_key == 1)
 		{
 			g_move_stop_flag = false;	//ストップフラグをオフ
-			Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
+			m_push_flag = true;
+			
 		}
 		g_key_flag = false;
 	}
+
+	if (m_push_flag == true)
+	{
+		m_Tra += 0.03;
+		if (m_Tra >= 1)
+		{
+			Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
+		}
+	}
+
 }
 
 //ドロー
@@ -78,11 +90,32 @@ void CObjMenu::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//メッセージフォントカラー
 	float backc[4] = { 1.0f,1.0f,0.0f,1.0f };	
 	float a[4] = { 1.0f,1.0f,1.0f,0.5f };
+	float c2[4] = { 1.0f,1.0f,1.0f,m_Tra };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
 //背景用画像-----------------------------------
+
+	//シーン切り替え用
+	if (m_push_flag == true)
+	{
+
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 350.0f;
+		src.m_right = 400.0f;
+		src.m_bottom = 50.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		Draw::Draw(9, &src, &dst, c2, 0.0f);
+	}
+	
 	//切り取り位置の設定
 	src.m_top    = 0.0f;
 	src.m_left   = 0.0f;
@@ -96,6 +129,10 @@ void CObjMenu::Draw()
 	dst.m_bottom = 500.0f;
 	//表示
 	Draw::Draw(40, &src, &dst, backc, 0.0f);
+
+	
+
+
 //----------------------------------------------
 
 //文字描画用------------------------------------

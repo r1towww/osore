@@ -18,14 +18,10 @@ class CObjStageClear :public CObj
 		int m_time;	//表示までの時間間隔
 
 		//各メッセージの透明度用変数
-		float m_alpha1;
-		float m_alpha2;
-		float m_alpha3;
-		float m_alpha4;
-		float m_alpha5;
-		float m_alpha6;
-		float m_alpha7;
+		
+		float m_Tra;
 
+		bool m_push_flag;
 		float m_alpha[7] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 
 };

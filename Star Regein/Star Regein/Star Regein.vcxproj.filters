@@ -215,6 +215,9 @@
     <ClCompile Include="ObjED.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBeam.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="ObjED.h">
       <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBeam.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

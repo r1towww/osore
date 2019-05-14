@@ -29,6 +29,9 @@ class CObjStarChoice :public CObj
 		float m_Tra2;//透過率
 		float m_Tra3;//透過率
 		float m_Tra4;
+		float m_Tra5; //ステージ移行用透過率
 		bool m_time;
 		bool m_key_flag;	//キー制御フラグ
+		bool m_push_flag;
+		
 };

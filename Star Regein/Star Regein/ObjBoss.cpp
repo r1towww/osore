@@ -36,7 +36,7 @@ void CObjBoss::Init()
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
-	m_warp_time = 300;
+
 
 	m_speed_power = 2.0f;//通常速度
 	m_ani_max_time = 15;	//アニメーション間隔幅
@@ -78,6 +78,8 @@ void CObjBoss::Init()
 	m_warp_ani_time = 0;		//アニメーション間隔タイム
 
 	m_warp_flag = false;
+	m_warp_time = 300;
+
 
 
 	//当たり判定用のHitBoxを作成
@@ -110,8 +112,12 @@ void CObjBoss::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
 
+	//HitBoxの内容を更新
+	CHitBox*hit = Hits::GetHitBox(this);
+	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
+
 	//時間経過でランダムにワープ
-	if (m_warp_time <= 0)
+	if (m_warp_time <= 0 && m_hp > 0)
 	{
 		m_warp_flag = true;
 
@@ -129,7 +135,7 @@ void CObjBoss::Action()
 		};
 
 		//アニメーションのコマ間隔制御
-		if (m_warp_ani_time > 2)
+		if (m_warp_ani_time > 3)
 		{
 			m_warp_ani++;		//アニメーションのコマを1つ進める
 			m_warp_ani_time = 0;
@@ -145,10 +151,28 @@ void CObjBoss::Action()
 		{
 			srand(time(NULL));
 			//マップのランダム処理の初期化
-			m_rand = rand() % 5;
+			m_rand = rand() % 6;
 
-			m_px = g_star_x[m_rand];
-			m_py = g_star_y[m_rand];
+			if (m_rand <= 4)
+			{
+				m_px = g_star_x[m_rand];
+				m_py = g_star_y[m_rand];
+			}
+			else
+			{
+				CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+				float hx = hero->GetX();
+				float hy = hero->GetY();
+
+				//ビームオブジェクト作成
+				CObjBeam* obj = new CObjBeam(hx, hy);//オブジェクト作成
+				Objs::InsertObj(obj, OBJ_BEAM, 11);//マネージャに登録
+
+				hit->SetInvincibility(true);
+				m_alpha = 0.0f;
+				
+			}
 		}
 
 		//7番目（画像最後）まで進んだら、0に戻す
@@ -160,18 +184,6 @@ void CObjBoss::Action()
 		}
 
 	}
-
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	if (hero != nullptr)
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-	}
-
-	//HitBoxの内容を更新
-	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
 
 	//主人公とBLOCK系統との当たり判定
@@ -387,11 +399,15 @@ void CObjBoss::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
+	
+
 	//切り取り位置の設定
 	src.m_top = 80.0f * m_posture;
 	src.m_left = 0.0f + (AniData[m_ani_frame] * 80);
 	src.m_right = 80.0f + (AniData[m_ani_frame] * 80);
 	src.m_bottom = src.m_top + 80.0f;
+
+
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();
@@ -399,10 +415,20 @@ void CObjBoss::Draw()
 	dst.m_right = 0.0f + m_px + block->GetScrollx();
 	dst.m_bottom = 160.0f + m_py + block->GetScrolly();
 
+	//描画
+	Draw::Draw(33, &src, &dst, c, 0.0f);
+
+	//ワープ
 	if (m_warp_flag == true)
 	{
+		//表示位置の設定
+		dst.m_top = -80.0f + m_py + block->GetScrolly();
+		dst.m_left = 240.0f + m_px + block->GetScrollx();
+		dst.m_right = -80.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 200.0f + m_py + block->GetScrolly();
 		//エフェクトの描画
-		Draw::Draw(34, &m_warp_eff, &dst, c,0.0f);
+		Draw::Draw(34, &m_warp_eff, &dst, c, 0.0f);
+
 	}
 	else
 	{
@@ -410,6 +436,4 @@ void CObjBoss::Draw()
 	}
 
 
-	//描画
-	Draw::Draw(33, &src, &dst, c, 0.0f);
 }

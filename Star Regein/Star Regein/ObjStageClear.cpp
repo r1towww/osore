@@ -16,7 +16,9 @@ using namespace GameL;
 void CObjStageClear::Init()
 {
 	m_time = 0;	//描画までのタイム感覚の初期化
-
+	m_alpha4 = 0.0f;
+	m_Tra = 0.0f;
+	m_push_flag = false;
 }
 
 //アクション
@@ -27,7 +29,22 @@ void CObjStageClear::Action()
 	{
 		g_stage_clear = false;
 		g_move_stop_flag = false;
-		Scene::SetScene(new CSceneStageChoice());
+		m_push_flag = true;
+		
+	
+	}
+	//Zキーを押すと徐々に暗転し、シーン移行
+	if (m_push_flag == true)
+	{
+		m_Tra += 0.03;
+		m_alpha1 = 0.0f;
+		m_alpha2 = 0.0f;
+		m_alpha3 = 0.0f;
+		m_alpha4 = 0.0f;
+		if (m_Tra >= 1)
+		{
+			Scene::SetScene(new CSceneStageChoice());//ステージ選択
+		}
 	}
 
 	//alpha();
@@ -76,7 +93,8 @@ void CObjStageClear::Action()
 void CObjStageClear::Draw()
 {
 	//描画カラー情報
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
+
 	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };
 	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };
 	float c3[4] = { 1.0f,1.0f,1.0f,m_alpha[2] };
@@ -90,6 +108,9 @@ void CObjStageClear::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
+
+	
+
 
 	if (g_stage == EarthStar)
 	{
@@ -173,8 +194,6 @@ void CObjStageClear::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
-
-	
 	}
 	if (g_stage == SunLeo)
 	{
@@ -190,16 +209,33 @@ void CObjStageClear::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
-
-	
 	}
 
 	//表示
-	Draw::Draw(60, &src, &dst, c, 0.0f);
+	Draw::Draw(60, &src, &dst, c5, 0.0f);
 
 	Font::StrDraw(L"STAGE CLEAR", 120,150, 100,y);
 
 	Font::StrDraw(L"Zキーでステージ選択へ戻る", 200, 510, 32, y);
+
+	//シーン移行用
+	if (m_push_flag == true)
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 350.0f;
+		src.m_right = 400.0f;
+		src.m_bottom = 50.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		Draw::Draw(9, &src, &dst, c, 0.0f);
+	}
+
 
 
 	//メッセージの情報を持ってくる

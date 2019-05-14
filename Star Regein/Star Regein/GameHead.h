@@ -42,6 +42,7 @@ enum OBJ_NAME
 	OBJ_LIBRA,
 	OBJ_LEO,
 	OBJ_BOSS,
+	OBJ_BEAM,
 
 	OBJ_MENU,
 	OBJ_HELP,
@@ -297,6 +298,7 @@ extern int g_cow_id[20];//ãçÇÃéØï ID
 #include "ObjLibra.h"
 #include "ObjLeo.h"
 #include "ObjBoss.h"
+#include "ObjBeam.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"

@@ -397,6 +397,7 @@ void CObjTwinsBlue::Action()
 	}
 
 
+
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
 	{

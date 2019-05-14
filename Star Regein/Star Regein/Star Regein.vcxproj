@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ObjBeam.cpp" />
     <ClCompile Include="ObjED.cpp" />
     <ClCompile Include="SceneED.cpp" />
     <ClCompile Include="ObjBlueBullet.cpp">
@@ -188,6 +189,7 @@
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ObjBeam.h" />
     <ClInclude Include="ObjED.h" />
     <ClInclude Include="SceneED.h" />
     <ClInclude Include="GameHead.h" />

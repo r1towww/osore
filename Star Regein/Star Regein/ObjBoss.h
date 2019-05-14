@@ -36,10 +36,14 @@ private:
 	float m_posture;//姿勢
 	float m_alpha;
 
-
+	//ワープアニメーション
+	RECT_F m_warp_eff;		//エフェクト描画用
 	int	 m_warp_ani;			//ワープアニメーション用
 	int	 m_warp_ani_time;		//ワープアニメーション間隔タイム
-	RECT_F m_warp_eff;		//エフェクト描画用
+	int m_warp_time;			//ワープ時間測定
+	bool m_warp_flag;
+
+
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
@@ -53,8 +57,6 @@ private:
 	int e_time;//敵行動時間
 	int enemy_move;//敵移動
 
-	int m_warp_time;//ワープ時間測定
-
 	float m_speed_power;	//通常速度
 	float m_ani_max_time;	//アニメーション動作間隔最大値
 
@@ -63,9 +65,6 @@ private:
 	bool m_hit_down;
 	bool m_hit_left;
 	bool m_hit_right;
-
-	//アニメーションフラグ
-	bool m_warp_flag;
 
 	bool m_invincible_flag;//無敵フラグ
 
