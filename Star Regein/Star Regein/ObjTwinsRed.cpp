@@ -527,7 +527,7 @@ void CObjTwinsRed::Action()
 			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
 		//敵削除
-		m_alpha = 0.0f;xxxxx
+		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_red_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
