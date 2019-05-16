@@ -310,7 +310,30 @@ void CObjStageClear::Draw()
 			Font::StrDraw(KILLCNT, 15, 340, 21, c4);
 		//ノーダメージクリアメッセージの表示
 		if (g_no_damage == false)
+		{
 			Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5);
+			//実績達成画面で表示させるためのフラグ処理
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_NoDamage_Clear = true;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_NoDamage_Clear = true;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_NoDamage_Clear = true;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_NoDamage_Clear = true;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_NoDamage_Clear = true;
+			}
+		}
 	}
 }
 

@@ -32,7 +32,7 @@ private:
 	bool m_f;		//エフェクト音用フラグ
 	bool m_bullet_f;//着弾用フラグ
 	bool m_hit_flag;//着弾フラグ
-
+	bool m_flag;	//1回だけ発動するように処理する
 	int m_ani_time; //アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 

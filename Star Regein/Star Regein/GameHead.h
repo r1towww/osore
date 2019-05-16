@@ -32,6 +32,8 @@ enum OBJ_NAME
 
 	OBJ_WHITEHOLE,
 
+	OBJ_PERFORMANCE_ROOM,
+
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
 	OBJ_TWINS_RED,
@@ -151,6 +153,7 @@ typedef enum Planet
 	Sun,			//太陽			8
 	SunLeo,			//太陽（獅子座）9
 	Space,			//ステージ選択	10
+	Performance,	//実績			11
 
 }Planet;
 
@@ -164,7 +167,6 @@ typedef enum Skill
 	Leo,		//獅子座		5
 
 }Skill;
-
 
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
@@ -280,6 +282,21 @@ extern int g_cow_id[20];//牛の識別ID
 
 extern bool g_hero_hit;
 
+/*実績達成状況*/
+//敵をすべて倒した------------------
+extern bool g_Taurus_Enemy_AllKill;	
+extern bool g_Libra_Enemy_AllKill;
+extern bool g_Gemini_Enemy_AllKill;
+extern bool g_Viego_Enemy_AllKill;
+extern bool g_Leo_Enemy_AllKill;
+//ラスボスを倒した------------------
+extern bool g_Earth_BossKill;
+//ノーダメージクリア----------------
+extern bool g_Taurus_NoDamage_Clear;
+extern bool g_Libra_NoDamage_Clear;
+extern bool g_Gemini_NoDamage_Clear;
+extern bool g_Viego_NoDamage_Clear;
+extern bool g_Leo_NoDamage_Clear;
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
@@ -311,6 +328,7 @@ extern bool g_hero_hit;
 #include "ObjBreakRock.h"
 #include "ObjBreakBigRock.h"
 
+#include "ObjPerformanceRoom.h"
 #include "ObjTitle.h"
 #include "ObjStageChoice.h"
 #include "ObjStarChoice.h"

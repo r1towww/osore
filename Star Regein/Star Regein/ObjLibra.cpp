@@ -31,7 +31,7 @@ CObjLibra::CObjLibra(float x, float y, int id)
 //イニシャライズ
 void CObjLibra::Init()
 {
-	m_hp = 5;        //体力
+	m_hp = 2;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -69,7 +69,9 @@ void CObjLibra::Init()
 
 	count = 0;
 
+
 	m_alpha = 1.0;
+
 
 
 	//消滅アニメーション用
