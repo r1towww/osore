@@ -14,7 +14,6 @@ using namespace GameL;
 float g_posture;
 int g_skill = NoSkill;
 int g_attack_power = 1;
-bool g_hero_hit;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -27,6 +26,7 @@ void CObjHero::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
+
 	//初期姿勢
 	g_posture = HERO_DOWN;
 
@@ -875,7 +875,6 @@ void CObjHero::Draw()
 	}
 	if (dead_flag == true)
 	{
-
 		//透明の主人公を表示
 		dst.m_top = 0.0f + m_py;
 		dst.m_left = 80.0f + m_px;

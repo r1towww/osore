@@ -86,25 +86,25 @@
       <Filter>ソースファイル\スキル</Filter>
     </ClCompile>
     <ClCompile Include="SceneEarth.cpp">
-      <Filter>ソースファイル\主人公\惑星\地球</Filter>
+      <Filter>ソースファイル\惑星\地球</Filter>
     </ClCompile>
     <ClCompile Include="SceneGameOver.cpp">
       <Filter>ソースファイル\GAMEOVER</Filter>
     </ClCompile>
     <ClCompile Include="SceneMercuryGemini.cpp">
-      <Filter>ソースファイル\主人公\惑星\水星</Filter>
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
     <ClCompile Include="SceneMercuryVirgo.cpp">
-      <Filter>ソースファイル\主人公\惑星\水星</Filter>
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClCompile>
     <ClCompile Include="SceneVenusLibra.cpp">
-      <Filter>ソースファイル\主人公\惑星\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
     <ClCompile Include="SceneVenusTaurus.cpp">
-      <Filter>ソースファイル\主人公\惑星\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClCompile>
     <ClCompile Include="SceneSunLeo.cpp">
-      <Filter>ソースファイル\主人公\惑星\太陽</Filter>
+      <Filter>ソースファイル\惑星\太陽</Filter>
     </ClCompile>
     <ClCompile Include="ObjCow.cpp">
       <Filter>ソースファイル\各惑星敵\牛</Filter>
@@ -206,17 +206,17 @@
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
-    <ClCompile Include="SceneED.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjED.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBeam.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
     <ClCompile Include="ObjSkillItem.cpp">
       <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjED.cpp">
+      <Filter>ソースファイル\ED</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneED.cpp">
+      <Filter>ソースファイル\ED</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,25 +308,25 @@
       <Filter>ソースファイル\スキル</Filter>
     </ClInclude>
     <ClInclude Include="SceneEarth.h">
-      <Filter>ソースファイル\主人公\惑星\地球</Filter>
+      <Filter>ソースファイル\惑星\地球</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameOver.h">
       <Filter>ソースファイル\GAMEOVER</Filter>
     </ClInclude>
     <ClInclude Include="SceneMercuryGemini.h">
-      <Filter>ソースファイル\主人公\惑星\水星</Filter>
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
     <ClInclude Include="SceneMercuryVirgo.h">
-      <Filter>ソースファイル\主人公\惑星\水星</Filter>
+      <Filter>ソースファイル\惑星\水星</Filter>
     </ClInclude>
     <ClInclude Include="SceneVenusLibra.h">
-      <Filter>ソースファイル\主人公\惑星\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClInclude>
     <ClInclude Include="SceneVenusTaurus.h">
-      <Filter>ソースファイル\主人公\惑星\金星</Filter>
+      <Filter>ソースファイル\惑星\金星</Filter>
     </ClInclude>
     <ClInclude Include="SceneSunLeo.h">
-      <Filter>ソースファイル\主人公\惑星\太陽</Filter>
+      <Filter>ソースファイル\惑星\太陽</Filter>
     </ClInclude>
     <ClInclude Include="ObjCow.h">
       <Filter>ソースファイル\各惑星敵\牛</Filter>
@@ -431,17 +431,17 @@
     <ClInclude Include="ObjBoss.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
-    <ClInclude Include="SceneED.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjED.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBeam.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjED.h">
+      <Filter>ソースファイル\ED</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneED.h">
+      <Filter>ソースファイル\ED</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -480,6 +480,21 @@
     </Filter>
     <Filter Include="ソースファイル\スキル">
       <UniqueIdentifier>{721439e3-4057-46b7-963f-679e43005a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星">
+      <UniqueIdentifier>{9afac6c9-d727-4953-915f-2342563defd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\地球">
+      <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\金星">
+      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\水星">
+      <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\太陽">
+      <UniqueIdentifier>{18ee5544-b49a-4972-bf09-10535f65f2fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\各惑星敵">
       <UniqueIdentifier>{d6de1a25-fb1f-4069-a30d-47db46a80c73}</UniqueIdentifier>
@@ -526,20 +541,8 @@
     <Filter Include="ソースファイル\各惑星敵\乙女">
       <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\主人公\惑星">
-      <UniqueIdentifier>{9afac6c9-d727-4953-915f-2342563defd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\主人公\惑星\地球">
-      <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\主人公\惑星\金星">
-      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\主人公\惑星\水星">
-      <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\主人公\惑星\太陽">
-      <UniqueIdentifier>{18ee5544-b49a-4972-bf09-10535f65f2fd}</UniqueIdentifier>
+    <Filter Include="ソースファイル\ED">
+      <UniqueIdentifier>{6ae17198-7438-4270-9d33-20e8f4d282b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
