@@ -22,8 +22,10 @@ ObjStageChoiceHero::ObjStageChoiceHero(float x, float y)
 //イニシャライズ
 void ObjStageChoiceHero::Init()
 {
-	m_vx = 0.0f;		//移動ベクトル
+	//移動ベクトル
+	m_vx = 0.0f;		
 	m_vy = 0.0f;
+
 	//初期姿勢
 	g_posture = HERO_DOWN;
 
@@ -54,7 +56,7 @@ void ObjStageChoiceHero::Action()
 
 	g_gemini_check = false;
 	//星座選択時に入力制御する
-	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun) {
+	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun||g_stage==Performance) {
 		return;
 	}
 	//主人公機が領域外行かない処理
@@ -80,7 +82,7 @@ void ObjStageChoiceHero::Action()
 	m_vy = 0.0f;
 
 	//Shiftキーが入力されたらダッシュ
-	if ((Input::GetVKey(VK_SHIFT)))
+	if ((Input::GetVKey('X')))
 	{
 		m_speed_power = STAGE_DASH_SPEED;
 	}
@@ -143,6 +145,7 @@ void ObjStageChoiceHero::Action()
 	}
 
 
+
 	// Zキーを入力かつ、キーフラグがオンの時に実行
 	if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
 	{
@@ -195,15 +198,21 @@ void ObjStageChoiceHero::Action()
 		//太陽へ
 		else if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2)
 		{
-			if (g_Mercury_clear == true)
-			{
-				Audio::Start(1);
-				//太陽に設定
-				g_stage = Sun;
+			//if (g_Mercury_clear == true)
+			//{
+			//	Audio::Start(1);
+			//	//太陽に設定
+			//	g_stage = Sun;
 				g_key_flag = false;	//キーフラグをオフ
-				//ステージ選択(星座)オブジェクト作成
-				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
-			}
+			//	//ステージ選択(星座)オブジェクト作成
+			//	Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+			//}
+			g_stage = Performance;
+			//実績オブジェクト作成
+			CObjPerformanceRoom* per = new CObjPerformanceRoom();
+			Objs::InsertObj(per, OBJ_PERFORMANCE_ROOM, 20);
+
+
 		}
 	}
 
@@ -240,7 +249,7 @@ void ObjStageChoiceHero::Draw()
 	//地球をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= VenusX && g_stage_px + 80.0f <= VenusX2 && g_stage_py >= VenusY&&g_stage_py + 80.0f <= VenusY2&&g_Earth_clear == false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 28, red);
 	}
 	//金星
 	else if (g_stage_px >= VenusX && g_stage_px + 80.0f <= VenusX2 && g_stage_py >= VenusY&&g_stage_py + 80.0f <= VenusY2&&g_Earth_clear == true)
@@ -250,7 +259,7 @@ void ObjStageChoiceHero::Draw()
 	//金星をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= MercuryX && g_stage_px + 80.0f <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py + 80.0f <= MercuryY2&&g_Venus_clear==false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 28, red);
 	}
 	//水星
 	else if (g_stage_px >= MercuryX && g_stage_px + 80.0f <= MercuryX2 && g_stage_py >= MercuryY&&g_stage_py + 80.0f <= MercuryY2&&g_Venus_clear == true)
@@ -260,13 +269,18 @@ void ObjStageChoiceHero::Draw()
 	//水星をクリアしていない場合このメッセージを表示する
 	if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2&&g_Mercury_clear == false)
 	{
-		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 32, red);
+		Font::StrDraw(L"前のステージをすべてクリアしてきてね", 32, 32, 28, red);
 	}
 	//太陽
 	else if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2&&g_Mercury_clear == true)
 	{
 		Font::StrDraw(L"太陽ステージ", 32, 32, 32, c);
 	}
+	if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2&&g_Mercury_clear == true)
+	{
+		Font::StrDraw(L"実績", 32, 32, 32, c);
+	}
+
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
@@ -301,6 +315,7 @@ void ObjStageChoiceHero::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
+	
 		m_Tra -= 0.03f;
 		if (m_Tra <= 0.0f)
 		{
