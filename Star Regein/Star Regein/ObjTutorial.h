@@ -27,4 +27,8 @@ private:
 	bool m_f;
 	int m_blink;
 
+	bool m_stage_start;//ステージ開始を認識するフラグ
+	float m_Tra;//ステージ開始時暗転から戻す用
+
+
 };

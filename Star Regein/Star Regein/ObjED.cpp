@@ -37,12 +37,12 @@ void CObjED::Action()
 	}
 	Font::StrDraw(L"END GAME"                  , GAME_CLEAR_X+25, GAME_CLEAR_Y + m_y   , GAME_CLEAR_FONT_SIZE+30, p);
 	Font::StrDraw(L"ゲーム名 STAR REGEIN"      , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 100, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"ゲーム作成者"              , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 150, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"リーダー     菅原 圭太"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 200, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プランナー   清水  蓮"     , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 250, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 田中 陸斗"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 300, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 木村 唯人"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 350, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 保地谷 広奈"  , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 400, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"ゲーム作成者"              , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 150, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"リーダー     菅原 圭太"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 200, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"プランナー   清水  蓮"     , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 250, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"プログラマー 田中 陸斗"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 300, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"プログラマー 木村 唯人"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 350, GAME_CLEAR_FONT_SIZE, p);
+	//Font::StrDraw(L"プログラマー 保地谷 広奈"  , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 400, GAME_CLEAR_FONT_SIZE, p);
 	if (m_y <= -500)
 	{
 

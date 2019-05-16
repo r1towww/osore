@@ -40,7 +40,8 @@ class ObjStageChoiceHero :public CObj
 		int m_f;//攻撃制御用
 
 		bool m_key_flag;	//キー入力制御フラグ
-
+		bool m_stage_start;
+		float m_Tra;
 };
 
 
