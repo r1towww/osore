@@ -8,7 +8,6 @@
 #include "GameHead.h"
 #include "ObjTitle.h"
 
-
 //使用するネームスペース
 using namespace GameL;
 
@@ -16,7 +15,7 @@ using namespace GameL;
 void CObjED::Init()
 {
 	m_y = 0.0;
-}
+} 
 
 //アクション
 void CObjED::Action()
@@ -30,7 +29,6 @@ void CObjED::Action()
 	{
 		m_y -= 10;
 	}
-
 	else
 	{
 		m_y -= 0.8f;
@@ -47,7 +45,6 @@ void CObjED::Action()
 	{
 
 	}
-
 }
 
 //ドロー
