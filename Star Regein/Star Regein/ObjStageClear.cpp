@@ -16,7 +16,7 @@ using namespace GameL;
 void CObjStageClear::Init()
 {
 	m_time = 0;	//描画までのタイム感覚の初期化
-	m_alpha4 = 0.0f;
+	
 	m_Tra = 0.0f;
 	m_push_flag = false;
 }
@@ -30,17 +30,15 @@ void CObjStageClear::Action()
 		g_stage_clear = false;
 		g_move_stop_flag = false;
 		m_push_flag = true;
-		
-	
 	}
 	//Zキーを押すと徐々に暗転し、シーン移行
 	if (m_push_flag == true)
 	{
 		m_Tra += 0.03;
-		m_alpha1 = 0.0f;
-		m_alpha2 = 0.0f;
-		m_alpha3 = 0.0f;
-		m_alpha4 = 0.0f;
+		m_alpha[1] = 0.0f;
+		m_alpha[2] = 0.0f;
+		m_alpha[3] = 0.0f;
+		m_alpha[4] = 0.0f;
 		if (m_Tra >= 1)
 		{
 			Scene::SetScene(new CSceneStageChoice());//ステージ選択
@@ -127,7 +125,6 @@ void CObjStageClear::Draw()
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
 
-	
 	}
 	if (g_stage == VenusTaurus)
 	{

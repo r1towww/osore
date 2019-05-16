@@ -48,7 +48,7 @@ void CObjSkillVirgo::Init()
 	m_ani_time = 0;
 	m_ani_stop = 0;
 
-	//主人公の向きによってビームサーベルを出す方向，向きを変える
+	//主人公の向きによってハート弾を出す方向，向きを変える
 	if (g_posture == 3)	//下
 	{
 		m_angle = 90.0f;	//角度調整
@@ -150,7 +150,8 @@ void CObjSkillVirgo::Action()
 		hit->CheckObjNameHit(OBJ_LEO)        != nullptr)//当たっていたら取得  
 	{
 		//フラグがオンの場合
-		if (m_bullet_f == false) {
+		if (m_bullet_f == false) 
+		{
 			Audio::Start(15);	//着弾SEを鳴らす
 			m_bullet_f = true;	//フラグをオンにして、１度だけ鳴らす
 		}
@@ -163,10 +164,12 @@ void CObjSkillVirgo::Action()
 		if (g_hp < 100.0f)
 		{
 			//70.0f以上の場合
-			if (g_hp >= 70.0f) {
+			if (g_hp >= 70.0f) 
+			{
 				g_hp = g_max_hp;	//最大まで回復させる
 			}
-			else{	
+			else
+			{	
 				g_hp += 30.0f;	//それ以外は30.0f回復させる
 			}
 			

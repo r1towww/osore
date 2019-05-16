@@ -14,7 +14,7 @@ using namespace GameL;
 float g_posture;
 int g_skill = NoSkill;
 int g_attack_power = 1;
-
+bool g_hero_hit;
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -428,6 +428,11 @@ void CObjHero::Action()
 	{
 		g_mp = g_max_mp;	//最大MPに戻す
 	}
+	//HPが0を下回らないようにする（火傷によるHPのオーバー）
+	if (g_hp <= 0.0f)
+	{
+		g_hp = 0.0f;
+	}
 	//MPが0を下回らないようにする（スキルによるMPのオーバー）
 	if (g_mp <= 0.0f)
 	{
@@ -435,7 +440,7 @@ void CObjHero::Action()
 	}
 
 
-	//MPが50以下になったら一定間隔で増える（リジェネ）
+	//MPが100未満になったら一定間隔で増える（リジェネ）
 	if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
 	{
 		if (g_mp < 100.0f)
@@ -638,7 +643,6 @@ void CObjHero::Action()
 			m_burn_f = false;
 		}
 	}
-
 	//アイテムが作成されたら無敵にする
 	if (g_Make_Item == true)
 	{
@@ -730,9 +734,6 @@ void CObjHero::Action()
 	{
 		m_alpha = 0.0f;
 		dead_flag = true;
-		//this->SetStatus(false);    //自身に削除命令を出す
-		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-
 	}
 
 

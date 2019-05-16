@@ -46,11 +46,7 @@ void CObjBreakRock::Action()
 	//主人公と当たっている、かつダッシュフラグがオンの場合
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && hero->GetDashF() == true)
 	{
-		//this->SetStatus(false);		//自身を削除
-		//Hits::DeleteHitBox(this);
-
 		m_eff_flag = true;		//フラグをオンにして、エフェクトの開始
-
 	}
 	if (m_eff_flag == true)
 	{

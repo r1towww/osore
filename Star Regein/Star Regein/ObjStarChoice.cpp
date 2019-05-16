@@ -259,7 +259,7 @@ void CObjStarChoice::Action()
 		m_Tra5 += 0.03;
 		if (m_Tra5 > 1)
 		{
-			if (g_stage == Earth)//’n‹…
+			if (g_stage == EarthStar)//’n‹…
 			{
 				Scene::SetScene(new CSceneEarth());
 			}
