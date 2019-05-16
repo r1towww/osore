@@ -182,6 +182,10 @@ void CObjHero::Action()
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
 		}
+		if (Input::GetVKey('T'))
+		{
+			g_mp -= 1.0f;
+		}
 
 		//移動系統情報--------------------------------------------------
 
@@ -329,7 +333,11 @@ void CObjHero::Action()
 			Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 		}
 		//残りHPに応じて攻撃力を変更
-		if (g_hp <= 20.0f)	//20.0f以下
+		if (g_mp <= 0.0f)
+		{
+			g_attack_power = 1;
+		}
+		else if (g_hp <= 20.0f)	//20.0f以下
 		{
 			g_attack_power = 5;	//攻撃力変更
 		}
@@ -798,6 +806,7 @@ void CObjHero::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
+
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -806,22 +815,11 @@ void CObjHero::Draw()
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 65.0f;
-	if (g_stage_clear == false)
-	{
-		//表示位置の設定
-		dst.m_top    = 0.0f	 + m_py;
-		dst.m_left   = 80.0f   + m_px;
-		dst.m_right  = 0.0f   + m_px;
-		dst.m_bottom = 80.0f + m_py;
-	}
-	else
-	{
-		//表示位置の設定
-		dst.m_top = 0.0f + m_py;
-		dst.m_left = 40.0f + m_px;
-		dst.m_right = 0.0f + m_px;
-		dst.m_bottom = 40.0f + m_py;
-	}
+	//表示位置の設定
+	dst.m_top    = 0.0f	 + m_py;
+	dst.m_left   = 80.0f   + m_px;
+	dst.m_right  = 0.0f   + m_px;
+	dst.m_bottom = 80.0f + m_py;
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 

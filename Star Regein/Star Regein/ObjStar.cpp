@@ -40,6 +40,7 @@ void CObjStar::Init()
 void CObjStar::Action()
 {
 
+
 	if (g_stage_clear != true)
 	{
 		//エフェクト用

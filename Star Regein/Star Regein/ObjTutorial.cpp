@@ -29,6 +29,12 @@ void CObjTutorial::Init()
 	m_line = 0;		//行数カウント
 	m_f = true;
 	m_next_f = false;
+
+	//ステージ開始を認識させる
+	m_stage_start = true;
+	m_Tra = 1.0f;
+
+
 }
 
 //アクション
@@ -61,6 +67,8 @@ void CObjTutorial::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
+	float Stage[4] = { 1.0f,1.0f,1.0f,m_Tra };
+
 	if (g_tutorial_flag == false)
 	{
 		return;
@@ -226,7 +234,30 @@ void CObjTutorial::Draw()
 		}
 
 
+	}
 
+	//シーン移行用
+	if (m_stage_start == true)
+	{
+
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 350.0f;
+		src.m_right = 400.0f;
+		src.m_bottom = 50.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+		m_Tra -= 0.03f;
+		if (m_Tra <= 0.0f)
+		{
+			m_stage_start = false;
+		}
+
+		Draw::Draw(9, &src, &dst, Stage, 0.0f);
 	}
 
 }
