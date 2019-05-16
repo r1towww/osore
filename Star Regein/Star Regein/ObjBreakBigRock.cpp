@@ -138,9 +138,9 @@ void CObjBreakBigRock::Draw()
 	//描画
 	Draw::Draw(4, &src, &dst, c, 90.0f);
 
+	//カウント数によって、表示場所を変更
 	if (m_eff_flag == true)
 	{
-		//カウント数によって、表示場所を変更
 		if (m_cnt == 1) {
 			m_bom_x = 50.0f;
 			m_bom_y = 50.0f;
