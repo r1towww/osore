@@ -28,7 +28,6 @@ void CObjStatus::Init()
 	m_gleen = 1.0f;		//HP用カラー 緑	の初期化
 	m_blue = 0.0f;		//HP用カラー 青	の初期化
 
-
 }
 
 //アクション

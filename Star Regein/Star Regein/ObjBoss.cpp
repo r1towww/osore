@@ -116,8 +116,10 @@ void CObjBoss::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + pb->GetScrollx(), m_py + pb->GetScrolly());
 
+	CObjBeam* beam = (CObjBeam*)Objs::GetObj(OBJ_BEAM);
+
 	//時間経過でランダムにワープ
-	if (m_warp_time <= 0 && m_hp > 0)
+	if (m_warp_time <= 0 && m_hp > 0 && beam == nullptr)
 	{
 		m_warp_flag = true;
 
@@ -151,14 +153,14 @@ void CObjBoss::Action()
 		{
 			srand(time(NULL));
 			//マップのランダム処理の初期化
-			m_rand = rand() % 6;
+			m_rand = 5;
 
 			if (m_rand <= 4)
 			{
 				m_px = g_star_x[m_rand];
 				m_py = g_star_y[m_rand];
 			}
-			else
+			else if(m_rand == 5)
 			{
 				CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
@@ -166,8 +168,8 @@ void CObjBoss::Action()
 				float hy = hero->GetY();
 
 				//ビームオブジェクト作成
-				CObjBeam* obj = new CObjBeam(hx, hy);//オブジェクト作成
-				Objs::InsertObj(obj, OBJ_BEAM, 11);//マネージャに登録
+				CObjBeam* beam = new CObjBeam(hx, hy);//オブジェクト作成
+				Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
 
 				hit->SetInvincibility(true);
 				m_alpha = 0.0f;
@@ -183,6 +185,12 @@ void CObjBoss::Action()
 			m_warp_flag = false;
 		}
 
+	}
+
+	if (beam == nullptr)
+	{
+		hit->SetInvincibility(false);
+		m_alpha = 1.0f;
 	}
 
 

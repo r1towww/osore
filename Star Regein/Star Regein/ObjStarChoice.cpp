@@ -146,7 +146,6 @@ void CObjStarChoice::Action()
 					Audio::Start(2);
 					Sleep(500);
 					//ステージを牡牛座に設定
-
 					g_stage = VenusTaurus;
 					m_push_flag = true;
 				}
@@ -244,7 +243,7 @@ void CObjStarChoice::Action()
 				g_stage = Space;	//ステージをSpaceに設定
 				stagec->SetAlpha(ALPHAORIGIN);	//アルファ値を元に戻す
 				this->SetStatus(false);
-				m_push_flag = true;
+				
 			}
 		}
 	}
@@ -257,10 +256,10 @@ void CObjStarChoice::Action()
 	//Zキーが押されると徐々に暗転しながらシーン移行
 	if (m_push_flag == true)
 	{
-		m_Tra5 += 0.03;
-		if (m_Tra5 > 1)
+		m_Tra5 += 0.03f;
+		if (m_Tra5 > 1.0f)
 		{
-			if (g_stage == Earth)//地球
+			if (g_stage == EarthStar)//地球
 			{
 				Scene::SetScene(new CSceneEarth());
 			}

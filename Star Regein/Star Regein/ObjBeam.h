@@ -29,12 +29,14 @@ private:
 	int	 m_beam_ani;			//ワープアニメーション用
 	int	 m_beam_ani_time;		//ワープアニメーション間隔タイム
 	int m_beam_time;			//ワープ時間測定
+	int m_time;					//アニメーション溜め用カウント
 	bool m_beam_flag;
 
+	bool m_d_beam_flag;
+
+	RECT_F m_eff;		//チャージエフェクト描画用
 	int	   m_ani;		//チャージアニメーション用
 	int	   m_ani_time;	//チャージアニメーション間隔タイム
-	RECT_F m_eff;		//チャージエフェクト描画用
-	int m_ani_stop;
 	bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
 
 };

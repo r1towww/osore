@@ -31,7 +31,7 @@ CObjCow::CObjCow(float x, float y, int id)
 //イニシャライズ
 void CObjCow::Init()
 {
-	m_hp = 5;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -88,6 +88,11 @@ void CObjCow::Init()
 //アクション
 void CObjCow::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
+
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -98,6 +103,11 @@ void CObjCow::Action()
 	{
 		m_ani_frame = 1;
 	}
+
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

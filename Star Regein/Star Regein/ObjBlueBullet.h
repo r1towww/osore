@@ -21,7 +21,7 @@ private:
 	float m_vy;	//オブジェクトの移動用ベクトルY
 	float m_r;	//移動する角度
 	float m_speed;	//速度
-	float m_ani_max_time;	//アニメーション動作間隔最大値
+	int m_ani_max_time;	//アニメーション動作間隔最大値
 	float m_ani_max_time2;
 
 	int m_ani_time; //アニメーションフレーム動作間隔
@@ -42,6 +42,6 @@ private:
 
 	
 
-	bool m_hero_hit;
+	bool m_hero_hit = false;
 
 };

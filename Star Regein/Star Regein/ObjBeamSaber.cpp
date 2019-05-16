@@ -130,7 +130,11 @@ void CObjBeamSaber::Draw()
 	dst.m_bottom = 64.0f + m_y + m_pos_y;
 
 	//•\Ž¦
-	if(g_hp <= 20.0f && g_skill == Libra)
+	if (g_mp <= 0.0f)
+	{
+		Draw::Draw(2, &src, &dst, c, m_angle);
+	}
+	else if(g_hp <= 20.0f && g_skill == Libra)
 		Draw::Draw(2, &src, &dst, r, m_angle);
 	else if(g_hp <= 50.0f && g_skill == Libra)
 		Draw::Draw(2, &src, &dst, y, m_angle);
