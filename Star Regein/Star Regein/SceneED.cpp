@@ -35,11 +35,11 @@ void CSceneED::InitScene()
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
-
 	Audio::LoadAudio(3, L"タイトル_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(3);
-	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_512);
+	//画像
+	Draw::LoadImageW(L"Fadein.png", 1, TEX_SIZE_512);
 }
 
 //ゲームタイトル実行中メソッド

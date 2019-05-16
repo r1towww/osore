@@ -369,5 +369,5 @@ extern bool g_hero_hit;
 	CSceneSunLeo		ëæózÅiéÇéqç¿Åj
 
 */
-#define SET_GAME_START  CSceneTitle
+#define SET_GAME_START  CSceneED
 //-----------------------------------------------

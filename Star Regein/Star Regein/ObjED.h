@@ -22,5 +22,10 @@ public:
 	void Draw();		//ドロー
 
 private:
-	int m_y;
+	int	m_ani_time;
+	int m_ani_frame;
+	int m_ani_max_time;	//アニメーション動作間隔最大値
+	int m_key; //フォント描画
+	bool m_key_f;//複数回押さないため
+	bool flag;//アニメーションのフラグ
 };
