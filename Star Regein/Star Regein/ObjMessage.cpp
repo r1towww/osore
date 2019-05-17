@@ -111,18 +111,25 @@ void CObjMessage::Draw()
 	//星のカウントが増えた場合
 	if (g_StarCount > m_memory)
 	{
-		//最後の星を取得した際
-		if (m_MaxStar == g_StarCount) {
-			Font::StrDraw(L"最後の星を取得！", 150, 240, 25, sc);	//別のメッセージを作成
+		if (g_Boss_Spawn == true && g_stage == EarthStar)
+		{
+			;
 		}
 		else
 		{
-			m_time++;	//timeをプラスしている時だけメッセージを表示
-			swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
-			Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
-			if (m_time == 100) {
-				m_memory = g_StarCount;	//現在の星の数を代入
-				m_time = 0;	//timeの初期化
+			//最後の星を取得した際
+			if (m_MaxStar == g_StarCount) {
+				Font::StrDraw(L"最後の星を取得！", 150, 240, 25, sc);	//別のメッセージを作成
+			}
+			else
+			{
+				m_time++;	//timeをプラスしている時だけメッセージを表示
+				swprintf_s(STARMES, L"%d個目の★を取得、残り%d個！", g_StarCount, m_MaxStar - g_StarCount);
+				Font::StrDraw(STARMES, 150, 240, 25, sc);//メッセージを表示
+				if (m_time == 100) {
+					m_memory = g_StarCount;	//現在の星の数を代入
+					m_time = 0;	//timeの初期化
+				}
 			}
 		}
 	}
