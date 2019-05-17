@@ -454,6 +454,7 @@ void CObjWoman::Action()
 		{
 			//乙女削除フラグオン
 			m_woman_delete = true;
+			hit->SetInvincibility(true);
 		}
 
 		//消滅アニメーションのコマを進める
@@ -478,7 +479,6 @@ void CObjWoman::Action()
 			}
 			//敵削除
 			m_alpha = 0.0f;
-			hit->SetInvincibility(true);
 			g_woman_d_flag[m_woman_id] = false;
 			this->SetStatus(false);    //自身に削除命令を出す
 		}

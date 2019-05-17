@@ -452,6 +452,7 @@ void CObjLeo::Action()
 	if (m_hp <= 0)
 	{
 		m_leo_delete = true;
+		hit->SetInvincibility(true);
 
 	};
 	//消滅アニメーションのコマを進める
@@ -487,7 +488,6 @@ void CObjLeo::Action()
 		}
 		//敵削除
 		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
 		g_leo_d_flag[m_leo_id] = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
