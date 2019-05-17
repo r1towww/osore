@@ -56,10 +56,6 @@ void CObjPerformanceRoom::Action()
 			m_f = false;
 		}
 	}
-	else
-	{
-		m_f = false;
-	}
 	//Cキーで前のページへ
 	if (Input::GetVKey('C'))
 	{
@@ -73,10 +69,6 @@ void CObjPerformanceRoom::Action()
 			m_f = false;
 		}
 
-	}
-	else
-	{
-		m_f = false;
 	}
 
 }
