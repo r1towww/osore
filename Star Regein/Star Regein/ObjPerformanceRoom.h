@@ -17,5 +17,6 @@ public:
 	void Draw();		//ドロー
 private:
 	 int m_page;
-	 bool m_f;
+	 bool m_next_f;		//次へ進む用フラグ
+	 bool m_back_f;		//後へ戻る用フラグ
 };

@@ -31,7 +31,8 @@ bool g_Leo_NoDamage_Clear= CLEAR_F;
 void CObjPerformanceRoom::Init()
 {
 	m_page = 0;
-	m_f = true;
+	m_next_f = false;
+	m_back_f = false;
 }
 
 //アクション
@@ -46,29 +47,28 @@ void CObjPerformanceRoom::Action()
 	//Zキーで次のページへ
 	if (Input::GetVKey('Z'))
 	{
-		if (m_f == false)
+		if (m_next_f == true)
 		{
 			m_page++;
-			m_f = true;
+			m_next_f = false;
 		}
-		else
-		{
-			m_f = false;
-		}
+	}
+	else
+	{
+		m_next_f = true;
 	}
 	//Cキーで前のページへ
 	if (Input::GetVKey('C'))
 	{
-		if (m_f == false)
+		if (m_back_f == true)
 		{
 			m_page--;
-			m_f = true;
+			m_back_f = false;
 		}
-		else
-		{
-			m_f = false;
-		}
-
+	}
+	else
+	{
+		m_back_f = true;
 	}
 
 }
