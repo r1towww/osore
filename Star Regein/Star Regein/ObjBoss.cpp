@@ -407,6 +407,8 @@ void CObjBoss::Action()
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_boss_d_flag = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+		g_Earth_BossKill = true;
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 

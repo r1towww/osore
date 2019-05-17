@@ -486,6 +486,8 @@ void CObjTwinsBlue::Action()
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_blue_id] = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 

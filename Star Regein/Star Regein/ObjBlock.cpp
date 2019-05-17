@@ -243,22 +243,25 @@ void CObjBlock::Init()
 		{
 			for (int j = 0; j < MAPSIZE; j++)
 			{
-				if (m_map[i][j] == 5)
+				if (g_Boss_Spawn == true)
 				{
-					//ボスオブジェクト作成
-					CObjBoss* boss = new CObjBoss(j*MAPSIZE, i*MAPSIZE);
-					//敵の位置を取得
-					float* bossx = boss->GetPX();
-					float* bossy = boss->GetPY();
+					if (m_map[i][j] == 5)
+					{
+						//ボスオブジェクト作成
+						CObjBoss* boss = new CObjBoss(j*MAPSIZE, i*MAPSIZE);
+						//敵の位置を取得
+						float* bossx = boss->GetPX();
+						float* bossy = boss->GetPY();
 
-					g_boss_x = boss->GetPX();
-					g_boss_y = boss->GetPY();
+						g_boss_x = boss->GetPX();
+						g_boss_y = boss->GetPY();
 
-					g_boss_d_flag = true;
+						g_boss_d_flag = true;
 
-					g_stan_boss_flag = false;
+						g_stan_boss_flag = false;
 
-					Objs::InsertObj(boss, OBJ_BOSS, 10);
+						Objs::InsertObj(boss, OBJ_BOSS, 10);
+					}
 				}
 			}
 		}

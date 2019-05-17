@@ -117,6 +117,7 @@ void CObjBlueBullet::Action()
 		m_ani_frame2 = 0;
 		m_hero_hit = false;
 		this->SetStatus(false);    //自身に削除命令を出す
+		g_All_Killcnt++;		   //キルカウントを+する
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 	
 	}

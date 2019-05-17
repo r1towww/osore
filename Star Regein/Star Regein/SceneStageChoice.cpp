@@ -45,6 +45,7 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"星座立ち絵総合.png", 7, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
 
 
 
