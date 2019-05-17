@@ -198,20 +198,23 @@ void ObjStageChoiceHero::Action()
 		//太陽へ
 		else if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2)
 		{
-			//if (g_Mercury_clear == true)
-			//{
-			//	Audio::Start(1);
-			//	//太陽に設定
-			//	g_stage = Sun;
+			if (g_Mercury_clear == true)
+			{
+				Audio::Start(1);
+				//太陽に設定
+				g_stage = Sun;
 				g_key_flag = false;	//キーフラグをオフ
-			//	//ステージ選択(星座)オブジェクト作成
-			//	Objs::InsertObj(star, OBJ_STARCHOICE, 20);
-			//}
+				//ステージ選択(星座)オブジェクト作成
+				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
+			}
+		}
+		else if (g_stage_px >= 550 && g_stage_px <= 700 && g_stage_py >= 400&&g_stage_py  <= 550)
+		{
+			Audio::Start(1);
 			g_stage = Performance;
 			//実績オブジェクト作成
 			CObjPerformanceRoom* per = new CObjPerformanceRoom();
 			Objs::InsertObj(per, OBJ_PERFORMANCE_ROOM, 20);
-
 
 		}
 	}
@@ -276,7 +279,7 @@ void ObjStageChoiceHero::Draw()
 	{
 		Font::StrDraw(L"太陽ステージ", 32, 32, 32, c);
 	}
-	if (g_stage_px >= SunX && g_stage_px + 80.0f <= SunX2 && g_stage_py >= SunY&&g_stage_py + 80.0f <= SunY2&&g_Mercury_clear == true)
+	if (g_stage_px >= 550 && g_stage_px <= 700 && g_stage_py >= 400&&g_stage_py  <= 550)
 	{
 		Font::StrDraw(L"実績", 32, 32, 32, c);
 	}

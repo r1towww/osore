@@ -19,6 +19,8 @@ float* g_boss_x;
 float* g_boss_y;
 
 
+
+
 CObjBoss::CObjBoss(float x, float y)
 {
 	m_px = x;	//位置
@@ -35,8 +37,6 @@ void CObjBoss::Init()
 
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
-
-
 
 	m_speed_power = 2.0f;//通常速度
 	m_ani_max_time = 15;	//アニメーション間隔幅
@@ -119,8 +119,9 @@ void CObjBoss::Action()
 	CObjBeam* beam = (CObjBeam*)Objs::GetObj(OBJ_BEAM);
 
 	//時間経過でランダムにワープ
-	if (m_warp_time <= 0 && m_hp > 0 && beam == nullptr)
+	if (m_warp_time <= 0 && m_hp > 0)
 	{
+
 		m_warp_flag = true;
 
 		//エフェクト用
@@ -151,37 +152,57 @@ void CObjBoss::Action()
 
 		if (m_warp_ani == 4)
 		{
-			srand(time(NULL));
-			//マップのランダム処理の初期化
-			m_rand = 5;
+			int count = 0;
 
-			if (m_rand <= 4)
+			//どこかの星に主人公が接触していた場合、そこにワープ
+			for (int i = 0; i <= 4; i++)
 			{
-				m_px = g_star_x[m_rand];
-				m_py = g_star_y[m_rand];
+				if (g_contact_star_f[i] == true)
+				{
+					m_px = g_star_x[i];
+					m_py = g_star_y[i];
+					break;
+				}
+				count++;
 			}
-			else if(m_rand == 5)
+
+			//どの星にも接触していなかった場合はランダムにワープ
+			if(count == 5)
 			{
-				CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+				srand(time(NULL));
+				//マップのランダム処理の初期化
+				m_rand = rand() % 6;
 
-				float hx = hero->GetX();
-				float hy = hero->GetY();
+				if (m_rand <= 4)
+				{
+					m_px = g_star_x[m_rand];
+					m_py = g_star_y[m_rand];
+				}
+				else if (m_rand == 5)
+				{
+					g_boss_d_flag = false;
+					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-				//ビームオブジェクト作成
-				CObjBeam* beam = new CObjBeam(hx, hy);//オブジェクト作成
-				Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
+					float hx = hero->GetX();
+					float hy = hero->GetY();
 
-				hit->SetInvincibility(true);
-				m_alpha = 0.0f;
-				
+					//ビームオブジェクト作成
+					CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
+					Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
+
+					hit->SetInvincibility(true);
+					m_alpha = 0.0f;
+
+				}
 			}
+
 		}
 
 		//7番目（画像最後）まで進んだら、0に戻す
 		if (m_warp_ani == 7)
 		{
 			m_warp_ani = 0;
-			m_warp_time = 300;
+			m_warp_time = 700;
 			m_warp_flag = false;
 		}
 
@@ -189,6 +210,7 @@ void CObjBoss::Action()
 
 	if (beam == nullptr)
 	{
+		g_boss_d_flag = true;
 		hit->SetInvincibility(false);
 		m_alpha = 1.0f;
 	}
@@ -385,6 +407,8 @@ void CObjBoss::Action()
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_boss_d_flag = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+		g_Earth_BossKill = true;
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 

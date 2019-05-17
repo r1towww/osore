@@ -493,6 +493,7 @@ void CObjTwinsRed::Action()
 	{
 		//双子赤削除フラグ
 		m_twinsred_delete = true;
+		hit->SetInvincibility(true);
 	}
 
 	//消滅アニメーションのコマを進める
@@ -530,6 +531,8 @@ void CObjTwinsRed::Action()
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
 		g_cow_d_flag[m_red_id] = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 }

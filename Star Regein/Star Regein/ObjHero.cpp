@@ -783,7 +783,7 @@ void CObjHero::Action()
 			m_eff_time3 = 0;
 
 			dead_flag = false;
-
+			g_Death_cnt++;//デスカウントを+する
 			Scene::SetScene(new CSceneGameOver());
 		}
 	}

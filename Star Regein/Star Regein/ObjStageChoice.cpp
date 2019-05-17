@@ -167,6 +167,26 @@ void CObjStageChoice::Draw()
 
 	//----------------------------------------
 
+	//実績------------------------------------
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 184.0f;
+	src.m_bottom = 175.0f;
+
+	//表示位置の設定
+	dst.m_top = 400.0f;
+	dst.m_left = 550.0f;
+	dst.m_right = 700.0f;
+	dst.m_bottom = 550.0f;
+
+	//表示
+	Draw::Draw(70, &src, &dst, c, 0.0f);
+	if (g_new_Performance == true)
+	{
+		Font::StrDraw(L"NEW!!", 580, 550, 40, y);
+	}
+
 	//太陽をクリアで地球にボスが出現したことを知らせるためのもの
 	if (g_Sun_clear == true)
 	{

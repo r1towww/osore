@@ -30,6 +30,8 @@ class CObjStar : public CObj
 		int m_ani_time;	//アニメーションフレーム動作間隔
 		int m_ani_frame;//描画フレーム
 
+		int m_id;
+
 		RECT_F m_eff;		//チャージエフェクト描画用
 		int m_ani_stop;
 		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
