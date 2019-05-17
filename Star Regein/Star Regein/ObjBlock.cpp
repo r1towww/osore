@@ -24,6 +24,7 @@ bool g_stan_woman_flag[20];//スタン乙女個別認識用
 bool g_stan_libra_flag[20];//スタン天秤個別認識用
 bool g_stan_leo_flag[60];//スタン獅子個別認識用
 bool g_stan_boss_flag;//スタンボス用
+bool g_stan_snake_flag[20];//スタン蛇用
 bool g_move_libra_flag[20];//ダメージで動かす判定
 
 CObjBlock::CObjBlock(int map[MAPSIZE][MAPSIZE])
@@ -297,14 +298,16 @@ void CObjBlock::Init()
 				CObjStar* objstar = new CObjStar(j*ALLSIZE, i*ALLSIZE,i,j,m_star_c);//オブジェクト作成
 				Objs::InsertObj(objstar, OBJ_STAR, 5);//マネージャに登録
 
-				if (g_stage == EarthStar)
+				if (g_stage == EarthStar && g_Boss_Spawn == true)
 				{
 					//星の位置を取得
-
 					g_star_x[m_star_c] = objstar->GetX();
 					g_star_y[m_star_c] = objstar->GetY();
 
+					m_map[i][j] = 4;
+
 					m_star_c++;
+
 				}
 
 			}

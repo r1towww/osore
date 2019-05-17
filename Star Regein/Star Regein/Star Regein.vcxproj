@@ -113,6 +113,7 @@
     <ClCompile Include="ObjBeam.cpp" />
     <ClCompile Include="ObjED.cpp" />
     <ClCompile Include="ObjPerformanceRoom.cpp" />
+    <ClCompile Include="ObjSnake.cpp" />
     <ClCompile Include="SceneED.cpp" />
     <ClCompile Include="ObjBlueBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -193,6 +194,7 @@
     <ClInclude Include="ObjBeam.h" />
     <ClInclude Include="ObjED.h" />
     <ClInclude Include="ObjPerformanceRoom.h" />
+    <ClInclude Include="ObjSnake.h" />
     <ClInclude Include="SceneED.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />

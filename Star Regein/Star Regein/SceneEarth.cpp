@@ -174,34 +174,34 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
-
-	//テスト（地球で星を5個集めたら次へ移行）
-	if (g_StarCount == EARTHMAXSTAR)
+	if (g_Boss_Spawn == false)
 	{
-
-		g_Earth_clear = true;
-		g_Tutorial_Clear = true;
-		//星を集めきるとオン
-		g_Earth_Max = true;
-	
-
-		if (g_Earth_Max == true)
+		//テスト（地球で星を5個集めたら次へ移行）
+		if (g_StarCount == EARTHMAXSTAR)
 		{
-			if (Item_cnt >= 1)
+			g_Earth_clear = true;
+			g_Tutorial_Clear = true;
+			//星を集めきるとオン
+			g_Earth_Max = true;
+
+
+			if (g_Earth_Max == true)
 			{
-				//一回作成されると終了
-				;
+				if (Item_cnt >= 1)
+				{
+					//一回作成されると終了
+					;
+				}
+				else
+				{
+					//スキルアイテムオブジェクト作成
+					CObjSkillItem* objsi = new CObjSkillItem(300, 10);
+					Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
+					g_Make_Item = true;
+					Item_cnt++;
+
+				}
 			}
-			else
-			{
-				//スキルアイテムオブジェクト作成
-				CObjSkillItem* objsi = new CObjSkillItem(300, 10);
-				Objs::InsertObj(objsi, OBJ_SKILL_ITEM, 300);
-				g_Make_Item = true;
-				Item_cnt++;
-				
-			}
-		}
 
 		//スキルアイテムを獲得したら
 		if (g_skill_item_flag == true)

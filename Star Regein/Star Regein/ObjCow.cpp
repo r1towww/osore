@@ -491,6 +491,7 @@ void CObjCow::Action()
 	{
 		//牛削除フラグ
 		m_cow_delete = true;
+		hit->SetInvincibility(true);
 
 	};
 	//消滅アニメーションのコマを進める
@@ -525,8 +526,7 @@ void CObjCow::Action()
 			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
 		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
+		m_alpha = 0.0f;	
 		g_cow_d_flag[m_cow_id] = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		this->SetStatus(false);    //自身に削除命令を出す

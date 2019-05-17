@@ -470,6 +470,7 @@ void CObjLibra::Action()
 	{
 		//天秤削除フラグ
 		m_libra_delete = true;
+		hit->SetInvincibility(true);
 	}
 	//消滅アニメーションのコマを進める
 	if (m_libra_delete == true)
@@ -493,7 +494,6 @@ void CObjLibra::Action()
 		}
 		//敵削除
 		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
 		g_libra_d_flag[m_libra_id] = false;
 
 		g_All_Killcnt++;		   //キルカウントを+する

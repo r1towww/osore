@@ -13,6 +13,8 @@ using namespace GameL;
 float  g_star_x[5];
 float  g_star_y[5];
 
+bool g_contact_star_f[5] = { false,false,false,false,false };//主人公が接触している星の確認フラグ
+
 
 CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 {
@@ -20,6 +22,8 @@ CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 	m_py = y;
 	m_i = i;
 	m_j = j;
+
+	m_id = id;
 
 }
 
@@ -71,17 +75,17 @@ void CObjStar::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 
 		//主人公と当たっているか確認
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら取得
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_GetStar == false)//当たっていたら取得
 		{
 			//スター獲得音
 			Audio::Start(6);
 			g_hp += 5.0f;	//星を回収した際、HPを0.5ゲージ回復
 			m_ani_flag = true;//アニメーション開始
-			hit->SetInvincibility(true);	//触れられなくする
 			m_GetStar = true;			//取得した際、色を変える為にフラグをオンにする
 			g_StarCount++;				//現在取得している星の数をカウントする
 			g_map[m_i][m_j] = 4;	//ミニマップ上で星を表示する
 		}
+
 		if (m_ani_flag == true)
 		{
 			//アニメーションのコマ間隔制御
@@ -108,9 +112,23 @@ void CObjStar::Action()
 		//HitBoxの位置の変更
 		hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
 	}
-	else
+
+	//ボス戦の場合
+	if (g_stage == EarthStar && g_Boss_Spawn ==true)
 	{
-		Hits::DeleteHitBox(this);
+		m_GetStar = true;			//色を変える為にフラグをオンにする
+		g_StarCount = 5;
+
+		//自身のHitBoxを持ってくる
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			g_contact_star_f[m_id] = true;
+		}
+		else
+		{
+			g_contact_star_f[m_id] = false;
+		}
 	}
 }
 

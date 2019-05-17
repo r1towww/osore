@@ -152,6 +152,11 @@ void CObjMiniMap::Draw()
 					}
 					if (g_map[i][j] == 2)//星（取得前）
 					{
+						if (g_Boss_Spawn == true && g_stage == EarthStar)
+						{
+							g_map[i][j] = 4;
+						}
+
 						//切り取り位置の設定
 						src.m_top = 0.0f;
 						src.m_left = 410.0f;

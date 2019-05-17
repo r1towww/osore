@@ -8,36 +8,36 @@
 #include"GameL\UserData.h" 
 
 #include"GameHead.h"
-#include"ObjTwinsBlue.h"
+#include"ObjSnake.h"
 #include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
 
-float* g_twinsblue_x[20];//全ての双子（青）のX位置を把握する
-float* g_twinsblue_y[20];//全ての双子（青）のY位置を把握する
+float* g_snake_x[20];//全ての牛のX位置を把握する
+float* g_snake_y[20];//全ての牛のY位置を把握する
+float g_Leo_cnt;
 
-CObjTwinsBlue::CObjTwinsBlue(float x, float y,int id)
+
+CObjSnake::CObjSnake(float x, float y, int id)
 {
 	m_px = x + 375.0f;	//位置
 	m_py = y + 275.0f;
 
-	m_blue_id = id;
+	m_cow_id = id;
 	g_enemy_cnt++;	//敵の総数のカウント
 }
 
-
-
 //イニシャライズ
-void CObjTwinsBlue::Init()
+void CObjSnake::Init()
 {
-	m_hp = 5;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
-	m_posture = 0.0f;//正面(0.0f) 左(4.0f) 右(1.0f) 背面(2.0f)
-	
-	m_ani_timeB = 0;
+	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
+
 	m_ani_time = 0;
+	m_ani_timeB = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
 	m_speed_power = 2.0f;//通常速度
@@ -56,16 +56,18 @@ void CObjTwinsBlue::Init()
 	m_f = false;
 	m_kill_f = false;	//キルカウント用フラグの初期化
 
-
-	m_bullet_time = 250;
-
-	m_time = 30;
+	g_Leo_cnt = 0.0f;
 
 	m_invincible_flag = false;
 
+	m_time = 30;
+
 	m_df = true;
+	count = 0;
 
 	m_alpha = 1.0;
+
+
 
 	//消滅アニメーション用
 	m_ani_delete = 0;
@@ -74,18 +76,23 @@ void CObjTwinsBlue::Init()
 	m_ani_frame_delete = 1;
 
 	//牛削除フラグ
-	m_twinsblue_delete = false;
-
+	m_cow_delete = false;
 
 	srand(time(NULL));
 
+
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 40, 40, ELEMENT_NULL, OBJ_TWINS_BLUE, 1);
+	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
 }
 
 //アクション
-void CObjTwinsBlue::Action()
+void CObjSnake::Action()
 {
+	//行動が制御されている場合（メニュー画面）
+	if (g_move_stop_flag == true || g_tutorial_flag == true)
+		return;	//行動を制御
+
+
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -101,31 +108,12 @@ void CObjTwinsBlue::Action()
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
 
+
+				//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-
-	//20°間隔で弾丸発射
-	m_bullet_time++;
-	if (m_bullet_time > 300 && m_hp > 0 && g_stan_blue_flag[m_blue_id] == false)
-	{
-		m_bullet_time = 0;
-
-		//6発同時発射
-		CObjBlueBullet*obj_b;
-		for (int i = 0; i < 360; i += 60)
-		{
-			//角度iで角度弾丸発射
-			obj_b = new CObjBlueBullet(m_px, m_py, i, 3.0f);
-			Objs::InsertObj(obj_b, OBJ_BLUE_BULLET, 5);
-		}
-	}
-
-	//ブロックとの当たり判定実行
 	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy
 	);
-
-
 
 	//主人公の位置を取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -135,11 +123,11 @@ void CObjTwinsBlue::Action()
 		float hy = hero->GetY();
 	}
 
-	if (g_stan_blue_flag[m_blue_id] == false)
+	if (g_stan_cow_flag[m_cow_id] == false)
 	{
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
-		check = CheckWindow(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
+		check = CheckWindow(m_px + pb->GetScrollx(), m_py + pb->GetScrolly(), 0.0f, 0.0f, 800.0f, 600.0f);
 		if (check == true)
 		{
 			//主人公機が存在する場合、誘導角度の計算する
@@ -154,18 +142,21 @@ void CObjTwinsBlue::Action()
 
 				float ar = GetAtan2Angle(x, y);
 
+				//敵の現在の向いている角度を取る
+				float br = GetAtan2Angle(m_vx, m_vy);
+
 				//角度で上下左右を判定
 				if ((ar < 45 && ar>0) || ar > 315)
 				{
 					//左
-					m_posture = 4.0f;
+					m_posture = 1.0f;
 					m_ani_time += 1;
 				}
 
 				if (ar > 45 && ar < 135)
 				{
 					//下
-					m_posture = 3.0f;
+					m_posture = 0.0f;
 					m_ani_time += 1;
 				}
 				if (ar > 135 && ar < 225)
@@ -177,14 +168,14 @@ void CObjTwinsBlue::Action()
 				if (ar > 225 && ar < 315)
 				{
 					//上
-					m_posture = 1.0f;
+					m_posture = 3.0f;
 					m_ani_time += 1;
 
 				}
 
 				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 1;
-				m_vy = sin(3.14 / 180 * ar) * 1;
+				m_vx = cos(3.14 / 180 * ar) * 2;
+				m_vy = sin(3.14 / 180 * ar) * 2;
 			}
 		}
 		else
@@ -200,7 +191,8 @@ void CObjTwinsBlue::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 19 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
+	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
+
 
 	//主人公とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -238,11 +230,49 @@ void CObjTwinsBlue::Action()
 		}
 	}
 
+	//主人公とBLOCK系統との当たり判定
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
+	{
+		//主人公がブロックとどの角度で当たっているのかを確認
+		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchElementHit(ELEMENT_BLOCK);	//hit_dateに主人公と当たっている他全てのHitBoxとの情報を入れる
+		float r = 0;
+
+		for (int i = 0; i < 10; i++)
+		{
+			if (hit_data[i] != nullptr)
+			{
+				r = hit_data[i]->r;
+
+
+				//角度で上下左右を判定
+				if ((r <= 45 && r >= 0) || r >= 315)
+				{
+					m_vx = -0.15f; //右
+				}
+				if (r > 45 && r < 135)
+				{
+					m_vy = 0.15f;//上
+				}
+				if (r >= 135 && r < 225)
+				{
+					m_vx = 0.15f;//左
+				}
+				if (r >= 225 && r < 315)
+				{
+					m_vy = -0.15f; //下
+				}
+			}
+		}
+	}
+
+	//敵とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_NULL) == true)
 	{
 		//敵がブロックとどの角度で当たっているのかを確認
 		HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_NULL);
+
 		float r = 0;
 
 		for (int i = 0; i < 10; i++)
@@ -268,6 +298,7 @@ void CObjTwinsBlue::Action()
 				{
 					m_vy = -0.15f; //下
 				}
+
 			}
 		}
 	}
@@ -288,6 +319,7 @@ void CObjTwinsBlue::Action()
 					continue;
 
 				float r = hit_data[i]->r;
+
 
 				if ((r < 45 && r >= 0) || r > 315)
 				{
@@ -394,10 +426,8 @@ void CObjTwinsBlue::Action()
 			m_key_f = true;
 
 		}
+
 	}
-
-
-
 	//ELEMENT_SKILL_LEOを持つオブジェクトと接触したら
 	if (hit->CheckElementHit(ELEMENT_SKILL_LEO) == true)
 	{
@@ -405,11 +435,11 @@ void CObjTwinsBlue::Action()
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 															//ヒット判定on
-		g_stan_blue_flag[m_blue_id] = true;
+		g_stan_cow_flag[m_cow_id] = true;
 	}
 
 	//しし座のヒット判定がonの時スタン
-	if (g_stan_blue_flag[m_blue_id] == true)
+	if (g_stan_cow_flag[m_cow_id] == true)
 	{
 
 		g_Leo_cnt += 1.0f;
@@ -425,7 +455,7 @@ void CObjTwinsBlue::Action()
 			if (g_Leo_cnt >= 200.0f)
 			{
 				g_Leo_cnt = 0.0f;
-				g_stan_blue_flag[m_blue_id] = false;
+				g_stan_cow_flag[m_cow_id] = false;
 			}
 		}
 
@@ -459,14 +489,25 @@ void CObjTwinsBlue::Action()
 	//HPが0になったら破棄
 	if (m_hp <= 0)
 	{
-		//双子青削除フラグ
-		m_twinsblue_delete = true;
-		hit->SetInvincibility(true);
+		//牛削除フラグ
+		m_cow_delete = true;
+
 	};
-	// 消滅アニメーションのコマを進める
-	if (m_twinsblue_delete == true)
+	//消滅アニメーションのコマを進める
+	if (m_cow_delete == true)
 	{
 		m_ani_count += 1;
+	}
+	//移動アニメーション
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
 	}
 	//消滅アニメーション
 	if (m_ani_count > m_ani_max_count)
@@ -474,7 +515,7 @@ void CObjTwinsBlue::Action()
 		m_ani_frame_delete += 1;
 		m_ani_count = 0;
 	}
-	if (m_ani_frame_delete == 4)
+	if (m_ani_frame_delete == 3)
 	{
 		m_ani_frame_delete = 0;
 		//フラグがオフの場合
@@ -485,54 +526,57 @@ void CObjTwinsBlue::Action()
 		}
 		//敵削除
 		m_alpha = 0.0f;
-		g_cow_d_flag[m_blue_id] = false;
+		hit->SetInvincibility(true);
+		g_cow_d_flag[m_cow_id] = false;
 		g_All_Killcnt++;		   //キルカウントを+する
-
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
-
-
+	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 }
 
 //ドロー
-void CObjTwinsBlue::Draw()
+void CObjSnake::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
+
 	int DeleteData[4] =
 	{ 1,2,3,4, };
+
 	int AniDataB[6] =
 	{ 0,1,2,3,4,0 };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
+
 	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
 
-	//ブロック情報を持ってくる
+			   //ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	if (m_twinsblue_delete == false)
+	if (m_cow_delete == false)
 	{
 		//切り取り位置の設定
-		src.m_top = 64.0f * m_posture;
-		src.m_left = 0.0f + (AniData[m_ani_frame] * 64);
-		src.m_right = 64.0f + (AniData[m_ani_frame] * 64);
-		src.m_bottom = src.m_top + 64.0f;
+		src.m_top = 48.0f * m_posture;
+		src.m_left = 0.0f + (AniData[m_ani_frame] * 48);
+		src.m_right = 48.0f + (AniData[m_ani_frame] * 48);
+		src.m_bottom = src.m_top + 48.0f;
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 80.0f + m_px + block->GetScrollx();
+		dst.m_left = 64.0f + m_px + block->GetScrollx();
 		dst.m_right = 0.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 80.0f + m_py + block->GetScrolly();
+		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+
 
 		//描画
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+		Draw::Draw(3, &src, &dst, c, 0.0f);
 	}
-	else if (m_twinsblue_delete == true)
+	else if (m_cow_delete == true)
 	{
 		//消滅アニメーション
 		//切り取り位置の設定
@@ -550,7 +594,10 @@ void CObjTwinsBlue::Draw()
 		//表示
 		Draw::Draw(80, &src, &dst, d, 0.0f);
 	}
-	if (g_stan_blue_flag[m_blue_id] == true)
+
+
+
+	if (g_stan_cow_flag[m_cow_id] == true)
 	{
 		RECT_F src;//描画元切り取り位置
 		RECT_F dst;//描画先表示位置
@@ -565,10 +612,10 @@ void CObjTwinsBlue::Draw()
 		src.m_bottom = src.m_top + 192.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 10.0f + m_px + block->GetScrollx();
-		dst.m_right = 70.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 60.0f + m_py + block->GetScrolly();
+		dst.m_top = -5.0f + m_py + block->GetScrolly();
+		dst.m_left = 94.0f + m_px + block->GetScrollx();
+		dst.m_right = -30.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 85.0f + m_py + block->GetScrolly();
 
 		//描画
 		Draw::Draw(49, &src, &dst, cB, 0.0f);

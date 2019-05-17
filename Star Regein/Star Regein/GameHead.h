@@ -45,6 +45,7 @@ enum OBJ_NAME
 	OBJ_LEO,
 	OBJ_BOSS,
 	OBJ_BEAM,
+	OBJ_SNAKE,
 
 	OBJ_MENU,
 	OBJ_HELP,
@@ -187,6 +188,8 @@ extern float* g_leo_x[60];//全ての獅子のX位置を把握する
 extern float* g_leo_y[60];//全ての獅子のY位置を把握する
 extern float* g_boss_x;//ボスのX位置を把握する
 extern float* g_boss_y;//ボスのY位置を把握する
+extern float* g_snake_x[20];//蛇のX位置を把握する
+extern float* g_snake_y[20];//蛇のY位置を把握する
 extern float g_star_x[5];
 extern float g_star_y[5];
 
@@ -214,6 +217,7 @@ extern bool g_woman_d_flag[20];//乙女削除フラグ
 extern bool g_libra_d_flag[20];//天秤削除フラグ
 extern bool g_leo_d_flag[60];//獅子削除フラグ
 extern bool g_boss_d_flag;//ボス削除フラグ
+extern bool g_snake_d_flag[20];//蛇削除フラグ
 
 extern int g_asteroid;		//マップのランダム化用変数（小惑星）
 extern int g_block;			//マップのランダム化用変数（隕石ブロック）
@@ -237,6 +241,7 @@ extern bool g_stan_woman_flag[20];//スタン乙女個別認識用
 extern bool g_stan_libra_flag[20];//スタン天秤個別認識用
 extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
 extern bool g_stan_boss_flag;//スタンボス用
+extern bool g_stan_snake_flag[20];//スタン蛇個別認識用
 extern bool g_move_libra_flag[20];//天秤座動かすためのもの
 
 //各星座の取得情報
@@ -247,6 +252,8 @@ extern bool g_Libra;	//天秤座
 extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
+
+extern bool g_contact_star_f[5];//主人公が接触している星の確認フラグ
 
 //各惑星・星座のクリア状況
 extern bool g_Earth_clear;	//地球	
@@ -333,6 +340,7 @@ extern bool g_All_Skill_Get;  //すべてのスキルを獲得
 #include "ObjLeo.h"
 #include "ObjBoss.h"
 #include "ObjBeam.h"
+#include "ObjSnake.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"

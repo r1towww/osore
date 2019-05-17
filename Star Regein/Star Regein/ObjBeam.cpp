@@ -46,7 +46,7 @@ void CObjBeam::Init()
 	m_ani = 0;
 	m_ani_time = 0;
 						//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 64, 64, ELEMENT_ENEMY, OBJ_BEAM, 1);
+	Hits::SetHitBox(this, m_px + 70, m_py - 500, 210, 2300, ELEMENT_ENEMY, OBJ_BEAM, 1);
 }
 
 //アクション
@@ -58,7 +58,9 @@ void CObjBeam::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
+	hit->SetPos(m_px + 70 + block->GetScrollx(), m_py - 500 + block->GetScrolly());
+
+	hit->SetInvincibility(true);
 
 	if (m_ani_flag == true)
 	{
@@ -129,6 +131,7 @@ void CObjBeam::Action()
 				m_beam_ani_time++;
 			}
 
+			//2番目のときコマの進行を少し遅くする
 			if (m_beam_ani == 2)
 			{
 				m_time++;
@@ -141,32 +144,39 @@ void CObjBeam::Action()
 			}
 		}
 
+		//5番目のときフラグをオフにする
 		if (m_beam_ani == 5)
 		{
 			m_time++;
+			hit->SetInvincibility(false);
 			m_beam_flag = false;
+		}
 
-			if (m_time >= 100)
+		//フラグがオフかつm_timeが100以上のときコマの進行を少し遅くする
+		if (m_beam_flag == false && m_time >= 100)
+		{
+			if (m_beam_ani_time > 6)
 			{
-				if (m_beam_ani_time > 6)
-				{
-					m_beam_ani--;		//アニメーションのコマを1つ進める
-					m_beam_ani_time = 0;
+				m_beam_ani--;		//アニメーションのコマを1つ進める
+				m_beam_ani_time = 0;
 
-					m_beam_eff = beam_ani_src[m_beam_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-				}
-				else
-				{
-					m_beam_ani_time++;
-				}
+				m_beam_eff = beam_ani_src[m_beam_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			}
+			else
+			{
+				m_beam_ani_time++;
+			}
 
-				if (m_beam_ani == 0)
-				{
-					this->SetStatus(false);    //自身に削除命令を出す
-					Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-				}
+			//0番目のときビームを削除
+			if (m_beam_ani == 0)
+			{
+				m_time = 0;
+				m_beam_ani_time = 0;
+				this->SetStatus(false);    //自身に削除命令を出す
+				Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 			}
 		}
+
 
 	if (m_d_beam_flag == true)
 	{
