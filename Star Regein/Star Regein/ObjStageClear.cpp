@@ -16,7 +16,6 @@ using namespace GameL;
 void CObjStageClear::Init()
 {
 	m_time = 0;	//描画までのタイム感覚の初期化
-	m_alpha4 = 0.0f;
 	m_Tra = 0.0f;
 	m_push_flag = false;
 }
@@ -37,10 +36,13 @@ void CObjStageClear::Action()
 	if (m_push_flag == true)
 	{
 		m_Tra += 0.03;
-		m_alpha1 = 0.0f;
-		m_alpha2 = 0.0f;
-		m_alpha3 = 0.0f;
-		m_alpha4 = 0.0f;
+		m_alpha[0] = 0.0f;
+		m_alpha[1] = 0.0f;
+		m_alpha[2] = 0.0f;
+		m_alpha[3] = 0.0f;
+		m_alpha[4] = 0.0f;
+		m_alpha[5] = 0.0f;
+		m_alpha[6] = 0.0f;
 		if (m_Tra >= 1)
 		{
 			Scene::SetScene(new CSceneStageChoice());//ステージ選択
