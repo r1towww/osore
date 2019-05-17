@@ -493,6 +493,7 @@ void CObjTwinsRed::Action()
 	{
 		//双子赤削除フラグ
 		m_twinsred_delete = true;
+		hit->SetInvincibility(true);
 	}
 
 	//消滅アニメーションのコマを進める
