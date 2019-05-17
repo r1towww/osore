@@ -33,5 +33,5 @@ class CObjStarChoice :public CObj
 		bool m_time;
 		bool m_key_flag;	//キー制御フラグ
 		bool m_push_flag;
-		
+		bool m_flag;
 };

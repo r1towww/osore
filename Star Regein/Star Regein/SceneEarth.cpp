@@ -17,7 +17,7 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
-bool g_Boss_Spawn = true;
+bool g_Boss_Spawn = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -209,6 +209,7 @@ void CSceneEarth::Scene()
 			//スキルアイテムフラグオフ
 			g_skill_item_flag = false;
 			g_stage_clear = true;
+			g_new_Performance = true;
 			ClearCheck(g_stage_clear);
 		}
 		
