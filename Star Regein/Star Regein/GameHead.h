@@ -248,6 +248,8 @@ extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
 
+extern bool g_contact_star_f[5];//主人公が接触している星の確認フラグ
+
 //各惑星・星座のクリア状況
 extern bool g_Earth_clear;	//地球	
 extern bool g_Venus_clear;	//金星
@@ -282,21 +284,36 @@ extern int g_cow_id[20];//牛の識別ID
 
 extern bool g_hero_hit;
 
+extern bool g_Boss_Spawn;
 /*実績達成状況*/
+//新しく実績を解除したとき----------
+extern bool g_new_Performance;
 //敵をすべて倒した------------------
 extern bool g_Taurus_Enemy_AllKill;	
 extern bool g_Libra_Enemy_AllKill;
 extern bool g_Gemini_Enemy_AllKill;
 extern bool g_Viego_Enemy_AllKill;
 extern bool g_Leo_Enemy_AllKill;
-//ラスボスを倒した------------------
-extern bool g_Earth_BossKill;
 //ノーダメージクリア----------------
 extern bool g_Taurus_NoDamage_Clear;
 extern bool g_Libra_NoDamage_Clear;
 extern bool g_Gemini_NoDamage_Clear;
 extern bool g_Viego_NoDamage_Clear;
 extern bool g_Leo_NoDamage_Clear;
+//その他
+extern int g_All_Killcnt;
+extern int g_Death_cnt;
+extern int g_Taurus_Grade;
+extern int g_Libra_Grade;
+extern int g_Gemini_Grade;
+extern int g_Viego_Grade;
+extern int g_Leo_Grade;
+
+//シークレット系
+extern bool g_Tutorial_Clear; //チュートリアルクリア
+extern bool g_Earth_BossKill; //ラスボスを倒した
+extern bool g_All_Skill_Get;  //すべてのスキルを獲得
+
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------

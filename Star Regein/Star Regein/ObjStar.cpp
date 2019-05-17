@@ -13,6 +13,8 @@ using namespace GameL;
 float  g_star_x[5];
 float  g_star_y[5];
 
+bool g_contact_star_f[5] = { false,false,false,false,false };//主人公が接触している星の確認フラグ
+
 
 CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 {
@@ -20,6 +22,8 @@ CObjStar::CObjStar(float x, float y ,int i,int j,int id)
 	m_py = y;
 	m_i = i;
 	m_j = j;
+
+	m_id = id;
 
 }
 
@@ -32,6 +36,11 @@ void CObjStar::Init()
 	m_ani_flag = false;
 
 	m_GetStar = false;	//星を取得変数の初期化
+
+	m_eff.m_top    =   0;
+	m_eff.m_left   =   0;
+	m_eff.m_right  = 192;
+	m_eff.m_bottom = 192;
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py,64, 64, ELEMENT_STAR, OBJ_STAR, 1);
 }
@@ -77,6 +86,19 @@ void CObjStar::Action()
 			g_StarCount++;				//現在取得している星の数をカウントする
 			g_map[m_i][m_j] = 4;	//ミニマップ上で星を表示する
 		}
+
+		if (g_stage == EarthStar)
+		{
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+			{
+				g_contact_star_f[m_id] = true;
+			}
+			else
+			{
+				g_contact_star_f[m_id] = false;
+			}
+		}
+
 		if (m_ani_flag == true)
 		{
 			//アニメーションのコマ間隔制御

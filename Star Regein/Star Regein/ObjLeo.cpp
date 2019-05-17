@@ -489,6 +489,7 @@ void CObjLeo::Action()
 		//敵削除
 		m_alpha = 0.0f;
 		g_leo_d_flag[m_leo_id] = false;
+		g_All_Killcnt++;		   //キルカウントを+する
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 
