@@ -239,7 +239,6 @@ void CObjStageClear::Draw()
 		dst.m_bottom = 600.0f;
 
 		Draw::Draw(9, &src, &dst, c, 0.0f);
-
 	}
 
 
