@@ -18,6 +18,14 @@ void CObjStageClear::Init()
 	m_time = 0;	//描画までのタイム感覚の初期化
 	m_Tra = 0.0f;
 	m_push_flag = false;
+
+	m_ani = 0;			//チャージアニメーション用
+	m_ani_time = 0;	//チャージアニメーション間隔タイム
+
+	m_eff.m_top = 0;
+	m_eff.m_left = 0;
+	m_eff.m_right = 192;
+	m_eff.m_bottom = 192;
 }
 
 //アクション
@@ -50,7 +58,43 @@ void CObjStageClear::Action()
 
 		}
 	}
+	//エフェクト用
+	RECT_F ani_src[15] =
+	{
+		{ 0,   0, 192, 192 },
+		{ 0, 192, 384, 192 },
+		{ 0, 384, 576, 192 },
+		{ 0, 576, 768, 192 },
+		{ 0, 768, 960, 192 },
+		{ 192,   0, 192, 384 },
+		{ 192, 192, 384, 384 },
+		{ 192, 384, 576, 384 },
+		{ 192, 576, 768, 384 },
+		{ 192, 768, 960, 384 },
+		{ 384,   0, 192, 576 },
+		{ 384, 192, 384, 576 },
+		{ 384, 384, 576, 576 },
+		{ 384, 576, 768, 576 },
+		{ 384, 768, 960, 576 },
+	};
 
+	//アニメーションのコマ間隔制御
+	if (m_ani_time > 3)
+	{
+		m_ani++;		//アニメーションのコマを1つ進める
+		m_ani_time = 0;
+
+		m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+	}
+	else
+	{
+		m_ani_time++;
+	}
+	//８番目（画像最後）まで進んだら、0番目に戻す
+	if (m_ani == 14)
+	{
+		m_ani = 0;
+	}
 
 	//タイムを60になるまでプラス
 	m_time++;
@@ -250,14 +294,12 @@ void CObjStageClear::Draw()
 
 	wchar_t TIME[128];	//タイムの描画
 
-	//m_time_mesから描分を求める
+	//m_time_mesから秒分を求める
 	//分：秒の値を文字列化
 	if (objmes->GetSECOND()<10)
 		swprintf_s(TIME, L"クリアタイム：%d分0%d秒", objmes->GetMINUTE(), objmes->GetSECOND());//秒の1桁目に0を用意
 	else
 		swprintf_s(TIME, L"クリアタイム：%d分%d秒", objmes->GetMINUTE(), objmes->GetSECOND());
-
-	
 
 	swprintf_s(KILLCNT, L"敵を%d体倒した！", g_kill_cnt);
 
