@@ -32,6 +32,11 @@ void CObjStar::Init()
 	m_ani_flag = false;
 
 	m_GetStar = false;	//¯‚ğæ“¾•Ï”‚Ì‰Šú‰»
+
+	m_eff.m_top    =   0;
+	m_eff.m_left   =   0;
+	m_eff.m_right  = 192;
+	m_eff.m_bottom = 192;
 	//“–‚½‚è”»’è—p‚ÌHitBox‚ğì¬
 	Hits::SetHitBox(this, m_px, m_py,64, 64, ELEMENT_STAR, OBJ_STAR, 1);
 }
