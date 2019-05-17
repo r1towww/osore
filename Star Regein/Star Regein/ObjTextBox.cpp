@@ -27,7 +27,7 @@ void CObjTextBox::Action()
 {
 	//キータイムを超えるとZ可能
 	//Zキー入力
-	if (Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true&& g_tutorial_next_flag ==true)
+	if (Input::GetVKey('Z') == true && g_tutorial_next_flag == true ||Input::GetVKey(VK_RETURN)==true&& g_tutorial_next_flag ==true)
 	{
 			
 		if (m_f == false)

@@ -31,14 +31,14 @@ CObjSkillItem::CObjSkillItem(float x, float y)
 void CObjSkillItem::Init()
 {
 
-
+	//移動量
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
+	//アイテムが生成されたかどうか
 	g_skill_item_flag = false;
 
-	m_eff_flag = false;
-
+	//主人公や敵の動きを止める
 	g_move_stop_flag = false;
 
 	//当たり判定をセット

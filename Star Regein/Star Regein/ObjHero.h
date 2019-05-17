@@ -75,7 +75,6 @@ class CObjHero :public CObj
 		bool m_a_flag;//攻撃制御用
 
 		bool m_burn_f;//火傷時主人公カラー変更用フラグ
-
 		//blockとの衝突状態確認用
 		bool m_hit_up;
 		bool m_hit_down;

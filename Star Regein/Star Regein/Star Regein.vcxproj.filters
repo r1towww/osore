@@ -209,14 +209,17 @@
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
-    <ClCompile Include="SceneED.cpp">
+    <ClCompile Include="ObjBeam.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjPerformanceRoom.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="ObjED.cpp">
-      <Filter>ソースファイル</Filter>
+      <Filter>ソースファイル\ED</Filter>
     </ClCompile>
-    <ClCompile Include="ObjBeam.cpp">
-      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    <ClCompile Include="SceneED.cpp">
+      <Filter>ソースファイル\ED</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,14 +437,17 @@
     <ClInclude Include="ObjBoss.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
-    <ClInclude Include="SceneED.h">
+    <ClInclude Include="ObjBeam.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjPerformanceRoom.h">
       <Filter>ソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjED.h">
-      <Filter>ソースファイル</Filter>
+      <Filter>ソースファイル\ED</Filter>
     </ClInclude>
-    <ClInclude Include="ObjBeam.h">
-      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    <ClInclude Include="SceneED.h">
+      <Filter>ソースファイル\ED</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -540,6 +546,9 @@
     </Filter>
     <Filter Include="ソースファイル\各惑星敵\乙女">
       <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\ED">
+      <UniqueIdentifier>{6ae17198-7438-4270-9d33-20e8f4d282b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

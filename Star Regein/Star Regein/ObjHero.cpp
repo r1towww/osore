@@ -15,7 +15,6 @@ float g_posture;
 int g_skill = NoSkill;
 int g_attack_power = 1;
 
-
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
 	m_px = x;
@@ -27,6 +26,7 @@ void CObjHero::Init()
 {
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
+
 	//初期姿勢
 	g_posture = HERO_DOWN;
 
@@ -182,6 +182,10 @@ void CObjHero::Action()
 			CObjStageClear* objs = new CObjStageClear();
 			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
 		}
+		if (Input::GetVKey('T'))
+		{
+			g_mp -= 1.0f;
+		}
 
 		//移動系統情報--------------------------------------------------
 
@@ -329,7 +333,11 @@ void CObjHero::Action()
 			Objs::InsertObj(libra, OBJ_SKILL_LIBRA, 11);
 		}
 		//残りHPに応じて攻撃力を変更
-		if (g_hp <= 20.0f)	//20.0f以下
+		if (g_mp <= 0.0f)
+		{
+			g_attack_power = 1;
+		}
+		else if (g_hp <= 20.0f)	//20.0f以下
 		{
 			g_attack_power = 5;	//攻撃力変更
 		}
@@ -428,6 +436,11 @@ void CObjHero::Action()
 	{
 		g_mp = g_max_mp;	//最大MPに戻す
 	}
+	//HPが0を下回らないようにする（火傷によるHPのオーバー）
+	if (g_hp <= 0.0f)
+	{
+		g_hp = 0.0f;
+	}
 	//MPが0を下回らないようにする（スキルによるMPのオーバー）
 	if (g_mp <= 0.0f)
 	{
@@ -435,7 +448,7 @@ void CObjHero::Action()
 	}
 
 
-	//MPが50以下になったら一定間隔で増える（リジェネ）
+	//MPが100未満になったら一定間隔で増える（リジェネ）
 	if (m_dash_flag == false && g_skill != Libra)//選択スキルがLibraじゃない、ダッシュしていなかったら増える
 	{
 		if (g_mp < 100.0f)
@@ -638,7 +651,6 @@ void CObjHero::Action()
 			m_burn_f = false;
 		}
 	}
-
 	//アイテムが作成されたら無敵にする
 	if (g_Make_Item == true)
 	{
@@ -730,9 +742,6 @@ void CObjHero::Action()
 	{
 		m_alpha = 0.0f;
 		dead_flag = true;
-		//this->SetStatus(false);    //自身に削除命令を出す
-		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-
 	}
 
 
@@ -798,6 +807,7 @@ void CObjHero::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
+
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -806,22 +816,11 @@ void CObjHero::Draw()
 	src.m_left   =  0.0f + (AniData[m_ani_frame] * 64);
 	src.m_right  = 64.0f + (AniData[m_ani_frame] * 64);
 	src.m_bottom = src.m_top + 65.0f;
-	if (g_stage_clear == false)
-	{
-		//表示位置の設定
-		dst.m_top    = 0.0f	 + m_py;
-		dst.m_left   = 80.0f   + m_px;
-		dst.m_right  = 0.0f   + m_px;
-		dst.m_bottom = 80.0f + m_py;
-	}
-	else
-	{
-		//表示位置の設定
-		dst.m_top = 0.0f + m_py;
-		dst.m_left = 40.0f + m_px;
-		dst.m_right = 0.0f + m_px;
-		dst.m_bottom = 40.0f + m_py;
-	}
+	//表示位置の設定
+	dst.m_top    = 0.0f	 + m_py;
+	dst.m_left   = 80.0f   + m_px;
+	dst.m_right  = 0.0f   + m_px;
+	dst.m_bottom = 80.0f + m_py;
 	//描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 
@@ -876,7 +875,6 @@ void CObjHero::Draw()
 	}
 	if (dead_flag == true)
 	{
-
 		//透明の主人公を表示
 		dst.m_top = 0.0f + m_py;
 		dst.m_left = 80.0f + m_px;

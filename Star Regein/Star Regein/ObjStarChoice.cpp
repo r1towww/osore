@@ -256,10 +256,10 @@ void CObjStarChoice::Action()
 	//Zキーが押されると徐々に暗転しながらシーン移行
 	if (m_push_flag == true)
 	{
-		m_Tra5 += 0.03;
-		if (m_Tra5 > 1)
+		m_Tra5 += 0.03f;
+		if (m_Tra5 > 1.0f)
 		{
-			if (g_stage == Earth)//地球
+			if (g_stage == EarthStar)//地球
 			{
 				Scene::SetScene(new CSceneEarth());
 			}

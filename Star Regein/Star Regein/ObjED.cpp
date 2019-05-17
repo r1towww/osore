@@ -8,44 +8,91 @@
 #include "GameHead.h"
 #include "ObjTitle.h"
 
-
 //使用するネームスペース
 using namespace GameL;
 
-							//イニシャライズ
+//イニシャライズ
 void CObjED::Init()
 {
-	m_y = 0.0;
+	m_ani_time = 0;
+	m_ani_frame = 0;
+	m_ani_max_time = 3;		//アニメーション間隔幅
+	m_key = 0;
+	//キーフラグの初期化
+	m_key_f = false;
+	flag = false;
 }
 
 //アクション
 void CObjED::Action()
 {
-	float p[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-	m_y--;
-
-	//エンターキーで早送り機能
-	if (Input::GetVKey(VK_RETURN) == true)
+	float p[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	//フォント描画-------------------------------------------
+	if (m_key == 0)
 	{
-		m_y -= 10;
+		Font::StrDraw(L"END GAME", GAME_CLEAR_X - 20, GAME_CLEAR_Y + 110, GAME_CLEAR_FONT_SIZE + 70, p);
 	}
-
-	else
+	if (m_key == 1)
 	{
-		m_y -= 0.8f;
+		Font::StrDraw(L"ゲーム名", GAME_CLEAR_X - 10, GAME_CLEAR_Y - 10, GAME_CLEAR_FONT_SIZE + 60, c);
+		Font::StrDraw(L"STAR REGEIN", GAME_CLEAR_X - 75, GAME_CLEAR_Y + 200, GAME_CLEAR_FONT_SIZE + 60, c);
 	}
-	Font::StrDraw(L"END GAME"                  , GAME_CLEAR_X+25, GAME_CLEAR_Y + m_y   , GAME_CLEAR_FONT_SIZE+30, p);
-	Font::StrDraw(L"ゲーム名 STAR REGEIN"      , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 100, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"ゲーム作成者"              , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 150, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"リーダー     菅原 圭太"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 200, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プランナー   清水  蓮"     , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 250, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 田中 陸斗"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 300, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 木村 唯人"    , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 350, GAME_CLEAR_FONT_SIZE, p);
-	Font::StrDraw(L"プログラマー 保地谷 広奈"  , GAME_CLEAR_X, GAME_CLEAR_Y + m_y + 400, GAME_CLEAR_FONT_SIZE, p);
-	if (m_y <= -500)
+	if (m_key == 2)
 	{
+		Font::StrDraw(L"チーム名", GAME_CLEAR_X -10, GAME_CLEAR_Y -10, GAME_CLEAR_FONT_SIZE + 60, c);
+		Font::StrDraw(L"恐れすぎた幽鬼", GAME_CLEAR_X -140, GAME_CLEAR_Y + 200, GAME_CLEAR_FONT_SIZE + 60, c);
+	}
+	if (m_key == 3)
+	{
+		Font::StrDraw(L"プレイして頂き", GAME_CLEAR_X - 45, GAME_CLEAR_Y +70, GAME_CLEAR_FONT_SIZE + 30, c);
+		Font::StrDraw(L"ありがとうございました", GAME_CLEAR_X - 160, GAME_CLEAR_Y + 180, GAME_CLEAR_FONT_SIZE + 30, c);
+	}
+	//-----------------------------------------------------------
 
+	//Enterが押されたらフラグオン
+	if (Input::GetVKey(VK_RETURN) == true && m_key_f == false)
+	{
+		m_key_f = true;
+	}
+	//---------------------------
+
+	//アニメーション表示----
+	if (m_key_f == true && flag==false)
+	{
+		m_ani_time += 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 10)
+		{
+			flag = true;
+			m_key += 1;
+		}
+	}
+	if (flag == true)
+	{
+		m_ani_time += 1;
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame -= 1;
+			m_ani_time = 0;
+		}
+		if (m_ani_frame == 0)
+		{
+			m_key_f = false;
+			flag = false;
+		}
+	}
+	//------------------------
+
+	if (m_key == 4)
+	{
+		Scene::SetScene(new CSceneTitle());
 	}
 
 }
@@ -53,5 +100,21 @@ void CObjED::Action()
 //ドロー
 void CObjED::Draw()
 {
+	float bc[4] = { 1.0f,1.0f,1.0f,1.0f };
 
+	RECT_F src;		//描画元切り取り位置
+	RECT_F dst;		//描画先表示位置
+
+					//背景切り取り
+	src.m_top = 0.0f;
+	src.m_left = 0.0f + (800.0f * m_ani_frame);
+	src.m_right = 800.0f + (800.0f * m_ani_frame);
+	src.m_bottom = 600.0f;
+
+	//描画
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 800.0f;
+	dst.m_bottom = 600.0f;
+	Draw::Draw(1, &src, &dst, bc, 0.0f);
 }

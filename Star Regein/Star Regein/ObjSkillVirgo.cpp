@@ -33,6 +33,7 @@ void CObjSkillVirgo::Init()
 	m_hit_flag = false;
 	m_f = false;	//エフェクト音フラグの初期化
 	m_bullet_f = false;	//着弾SEフラグの初期化
+	m_flag = false;
 	//主人公の向きを取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_posture = hero->GetPos();
@@ -48,7 +49,7 @@ void CObjSkillVirgo::Init()
 	m_ani_time = 0;
 	m_ani_stop = 0;
 
-	//主人公の向きによってビームサーベルを出す方向，向きを変える
+	//主人公の向きによってハート弾を出す方向，向きを変える
 	if (g_posture == 3)	//下
 	{
 		m_angle = 90.0f;	//角度調整
@@ -149,29 +150,36 @@ void CObjSkillVirgo::Action()
 		hit->CheckObjNameHit(OBJ_WOMAN)      != nullptr ||
 		hit->CheckObjNameHit(OBJ_LEO)        != nullptr)//当たっていたら取得  
 	{
-		//フラグがオンの場合
-		if (m_bullet_f == false) {
-			Audio::Start(15);	//着弾SEを鳴らす
-			m_bullet_f = true;	//フラグをオンにして、１度だけ鳴らす
-		}
-
-		m_hit_flag = true;//アニメーション開始
-		m_vx = 0.0f;
-		m_vy = 0.0f;
-
-		//HPが減っていたら30回復
-		if (g_hp < 100.0f)
+		//1発につき１回だけ回復するように調整
+		if (m_flag == false)
 		{
-			//70.0f以上の場合
-			if (g_hp >= 70.0f) {
-				g_hp = g_max_hp;	//最大まで回復させる
+			//フラグがオンの場合
+			if (m_bullet_f == false)
+			{
+				Audio::Start(15);	//着弾SEを鳴らす
+				m_bullet_f = true;	//フラグをオンにして、１度だけ鳴らす
 			}
-			else{	
-				g_hp += 30.0f;	//それ以外は30.0f回復させる
+
+			m_hit_flag = true;//アニメーション開始
+			m_vx = 0.0f;
+			m_vy = 0.0f;
+
+			//HPが減っていたら30回復
+			if (g_hp < 100.0f)
+			{
+				//70.0f以上の場合
+				if (g_hp >= 70.0f)
+				{
+					g_hp = g_max_hp;	//最大まで回復させる
+				}
+				else
+				{
+					g_hp += 30.0f;	//それ以外は30.0f回復させる
+				}
+
 			}
-			
+			m_flag = true;
 		}
-		
 	}
 
 	if (m_hit_flag == true)
@@ -206,9 +214,7 @@ void CObjSkillVirgo::Action()
 
 	//作成したHitBox更新用の入り口を取り出す
 	hit->SetPos(m_x + m_pos_x + block->GetScrollx(), m_y + m_pos_y + block->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
-
 	m_time++;
-
 	if (m_time >= 25)
 	{
 		m_time = 0.0f;

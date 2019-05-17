@@ -25,4 +25,5 @@ class CObjStatus : public CObj
 		int m_gleen;	//HP用カラー 緑
 		int m_blue;		//HP用カラー 青
 
+
 };

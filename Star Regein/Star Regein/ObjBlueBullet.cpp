@@ -26,11 +26,12 @@ void CObjBlueBullet::Init()
 	m_ani_stop = 0;
 
 
+
 	m_ani_time2 = 0;
 	m_ani_frame2 = 1;
 	m_ani_stop2 = 0;
 
-	m_time = 300;
+	m_time = 150;
 	m_del = false;
 
 	m_vx = cos(3.14f / 180.0f*m_r);
@@ -55,23 +56,7 @@ void CObjBlueBullet::Action()
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
 
-	//大から小
-	RECT_F ani_src[12] =
-	{
-		{ 0,   0,    32, 32 },
-		{ 0,  32,    64, 32 },
-		{ 0,  64,    96, 32 },
-		{ 0,  96,   128, 32 },
-		{ 0, 128,   160, 32 },
-		{ 0, 160,   192, 32 },
-		{ 0, 192,   224, 32 },
-		{ 0, 224,   256, 32 },
-		{ 0, 256,   288, 32 },
-		{ 0, 288,   320, 32 },
-		{ 0, 320,   352, 32 },
-	};
-
-	m_time--;
+	m_time++;
 
 	m_ani_time += ANITIME;
 
@@ -99,17 +84,21 @@ void CObjBlueBullet::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());			//HitBoxの位置を敵機弾丸の位置に更新
 
-	//ブロックオブジェクトと接触か一定時間で弾丸削除
-	if ( hit->CheckElementHit(ELEMENT_BLOCK) || m_time <= 150)
-	{
-		this->SetStatus(false);    //自身に削除命令を出す
-		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
-	}
+
 	//主人公と接触したらアニメーションの後削除
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
 		m_hero_hit = true;
+
 	}
+	//ブロックオブジェクトと接触か一定時間で弾丸削除
+	if ( hit->CheckElementHit(ELEMENT_BLOCK)==true || m_time <=150 )
+	{
+		this->SetStatus(false);    //自身に削除命令を出す
+		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
+	}
+
+
 
 	//主人公にヒットしたらコマを１つ進める
 	if (m_hero_hit == true)
@@ -126,6 +115,7 @@ void CObjBlueBullet::Action()
 	if (m_ani_frame2 == 8)//最後のコマになると弾丸削除
 	{
 		m_ani_frame2 = 0;
+		m_hero_hit = false;
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 	
