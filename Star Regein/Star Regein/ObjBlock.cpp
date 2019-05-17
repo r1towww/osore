@@ -298,6 +298,7 @@ void CObjBlock::Init()
 				{
 					//¯‚ÌˆÊ’u‚ðŽæ“¾
 
+			
 					g_star_x[m_star_c] = objstar->GetX();
 					g_star_y[m_star_c] = objstar->GetY();
 

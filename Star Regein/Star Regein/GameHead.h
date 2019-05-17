@@ -248,6 +248,8 @@ extern bool g_Gemini;	//双子座
 extern bool g_Virgo;	//乙女座
 extern bool g_Leo;		//獅子座
 
+extern bool g_contact_star_f[5];//主人公が接触している星の確認フラグ
+
 //各惑星・星座のクリア状況
 extern bool g_Earth_clear;	//地球	
 extern bool g_Venus_clear;	//金星
