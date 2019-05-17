@@ -17,11 +17,32 @@ void CObjStageClear::Init()
 {
 	m_time = 0;	//描画までのタイム感覚の初期化
 	m_Tra = 0.0f;
+	m_Eff_Tra = 1.0f;
 	m_push_flag = false;
 
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
 
+	m_draw_f = false;	//グレード別表示フラグの初期化
+	m_draw_time = 0;	//グレード別表示時間の初期化
+	m_cnt_f = true;
+	//敵を倒した数の評価基準
+	if (g_enemy_cnt == g_kill_cnt)
+		m_kill_grade = 3;		//キル数の評価
+	else if(g_kill_cnt == 0)
+		m_kill_grade = 0;
+	else if (g_kill_cnt / g_enemy_cnt >= 0.5)
+		m_kill_grade = 2;
+	else
+		m_kill_grade = 1;
+
+
+	m_kill_star_cnt = 0;	//キル評価のカウント
+	m_damage_star_cnt = 0;		//被ダメージの評価
+
+	m_time_grade = 0;		//タイムの評価
+
+	m_cnt = 0;		//評価星カウントの初期化
 	m_eff.m_top = 0;
 	m_eff.m_left = 0;
 	m_eff.m_right = 192;
@@ -32,16 +53,17 @@ void CObjStageClear::Init()
 void CObjStageClear::Action()
 {
 	//キー入力タイムが一定に達した場合、キー入力を許可する
-	if ((Input::GetVKey('Z') == true && m_alpha[4] == 1.0f || Input::GetVKey(VK_RETURN) == true) && m_alpha[4] == 1.0f)	
+	if ((Input::GetVKey('Z') == true && m_alpha[4] == 1.0f || Input::GetVKey(VK_RETURN) == true) && m_alpha[4] == 1.0f)
 	{
 
 		m_push_flag = true;
-	
+
 	}
 	//Zキーを押すと徐々に暗転し、シーン移行
 	if (m_push_flag == true)
 	{
 		m_Tra += 0.03f;
+		m_Eff_Tra = 0.03f;
 		m_alpha[0] = 0.03f;
 		m_alpha[1] = 0.03f;
 		m_alpha[2] = 0.03f;
@@ -58,98 +80,142 @@ void CObjStageClear::Action()
 
 		}
 	}
-	//エフェクト用
-	RECT_F ani_src[15] =
-	{
-		{ 0,   0, 192, 192 },
-		{ 0, 192, 384, 192 },
-		{ 0, 384, 576, 192 },
-		{ 0, 576, 768, 192 },
-		{ 0, 768, 960, 192 },
-		{ 192,   0, 192, 384 },
-		{ 192, 192, 384, 384 },
-		{ 192, 384, 576, 384 },
-		{ 192, 576, 768, 384 },
-		{ 192, 768, 960, 384 },
-		{ 384,   0, 192, 576 },
-		{ 384, 192, 384, 576 },
-		{ 384, 384, 576, 576 },
-		{ 384, 576, 768, 576 },
-		{ 384, 768, 960, 576 },
-	};
-
-	//アニメーションのコマ間隔制御
-	if (m_ani_time > 3)
-	{
-		m_ani++;		//アニメーションのコマを1つ進める
-		m_ani_time = 0;
-
-		m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-	}
-	else
-	{
-		m_ani_time++;
-	}
-	//８番目（画像最後）まで進んだら、0番目に戻す
-	if (m_ani == 14)
-	{
-		m_ani = 0;
-	}
 
 	//タイムを60になるまでプラス
 	m_time++;
 	if (m_time >= 60)
 		m_time = 60;
-	if (m_time == 60) {	//タイムが100になったらアルファ値を増やす
-		m_alpha[0] += 0.05f;
-		if (m_alpha[0] >= 1.0f)
-			m_alpha[0] = 1.0f;	//1.0fになったら次へ
-	}
-	if (m_alpha[0] == 1.0f) {	//メッセージ分繰り返す
-		m_alpha[1] += 0.05f;
-		if (m_alpha[1] >= 1.0f)
-			m_alpha[1] = 1.0f;
-	}
-	if (m_alpha[1] == 1.0f) {
-		m_alpha[2] += 0.05f;
-		if (m_alpha[2] >= 1.0f)
-			m_alpha[2] = 1.0f;
-	}
-	if (m_alpha[2] == 1.0f) {
-		m_alpha[3] += 0.05f;
-		if (m_alpha[3] >= 1.0f)
-			m_alpha[3] = 1.0f;
-	}
-	if (m_alpha[3] == 1.0f) {
-		m_alpha[4] += 0.05f;
-		if (m_alpha[4] >= 1.0f)
-			m_alpha[4] = 1.0f;
-	}
-	if (m_alpha[4] == 1.0f) {
-		m_alpha[5] += 0.05f;
-		if (m_alpha[5] >= 1.0f)
-			m_alpha[5] = 1.0f;
-	}
+
+
+
+
 	if (m_alpha[5] == 1.0f) {
 		m_alpha[6] += 0.05f;
 		if (m_alpha[6] >= 1.0f)
 			m_alpha[6] = 1.0f;
+	}
+	else if (m_alpha[4] == 1.0f) {
+		m_alpha[5] += 0.05f;
+		if (m_alpha[5] >= 1.0f)
+			m_alpha[5] = 1.0f;
+	}
+	else if (m_alpha[3] == 1.0f&& m_ani_flag == false) {
+		m_alpha[4] += 0.05f;
+		if (m_alpha[4] >= 1.0f) {
+			m_alpha[4] = 1.0f;
+			m_ani_flag = true;
+		}
+	}
+	else if (m_alpha[2] == 1.0f) {
+		m_alpha[3] += 0.05f;
+		if (m_alpha[3] >= 1.0f) {
+			m_alpha[3] = 1.0f;
+			m_ani_flag = true;
+		}
+	}
+	else if (m_alpha[1] == 1.0f) {
+		m_alpha[2] += 0.05f;
+		if (m_alpha[2] >= 1.0f)
+			m_alpha[2] = 1.0f;
+	}
+	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {
+		m_alpha[1] += 0.05f;
+		if (m_alpha[1] >= 1.0f)
+			m_alpha[1] = 1.0f;
+	}
+	else if (m_time == 60) {	//タイムが60になったらアルファ値を増やす
+		m_alpha[0] += 0.05f;
+		if (m_alpha[0] >= 1.0f) {
+			m_alpha[0] = 1.0f;	//1.0fになったら次へ
+			m_ani_flag = true;
+		}
+	}
+
+	if (m_ani_flag == true)
+	{
+		//エフェクト用
+		RECT_F ani_src[15] =
+		{
+			{   0,   0, 192, 192 },
+			{   0, 192, 384, 192 },
+			{   0, 384, 576, 192 },
+			{   0, 576, 768, 192 },
+			{   0, 768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+			{ 192, 384, 576, 384 },
+			{ 192, 576, 768, 384 },
+			{ 192, 768, 960, 384 },
+			{ 384,   0, 192, 576 },
+			{ 384, 192, 384, 576 },
+			{ 384, 384, 576, 576 },
+			{ 384, 576, 768, 576 },
+			{ 384, 768, 960, 576 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_ani_time > 2)
+		{
+			m_ani++;		//アニメーションのコマを1つ進める
+			m_ani_time = 0;
+
+			m_eff = ani_src[m_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_ani_time++;
+		}
+		//画像最後まで進んだら、0番目に戻す
+		if (m_ani == 14)
+		{
+			if (m_grade_f[0] == false)
+				m_grade_f[0] = true;
+
+
+			if (m_grade_f[1] == true)
+				m_damage_star_cnt++;
+
+			if (m_f[0] == true)
+				m_kill_star_cnt++;
+
+			if (m_kill_grade == m_kill_star_cnt)
+				m_grade_f[1] = true;
+
+
+			
+
+			for (int i = 0; i < 10; i++) {
+				if (m_cnt == i)
+					m_f[i] = true;
+			}
+			m_cnt++;		//カウントを増やす
+			m_ani = 0;
+			m_ani_flag = false;
+			
+		}
 	}
 }
 
 //ドロー
 void CObjStageClear::Draw()
 {
+	
+
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
 	float Stage[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float effc[4] = { 1.0f,1.0f,1.0f,m_Eff_Tra };
+	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };	//星座クリアメッセージカラー
+	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };	//取得スキルメッセージカラー
+	float c3[4] = { 1.0f,1.0f,1.0f,m_alpha[2] };	//クリアタイムメッセージカラー
+	float c4[4] = { 1.0f,1.0f,1.0f,m_alpha[3] };	//敵殲滅数メッセージカラー
+	float c4y[4] = { 1.0f,1.0f,0.0f,m_alpha[3] };	//敵殲滅数メッセージカラー（黄）
+	float c4r[4] = { 1.0f,0.0f,0.0f,m_alpha[3] };	//敵殲滅数メッセージカラー（赤）
+	float c5[4] = { 1.0f,1.0f,1.0f,m_alpha[4] };	//被ダメージメッセージカラー
+	float c5y[4] = { 1.0f,1.0f,0.0f,m_alpha[4] };	//被ダメージメッセージカラー（黄）
+	float c5r[4] = { 1.0f,0.0f,0.0f,m_alpha[4] };	//被ダメージメッセージカラー（赤）
 
-	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };
-	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };
-	float c3[4] = { 1.0f,1.0f,1.0f,m_alpha[2] };
-	float c4[4] = { 1.0f,1.0f,0.0f,m_alpha[3] };
-	float c5[4] = { 1.0f,1.0f,1.0f,m_alpha[4] };
-	float c6[4] = { 1.0f,1.0f,1.0f,m_alpha[5] };
+	float c6[4] = { 1.0f,1.0f,1.0f,m_alpha[5] };	
 	float c7[4] = { 1.0f,1.0f,1.0f,m_alpha[6] };
 
 
@@ -266,24 +332,6 @@ void CObjStageClear::Draw()
 
 	Font::StrDraw(L"Zキーでステージ選択へ戻る", 200, 510, 32, y);
 
-	//シーン移行用
-	if (m_push_flag == true)
-	{
-	
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 350.0f;
-		src.m_right = 400.0f;
-		src.m_bottom = 50.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-		Draw::Draw(9, &src, &dst, c, 0.0f);
-	}
 
 
 
@@ -291,6 +339,7 @@ void CObjStageClear::Draw()
 	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	//クリア情報
 	wchar_t KILLCNT[128];	//キルカウント表示用
+	wchar_t DAMAGECNT[128];	//被ダメージの描画
 
 	wchar_t TIME[128];	//タイムの描画
 
@@ -302,6 +351,11 @@ void CObjStageClear::Draw()
 		swprintf_s(TIME, L"クリアタイム：%d分%d秒", objmes->GetMINUTE(), objmes->GetSECOND());
 
 	swprintf_s(KILLCNT, L"敵を%d体倒した！", g_kill_cnt);
+	//切り取り位置の設定
+	src.m_top    = 0.0f;
+	src.m_left   = 0.0f;
+	src.m_right  = 184.0f;
+	src.m_bottom = 175.0f;
 
 	//各星座ごとのメッセージ
 	if (g_stage == EarthStar)
@@ -312,6 +366,23 @@ void CObjStageClear::Draw()
 	if (g_stage == VenusTaurus)
 	{
 		Font::StrDraw(L"牡牛座をクリアした！", 15, 250, 21, c1);
+
+		//表示位置の設定
+		dst.m_top    = 220.0f;
+		dst.m_left   = 200.0f;
+		dst.m_right  = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if(m_ani_flag == true && m_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+
+		//表示位置の設定
+		dst.m_top    = 245.0f;
+		dst.m_left   = 225.0f;
+		dst.m_right  = 255.0f;
+		dst.m_bottom = 275.0f;
+		if (m_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
+
 		Font::StrDraw(L"取得したスキル：牡牛座", 15, 280, 21, c2);
 	}
 	if (g_stage == VenusLibra)
@@ -343,15 +414,70 @@ void CObjStageClear::Draw()
 	{
 		//敵殲滅用メッセージの表示
 		if (g_kill_cnt == g_enemy_cnt)
-			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4);
+			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
 		else if (g_kill_cnt == 0)
-			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4);
+			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4r);
 		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 340, 21, c4);
+
+			
+		if (m_kill_star_cnt == 1 || m_kill_star_cnt == 2) {
+			m_ani_flag = true;
+		}
+		if (m_ani_flag == true && m_f[0] == true && m_kill_grade != 0 &&m_kill_star_cnt == 0 
+			|| m_kill_star_cnt == 1 && m_f[0] == true || m_kill_star_cnt == 2 && m_f[0] == true)
+		{
+			//表示位置の設定
+			dst.m_top = 310.0f;
+			dst.m_left = 200.0f + (40.0f * m_kill_star_cnt);
+			dst.m_right = 280.0f + (40.0f * m_kill_star_cnt);
+			dst.m_bottom = dst.m_top + 80.0f;
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		}
+		for (int i = 0; i < m_kill_grade; i++)
+		{
+			//表示位置の設定
+			dst.m_top = 335.0f;
+			dst.m_left = 225.0f + (40.0f * i);
+			dst.m_right = 255.0f + (40.0f * i);
+			dst.m_bottom = 365.0f;
+			if (m_f[i + 1] == true) {
+				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			}
+		}
+
 		//ノーダメージクリアメッセージの表示
 		if (g_no_damage == false)
 		{
-			Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5);
+			m_damage_star_cnt = 0;
+			Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5y);
+
+			if (m_damage_star_cnt == 1 || m_damage_star_cnt == 2) {
+				m_ani_flag = true;
+			}
+			if (m_ani_flag == true && m_grade_f[1] == true && m_kill_grade != 0 && m_damage_star_cnt == 0
+				|| m_damage_star_cnt == 1 && m_grade_f[1] == true || m_damage_star_cnt == 2 && m_grade_f[1] == true)
+			{
+				//表示位置の設定
+				dst.m_top    = 345.0f;
+				dst.m_left   = 200.0f + (40.0f * m_damage_star_cnt);
+				dst.m_right  = 280.0f + (40.0f * m_damage_star_cnt);
+				dst.m_bottom = dst.m_top + 80.0f;
+				Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+			}
+
+			for (int i = 0; i < m_damage_star_cnt; i++)
+			{
+				//表示位置の設定
+				dst.m_top    = 370.0f;
+				dst.m_left   = 225.0f + (40.0f * i);
+				dst.m_right  = 255.0f + (40.0f * i);
+				dst.m_bottom = 400.0f;
+				if (m_f[i + 4] == true) {
+					Draw::Draw(70, &src, &dst, effc, 0.0f);
+				}
+			}
+
 			//実績達成画面で表示させるためのフラグ処理
 			if (g_stage == VenusTaurus)
 			{
@@ -374,7 +500,27 @@ void CObjStageClear::Draw()
 				g_Leo_NoDamage_Clear = true;
 			}
 		}
+		
 	}
+	//シーン移行用
+	if (m_push_flag == true)
+	{
+
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 350.0f;
+		src.m_right = 400.0f;
+		src.m_bottom = 50.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 800.0f;
+		dst.m_bottom = 600.0f;
+
+		Draw::Draw(9, &src, &dst, c, 0.0f);
+	}
+
 }
 
 void CObjStageClear::alpha()
