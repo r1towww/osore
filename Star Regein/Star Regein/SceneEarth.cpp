@@ -17,6 +17,7 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
+bool g_Boss_Spawn = true;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -179,7 +180,7 @@ void CSceneEarth::Scene()
 	{
 
 		g_Earth_clear = true;
-
+		g_Tutorial_Clear = true;
 		//星を集めきるとオン
 		g_Earth_Max = true;
 	

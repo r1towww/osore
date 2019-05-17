@@ -301,7 +301,7 @@ void CObjStageClear::Draw()
 	else
 		swprintf_s(TIME, L"クリアタイム：%d分%d秒", objmes->GetMINUTE(), objmes->GetSECOND());
 
-	swprintf_s(KILLCNT, L"敵を%d体倒した！", g_kill_cnt);
+	swprintf_s(KILLCNT, L"敵を%d体倒した！", g_All_Killcnt);
 
 	//各星座ごとのメッセージ
 	if (g_stage == EarthStar)
@@ -349,22 +349,31 @@ void CObjStageClear::Draw()
 			if (g_stage == VenusTaurus)
 			{
 				g_Taurus_Enemy_AllKill = true;
+				g_new_Performance = true;
 			}
 			else if (g_stage == VenusLibra)
 			{
 				g_Libra_Enemy_AllKill = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == MercuryGemini)
 			{
 				g_Gemini_Enemy_AllKill = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == MercuryVirgo)
 			{
 				g_Viego_Enemy_AllKill = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == SunLeo)
 			{
 				g_Leo_Enemy_AllKill = true;
+				g_new_Performance = true;
+
 			}
 
 		}
@@ -380,22 +389,32 @@ void CObjStageClear::Draw()
 			if (g_stage == VenusTaurus)
 			{
 				g_Taurus_NoDamage_Clear = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == VenusLibra)
 			{
 				g_Libra_NoDamage_Clear = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == MercuryGemini)
 			{
 				g_Gemini_NoDamage_Clear = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == MercuryVirgo)
 			{
 				g_Viego_NoDamage_Clear = true;
+				g_new_Performance = true;
+
 			}
 			else if (g_stage == SunLeo)
 			{
 				g_Leo_NoDamage_Clear = true;
+				g_new_Performance = true;
+
 			}
 		}
 	}

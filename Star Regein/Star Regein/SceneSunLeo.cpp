@@ -174,6 +174,8 @@ void CSceneSunLeo::Scene()
 	{
 		g_Leo = true;		//スキル（天秤座）をオンにする
 		g_Leo_Max = true;
+		g_All_Skill_Get = true;
+		g_Boss_Spawn = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
 		
