@@ -10,7 +10,7 @@
 
 //使用するネームスペース
 using namespace GameL;
-#define CLEAR_F true
+#define CLEAR_F false
 //敵をすべて倒した------------------
 bool g_Taurus_Enemy_AllKill= CLEAR_F;
 bool g_Libra_Enemy_AllKill= CLEAR_F;
@@ -53,6 +53,7 @@ void CObjPerformanceRoom::Action()
 			m_next_f = false;
 		}
 	}
+
 	else
 	{
 		m_next_f = true;
@@ -62,7 +63,14 @@ void CObjPerformanceRoom::Action()
 	{
 		if (m_back_f == true)
 		{
-			m_page--;
+			if (m_page <= 0)
+			{
+				;
+			}
+			else
+			{
+				m_page--;
+			}
 			m_back_f = false;
 		}
 	}
@@ -134,7 +142,7 @@ void CObjPerformanceRoom::Draw()
 	}
 	else
 	{
-		Font::StrDraw(L"天秤座：未達成", 75, 190, 28, c);
+		Font::StrDraw(L"天秤座：未達成", 75, 225, 28, c);
 
 	}
 	if (g_Gemini_NoDamage_Clear == true)
@@ -144,7 +152,7 @@ void CObjPerformanceRoom::Draw()
 	}
 	else
 	{
-		Font::StrDraw(L"双子座：未達成", 75, 190, 28, c);
+		Font::StrDraw(L"双子座：未達成", 75, 260, 28, c);
 
 	}
 	 if (g_Viego_NoDamage_Clear == true)
@@ -153,7 +161,7 @@ void CObjPerformanceRoom::Draw()
 	}
 	else
 	{
-		Font::StrDraw(L"乙女座：未達成", 75, 190, 28, c);
+		Font::StrDraw(L"乙女座：未達成", 75, 295, 28, c);
 
 	}
 	if (g_Leo_NoDamage_Clear == true)
@@ -162,7 +170,7 @@ void CObjPerformanceRoom::Draw()
 	}
 	else
 	{
-		Font::StrDraw(L"獅子座：未達成", 75, 190, 28, c);
+		Font::StrDraw(L"獅子座：未達成", 75, 330, 28, c);
 
 	}
 

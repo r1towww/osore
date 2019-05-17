@@ -301,7 +301,31 @@ void CObjStageClear::Draw()
 	{
 		//敵殲滅用メッセージの表示
 		if (g_kill_cnt == g_enemy_cnt)
+		{
 			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4);
+			//実績達成画面で表示させるためのフラグ処理
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Enemy_AllKill = true;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Enemy_AllKill = true;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Enemy_AllKill = true;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Enemy_AllKill = true;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Enemy_AllKill = true;
+			}
+
+		}
 		else if (g_kill_cnt == 0)
 			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4);
 		else if (g_kill_cnt > 0)
