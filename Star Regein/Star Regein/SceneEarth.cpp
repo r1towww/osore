@@ -203,19 +203,19 @@ void CSceneEarth::Scene()
 				}
 			}
 
-		//スキルアイテムを獲得したら
-		if (g_skill_item_flag == true)
-		{
-			//スキルアイテムフラグオフ
-			g_skill_item_flag = false;
-			g_stage_clear = true;
-			g_new_Performance = true;
-			ClearCheck(g_stage_clear);
+			//スキルアイテムを獲得したら
+			if (g_skill_item_flag == true)
+			{
+				//スキルアイテムフラグオフ
+				g_skill_item_flag = false;
+				g_stage_clear = true;
+				g_new_Performance = true;
+				ClearCheck(g_stage_clear);
+			}
+
 		}
-		
 	}
 }
-
 void CSceneEarth::ClearCheck(bool a)
 {
 	if (a == true)

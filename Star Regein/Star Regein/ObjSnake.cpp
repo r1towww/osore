@@ -16,7 +16,6 @@ using namespace GameL;
 
 float* g_snake_x[20];//全ての牛のX位置を把握する
 float* g_snake_y[20];//全ての牛のY位置を把握する
-float g_Leo_cnt;
 
 
 CObjSnake::CObjSnake(float x, float y, int id)
