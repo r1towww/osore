@@ -78,6 +78,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"ëoéq1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"ëoéq2.png", 21, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"é÷.png", 52, TEX_SIZE_128);
+
 	Draw::LoadImageW(L"ëoéqópíeä€.png", 16, TEX_SIZE_128);
 
 	Draw::LoadImageW(L"ç¨óê.png", 49, TEX_SIZE_512);

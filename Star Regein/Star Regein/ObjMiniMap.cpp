@@ -20,6 +20,7 @@ bool g_woman_d_flag[20];//乙女削除フラグ
 bool g_libra_d_flag[20];//天秤削除フラグ
 bool g_leo_d_flag[60];//獅子削除フラグ
 bool g_boss_d_flag;//ボス削除フラグ
+bool g_snake_d_flag[20];
 
 int g_map[MAPSIZE][MAPSIZE];
 
@@ -529,6 +530,43 @@ void CObjMiniMap::Draw()
 						Draw::Draw(9, &src, &dst, c, 0.0f);
 						g_geminiattck_check = true;
 					//}
+				}
+
+
+				CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
+
+				if (snake != nullptr)
+				{
+					for (int i = 0; i < 19; i++)//敵の数分回す
+					{
+						float snakex = *g_snake_x[i];
+						float snakey = *g_snake_y[i];
+
+						if (g_snake_d_flag[i] == true)
+						{
+							//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
+							bool check;
+							check = CheckWindow(snakex + block->GetScrollx(), snakey + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
+							if (check == true)
+							{
+								//ミニマップに敵の位置を表示する
+								//表示位置の設定
+								dst.m_top = m_uisize_y + (snakey / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+								dst.m_left = m_uisize_x + (snakex / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+								dst.m_right = dst.m_left + m_blocksize;
+								dst.m_bottom = dst.m_top + m_blocksize;
+
+								//切り取り位置の設定
+								src.m_top = 0.0f;
+								src.m_left = 50.0f;
+								src.m_right = 95.0f;
+								src.m_bottom = 50.0f;
+								//描画
+								Draw::Draw(9, &src, &dst, c, 0.0f);
+								g_geminiattck_check = true;
+							}
+						}
+					}
 				}
 			}
 		}

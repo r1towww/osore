@@ -18,9 +18,6 @@ using namespace GameL;
 float* g_boss_x;
 float* g_boss_y;
 
-
-
-
 CObjBoss::CObjBoss(float x, float y)
 {
 	m_px = x + 180.0f;	//位置
@@ -58,6 +55,10 @@ void CObjBoss::Init()
 	m_time = 30;
 
 	m_rand = 0;
+
+	m_attack_pattern = 0;
+
+	m_snake_c = 0;
 
 	m_invincible_flag = false;
 
@@ -171,12 +172,13 @@ void CObjBoss::Action()
 			{
 				srand(time(NULL));
 				//マップのランダム処理の初期化
-				m_rand = rand() % 6;
+				m_rand = rand() % 5;
 
 				if (m_rand <= 4)
 				{
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
+
 				}
 				else if (m_rand == 5)
 				{
@@ -192,6 +194,9 @@ void CObjBoss::Action()
 						CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
 						Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
 
+						m_px = g_star_x[m_rand] - 20;
+						m_py = g_star_y[m_rand] - 20;
+
 					}
 
 					hit->SetInvincibility(true);
@@ -200,6 +205,53 @@ void CObjBoss::Action()
 				}
 			}
 
+			//攻撃パターン決定
+			srand(time(NULL));
+//			m_attack_pattern = rand() % 3;
+			m_attack_pattern = 0;
+
+			CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
+
+			if (snake == nullptr)
+			{
+				//蛇召喚
+				if (m_attack_pattern == 0)
+				{
+					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+					float hx = hero->GetX();
+					float hy = hero->GetY();
+
+					//蛇オブジェクト作成
+					for (int i = 0; i < MAPSIZE; i++)
+					{
+						for (int j = 0; j < MAPSIZE; j++)
+						{
+							if (g_map[i][j] == 5)
+							{
+								//蛇オブジェクト作成
+								CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
+								//敵の位置を取得
+								float* snakex = snake->GetPX();
+								float* snakey = snake->GetPY();
+
+								g_snake_x[m_snake_c] = snake->GetPX();
+								g_snake_y[m_snake_c] = snake->GetPY();
+
+								g_snake_d_flag[m_snake_c] = true;
+
+								g_stan_snake_flag[m_snake_c] = false;
+
+								m_snake_c++;
+
+								Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+							}
+						}
+						if (m_snake_c == 20)
+							break;
+					}
+				}
+			}
 		}
 
 		//7番目（画像最後）まで進んだら、0に戻す
@@ -217,6 +269,7 @@ void CObjBoss::Action()
 		g_boss_d_flag = true;
 		hit->SetInvincibility(false);
 		m_alpha = 1.0f;
+
 	}
 
 
@@ -310,19 +363,19 @@ void CObjBoss::Action()
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
 				{
-					m_vx = -0.15f; //右
+					m_vx = -0.0f; //右
 				}
 				if (r > 45 && r < 135)
 				{
-					m_vy = 0.15f;//上
+					m_vy = 0.0f;//上
 				}
 				if (r >= 135 && r < 225)
 				{
-					m_vx = 0.15f;//左
+					m_vx = 0.0f;//左
 				}
 				if (r >= 225 && r < 315)
 				{
-					m_vy = -0.15f; //下
+					m_vy = -0.0f; //下
 				}
 
 			}

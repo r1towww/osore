@@ -24,7 +24,7 @@ CObjSnake::CObjSnake(float x, float y, int id)
 	m_px = x + 375.0f;	//位置
 	m_py = y + 275.0f;
 
-	m_cow_id = id;
+	m_snake_id = id;
 	g_enemy_cnt++;	//敵の総数のカウント
 }
 
@@ -68,6 +68,16 @@ void CObjSnake::Init()
 	m_alpha = 1.0;
 
 
+	//ワープアニメーション関連初期化
+	m_warp_eff.m_top = 0;	//エフェクト初期値の初期化
+	m_warp_eff.m_left = 0;
+	m_warp_eff.m_right = 192;
+	m_warp_eff.m_bottom = 192;
+
+	m_warp_ani = 0;			//アニメーション用
+	m_warp_ani_time = 0;		//アニメーション間隔タイム
+
+	m_warp_flag = true;
 
 	//消滅アニメーション用
 	m_ani_delete = 0;
@@ -76,18 +86,55 @@ void CObjSnake::Init()
 	m_ani_frame_delete = 1;
 
 	//牛削除フラグ
-	m_cow_delete = false;
+	m_snake_delete = false;
 
 	srand(time(NULL));
 
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px + 2, m_py + 4, 64, 64, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px + 5, m_py + 15, 50, 50, ELEMENT_NULL, OBJ_SNAKE, 1);
 }
 
 //アクション
 void CObjSnake::Action()
 {
+
+	if (m_warp_flag == true)
+	{
+		//エフェクト用
+		RECT_F warp_ani_src[8] =
+		{
+			{ 0,   0,  192, 192 },
+			{ 0, 192,  384, 192 },
+			{ 0, 384,  576, 192 },
+			{ 0, 576,  768, 192 },
+			{ 0, 768,  960, 192 },
+			{ 192,   0,  192, 384 },
+			{ 192, 192,  384, 384 },
+			{ 192, 384,  576, 384 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_warp_ani_time > 3)
+		{
+			m_warp_ani++;		//アニメーションのコマを1つ進める
+			m_warp_ani_time = 0;
+
+			m_warp_eff = warp_ani_src[m_warp_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else
+		{
+			m_warp_ani_time++;
+		}
+
+		//7番目（画像最後）まで進んだら、0に戻す
+		if (m_warp_ani == 7)
+		{
+			m_warp_ani = 0;
+			m_warp_flag = false;
+		}
+	}
+
 	//行動が制御されている場合（メニュー画面）
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//行動を制御
@@ -123,7 +170,7 @@ void CObjSnake::Action()
 		float hy = hero->GetY();
 	}
 
-	if (g_stan_cow_flag[m_cow_id] == false)
+	if (g_stan_snake_flag[m_snake_id] == false)
 	{
 		//UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
 		bool check;
@@ -191,7 +238,7 @@ void CObjSnake::Action()
 
 	//HitBoxの内容を更新
 	CHitBox*hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 2 + pb->GetScrollx(), m_py + 4 + pb->GetScrolly());
+	hit->SetPos(m_px + 5 + pb->GetScrollx(), m_py + 15 + pb->GetScrolly());
 
 
 	//主人公とBLOCK系統との当たり判定
@@ -435,11 +482,11 @@ void CObjSnake::Action()
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchElementHit(ELEMENT_SKILL_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
 															//ヒット判定on
-		g_stan_cow_flag[m_cow_id] = true;
+		g_stan_snake_flag[m_snake_id] = true;
 	}
 
 	//しし座のヒット判定がonの時スタン
-	if (g_stan_cow_flag[m_cow_id] == true)
+	if (g_stan_snake_flag[m_snake_id] == true)
 	{
 
 		g_Leo_cnt += 1.0f;
@@ -455,7 +502,7 @@ void CObjSnake::Action()
 			if (g_Leo_cnt >= 200.0f)
 			{
 				g_Leo_cnt = 0.0f;
-				g_stan_cow_flag[m_cow_id] = false;
+				g_stan_snake_flag[m_snake_id] = false;
 			}
 		}
 
@@ -490,11 +537,11 @@ void CObjSnake::Action()
 	if (m_hp <= 0)
 	{
 		//牛削除フラグ
-		m_cow_delete = true;
+		m_snake_delete = true;
 
 	};
 	//消滅アニメーションのコマを進める
-	if (m_cow_delete == true)
+	if (m_snake_delete == true)
 	{
 		m_ani_count += 1;
 	}
@@ -527,7 +574,7 @@ void CObjSnake::Action()
 		//敵削除
 		m_alpha = 0.0f;
 		hit->SetInvincibility(true);
-		g_cow_d_flag[m_cow_id] = false;
+		g_snake_d_flag[m_snake_id] = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
@@ -558,7 +605,7 @@ void CObjSnake::Draw()
 			   //ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	if (m_cow_delete == false)
+	if (m_snake_delete == false)
 	{
 		//切り取り位置の設定
 		src.m_top = 48.0f * m_posture;
@@ -574,9 +621,9 @@ void CObjSnake::Draw()
 
 
 		//描画
-		Draw::Draw(3, &src, &dst, c, 0.0f);
+		Draw::Draw(52, &src, &dst, c, 0.0f);
 	}
-	else if (m_cow_delete == true)
+	else if (m_snake_delete == true)
 	{
 		//消滅アニメーション
 		//切り取り位置の設定
@@ -597,7 +644,7 @@ void CObjSnake::Draw()
 
 
 
-	if (g_stan_cow_flag[m_cow_id] == true)
+	if (g_stan_snake_flag[m_snake_id] == true)
 	{
 		RECT_F src;//描画元切り取り位置
 		RECT_F dst;//描画先表示位置
@@ -620,4 +667,23 @@ void CObjSnake::Draw()
 		//描画
 		Draw::Draw(49, &src, &dst, cB, 0.0f);
 	}
+
+
+	//ワープ
+	if (m_warp_flag == true)
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py + block->GetScrolly();
+		dst.m_left = 150.0f + m_px + block->GetScrollx();
+		dst.m_right = 0.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 100.0f + m_py + block->GetScrolly();
+		//エフェクトの描画
+		Draw::Draw(34, &m_warp_eff, &dst, c, 0.0f);
+
+	}
+	else
+	{
+		m_warp_ani = 0;
+	}
+
 }

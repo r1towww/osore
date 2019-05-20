@@ -136,7 +136,7 @@ void CObjBeam::Action()
 			{
 				m_time++;
 
-				if (m_time >= 100)
+				if (m_time >= 50)
 				{
 					m_beam_ani++;
 					m_time = 0;
