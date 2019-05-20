@@ -413,7 +413,7 @@ void CObjStageClear::Draw()
 	if (g_stage != EarthStar)
 	{
 		//敵殲滅用メッセージの表示
-		if (g_kill_cnt == g_enemy_cnt)
+		if (g_kill_cnt == g_enemy_cnt){
 			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
 			//実績達成画面で表示させるためのフラグ処理
 			if (g_stage == VenusTaurus)
