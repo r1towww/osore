@@ -227,7 +227,7 @@ void CObjStageClear::Action()
 
 			if (m_cnt == m_grade_cnt) {
 				m_grade_draw_f = true;
-				m_grade_cnt_f = false;
+				m_grade_cnt_f =true;
 			}
 			//フラグがオンの際、星（評価）をいくつ取得できたか
 			if (m_cnt_f == true)
@@ -236,10 +236,10 @@ void CObjStageClear::Action()
 				m_grade_cnt++;
 
 
-
-
+			
 			m_ani = 0;
 			m_ani_flag = false;
+			
 			
 		}
 	}
@@ -456,9 +456,6 @@ void CObjStageClear::Draw()
 		Font::StrDraw(L"取得したスキル：獅子座", 15, 280, 21, c2);
 	}
 
-
-
-
 	Font::StrDraw(TIME, 15, 310, 21, c3);
 
 
@@ -646,6 +643,8 @@ void CObjStageClear::Draw()
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 			
 		}
+		
+		m_grade_cnt_f = false;
 	}
 	for (int i = 0; i < m_grade_cnt; i++)
 	{
