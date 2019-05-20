@@ -377,9 +377,6 @@ extern bool g_All_Skill_Get;  //すべてのスキルを獲得
 #include "ObjSkillLeo.h"
 
 #include "ObjSkillItem.h"
-
-
-
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
