@@ -24,6 +24,8 @@ CSceneVenusTaurus::CSceneVenusTaurus()
 	m_clear_f == false;
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
+	g_Taurus_Max = false;
+	g_Libra_Max = false;
 }
 
 //デストラクタ

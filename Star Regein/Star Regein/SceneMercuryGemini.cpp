@@ -22,6 +22,8 @@ CSceneMercuryGemini::CSceneMercuryGemini()
 	g_StarCount = 0;	//星を数える変数の初期化
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
+	g_Gemini_Max = false;
+	g_Virgo_Max = false;
 }
 
 //デストラクタ

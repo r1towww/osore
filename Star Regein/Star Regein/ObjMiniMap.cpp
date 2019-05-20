@@ -503,9 +503,9 @@ void CObjMiniMap::Draw()
 
 			if (g_stage == EarthStar)
 			{
-				float bossx = *g_boss_x;
+				/*float bossx = *g_boss_x;
 				float bossy = *g_boss_y;
-
+*/
 				if (g_boss_d_flag == true)
 				{
 					////UtilityModuleのチェック関数に場所と領域を渡し、領域外か判定
@@ -513,12 +513,12 @@ void CObjMiniMap::Draw()
 					//check = CheckWindow(bossx + block->GetScrollx(), bossy + block->GetScrolly(), 10.0f, 10.0f, 790.0f, 590.0f);
 					//if (check == true)
 					//{
-						//ミニマップに敵の位置を表示する
-						//表示位置の設定
-						dst.m_top = m_uisize_y + (bossy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_left = m_uisize_x + (bossx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
-						dst.m_right = dst.m_left + m_blocksize;
-						dst.m_bottom = dst.m_top + m_blocksize;
+						////ミニマップに敵の位置を表示する
+						////表示位置の設定
+						//dst.m_top = m_uisize_y + (bossy / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						//dst.m_left = m_uisize_x + (bossx / ((MAPSIZE * 64.0f) / (MAPSIZE * m_blocksize)));
+						//dst.m_right = dst.m_left + m_blocksize;
+						//dst.m_bottom = dst.m_top + m_blocksize;
 
 						//切り取り位置の設定
 						src.m_top = 0.0f;
