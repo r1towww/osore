@@ -132,6 +132,8 @@ void CObjSkill::Action()
 			m_back = 1;
 		m_next = 0;
 	}
+
+	
 }
 
 //ÉhÉçÅ[

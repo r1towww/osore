@@ -209,17 +209,20 @@
     <ClCompile Include="ObjBoss.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
-    <ClCompile Include="SceneED.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjED.cpp">
-      <Filter>ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjBeam.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
     <ClCompile Include="ObjPerformanceRoom.cpp">
       <Filter>ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjED.cpp">
+      <Filter>ソースファイル\ED</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneED.cpp">
+      <Filter>ソースファイル\ED</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSnake.cpp">
+      <Filter>ソースファイル\各惑星敵\蛇</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -437,17 +440,20 @@
     <ClInclude Include="ObjBoss.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
-    <ClInclude Include="SceneED.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjED.h">
-      <Filter>ソースファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjBeam.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
     <ClInclude Include="ObjPerformanceRoom.h">
       <Filter>ソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjED.h">
+      <Filter>ソースファイル\ED</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneED.h">
+      <Filter>ソースファイル\ED</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSnake.h">
+      <Filter>ソースファイル\各惑星敵\蛇</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +492,21 @@
     </Filter>
     <Filter Include="ソースファイル\スキル">
       <UniqueIdentifier>{721439e3-4057-46b7-963f-679e43005a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星">
+      <UniqueIdentifier>{9afac6c9-d727-4953-915f-2342563defd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\地球">
+      <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\金星">
+      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\水星">
+      <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\太陽">
+      <UniqueIdentifier>{18ee5544-b49a-4972-bf09-10535f65f2fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\各惑星敵">
       <UniqueIdentifier>{d6de1a25-fb1f-4069-a30d-47db46a80c73}</UniqueIdentifier>
@@ -532,20 +553,11 @@
     <Filter Include="ソースファイル\各惑星敵\乙女">
       <UniqueIdentifier>{bb7a3706-0ee8-4d5d-a487-8dcd3ee9da6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\惑星">
-      <UniqueIdentifier>{9afac6c9-d727-4953-915f-2342563defd2}</UniqueIdentifier>
+    <Filter Include="ソースファイル\ED">
+      <UniqueIdentifier>{6ae17198-7438-4270-9d33-20e8f4d282b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソースファイル\惑星\地球">
-      <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\惑星\金星">
-      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\惑星\水星">
-      <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\惑星\太陽">
-      <UniqueIdentifier>{18ee5544-b49a-4972-bf09-10535f65f2fd}</UniqueIdentifier>
+    <Filter Include="ソースファイル\各惑星敵\蛇">
+      <UniqueIdentifier>{cd30f605-bff9-41d9-8d6c-96bebe349040}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

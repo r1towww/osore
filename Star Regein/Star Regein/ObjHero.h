@@ -62,6 +62,7 @@ class CObjHero :public CObj
 		int m_time;//無敵時間カウント
 		int m_MP_time;//ＭＰ減少カウント
 		int m_regene_time;//ＭＰリジェネカウント
+		int m_hp_regene_time;//HPリジェネカウント
 
 		int m_burn_time;//火傷間隔タイム
 		int m_burn_max_time;//火傷合計継続時間

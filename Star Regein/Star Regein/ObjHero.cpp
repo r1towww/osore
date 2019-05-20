@@ -64,6 +64,9 @@ void CObjHero::Init()
 	//ＭＰリジェネカウント用初期化
 	m_regene_time = 0;
 
+	//HPリジェネカウント用初期化
+	m_hp_regene_time = 0;
+
 	//火傷継続時間
 	m_burn_time = 0;
 	//火傷合計継続時間
@@ -424,6 +427,24 @@ void CObjHero::Action()
 		m_key_f = true;
 	}
 
+	//ボス戦の場合、星の上にいるときHP持続回復
+	if (g_Boss_Spawn == true && g_stage == EarthStar)
+	{
+		//自身のHitBoxを持ってくる
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_STAR) != nullptr)
+		{
+			if (g_hp < 100.0f)
+			{
+				m_hp_regene_time++;
+				if (m_hp_regene_time > 15)
+				{
+					m_hp_regene_time = 0;
+					g_hp += 1.0f;
+				}
+			}
+		}
+	}
 
 
 	//HPが最大を超えないようにする（回復スキル）

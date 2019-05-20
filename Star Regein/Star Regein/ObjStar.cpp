@@ -75,28 +75,15 @@ void CObjStar::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 
 		//主人公と当たっているか確認
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)//当たっていたら取得
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr && m_GetStar == false)//当たっていたら取得
 		{
 			//スター獲得音
 			Audio::Start(6);
 			g_hp += 5.0f;	//星を回収した際、HPを0.5ゲージ回復
 			m_ani_flag = true;//アニメーション開始
-			hit->SetInvincibility(true);	//触れられなくする
 			m_GetStar = true;			//取得した際、色を変える為にフラグをオンにする
 			g_StarCount++;				//現在取得している星の数をカウントする
 			g_map[m_i][m_j] = 4;	//ミニマップ上で星を表示する
-		}
-
-		if (g_stage == EarthStar)
-		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-			{
-				g_contact_star_f[m_id] = true;
-			}
-			else
-			{
-				g_contact_star_f[m_id] = false;
-			}
 		}
 
 		if (m_ani_flag == true)
@@ -125,9 +112,23 @@ void CObjStar::Action()
 		//HitBoxの位置の変更
 		hit->SetPos(m_px + block->GetScrollx(), m_py + block->GetScrolly());
 	}
-	else
+
+	//ボス戦の場合
+	if (g_stage == EarthStar && g_Boss_Spawn ==true)
 	{
-		Hits::DeleteHitBox(this);
+		m_GetStar = true;			//色を変える為にフラグをオンにする
+		g_StarCount = 5;
+
+		//自身のHitBoxを持ってくる
+		CHitBox* hit = Hits::GetHitBox(this);
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			g_contact_star_f[m_id] = true;
+		}
+		else
+		{
+			g_contact_star_f[m_id] = false;
+		}
 	}
 }
 

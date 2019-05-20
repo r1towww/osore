@@ -257,7 +257,7 @@ void CObjPerformanceRoom::Draw()
 	{
 		Font::StrDraw(L"シークレット", 75, 155, 27, c);
 
-		if (g_Earth_BossKill == true)
+		if (g_Tutorial_Clear == true)
 		{			
 			Font::StrDraw(L"チュートリアルクリア！ようこそ！STAR REGEINへ！", 75, 190, 28, y);
 		}
@@ -273,7 +273,7 @@ void CObjPerformanceRoom::Draw()
 		{
 			Font::StrDraw(L"？？？", 75, 225, 28, c);
 		}
-		if (g_Tutorial_Clear == true)
+		if (g_Earth_BossKill == true)
 		{			
 			Font::StrDraw(L"ラスボスを倒した！！！", 75, 260, 28, y);
 		}
