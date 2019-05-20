@@ -23,8 +23,8 @@ float* g_boss_y;
 
 CObjBoss::CObjBoss(float x, float y)
 {
-	m_px = x;	//位置
-	m_py = y;
+	m_px = x + 180.0f;	//位置
+	m_py = y + 275.0f;
 }
 
 //イニシャライズ

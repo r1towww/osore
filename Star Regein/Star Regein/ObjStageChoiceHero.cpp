@@ -208,10 +208,13 @@ void ObjStageChoiceHero::Action()
 				Objs::InsertObj(star, OBJ_STARCHOICE, 20);
 			}
 		}
+		//実績確認へ
 		else if (g_stage_px >= 550 && g_stage_px <= 700 && g_stage_py >= 400&&g_stage_py  <= 550)
 		{
-			Audio::Start(1);
 			g_stage = Performance;
+			Audio::Start(1);
+			g_key_flag = false;	//キーフラグをオフ
+
 			//実績オブジェクト作成
 			CObjPerformanceRoom* per = new CObjPerformanceRoom();
 			Objs::InsertObj(per, OBJ_PERFORMANCE_ROOM, 20);

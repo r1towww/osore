@@ -61,9 +61,12 @@ void CObjTextBox::Draw()
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
 		if (g_stage == EarthStar)
 		{
-			Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
+			if (g_Leo_clear == true)
+				;
+			else
+				Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 		}
-		else
+		if(g_Leo_clear==true)
 			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
 
 	}
@@ -77,34 +80,70 @@ void CObjTextBox::Draw()
 	{
 		if (g_stage == EarthStar)
 		{
-			if (m_text == 0)
+			//ラスボス出現時
+			if (g_Leo_clear == true)
 			{
-				Font::StrDraw(L"Star Reginへようこそ！！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここ、地球ステージでは基本的な操作と", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"ゲームのクリア条件をお伝えします！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"まずは移動してみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"方向キーで移動することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				if (m_text == 0)
+				{
+					Font::StrDraw(L"緊急連絡！緊急連絡！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"地球に謎の生命体出現！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				}
+				else if (m_text == 1)
+				{
+					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+				}
+				else if (m_text == 2)
+				{
+					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+				}
+				else if (m_text == 3)
+				{
+					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+
+				}
+				else if (m_text == 4)
+				{
+					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+
+				}
 
 			}
-			else if (m_text == 2)
+			else
 			{
-				Font::StrDraw(L"次にこのゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"各ステージにある星を集めることです", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				if (m_text == 0)
+				{
+					Font::StrDraw(L"Star Reginへようこそ！！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"ここ、地球ステージでは基本的な操作と", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"ゲームのクリア条件をお伝えします！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+				}
+				else if (m_text == 1)
+				{
+					Font::StrDraw(L"まずは移動してみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"方向キーで移動することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
-			}
-			else if (m_text == 3)
-			{
-				Font::StrDraw(L"星を集めきると星座が完成し、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"新しくスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				}
+				else if (m_text == 2)
+				{
+					Font::StrDraw(L"次にこのゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"各ステージにある星を集めることです", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
-			}
-			else if (m_text == 4)
-			{
-				Font::StrDraw(L"それでは星を集めてみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				}
+				else if (m_text == 3)
+				{
+					Font::StrDraw(L"星を集めきると星座が完成し、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"新しくスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
+				}
+				else if (m_text == 4)
+				{
+					Font::StrDraw(L"それでは星を集めてみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+
+				}
 			}
 		}
 		//おうし座
