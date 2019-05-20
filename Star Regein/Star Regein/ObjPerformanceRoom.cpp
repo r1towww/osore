@@ -69,6 +69,7 @@ void CObjPerformanceRoom::Action()
 			}
 			else
 			{
+				Audio::Start(1);
 				m_page++;
 			}
 			m_next_f = false;
@@ -90,6 +91,7 @@ void CObjPerformanceRoom::Action()
 			}
 			else
 			{
+				Audio::Start(1);
 				m_page--;
 			}
 			m_back_f = false;
@@ -127,7 +129,7 @@ void CObjPerformanceRoom::Draw()
 	Draw::Draw(40, &src, &dst, a, 0.0f);
 	//----------------------------------------------
 		wchar_t KILLCNT[128];	//キルカウント表示用
-		wchar_t DEATHCNT[128];	//キルカウント表示用
+		wchar_t DEATHCNT[128];	//デスカウント表示用
 
 		swprintf_s(KILLCNT, L"敵を合計%d体倒した！", g_All_Killcnt);
 		swprintf_s(DEATHCNT, L"%d回死んでしまった！", g_Death_cnt);
@@ -245,11 +247,118 @@ void CObjPerformanceRoom::Draw()
 	//その他
 	else if (m_page == 2)
 	{
-		Font::StrDraw(L"その他", 75, 155, 27, c);
+		Font::StrDraw(L"その他・各星座ランク", 75, 155, 27, c);
 
 		Font::StrDraw(KILLCNT, 75, 190, 28, y);
 		Font::StrDraw(DEATHCNT, 75, 225, 28, y);
-		Font::StrDraw(L"", 75, 260, 28, y);
+		//牡牛座
+		if (g_Taurus_Grade == C)
+		{
+			Font::StrDraw(L"牡牛座：Cランク", 75, 260, 28, c);
+		}
+		else if (g_Taurus_Grade == B)
+		{
+			Font::StrDraw(L"牡牛座：Bランク", 75, 260, 28, c);
+		}
+		else if (g_Taurus_Grade == A)
+		{
+			Font::StrDraw(L"牡牛座：Aランク", 75, 260, 28, c);
+		}
+		else if (g_Taurus_Grade == S)
+		{
+			Font::StrDraw(L"牡牛座：Sランク", 75, 260, 28, y);
+		}
+		else
+		{
+			Font::StrDraw(L"牡牛座：まだクリアしていないよ", 75, 260, 28, c);
+		}
+		//天秤座
+		if (g_Libra_Grade == C)
+		{
+			Font::StrDraw(L"天秤座：Cランク", 75, 295, 28, c);
+		}
+		else if (g_Libra_Grade == B)
+		{
+			Font::StrDraw(L"天秤座：Bランク", 75, 295, 28, c);
+		}
+		else if (g_Libra_Grade == A)
+		{
+			Font::StrDraw(L"天秤座：Aランク", 75, 295, 28, c);
+		}
+		else if (g_Libra_Grade == S)
+		{
+			Font::StrDraw(L"天秤座：Sランク", 75, 295, 28, y);
+		}
+		else
+		{
+			Font::StrDraw(L"天秤座：まだクリアしていないよ", 75, 295, 28, c);
+		}
+
+		//双子座
+		if (g_Gemini_Grade == C)
+		{
+			Font::StrDraw(L"双子座：Cランク", 75, 330, 28, c);
+		}
+		else if (g_Gemini_Grade == B)
+		{
+			Font::StrDraw(L"双子座：Bランク", 75, 330, 28, c);
+		}
+		else if (g_Gemini_Grade == A)
+		{
+			Font::StrDraw(L"双子座：Aランク", 75, 330, 28, c);
+		}
+		else if (g_Gemini_Grade == S)
+		{
+			Font::StrDraw(L"双子座：Sランク", 75, 330, 28, y);
+		}
+		else
+		{
+			Font::StrDraw(L"双子座：まだクリアしていないよ", 75, 330, 28, c);
+		}
+
+		//乙女座
+		if (g_Viego_Grade == C)
+		{
+			Font::StrDraw(L"乙女座：Cランク", 75, 365, 28, c);
+		}
+		else if (g_Viego_Grade == B)
+		{
+			Font::StrDraw(L"乙女座：Bランク", 75, 365, 28, c);
+		}
+		else if (g_Viego_Grade == A)
+		{
+			Font::StrDraw(L"乙女座：Aランク", 75, 365, 28, c);
+		}
+		else if (g_Viego_Grade == S)
+		{
+			Font::StrDraw(L"乙女座：Sランク", 75, 365, 28, y);
+		}
+		else
+		{
+			Font::StrDraw(L"乙女座：まだクリアしていないよ", 75, 365, 28, c);
+		}
+
+		//獅子座
+		if (g_Leo_Grade == C)
+		{
+			Font::StrDraw(L"獅子座：Cランク", 75, 400, 28, c);
+		}
+		else if (g_Leo_Grade == B)
+		{
+			Font::StrDraw(L"獅子座：Bランク", 75, 400, 28, c);
+		}
+		else if (g_Leo_Grade == A)
+		{
+			Font::StrDraw(L"獅子座：Aランク", 75, 400, 28, c);
+		}
+		else if (g_Leo_Grade == S)
+		{
+			Font::StrDraw(L"獅子座：Sランク", 75, 400, 28, y);
+		}
+		else
+		{
+			Font::StrDraw(L"獅子座：まだクリアしていないよ", 75, 400, 28, c);
+		}
 
 	}
 	//シークレット

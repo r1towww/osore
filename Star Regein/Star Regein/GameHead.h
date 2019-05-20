@@ -169,6 +169,15 @@ typedef enum Skill
 
 }Skill;
 
+typedef enum Rank
+{/*各惑星ランク保存用*/
+	None,
+	C,
+	B,
+	A,
+	S,
+}Rank;
+
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
 
@@ -308,12 +317,12 @@ extern bool g_Leo_NoDamage_Clear;
 //その他
 extern int g_All_Killcnt;
 extern int g_Death_cnt;
+//各星座ランク読み込み用
 extern int g_Taurus_Grade;
 extern int g_Libra_Grade;
 extern int g_Gemini_Grade;
 extern int g_Viego_Grade;
 extern int g_Leo_Grade;
-
 //シークレット系
 extern bool g_Tutorial_Clear; //チュートリアルクリア
 extern bool g_Earth_BossKill; //ラスボスを倒した
