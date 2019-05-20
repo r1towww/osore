@@ -27,21 +27,26 @@ class CObjStageClear :public CObj
 		RECT_F m_eff;		//エフェクト描画用
 		bool m_ani_flag;	//trueでアニメーション動作、falseでアニメーション停止
 		int m_cnt;	//どの評価星を表示し終えたかのカウント用
+		int m_grade_cnt;	//すべての評価星のカウント
+		bool m_grade_cnt_f;	//グレード評価表示用フラグ
+		bool m_grade_draw_f;//グレード評価表示用フラグ
+
 		bool m_cnt_f;		//カウントするかどうかのフラグ
-		bool m_f[10] = { false,false,false,false,false,false,false,false,false,false };	//各評価星のエフェクト処理を終えたかどうかのフラグ
-		bool m_grade_f[4]{ false,false, false, false, };	//各評価を終えたかどうか
 
-
+		bool m_grade_f[4] = { false,false, false, false, };	//各評価を終えたかどうか
+			
+		bool m_kill_star_f[3] = { false, false, false };	//キル数の評価を終えたか
 		int m_kill_grade;		//キル数の評価
 		int m_kill_star_cnt;		//キルグレード数用のカウント
 
-		
-
+		bool m_time_star_f[3] = { false, false, false };	//タイムの評価を終えたか
 		int m_time_grade;		//タイムの評価
-		
+		int m_time_star_cnt;		//タイムグレード数用のカウント
+
+		bool m_damage_star_f[3] = { false, false, false };	//ダメージの評価を終えたか
+		int m_damage_grade;		//ダメージの評価
 		int m_damage_star_cnt;		//ダメージの評価
-		int m_draw_time;		//グレード別表示時間
-		bool m_draw_f;			//グレード別表示フラグ
+
 
 		bool m_push_flag;
 		float m_alpha[7] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };	//メッセージalpha値変更用
