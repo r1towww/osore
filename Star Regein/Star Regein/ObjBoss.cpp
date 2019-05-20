@@ -159,8 +159,8 @@ void CObjBoss::Action()
 			{
 				if (g_contact_star_f[i] == true)
 				{
-					m_px = g_star_x[i];
-					m_py = g_star_y[i];
+					m_px = g_star_x[i] - 20;
+					m_py = g_star_y[i] - 20;
 					break;
 				}
 				count++;
@@ -175,20 +175,24 @@ void CObjBoss::Action()
 
 				if (m_rand <= 4)
 				{
-					m_px = g_star_x[m_rand];
-					m_py = g_star_y[m_rand];
+					m_px = g_star_x[m_rand] - 20;
+					m_py = g_star_y[m_rand] - 20;
 				}
 				else if (m_rand == 5)
 				{
-					g_boss_d_flag = false;
-					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+					if (beam == nullptr)
+					{
+						g_boss_d_flag = false;
+						CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-					float hx = hero->GetX();
-					float hy = hero->GetY();
+						float hx = hero->GetX();
+						float hy = hero->GetY();
 
-					//ビームオブジェクト作成
-					CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
-					Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
+						//ビームオブジェクト作成
+						CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
+						Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
+
+					}
 
 					hit->SetInvincibility(true);
 					m_alpha = 0.0f;

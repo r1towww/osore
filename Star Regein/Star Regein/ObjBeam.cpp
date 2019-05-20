@@ -60,6 +60,8 @@ void CObjBeam::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + 70 + block->GetScrollx(), m_py - 500 + block->GetScrolly());
 
+	hit->SetInvincibility(true);
+
 	if (m_ani_flag == true)
 	{
 		RECT_F ani_src[10] =
@@ -146,6 +148,7 @@ void CObjBeam::Action()
 		if (m_beam_ani == 5)
 		{
 			m_time++;
+			hit->SetInvincibility(false);
 			m_beam_flag = false;
 		}
 

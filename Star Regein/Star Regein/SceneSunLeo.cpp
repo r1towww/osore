@@ -178,7 +178,8 @@ void CSceneSunLeo::Scene()
 		g_Boss_Spawn = true;
 		//獅子座をクリア表示
 		g_Sun_clear = true;
-		
+		g_new_Performance = true;
+
 
 		//星を集めきったら
 		if (g_Leo_Max == true)
