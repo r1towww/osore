@@ -31,7 +31,7 @@ void CObjBlueBullet::Init()
 	m_ani_frame2 = 1;
 	m_ani_stop2 = 0;
 
-	m_time = 150;
+	m_time = 300;
 	m_del = false;
 
 	m_vx = cos(3.14f / 180.0f*m_r);
@@ -56,7 +56,7 @@ void CObjBlueBullet::Action()
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
 		return;	//çsìÆÇêßå‰
 
-	m_time++;
+	m_time--;
 
 	m_ani_time += ANITIME;
 

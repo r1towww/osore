@@ -38,6 +38,8 @@ void CObjSkillItem::Init()
 	//アイテムが生成されたかどうか
 	g_skill_item_flag = false;
 
+	g_Make_Item = false;
+
 	//主人公や敵の動きを止める
 	g_move_stop_flag = false;
 

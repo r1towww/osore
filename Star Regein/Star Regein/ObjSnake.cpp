@@ -19,6 +19,7 @@ float* g_snake_y[20];//‘S‚Ä‚Ì‹‚ÌYˆÊ’u‚ğ”cˆ¬‚·‚é
 
 
 CObjSnake::CObjSnake(float x, float y, int id)
+
 {
 	m_px = x + 375.0f;	//ˆÊ’u
 	m_py = y + 275.0f;

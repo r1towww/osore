@@ -22,6 +22,8 @@ CSceneMercuryGemini::CSceneMercuryGemini()
 	g_StarCount = 0;	//星を数える変数の初期化
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
+	g_Gemini_Max = false;
+	g_Virgo_Max = false;
 }
 
 //デストラクタ
@@ -143,20 +145,23 @@ void CSceneMercuryGemini::InitScene()
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
-	//チュートリアル吹き出し作成
-	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
-	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-	//チュートリアルオブジェクト作成
-	CObjTutorial* objtutorial = new CObjTutorial(1, 3);
-	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-	//チュートリアル発生時のみ作成
-	if (g_tutorial_flag == true)
+	//クリアしてなかったらチュートリアル表示
+	if (g_Gemini_clear != true)
 	{
-		//テキストボックスオブジェクト作成
-		CObjTextBox* objtextbox = new CObjTextBox();
-		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+		//チュートリアル吹き出し作成
+		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
+		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+		//チュートリアルオブジェクト作成
+		CObjTutorial* objtutorial = new CObjTutorial(1, 3);
+		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+		//チュートリアル発生時のみ作成
+		if (g_tutorial_flag == true)
+		{
+			//テキストボックスオブジェクト作成
+			CObjTextBox* objtextbox = new CObjTextBox();
+			Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+		}
 	}
-
 	
 
 }
