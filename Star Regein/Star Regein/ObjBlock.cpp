@@ -246,7 +246,7 @@ void CObjBlock::Init()
 			{
 				if (g_Boss_Spawn == true)
 				{
-					if (m_map[i][j] == 5)
+					if (m_map[i][j] == 80)
 					{
 						//ボスオブジェクト作成
 						CObjBoss* boss = new CObjBoss(j*MAPSIZE, i*MAPSIZE);

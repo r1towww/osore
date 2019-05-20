@@ -40,7 +40,7 @@ private:
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
 
-	int m_cow_id;
+	int m_snake_id;
 
 	int m_time;//無敵時間測定
 	int m_key_f;//無敵時間行動制御
@@ -69,6 +69,11 @@ private:
 
 	bool m_df;//ミニマップからの削除フラグ
 
+			  //ワープアニメーション
+	RECT_F m_warp_eff;		//エフェクト描画用
+	int	 m_warp_ani;			//ワープアニメーション用
+	int	 m_warp_ani_time;		//ワープアニメーション間隔タイム
+	bool m_warp_flag;
 
 	int	   m_ani;		//チャージアニメーション用
 	RECT_F m_eff;		//チャージエフェクト描画用
@@ -76,7 +81,7 @@ private:
 
 
 	bool m_kill_f;	//キルカウント用フラグ
-	bool m_cow_delete; //牛削除フラグ
+	bool m_snake_delete; //牛削除フラグ
 
 					   //消滅アニメーション用
 	int m_ani_count;

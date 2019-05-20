@@ -17,7 +17,7 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
-bool g_Boss_Spawn = false;
+bool g_Boss_Spawn = true;
 //égópÉwÉbÉ_Å[
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -77,6 +77,8 @@ void CSceneEarth::InitScene()
 
 	Draw::LoadImageW(L"ëoéq1.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"ëoéq2.png", 21, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"é÷.png", 52, TEX_SIZE_128);
 
 	Draw::LoadImageW(L"ëoéqópíeä€.png", 16, TEX_SIZE_128);
 

@@ -50,6 +50,9 @@ private:
 	int m_hp;//‘Ì—Í
 
 	int m_rand;
+	int m_attack_pattern;
+
+	int m_snake_c;
 
 	int m_time;//–³“GŠÔ‘ª’è
 	int m_key_f;//–³“GŠÔs“®§Œä
