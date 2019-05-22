@@ -32,6 +32,10 @@ class CObjStageClear :public CObj
 		bool m_grade_draw_f;//グレード評価表示用フラグ
 
 		bool m_cnt_f;		//カウントするかどうかのフラグ
+		bool m_next_f;
+		bool m_end_start;
+		bool m_end_f;		//最終アニメーション終了フラグ
+		bool m_end_s_f;		//星出現開始フラグ
 
 		bool m_grade_f[4] = { false,false, false, false, };	//各評価を終えたかどうか
 			

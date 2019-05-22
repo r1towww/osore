@@ -19,7 +19,9 @@ void CObjStageClear::Init()
 	m_Tra = 0.0f;
 	m_Eff_Tra = 1.0f;
 	m_push_flag = false;
-
+	m_end_start = false;
+	m_end_f = false;
+	m_end_s_f = false;
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
 
@@ -226,8 +228,18 @@ void CObjStageClear::Action()
 				m_grade_f[3] = true;
 
 			if (m_cnt == m_grade_cnt) {
-				m_grade_draw_f = true;
-				m_grade_cnt_f =true;
+				//最終アニメーションフラグがオンの時
+				if (m_end_f == true)
+				{
+					//最終アニメーションを止めて星を表示させるフラグ
+					m_end_start = false;
+					m_end_s_f=true;
+				}
+				else
+				{
+					m_grade_draw_f = true;
+					m_grade_cnt_f = true;
+				}
 			}
 			//フラグがオンの際、星（評価）をいくつ取得できたか
 			if (m_cnt_f == true)
@@ -460,7 +472,8 @@ void CObjStageClear::Draw()
 
 
 	//クリアタイム評価の描画用----------------------------------------
-	if (m_time_star_cnt == 1 && m_grade_f[1] != true || m_time_star_cnt == 2 && m_grade_f[1] != true) {
+	if (m_time_star_cnt == 1 && m_grade_f[1] != true || m_time_star_cnt == 2 && m_grade_f[1] != true) 
+	{
 		m_ani_flag = true;
 	}
 	if (m_ani_flag == true && m_time_star_cnt == 0 && m_grade_f[0] == true && m_grade_f[1] != true
@@ -481,7 +494,8 @@ void CObjStageClear::Draw()
 		dst.m_left = 245.0f + (40.0f * i);
 		dst.m_right = 275.0f + (40.0f * i);
 		dst.m_bottom = 335.0f;
-		if (m_time_star_f[i] == true) {
+		if (m_time_star_f[i] == true) 
+		{
 			Draw::Draw(70, &src, &dst, effc, 0.0f);
 		}
 	}
@@ -492,7 +506,8 @@ void CObjStageClear::Draw()
 	if (g_stage != EarthStar)
 	{
 		//敵殲滅用メッセージの表示
-		if (g_kill_cnt == g_enemy_cnt) {
+		if (g_kill_cnt == g_enemy_cnt)
+		{
 			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
 			//実績達成画面で表示させるためのフラグ処理
 			if (g_stage == VenusTaurus)
@@ -527,17 +542,20 @@ void CObjStageClear::Draw()
 
 		}
 		else if (g_kill_cnt == 0)
+		{
 			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4r);
+		}
 		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 340, 21, c4);
 	}
 	
 
 	//キル数評価の描画用----------------------------------------
-	if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true) {
+	if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+	{
 		m_ani_flag = true;
 	}
-	if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true /*&& m_kill_grade != 0*/
+	if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
 		|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
 		|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
 	{
@@ -559,6 +577,7 @@ void CObjStageClear::Draw()
 			Draw::Draw(70, &src, &dst, effc, 0.0f);
 		}
 	}
+
 	//-----------------------------------------------------------------
 
 
@@ -624,10 +643,19 @@ void CObjStageClear::Draw()
 			g_new_Performance = true;
 
 		}
+		m_end_start = true;
+	}
+	else
+	{
+		if (m_grade_f[2] == true&&m_end_s_f==false)
+		{
+			m_end_start = true;
+		}
 	}
 
+
 	//ダメージまでの評価を表示し終えた際
-	if (m_grade_f[3] == true)
+	if (m_grade_f[3] == true&& m_end_start==true)
 	{
 		m_cnt_f = false;
 		for (int i = 0; i < m_cnt; i++)
@@ -643,18 +671,25 @@ void CObjStageClear::Draw()
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 			
 		}
-		
+		//最終アニメーションフラグをオンにする
+		m_end_f = true;
+		//今まで数えた星の数を一番下に出す星のカウントと同じにする
+		m_grade_cnt = m_cnt;
+	
 		m_grade_cnt_f = false;
 	}
-	for (int i = 0; i < m_grade_cnt; i++)
+	if (m_end_s_f == true)
 	{
-		//表示位置の設定
-		dst.m_top = 425.0f;
-		dst.m_left = 45.0f + (50.0f * i);
-		dst.m_right = 80.0f + (50.0f * i);
-		dst.m_bottom = 460.0f;
-		if (m_grade_draw_f == true) {
-			Draw::Draw(70, &src, &dst, effc, 0.0f);
+		for (int i = 0; i < m_grade_cnt; i++)
+		{
+			//表示位置の設定
+			dst.m_top = 425.0f;
+			dst.m_left = 45.0f + (50.0f * i);
+			dst.m_right = 80.0f + (50.0f * i);
+			dst.m_bottom = 460.0f;
+			if (m_grade_draw_f == true) {
+				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			}
 		}
 	}
 
