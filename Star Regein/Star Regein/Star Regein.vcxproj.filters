@@ -224,6 +224,9 @@
     <ClCompile Include="ObjSkillItem.cpp">
       <Filter>ソースファイル\スキル\アイテム</Filter>
     </ClCompile>
+    <ClCompile Include="ObjPoison.cpp">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -454,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="ObjSkillItem.h">
       <Filter>ソースファイル\スキル\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjPoison.h">
+      <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

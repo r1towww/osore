@@ -53,9 +53,11 @@ private:
 	int m_attack_pattern;
 
 	int m_snake_c;
+	int m_bullet_t;//’e–‹—pƒ^ƒCƒ€
 
 	int m_time;//–³“GŠÔ‘ª’è
 	int m_key_f;//–³“GŠÔs“®§Œä
+	int m_imposition_t;//UŒ‚”­“®ŠÔ’²®—p
 	int count;
 	int e_time;//“Gs“®ŠÔ
 	int enemy_move;//“GˆÚ“®
@@ -76,6 +78,9 @@ private:
 	bool m_movey;//ã‰º
 
 	bool m_f;//–³“GŠÔ
+
+	bool m_beam_f;//ƒr[ƒ€ƒtƒ‰ƒO
+	bool m_attack_f;
 
 	bool m_do_f;//“GUŒ‚ƒtƒ‰ƒO
 
