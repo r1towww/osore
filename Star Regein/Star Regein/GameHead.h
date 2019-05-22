@@ -46,6 +46,7 @@ enum OBJ_NAME
 	OBJ_BOSS,
 	OBJ_BEAM,
 	OBJ_SNAKE,
+	OBJ_POISON,
 
 	OBJ_MENU,
 	OBJ_HELP,
@@ -350,6 +351,7 @@ extern bool g_All_Skill_Get;  //‚·‚×‚Ä‚ÌƒXƒLƒ‹‚ðŠl“¾
 #include "ObjBoss.h"
 #include "ObjBeam.h"
 #include "ObjSnake.h"
+#include "ObjPoison.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"

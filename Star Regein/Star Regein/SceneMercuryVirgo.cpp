@@ -76,8 +76,6 @@ void CSceneMercuryVirgo::InitScene()
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"乙女.png", 22, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"双子用弾丸.png", 16, TEX_SIZE_128);
-
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
 	Draw::LoadImageW(L"星 エフェクト入り.png", 6, TEX_SIZE_2048);
 	Draw::LoadImageW(L"星エフェクト.png", 99, TEX_SIZE_512);
