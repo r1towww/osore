@@ -78,9 +78,7 @@ void CObjStageClear::Action()
 	//キー入力タイムが一定に達した場合、キー入力を許可する
 	if ((Input::GetVKey('Z') == true && m_alpha[4] == 1.0f || Input::GetVKey(VK_RETURN) == true) && m_alpha[4] == 1.0f)
 	{
-
 		m_push_flag = true;
-
 	}
 	//Zキーを押すと徐々に暗転し、シーン移行
 	if (m_push_flag == true)
@@ -108,9 +106,6 @@ void CObjStageClear::Action()
 	m_time++;
 	if (m_time >= 60)
 		m_time = 60;
-
-
-
 
 	if (m_alpha[5] == 1.0f) {
 		m_alpha[6] += 0.05f;
@@ -155,8 +150,6 @@ void CObjStageClear::Action()
 			m_ani_flag = true;
 		}
 	}
-
-	
 
 	if (m_ani_flag == true)
 	{
@@ -235,11 +228,9 @@ void CObjStageClear::Action()
 			else if (m_cnt_f == false && m_grade_cnt_f == true)
 				m_grade_cnt++;
 
-
-			
 			m_ani = 0;
-			m_ani_flag = false;
-			
+			m_ani_flag = false;		
+
 			
 		}
 	}
@@ -248,8 +239,6 @@ void CObjStageClear::Action()
 //ドロー
 void CObjStageClear::Draw()
 {
-
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
 	float Stage[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -645,6 +634,7 @@ void CObjStageClear::Draw()
 		}
 		
 		m_grade_cnt_f = false;
+		
 	}
 	for (int i = 0; i < m_grade_cnt; i++)
 	{
@@ -658,8 +648,6 @@ void CObjStageClear::Draw()
 		}
 	}
 
-
-		
 	//シーン移行用
 	if (m_push_flag == true)
 	{

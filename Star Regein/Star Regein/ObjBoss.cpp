@@ -466,10 +466,9 @@ void CObjBoss::Action()
 		g_boss_d_flag = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		g_Earth_BossKill = true;
+		Scene::SetScene(new CSceneED());//EDに移行
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-
-
 
 }
 
