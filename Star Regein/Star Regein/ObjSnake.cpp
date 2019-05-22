@@ -46,7 +46,7 @@ void CObjSnake::Init()
 	m_movey = true; //true=正面　false=背面
 	m_movex = true;	//true=右　false=左
 
-					//blockとの衝突状態確認用
+	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
@@ -221,8 +221,8 @@ void CObjSnake::Action()
 				}
 
 				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 2;
-				m_vy = sin(3.14 / 180 * ar) * 2;
+				m_vx = cos(3.14 / 180 * ar) * 3;
+				m_vy = sin(3.14 / 180 * ar) * 3;
 			}
 		}
 		else
@@ -572,10 +572,9 @@ void CObjSnake::Action()
 			m_kill_f = true;//フラグをオンにして入らないようにする
 		}
 		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
 		g_snake_d_flag[m_snake_id] = false;
 		g_All_Killcnt++;		   //キルカウントを+する
+		Hits::DeleteHitBox(this);
 		this->SetStatus(false);    //自身に削除命令を出す
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
@@ -673,10 +672,10 @@ void CObjSnake::Draw()
 	if (m_warp_flag == true)
 	{
 		//表示位置の設定
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 150.0f + m_px + block->GetScrollx();
-		dst.m_right = 0.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 100.0f + m_py + block->GetScrolly();
+		dst.m_top = -20.0f + m_py + block->GetScrolly();
+		dst.m_left = -60.0f + m_px + block->GetScrollx();
+		dst.m_right = 120.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 80.0f + m_py + block->GetScrolly();
 		//エフェクトの描画
 		Draw::Draw(34, &m_warp_eff, &dst, c, 0.0f);
 

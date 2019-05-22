@@ -97,6 +97,8 @@ void CObjHero::Init()
 
 	//火傷時主人公カラー変更用フラグ
 	m_burn_f =false;
+	//毒時主人公カラー変更用フラグ
+	m_poison_f = false;
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px+15, m_py +15, 50, 50, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -672,6 +674,43 @@ void CObjHero::Action()
 			m_burn_f = false;
 		}
 	}
+
+	//毒弾と当たった場合火傷状態を付与
+	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
+	{
+		//敵が主人公とどの角度で当たっているかを確認
+		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
+		hit_data = hit->SearchObjNameHit(OBJ_POISON);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
+
+		//もし毒弾丸に再度攻撃を喰らった時継続時間初期化
+		m_burn_max_time = 0;
+		m_burn_time = 0;
+
+		m_poison_f = true;
+		m_eff_flag = true;
+
+	}
+	//フラグがオンのとき毒状態になり、持続ダメージ
+	if (m_poison_f == true)
+	{
+		m_burn_max_time++;
+		if (m_burn_time >= 50)
+		{
+			g_hp -= 2.5f;
+			m_burn_time = 0;
+		}
+		else
+		{
+			m_burn_time++;
+		}
+
+		if (m_burn_max_time > 550)
+		{
+			m_burn_max_time = 0;
+			m_poison_f = false;
+		}
+	}
+
 	//アイテムが作成されたら無敵にする
 	if (g_Make_Item == true)
 	{
@@ -823,6 +862,7 @@ void CObjHero::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float c2[4] = { 1.0f,0.7f,0.7f,m_alpha };
 	float c3[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c4[4] = { 1.0f,0.7f,1.0f,m_alpha };
 	
 
 	RECT_F src; //描画元切り取り位置
@@ -848,6 +888,8 @@ void CObjHero::Draw()
 	//火傷状態のとき主人公を赤色に
 	if (m_burn_f == true)
 		Draw::Draw(1, &src, &dst, c2, 0.0f);
+	else if(m_poison_f == true)
+		Draw::Draw(1, &src, &dst, c4, 0.0f);
 	else
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 

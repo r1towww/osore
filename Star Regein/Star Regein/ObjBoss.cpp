@@ -60,7 +60,14 @@ void CObjBoss::Init()
 
 	m_snake_c = 0;
 
+	m_imposition_t = 0;
+
+	m_bullet_t = 0;
+
 	m_invincible_flag = false;
+
+	m_attack_f = false;
+	m_beam_f = false;
 
 	m_df = true;
 	count = 0;
@@ -168,7 +175,7 @@ void CObjBoss::Action()
 			}
 
 			//どの星にも接触していなかった場合はランダムにワープ
-			if(count == 5)
+			if (count == 5)
 			{
 				srand(time(NULL));
 				//マップのランダム処理の初期化
@@ -182,74 +189,7 @@ void CObjBoss::Action()
 				}
 				else if (m_rand == 5)
 				{
-					if (beam == nullptr)
-					{
-						g_boss_d_flag = false;
-						CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-						float hx = hero->GetX();
-						float hy = hero->GetY();
-
-						//ビームオブジェクト作成
-						CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
-						Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
-
-						m_px = g_star_x[m_rand] - 20;
-						m_py = g_star_y[m_rand] - 20;
-
-					}
-
-					hit->SetInvincibility(true);
-					m_alpha = 0.0f;
-
-				}
-			}
-
-			//攻撃パターン決定
-			srand(time(NULL));
-//			m_attack_pattern = rand() % 3;
-			m_attack_pattern = 0;
-
-			CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
-
-			if (snake == nullptr)
-			{
-				//蛇召喚
-				if (m_attack_pattern == 0)
-				{
-					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-					float hx = hero->GetX();
-					float hy = hero->GetY();
-
-					//蛇オブジェクト作成
-					for (int i = 0; i < MAPSIZE; i++)
-					{
-						for (int j = 0; j < MAPSIZE; j++)
-						{
-							if (g_map[i][j] == 5)
-							{
-								//蛇オブジェクト作成
-								CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
-								//敵の位置を取得
-								float* snakex = snake->GetPX();
-								float* snakey = snake->GetPY();
-
-								g_snake_x[m_snake_c] = snake->GetPX();
-								g_snake_y[m_snake_c] = snake->GetPY();
-
-								g_snake_d_flag[m_snake_c] = true;
-
-								g_stan_snake_flag[m_snake_c] = false;
-
-								m_snake_c++;
-
-								Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
-							}
-						}
-						if (m_snake_c == 20)
-							break;
-					}
+					m_beam_f = true;
 				}
 			}
 		}
@@ -260,8 +200,113 @@ void CObjBoss::Action()
 			m_warp_ani = 0;
 			m_warp_time = 700;
 			m_warp_flag = false;
+			m_attack_f = true;
 		}
 
+	}
+
+	if (m_attack_f == true)
+	{
+		m_imposition_t++;
+
+		if (m_imposition_t >= 100)
+		{
+			if (m_beam_f == false)
+			{
+				//攻撃パターン決定
+				srand(time(NULL));
+				//			m_attack_pattern = rand() % 3;
+				m_attack_pattern = 1;
+
+				CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
+
+				//蛇召喚
+				if (m_attack_pattern == 0)
+				{
+					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+					float hx = hero->GetX();
+					float hy = hero->GetY();
+
+					m_snake_c = 0;
+					m_imposition_t = 0;
+
+					//蛇オブジェクト作成
+					for (int i = 0; i < MAPSIZE; i++)
+					{
+						for (int j = 0; j < MAPSIZE; j++)
+						{
+							if (g_map[i][j] == 5)
+							{
+								if (g_snake_d_flag[m_snake_c] == false)
+								{
+									//蛇オブジェクト作成
+									CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
+																									  //敵の位置を取得
+									float* snakex = snake->GetPX();
+									float* snakey = snake->GetPY();
+
+									g_snake_x[m_snake_c] = snake->GetPX();
+									g_snake_y[m_snake_c] = snake->GetPY();
+
+									g_snake_d_flag[m_snake_c] = true;
+
+									g_stan_snake_flag[m_snake_c] = false;
+
+									Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+								}
+								m_snake_c++;
+							}
+						}
+						if (m_snake_c == 20)
+							break;
+					}
+				}
+
+				if (m_attack_pattern == 1)
+				{
+					m_imposition_t = 0;
+
+					//毒弾丸18発同時発射
+					for (int i = 0; i < 360; i += 18)
+					{
+						CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 3.0f);//オブジェクト作成
+						Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+					}
+				}
+
+				m_attack_f = false;
+			}
+			else
+			{
+				if (beam == nullptr)
+				{
+					g_boss_d_flag = false;
+					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+					float hx = hero->GetX();
+					float hy = hero->GetY();
+
+					//ビームオブジェクト作成
+					CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
+					Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
+
+					m_px = g_star_x[m_rand] - 20;
+					m_py = g_star_y[m_rand] - 20;
+
+				}
+
+				hit->SetInvincibility(true);
+				m_alpha = 0.0f;
+				m_beam_f = false;
+				m_imposition_t = 0;
+				m_attack_f = false;
+			}
+		}
+		else
+		{
+			m_imposition_t++;
+		}
 	}
 
 	if (beam == nullptr)
