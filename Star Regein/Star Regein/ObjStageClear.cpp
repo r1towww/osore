@@ -215,16 +215,14 @@ void CObjStageClear::Action()
 			//ステージクリア用グレード
 			if (m_grade_f[0] == false)
 				m_grade_f[0] = true;
-
-
 			//クリアタイム評価の分、星を表示
-			if (m_time_grade == m_time_star_cnt)
+			if (m_time_grade == m_time_star_cnt && m_grade_f[0] == true)
 				m_grade_f[1] = true;
 			//キル評価の分、星を表示
-			if (m_kill_grade == m_kill_star_cnt)
+			if (m_kill_grade == m_kill_star_cnt && m_grade_f[1] == true)
 				m_grade_f[2] = true;
 			//ダメージ評価の分、星を表示
-			if (m_damage_grade == m_damage_star_cnt)
+			if (m_damage_grade == m_damage_star_cnt && m_grade_f[2] == true)
 				m_grade_f[3] = true;
 
 			if (m_cnt == m_grade_cnt) {
@@ -566,6 +564,11 @@ void CObjStageClear::Draw()
 		dst.m_bottom = dst.m_top + 80.0f;
 		Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 	}
+	else if (m_grade_f[1] == true && m_kill_grade == 0)
+	{
+		m_grade_f[2] = true;
+		m_ani_flag = false;
+	}
 	for (int i = 0; i < m_kill_grade; i++)
 	{
 		//表示位置の設定
@@ -589,7 +592,7 @@ void CObjStageClear::Draw()
 		if (m_damage_star_cnt == 1 && m_grade_f[3] != true || m_damage_star_cnt == 2 && m_grade_f[3] != true) {
 			m_ani_flag = true;
 		}
-		if (m_ani_flag == true && m_damage_star_cnt == 0 && m_grade_f[2] == true && m_grade_f[3] != true /*&& m_kill_grade != 0*/
+		if (m_ani_flag == true && m_damage_star_cnt == 0 && m_grade_f[2] == true && m_grade_f[3] != true
 			|| m_ani_flag == true && m_damage_star_cnt == 1 && m_grade_f[2] == true && m_grade_f[3] != true
 			|| m_ani_flag == true && m_damage_star_cnt == 2 && m_grade_f[2] == true && m_grade_f[3] != true)
 		{
@@ -643,19 +646,12 @@ void CObjStageClear::Draw()
 			g_new_Performance = true;
 
 		}
-		m_end_start = true;
 	}
-	else
-	{
-		if (m_grade_f[2] == true&&m_end_s_f==false)
-		{
-			m_end_start = true;
-		}
-	}
+	
 
 
 	//ダメージまでの評価を表示し終えた際
-	if (m_grade_f[3] == true&& m_end_start==true)
+	if (m_grade_f[3] == true)
 	{
 		m_cnt_f = false;
 		for (int i = 0; i < m_cnt; i++)
@@ -671,15 +667,6 @@ void CObjStageClear::Draw()
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 			
 		}
-		//最終アニメーションフラグをオンにする
-		m_end_f = true;
-		//今まで数えた星の数を一番下に出す星のカウントと同じにする
-		m_grade_cnt = m_cnt;
-	
-		m_grade_cnt_f = false;
-	}
-	if (m_end_s_f == true)
-	{
 		for (int i = 0; i < m_grade_cnt; i++)
 		{
 			//表示位置の設定
@@ -692,6 +679,7 @@ void CObjStageClear::Draw()
 			}
 		}
 	}
+	
 
 
 		
