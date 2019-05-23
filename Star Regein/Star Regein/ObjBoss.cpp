@@ -240,6 +240,7 @@ void CObjBoss::Action()
 
 						m_snake_c = 0;
 						m_imposition_t = 0;
+						Audio::Start(17); //ワープ音
 
 						//蛇オブジェクト作成
 						for (int i = 0; i < MAPSIZE; i++)
