@@ -39,6 +39,11 @@ void CObjStageClear::Init()
 		else
 			m_kill_grade = 1;
 	}
+	else if (g_stage == EarthStar)//地球
+	{
+		m_kill_grade = 0;
+	}
+
 	m_kill_star_cnt = 0;	//キル評価のカウント
 
 	//メッセージの情報を持ってくる
@@ -63,6 +68,8 @@ void CObjStageClear::Init()
 		m_damage_grade = 0;
 
 	m_damage_star_cnt = 0;		//被ダメージの評価
+
+	
 
 	m_next_cnt = 0;		//次へ進む用のカウント
 	m_key_f = true;	//キー入力制御用フラグ
@@ -152,6 +159,7 @@ void CObjStageClear::Action()
 		if (m_Tra >= 1.0f)
 		{
 			Scene::SetScene(new CSceneStageChoice());//ステージ選択
+			g_stage = Space;
 			g_stage_clear = false;
 			g_move_stop_flag = false;
 
@@ -197,8 +205,6 @@ void CObjStageClear::Action()
 			m_ani_flag = true;
 		}
 	}
-
-	
 
 	if (m_ani_flag == true)
 	{
@@ -288,8 +294,6 @@ void CObjStageClear::Action()
 			else if (m_cnt_f == false && m_grade_cnt_f == true)
 				m_grade_cnt++;
 
-
-			
 			m_ani = 0;
 			m_ani_flag = false;
 			Audio::Stop(19);
@@ -301,8 +305,6 @@ void CObjStageClear::Action()
 //ドロー
 void CObjStageClear::Draw()
 {
-
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
 	float Stage[4] = { 0.5f,0.5f,0.5f,1.0f };
@@ -589,30 +591,38 @@ void CObjStageClear::Draw()
 	
 
 	//キル数評価の描画用----------------------------------------
-	if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+	if (g_Boss_Spawn == true || g_stage != EarthStar)
 	{
-		m_ani_flag = true;
-	}
-	if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
-		|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
-		|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
-	{
-		//表示位置の設定
-		dst.m_top    = 310.0f;
-		dst.m_left   = 220.0f + (40.0f * m_kill_star_cnt);
-		dst.m_right  = 300.0f + (40.0f * m_kill_star_cnt);
-		dst.m_bottom = dst.m_top + 80.0f;
-		Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-	}
-	for (int i = 0; i < m_kill_grade; i++)
-	{
-		//表示位置の設定
-		dst.m_top    = 335.0f;
-		dst.m_left   = 245.0f + (40.0f * i);
-		dst.m_right  = 275.0f + (40.0f * i);
-		dst.m_bottom = 365.0f;
-		if (m_kill_star_f[i] == true) {
-			Draw::Draw(70, &src, &dst, effc, 0.0f);
+		if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+		{
+			m_ani_flag = true;
+		}
+		if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
+			|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
+			|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
+		{
+			//表示位置の設定
+			dst.m_top = 310.0f;
+			dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
+			dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
+			dst.m_bottom = dst.m_top + 80.0f;
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		}
+		//else if (m_grade_f[1] == true && m_kill_grade == 0)
+		//{
+		//	m_grade_f[2] = true;
+		//	m_ani_flag = false;
+		//}
+		for (int i = 0; i < m_kill_grade; i++)
+		{
+			//表示位置の設定
+			dst.m_top = 335.0f;
+			dst.m_left = 245.0f + (40.0f * i);
+			dst.m_right = 275.0f + (40.0f * i);
+			dst.m_bottom = 365.0f;
+			if (m_kill_star_f[i] == true) {
+				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			}
 		}
 	}
 
@@ -707,6 +717,7 @@ void CObjStageClear::Draw()
 		m_grade_cnt = m_cnt;
 
 		m_grade_cnt_f = false;
+		
 	}
 	
 	if (m_end_s_f == true)
@@ -726,14 +737,107 @@ void CObjStageClear::Draw()
 		if (m_alpha[5] >= 1.0f) {
 			m_alpha[5] = 1.0f;
 		}
+		//星の数に応じてランクづけ
 		if (m_grade_cnt == 10)
+		{
 			Font::StrDraw(L"S", 550, 390, 120, c6s);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = S;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = S;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = S;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = S;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = S;
+			}
+		}
 		else if (m_grade_cnt >= 7)
+		{
 			Font::StrDraw(L"A", 550, 390, 120, c6a);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = A;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = A;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = A;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = A;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = A;
+			}
+		}
 		else if (m_grade_cnt >= 4)
+		{
 			Font::StrDraw(L"B", 550, 390, 120, c6b);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = B;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = B;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = B;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = B;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = B;
+			}
+		}
 		else
+		{
 			Font::StrDraw(L"C", 550, 390, 120, c6c);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = C;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = C;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = C;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = C;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = C;
+			}
+		}
 
 		m_next_cnt = 1;	//ステージへ戻るようにする
 	}

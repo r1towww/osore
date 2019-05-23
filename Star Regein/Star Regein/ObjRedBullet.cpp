@@ -76,6 +76,11 @@ void CObjRedBullet::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_x + block->GetScrollx(), m_y + block->GetScrolly());			//HitBoxの位置を敵機弾丸の位置に更新
+																				//主人公と接触したらアニメーションの後削除
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		m_hero_hit = true;
+	}
 
 
 	//ブロックオブジェクトと接触か一定時間で弾丸削除
@@ -86,11 +91,6 @@ void CObjRedBullet::Action()
 	}
 
 
-	//主人公と接触したらアニメーションの後削除
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		m_hero_hit = true;
-	}
 
 
 	//主人公にヒットしたらコマを１つ進める

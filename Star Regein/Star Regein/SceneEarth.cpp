@@ -17,7 +17,7 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
-bool g_Boss_Spawn = true;
+bool g_Boss_Spawn = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -104,6 +104,7 @@ void CSceneEarth::InitScene()
 
 	Draw::LoadImageW(L"ボス.png", 33, TEX_SIZE_512);
 	Draw::LoadImageW(L"ワープ.png", 34, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ボス消滅エフェクト.png",65, TEX_SIZE_1024);
 	Draw::LoadImageW(L"レーザー.png", 37, TEX_SIZE_1024);
 	Draw::LoadImageW(L"溜め1.png", 36, TEX_SIZE_1024);
 	
@@ -129,6 +130,7 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(7, L"場面転換・スライド表現04.wav", EFFECT);//ブラックホールでのワープ時SE
 	Audio::LoadAudio(9, L"ステージクリア.wav", EFFECT);
 	Audio::LoadAudio(10, L"ゲームオーバー.wav", EFFECT);
+	Audio::LoadAudio(17, L"ワープ.wav", EFFECT);
 	//各星座スキル用SE
 	Audio::LoadAudio(11, L"牡牛座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(12, L"天秤座スキルSE.wav", EFFECT);

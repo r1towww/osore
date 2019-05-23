@@ -7,6 +7,7 @@
 #include"GameL\HitBoxManager.h"
 #include"GameL\UserData.h" 
 #include<time.h>
+#include "GameL\Audio.h"
 
 #include"GameHead.h"
 #include"ObjBoss.h"
@@ -27,11 +28,12 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 40;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
+	m_ani_timeB = 0;
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
@@ -64,6 +66,8 @@ void CObjBoss::Init()
 
 	m_bullet_t = 0;
 
+	m_attack_key_f = true;
+
 	m_invincible_flag = false;
 
 	m_attack_f = false;
@@ -86,17 +90,36 @@ void CObjBoss::Init()
 	m_warp_ani_time = 0;		//アニメーション間隔タイム
 
 	m_warp_flag = false;
-	m_warp_time = 300;
+	m_warp_time = 200;
 
+	//死亡エフェクト
+	m_dead_eff.m_top = 0;
+	m_dead_eff.m_left = 0;
+	m_dead_eff.m_right = 192;
+	m_dead_eff.m_bottom = 192;
+
+	dead_flag	= false;	
+	m_dead_time =0;//アニメーション間隔用
+	m_dead_ani  =0;//アニメーション用
 
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_BOSS, 1);
 }
 
 //アクション
 void CObjBoss::Action()
 {
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
+	}
 
 	m_warp_time--;
 
@@ -131,6 +154,7 @@ void CObjBoss::Action()
 	{
 
 		m_warp_flag = true;
+	
 
 		//エフェクト用
 		RECT_F warp_ani_src[8] =
@@ -167,6 +191,7 @@ void CObjBoss::Action()
 			{
 				if (g_contact_star_f[i] == true)
 				{
+					Audio::Start(17); //ワープ音
 					m_px = g_star_x[i] - 20;
 					m_py = g_star_y[i] - 20;
 					break;
@@ -183,8 +208,10 @@ void CObjBoss::Action()
 
 				if (m_rand <= 4)
 				{
+					Audio::Start(17); //ワープ音
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
+					
 
 				}
 				else if (m_rand == 5)
@@ -198,9 +225,10 @@ void CObjBoss::Action()
 		if (m_warp_ani == 7)
 		{
 			m_warp_ani = 0;
-			m_warp_time = 700;
+			m_warp_time = 400;
 			m_warp_flag = false;
 			m_attack_f = true;
+			m_attack_key_f = true;
 		}
 
 	}
@@ -213,69 +241,107 @@ void CObjBoss::Action()
 		{
 			if (m_beam_f == false)
 			{
-				//攻撃パターン決定
-				srand(time(NULL));
-				//			m_attack_pattern = rand() % 3;
-				m_attack_pattern = 1;
-
-				CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
-
-				//蛇召喚
-				if (m_attack_pattern == 0)
+				if (m_attack_key_f == true)
 				{
-					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+					//攻撃パターン決定
+					srand(time(NULL));
+					m_attack_pattern = rand() % 2;
+					//m_attack_pattern = 1;
 
-					float hx = hero->GetX();
-					float hy = hero->GetY();
+					CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
 
-					m_snake_c = 0;
-					m_imposition_t = 0;
-
-					//蛇オブジェクト作成
-					for (int i = 0; i < MAPSIZE; i++)
+					//蛇召喚
+					if (m_attack_pattern == 0)
 					{
-						for (int j = 0; j < MAPSIZE; j++)
+						CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+						float hx = hero->GetX();
+						float hy = hero->GetY();
+
+						m_snake_c = 0;
+						m_imposition_t = 0;
+
+						//蛇オブジェクト作成
+						for (int i = 0; i < MAPSIZE; i++)
 						{
-							if (g_map[i][j] == 5)
+							for (int j = 0; j < MAPSIZE; j++)
 							{
-								if (g_snake_d_flag[m_snake_c] == false)
+								if (g_map[i][j] == 5)
 								{
-									//蛇オブジェクト作成
-									CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
-																									  //敵の位置を取得
-									float* snakex = snake->GetPX();
-									float* snakey = snake->GetPY();
+									if (g_snake_d_flag[m_snake_c] == false)
+									{
+										//蛇オブジェクト作成
+										CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
+																										  //敵の位置を取得
+										float* snakex = snake->GetPX();
+										float* snakey = snake->GetPY();
 
-									g_snake_x[m_snake_c] = snake->GetPX();
-									g_snake_y[m_snake_c] = snake->GetPY();
+										g_snake_x[m_snake_c] = snake->GetPX();
+										g_snake_y[m_snake_c] = snake->GetPY();
 
-									g_snake_d_flag[m_snake_c] = true;
+										g_snake_d_flag[m_snake_c] = true;
 
-									g_stan_snake_flag[m_snake_c] = false;
+										g_stan_snake_flag[m_snake_c] = false;
 
-									Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+										Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+									}
+									m_snake_c++;
 								}
-								m_snake_c++;
 							}
+							if (m_snake_c == 20)
+								break;
 						}
-						if (m_snake_c == 20)
-							break;
 					}
 				}
 
+				//毒弾幕
 				if (m_attack_pattern == 1)
 				{
 					m_imposition_t = 0;
-
-					//毒弾丸18発同時発射
-					for (int i = 0; i < 360; i += 18)
+					if (count <= 3)
 					{
-						CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 3.0f);//オブジェクト作成
-						Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+						if (count == 0)
+						{
+							//毒弾丸18発同時発射
+							for (int i = 36; i < 360; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 1)
+						{
+							//毒弾丸18発同時発射
+							for (int i = 18; i < 342; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 2)
+						{
+							//毒弾丸18発同時発射
+							for (int i = -0; i < 324; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 3)
+						{
+							//毒弾丸18発同時発射
+							for (int i = -18; i < 306; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+							m_attack_f = false;
+							count = 0;
+						}
+						count++;
 					}
 				}
-
-				m_attack_f = false;
+				m_attack_key_f = false;
 			}
 			else
 			{
@@ -300,7 +366,6 @@ void CObjBoss::Action()
 				m_alpha = 0.0f;
 				m_beam_f = false;
 				m_imposition_t = 0;
-				m_attack_f = false;
 			}
 		}
 		else
@@ -476,8 +541,14 @@ void CObjBoss::Action()
 		g_Leo_cnt += 1.0f;
 		if (g_Leo_cnt >= 200.0f)
 		{
-			g_Leo_cnt = 0.0f;
-			g_stan_boss_flag = false;
+			m_ani_frame++;	//アニメーションのコマを１つ進める
+			m_ani_timeB = 10;
+
+			if (g_Leo_cnt >= 200.0f)
+			{
+				g_Leo_cnt = 0.0f;
+				g_stan_boss_flag = false;
+			}
 		}
 
 	}
@@ -497,6 +568,59 @@ void CObjBoss::Action()
 		m_time = 30;
 	}
 
+	//HPが０以下でエフェクト開始
+	if (dead_flag == true)
+	{
+		//エフェクト用
+		RECT_F dead[20] =
+		{
+
+			{ 0,     0, 192, 192 },
+			{ 0,   192, 384, 192 },
+			{ 0,   384, 576, 192 },
+			{ 0,   576, 768, 192 },
+			{ 0,   768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+			{ 192, 384, 576, 384 },
+			{ 192, 576, 768, 384 },
+			{ 192, 768, 960, 384 },
+			{ 384,   0, 192, 576 },
+			{ 384, 192, 384, 576 },
+			{ 384, 384, 576, 576 },
+			{ 384, 576, 768, 576 },
+			{ 384, 768, 960, 576 },
+			{ 576,   0, 192, 768 },
+			{ 576, 192, 384, 768 },
+			{ 576, 384, 576, 768 },
+			{ 576, 576, 768, 768 },
+			{ 576, 768, 960, 768 },
+
+		};
+
+
+
+		//アニメーションのコマ間隔制御
+		if (m_dead_time > 2)
+		{
+			m_dead_ani++;		//アニメーションのコマを1つ進める
+			m_dead_time = 0;
+
+
+			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			// 12番目（画像最後）まで進んだら、0に戻す
+			if (m_dead_ani == 20)
+			{
+				Scene::SetScene(new CSceneED());//EDに移行
+			}
+
+		}
+		else
+		{
+			m_dead_time++;
+		}
+	}
+
 
 	//位置の更新
 	m_px += m_vx*1.0;
@@ -506,15 +630,14 @@ void CObjBoss::Action()
 	if (m_hp <= 0)
 	{
 		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
+		//m_alpha = 0.0f;
+		//hit->SetInvincibility(true);
 		g_boss_d_flag = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		g_Earth_BossKill = true;
+		dead_flag = true;
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
-
-
 
 }
 
@@ -523,9 +646,12 @@ void CObjBoss::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
+	int AniDataB[6] =
+	{ 0,1,2,3,4,0 };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
+	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
@@ -568,6 +694,40 @@ void CObjBoss::Draw()
 	{
 		m_warp_ani = 0;
 	}
+	//表示位置の設定
+	dst.m_top = -80.0f + m_py + block->GetScrolly();
+	dst.m_left = 240.0f + m_px + block->GetScrollx();
+	dst.m_right = -80.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 200.0f + m_py + block->GetScrolly();
+	if (dead_flag == true)
+	{
+		//エフェクトの描画
+		Draw::Draw(65, &m_dead_eff, &dst, c, 0.0f);
 
+	}
+
+	if (g_stan_boss_flag == true)
+	{
+		RECT_F src;//描画元切り取り位置
+		RECT_F dst;//描画先表示位置
+
+				   //ブロック情報を持ってくる
+		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+		//切り取り位置の設定
+		src.m_top = 0.0f * m_posture;
+		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
+		src.m_bottom = src.m_top + 192.0f;
+
+		//表示位置の設定
+		dst.m_top = -30.0f + m_py + block->GetScrolly();
+		dst.m_left = -35.0f + m_px + block->GetScrollx();
+		dst.m_right = 200.0f + m_px + block->GetScrollx();
+		dst.m_bottom =200.0f + m_py + block->GetScrolly();
+
+		//描画
+		Draw::Draw(49, &src, &dst, cB, 0.0f);
+	}
 
 }

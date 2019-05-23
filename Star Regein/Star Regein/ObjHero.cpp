@@ -519,6 +519,7 @@ void CObjHero::Action()
 				//ベクトルを０にする
 				m_vx = 0.0f;
 				m_vy = 0.0f;
+				g_stage = Space;
 				//Menuオブジェクトを作成
 				CObjMenu *objmenu = new CObjMenu();
 				Objs::InsertObj(objmenu, OBJ_MENU, 150);
@@ -590,7 +591,6 @@ void CObjHero::Action()
 			}
 		}
 	}
-
 
 	if (m_invincible_flag == false)
 	{
@@ -694,9 +694,9 @@ void CObjHero::Action()
 	if (m_poison_f == true)
 	{
 		m_burn_max_time++;
-		if (m_burn_time >= 50)
+		if (m_burn_time >= 70)
 		{
-			g_hp -= 2.5f;
+			g_hp -= 2.0f;
 			m_burn_time = 0;
 		}
 		else
@@ -704,7 +704,7 @@ void CObjHero::Action()
 			m_burn_time++;
 		}
 
-		if (m_burn_max_time > 550)
+		if (m_burn_max_time > 700)
 		{
 			m_burn_max_time = 0;
 			m_poison_f = false;
@@ -802,6 +802,7 @@ void CObjHero::Action()
 	{
 		m_alpha = 0.0f;
 		dead_flag = true;
+		
 	}
 
 
