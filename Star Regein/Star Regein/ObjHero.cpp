@@ -801,6 +801,7 @@ void CObjHero::Action()
 	{
 		m_alpha = 0.0f;
 		dead_flag = true;
+		
 	}
 
 

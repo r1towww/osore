@@ -7,6 +7,7 @@
 #include"GameL\HitBoxManager.h"
 #include"GameL\UserData.h" 
 #include<time.h>
+#include "GameL\Audio.h"
 
 #include"GameHead.h"
 #include"ObjBoss.h"
@@ -131,6 +132,7 @@ void CObjBoss::Action()
 	{
 
 		m_warp_flag = true;
+	
 
 		//エフェクト用
 		RECT_F warp_ani_src[8] =
@@ -167,6 +169,7 @@ void CObjBoss::Action()
 			{
 				if (g_contact_star_f[i] == true)
 				{
+					Audio::Start(17); //ワープ音
 					m_px = g_star_x[i] - 20;
 					m_py = g_star_y[i] - 20;
 					break;
@@ -183,8 +186,10 @@ void CObjBoss::Action()
 
 				if (m_rand <= 4)
 				{
+					Audio::Start(17); //ワープ音
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
+					
 
 				}
 				else if (m_rand == 5)
