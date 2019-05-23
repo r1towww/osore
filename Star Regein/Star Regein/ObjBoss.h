@@ -43,8 +43,7 @@ private:
 	int m_warp_time;			//ワープ時間測定
 	bool m_warp_flag;
 
-
-
+	int m_ani_timeB;
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
 	int m_hp;//体力
