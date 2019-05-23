@@ -591,7 +591,6 @@ void CObjHero::Action()
 		}
 	}
 
-
 	if (m_invincible_flag == false)
 	{
 		if (hit->CheckElementHit(ELEMENT_NULL) == true || hit->CheckElementHit(ELEMENT_ENEMY) == true)

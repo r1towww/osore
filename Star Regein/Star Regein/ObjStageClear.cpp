@@ -169,8 +169,6 @@ void CObjStageClear::Action()
 		}
 	}
 
-	
-
 	if (m_ani_flag == true)
 	{
 		//エフェクト用
@@ -256,11 +254,9 @@ void CObjStageClear::Action()
 			else if (m_cnt_f == false && m_grade_cnt_f == true)
 				m_grade_cnt++;
 
-
-			
 			m_ani = 0;
-			m_ani_flag = false;
-			
+			m_ani_flag = false;		
+
 			
 		}
 	}
@@ -269,8 +265,6 @@ void CObjStageClear::Action()
 //ドロー
 void CObjStageClear::Draw()
 {
-
-
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
 	float Stage[4] = { 0.5f,0.5f,0.5f,1.0f };
@@ -690,6 +684,7 @@ void CObjStageClear::Draw()
 		m_grade_cnt = m_cnt;
 
 		m_grade_cnt_f = false;
+		
 	}
 	
 	if (m_end_s_f == true)

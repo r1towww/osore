@@ -24,6 +24,7 @@ CSceneSunLeo::CSceneSunLeo()
 
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
+	g_Virgo_Max = false;
 	g_Leo_Max = false;
 }
 
