@@ -123,6 +123,11 @@ void CSceneVenusTaurus::InitScene()
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
 
+
+	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+
+	
+
 	
 	//BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
