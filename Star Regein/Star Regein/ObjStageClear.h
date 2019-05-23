@@ -4,6 +4,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define CLEARGRADE 1
+
 //オブジェクト：タイトル
 class CObjStageClear :public CObj
 {

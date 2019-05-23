@@ -519,6 +519,7 @@ void CObjHero::Action()
 				//ベクトルを０にする
 				m_vx = 0.0f;
 				m_vy = 0.0f;
+				g_stage = Space;
 				//Menuオブジェクトを作成
 				CObjMenu *objmenu = new CObjMenu();
 				Objs::InsertObj(objmenu, OBJ_MENU, 150);

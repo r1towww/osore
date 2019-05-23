@@ -100,6 +100,9 @@ void CSceneMercuryVirgo::InitScene()
 	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
+	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
+	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
+
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
@@ -119,6 +122,7 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(17, L"岩砕きSE.wav", EFFECT);
 	Audio::LoadAudio(18, L"岩砕き・破壊SE.wav", EFFECT);
+	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
