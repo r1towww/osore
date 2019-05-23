@@ -81,6 +81,7 @@ private:
 
 	bool m_beam_f;//ビームフラグ
 	bool m_attack_f;
+	bool m_attack_key_f;
 
 	bool m_do_f;//敵攻撃フラグ
 
