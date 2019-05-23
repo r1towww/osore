@@ -694,9 +694,9 @@ void CObjHero::Action()
 	if (m_poison_f == true)
 	{
 		m_burn_max_time++;
-		if (m_burn_time >= 50)
+		if (m_burn_time >= 70)
 		{
-			g_hp -= 2.5f;
+			g_hp -= 2.0f;
 			m_burn_time = 0;
 		}
 		else
@@ -704,7 +704,7 @@ void CObjHero::Action()
 			m_burn_time++;
 		}
 
-		if (m_burn_max_time > 550)
+		if (m_burn_max_time > 700)
 		{
 			m_burn_max_time = 0;
 			m_poison_f = false;
