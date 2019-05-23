@@ -39,6 +39,11 @@ void CObjStageClear::Init()
 		else
 			m_kill_grade = 1;
 	}
+	else if (g_stage == EarthStar)//地球
+	{
+		m_kill_grade = 0;
+	}
+
 	m_kill_star_cnt = 0;	//キル評価のカウント
 
 	//メッセージの情報を持ってくる
@@ -64,6 +69,8 @@ void CObjStageClear::Init()
 
 	m_damage_star_cnt = 0;		//被ダメージの評価
 
+	
+
 	m_next_cnt = 0;		//次へ進む用のカウント
 	m_key_f = true;	//キー入力制御用フラグ
 	m_grade_cnt_f = false;
@@ -83,14 +90,7 @@ void CObjStageClear::Action()
 	if ((Input::GetVKey('Z') == true && m_key_f == true || Input::GetVKey(VK_RETURN) == true) && m_key_f == true)
 	{
 		if (m_next_cnt == 0)
-		{
-			
-			
-			
-			
-			
-			
-			
+		{	
 			m_next_cnt++;
 			
 		}
@@ -120,6 +120,7 @@ void CObjStageClear::Action()
 		if (m_Tra >= 1.0f)
 		{
 			Scene::SetScene(new CSceneStageChoice());//ステージ選択
+			g_stage = Space;
 			g_stage_clear = false;
 			g_move_stop_flag = false;
 
@@ -561,35 +562,38 @@ void CObjStageClear::Draw()
 	
 
 	//キル数評価の描画用----------------------------------------
-	if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+	if (g_Boss_Spawn == true || g_stage != EarthStar)
 	{
-		m_ani_flag = true;
-	}
-	if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
-		|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
-		|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
-	{
-		//表示位置の設定
-		dst.m_top    = 310.0f;
-		dst.m_left   = 220.0f + (40.0f * m_kill_star_cnt);
-		dst.m_right  = 300.0f + (40.0f * m_kill_star_cnt);
-		dst.m_bottom = dst.m_top + 80.0f;
-		Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-	}
-	//else if (m_grade_f[1] == true && m_kill_grade == 0)
-	//{
-	//	m_grade_f[2] = true;
-	//	m_ani_flag = false;
-	//}
-	for (int i = 0; i < m_kill_grade; i++)
-	{
-		//表示位置の設定
-		dst.m_top    = 335.0f;
-		dst.m_left   = 245.0f + (40.0f * i);
-		dst.m_right  = 275.0f + (40.0f * i);
-		dst.m_bottom = 365.0f;
-		if (m_kill_star_f[i] == true) {
-			Draw::Draw(70, &src, &dst, effc, 0.0f);
+		if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+		{
+			m_ani_flag = true;
+		}
+		if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
+			|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
+			|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
+		{
+			//表示位置の設定
+			dst.m_top = 310.0f;
+			dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
+			dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
+			dst.m_bottom = dst.m_top + 80.0f;
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		}
+		//else if (m_grade_f[1] == true && m_kill_grade == 0)
+		//{
+		//	m_grade_f[2] = true;
+		//	m_ani_flag = false;
+		//}
+		for (int i = 0; i < m_kill_grade; i++)
+		{
+			//表示位置の設定
+			dst.m_top = 335.0f;
+			dst.m_left = 245.0f + (40.0f * i);
+			dst.m_right = 275.0f + (40.0f * i);
+			dst.m_bottom = 365.0f;
+			if (m_kill_star_f[i] == true) {
+				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			}
 		}
 	}
 
