@@ -113,6 +113,7 @@ void CObjGameOver::Draw()
 			if (m_Right == true)
 			{
 				//ステージ選択
+				g_stage = Space;
 				Scene::SetScene(new CSceneStageChoice());
 			}
 			else if (m_Left == true)
