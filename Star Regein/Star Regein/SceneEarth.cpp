@@ -114,7 +114,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
-	//Draw::LoadImageW(L"ボス消滅エフェクト.png", 100, TEX_SIZE_1024);
+	Draw::LoadImageW(L"ボス消滅エフェクト.png", 100, TEX_SIZE_128);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);

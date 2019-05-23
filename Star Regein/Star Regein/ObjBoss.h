@@ -43,6 +43,11 @@ private:
 	int m_warp_time;			//ワープ時間測定
 	bool m_warp_flag;
 
+	//死亡エフェクト
+	RECT_F m_dead_eff;
+	bool dead_flag;
+	int m_dead_time;
+	int m_dead_ani;
 
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
@@ -86,6 +91,7 @@ private:
 	bool m_do_f;//敵攻撃フラグ
 
 	bool m_df;//ミニマップからの削除フラグ
+
 
 
 };

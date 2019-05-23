@@ -28,7 +28,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 40;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -91,6 +91,15 @@ void CObjBoss::Init()
 	m_warp_flag = false;
 	m_warp_time = 200;
 
+	//死亡エフェクト
+	m_dead_eff.m_top = 0;
+	m_dead_eff.m_left = 0;
+	m_dead_eff.m_right = 192;
+	m_dead_eff.m_bottom = 192;
+
+	dead_flag	= false;	
+	m_dead_time =0;//アニメーション間隔用
+	m_dead_ani  =0;//アニメーション用
 
 
 	//当たり判定用のHitBoxを作成
@@ -100,6 +109,53 @@ void CObjBoss::Init()
 //アクション
 void CObjBoss::Action()
 {
+	if (dead_flag == true)
+	{
+		//エフェクト用
+		RECT_F dead[20] =
+		{
+
+			{ 0,     0, 192, 192 },
+			{ 0,   192, 384, 192 },
+			{ 0,   384, 576, 192 },
+			{ 0,   576, 768, 192 },
+			{ 0,   768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+			{ 192, 384, 576, 384 },
+			{ 192, 576, 768, 384 },
+			{ 192, 768, 960, 384 },
+			{ 384,   0, 192, 576 },
+			{ 384, 192, 384, 576 },
+			{ 384, 384, 576, 576 },
+			{ 384, 576, 768, 576 },
+			{ 384, 768, 960, 576 },
+			{ 576,   0, 192, 768 },
+			{ 576, 192, 384, 768 },
+			{ 576, 384, 576, 768 },
+			{ 576, 576, 768, 768 },
+			{ 576, 768, 960, 768 },
+
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_dead_time > 2)
+		{
+			m_dead_ani++;		//アニメーションのコマを1つ進める
+			m_dead_time = 0;
+
+		}
+		else
+		{
+			m_dead_time++;
+		}
+		// 12番目（画像最後）まで進んだら、0に戻す
+		if (m_dead_ani == 20)
+		{
+			m_dead_ani = 0;
+			m_dead_time = 0;
+		}
+	}
 
 	m_warp_time--;
 
@@ -556,7 +612,8 @@ void CObjBoss::Action()
 		g_boss_d_flag = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		g_Earth_BossKill = true;
-		Scene::SetScene(new CSceneED());//EDに移行
+		dead_flag = true;
+		//Scene::SetScene(new CSceneED());//EDに移行
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
@@ -613,5 +670,16 @@ void CObjBoss::Draw()
 		m_warp_ani = 0;
 	}
 
+	if (dead_flag == true)
+	{
+		//表示位置の設定
+		dst.m_top = -80.0f + m_py + block->GetScrolly();
+		dst.m_left = 240.0f + m_px + block->GetScrollx();
+		dst.m_right = -80.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 200.0f + m_py + block->GetScrolly();
+		//エフェクトの描画
+		Draw::Draw(100, &m_dead_eff, &dst, c, 0.0f);
+
+	}
 
 }
