@@ -32,7 +32,6 @@ class CObjStageClear :public CObj
 		bool m_grade_draw_f;//グレード評価表示用フラグ
 
 		bool m_cnt_f;		//カウントするかどうかのフラグ
-		bool m_next_f;
 		bool m_end_start;
 		bool m_end_f;		//最終アニメーション終了フラグ
 		bool m_end_s_f;		//星出現開始フラグ
@@ -51,8 +50,9 @@ class CObjStageClear :public CObj
 		int m_damage_grade;		//ダメージの評価
 		int m_damage_star_cnt;		//ダメージの評価
 
-
-		bool m_push_flag;
+		int m_next_cnt;		//次へ進む用カウント
+		bool m_key_f;		//キー入力制御用フラグ
+		bool m_push_flag;		//暗転用フラグ
 		float m_alpha[7] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };	//メッセージalpha値変更用
 
 };

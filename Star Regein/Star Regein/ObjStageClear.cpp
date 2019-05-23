@@ -45,11 +45,11 @@ void CObjStageClear::Init()
 	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 
 	//クリアタイムの評価基準
-	if (objmes->GetMINUTE() < 2)
+	if (objmes->GetMINUTE() < 1)
 		m_time_grade = 3;
-	else if(objmes->GetMINUTE() < 3)
+	else if(objmes->GetMINUTE() < 2)
 		m_time_grade = 2;
-	else if (objmes->GetMINUTE() < 4)
+	else if (objmes->GetMINUTE() < 3)
 		m_time_grade = 1;
 	else
 		m_time_grade = 0;
@@ -64,6 +64,8 @@ void CObjStageClear::Init()
 
 	m_damage_star_cnt = 0;		//被ダメージの評価
 
+	m_next_cnt = 0;		//次へ進む用のカウント
+	m_key_f = true;	//キー入力制御用フラグ
 	m_grade_cnt_f = false;
 	m_grade_draw_f = false;
 	m_grade_cnt = 0;
@@ -78,11 +80,29 @@ void CObjStageClear::Init()
 void CObjStageClear::Action()
 {
 	//キー入力タイムが一定に達した場合、キー入力を許可する
-	if ((Input::GetVKey('Z') == true && m_alpha[4] == 1.0f || Input::GetVKey(VK_RETURN) == true) && m_alpha[4] == 1.0f)
+	if ((Input::GetVKey('Z') == true && m_key_f == true || Input::GetVKey(VK_RETURN) == true) && m_key_f == true)
 	{
-
-		m_push_flag = true;
-
+		if (m_next_cnt == 0)
+		{
+			
+			
+			
+			
+			
+			
+			
+			m_next_cnt++;
+			
+		}
+		else if (m_next_cnt == 1)
+		{
+			m_push_flag = true;
+		}
+		m_key_f = false;
+	}
+	else
+	{
+		m_key_f = true;
 	}
 	//Zキーを押すと徐々に暗転し、シーン移行
 	if (m_push_flag == true)
@@ -114,43 +134,34 @@ void CObjStageClear::Action()
 
 
 
-	if (m_alpha[5] == 1.0f) {
-		m_alpha[6] += 0.05f;
-		if (m_alpha[6] >= 1.0f)
-			m_alpha[6] = 1.0f;
-	}
-	else if (m_alpha[4] == 1.0f) {
-		m_alpha[5] += 0.05f;
-		if (m_alpha[5] >= 1.0f)
-			m_alpha[5] = 1.0f;
-	}
-	else if (m_alpha[3] == 1.0f&& m_ani_flag == false) {
+	
+	if (m_alpha[3] == 1.0f) {			//被ダメージ評価用
 		m_alpha[4] += 0.05f;
 		if (m_alpha[4] >= 1.0f) {
 			m_alpha[4] = 1.0f;
 			m_ani_flag = true;
 		}
 	}
-	else if (m_alpha[2] == 1.0f&& m_ani_flag == false) {
+	else if (m_alpha[2] == 1.0f&& m_ani_flag == false) {	//キル数評価用
 		m_alpha[3] += 0.05f;
 		if (m_alpha[3] >= 1.0f) {
 			m_alpha[3] = 1.0f;
 			m_ani_flag = true;
 		}
 	}
-	else if (m_alpha[1] == 1.0f) {
+	else if (m_alpha[1] == 1.0f) {							//クリアタイム評価用
 		m_alpha[2] += 0.05f;
 		if (m_alpha[2] >= 1.0f) {
 			m_alpha[2] = 1.0f;
 			m_ani_flag = true;
 		}
 	}
-	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {
+	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {		//取得星座用
 		m_alpha[1] += 0.05f;
 		if (m_alpha[1] >= 1.0f)
 			m_alpha[1] = 1.0f;
 	}
-	else if (m_time == 60) {	//タイムが60になったらアルファ値を増やす
+	else if (m_time == 60) {	//タイムが60になったらアルファ値を増やす	ステージクリア用
 		m_alpha[0] += 0.05f;
 		if (m_alpha[0] >= 1.0f) {
 			m_alpha[0] = 1.0f;	//1.0fになったら次へ
@@ -183,7 +194,7 @@ void CObjStageClear::Action()
 		};
 
 		//アニメーションのコマ間隔制御
-		if (m_ani_time > 2)
+		if (m_ani_time > 1)
 		{
 			m_ani++;		//アニメーションのコマを1つ進める
 			m_ani_time = 0;
@@ -223,7 +234,7 @@ void CObjStageClear::Action()
 				m_grade_f[2] = true;
 			//ダメージ評価の分、星を表示
 			if (m_damage_grade == m_damage_star_cnt && m_grade_f[2] == true)
-				m_grade_f[3] = true;
+				m_grade_f[3] = true; m_end_start = true;
 
 			if (m_cnt == m_grade_cnt) {
 				//最終アニメーションフラグがオンの時
@@ -262,7 +273,7 @@ void CObjStageClear::Draw()
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
-	float Stage[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float Stage[4] = { 0.5f,0.5f,0.5f,1.0f };
 	float effc[4] = { 1.0f,1.0f,1.0f,m_Eff_Tra };
 	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };	//星座クリアメッセージカラー
 	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };	//取得スキルメッセージカラー
@@ -274,7 +285,14 @@ void CObjStageClear::Draw()
 	float c5y[4] = { 1.0f,1.0f,0.0f,m_alpha[4] };	//被ダメージメッセージカラー（黄）
 	float c5r[4] = { 1.0f,0.0f,0.0f,m_alpha[4] };	//被ダメージメッセージカラー（赤）
 
-	float c6[4] = { 1.0f,1.0f,1.0f,m_alpha[5] };
+	float c6s[4] = { 0.0f,0.5f,1.0f,m_alpha[5] };
+	float c6a[4] = { 1.0f,0.0f,0.0f,m_alpha[5] };
+	float c6b[4] = { 0.0f,1.0f,0.0f,m_alpha[5] };
+	float c6c[4] = { 1.0f,1.0f,1.0f,m_alpha[5] };
+
+
+
+
 	float c7[4] = { 1.0f,1.0f,1.0f,m_alpha[6] };
 
 
@@ -564,11 +582,11 @@ void CObjStageClear::Draw()
 		dst.m_bottom = dst.m_top + 80.0f;
 		Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 	}
-	else if (m_grade_f[1] == true && m_kill_grade == 0)
-	{
-		m_grade_f[2] = true;
-		m_ani_flag = false;
-	}
+	//else if (m_grade_f[1] == true && m_kill_grade == 0)
+	//{
+	//	m_grade_f[2] = true;
+	//	m_ani_flag = false;
+	//}
 	for (int i = 0; i < m_kill_grade; i++)
 	{
 		//表示位置の設定
@@ -597,9 +615,9 @@ void CObjStageClear::Draw()
 			|| m_ani_flag == true && m_damage_star_cnt == 2 && m_grade_f[2] == true && m_grade_f[3] != true)
 		{
 			//表示位置の設定
-			dst.m_top = 340.0f;
-			dst.m_left = 220.0f + (40.0f * m_damage_star_cnt);
-			dst.m_right = 300.0f + (40.0f * m_damage_star_cnt);
+			dst.m_top    = 340.0f;
+			dst.m_left   = 220.0f + (40.0f * m_damage_star_cnt);
+			dst.m_right  = 300.0f + (40.0f * m_damage_star_cnt);
 			dst.m_bottom = dst.m_top + 80.0f;
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 		}
@@ -651,14 +669,13 @@ void CObjStageClear::Draw()
 
 
 	//ダメージまでの評価を表示し終えた際
-	if (m_grade_f[3] == true)
+	if (m_grade_f[3] == true && m_alpha[4] == 1.0f&& m_end_start == true)
 	{
 		m_cnt_f = false;
+	
 		for (int i = 0; i < m_cnt; i++)
 		{
-			if(m_grade_cnt_f == true)
-				m_ani_flag = true;
-			
+	
 			//表示位置の設定
 			dst.m_top    = 400.0f;
 			dst.m_left   =  20.0f + (50.0f * i);
@@ -667,6 +684,16 @@ void CObjStageClear::Draw()
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 			
 		}
+		//最終アニメーションフラグをオンにする
+		m_end_f = true;
+		//今まで数えた星の数を一番下に出す星のカウントと同じにする
+		m_grade_cnt = m_cnt;
+
+		m_grade_cnt_f = false;
+	}
+	
+	if (m_end_s_f == true)
+	{
 		for (int i = 0; i < m_grade_cnt; i++)
 		{
 			//表示位置の設定
@@ -678,11 +705,22 @@ void CObjStageClear::Draw()
 				Draw::Draw(70, &src, &dst, effc, 0.0f);
 			}
 		}
+		m_alpha[5] += 0.05f;
+		if (m_alpha[5] >= 1.0f) {
+			m_alpha[5] = 1.0f;
+		}
+		if (m_grade_cnt == 10)
+			Font::StrDraw(L"S", 550, 390, 120, c6s);
+		else if (m_grade_cnt >= 7)
+			Font::StrDraw(L"A", 550, 390, 120, c6a);
+		else if (m_grade_cnt >= 4)
+			Font::StrDraw(L"B", 550, 390, 120, c6b);
+		else
+			Font::StrDraw(L"C", 550, 390, 120, c6c);
 	}
+
 	
 
-
-		
 	//シーン移行用
 	if (m_push_flag == true)
 	{
