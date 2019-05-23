@@ -56,7 +56,8 @@ void ObjStageChoiceHero::Action()
 
 	g_gemini_check = false;
 	//星座選択時に入力制御する
-	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun||g_stage==Performance) {
+	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun||g_stage==Performance||
+		g_stage==EarthStar||g_stage==VenusTaurus||g_stage== VenusLibra ||g_stage==MercuryGemini||g_stage==MercuryVirgo|g_stage==SunLeo) {
 		return;
 	}
 	//主人公機が領域外行かない処理

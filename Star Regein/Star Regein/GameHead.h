@@ -328,6 +328,11 @@ extern int g_Leo_Grade;
 extern bool g_Tutorial_Clear; //チュートリアルクリア
 extern bool g_Earth_BossKill; //ラスボスを倒した
 extern bool g_All_Skill_Get;  //すべてのスキルを獲得
+extern int g_TRank;		//ランク管理用
+extern int g_LiRank;		//ランク管理用
+extern int g_GRank;		//ランク管理用
+extern int g_VRank;		//ランク管理用
+extern int g_LeRank;		//ランク管理用
 
 
 //------------------------------------------------
