@@ -704,14 +704,107 @@ void CObjStageClear::Draw()
 		if (m_alpha[5] >= 1.0f) {
 			m_alpha[5] = 1.0f;
 		}
+		//星の数に応じてランクづけ
 		if (m_grade_cnt == 10)
+		{
 			Font::StrDraw(L"S", 550, 390, 120, c6s);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = S;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = S;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = S;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = S;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = S;
+			}
+		}
 		else if (m_grade_cnt >= 7)
+		{
 			Font::StrDraw(L"A", 550, 390, 120, c6a);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = A;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = A;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = A;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = A;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = A;
+			}
+		}
 		else if (m_grade_cnt >= 4)
+		{
 			Font::StrDraw(L"B", 550, 390, 120, c6b);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = B;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = B;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = B;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = B;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = B;
+			}
+		}
 		else
+		{
 			Font::StrDraw(L"C", 550, 390, 120, c6c);
+			//ランクデータ保存
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_Grade = C;
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_Grade = C;
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_Grade = C;
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_Grade = C;
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_Grade = C;
+			}
+		}
 	}
 
 	
