@@ -65,6 +65,8 @@ void CObjBoss::Init()
 
 	m_bullet_t = 0;
 
+	m_attack_key_f = true;
+
 	m_invincible_flag = false;
 
 	m_attack_f = false;
@@ -87,7 +89,7 @@ void CObjBoss::Init()
 	m_warp_ani_time = 0;		//アニメーション間隔タイム
 
 	m_warp_flag = false;
-	m_warp_time = 300;
+	m_warp_time = 200;
 
 
 
@@ -203,9 +205,10 @@ void CObjBoss::Action()
 		if (m_warp_ani == 7)
 		{
 			m_warp_ani = 0;
-			m_warp_time = 700;
+			m_warp_time = 400;
 			m_warp_flag = false;
 			m_attack_f = true;
+			m_attack_key_f = true;
 		}
 
 	}
@@ -218,69 +221,107 @@ void CObjBoss::Action()
 		{
 			if (m_beam_f == false)
 			{
-				//攻撃パターン決定
-				srand(time(NULL));
-				//			m_attack_pattern = rand() % 3;
-				m_attack_pattern = 1;
-
-				CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
-
-				//蛇召喚
-				if (m_attack_pattern == 0)
+				if (m_attack_key_f == true)
 				{
-					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+					//攻撃パターン決定
+					srand(time(NULL));
+					m_attack_pattern = rand() % 2;
+					//m_attack_pattern = 1;
 
-					float hx = hero->GetX();
-					float hy = hero->GetY();
+					CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
 
-					m_snake_c = 0;
-					m_imposition_t = 0;
-
-					//蛇オブジェクト作成
-					for (int i = 0; i < MAPSIZE; i++)
+					//蛇召喚
+					if (m_attack_pattern == 0)
 					{
-						for (int j = 0; j < MAPSIZE; j++)
+						CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+						float hx = hero->GetX();
+						float hy = hero->GetY();
+
+						m_snake_c = 0;
+						m_imposition_t = 0;
+
+						//蛇オブジェクト作成
+						for (int i = 0; i < MAPSIZE; i++)
 						{
-							if (g_map[i][j] == 5)
+							for (int j = 0; j < MAPSIZE; j++)
 							{
-								if (g_snake_d_flag[m_snake_c] == false)
+								if (g_map[i][j] == 5)
 								{
-									//蛇オブジェクト作成
-									CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
-																									  //敵の位置を取得
-									float* snakex = snake->GetPX();
-									float* snakey = snake->GetPY();
+									if (g_snake_d_flag[m_snake_c] == false)
+									{
+										//蛇オブジェクト作成
+										CObjSnake* snake = new CObjSnake(j*MAPSIZE, i*MAPSIZE, m_snake_c);//オブジェクト作成
+																										  //敵の位置を取得
+										float* snakex = snake->GetPX();
+										float* snakey = snake->GetPY();
 
-									g_snake_x[m_snake_c] = snake->GetPX();
-									g_snake_y[m_snake_c] = snake->GetPY();
+										g_snake_x[m_snake_c] = snake->GetPX();
+										g_snake_y[m_snake_c] = snake->GetPY();
 
-									g_snake_d_flag[m_snake_c] = true;
+										g_snake_d_flag[m_snake_c] = true;
 
-									g_stan_snake_flag[m_snake_c] = false;
+										g_stan_snake_flag[m_snake_c] = false;
 
-									Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+										Objs::InsertObj(snake, OBJ_SNAKE, 11);//マネージャに登録
+									}
+									m_snake_c++;
 								}
-								m_snake_c++;
 							}
+							if (m_snake_c == 20)
+								break;
 						}
-						if (m_snake_c == 20)
-							break;
 					}
 				}
 
+				//毒弾幕
 				if (m_attack_pattern == 1)
 				{
 					m_imposition_t = 0;
-
-					//毒弾丸18発同時発射
-					for (int i = 0; i < 360; i += 18)
+					if (count <= 3)
 					{
-						CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 3.0f);//オブジェクト作成
-						Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+						if (count == 0)
+						{
+							//毒弾丸18発同時発射
+							for (int i = 36; i < 360; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 1)
+						{
+							//毒弾丸18発同時発射
+							for (int i = 18; i < 342; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 2)
+						{
+							//毒弾丸18発同時発射
+							for (int i = -0; i < 324; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+						}
+						if (count == 3)
+						{
+							//毒弾丸18発同時発射
+							for (int i = -18; i < 306; i += 18)
+							{
+								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+							}
+							m_attack_f = false;
+							count = 0;
+						}
+						count++;
 					}
 				}
-
-				m_attack_f = false;
+				m_attack_key_f = false;
 			}
 			else
 			{
@@ -305,7 +346,6 @@ void CObjBoss::Action()
 				m_alpha = 0.0f;
 				m_beam_f = false;
 				m_imposition_t = 0;
-				m_attack_f = false;
 			}
 		}
 		else
