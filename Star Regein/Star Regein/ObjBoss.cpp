@@ -101,6 +101,16 @@ void CObjBoss::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjBoss::Action()
 {
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
+	}
 
 	m_warp_time--;
 
