@@ -259,6 +259,7 @@ void CObjBoss::Action()
 
 						m_snake_c = 0;
 						m_imposition_t = 0;
+						Audio::Start(17); //ワープ音
 
 						//蛇オブジェクト作成
 						for (int i = 0; i < MAPSIZE; i++)
@@ -628,8 +629,8 @@ void CObjBoss::Action()
 	if (m_hp <= 0)
 	{
 		//敵削除
-		//m_alpha = 0.0f;
-		//hit->SetInvincibility(true);
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
 		g_boss_d_flag = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		g_Earth_BossKill = true;
@@ -644,12 +645,10 @@ void CObjBoss::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
-	int AniDataB[6] =
-	{ 0,1,2,3,4,0 };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
-	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
+	float cB[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
@@ -700,32 +699,9 @@ void CObjBoss::Draw()
 	if (dead_flag == true)
 	{
 		//エフェクトの描画
-		Draw::Draw(65, &m_dead_eff, &dst, c, 0.0f);
+		Draw::Draw(65, &m_dead_eff, &dst, cB, 0.0f);
 
 	}
 
-	if (g_stan_boss_flag == true)
-	{
-		RECT_F src;//描画元切り取り位置
-		RECT_F dst;//描画先表示位置
-
-				   //ブロック情報を持ってくる
-		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		//切り取り位置の設定
-		src.m_top = 0.0f * m_posture;
-		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
-		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
-		src.m_bottom = src.m_top + 192.0f;
-
-		//表示位置の設定
-		dst.m_top = -30.0f + m_py + block->GetScrolly();
-		dst.m_left = -35.0f + m_px + block->GetScrollx();
-		dst.m_right = 200.0f + m_px + block->GetScrollx();
-		dst.m_bottom =200.0f + m_py + block->GetScrolly();
-
-		//描画
-		Draw::Draw(49, &src, &dst, cB, 0.0f);
-	}
 
 }
