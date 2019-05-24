@@ -130,9 +130,8 @@ void CSceneVenusTaurus::InitScene()
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	
-
-	
 	//BGM
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
