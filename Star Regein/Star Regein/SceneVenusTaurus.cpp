@@ -125,6 +125,9 @@ void CSceneVenusTaurus::InitScene()
 
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	
 

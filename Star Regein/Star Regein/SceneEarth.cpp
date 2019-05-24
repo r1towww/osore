@@ -140,6 +140,9 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
 

@@ -123,6 +123,9 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(17, L"岩砕きSE.wav", EFFECT);
 	Audio::LoadAudio(18, L"岩砕き・破壊SE.wav", EFFECT);
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"乙女座BGM.wav", SOUND_TYPE::BACK_MUSIC);

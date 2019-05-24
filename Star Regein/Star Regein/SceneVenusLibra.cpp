@@ -126,6 +126,9 @@ void CSceneVenusLibra::InitScene()
 
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	 //BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
