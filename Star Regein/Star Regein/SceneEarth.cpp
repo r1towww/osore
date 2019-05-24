@@ -140,6 +140,11 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
+
+	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
 
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
@@ -165,21 +170,18 @@ void CSceneEarth::InitScene()
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
 	//クリアしてなかったらチュートリアル表示
-	if (g_Earth_clear != true)
+	//チュートリアル吹き出し作成
+	CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
+	Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+	//チュートリアルオブジェクト作成
+	CObjTutorial* objtutorial = new CObjTutorial(1, 5);
+	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+	//チュートリアル発生時のみ作成
+	if (g_tutorial_flag == true)
 	{
-		//チュートリアル吹き出し作成
-		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 5);
-		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-		//チュートリアルオブジェクト作成
-		CObjTutorial* objtutorial = new CObjTutorial(1, 5);
-		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-		//チュートリアル発生時のみ作成
-		if (g_tutorial_flag == true)
-		{
-			//テキストボックスオブジェクト作成
-			CObjTextBox* objtextbox = new CObjTextBox();
-			Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-		}
+		//テキストボックスオブジェクト作成
+		CObjTextBox* objtextbox = new CObjTextBox();
+		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
 	}
 	
 

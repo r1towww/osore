@@ -210,8 +210,6 @@ void CObjBoss::Action()
 					Audio::Start(17); //ÉèÅ[Évâπ
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
-					
-
 				}
 				else if (m_rand == 5)
 				{

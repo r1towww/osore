@@ -125,6 +125,9 @@ void CSceneVenusTaurus::InitScene()
 
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
+	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
+	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
+	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	
 
@@ -159,10 +162,10 @@ void CSceneVenusTaurus::InitScene()
 	if (g_Taurus_clear != true)
 	{
 		//チュートリアル吹き出し作成
-		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 7);
+		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 4);
 		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
 		//チュートリアルオブジェクト作成
-		CObjTutorial* objtutorial = new CObjTutorial(1, 7);
+		CObjTutorial* objtutorial = new CObjTutorial(1, 4);
 		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 		//チュートリアル発生時のみ作成
 		if (g_tutorial_flag == true)
