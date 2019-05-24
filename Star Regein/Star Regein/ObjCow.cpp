@@ -604,8 +604,8 @@ void CObjCow::Draw()
 	{
 
 		//•\Ž¦ˆÊ’u‚ÌÝ’è
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 0.0f + m_px + block->GetScrollx();
+		dst.m_top = -60.0f + m_py + block->GetScrolly();
+		dst.m_left = -60.0f + m_px + block->GetScrollx();
 		dst.m_right = 128.0f + m_px + block->GetScrollx();
 		dst.m_bottom = 128.0f + m_py + block->GetScrolly();
 

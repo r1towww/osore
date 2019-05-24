@@ -127,10 +127,11 @@ void CSceneMercuryGemini::InitScene()
 	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
-	Audio::LoadAudio(23, L"主人公死亡時SE.wav", EFFECT);
+	Audio::LoadAudio(25, L"主人公死亡時SE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"双子座BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 

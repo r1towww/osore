@@ -123,7 +123,7 @@ void CSceneVenusLibra::InitScene()
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
-	Audio::LoadAudio(23, L"主人公死亡時SE.wav", EFFECT);
+	Audio::LoadAudio(25, L"主人公死亡時SE.wav", EFFECT);
 
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);

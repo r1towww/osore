@@ -136,7 +136,7 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
-	Audio::LoadAudio(23, L"主人公死亡時SE.wav", EFFECT);
+	Audio::LoadAudio(25, L"主人公死亡時SE.wav", EFFECT);
 
 	Audio::LoadAudio(24, L"リジェネSE.wav", EFFECT);
 
@@ -148,6 +148,7 @@ void CSceneEarth::InitScene()
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
 	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	if (g_Boss_Spawn != true)
 	{

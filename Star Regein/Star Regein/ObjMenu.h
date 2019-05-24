@@ -21,6 +21,6 @@ class CObjMenu :public CObj
 		bool m_choice_key_f;	//選択用のキーフラグ
 		bool m_push_flag;
 		float m_Tra;
-
+		bool m_f;
 };
 
