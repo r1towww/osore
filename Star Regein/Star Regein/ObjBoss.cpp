@@ -109,6 +109,8 @@ void CObjBoss::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjBoss::Action()
 {
+	if (g_tutorial_flag == true)
+		return;
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;

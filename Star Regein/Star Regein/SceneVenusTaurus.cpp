@@ -78,7 +78,7 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
-	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"敵死亡エフェクト.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
