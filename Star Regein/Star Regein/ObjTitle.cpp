@@ -9,7 +9,7 @@
 #include "ObjTitle.h"
 
 //通常プレイの際は false
-#define CLEARF	false
+#define CLEARF	true
 
 //各惑星・星座のクリア状況
 bool g_Earth_clear= CLEARF;	//地球	

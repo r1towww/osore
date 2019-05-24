@@ -131,10 +131,6 @@ void CObjStageClear::Action()
 	m_time++;
 	if (m_time >= 60)
 		m_time = 60;
-
-
-
-
 	
 	if (m_alpha[3] == 1.0f) {			//被ダメージ評価用
 		m_alpha[4] += 0.05f;
