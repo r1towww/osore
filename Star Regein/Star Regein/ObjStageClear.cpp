@@ -81,11 +81,18 @@ void CObjStageClear::Init()
 	m_eff.m_left = 0;
 	m_eff.m_right = 192;
 	m_eff.m_bottom = 192;
+
+
+	Audio::Stop(8);		//戦闘BGMを止める
+
+	Audio::Start(23);	//クリアBGMを鳴らす
 }
 
 //アクション
 void CObjStageClear::Action()
 {
+
+
 	//キー入力タイムが一定に達した場合、キー入力を許可する
 	if ((Input::GetVKey('Z') == true  || Input::GetVKey(VK_RETURN) == true))
 	{
@@ -173,14 +180,15 @@ void CObjStageClear::Action()
 	if (m_time >= 60)
 		m_time = 60;
 
-
-	if (m_alpha[3] == 1.0f) {			//被ダメージ評価用
+	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
+	if (m_alpha[3] == 1.0f && m_ani_flag == false) {		//被ダメージ評価用
 		m_alpha[4] += 0.05f;
 		if (m_alpha[4] >= 1.0f) {
 			m_alpha[4] = 1.0f;
 			m_ani_flag = true;
 		}
 	}
+	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
 	else if (m_alpha[2] == 1.0f&& m_ani_flag == false) {	//キル数評価用
 		m_alpha[3] += 0.05f;
 		if (m_alpha[3] >= 1.0f) {
@@ -188,6 +196,7 @@ void CObjStageClear::Action()
 			m_ani_flag = true;
 		}
 	}
+	//前のメッセージが表示された際
 	else if (m_alpha[1] == 1.0f) {							//クリアタイム評価用
 		m_alpha[2] += 0.05f;
 		if (m_alpha[2] >= 1.0f) {
@@ -195,7 +204,8 @@ void CObjStageClear::Action()
 			m_ani_flag = true;
 		}
 	}
-	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {		//取得星座用
+	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
+	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {	//取得星座用
 		m_alpha[1] += 0.05f;
 		if (m_alpha[1] >= 1.0f)
 			m_alpha[1] = 1.0f;
@@ -203,7 +213,7 @@ void CObjStageClear::Action()
 	else if (m_time == 60) {	//タイムが60になったらアルファ値を増やす	ステージクリア用
 		m_alpha[0] += 0.05f;
 		if (m_alpha[0] >= 1.0f) {
-			m_alpha[0] = 1.0f;	//1.0fになったら次へ
+			m_alpha[0] = 1.0f;	//1.0fになったら次のメッセージの表示
 			m_ani_flag = true;
 		}
 	}
@@ -213,6 +223,7 @@ void CObjStageClear::Action()
 		//最終リザルト以外
 		if(m_end_s_f != true)
 			Audio::Start(19);	//エフェクトを鳴らす
+
 		//エフェクト用
 		RECT_F ani_src[15] =
 		{

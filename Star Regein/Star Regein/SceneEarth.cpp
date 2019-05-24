@@ -147,7 +147,10 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
 	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
 
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+
+	
 
 	Audio::Start(8);
 	//blockオブジェクト作成
