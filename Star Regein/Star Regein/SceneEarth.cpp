@@ -145,6 +145,7 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
+	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
 
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
