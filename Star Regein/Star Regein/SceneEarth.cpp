@@ -17,7 +17,7 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
-bool g_Boss_Spawn = true;
+bool g_Boss_Spawn = false;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
