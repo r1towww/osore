@@ -128,7 +128,7 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(22, L"BCÉâÉìÉNSE.wav", EFFECT);
 
 	//BGM
-	Audio::LoadAudio(8, L"êÌì¨âÊñ _BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(8, L"â≥èóç¿BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
