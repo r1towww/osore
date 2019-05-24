@@ -819,7 +819,7 @@ void CObjHero::Action()
 	}
 	if (m_SE_on ==1)
 	{
-		Audio::Start(23);
+		Audio::Start(25);
 	}
 
 	if (dead_flag == true)
