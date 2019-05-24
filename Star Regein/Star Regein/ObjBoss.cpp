@@ -33,7 +33,6 @@ void CObjBoss::Init()
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
-	m_ani_timeB = 0;
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
@@ -542,7 +541,6 @@ void CObjBoss::Action()
 		if (g_Leo_cnt >= 200.0f)
 		{
 			m_ani_frame++;	//アニメーションのコマを１つ進める
-			m_ani_timeB = 10;
 
 			if (g_Leo_cnt >= 200.0f)
 			{
