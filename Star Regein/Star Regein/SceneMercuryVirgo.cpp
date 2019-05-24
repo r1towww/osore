@@ -97,7 +97,7 @@ void CSceneMercuryVirgo::InitScene()
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"敵死亡エフェクト.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
@@ -126,6 +126,7 @@ void CSceneMercuryVirgo::InitScene()
 	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
+	Audio::LoadAudio(23, L"主人公死亡時SE.wav", EFFECT);
 
 	//BGM
 	Audio::LoadAudio(8, L"乙女座BGM.wav", SOUND_TYPE::BACK_MUSIC);

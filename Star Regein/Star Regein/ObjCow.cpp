@@ -497,6 +497,17 @@ void CObjCow::Action()
 		hit->SetInvincibility(true);
 
 	};
+	//移動アニメーション
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 3)
+	{
+		m_ani_frame = 1;
+	}
 
 	//HPが０以下でエフェクト開始
 	if (m_cow_delete == true)
