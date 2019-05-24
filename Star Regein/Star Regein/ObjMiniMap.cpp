@@ -502,7 +502,7 @@ void CObjMiniMap::Draw()
 				}
 			}
 
-			if (g_stage == EarthStar)
+			if (g_stage == EarthStar && g_Boss_Spawn == true)
 			{
 				float bossx = *g_boss_x;
 				float bossy = *g_boss_y;
