@@ -90,25 +90,26 @@ void CObjTextBox::Draw()
 				}
 				else if (m_text == 1)
 				{
-					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"今まで手に入れた星座たちを駆使して", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"ボスを倒してください！！！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 2)
 				{
-					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"光っている星の場所に行くと", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"HPが徐々に回復していきます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 3)
 				{
-					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"ただし、ずっと同じ星にいると", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"敵が感知してワープしてくるので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"注意してください", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 				}
 				else if (m_text == 4)
 				{
-					Font::StrDraw(L"", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"地球の運命はあなたにかかっています！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 
 				}
 
@@ -168,29 +169,9 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 3)
 			{
-				Font::StrDraw(L"Zキーで攻撃することが可能です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"自分のHPが０になってしまうと", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"GAMEOVERになってしまいます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 4)
-			{
 				Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 5)
-			{
-				Font::StrDraw(L"もし、先にてんびん座のスキルを", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"獲得しているなら、天秤座のスキルを", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"セットすることで発動できます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-			}
-			else if (m_text == 6)
-			{
-				Font::StrDraw(L"スキルを使うにはMP（青いゲージ）が必要です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"MPは時間経過で回復していくので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"どんどん使っていきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 			}
 		}
 		//てんびん座
@@ -217,27 +198,17 @@ void CObjTextBox::Draw()
 			}
 			else if (m_text == 3)
 			{
-				Font::StrDraw(L"Zキーで攻撃することが可能です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"自分のHPが０になってしまうと", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"GAMEOVERになってしまいます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 4)
-			{
 				Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
 			}
-			else if (m_text == 5)
+			else if (m_text == 4)
 			{
 				Font::StrDraw(L"天秤座の敵は温厚で", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"基本的に戦う意思はないので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				Font::StrDraw(L"平和にいきましょう…！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-
 			}
-			else if (m_text == 6)
+			else if (m_text == 5)
 			{
 				Font::StrDraw(L"もし、攻撃してしまったら・・・", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 				Font::StrDraw(L"その時は頑張って生きてください・・・", TEXT_X, TEXT_Y2, TEXTSIZE, c);

@@ -130,6 +130,7 @@ void CSceneMercuryVirgo::InitScene()
 	//BGM
 	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(8, L"乙女座BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
