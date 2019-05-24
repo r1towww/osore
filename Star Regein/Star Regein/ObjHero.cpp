@@ -246,8 +246,12 @@ void CObjHero::Action()
 	{
 		if (m_a_flag == true)
 		{
+
+			//ブロック情報を持ってくる
+			CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 			//ビームサーベルオブジェクト作成
-			CObjBeamSaber* objb = new CObjBeamSaber(m_px, m_py);
+			CObjBeamSaber* objb = new CObjBeamSaber(m_px - block ->GetScrollx(), m_py - block->GetScrolly());
 			Objs::InsertObj(objb, OBJ_BEAMSABER, 2);
 
 			m_a_flag = false;

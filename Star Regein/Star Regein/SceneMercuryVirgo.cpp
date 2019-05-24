@@ -154,23 +154,6 @@ void CSceneMercuryVirgo::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
-	//クリアしてなかったらチュートリアル表示
-	if (g_Virgo_clear != true)
-	{
-		//チュートリアル吹き出し作成
-		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
-		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-		//チュートリアルオブジェクト作成
-		CObjTutorial* objtutorial = new CObjTutorial(1, 3);
-		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-		//チュートリアル発生時のみ作成
-		if (g_tutorial_flag == true)
-		{
-			//テキストボックスオブジェクト作成
-			CObjTextBox* objtextbox = new CObjTextBox();
-			Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-		}
-	}
 
 }
 
