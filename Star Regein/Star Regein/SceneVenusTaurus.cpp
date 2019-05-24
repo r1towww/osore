@@ -133,7 +133,7 @@ void CSceneVenusTaurus::InitScene()
 
 	
 	//BGM
-	Audio::LoadAudio(8, L"êÌì¨âÊñ _BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(8, L"â≤ãçç¿BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 

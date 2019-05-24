@@ -131,7 +131,7 @@ void CSceneVenusLibra::InitScene()
 	Audio::LoadAudio(22, L"BCƒ‰ƒ“ƒNSE.wav", EFFECT);
 
 	 //BGM
-	Audio::LoadAudio(8, L"í“¬‰æ–Ê_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(8, L"“V”‰ÀBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
