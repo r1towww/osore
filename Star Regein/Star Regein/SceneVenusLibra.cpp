@@ -103,6 +103,9 @@ void CSceneVenusLibra::InitScene()
 	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 	
+	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
+	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
+
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
@@ -120,6 +123,9 @@ void CSceneVenusLibra::InitScene()
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
+
+
+	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
 
 	 //BGM
 	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);

@@ -28,12 +28,11 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 40;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
 
-	m_ani_timeB = 0;
 	m_ani_time = 0;
 	m_ani_frame = 0;	//静止フレームを初期にする
 
@@ -92,10 +91,19 @@ void CObjBoss::Init()
 	m_warp_flag = false;
 	m_warp_time = 200;
 
+	//死亡エフェクト
+	m_dead_eff.m_top = 0;
+	m_dead_eff.m_left = 0;
+	m_dead_eff.m_right = 192;
+	m_dead_eff.m_bottom = 192;
+
+	dead_flag	= false;	
+	m_dead_time =0;//アニメーション間隔用
+	m_dead_ani  =0;//アニメーション用
 
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_COW, 1);
+	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_BOSS, 1);
 }
 
 //アクション
@@ -251,6 +259,7 @@ void CObjBoss::Action()
 
 						m_snake_c = 0;
 						m_imposition_t = 0;
+						Audio::Start(17); //ワープ音
 
 						//蛇オブジェクト作成
 						for (int i = 0; i < MAPSIZE; i++)
@@ -533,7 +542,6 @@ void CObjBoss::Action()
 		if (g_Leo_cnt >= 200.0f)
 		{
 			m_ani_frame++;	//アニメーションのコマを１つ進める
-			m_ani_timeB = 10;
 
 			if (g_Leo_cnt >= 200.0f)
 			{
@@ -559,6 +567,59 @@ void CObjBoss::Action()
 		m_time = 30;
 	}
 
+	//HPが０以下でエフェクト開始
+	if (dead_flag == true)
+	{
+		//エフェクト用
+		RECT_F dead[20] =
+		{
+
+			{ 0,     0, 192, 192 },
+			{ 0,   192, 384, 192 },
+			{ 0,   384, 576, 192 },
+			{ 0,   576, 768, 192 },
+			{ 0,   768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+			{ 192, 384, 576, 384 },
+			{ 192, 576, 768, 384 },
+			{ 192, 768, 960, 384 },
+			{ 384,   0, 192, 576 },
+			{ 384, 192, 384, 576 },
+			{ 384, 384, 576, 576 },
+			{ 384, 576, 768, 576 },
+			{ 384, 768, 960, 576 },
+			{ 576,   0, 192, 768 },
+			{ 576, 192, 384, 768 },
+			{ 576, 384, 576, 768 },
+			{ 576, 576, 768, 768 },
+			{ 576, 768, 960, 768 },
+
+		};
+
+
+
+		//アニメーションのコマ間隔制御
+		if (m_dead_time > 2)
+		{
+			m_dead_ani++;		//アニメーションのコマを1つ進める
+			m_dead_time = 0;
+
+
+			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+			// 12番目（画像最後）まで進んだら、0に戻す
+			if (m_dead_ani == 20)
+			{
+				Scene::SetScene(new CSceneED());//EDに移行
+			}
+
+		}
+		else
+		{
+			m_dead_time++;
+		}
+	}
+
 
 	//位置の更新
 	m_px += m_vx*1.0;
@@ -573,7 +634,7 @@ void CObjBoss::Action()
 		g_boss_d_flag = false;
 		g_All_Killcnt++;		   //キルカウントを+する
 		g_Earth_BossKill = true;
-		Scene::SetScene(new CSceneED());//EDに移行
+		dead_flag = true;
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
@@ -584,12 +645,10 @@ void CObjBoss::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
-	int AniDataB[6] =
-	{ 0,1,2,3,4,0 };
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
-	float cB[4] = { 1.0f,1.0f,1.0f,0.5f };
+	float cB[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;//描画元切り取り位置
 	RECT_F dst;//描画先表示位置
@@ -632,29 +691,17 @@ void CObjBoss::Draw()
 	{
 		m_warp_ani = 0;
 	}
-
-	if (g_stan_boss_flag == true)
+	//表示位置の設定
+	dst.m_top = -80.0f + m_py + block->GetScrolly();
+	dst.m_left = 240.0f + m_px + block->GetScrollx();
+	dst.m_right = -80.0f + m_px + block->GetScrollx();
+	dst.m_bottom = 200.0f + m_py + block->GetScrolly();
+	if (dead_flag == true)
 	{
-		RECT_F src;//描画元切り取り位置
-		RECT_F dst;//描画先表示位置
+		//エフェクトの描画
+		Draw::Draw(65, &m_dead_eff, &dst, cB, 0.0f);
 
-				   //ブロック情報を持ってくる
-		CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-		//切り取り位置の設定
-		src.m_top = 0.0f * m_posture;
-		src.m_left = 0.0f + (AniDataB[m_ani_frame] * 192);
-		src.m_right = 192.0f + (AniDataB[m_ani_frame] * 192);
-		src.m_bottom = src.m_top + 192.0f;
-
-		//表示位置の設定
-		dst.m_top = -30.0f + m_py + block->GetScrolly();
-		dst.m_left = -35.0f + m_px + block->GetScrollx();
-		dst.m_right = 200.0f + m_px + block->GetScrollx();
-		dst.m_bottom =200.0f + m_py + block->GetScrolly();
-
-		//描画
-		Draw::Draw(49, &src, &dst, cB, 0.0f);
 	}
+
 
 }
