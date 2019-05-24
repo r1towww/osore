@@ -642,6 +642,7 @@ void CObjHero::Action()
 	//獅子と当たった場合火傷状態を付与
 	if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
 	{
+		Audio::Start(24);
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
