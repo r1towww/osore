@@ -79,11 +79,11 @@ private:
 
 	bool m_leo_delete;
 
-
-	int m_ani_count;
-	int m_ani_delete;
-	int m_ani_max_count;
-	int m_ani_frame_delete;
+	//死亡エフェクト
+	RECT_F m_dead_eff;
+	bool dead_flag;
+	int m_dead_time;
+	int m_dead_ani;
 
 	bool m_kill_f;	//キルカウント用フラグ
 

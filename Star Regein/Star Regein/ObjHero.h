@@ -88,7 +88,8 @@ class CObjHero :public CObj
 		bool m_eff_flag;
 
 		bool dead_flag; //Ž€–Sƒtƒ‰ƒO
-	
+		
+		int m_SE_on;
 };
 
 

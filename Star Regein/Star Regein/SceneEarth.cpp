@@ -17,7 +17,6 @@ bool g_skill_item_flag;
 bool g_Make_Item;
 
 bool g_stage_clear = false;
-bool g_Boss_Spawn = true;
 //使用ヘッダー
 #include "SceneEarth.h"
 #include "GameHead.h"
@@ -112,13 +111,12 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"敵死亡エフェクト.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
 	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
 
-	//Draw::LoadImageW(L"ボス消滅エフェクト.png", 100, TEX_SIZE_1024);
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -138,19 +136,27 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(23, L"主人公死亡時SE.wav", EFFECT);
+
+	Audio::LoadAudio(24, L"リジェネSE.wav", EFFECT);
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
 	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
+
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
+	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
 
-	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
-	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
-
-	
-
+	if (g_Boss_Spawn != true)
+	{
+		Audio::LoadAudio(8, L"チュートリアルBGM.wav", SOUND_TYPE::BACK_MUSIC);
+	}
+	else
+	{
+		Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	}
 	Audio::Start(8);
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);

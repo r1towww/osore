@@ -22,6 +22,7 @@ bool g_Libra_clear= CLEARF;	//ìVîâç¿
 bool g_Gemini_clear= CLEARF;	//ëoéqç¿
 bool g_Virgo_clear= CLEARF;	//â≥èóç¿
 bool g_Leo_clear= CLEARF;	//éÇéqç¿
+bool g_Boss_Spawn = CLEARF;
 
 bool g_geminiattack_check = false;
 bool g_gemini_bullet_check = false;
