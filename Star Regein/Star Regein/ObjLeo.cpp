@@ -568,11 +568,12 @@ void CObjLeo::Draw()
 	else if (m_leo_delete == true)
 	{
 
+
 		//•\Ž¦ˆÊ’u‚ÌÝ’è
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 0.0f + m_px + block->GetScrollx();
-		dst.m_right = 120.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 120.0f + m_py + block->GetScrolly();
+		dst.m_top = -60.0f + m_py + block->GetScrolly();
+		dst.m_left = -60.0f + m_px + block->GetScrollx();
+		dst.m_right = 128.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 128.0f + m_py + block->GetScrolly();
 
 		//•\Ž¦
 		Draw::Draw(80, &m_dead_eff, &dst, d, 0.0f);
