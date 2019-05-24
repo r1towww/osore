@@ -91,6 +91,8 @@ void CObjStageClear::Action()
 	{
 		if (m_key_f == true)
 		{
+			Audio::Start(1);	//エフェクト音を鳴らす
+
 			//1度目のZキーを入力した際
 			if (m_next_cnt == 0)
 			{
@@ -468,7 +470,7 @@ void CObjStageClear::Draw()
 	if (g_stage == VenusTaurus)
 	{
 		Font::StrDraw(L"牡牛座をクリアした！", 15, 250, 21, c1);
-
+		//リザルトスターエフェクトの表示
 		//表示位置の設定
 		dst.m_top = 220.0f;
 		dst.m_left = 220.0f;
@@ -476,7 +478,7 @@ void CObjStageClear::Draw()
 		dst.m_bottom = dst.m_top + 80.0f;
 		if (m_ani_flag == true && m_grade_f[0] == false)
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-
+		//取得した評価（星）の表示
 		//表示位置の設定
 		dst.m_top = 245.0f;
 		dst.m_left = 245.0f;
@@ -490,21 +492,91 @@ void CObjStageClear::Draw()
 	if (g_stage == VenusLibra)
 	{
 		Font::StrDraw(L"天秤座をクリアした！", 15, 250, 21, c1);
+		//リザルトスターエフェクトの表示
+		//表示位置の設定
+		dst.m_top = 220.0f;
+		dst.m_left = 220.0f;
+		dst.m_right = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if (m_ani_flag == true && m_grade_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		//取得した評価（星）の表示
+		//表示位置の設定
+		dst.m_top = 245.0f;
+		dst.m_left = 245.0f;
+		dst.m_right = 275.0f;
+		dst.m_bottom = 275.0f;
+		if (m_grade_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
+
 		Font::StrDraw(L"取得したスキル：天秤座", 15, 280, 21, c2);
 	}
 	if (g_stage == MercuryGemini)
 	{
 		Font::StrDraw(L"双子座をクリアした！", 15, 250, 21, c1);
+		//リザルトスターエフェクトの表示
+		//表示位置の設定
+		dst.m_top = 220.0f;
+		dst.m_left = 220.0f;
+		dst.m_right = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if (m_ani_flag == true && m_grade_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		//取得した評価（星）の表示
+		//表示位置の設定
+		dst.m_top = 245.0f;
+		dst.m_left = 245.0f;
+		dst.m_right = 275.0f;
+		dst.m_bottom = 275.0f;
+		if (m_grade_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
+
 		Font::StrDraw(L"取得したスキル：双子座", 15, 280, 21, c2);
 	}
 	if (g_stage == MercuryVirgo)
 	{
 		Font::StrDraw(L"乙女座をクリアした！", 15, 250, 21, c1);
+
+		//リザルトスターエフェクトの表示
+		//表示位置の設定
+		dst.m_top = 220.0f;
+		dst.m_left = 220.0f;
+		dst.m_right = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if (m_ani_flag == true && m_grade_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		//取得した評価（星）の表示
+		//表示位置の設定
+		dst.m_top = 245.0f;
+		dst.m_left = 245.0f;
+		dst.m_right = 275.0f;
+		dst.m_bottom = 275.0f;
+		if (m_grade_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
+
 		Font::StrDraw(L"取得したスキル：乙女座", 15, 280, 21, c2);
 	}
 	if (g_stage == SunLeo)
 	{
 		Font::StrDraw(L"獅子座をクリアした！", 15, 250, 21, c1);
+
+		//リザルトスターエフェクトの表示
+		//表示位置の設定
+		dst.m_top = 220.0f;
+		dst.m_left = 220.0f;
+		dst.m_right = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if (m_ani_flag == true && m_grade_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		//取得した評価（星）の表示
+		//表示位置の設定
+		dst.m_top = 245.0f;
+		dst.m_left = 245.0f;
+		dst.m_right = 275.0f;
+		dst.m_bottom = 275.0f;
+		if (m_grade_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
+
 		Font::StrDraw(L"取得したスキル：獅子座", 15, 280, 21, c2);
 	}
 
@@ -527,7 +599,7 @@ void CObjStageClear::Draw()
 		dst.m_bottom = dst.m_top + 80.0f;
 		Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 	}
-	for (int i = 0; i < m_time_star_cnt; i++)
+	for (int i = 0; i < m_time_star_cnt; i++)	//評価（星）の表示
 	{
 		//表示位置の設定
 		dst.m_top = 305.0f;
@@ -613,7 +685,7 @@ void CObjStageClear::Draw()
 		//	m_grade_f[2] = true;
 		//	m_ani_flag = false;
 		//}
-		for (int i = 0; i < m_kill_grade; i++)
+		for (int i = 0; i < m_kill_grade; i++)	//評価（星）の表示
 		{
 			//表示位置の設定
 			dst.m_top = 335.0f;
@@ -648,7 +720,7 @@ void CObjStageClear::Draw()
 			dst.m_bottom = dst.m_top + 80.0f;
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
 		}
-		for (int i = 0; i < m_damage_star_cnt; i++)
+		for (int i = 0; i < m_damage_star_cnt; i++)	//評価（星）の表示
 		{
 			//表示位置の設定
 			dst.m_top = 365.0f;
@@ -740,6 +812,9 @@ void CObjStageClear::Draw()
 		//星の数に応じてランクづけ
 		if (m_grade_cnt == 10)
 		{
+			if (m_next_cnt == 0)
+				Audio::Start(20);	//エフェクト音を鳴らす
+
 			Font::StrDraw(L"S", 550, 390, 120, c6s);
 			//ランクデータ保存
 			if (g_stage == VenusTaurus)
@@ -765,6 +840,9 @@ void CObjStageClear::Draw()
 		}
 		else if (m_grade_cnt >= 7)
 		{
+			if (m_next_cnt == 0)
+				Audio::Start(21);	//エフェクト音を鳴らす
+
 			Font::StrDraw(L"A", 550, 390, 120, c6a);
 			//ランクデータ保存
 			if (g_stage == VenusTaurus)
@@ -790,6 +868,9 @@ void CObjStageClear::Draw()
 		}
 		else if (m_grade_cnt >= 4)
 		{
+			if (m_next_cnt == 0)
+				Audio::Start(22);	//エフェクト音を鳴らす
+
 			Font::StrDraw(L"B", 550, 390, 120, c6b);
 			//ランクデータ保存
 			if (g_stage == VenusTaurus)
@@ -815,6 +896,9 @@ void CObjStageClear::Draw()
 		}
 		else
 		{
+			if(m_next_cnt == 0)
+				Audio::Start(22);	//エフェクト音を鳴らす
+
 			Font::StrDraw(L"C", 550, 390, 120, c6c);
 			//ランクデータ保存
 			if (g_stage == VenusTaurus)
