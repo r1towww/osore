@@ -54,6 +54,7 @@ void CObjMiniMap::Init()
 
 	m_hint_f = false;	//ヒント表示用フラグの初期化
 
+	
 	count = 0;
 }
 
