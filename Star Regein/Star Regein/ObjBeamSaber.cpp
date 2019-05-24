@@ -64,9 +64,6 @@ void CObjBeamSaber::Init()
 //アクション
 void CObjBeamSaber::Action()
 {
-	//ブロックの情報を持ってくる
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
@@ -100,7 +97,7 @@ void CObjBeamSaber::Action()
 	}
 
 	//作成したHitBox更新用の入り口を取り出す
-	hit->SetPos(m_x + m_pos_x + pb->GetScrollx(), m_y + m_pos_y + pb->GetScrolly());//入り口から新しい位置（主人公の位置）情報に置き換える
+	hit->SetPos(m_x + m_pos_x, m_y + m_pos_y);//入り口から新しい位置（主人公の位置）情報に置き換える
 }
 
 //ドロー
@@ -111,8 +108,6 @@ void CObjBeamSaber::Draw()
 	{
 		0,1,2,3,4,
 	};
-	//ブロックの情報を持ってくる
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//描画カラー情報
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -129,10 +124,10 @@ void CObjBeamSaber::Draw()
 	src.m_bottom = 192.0f;
 
 	//表示位置の設定
-	dst.m_top    =  0.0f + m_y + m_pos_y + pb->GetScrolly();
-	dst.m_left   =  0.0f + m_x + m_pos_x + pb->GetScrollx();
-	dst.m_right  = 64.0f + m_x + m_pos_x + pb->GetScrollx();
-	dst.m_bottom = 64.0f + m_y + m_pos_y + pb->GetScrolly();
+	dst.m_top    =  0.0f + m_y + m_pos_y;
+	dst.m_left   =  0.0f + m_x + m_pos_x;
+	dst.m_right  = 64.0f + m_x + m_pos_x;
+	dst.m_bottom = 64.0f + m_y + m_pos_y;
 
 	//表示
 	if (g_mp <= 0.0f)

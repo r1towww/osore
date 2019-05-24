@@ -41,11 +41,13 @@ void CObjMessage::Action()
 	CObjSkillItem* objskillitem = (CObjSkillItem*)Objs::GetObj(OBJ_SKILL_ITEM);
 	//ステージクリアの情報を持ってくる
 	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
+	//ステージクリアの情報を持ってくる
+	CObjMenu* objmenu = (CObjMenu*)Objs::GetObj(OBJ_MENU);
 
 	if (g_tutorial_flag == true) {
 		;			//チュートリアルメッセージが表示されている際、タイムをカウントしない
 	}
-	else if(objskillitem != nullptr || objclear != nullptr){	//スキルオブジェクトが作成された際、またはクリアオブジェクトが作成されている際
+	else if(objskillitem != nullptr || objclear != nullptr || objmenu != nullptr){	//スキルオブジェクトが作成された際、クリアオブジェクトが作成されている際、メニュー画面が表示されている際
 		m_f = true;		//フラグをオンにする
 	}
 	else if(m_f == false){	//フラグがオフの際、タイムをカウント
@@ -68,6 +70,8 @@ void CObjMessage::Draw()
 	wchar_t STARMES[128];	//星の数を数えるメッセージ用
 	wchar_t STAR[128];	//星の数を常に表示する
 	wchar_t TIME[128];	//タイムの描画
+	wchar_t KILLCNT[128];	//倒した数の描画
+
 
 	//m_time_mesから描分を求める
 	m_second = (m_time_mes / 60) % 60;	//秒
@@ -80,6 +84,11 @@ void CObjMessage::Draw()
 		swprintf_s(TIME, L"%d分%d秒", m_minute, m_second);
 
 	Font::StrDraw(TIME, 10, 250, 20, c);	//タイムの表示
+
+	//倒した数描画用
+	swprintf_s(KILLCNT, L"%.0f/%.0f体倒した", g_kill_cnt, g_enemy_cnt);
+	Font::StrDraw(KILLCNT, 10, 270, 20, c);//メッセージを表示
+
 
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
 	Font::StrDraw(STAR, 400, 20, 25, sc);//メッセージを表示

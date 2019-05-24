@@ -61,6 +61,19 @@ void CObjMiniMap::Init()
 //アクション
 void CObjMiniMap::Action()
 {
+	//ステージクリアの情報を持ってくる
+	CObjSkillItem* objskillitem = (CObjSkillItem*)Objs::GetObj(OBJ_SKILL_ITEM);
+
+	if (objskillitem != nullptr)
+	{
+		m_hint_f = true;		//フラグをオン
+		m_blocksize = m_smallsize;		//ブロックのサイズ変更	
+		m_uisize_x = 590.0f, m_uisize_y = 10.0f;	//マップの位置の変更
+		m_backsize = 200.0f;						//背景のサイズ変更
+
+	}
+
+
 	if (Input::GetVKey('M'))//Mキーが入力されたとき
 	{
 		//キー入力制御
@@ -119,9 +132,6 @@ void CObjMiniMap::Draw()
 
 		//背景の描画
 		Draw::Draw(7, &src, &dst, c, 0.0f);
-
-
-
 
 
 		/* ミニマップ描画処理 */

@@ -61,6 +61,10 @@ void CObjStageClear::Init()
 
 	m_time_star_cnt = 0;		//タイムグレード数用のカウント
 
+	//チュートリアルステージはノーダメージクリアをオフにする
+	if (g_stage == EarthStar)
+		g_no_damage = true;
+
 	//ダメージの評価基準
 	if (g_no_damage == false)
 		m_damage_grade = 3;
@@ -476,6 +480,22 @@ void CObjStageClear::Draw()
 	if (g_stage == EarthStar)
 	{
 		Font::StrDraw(L"地球をクリアした！", 15, 250, 21, c1);
+		//リザルトスターエフェクトの表示
+		//表示位置の設定
+		dst.m_top = 220.0f;
+		dst.m_left = 220.0f;
+		dst.m_right = dst.m_left + 80.0f;
+		dst.m_bottom = dst.m_top + 80.0f;
+		if (m_ani_flag == true && m_grade_f[0] == false)
+			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+		//取得した評価（星）の表示
+		//表示位置の設定
+		dst.m_top = 245.0f;
+		dst.m_left = 245.0f;
+		dst.m_right = 275.0f;
+		dst.m_bottom = 275.0f;
+		if (m_grade_f[0] == true)
+			Draw::Draw(70, &src, &dst, effc, 0.0f);
 		Font::StrDraw(L"取得したスキル：無し", 15, 280, 21, c2);
 	}
 	if (g_stage == VenusTaurus)
@@ -670,109 +690,110 @@ void CObjStageClear::Draw()
 		}
 		else if (g_kill_cnt > 0)
 			Font::StrDraw(KILLCNT, 15, 340, 21, c4);
-	}
-	
 
-	//キル数評価の描画用----------------------------------------
-	if (g_Boss_Spawn == true || g_stage != EarthStar)
-	{
-		if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+
+
+		//キル数評価の描画用----------------------------------------
+		if (g_Boss_Spawn == true || g_stage != EarthStar)
 		{
-			m_ani_flag = true;
-		}
-		if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
-			|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
-			|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
-		{
-			//表示位置の設定
-			dst.m_top = 310.0f;
-			dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
-			dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
-			dst.m_bottom = dst.m_top + 80.0f;
-			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-		}
-		//else if (m_grade_f[1] == true && m_kill_grade == 0)
-		//{
-		//	m_grade_f[2] = true;
-		//	m_ani_flag = false;
-		//}
-		for (int i = 0; i < m_kill_grade; i++)	//評価（星）の表示
-		{
-			//表示位置の設定
-			dst.m_top = 335.0f;
-			dst.m_left = 245.0f + (40.0f * i);
-			dst.m_right = 275.0f + (40.0f * i);
-			dst.m_bottom = 365.0f;
-			if (m_kill_star_f[i] == true) {
-				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+			{
+				m_ani_flag = true;
 			}
-		}
-	}
-
-	//-----------------------------------------------------------------
-
-
-	//ノーダメージクリアメッセージの表示
-	if (g_no_damage == false)
-	{
-		Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5y);
-
-		if (m_damage_star_cnt == 1 && m_grade_f[3] != true || m_damage_star_cnt == 2 && m_grade_f[3] != true) {
-			m_ani_flag = true;
-		}
-		if (m_ani_flag == true && m_damage_star_cnt == 0 && m_grade_f[2] == true && m_grade_f[3] != true
-			|| m_ani_flag == true && m_damage_star_cnt == 1 && m_grade_f[2] == true && m_grade_f[3] != true
-			|| m_ani_flag == true && m_damage_star_cnt == 2 && m_grade_f[2] == true && m_grade_f[3] != true)
-		{
-			//表示位置の設定
-			dst.m_top    = 340.0f;
-			dst.m_left   = 220.0f + (40.0f * m_damage_star_cnt);
-			dst.m_right  = 300.0f + (40.0f * m_damage_star_cnt);
-			dst.m_bottom = dst.m_top + 80.0f;
-			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-		}
-		for (int i = 0; i < m_damage_star_cnt; i++)	//評価（星）の表示
-		{
-			//表示位置の設定
-			dst.m_top = 365.0f;
-			dst.m_left = 245.0f + (40.0f * i);
-			dst.m_right = 275.0f + (40.0f * i);
-			dst.m_bottom = 395.0f;
-			if (m_damage_star_f[i] == true) {
-				Draw::Draw(70, &src, &dst, effc, 0.0f);
+			if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
+				|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
+				|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
+			{
+				//表示位置の設定
+				dst.m_top = 310.0f;
+				dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
+				dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
+				dst.m_bottom = dst.m_top + 80.0f;
+				Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+			}
+			//else if (m_grade_f[1] == true && m_kill_grade == 0)
+			//{
+			//	m_grade_f[2] = true;
+			//	m_ani_flag = false;
+			//}
+			for (int i = 0; i < m_kill_grade; i++)	//評価（星）の表示
+			{
+				//表示位置の設定
+				dst.m_top = 335.0f;
+				dst.m_left = 245.0f + (40.0f * i);
+				dst.m_right = 275.0f + (40.0f * i);
+				dst.m_bottom = 365.0f;
+				if (m_kill_star_f[i] == true) {
+					Draw::Draw(70, &src, &dst, effc, 0.0f);
+				}
 			}
 		}
 
-		//実績達成画面で表示させるためのフラグ処理
-		if (g_stage == VenusTaurus)
-		{
-			g_Taurus_NoDamage_Clear = true;
-			g_new_Performance = true;
+		//-----------------------------------------------------------------
 
-		}
-		else if (g_stage == VenusLibra)
-		{
-			g_Libra_NoDamage_Clear = true;
-			g_new_Performance = true;
 
-		}
-		else if (g_stage == MercuryGemini)
+		//ノーダメージクリアメッセージの表示
+		if (g_no_damage == false)
 		{
-			g_Gemini_NoDamage_Clear = true;
-			g_new_Performance = true;
+			Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5y);
 
-		}
-		else if (g_stage == MercuryVirgo)
-		{
-			g_Viego_NoDamage_Clear = true;
-			g_new_Performance = true;
+			if (m_damage_star_cnt == 1 && m_grade_f[3] != true || m_damage_star_cnt == 2 && m_grade_f[3] != true) {
+				m_ani_flag = true;
+			}
+			if (m_ani_flag == true && m_damage_star_cnt == 0 && m_grade_f[2] == true && m_grade_f[3] != true
+				|| m_ani_flag == true && m_damage_star_cnt == 1 && m_grade_f[2] == true && m_grade_f[3] != true
+				|| m_ani_flag == true && m_damage_star_cnt == 2 && m_grade_f[2] == true && m_grade_f[3] != true)
+			{
+				//表示位置の設定
+				dst.m_top = 340.0f;
+				dst.m_left = 220.0f + (40.0f * m_damage_star_cnt);
+				dst.m_right = 300.0f + (40.0f * m_damage_star_cnt);
+				dst.m_bottom = dst.m_top + 80.0f;
+				Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+			}
+			for (int i = 0; i < m_damage_star_cnt; i++)	//評価（星）の表示
+			{
+				//表示位置の設定
+				dst.m_top = 365.0f;
+				dst.m_left = 245.0f + (40.0f * i);
+				dst.m_right = 275.0f + (40.0f * i);
+				dst.m_bottom = 395.0f;
+				if (m_damage_star_f[i] == true) {
+					Draw::Draw(70, &src, &dst, effc, 0.0f);
+				}
+			}
 
-		}
-		else if (g_stage == SunLeo)
-		{
-			g_Leo_NoDamage_Clear = true;
-			g_new_Performance = true;
+			//実績達成画面で表示させるためのフラグ処理
+			if (g_stage == VenusTaurus)
+			{
+				g_Taurus_NoDamage_Clear = true;
+				g_new_Performance = true;
 
+			}
+			else if (g_stage == VenusLibra)
+			{
+				g_Libra_NoDamage_Clear = true;
+				g_new_Performance = true;
+
+			}
+			else if (g_stage == MercuryGemini)
+			{
+				g_Gemini_NoDamage_Clear = true;
+				g_new_Performance = true;
+
+			}
+			else if (g_stage == MercuryVirgo)
+			{
+				g_Viego_NoDamage_Clear = true;
+				g_new_Performance = true;
+
+			}
+			else if (g_stage == SunLeo)
+			{
+				g_Leo_NoDamage_Clear = true;
+				g_new_Performance = true;
+
+			}
 		}
 	}
 	

@@ -21,4 +21,6 @@ class CObjSkill : public CObj
 		int m_next;	//次のスキル用
 		int m_back;	//前のスキル用
 
+		bool m_right_f;	//右の星座のオンオフを比べるフラグ
+		bool m_left_f;	//左の星座のオンオフを比べるフラグ
 };
