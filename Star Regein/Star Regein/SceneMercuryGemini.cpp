@@ -131,6 +131,7 @@ void CSceneMercuryGemini::InitScene()
 
 	//BGM
 	Audio::LoadAudio(8, L"双子座BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
