@@ -686,9 +686,10 @@ void CObjHero::Action()
 		}
 	}
 
-	//毒弾と当たった場合火傷状態を付与
+	//毒弾と当たった場合毒状態を付与
 	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
 	{
+		Audio::Start(22);
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_POISON);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる

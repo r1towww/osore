@@ -147,6 +147,7 @@ void CSceneEarth::InitScene()
 
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
+	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
 
 	if (g_Boss_Spawn != true)
 	{
