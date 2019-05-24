@@ -98,6 +98,7 @@ void CObjBeam::Action()
 		{
 			m_ani = 0;
 			m_beam_flag = true;
+			Audio::Start(20);
 			m_ani_flag = false;
 		}
 	}

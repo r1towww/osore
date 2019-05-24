@@ -51,7 +51,7 @@ void CObjED::Action()
 	//-----------------------------------------------------------
 
 	//Enter‚ª‰Ÿ‚³‚ê‚½‚çƒtƒ‰ƒOƒIƒ“
-	if (Input::GetVKey(VK_RETURN) == true && m_key_f == false)
+	if (Input::GetVKey('Z') && m_key_f == false ||Input::GetVKey(VK_RETURN) == true && m_key_f == false)
 	{
 		m_key_f = true;
 	}
