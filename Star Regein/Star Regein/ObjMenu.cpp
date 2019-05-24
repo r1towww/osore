@@ -21,6 +21,7 @@ void CObjMenu::Init()
 	m_key_f = false;
 	m_choice_key_f = false;	
 	m_Tra = 0.0f;
+	m_f = false;
 }
 
 //アクション
@@ -56,7 +57,6 @@ void CObjMenu::Action()
 	//Zキーが押された場合
 	if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 	{
-		Audio::Start(2);	//エフェクト音を鳴らす
 		//０番の場合
 		if (m_key == 0)
 		{
@@ -75,6 +75,13 @@ void CObjMenu::Action()
 
 	if (m_push_flag == true)
 	{
+		if (m_f == false)
+		{
+			Audio::Start(2);	//エフェクト音を鳴らす
+			m_f = true;
+		}
+		
+		
 		m_Tra += 0.03;
 		if (m_Tra >= 1)
 		{

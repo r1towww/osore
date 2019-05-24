@@ -78,7 +78,7 @@ void CSceneVenusTaurus::InitScene()
 	Draw::LoadImageW(L"双子2.png", 21, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"混乱.png", 49, TEX_SIZE_512);
-	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"敵死亡エフェクト.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"隕石.png", 4, TEX_SIZE_64);
@@ -122,6 +122,7 @@ void CSceneVenusTaurus::InitScene()
 	Audio::LoadAudio(14, L"乙女座スキルSE.wav", EFFECT);
 	Audio::LoadAudio(15, L"乙女座着弾SE.wav", EFFECT);
 	Audio::LoadAudio(16, L"獅子座スキルSE.wav", EFFECT);
+	Audio::LoadAudio(25, L"主人公死亡時SE.wav", EFFECT);
 
 
 	Audio::LoadAudio(19, L"リザルトスターSE.wav", EFFECT);
@@ -130,10 +131,9 @@ void CSceneVenusTaurus::InitScene()
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
 	
-
-	
 	//BGM
 	Audio::LoadAudio(8, L"牡牛座BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
@@ -158,23 +158,6 @@ void CSceneVenusTaurus::InitScene()
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
 
-	//クリアしてなかったらチュートリアル表示
-	if (g_Taurus_clear != true)
-	{
-		//チュートリアル吹き出し作成
-		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 4);
-		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-		//チュートリアルオブジェクト作成
-		CObjTutorial* objtutorial = new CObjTutorial(1, 4);
-		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-		//チュートリアル発生時のみ作成
-		if (g_tutorial_flag == true)
-		{
-			//テキストボックスオブジェクト作成
-			CObjTextBox* objtextbox = new CObjTextBox();
-			Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-		}
-	}
 }
 
 //実行中メソッド

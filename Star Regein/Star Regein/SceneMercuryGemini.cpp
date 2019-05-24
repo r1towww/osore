@@ -98,7 +98,7 @@ void CSceneMercuryGemini::InitScene()
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"消滅アニメーション.png", 80, TEX_SIZE_1024);
+	Draw::LoadImageW(L"敵死亡エフェクト.png", 80, TEX_SIZE_1024);
 	Draw::LoadImageW(L"死亡アニメーション.png", 35, TEX_SIZE_1024);
 
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
@@ -127,9 +127,11 @@ void CSceneMercuryGemini::InitScene()
 	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
+	Audio::LoadAudio(25, L"主人公死亡時SE.wav", EFFECT);
 
 	//BGM
-	Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(8, L"双子座BGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(8);
 
@@ -152,24 +154,6 @@ void CSceneMercuryGemini::InitScene()
 	//スキル切り替えオブジェクト作成
 	CObjSkill* objSkill = new CObjSkill();
 	Objs::InsertObj(objSkill, OBJ_SKILL, 110);
-
-	//クリアしてなかったらチュートリアル表示
-	if (g_Gemini_clear != true)
-	{
-		//チュートリアル吹き出し作成
-		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
-		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
-		//チュートリアルオブジェクト作成
-		CObjTutorial* objtutorial = new CObjTutorial(1, 3);
-		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
-		//チュートリアル発生時のみ作成
-		if (g_tutorial_flag == true)
-		{
-			//テキストボックスオブジェクト作成
-			CObjTextBox* objtextbox = new CObjTextBox();
-			Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-		}
-	}
 	
 
 }

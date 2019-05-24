@@ -31,7 +31,7 @@ CObjTwinsBlue::CObjTwinsBlue(float x, float y,int id)
 //イニシャライズ
 void CObjTwinsBlue::Init()
 {
-	m_hp = 5;        //体力
+	m_hp = 4;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(4.0f) 右(1.0f) 背面(2.0f)
@@ -67,11 +67,14 @@ void CObjTwinsBlue::Init()
 
 	m_alpha = 1.0;
 
-	//消滅アニメーション用
-	m_ani_delete = 0;
-	m_ani_count = 0;
-	m_ani_max_count = 10;
-	m_ani_frame_delete = 1;
+	//死亡エフェクト
+	m_dead_eff.m_top = 0;
+	m_dead_eff.m_left = 0;
+	m_dead_eff.m_right = 192;
+	m_dead_eff.m_bottom = 192;
+
+	m_dead_ani = 0;
+	m_dead_time = 0;
 
 	//牛削除フラグ
 	m_twinsblue_delete = false;
@@ -463,32 +466,53 @@ void CObjTwinsBlue::Action()
 		m_twinsblue_delete = true;
 		hit->SetInvincibility(true);
 	};
-	// 消滅アニメーションのコマを進める
+	//HPが０以下でエフェクト開始
 	if (m_twinsblue_delete == true)
 	{
-		m_ani_count += 1;
-	}
-	//消滅アニメーション
-	if (m_ani_count > m_ani_max_count)
-	{
-		m_ani_frame_delete += 1;
-		m_ani_count = 0;
-	}
-	if (m_ani_frame_delete == 4)
-	{
-		m_ani_frame_delete = 0;
-		//フラグがオフの場合
-		if (m_kill_f == false)
+		//エフェクト用
+		RECT_F dead[7] =
 		{
-			g_kill_cnt++;	//キルカウントを増やす
-			m_kill_f = true;//フラグをオンにして入らないようにする
-		}
-		//敵削除
-		m_alpha = 0.0f;
-		g_cow_d_flag[m_blue_id] = false;
-		g_All_Killcnt++;		   //キルカウントを+する
 
-		this->SetStatus(false);    //自身に削除命令を出す
+			{ 0,     0, 192, 192 },
+			{ 0,   192, 384, 192 },
+			{ 0,   384, 576, 192 },
+			{ 0,   576, 768, 192 },
+			{ 0,   768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+		};
+
+
+
+		//アニメーションのコマ間隔制御
+		if (m_dead_time > 2)
+		{
+			m_dead_ani++;		//アニメーションのコマを1つ進める
+			m_dead_time = 0;
+
+
+			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+										  // 12番目（画像最後）まで進んだら、0に戻す
+			if (m_dead_ani >= 7)
+			{
+				//フラグがオフの場合
+				if (m_kill_f == false)
+				{
+					g_kill_cnt++;	//キルカウントを増やす
+					m_kill_f = true;//フラグをオンにして入らないようにする
+				}
+				//敵削除
+				m_alpha = 0.0f;
+				g_blue_d_flag[m_blue_id] = false;
+				g_All_Killcnt++;		   //キルカウントを+する
+				this->SetStatus(false);    //自身に削除命令を出す
+			}
+
+		}
+		else
+		{
+			m_dead_time++;
+		}
 	}
 
 
@@ -499,8 +523,6 @@ void CObjTwinsBlue::Draw()
 {
 	int AniData[4] =
 	{ 1,0,2,0, };
-	int DeleteData[4] =
-	{ 1,2,3,4, };
 	int AniDataB[6] =
 	{ 0,1,2,3,4,0 };
 
@@ -535,11 +557,6 @@ void CObjTwinsBlue::Draw()
 	else if (m_twinsblue_delete == true)
 	{
 		//消滅アニメーション
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f + (DeleteData[m_ani_frame_delete] * 192);
-		src.m_right = 192.0f + (DeleteData[m_ani_frame_delete] * 192);
-		src.m_bottom = src.m_top + 192.0f;
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_py + block->GetScrolly();
@@ -548,7 +565,7 @@ void CObjTwinsBlue::Draw()
 		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
 
 		//表示
-		Draw::Draw(80, &src, &dst, d, 0.0f);
+		Draw::Draw(80, &m_dead_eff, &dst, d, 0.0f);
 	}
 	if (g_stan_blue_flag[m_blue_id] == true)
 	{

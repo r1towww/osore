@@ -68,12 +68,15 @@ void CObjCow::Init()
 	m_alpha = 1.0;
 
 
-	
-	//消滅アニメーション用
-	m_ani_delete = 0;
-	m_ani_count = 0;
-	m_ani_max_count = 10;
-	m_ani_frame_delete = 1;
+
+	//死亡エフェクト
+	m_dead_eff.m_top = 0;
+	m_dead_eff.m_left = 0;
+	m_dead_eff.m_right = 192;
+	m_dead_eff.m_bottom = 192;
+
+	m_dead_ani = 0;
+	m_dead_time = 0;
 
 	//牛削除フラグ
 	m_cow_delete = false;
@@ -494,11 +497,6 @@ void CObjCow::Action()
 		hit->SetInvincibility(true);
 
 	};
-	//消滅アニメーションのコマを進める
-	if (m_cow_delete == true)
-	{
-		m_ani_count += 1;
-	}
 	//移動アニメーション
 	if (m_ani_time > m_ani_max_time)
 	{
@@ -510,26 +508,54 @@ void CObjCow::Action()
 	{
 		m_ani_frame = 1;
 	}
-	//消滅アニメーション
-	if (m_ani_count > m_ani_max_count)
+
+	//HPが０以下でエフェクト開始
+	if (m_cow_delete == true)
 	{
-		m_ani_frame_delete += 1;
-		m_ani_count = 0;
-	}
-	if (m_ani_frame_delete == 3)
-	{
-		m_ani_frame_delete = 0;
-		//フラグがオフの場合
-		if (m_kill_f == false)
+		//エフェクト用
+		RECT_F dead[7] =
 		{
-			g_kill_cnt++;	//キルカウントを増やす
-			m_kill_f = true;//フラグをオンにして入らないようにする
+
+			{ 0,     0, 192, 192 },
+			{ 0,   192, 384, 192 },
+			{ 0,   384, 576, 192 },
+			{ 0,   576, 768, 192 },
+			{ 0,   768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+		};
+
+
+
+		//アニメーションのコマ間隔制御
+		if (m_dead_time > 2)
+		{
+			m_dead_ani++;		//アニメーションのコマを1つ進める
+			m_dead_time = 0;
+
+
+			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+										  // 12番目（画像最後）まで進んだら、0に戻す
+			if (m_dead_ani>=7)
+			{
+				//フラグがオフの場合
+				if (m_kill_f == false)
+				{
+					g_kill_cnt++;	//キルカウントを増やす
+					m_kill_f = true;//フラグをオンにして入らないようにする
+				}
+				//敵削除
+				m_alpha = 0.0f;
+				g_cow_d_flag[m_cow_id] = false;
+				g_All_Killcnt++;		   //キルカウントを+する
+				this->SetStatus(false);    //自身に削除命令を出す
+			}
+
 		}
-		//敵削除
-		m_alpha = 0.0f;	
-		g_cow_d_flag[m_cow_id] = false;
-		g_All_Killcnt++;		   //キルカウントを+する
-		this->SetStatus(false);    //自身に削除命令を出す
+		else
+		{
+			m_dead_time++;
+		}
 	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 }
@@ -540,8 +566,6 @@ void CObjCow::Draw()
 	int AniData[4] =
 	{ 1,0,2,0, };
 
-	int DeleteData[4] =
-	{1,2,3,4, };
 
 	int AniDataB[6] =
 	{ 0,1,2,3,4,0 };
@@ -578,21 +602,15 @@ void CObjCow::Draw()
 	}
 	else if (m_cow_delete == true)
 	{
-		//消滅アニメーション
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f + (DeleteData[m_ani_frame_delete] * 192);
-		src.m_right = 192.0f + (DeleteData[m_ani_frame_delete] * 192);
-		src.m_bottom = src.m_top + 192.0f;
 
 		//表示位置の設定
-		dst.m_top = 0.0f + m_py + block->GetScrolly();
-		dst.m_left = 0.0f + m_px + block->GetScrollx();
-		dst.m_right = 64.0f + m_px + block->GetScrollx();
-		dst.m_bottom = 64.0f + m_py + block->GetScrolly();
+		dst.m_top = -60.0f + m_py + block->GetScrolly();
+		dst.m_left = -60.0f + m_px + block->GetScrollx();
+		dst.m_right = 128.0f + m_px + block->GetScrollx();
+		dst.m_bottom = 128.0f + m_py + block->GetScrolly();
 
 		//表示
-		Draw::Draw(80, &src, &dst, d, 0.0f);
+		Draw::Draw(80, &m_dead_eff, &dst, d, 0.0f);
 	}
 
 

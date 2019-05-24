@@ -33,6 +33,10 @@ void CObjSkill::Init()
 	m_memory = g_skill;	//スキル比較変数の初期化
 	m_next = 0;	//スキル画像用変数の初期化
 	m_back = 0;	//スキル画像用変数の初期化
+
+	m_right_f = false;
+	m_left_f = false;
+
 }
 
 //アクション
@@ -80,57 +84,57 @@ void CObjSkill::Action()
 	//画像の前後描画用
 	if (g_skill == NoSkill) {
 		if (g_Leo == true)
-			m_back = 0;
+			m_left_f = true;
 		else
-			m_back = 1;
+			m_left_f = false;
 		if (g_Taurus == true)
-			m_next = 0;
+			m_right_f = true;
 		else
-			m_next = 1;
+			m_right_f = false;
 	}
 	if (g_skill == Taurus) {
-		m_back = 0;
+		m_left_f = true;
 		if (g_Libra == true)
-			m_next = 0;
+			m_right_f = true;
 		else
-			m_next = 1;
+			m_right_f = false;
 	}
 	if (g_skill == Libra) {
 		if (g_Taurus == true)
-			m_back = 0;
+			m_left_f = true;
 		else
-			m_back = 1;
+			m_left_f = false;
 		if (g_Gemini == true)
-			m_next = 0;
+			m_right_f = true;
 		else
-			m_next = 1;
+			m_right_f = false;
 	}
 	if (g_skill == Gemini) {
 		if (g_Libra == true)
-			m_back = 0;
+			m_left_f = true;
 		else
-			m_back = 1;
+			m_left_f = false;
 		if (g_Virgo == true)
-			m_next = 0;
+			m_right_f = true;
 		else
-			m_next = 1;
+			m_right_f = false;
 	}
 	if (g_skill == Virgo) {
 		if (g_Gemini == true)
-			m_back = 0;
+			m_left_f = true;
 		else
-			m_back = 1;
+			m_left_f = false;
 		if (g_Leo == true)
-			m_next = 0;
+			m_right_f = true;
 		else
-			m_next = 1;
+			m_right_f = false;
 	}
 	if (g_skill == Leo) {
 		if (g_Virgo == true)
-			m_back = 0;
+			m_left_f = true;
 		else
-			m_back = 1;
-		m_next = 0;
+			m_left_f = false;
+		m_next = true;
 	}
 
 	
@@ -144,6 +148,8 @@ void CObjSkill::Draw()
 	{
 		//描画カラー情報
 		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+		float b[4] = { 0.0f,0.0f,0.0f,1.0f };
+
 		float s[4] = { 1.0f,1.0f,1.0f,0.5f };
 		RECT_F src;	//描画元切り取り位置
 		RECT_F dst;	//描画先表示位置
@@ -164,8 +170,8 @@ void CObjSkill::Draw()
 		//後ろにあるスキルを表示
 		//切り取り位置の設定
 		src.m_top = 0.0f;
-		src.m_left = 1500.0f + (300.0f * (g_skill - m_back));		//スキルの値が変われば次の画像へ移行
-		src.m_right = 1800.0f + (300.0f * (g_skill - m_back));
+		src.m_left = 1500.0f + (300.0f * (g_skill));		//スキルの値が変われば次の画像へ移行
+		src.m_right = 1800.0f + (300.0f * (g_skill));
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
@@ -173,13 +179,16 @@ void CObjSkill::Draw()
 		dst.m_left = 500.0f;
 		dst.m_right = 580.0f;
 		dst.m_bottom = 600.0f; 
-		Draw::Draw(13, &src, &dst, s, 0.0f);
-
+		if(m_left_f == true)
+			Draw::Draw(13, &src, &dst, s, 0.0f);
+		else
+			Draw::Draw(13, &src, &dst, b, 0.0f);
+	
 		//前にあるスキルを表示
 		//切り取り位置の設定
 		src.m_top = 0.0f;
-		src.m_left = 300.0f + (300.0f * (g_skill + m_next));		//スキルの値が変われば次の画像へ移行
-		src.m_right = 600.0f + (300.0f * (g_skill + m_next));
+		src.m_left = 300.0f + (300.0f * (g_skill));		//スキルの値が変われば次の画像へ移行
+		src.m_right = 600.0f + (300.0f * (g_skill));
 		src.m_bottom = 200.0f;
 
 		//表示位置の設定
@@ -187,7 +196,10 @@ void CObjSkill::Draw()
 		dst.m_left = 720.0f;
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
-		Draw::Draw(13, &src, &dst, s, 0.0f);
+		if (m_right_f == true)
+			Draw::Draw(13, &src, &dst, s, 0.0f);
+		else
+			Draw::Draw(13, &src, &dst, b, 0.0f);
 
 	}
 }

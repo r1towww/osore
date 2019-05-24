@@ -91,25 +91,26 @@ void CObjTextBox::Draw()
 				else if (m_text == 1)
 				{
 					Font::StrDraw(L"今まで手に入れた星座たちを駆使して", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"ボスを倒してください！！！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"敵を討伐して下さい！！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 2)
 				{
 					Font::StrDraw(L"光っている星の場所に行くと", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"HPが徐々に回復していきます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"支援班が体力を回復します！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 3)
 				{
 					Font::StrDraw(L"ただし、ずっと同じ星にいると", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"敵が感知してワープしてくるので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-					Font::StrDraw(L"注意してください", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+					Font::StrDraw(L"敵が感知してワープしてくる可能性が", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"ありますのでご注意下さい！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 
 				}
 				else if (m_text == 4)
 				{
-					Font::StrDraw(L"地球の運命はあなたにかかっています！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"地球の命運はあなたに掛かっています！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"ご武運を！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 
@@ -120,7 +121,7 @@ void CObjTextBox::Draw()
 				{
 					Font::StrDraw(L"Star Reginへようこそ！！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					Font::StrDraw(L"ここ、地球ステージでは基本的な操作と", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-					Font::StrDraw(L"ゲームのクリア条件をお伝えします！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
+					Font::StrDraw(L"ゲームのクリア条件をお伝えします", TEXT_X, TEXT_Y3, TEXTSIZE, c);
 				}
 				else if (m_text == 1)
 				{
@@ -130,177 +131,27 @@ void CObjTextBox::Draw()
 				}
 				else if (m_text == 2)
 				{
-					Font::StrDraw(L"次にこのゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"このゲームのクリア条件は", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					Font::StrDraw(L"各ステージにある星を集めることです", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 3)
 				{
 					Font::StrDraw(L"星を集めきると星座が完成し、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"新しくスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"その星座のスキルを使うことができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 
 				}
 				else if (m_text == 4)
+				{
+					Font::StrDraw(L"スキルの切り替えはCキーで行えます", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"各スキルの説明はヘルプで確認して下さい", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				}
+				else if (m_text == 5)
 				{
 					Font::StrDraw(L"それでは星を集めてみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 
 				}
 			}
-		}
-		//おうし座
-		else if (g_stage == VenusTaurus)
-		{
-			if (m_text == 0)
-			{
-				Font::StrDraw(L"ここ金星ではおうし座とてんびん座の", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"ここ、おうし座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ダッシュスキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-			else if (m_text == 2)
-			{
-				Font::StrDraw(L"ここで獲得すべき星は全部で１８個もあります", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"しかも、この金星から敵も出現します", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-			else if (m_text == 3)
-			{
-				Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-			}
-		}
-		//てんびん座
-		else if (g_stage == VenusLibra)
-		{
-			if (m_text == 0)
-			{
-				Font::StrDraw(L"ここ金星ではおうし座とてんびん座の", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"ここ、てんびん座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"HPに応じて攻撃力の変わるパッシブスキル", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"を取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 2)
-			{
-				Font::StrDraw(L"ここで獲得すべき星は全部で６個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"この金星から敵も出現します", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-			else if (m_text == 3)
-			{
-				Font::StrDraw(L"敵を見つけたら倒しに行くのもいいですが", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"星をすべて獲得するとクリアなので", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"星獲得を優先的に行動しましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-			}
-			else if (m_text == 4)
-			{
-				Font::StrDraw(L"天秤座の敵は温厚で", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"基本的に戦う意思はないので、", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"平和にいきましょう…！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-			}
-			else if (m_text == 5)
-			{
-				Font::StrDraw(L"もし、攻撃してしまったら・・・", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"その時は頑張って生きてください・・・", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-			}
-		}
-		//ふたご座
-		else if (g_stage == MercuryGemini)
-		{
-			if (m_text == 0)
-			{
-				Font::StrDraw(L"水星へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここ水星では双子座とおとめ座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"ここ、双子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"サブ機出現スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 2)
-			{
-				Font::StrDraw(L"ここで獲得すべき星は全部で14個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"早速、集めていきましょう！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-		}
-		//おとめ座
-		else if (g_stage == MercuryVirgo)
-		{
-			if (m_text == 0)
-			{
-				Font::StrDraw(L"水星へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここ水星では双子座とおとめ座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"ここ、おとめ座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"HP吸収遠距離攻撃スキルを取得することができます", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"（取得後Xキーで発動）", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 2)
-			{
-				Font::StrDraw(L"ここで獲得すべき星は全部で15個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"早速、集めていきましょう！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-
-		}
-		//太陽
-		else if (g_stage == SunLeo)
-		{
-			if (m_text == 0)
-			{
-				Font::StrDraw(L"太陽へようこそ！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここ太陽では獅子座の", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 1)
-			{
-				Font::StrDraw(L"獅子座で取得できるスキルは", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"周囲の敵をマヒさせるスキルを", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"取得することができます", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 2)
-			{
-				Font::StrDraw(L"ここで獲得すべき星は全部で15個です", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ここにいる敵は、やけどを付与する", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"攻撃をしてきます！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-			else if (m_text == 3)
-			{
-				Font::StrDraw(L"やけど状態では一定時間", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"ダメージを受けてしまいます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
-			}
-			else if (m_text == 4)
-			{
-				Font::StrDraw(L"やけどは無効化できないので", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-				Font::StrDraw(L"スキルを駆使して", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-				Font::StrDraw(L"攻略していきましょう！", TEXT_X, TEXT_Y3, TEXTSIZE, c);
-
-			}
-
 		}
 		
 	}

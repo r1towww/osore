@@ -27,9 +27,16 @@ void CObjHero::Init()
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 
+	m_SE_on = 0;
 	//初期姿勢
-	g_posture = HERO_DOWN;
-
+	if (g_Boss_Spawn == true)
+	{
+		g_posture = HERO_UP;
+	}
+	else
+	{
+		g_posture = HERO_DOWN;
+	}
 	//最大HPの初期化
 	g_max_hp = 100.0f;
 	//HPの初期化
@@ -436,13 +443,17 @@ void CObjHero::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 		if (hit->CheckObjNameHit(OBJ_STAR) != nullptr)
 		{
+
 			if (g_hp < 100.0f)
 			{
+
 				m_hp_regene_time++;
 				if (m_hp_regene_time > 15)
 				{
 					m_hp_regene_time = 0;
 					g_hp += 1.0f;
+					Audio::Start(24);
+
 				}
 			}
 		}
@@ -642,6 +653,7 @@ void CObjHero::Action()
 	//獅子と当たった場合火傷状態を付与
 	if (hit->CheckObjNameHit(OBJ_LEO) != nullptr)
 	{
+		Audio::Start(24);
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_LEO);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
@@ -675,9 +687,10 @@ void CObjHero::Action()
 		}
 	}
 
-	//毒弾と当たった場合火傷状態を付与
+	//毒弾と当たった場合毒状態を付与
 	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
 	{
+		Audio::Start(22);
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_POISON);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
@@ -802,9 +815,13 @@ void CObjHero::Action()
 	{
 		m_alpha = 0.0f;
 		dead_flag = true;
-		
-	}
+		m_SE_on++ ;
 
+	}
+	if (m_SE_on ==1)
+	{
+		Audio::Start(25);
+	}
 
 	if (dead_flag == true)
 	{
@@ -840,6 +857,7 @@ void CObjHero::Action()
 		// 12番目（画像最後）まで進んだら、0に戻す
 		if (m_ani3 == 12)
 		{
+
 			m_ani3 = 0;
 			m_eff_time3 = 0;
 
