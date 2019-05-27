@@ -75,18 +75,21 @@ void CObjTitle::Init()
 	m_time = true;
 	m_Tra = 1.0f;
 	m_key_flag =true;	//キー制御フラグ
+	m_Allclear = false;
+	m_f = true;
 }
 
 //アクション
 void CObjTitle::Action()
 {
-
 }
 
 //ドロー
 void CObjTitle::Draw()
 {
 	float c[4] = { 1,1,1,m_Tra };
+	float t[4] = { 0,1,0,m_Tra };
+
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
@@ -103,13 +106,35 @@ void CObjTitle::Draw()
 	dst.m_bottom = 600.0f;
 
 	//描画
-	Draw::Draw(1, &src, &dst, c, 0.0f);
+	if(m_Allclear!=true)
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+	else
+		Draw::Draw(1, &src, &dst, t, 0.0f);
+
+	//タイトルでスペース+Zキーでチートオン
+	if (Input::GetVKey(VK_SPACE) == true && Input::GetVKey('Z') == true)
+	{
+		if (m_f == false)
+		{
+			if (m_Allclear == true)
+				m_Allclear = false;
+			else
+				m_Allclear = true;
+
+			m_f = true;
+		}
+	}
+	else
+	{
+		m_f = false;
+	}
 
 	//上キーを押したとき
 	if (Input::GetVKey(VK_UP) == true)
 	{
 		if (m_key_flag == true)
 		{
+
 			Audio::Start(1);
 			m_key_flag = false;
 			m_up = true;
@@ -130,6 +155,47 @@ void CObjTitle::Draw()
 	}
 	else
 		m_key_flag = true;
+
+	//チートフラグオン
+	if (m_Allclear == true)
+	{
+		g_Earth_clear = true;	//地球	
+		g_Venus_clear = true;	//金星
+		g_Mercury_clear = true;	//水星
+		g_Sun_clear = true;	//太陽
+
+		g_Taurus_clear = true;	//牡牛座	
+		g_Libra_clear = true;	//天秤座
+		g_Gemini_clear = true;	//双子座
+		g_Virgo_clear = true;	//乙女座
+		g_Leo_clear = true;	//獅子座
+		g_Boss_Spawn = true;
+		g_Taurus = true;	//牡牛座	
+		g_Libra = true;	//天秤座
+		g_Gemini = true;	//双子座
+		g_Virgo = true;	//乙女座
+		g_Leo = true;	//獅子座
+	}
+	else
+	{
+		g_Earth_clear = false;	//地球	
+		g_Venus_clear = false;	//金星
+		g_Mercury_clear = false;	//水星
+		g_Sun_clear = false;	//太陽
+
+		g_Taurus_clear = false;	//牡牛座	
+		g_Libra_clear = false;	//天秤座
+		g_Gemini_clear = false;	//双子座
+		g_Virgo_clear = false;	//乙女座
+		g_Leo_clear = false;	//獅子座
+		g_Boss_Spawn = false;
+		g_Taurus = false;	//牡牛座	
+		g_Libra = false;	//天秤座
+		g_Gemini = false;	//双子座
+		g_Virgo = false;	//乙女座
+		g_Leo = false;	//獅子座
+
+	}
 
 	//ゲーム開始
 	if (m_start == true)

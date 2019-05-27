@@ -119,6 +119,7 @@ void CObjGameOver::Draw()
 			else if (m_Left == true)
 			{
 				//ƒ^ƒCƒgƒ‹
+				g_stage = Space;
 				Scene::SetScene(new CSceneTitle());
 			}
 		}

@@ -25,7 +25,7 @@ void ObjStageChoiceHero::Init()
 	//移動ベクトル
 	m_vx = 0.0f;		
 	m_vy = 0.0f;
-
+	m_f = false;
 	//初期姿勢
 	g_posture = HERO_DOWN;
 
@@ -56,10 +56,19 @@ void ObjStageChoiceHero::Action()
 
 	g_gemini_check = false;
 	//星座選択時に入力制御する
-	if (g_stage == Earth || g_stage == Venus || g_stage == Mercury || g_stage == Sun||g_stage==Performance||
-		g_stage==EarthStar||g_stage==VenusTaurus||g_stage== VenusLibra ||g_stage==MercuryGemini||g_stage==MercuryVirgo|g_stage==SunLeo) {
+	if(g_stage!=Space)
+	{
 		return;
 	}
+
+	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
+	if (g_tutorial_flag == true || g_move_stop_flag == true )
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+		return;
+	}
+
 	//主人公機が領域外行かない処理
 	if (g_stage_px + 80.0f > 800.0f)
 	{
@@ -145,7 +154,27 @@ void ObjStageChoiceHero::Action()
 		g_key_flag = true;	//離したらオンにする
 	}
 
+	//Qキーが入力された場合
+	if (Input::GetVKey('Q'))
+	{
+		if (m_f == true)
+		{
+			Audio::Start(1);	//エフェクト音を鳴らす
+								//ベクトルを０にする
+			m_vx = 0.0f;
+			m_vy = 0.0f;
+			//Menuオブジェクトを作成
+			CObjMenu *objmenu = new CObjMenu();
+			Objs::InsertObj(objmenu, OBJ_MENU, 150);
+			g_move_stop_flag = true;	//ストップフラグをオン
 
+			m_f = false;
+		}
+	}
+	else
+	{
+		m_f = true;
+	}
 
 	// Zキーを入力かつ、キーフラグがオンの時に実行
 	if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
@@ -221,6 +250,31 @@ void ObjStageChoiceHero::Action()
 			Objs::InsertObj(per, OBJ_PERFORMANCE_ROOM, 20);
 
 		}
+		//ショートカット
+		else if (g_stage_px >= 50 && g_stage_px <= 100 && g_stage_py >= 50 && g_stage_py <= 100)
+		{
+			Audio::Start(1);
+
+			g_key_flag = false;	//キーフラグをオフ
+			g_Earth_clear = true;	//地球	
+			g_Venus_clear = true;	//金星
+			g_Mercury_clear = true;	//水星
+			g_Sun_clear = true;	//太陽
+
+			g_Taurus_clear = true;	//牡牛座	
+			g_Libra_clear = true;	//天秤座
+			g_Gemini_clear = true;	//双子座
+			g_Virgo_clear = true;	//乙女座
+			g_Leo_clear = true;	//獅子座
+			g_Boss_Spawn = true;
+			g_Taurus = true;	//牡牛座	
+			g_Libra = true;	//天秤座
+			g_Gemini = true;	//双子座
+			g_Virgo = true;	//乙女座
+			g_Leo = true;	//獅子座
+
+		}
+
 	}
 
 	//位置の更新

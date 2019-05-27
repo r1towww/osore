@@ -68,6 +68,7 @@ void CObjMenu::Action()
 		{
 			g_move_stop_flag = false;	//ストップフラグをオフ
 			m_push_flag = true;
+
 			
 		}
 		g_key_flag = false;
@@ -85,7 +86,19 @@ void CObjMenu::Action()
 		m_Tra += 0.03;
 		if (m_Tra >= 1)
 		{
-			Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
+			if (g_stage == Space)
+			{
+				Scene::SetScene(new CSceneTitle());	//タイトル選択へ戻る
+
+			}
+			else
+			{
+				this->SetStatus(false);		//オブジェクトを削除
+
+				g_stage = Space;
+				Scene::SetScene(new CSceneStageChoice());	//ステージ選択へ戻る
+
+			}
 		}
 	}
 
@@ -143,10 +156,16 @@ void CObjMenu::Draw()
 //----------------------------------------------
 
 //文字描画用------------------------------------
-	
-	Font::StrDraw(L"ステージ選択へ戻る", 110, 250, 32, c);
-	Font::StrDraw(L"ゲームへ戻る", 470, 250, 32, c);
-
+	if (g_stage == Space)
+	{
+		Font::StrDraw(L"タイトルへ戻る", 110, 250, 32, c);
+		Font::StrDraw(L"ゲームへ戻る", 470, 250, 32, c);
+	}
+	else
+	{
+		Font::StrDraw(L"ステージ選択へ戻る", 110, 250, 32, c);
+		Font::StrDraw(L"ゲームへ戻る", 470, 250, 32, c);
+	}
 	//番号によって選択を変更
 	if (m_key == 0)
 		Font::StrDraw(L"→", 440, 250, 32, c);

@@ -148,7 +148,9 @@ void CObjSkillVirgo::Action()
 		hit->CheckObjNameHit(OBJ_TWINS_BLUE) != nullptr ||
 		hit->CheckObjNameHit(OBJ_TWINS_RED)  != nullptr ||
 		hit->CheckObjNameHit(OBJ_WOMAN)      != nullptr ||
-		hit->CheckObjNameHit(OBJ_LEO)        != nullptr)//“–‚½‚Á‚Ä‚¢‚½‚çŽæ“¾  
+		hit->CheckObjNameHit(OBJ_LEO)        != nullptr || 
+		hit->CheckObjNameHit(OBJ_BOSS)		 != nullptr || 
+		hit->CheckObjNameHit(OBJ_SNAKE)		 != nullptr)//“–‚½‚Á‚Ä‚¢‚½‚çŽæ“¾  
 	{
 		//1”­‚É‚Â‚«‚P‰ñ‚¾‚¯‰ñ•œ‚·‚é‚æ‚¤‚É’²®
 		if (m_flag == false)

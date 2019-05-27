@@ -47,6 +47,10 @@ void CObjHero::Init()
 	//ＭＰの初期化
 	g_mp = 100.0f;
 
+	//移動速度の初期化
+	m_speed_power = NORMAL_SPEED;
+
+
 	//アニメーション用変数初期化
 	m_ani_time = 0;
 	m_ani_frame = 1;
@@ -530,7 +534,6 @@ void CObjHero::Action()
 				//ベクトルを０にする
 				m_vx = 0.0f;
 				m_vy = 0.0f;
-				g_stage = Space;
 				//Menuオブジェクトを作成
 				CObjMenu *objmenu = new CObjMenu();
 				Objs::InsertObj(objmenu, OBJ_MENU, 150);
@@ -690,7 +693,7 @@ void CObjHero::Action()
 	//毒弾と当たった場合毒状態を付与
 	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
 	{
-		Audio::Start(22);
+		Audio::Start(30);
 		//敵が主人公とどの角度で当たっているかを確認
 		HIT_DATA**hit_data;							//当たった時の細かな情報を入れるための構造体
 		hit_data = hit->SearchObjNameHit(OBJ_POISON);//hit_dataに主人公と当たっている他全てのHitBoxとの情報を入れる
