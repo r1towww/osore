@@ -185,15 +185,14 @@ void CObjStageClear::Action()
 		m_time = 60;
 
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	if (m_alpha[3] == 1.0f && m_ani_flag == false) {		//被ダメージ評価用
+	if (m_alpha[3] == 1.0f && m_grade_f[2] == true) {		//被ダメージ評価用
 		m_alpha[4] += 0.05f;
 		if (m_alpha[4] >= 1.0f) {
 			m_alpha[4] = 1.0f;
-			m_ani_flag = true;
 		}
 	}
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	else if (m_alpha[2] == 1.0f&& m_ani_flag == false) {	//キル数評価用
+	else if (m_alpha[2] == 1.0f&& m_grade_f[1] == true) {	//キル数評価用
 		m_alpha[3] += 0.05f;
 		if (m_alpha[3] >= 1.0f) {
 			m_alpha[3] = 1.0f;
@@ -209,7 +208,7 @@ void CObjStageClear::Action()
 		}
 	}
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {	//取得星座用
+	else if (m_alpha[0] == 1.0f && m_grade_f[0] == true) {	//取得星座用
 		m_alpha[1] += 0.05f;
 		if (m_alpha[1] >= 1.0f)
 			m_alpha[1] = 1.0f;
@@ -263,6 +262,7 @@ void CObjStageClear::Action()
 		//画像最後まで進んだら、0番目に戻す
 		if (m_ani == 14)
 		{
+			
 			//クリアタイム用グレード
 			if (m_grade_f[0] == true && m_grade_f[1] == false) {
 				m_time_star_f[m_time_star_cnt] = true;
@@ -809,14 +809,12 @@ void CObjStageClear::Draw()
 	
 		for (int i = 0; i < m_cnt; i++)
 		{
-	
 			//表示位置の設定
 			dst.m_top    = 400.0f;
 			dst.m_left   =  20.0f + (50.0f * i);
 			dst.m_right  = 100.0f + (50.0f * i);
 			dst.m_bottom = dst.m_top + 80.0f;
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-			
 		}
 		//最終アニメーションフラグをオンにする
 		m_end_f = true;
