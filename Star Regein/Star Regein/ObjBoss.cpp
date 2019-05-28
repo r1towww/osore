@@ -28,7 +28,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 40;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -610,17 +610,15 @@ void CObjBoss::Action()
 			// 12番目（画像最後）まで進んだら、0に戻す
 			if (m_dead_ani == 20)
 			{
-				Scene::SetScene(new CSceneED());//EDに移行
+				CObjFadein *objfade = new CObjFadein();
+				Objs::InsertObj(objfade, OBJ_FADE_IN, 150);
 			}
-
 		}
 		else
 		{
 			m_dead_time++;
 		}
 	}
-
-
 	//位置の更新
 	m_px += m_vx*1.0;
 	m_py += m_vy*1.0;

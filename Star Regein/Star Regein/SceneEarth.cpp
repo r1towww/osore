@@ -117,6 +117,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
 	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
 
+	Draw::LoadImageW(L"Fadein.png", 99, TEX_SIZE_512);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);

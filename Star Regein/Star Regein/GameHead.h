@@ -9,7 +9,7 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_STAGECHOICE,
 	OBJ_MESSAGE,
-	
+
 	OBJ_MINIMAP,
 
 	OBJ_HERO,
@@ -29,6 +29,8 @@ enum OBJ_NAME
 	OBJ_BLACKHOLE4,
 	OBJ_BREAK_ROCK,
 	OBJ_BREAK_BIGROCK,
+
+	OBJ_FADE_IN,
 
 	OBJ_WHITEHOLE,
 
@@ -357,6 +359,7 @@ extern int g_LeRank;		//ÉâÉìÉNä«óùóp
 #include "ObjBeam.h"
 #include "ObjSnake.h"
 #include "ObjPoison.h"
+#include "ObjFadein.h"
 
 #include "ObjBlock.h"
 #include "ObjStar.h"
