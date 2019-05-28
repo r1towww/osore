@@ -18,6 +18,9 @@ using namespace GameL;
 
 float* g_boss_x;
 float* g_boss_y;
+bool g_dead_flag = false;
+bool g_Voice_flag = false;
+bool g_End_flag = false;
 
 CObjBoss::CObjBoss(float x, float y)
 {
@@ -28,7 +31,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 40;        //体力
+	m_hp = 1;        //体力
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -75,6 +78,7 @@ void CObjBoss::Init()
 	m_df = true;
 	count = 0;
 
+	
 	m_alpha = 1.0;
 
 	srand(time(NULL));
@@ -97,10 +101,9 @@ void CObjBoss::Init()
 	m_dead_eff.m_right = 192;
 	m_dead_eff.m_bottom = 192;
 
-	dead_flag	= false;	
+	
 	m_dead_time =0;//アニメーション間隔用
 	m_dead_ani  =0;//アニメーション用
-
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_BOSS, 1);
@@ -137,7 +140,6 @@ void CObjBoss::Action()
 		m_ani_frame = 0;
 	}
 	
-	
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
@@ -153,10 +155,8 @@ void CObjBoss::Action()
 	//時間経過でランダムにワープ
 	if (m_warp_time <= 0 && m_hp > 0)
 	{
-
 		m_warp_flag = true;
 	
-
 		//エフェクト用
 		RECT_F warp_ani_src[8] =
 		{
@@ -359,9 +359,7 @@ void CObjBoss::Action()
 
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
-
 				}
-
 				hit->SetInvincibility(true);
 				m_alpha = 0.0f;
 				m_beam_f = false;
@@ -379,9 +377,7 @@ void CObjBoss::Action()
 		g_boss_d_flag = true;
 		hit->SetInvincibility(false);
 		m_alpha = 1.0f;
-
 	}
-
 
 	//主人公とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -396,7 +392,6 @@ void CObjBoss::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -432,7 +427,6 @@ void CObjBoss::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -487,7 +481,6 @@ void CObjBoss::Action()
 				{
 					m_vy = -0.0f; //下
 				}
-
 			}
 		}
 	}
@@ -501,7 +494,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 
 		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
@@ -511,7 +503,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 
 		//ELEMENT_SUBを持つオブジェクトと接触したら
@@ -521,7 +512,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 	}
 
@@ -549,14 +539,12 @@ void CObjBoss::Action()
 				g_stan_boss_flag = false;
 			}
 		}
-
 	}
 
 	if (m_f == true)
 	{
 		m_time--;
 		m_alpha = ALPHAUNDER;
-
 	}
 	if (m_time <= 0)
 	{
@@ -566,9 +554,24 @@ void CObjBoss::Action()
 
 		m_time = 30;
 	}
+	//位置の更新
+	m_px += m_vx*1.0;
+	m_py += m_vy*1.0;
+
+	//HPが0になったら破棄
+	if (m_hp <= 0)
+	{
+		//敵削除
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_boss_d_flag = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+		g_Earth_BossKill = true;
+		g_dead_flag = true;
+	}
 
 	//HPが０以下でエフェクト開始
-	if (dead_flag == true)
+	if (g_dead_flag == true)
 	{
 		//エフェクト用
 		RECT_F dead[20] =
@@ -597,45 +600,41 @@ void CObjBoss::Action()
 
 		};
 
-
-
 		//アニメーションのコマ間隔制御
 		if (m_dead_time > 2)
 		{
 			m_dead_ani++;		//アニメーションのコマを1つ進める
 			m_dead_time = 0;
-
-
 			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-			// 12番目（画像最後）まで進んだら、0に戻す
+										  // 12番目（画像最後）まで進んだら、0に戻す
 			if (m_dead_ani == 20)
 			{
-				Scene::SetScene(new CSceneED());//EDに移行
+				//撃破アニメーションが終わったら天の声（クリア用）を表示
+				g_tutorial_flag = true;
+				g_Voice_flag = true;
 			}
-
 		}
 		else
 		{
 			m_dead_time++;
 		}
 	}
-
-
-	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
-
-	//HPが0になったら破棄
-	if (m_hp <= 0)
+	if (g_Voice_flag == true)//天の声（クリア用）を表示
 	{
-		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
-		g_boss_d_flag = false;
-		g_All_Killcnt++;		   //キルカウントを+する
-		g_Earth_BossKill = true;
-		dead_flag = true;
+		//チュートリアル吹き出し作成
+		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
+		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+
+		//チュートリアルオブジェクト作成
+		CObjTutorial* objtutorial = new CObjTutorial(1, 3);
+		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	}
+	if (g_End_flag == true)//天の声（クリア用）が終わったらフェードインを作成し、EDに移行
+	{
+		CObjFadein *objfade = new CObjFadein();
+		Objs::InsertObj(objfade, OBJ_FADE_IN, 150);//フェードインオブジェクト作成
+	}
+
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
 }
@@ -656,15 +655,11 @@ void CObjBoss::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	
-
 	//切り取り位置の設定
 	src.m_top = 80.0f * m_posture;
 	src.m_left = 0.0f + (AniData[m_ani_frame] * 80);
 	src.m_right = 80.0f + (AniData[m_ani_frame] * 80);
 	src.m_bottom = src.m_top + 80.0f;
-
-
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();
@@ -685,7 +680,6 @@ void CObjBoss::Draw()
 		dst.m_bottom = 200.0f + m_py + block->GetScrolly();
 		//エフェクトの描画
 		Draw::Draw(34, &m_warp_eff, &dst, c, 0.0f);
-
 	}
 	else
 	{
@@ -696,12 +690,9 @@ void CObjBoss::Draw()
 	dst.m_left = 240.0f + m_px + block->GetScrollx();
 	dst.m_right = -80.0f + m_px + block->GetScrollx();
 	dst.m_bottom = 200.0f + m_py + block->GetScrolly();
-	if (dead_flag == true)
+	if (g_dead_flag == true)
 	{
 		//エフェクトの描画
 		Draw::Draw(65, &m_dead_eff, &dst, cB, 0.0f);
-
 	}
-
-
 }

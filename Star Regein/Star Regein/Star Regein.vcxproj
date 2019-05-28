@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="ObjBeam.cpp" />
     <ClCompile Include="ObjED.cpp" />
+    <ClCompile Include="ObjFadein.cpp" />
     <ClCompile Include="ObjPerformanceRoom.cpp" />
     <ClCompile Include="ObjPoison.cpp" />
     <ClCompile Include="ObjSnake.cpp" />
@@ -195,6 +196,7 @@
   <ItemGroup>
     <ClInclude Include="ObjBeam.h" />
     <ClInclude Include="ObjED.h" />
+    <ClInclude Include="ObjFadein.h" />
     <ClInclude Include="ObjPerformanceRoom.h" />
     <ClInclude Include="ObjPoison.h" />
     <ClInclude Include="ObjSnake.h" />

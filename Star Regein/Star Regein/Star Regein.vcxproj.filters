@@ -230,6 +230,9 @@
     <ClCompile Include="ObjWorning.cpp">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
+    <ClCompile Include="ObjFadein.cpp">
+      <Filter>ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -467,6 +470,9 @@
     <ClInclude Include="ObjWorning.h">
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
+    <ClInclude Include="ObjFadein.h">
+      <Filter>ソースファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="リソースファイル">
@@ -510,9 +516,6 @@
     </Filter>
     <Filter Include="ソースファイル\惑星\地球">
       <UniqueIdentifier>{1c9df4ce-2891-49f2-b9f7-728ee9b2694d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソースファイル\惑星\金星">
-      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソースファイル\惑星\水星">
       <UniqueIdentifier>{84f98798-388e-4df0-8f30-6bce20dd88dc}</UniqueIdentifier>
@@ -573,6 +576,9 @@
     </Filter>
     <Filter Include="ソースファイル\実績">
       <UniqueIdentifier>{59bbf528-e1be-4fab-88a8-81c8c3737163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\惑星\金星">
+      <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

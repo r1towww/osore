@@ -117,6 +117,8 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
 	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
 
+	Draw::LoadImageW(L"Fadein.png", 99, TEX_SIZE_512);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -144,7 +146,6 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(20, L"SランクSE.wav", EFFECT);
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
-
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
 	Audio::LoadAudio(30, L"毒SE.wav", EFFECT);
@@ -191,12 +192,14 @@ void CSceneEarth::InitScene()
 	CObjTutorial* objtutorial = new CObjTutorial(1, 5);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
-	if (g_tutorial_flag == true)
+	if (g_tutorial_flag == true )
 	{
 		//テキストボックスオブジェクト作成
 		CObjTextBox* objtextbox = new CObjTextBox();
 		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+		
 	}
+
 	
 
 }
@@ -205,6 +208,7 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
+
 	if (g_Boss_Spawn == false)
 	{
 		//テスト（地球で星を5個集めたら次へ移行）
@@ -243,9 +247,11 @@ void CSceneEarth::Scene()
 				g_new_Performance = true;
 				ClearCheck(g_stage_clear);
 			}
-
 		}
 	}
+
+
+
 }
 void CSceneEarth::ClearCheck(bool a)
 {

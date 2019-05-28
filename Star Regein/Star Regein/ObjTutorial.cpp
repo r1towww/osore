@@ -46,8 +46,14 @@ void CObjTutorial::Action()
 		g_tutorial_flag = false;
 	}
 
+	//最後のセリフはスキップできないようにする
+	if (g_Voice_flag == true && Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false
+	                                                   	    && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_RIGHT) == false) 
+	{
+		;
+	}
 	//Xキーを押してスキップ（移動キーを入力できなくしている）
-	if (Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false 
+	else if (Input::GetVKey('X') == true && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false 
 									&& Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_RIGHT) == false )
 	{
 		Audio::Start(1);	//エフェクト音を鳴らす
@@ -74,7 +80,7 @@ void CObjTutorial::Draw()
 		return;
 	}
 	//チュートリアルフラグが立った時チュートリアルを開始する
-	else if (g_tutorial_flag == true)
+	else if (g_tutorial_flag == true )
 	{
 		//テキストボックス表示
 		if (m_tipe == 0)
