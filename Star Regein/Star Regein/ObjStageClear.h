@@ -15,8 +15,18 @@ class CObjStageClear :public CObj
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
-		void alpha();
+		bool ani_flag();	//アニメーションのオンオフの切り替え
+		void Star_eff_ani();	//スターエフェクト
+		void Star_clear();	//惑星クリアメッセージ、エフェクト、スターの描画
+		//各評価のエフェクトの描画
+		void Star_grade_eff(bool ani, int starcnt, bool grade1, bool grade2, float x, float y);//アニメーションフラグ、各評価のカウント、前の評価、選択中の評価、位置X、位置Y
+		//各評価のスターの描画	
+		void Star_grade_draw(bool grade_f[3], int starcnt,float x, float y);//各評価の数のフラグ、各評価のカウント、位置X、位置Y
+
+
 	private:
+
+
 		int m_time;	//表示までの時間間隔
 
 		//各メッセージの透明度用変数
