@@ -614,9 +614,10 @@ void CObjBoss::Action()
 			// 12番目（画像最後）まで進んだら、0に戻す
 			if (m_dead_ani == 20)
 			{
+				CObjFadein *objfade = new CObjFadein();
+				Objs::InsertObj(objfade, OBJ_FADE_IN, 150);
 				g_Voice_flag = true;
 			}
-
 		}
 		else
 		{
