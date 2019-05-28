@@ -13,7 +13,7 @@ void CObjFadein::Init()
 {
 	m_ani_time = 0;
 	m_ani_frame = 0;
-	m_ani_max_time = 2;		//アニメーション間隔幅
+	m_ani_max_time = 8;		//アニメーション間隔幅
 
 	m_flag = true;			//切り替え用フラグ
 	m_fade_flag = true;		//フェイドインの切り替え用フラグ
@@ -22,7 +22,7 @@ void CObjFadein::Init()
 //アクション
 void CObjFadein::Action()
 {
-
+	//フェードインのアニメーション用
 	if (m_flag == true)
 	{
 		m_ani_time += 1;
@@ -34,6 +34,7 @@ void CObjFadein::Action()
 		}
 		if (m_ani_frame == 10)
 		{
+			//フェードイン完了でエンディングに移行
 			Scene::SetScene(new  CSceneED());
 		}
 	}

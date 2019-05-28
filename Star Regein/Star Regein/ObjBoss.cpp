@@ -101,7 +101,6 @@ void CObjBoss::Init()
 	m_dead_time =0;//アニメーション間隔用
 	m_dead_ani  =0;//アニメーション用
 
-
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, 160, 160, ELEMENT_NULL, OBJ_BOSS, 1);
 }
@@ -137,7 +136,6 @@ void CObjBoss::Action()
 		m_ani_frame = 0;
 	}
 	
-	
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
@@ -153,10 +151,8 @@ void CObjBoss::Action()
 	//時間経過でランダムにワープ
 	if (m_warp_time <= 0 && m_hp > 0)
 	{
-
 		m_warp_flag = true;
 	
-
 		//エフェクト用
 		RECT_F warp_ani_src[8] =
 		{
@@ -359,9 +355,7 @@ void CObjBoss::Action()
 
 					m_px = g_star_x[m_rand] - 20;
 					m_py = g_star_y[m_rand] - 20;
-
 				}
-
 				hit->SetInvincibility(true);
 				m_alpha = 0.0f;
 				m_beam_f = false;
@@ -379,9 +373,7 @@ void CObjBoss::Action()
 		g_boss_d_flag = true;
 		hit->SetInvincibility(false);
 		m_alpha = 1.0f;
-
 	}
-
 
 	//主人公とBLOCK系統との当たり判定
 	if (hit->CheckElementHit(ELEMENT_BLOCK) == true)
@@ -396,7 +388,6 @@ void CObjBoss::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -432,7 +423,6 @@ void CObjBoss::Action()
 			if (hit_data[i] != nullptr)
 			{
 				r = hit_data[i]->r;
-
 
 				//角度で上下左右を判定
 				if ((r <= 45 && r >= 0) || r >= 315)
@@ -487,7 +477,6 @@ void CObjBoss::Action()
 				{
 					m_vy = -0.0f; //下
 				}
-
 			}
 		}
 	}
@@ -501,7 +490,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 
 		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
@@ -511,7 +499,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 
 		//ELEMENT_SUBを持つオブジェクトと接触したら
@@ -521,7 +508,6 @@ void CObjBoss::Action()
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
-
 		}
 	}
 
@@ -549,14 +535,12 @@ void CObjBoss::Action()
 				g_stan_boss_flag = false;
 			}
 		}
-
 	}
 
 	if (m_f == true)
 	{
 		m_time--;
 		m_alpha = ALPHAUNDER;
-
 	}
 	if (m_time <= 0)
 	{
@@ -597,15 +581,11 @@ void CObjBoss::Action()
 
 		};
 
-
-
 		//アニメーションのコマ間隔制御
 		if (m_dead_time > 2)
 		{
 			m_dead_ani++;		//アニメーションのコマを1つ進める
 			m_dead_time = 0;
-
-
 			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
 			// 12番目（画像最後）まで進んだら、0に戻す
 			if (m_dead_ani == 20)
@@ -654,15 +634,11 @@ void CObjBoss::Draw()
 	//ブロック情報を持ってくる
 	CObjBlock*block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	
-
 	//切り取り位置の設定
 	src.m_top = 80.0f * m_posture;
 	src.m_left = 0.0f + (AniData[m_ani_frame] * 80);
 	src.m_right = 80.0f + (AniData[m_ani_frame] * 80);
 	src.m_bottom = src.m_top + 80.0f;
-
-
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py + block->GetScrolly();
@@ -683,7 +659,6 @@ void CObjBoss::Draw()
 		dst.m_bottom = 200.0f + m_py + block->GetScrolly();
 		//エフェクトの描画
 		Draw::Draw(34, &m_warp_eff, &dst, c, 0.0f);
-
 	}
 	else
 	{
@@ -698,8 +673,5 @@ void CObjBoss::Draw()
 	{
 		//エフェクトの描画
 		Draw::Draw(65, &m_dead_eff, &dst, cB, 0.0f);
-
 	}
-
-
 }
