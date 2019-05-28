@@ -78,15 +78,15 @@ void CObjTextBox::Draw()
 	//地球
 	else if (g_tutorial_flag == true)
 	{
-		if (g_stage == EarthStar)
+		if (g_stage == EarthStar || g_stage == Space)
 		{
 			//ラスボス出現時
 			if (g_Boss_Spawn == true)
 			{
 				if (m_text == 0)
 				{
-					Font::StrDraw(L"緊急連絡！緊急連絡！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"地球に謎の生命体出現！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"本部より通達です！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"地球に侵入したのはへびつかい座と思われます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				}
 				else if (m_text == 1)
 				{
@@ -114,6 +114,19 @@ void CObjTextBox::Draw()
 
 				}
 
+			}
+			else if (g_Sun_clear == true)
+			{
+				if (m_text == 0)
+				{
+					Font::StrDraw(L"緊急連絡！緊急連絡！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"地球に謎の生命体出現！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				}
+				else if (m_text == 1)
+				{
+					Font::StrDraw(L"即座に地球へ帰還して下さい！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					Font::StrDraw(L"繰り返します……", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+				}
 			}
 			else
 			{
@@ -149,7 +162,6 @@ void CObjTextBox::Draw()
 				else if (m_text == 5)
 				{
 					Font::StrDraw(L"それでは星を集めてみましょう", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-
 				}
 			}
 		}

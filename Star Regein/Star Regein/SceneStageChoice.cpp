@@ -45,17 +45,25 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"星座立ち絵総合.png", 7, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ミニマップ各種点.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"テキストボックス .png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
+	Draw::LoadImageW(L"WORNING!!.png", 50, TEX_SIZE_2048);
+	Draw::LoadImageW(L"!.png", 51, TEX_SIZE_2048);
 
 
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
 	Audio::LoadAudio(2, L"決定音.wav", EFFECT);
+	Audio::LoadAudio(4, L"警告音.wav", EFFECT);
 
 	Audio::LoadAudio(3, L"ステージ選択_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	Audio::Start(3);
+
+	CObjWorning* worning = (CObjWorning*)Objs::GetObj(OBJ_WORNING);
+
 	//ステージ選択オブジェクト作成
 	CObjStageChoice* o = new CObjStageChoice();
 	Objs::InsertObj(o, OBJ_STAGECHOICE, 0);

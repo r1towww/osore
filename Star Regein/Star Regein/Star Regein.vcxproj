@@ -115,6 +115,7 @@
     <ClCompile Include="ObjPerformanceRoom.cpp" />
     <ClCompile Include="ObjPoison.cpp" />
     <ClCompile Include="ObjSnake.cpp" />
+    <ClCompile Include="ObjWorning.cpp" />
     <ClCompile Include="SceneED.cpp" />
     <ClCompile Include="ObjBlueBullet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -197,6 +198,7 @@
     <ClInclude Include="ObjPerformanceRoom.h" />
     <ClInclude Include="ObjPoison.h" />
     <ClInclude Include="ObjSnake.h" />
+    <ClInclude Include="ObjWorning.h" />
     <ClInclude Include="SceneED.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />

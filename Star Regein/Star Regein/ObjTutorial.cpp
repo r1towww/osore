@@ -223,7 +223,7 @@ void CObjTutorial::Draw()
 			else 
 			{ ; }
 		}
-		if (g_stage == EarthStar)
+		if (g_stage == EarthStar || g_stage == Space)
 		{
 			if(g_Leo_clear==true)
 				Font::StrDraw(L"天の声", 10, 380, 30, c);
@@ -239,7 +239,7 @@ void CObjTutorial::Draw()
 	}
 
 	//シーン移行用
-	if (m_stage_start == true)
+	if (m_stage_start == true && g_stage ==EarthStar)
 	{
 
 		//切り取り位置の設定
