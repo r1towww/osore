@@ -102,7 +102,7 @@ void CObjTextBox::Draw()
 				}
 			}
 			//ラスボス出現時
-			else if (g_Boss_Spawn == true)
+			else if (g_stage == EarthStar && g_Boss_Spawn == true)
 			{
 				if (m_text == 0)
 				{

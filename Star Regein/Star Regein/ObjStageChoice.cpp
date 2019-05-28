@@ -215,7 +215,12 @@ void CObjStageChoice::Draw()
 
 		Font::StrDraw(L"!!!!!", 40, 400, 40, r);
 
+	}
 
+	if (g_key_flag == false)
+	{
+
+		g_key_flag = true;
 	}
 
 }
