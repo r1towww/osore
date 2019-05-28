@@ -190,7 +190,15 @@ void CSceneEarth::InitScene()
 	CObjTutorial* objtutorial = new CObjTutorial(1, 5);
 	Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
 	//チュートリアル発生時のみ作成
-	if (g_tutorial_flag == true)
+	if (g_tutorial_flag == true )
+	{
+		//テキストボックスオブジェクト作成
+		CObjTextBox* objtextbox = new CObjTextBox();
+		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
+		
+	}
+
+	if (g_Voice_flag == true)
 	{
 		//テキストボックスオブジェクト作成
 		CObjTextBox* objtextbox = new CObjTextBox();

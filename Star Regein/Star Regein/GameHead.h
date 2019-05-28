@@ -300,6 +300,9 @@ extern int g_cow_id[20];//牛の識別ID
 extern bool g_hero_hit;
 
 extern bool g_Boss_Spawn;
+extern bool g_dead_flag;  //ボスが死んだかどうかのフラグ
+extern bool g_Voice_flag; //ボス撃破後の天の声フラグ
+extern bool g_End_flag;   //天の声が終わったかどうかのフラグ
 /*実績達成状況*/
 //新しく実績を解除したとき----------
 extern bool g_new_Performance;
@@ -333,6 +336,8 @@ extern int g_LiRank;		//ランク管理用
 extern int g_GRank;		//ランク管理用
 extern int g_VRank;		//ランク管理用
 extern int g_LeRank;		//ランク管理用
+
+
 
 
 //------------------------------------------------

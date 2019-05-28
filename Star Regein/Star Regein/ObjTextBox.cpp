@@ -27,9 +27,9 @@ void CObjTextBox::Action()
 {
 	//キータイムを超えるとZ可能
 	//Zキー入力
-	if (Input::GetVKey('Z') == true && g_tutorial_next_flag == true ||Input::GetVKey(VK_RETURN)==true&& g_tutorial_next_flag ==true)
+	if (Input::GetVKey('Z') == true && g_tutorial_next_flag == true || Input::GetVKey(VK_RETURN) == true && g_tutorial_next_flag == true)
 	{
-			
+
 		if (m_f == false)
 		{
 			//チュートリアルフラグがオンのとき
@@ -66,7 +66,7 @@ void CObjTextBox::Draw()
 			else
 				Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 		}
-		if(g_Boss_Spawn==true)
+		if (g_Boss_Spawn == true)
 			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
 
 	}
@@ -152,8 +152,24 @@ void CObjTextBox::Draw()
 
 				}
 			}
+			if (g_Voice_flag == true)
+			{
+				if (m_text == 0)
+				{
+					Font::StrDraw(L"すべての星座の力を集め、敵を倒したことで地球に平和が訪れました。", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				}
+				else if (m_text == 1)
+				{
+					Font::StrDraw(L"これでもう二度と地球の平和が脅かされることはないでしょう。", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+				}
+				else if (m_text == 2)
+				{
+					Font::StrDraw(L"おしまい", TEXT_X, TEXT_Y1, TEXTSIZE, c);
+					g_End_flag = true;
+				}
+			}
 		}
-		
+
 	}
 
 }
