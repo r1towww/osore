@@ -570,6 +570,21 @@ void CObjBoss::Action()
 
 		m_time = 30;
 	}
+	//位置の更新
+	m_px += m_vx*1.0;
+	m_py += m_vy*1.0;
+
+	//HPが0になったら破棄
+	if (m_hp <= 0)
+	{
+		//敵削除
+		m_alpha = 0.0f;
+		hit->SetInvincibility(true);
+		g_boss_d_flag = false;
+		g_All_Killcnt++;		   //キルカウントを+する
+		g_Earth_BossKill = true;
+		g_dead_flag = true;
+	}
 
 	//HPが０以下でエフェクト開始
 	if (g_dead_flag == true)
@@ -611,11 +626,11 @@ void CObjBoss::Action()
 
 
 			m_dead_eff = dead[m_dead_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-			// 12番目（画像最後）まで進んだら、0に戻す
+										  // 12番目（画像最後）まで進んだら、0に戻す
 			if (m_dead_ani == 20)
 			{
-				CObjFadein *objfade = new CObjFadein();
-				Objs::InsertObj(objfade, OBJ_FADE_IN, 150);
+				//撃破アニメーションが終わったら天の声（クリア用）を表示
+				g_tutorial_flag = true;
 				g_Voice_flag = true;
 			}
 		}
@@ -624,28 +639,22 @@ void CObjBoss::Action()
 			m_dead_time++;
 		}
 	}
-
-	//クリア後の天の声が終わったらEDに移行
-	if (g_End_flag == true)
+	if (g_Voice_flag == true)//天の声（クリア用）を表示
 	{
-		Scene::SetScene(new CSceneED());//EDに移行
+		//チュートリアル吹き出し作成
+		CObjTutorial* objtutorialhukidashi = new CObjTutorial(0, 3);
+		Objs::InsertObj(objtutorialhukidashi, OBJ_TUTORIAL, 151);
+
+		//チュートリアルオブジェクト作成
+		CObjTutorial* objtutorial = new CObjTutorial(1, 3);
+		Objs::InsertObj(objtutorial, OBJ_TUTORIAL, 170);
+	}
+	if (g_End_flag == true)//天の声（クリア用）が終わったらフェードインを作成し、EDに移行
+	{
+		CObjFadein *objfade = new CObjFadein();
+		Objs::InsertObj(objfade, OBJ_FADE_IN, 150);//フェードインオブジェクト作成
 	}
 
-	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
-
-	//HPが0になったら破棄
-	if (m_hp <= 0)
-	{
-		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
-		g_boss_d_flag = false;
-		g_All_Killcnt++;		   //キルカウントを+する
-		g_Earth_BossKill = true;
-		g_dead_flag = true;
-	}
 	CObjMiniMap*map = (CObjMiniMap*)Objs::GetObj(OBJ_MINIMAP);
 
 }

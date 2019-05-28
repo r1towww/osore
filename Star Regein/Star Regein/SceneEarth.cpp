@@ -200,12 +200,6 @@ void CSceneEarth::InitScene()
 		
 	}
 
-	if (g_Voice_flag == true)
-	{
-		//テキストボックスオブジェクト作成
-		CObjTextBox* objtextbox = new CObjTextBox();
-		Objs::InsertObj(objtextbox, OBJ_TEXTBOX, 160);
-	}
 	
 
 }
@@ -214,6 +208,7 @@ void CSceneEarth::InitScene()
 //実行中メソッド
 void CSceneEarth::Scene()
 {
+
 	if (g_Boss_Spawn == false)
 	{
 		//テスト（地球で星を5個集めたら次へ移行）
@@ -252,9 +247,11 @@ void CSceneEarth::Scene()
 				g_new_Performance = true;
 				ClearCheck(g_stage_clear);
 			}
-
 		}
 	}
+
+
+
 }
 void CSceneEarth::ClearCheck(bool a)
 {
