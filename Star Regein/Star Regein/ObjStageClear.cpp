@@ -185,15 +185,14 @@ void CObjStageClear::Action()
 		m_time = 60;
 
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	if (m_alpha[3] == 1.0f && m_ani_flag == false) {		//被ダメージ評価用
+	if (m_alpha[3] == 1.0f && m_grade_f[2] == true) {		//被ダメージ評価用
 		m_alpha[4] += 0.05f;
 		if (m_alpha[4] >= 1.0f) {
 			m_alpha[4] = 1.0f;
-			m_ani_flag = true;
 		}
 	}
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	else if (m_alpha[2] == 1.0f&& m_ani_flag == false) {	//キル数評価用
+	else if (m_alpha[2] == 1.0f&& m_grade_f[1] == true) {	//キル数評価用
 		m_alpha[3] += 0.05f;
 		if (m_alpha[3] >= 1.0f) {
 			m_alpha[3] = 1.0f;
@@ -209,7 +208,7 @@ void CObjStageClear::Action()
 		}
 	}
 	//前のメッセージが表示され、アニメーションフラグがオフになった際（エフェクト、評価が終わった際）、メッセージを表示する
-	else if (m_alpha[0] == 1.0f && m_ani_flag == false) {	//取得星座用
+	else if (m_alpha[0] == 1.0f && m_grade_f[0] == true) {	//取得星座用
 		m_alpha[1] += 0.05f;
 		if (m_alpha[1] >= 1.0f)
 			m_alpha[1] = 1.0f;
@@ -263,6 +262,7 @@ void CObjStageClear::Action()
 		//画像最後まで進んだら、0番目に戻す
 		if (m_ani == 14)
 		{
+			
 			//クリアタイム用グレード
 			if (m_grade_f[0] == true && m_grade_f[1] == false) {
 				m_time_star_f[m_time_star_cnt] = true;
@@ -648,85 +648,88 @@ void CObjStageClear::Draw()
 	//地球以外の星の場合
 	if (g_stage != EarthStar)
 	{
-		//敵殲滅用メッセージの表示
-		if (g_kill_cnt == g_enemy_cnt)
+		//1体以上敵を倒している場合
+		if (g_kill_cnt > 0)
 		{
-			Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
-			//実績達成画面で表示させるためのフラグ処理
-			if (g_stage == VenusTaurus)
+			//敵殲滅用メッセージの表示
+			if (g_kill_cnt == g_enemy_cnt)
 			{
-				g_Taurus_Enemy_AllKill = true;
-				g_new_Performance = true;
-			}
-			else if (g_stage == VenusLibra)
-			{
-				g_Libra_Enemy_AllKill = true;
-				g_new_Performance = true;
+				Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
+				//実績達成画面で表示させるためのフラグ処理
+				if (g_stage == VenusTaurus)
+				{
+					g_Taurus_Enemy_AllKill = true;
+					g_new_Performance = true;
+				}
+				else if (g_stage == VenusLibra)
+				{
+					g_Libra_Enemy_AllKill = true;
+					g_new_Performance = true;
+
+				}
+				else if (g_stage == MercuryGemini)
+				{
+					g_Gemini_Enemy_AllKill = true;
+					g_new_Performance = true;
+
+				}
+				else if (g_stage == MercuryVirgo)
+				{
+					g_Viego_Enemy_AllKill = true;
+					g_new_Performance = true;
+
+				}
+				else if (g_stage == SunLeo)
+				{
+					g_Leo_Enemy_AllKill = true;
+					g_new_Performance = true;
+
+				}
 
 			}
-			else if (g_stage == MercuryGemini)
+			else if (g_kill_cnt > 0)
+				Font::StrDraw(KILLCNT, 15, 340, 21, c4);
+
+
+			//キル数評価の描画用----------------------------------------
+			if (g_Boss_Spawn == true || g_stage != EarthStar)
 			{
-				g_Gemini_Enemy_AllKill = true;
-				g_new_Performance = true;
-
+				if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
+				{
+					m_ani_flag = true;
+				}
+				if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
+					|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
+					|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
+				{
+					//表示位置の設定
+					dst.m_top = 310.0f;
+					dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
+					dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
+					dst.m_bottom = dst.m_top + 80.0f;
+					Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
+				}
+				//else if (m_grade_f[1] == true && m_kill_grade == 0)
+				//{
+				//	m_grade_f[2] = true;
+				//	m_ani_flag = false;
+				//}
+				for (int i = 0; i < m_kill_grade; i++)	//評価（星）の表示
+				{
+					//表示位置の設定
+					dst.m_top = 335.0f;
+					dst.m_left = 245.0f + (40.0f * i);
+					dst.m_right = 275.0f + (40.0f * i);
+					dst.m_bottom = 365.0f;
+					if (m_kill_star_f[i] == true) {
+						Draw::Draw(70, &src, &dst, effc, 0.0f);
+					}
+				}
 			}
-			else if (g_stage == MercuryVirgo)
-			{
-				g_Viego_Enemy_AllKill = true;
-				g_new_Performance = true;
-
-			}
-			else if (g_stage == SunLeo)
-			{
-				g_Leo_Enemy_AllKill = true;
-				g_new_Performance = true;
-
-			}
-
 		}
 		else if (g_kill_cnt == 0)
 		{
 			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4r);
-		}
-		else if (g_kill_cnt > 0)
-			Font::StrDraw(KILLCNT, 15, 340, 21, c4);
-
-
-
-		//キル数評価の描画用----------------------------------------
-		if (g_Boss_Spawn == true || g_stage != EarthStar)
-		{
-			if (m_kill_star_cnt == 1 && m_grade_f[2] != true || m_kill_star_cnt == 2 && m_grade_f[2] != true)
-			{
-				m_ani_flag = true;
-			}
-			if (m_ani_flag == true && m_kill_star_cnt == 0 && m_grade_f[1] == true && m_grade_f[2] != true && m_kill_grade != 0
-				|| m_ani_flag == true && m_kill_star_cnt == 1 && m_grade_f[1] == true && m_grade_f[2] != true
-				|| m_ani_flag == true && m_kill_star_cnt == 2 && m_grade_f[1] == true && m_grade_f[2] != true)
-			{
-				//表示位置の設定
-				dst.m_top = 310.0f;
-				dst.m_left = 220.0f + (40.0f * m_kill_star_cnt);
-				dst.m_right = 300.0f + (40.0f * m_kill_star_cnt);
-				dst.m_bottom = dst.m_top + 80.0f;
-				Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-			}
-			//else if (m_grade_f[1] == true && m_kill_grade == 0)
-			//{
-			//	m_grade_f[2] = true;
-			//	m_ani_flag = false;
-			//}
-			for (int i = 0; i < m_kill_grade; i++)	//評価（星）の表示
-			{
-				//表示位置の設定
-				dst.m_top = 335.0f;
-				dst.m_left = 245.0f + (40.0f * i);
-				dst.m_right = 275.0f + (40.0f * i);
-				dst.m_bottom = 365.0f;
-				if (m_kill_star_f[i] == true) {
-					Draw::Draw(70, &src, &dst, effc, 0.0f);
-				}
-			}
 		}
 
 		//-----------------------------------------------------------------
@@ -806,14 +809,12 @@ void CObjStageClear::Draw()
 	
 		for (int i = 0; i < m_cnt; i++)
 		{
-	
 			//表示位置の設定
 			dst.m_top    = 400.0f;
 			dst.m_left   =  20.0f + (50.0f * i);
 			dst.m_right  = 100.0f + (50.0f * i);
 			dst.m_bottom = dst.m_top + 80.0f;
 			Draw::Draw(71, &m_eff, &dst, effc, 0.0f);
-			
 		}
 		//最終アニメーションフラグをオンにする
 		m_end_f = true;

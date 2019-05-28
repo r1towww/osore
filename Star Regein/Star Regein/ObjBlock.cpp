@@ -74,6 +74,9 @@ void CObjBlock::Init()
 	m_leo_c = 0;
 	m_star_c = 0;
 
+	m_scrollx = 0.0f;
+	m_scrolly = 0.0f;
+
 	//ìGèoåª
 	if (g_stage == VenusTaurus)
 	{

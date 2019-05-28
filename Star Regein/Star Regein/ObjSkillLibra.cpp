@@ -84,7 +84,7 @@ void CObjSkillLibra::Action()
 
 	m_persist_time++;
 	
-	if (m_persist_time > 40)
+	if (m_persist_time > 25)
 	{
 		m_persist_time = 0;
 		g_mp -= 1.0f;

@@ -21,4 +21,6 @@ private:
 	float m_Tra;
 	bool m_time;
 	bool m_key_flag;	//キー制御フラグ
+	bool m_Allclear;	//チートオン
+	bool m_f;
 };

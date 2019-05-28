@@ -147,9 +147,12 @@ void CSceneEarth::InitScene()
 
 
 	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
-	Audio::LoadAudio(22, L"毒SE.wav", EFFECT);
+	Audio::LoadAudio(30, L"毒SE.wav", EFFECT);
+
+
 	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
+	//ボスわいたらBGM変更
 	if (g_Boss_Spawn != true)
 	{
 		Audio::LoadAudio(8, L"チュートリアルBGM.wav", SOUND_TYPE::BACK_MUSIC);
@@ -158,6 +161,7 @@ void CSceneEarth::InitScene()
 	{
 		Audio::LoadAudio(8, L"戦闘画面_BGM.wav", SOUND_TYPE::BACK_MUSIC);
 	}
+
 	Audio::Start(8);
 	//blockオブジェクト作成
 	CObjBlock* objb = new CObjBlock(map);
