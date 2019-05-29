@@ -343,7 +343,7 @@ extern int g_GRank;		//ランク管理用
 extern int g_VRank;		//ランク管理用
 extern int g_LeRank;		//ランク管理用
 
-
+extern float g_boss_hp;//ボスHP
 
 
 //------------------------------------------------

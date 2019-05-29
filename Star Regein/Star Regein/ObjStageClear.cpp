@@ -317,7 +317,7 @@ void CObjStageClear::Draw()
 	//-----------------------------------------------------------------
 
 	//チュートリアル中の場合
-	if (g_Boss_Spawn == false || g_stage == EarthStar)
+	if (g_stage == EarthStar)
 	{
 		Font::StrDraw(L"移動方法を覚えた！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
 		ani_flag();		//アニメーションのオンオフ切り替え用
