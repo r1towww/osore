@@ -223,6 +223,8 @@ extern int    g_attack_power;	//主人公の攻撃力
 extern bool g_key_flag;	//キー入力制御フラグ
 extern bool g_gemini_move;//双子座ブラックホール移動
 
+extern int g_count;//ボスイベント回数制御
+
 
 extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ

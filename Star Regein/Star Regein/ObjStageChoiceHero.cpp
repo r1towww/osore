@@ -151,7 +151,7 @@ void ObjStageChoiceHero::Action()
 	CObjTextBox* text = (CObjTextBox*)Objs::GetObj(OBJ_TEXTBOX);
 
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false || text != nullptr)
+	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}
@@ -179,7 +179,7 @@ void ObjStageChoiceHero::Action()
 	}
 
 	// Zキーを入力かつ、キーフラグがオンの時に実行
-	if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+	if ((Input::GetVKey('Z') == true && g_key_flag == true) || (Input::GetVKey(VK_RETURN) == true && g_key_flag == true))
 	{
 		//地球へ
 		if (g_stage_px >= EarthX && g_stage_px + 80.0f <= EarthX2 && g_stage_py >= EarthY&&g_stage_py + 80.0f <= EarthY2)

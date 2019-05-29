@@ -122,7 +122,7 @@ void CObjStarChoice::Action()
 		m_Tra3 = 0.3f;
 		m_Tra4 = 1.0f;
 		//キー入力タイムが一定に達した場合、キー入力を許可する
-		if ((Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true) && g_key_flag == true)
+		if (Input::GetVKey('Z') == true && g_key_flag == true || Input::GetVKey(VK_RETURN) == true && g_key_flag == true)
 		{
 			if (g_stage == Earth)
 			{

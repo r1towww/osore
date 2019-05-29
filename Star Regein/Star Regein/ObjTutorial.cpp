@@ -44,7 +44,8 @@ void CObjTutorial::Action()
 	if (m_page == m_p) 
 	{//渡されたページ数と現在のページ数が同じになったら
 		g_tutorial_flag = false;
-		g_key_flag = true;
+		g_key_flag = false;
+		this->SetStatus(false);
 	}
 
 	//最後のセリフはスキップできないようにする
@@ -59,8 +60,10 @@ void CObjTutorial::Action()
 	{
 		Audio::Start(1);	//エフェクト音を鳴らす
 		g_tutorial_flag = false;
-		this->SetStatus(false);
 		g_key_flag = false;
+		g_Voice_flag = false;
+		this->SetStatus(false);
+
 	}
 	
 }

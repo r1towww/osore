@@ -61,6 +61,7 @@ bool g_key_flag = false;	//キー入力制御フラグ
 float g_stage_px = 55;  //ステージ選択時の位置X
 float g_stage_py = 420;  //ステージ選択時の位置Y
 
+
 float g_enemy_cnt = 0;//敵の総数のカウント用変数の初期化
 float g_kill_cnt = 0;	//敵殲滅用変数の初期化
 bool g_no_damage = false;	//ノーダメージクリア用変数の初期化
