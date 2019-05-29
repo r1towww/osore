@@ -60,7 +60,7 @@ void CObjTextBox::Draw()
 		Font::StrDraw(L"Zキーで次へ", TEXT_ZX, TEXT_ZY, TEXTSIZE_Z, c);
 		if (g_stage == EarthStar)
 		{
-			if (g_Leo_clear == true)
+			if (g_Boss_Spawn == true)
 				;
 			else
 				Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);

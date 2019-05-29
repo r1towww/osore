@@ -236,15 +236,12 @@ void CObjTutorial::Draw()
 		}
 		if (g_stage == EarthStar || g_stage == Space)
 		{
-			if(g_Leo_clear==true)
+			if(g_Boss_Spawn==true)
 				Font::StrDraw(L"天の声", 10, 380, 30, c);
 			else
 				Font::StrDraw(L"チュートリアル", 10, 380, 30, c);
 		}
-		else
-		{
-			Font::StrDraw(L"天の声", 10, 380, 30, c);
-		}
+
 
 
 	}
