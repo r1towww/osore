@@ -108,6 +108,8 @@ void CObjStageClear::Action()
 			//1度目のZキーを入力した際
 			if (m_next_cnt == 0)
 			{
+				m_ani_flag = false;	//アニメーションフラグをオフにする
+
 				//すべての評価の取得
 				for (int i = 0; i < 4; i++)
 				{
@@ -138,6 +140,8 @@ void CObjStageClear::Action()
 				m_kill_star_cnt = m_kill_grade;
 				m_damage_star_cnt = m_damage_grade;
 
+				
+
 				m_cnt_f = false;
 				m_grade_cnt_f = false;
 				m_cnt = CLEARGRADE + m_time_grade + m_kill_grade + m_damage_grade;		//アニメーションに入らないため、スコアを評価分代入
@@ -150,6 +154,21 @@ void CObjStageClear::Action()
 				m_push_flag = true;	//ステージ選択へ戻るようにする
 			}
 			m_key_f = false;
+
+			m_end_start = true;
+
+			//カウントの値が同じ時
+			if (m_cnt == m_grade_cnt) {
+				//最終アニメーションフラグがオンの時
+				if (m_end_f == true)
+				{
+					//最終アニメーションを止めて星を表示させるフラグ
+					m_end_start = false;		//エフェクトを止める
+					m_end_s_f = true;			//星を描画する
+				}
+				else
+					m_grade_draw_f = true;		//最終評価の星の描画
+			}
 		}
 	}
 	else
@@ -317,7 +336,7 @@ void CObjStageClear::Draw()
 	//-----------------------------------------------------------------
 
 	//チュートリアル中の場合
-	if (g_Boss_Spawn == false || g_stage == EarthStar)
+	if (g_stage == EarthStar)
 	{
 		Font::StrDraw(L"移動方法を覚えた！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
 		ani_flag();		//アニメーションのオンオフ切り替え用
