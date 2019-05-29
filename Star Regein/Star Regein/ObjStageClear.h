@@ -6,6 +6,26 @@ using namespace GameL;
 
 #define CLEARGRADE 1
 
+#define CLEAR_X 120
+#define CLEAR_Y 150
+#define CLEAR_SIZE 100
+
+#define BACK_X 200
+#define BACK_Y 510
+#define BACK_SIZE 32
+
+#define PER_ALL_X 15
+#define PER_ALL_SIZE 21
+
+#define PER_CLEAR_1 250
+#define PER_CLEAR_2 280
+
+
+#define FIRST_Y 310
+
+#define SECOND_Y 340
+
+#define THIRD_Y 370
 //オブジェクト：タイトル
 class CObjStageClear :public CObj
 {

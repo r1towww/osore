@@ -260,112 +260,24 @@ void CObjStageClear::Draw()
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
+	//クリア背景画像の切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 790.0f;
+	src.m_bottom = 590.0f;
 
-	if (g_stage == EarthStar)
-	{
-		//地球-------------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-	}
-	if (g_stage == VenusTaurus)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-
-	}
-	if (g_stage == VenusLibra)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-
-	}
-	if (g_stage == MercuryGemini)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-
-
-	}
-	if (g_stage == MercuryVirgo)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-	}
-	if (g_stage == SunLeo)
-	{
-		//金星（牡牛座）--------------------------
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 790.0f;
-		src.m_bottom = 590.0f;
-
-		//表示位置の設定
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = 800.0f;
-		dst.m_bottom = 600.0f;
-	}
+	//表示位置の設定
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 800.0f;
+	dst.m_bottom = 600.0f;
 
 	//表示
 	Draw::Draw(60, &src, &dst, Stage, 0.0f);
 
-	Font::StrDraw(L"STAGE CLEAR", 120, 150, 100, y);
+	Font::StrDraw(L"STAGE CLEAR", CLEAR_X, CLEAR_Y, CLEAR_SIZE, y);
 
-	Font::StrDraw(L"Zキーでステージ選択へ戻る", 200, 510, 32, y);
-
+	Font::StrDraw(L"Zキーでステージ選択へ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
 
 	//メッセージの情報を持ってくる
 	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
@@ -386,7 +298,7 @@ void CObjStageClear::Draw()
 
 	Star_clear();//リザルトスターエフェクトの表示
 
-	Font::StrDraw(TIME, 15, 310, 21, c3);
+	Font::StrDraw(TIME, PER_ALL_X, FIRST_Y, PER_ALL_SIZE, c3);
 
 
 	//星切り取り位置の設定
@@ -407,7 +319,7 @@ void CObjStageClear::Draw()
 	//チュートリアル中の場合
 	if (g_Boss_Spawn == false || g_stage == EarthStar)
 	{
-		Font::StrDraw(L"移動方法を覚えた！", 15, 340, 21, c4y);
+		Font::StrDraw(L"移動方法を覚えた！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
 		ani_flag();		//アニメーションのオンオフ切り替え用
 		//各評価のエフェクトの描画
 		Star_grade_eff(m_ani_flag, m_kill_star_cnt, m_grade_f[1], m_grade_f[2], 220.0f, 310.0f);
@@ -416,7 +328,7 @@ void CObjStageClear::Draw()
 
 		//チュートリアル中の場合
 		if (g_Boss_Spawn == false || g_stage == EarthStar)
-			Font::StrDraw(L"チュートリアルクリア！", 15, 370, 21, c5y);
+			Font::StrDraw(L"チュートリアルクリア！", PER_ALL_X, THIRD_Y, PER_ALL_SIZE, c5y);
 
 		ani_flag();		//アニメーションのオンオフ切り替え用
 		//各評価のエフェクトの描画
@@ -433,7 +345,7 @@ void CObjStageClear::Draw()
 			//敵殲滅用メッセージの表示
 			if (g_kill_cnt == g_enemy_cnt)
 			{
-				Font::StrDraw(L"敵を全滅させた！", 15, 340, 21, c4y);
+				Font::StrDraw(L"敵を全滅させた！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
 				//実績達成画面で表示させるためのフラグ処理
 				if (g_stage == VenusTaurus)
 				{
@@ -467,7 +379,7 @@ void CObjStageClear::Draw()
 
 			}
 			else if (g_kill_cnt > 0)
-				Font::StrDraw(KILLCNT, 15, 340, 21, c4);
+				Font::StrDraw(KILLCNT, PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4);
 
 
 			//キル数評価の描画用----------------------------------------
@@ -483,7 +395,7 @@ void CObjStageClear::Draw()
 		}
 		else if (g_kill_cnt == 0)	//キルしなかった場合
 		{
-			Font::StrDraw(L"誰も倒さなかった！", 15, 340, 21, c4r);
+			Font::StrDraw(L"誰も倒さなかった！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4r);
 		}
 
 		//-----------------------------------------------------------------
@@ -492,7 +404,7 @@ void CObjStageClear::Draw()
 		//ノーダメージクリアメッセージの表示
 		if (g_no_damage == false)	//ダメージを受けなかった場合
 		{
-			Font::StrDraw(L"ノーダメージクリア！", 15, 370, 21, c5y);
+			Font::StrDraw(L"ノーダメージクリア！", PER_ALL_X, THIRD_Y, PER_ALL_SIZE, c5y);
 
 			ani_flag();		//アニメーションのオンオフ切り替え用
 			//各評価のエフェクトの描画
@@ -859,41 +771,40 @@ void CObjStageClear::Star_clear()
 	//各星座ごとのメッセージ
 	if (g_stage == EarthStar)
 	{
-		Font::StrDraw(L"地球をクリアした！", 15, 250, 21, c1);
-		Font::StrDraw(L"取得したスキル：無し", 15, 280, 21, c2);
+		Font::StrDraw(L"地球をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
+		Font::StrDraw(L"取得したスキル：無し", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == VenusTaurus)
 	{
-		Font::StrDraw(L"牡牛座をクリアした！", 15, 250, 21, c1);
-		Font::StrDraw(L"取得したスキル：牡牛座", 15, 280, 21, c2);
+		Font::StrDraw(L"牡牛座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
+		Font::StrDraw(L"取得したスキル：牡牛座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == VenusLibra)
 	{
-		Font::StrDraw(L"天秤座をクリアした！", 15, 250, 21, c1);
+		Font::StrDraw(L"天秤座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
 
-		Font::StrDraw(L"取得したスキル：天秤座", 15, 280, 21, c2);
+		Font::StrDraw(L"取得したスキル：天秤座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == MercuryGemini)
 	{
-		Font::StrDraw(L"双子座をクリアした！", 15, 250, 21, c1);
+		Font::StrDraw(L"双子座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
 
-		Font::StrDraw(L"取得したスキル：双子座", 15, 280, 21, c2);
+		Font::StrDraw(L"取得したスキル：双子座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == MercuryVirgo)
 	{
-		Font::StrDraw(L"乙女座をクリアした！", 15, 250, 21, c1);
+		Font::StrDraw(L"乙女座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
 
 
-		Font::StrDraw(L"取得したスキル：乙女座", 15, 280, 21, c2);
+		Font::StrDraw(L"取得したスキル：乙女座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == SunLeo)
 	{
-		Font::StrDraw(L"獅子座をクリアした！", 15, 250, 21, c1);
+		Font::StrDraw(L"獅子座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
 
 
-		Font::StrDraw(L"取得したスキル：獅子座", 15, 280, 21, c2);
+		Font::StrDraw(L"取得したスキル：獅子座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
-
 
 	//リザルトスターエフェクトの表示
 	//表示位置の設定

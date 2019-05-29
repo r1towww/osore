@@ -59,6 +59,6 @@ void CObjFadein::Draw()
 	dst.m_left   =   0.0f;
 	dst.m_right  = 800.0f;
 	dst.m_bottom = 600.0f;
-	Draw::Draw(99, &src, &dst, c, 0.0f);
+	Draw::Draw(89, &src, &dst, c, 0.0f);
 }
 
