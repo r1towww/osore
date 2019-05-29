@@ -31,7 +31,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 1;        //体力
+	m_hp = 1;        //体力（初期40）
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -631,6 +631,7 @@ void CObjBoss::Action()
 	}
 	if (g_End_flag == true)//天の声（クリア用）が終わったらフェードインを作成し、EDに移行
 	{
+		g_tutorial_flag = false;
 		CObjFadein *objfade = new CObjFadein();
 		Objs::InsertObj(objfade, OBJ_FADE_IN, 150);//フェードインオブジェクト作成
 	}

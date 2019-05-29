@@ -87,7 +87,8 @@ void CObjMessage::Draw()
 
 	//倒した数描画用
 	swprintf_s(KILLCNT, L"%.0f/%.0f体倒した", g_kill_cnt, g_enemy_cnt);
-	Font::StrDraw(KILLCNT, 10, 270, 20, c);//メッセージを表示
+	if(g_stage != EarthStar)	//地球以外の星で表示
+		Font::StrDraw(KILLCNT, 10, 270, 20, c);//メッセージを表示
 
 
 	swprintf_s(STAR, L"%d/%d", g_StarCount, m_MaxStar);
