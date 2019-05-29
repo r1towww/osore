@@ -21,8 +21,8 @@ float* g_boss_y;
 bool g_dead_flag = false;
 bool g_Voice_flag = false;
 bool g_End_flag = false;
-
 float g_boss_hp;
+
 CObjBoss::CObjBoss(float x, float y)
 {
 	m_px = x + 180.0f;	//ˆÊ’u
@@ -562,7 +562,7 @@ void CObjBoss::Action()
 	//HP‚ª0‚É‚È‚Á‚½‚ç”jŠü
 	if (m_dead_end != true)
 	{
-		if (m_hp <= 0)
+		if (g_boss_hp <= 0)
 		{
 			//“Gíœ
 			m_alpha = 0.0f;
