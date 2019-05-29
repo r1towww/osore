@@ -101,7 +101,7 @@ void CObjBoss::Init()
 	m_dead_eff.m_right = 192;
 	m_dead_eff.m_bottom = 192;
 
-	
+	m_dead_end = false;
 	m_dead_time =0;//アニメーション間隔用
 	m_dead_ani  =0;//アニメーション用
 
@@ -559,17 +559,19 @@ void CObjBoss::Action()
 	m_py += m_vy*1.0;
 
 	//HPが0になったら破棄
-	if (m_hp <= 0)
+	if (m_dead_end != true)
 	{
-		//敵削除
-		m_alpha = 0.0f;
-		hit->SetInvincibility(true);
-		g_boss_d_flag = false;
-		g_All_Killcnt++;		   //キルカウントを+する
-		g_Earth_BossKill = true;
-		g_dead_flag = true;
+		if (m_hp <= 0)
+		{
+			//敵削除
+			m_alpha = 0.0f;
+			hit->SetInvincibility(true);
+			g_boss_d_flag = false;
+			g_All_Killcnt++;		   //キルカウントを+する
+			g_Earth_BossKill = true;
+			g_dead_flag = true;
+		}
 	}
-
 	//HPが０以下でエフェクト開始
 	if (g_dead_flag == true)
 	{
@@ -613,6 +615,9 @@ void CObjBoss::Action()
 				g_tutorial_flag = true;
 				g_Voice_flag = true;
 				g_dead_flag = false;
+				m_dead_end = true;
+				hit->SetInvincibility(true);
+
 			}
 		}
 		else
@@ -632,6 +637,7 @@ void CObjBoss::Action()
 	}
 	if (g_End_flag == true)//天の声（クリア用）が終わったらフェードインを作成し、EDに移行
 	{
+
 		g_tutorial_flag = false;
 		CObjFadein *objfade = new CObjFadein();
 		Objs::InsertObj(objfade, OBJ_FADE_IN, 150);//フェードインオブジェクト作成
@@ -668,9 +674,11 @@ void CObjBoss::Draw()
 	dst.m_left = 160.0f + m_px + block->GetScrollx();
 	dst.m_right = 0.0f + m_px + block->GetScrollx();
 	dst.m_bottom = 160.0f + m_py + block->GetScrolly();
-
-	//描画
-	Draw::Draw(33, &src, &dst, c, 0.0f);
+	if (m_dead_end != true)
+	{
+		//描画
+		Draw::Draw(33, &src, &dst, c, 0.0f);
+	}
 
 	//ワープ
 	if (m_warp_flag == true)
