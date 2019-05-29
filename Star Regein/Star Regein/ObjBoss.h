@@ -48,6 +48,7 @@ private:
 	
 	int m_dead_time;
 	int m_dead_ani;
+	bool m_dead_end;
 
 	int m_ani_time;	//アニメーションフレーム動作間隔
 	int m_ani_frame;//描画フレーム
