@@ -69,6 +69,7 @@ void CObjTextBox::Draw()
 				Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
 			}
 		}
+
 		if (g_Voice_flag == true)
 		{
 			;
