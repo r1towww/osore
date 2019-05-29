@@ -21,7 +21,11 @@ void CObjStageChoice::Init()
 	g_enemy_cnt = 0;		//敵カウント数の初期化
 
 	m_alpha = ALPHAORIGIN;		//アルファ値の初期化
+	m_worning_alpha = 0.8f;
 	m_time = true;
+	m_worning_time = 0;
+
+	m_worning_f = false;
 }
 
 //アクション
@@ -44,7 +48,7 @@ void CObjStageChoice::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float y[4] = { 1.0f,1.0f,0.0f,m_alpha };
 	float r[4] = { 1.0f,0.0f,0.0f,m_alpha };
-
+	float w[4] = { 1.0f,1.0f,1.0f,m_worning_alpha };
 	//地球変更用
 	float E[4] = { 0.2f,0.2f,0.2f,m_alpha };
 
@@ -190,8 +194,33 @@ void CObjStageChoice::Draw()
 	//太陽をクリアで地球にボスが出現したことを知らせるためのもの
 	if (g_Sun_clear == true)
 	{
+		m_worning_time++;
+
+		if (m_worning_time == 100)
+		{
+			m_worning_f = true;
+		}
+
+		if (m_worning_f == true)
+		{
+			//ステージ選択用ヒーローオブジェクト作成
+			CObjWorning* worning = new CObjWorning();
+			Objs::InsertObj(worning, OBJ_WORNING, 10);
+
+			Audio::Start(4);
+			Audio::Stop(3);
+
+			m_worning_f = false;
+		}
+
 		Font::StrDraw(L"!!!!!", 40, 400, 40, r);
 
+	}
+
+	if (g_key_flag == false)
+	{
+
+		g_key_flag = true;
 	}
 
 }
