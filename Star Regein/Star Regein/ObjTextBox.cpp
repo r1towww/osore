@@ -61,14 +61,22 @@ void CObjTextBox::Draw()
 		if (g_stage == EarthStar)
 		{
 			if (g_Leo_clear == true)
+			{
 				;
+			}
 			else
+			{
 				Font::StrDraw(L"Xキーでチュートリアルをスキップ", 300, 350, 32, c);
+			}
 		}
 		if (g_Voice_flag == true)
+		{
 			;
+		}
 		else if (g_Boss_Spawn == true)
+		{
 			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
+		}
 	
 	}
 
