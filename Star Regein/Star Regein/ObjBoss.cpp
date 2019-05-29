@@ -612,6 +612,7 @@ void CObjBoss::Action()
 				//撃破アニメーションが終わったら天の声（クリア用）を表示
 				g_tutorial_flag = true;
 				g_Voice_flag = true;
+				g_dead_flag = false;
 			}
 		}
 		else
