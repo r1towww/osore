@@ -154,7 +154,7 @@ void CObjBoss::Action()
 	CObjBeam* beam = (CObjBeam*)Objs::GetObj(OBJ_BEAM);
 
 	//時間経過でランダムにワープ
-	if (m_warp_time <= 0 && m_hp > 0)
+	if (m_warp_time <= 0 && g_boss_hp > 0)
 	{
 		m_warp_flag = true;
 	
