@@ -38,6 +38,12 @@ class CObjStageChoice :public CObj
 		void SetAlpha(float a) { m_alpha = a; }	//アルファ値をセットする関数
 
 	private:
-		bool m_time;
+		
 		float m_alpha;	//背景透明度
+		float m_worning_alpha;
+
+		int m_worning_time;
+
+		bool m_worning_f;
+		bool m_time;
 };

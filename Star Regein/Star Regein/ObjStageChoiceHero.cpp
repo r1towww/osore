@@ -148,8 +148,10 @@ void ObjStageChoiceHero::Action()
 	//ステージ選択(星座)オブジェクト作成
 	CObjStarChoice* star = new CObjStarChoice();
 
+	CObjTextBox* text = (CObjTextBox*)Objs::GetObj(OBJ_TEXTBOX);
+
 	//キー入力を長押しで出来ないようにする
-	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false)
+	if (Input::GetVKey('Z') == false && Input::GetVKey(VK_RETURN) == false || text != nullptr)
 	{
 		g_key_flag = true;	//離したらオンにする
 	}

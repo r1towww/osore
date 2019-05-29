@@ -44,6 +44,7 @@ void CObjTutorial::Action()
 	if (m_page == m_p) 
 	{//渡されたページ数と現在のページ数が同じになったら
 		g_tutorial_flag = false;
+		g_key_flag = true;
 	}
 
 	//最後のセリフはスキップできないようにする
@@ -59,6 +60,7 @@ void CObjTutorial::Action()
 		Audio::Start(1);	//エフェクト音を鳴らす
 		g_tutorial_flag = false;
 		this->SetStatus(false);
+		g_key_flag = false;
 	}
 	
 }
@@ -229,7 +231,7 @@ void CObjTutorial::Draw()
 			else 
 			{ ; }
 		}
-		if (g_stage == EarthStar)
+		if (g_stage == EarthStar || g_stage == Space)
 		{
 			if(g_Leo_clear==true)
 				Font::StrDraw(L"天の声", 10, 380, 30, c);
@@ -245,7 +247,7 @@ void CObjTutorial::Draw()
 	}
 
 	//シーン移行用
-	if (m_stage_start == true)
+	if (m_stage_start == true && g_stage ==EarthStar)
 	{
 
 		//切り取り位置の設定

@@ -36,6 +36,8 @@ enum OBJ_NAME
 
 	OBJ_PERFORMANCE_ROOM,
 
+	OBJ_WORNING,
+
 	OBJ_COW,
 	OBJ_TWINS_BLUE,
 	OBJ_TWINS_RED,
@@ -374,6 +376,7 @@ extern int g_LeRank;		//ÉâÉìÉNä«óùóp
 #include "ObjWhitehole.h"
 #include "ObjBreakRock.h"
 #include "ObjBreakBigRock.h"
+#include "ObjWorning.h"
 
 #include "ObjPerformanceRoom.h"
 #include "ObjTitle.h"

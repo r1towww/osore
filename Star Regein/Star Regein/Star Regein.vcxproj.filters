@@ -227,6 +227,9 @@
     <ClCompile Include="ObjPoison.cpp">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
     </ClCompile>
+    <ClCompile Include="ObjWorning.cpp">
+      <Filter>ソースファイル\ステージ選択</Filter>
+    </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
       <Filter>ソースファイル</Filter>
     </ClCompile>
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="ObjPoison.h">
       <Filter>ソースファイル\各惑星敵\ボス</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjWorning.h">
+      <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
     <ClInclude Include="ObjFadein.h">
       <Filter>ソースファイル</Filter>
