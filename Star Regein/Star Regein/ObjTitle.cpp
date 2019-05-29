@@ -78,25 +78,6 @@ void CObjTitle::Init()
 	m_key_flag =true;	//キー制御フラグ
 	m_Allclear = false;
 	m_f = true;
-	//各惑星・星座のクリア状況
-	g_Earth_clear = CLEARF;	//地球	
-	g_Venus_clear = CLEARF;	//金星
-	g_Mercury_clear = CLEARF;	//水星
-	g_Sun_clear = false;	//太陽
-
-	g_Taurus_clear = CLEARF;	//牡牛座	
-	g_Libra_clear = CLEARF;	//天秤座
-	g_Gemini_clear = CLEARF;	//双子座
-	g_Virgo_clear = CLEARF;	//乙女座
-	g_Leo_clear = CLEARF;	//獅子座
-	g_Boss_Spawn = CLEARF;
-
-	g_geminiattack_check = false;
-	g_gemini_bullet_check = false;
-	g_gemini_move = false;
-	g_gemini_check = false;
-	g_tutorial_flag = false;
-	g_move_stop_flag = false;
 
 }
 
