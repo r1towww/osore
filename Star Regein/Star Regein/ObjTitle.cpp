@@ -77,11 +77,32 @@ void CObjTitle::Init()
 	m_key_flag =true;	//キー制御フラグ
 	m_Allclear = false;
 	m_f = true;
+	//各惑星・星座のクリア状況
+	g_Earth_clear = CLEARF;	//地球	
+	g_Venus_clear = CLEARF;	//金星
+	g_Mercury_clear = CLEARF;	//水星
+	g_Sun_clear = false;	//太陽
+
+	g_Taurus_clear = CLEARF;	//牡牛座	
+	g_Libra_clear = CLEARF;	//天秤座
+	g_Gemini_clear = CLEARF;	//双子座
+	g_Virgo_clear = CLEARF;	//乙女座
+	g_Leo_clear = CLEARF;	//獅子座
+	g_Boss_Spawn = CLEARF;
+
+	g_geminiattack_check = false;
+	g_gemini_bullet_check = false;
+	g_gemini_move = false;
+	g_gemini_check = false;
+	g_tutorial_flag = false;
+	g_move_stop_flag = false;
+
 }
 
 //アクション
 void CObjTitle::Action()
 {
+
 }
 
 //ドロー
@@ -110,6 +131,20 @@ void CObjTitle::Draw()
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 	else
 		Draw::Draw(1, &src, &dst, t, 0.0f);
+
+	//切り取り位置の設定
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 800.0f;
+	src.m_bottom = 353.0f;
+
+	//表示位置の設定
+	dst.m_top = 50.0f;	//描画に対してスクロールの影響を加える
+	dst.m_left = 50.0f;
+	dst.m_right =750.0f;
+	dst.m_bottom = 350.0f;
+
+	Draw::Draw(2, &src, &dst, c, 0.0f);
 
 	//タイトルでスペース+Zキーでチートオン
 	if (Input::GetVKey(VK_SPACE) == true && Input::GetVKey('Z') == true)
@@ -228,8 +263,8 @@ void CObjTitle::Draw()
 	//カーソルが動く
 	if (m_up == true)
 	{
-		Font::StrDraw(L"→ゲームスタート", 280, 300, 32, c);
-		Font::StrDraw(L"ゲーム終了", 280, 340, 32, c);
+		Font::StrDraw(L"→ゲームスタート", 300, 380, 32, c);
+		Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
 		//Ｚキーで始める
 		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 		{
@@ -239,8 +274,8 @@ void CObjTitle::Draw()
 	}
 	else if (m_down == true)
 	{
-		Font::StrDraw(L"ゲームスタート", 280, 300, 32, c);
-		Font::StrDraw(L"→ゲーム終了", 280, 340, 32, c);
+		Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
+		Font::StrDraw(L"→ゲーム終了", 300, 420, 32, c);
 		//Zキーで終わる
 		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
 		{
@@ -252,8 +287,8 @@ void CObjTitle::Draw()
 	//始めはこの状態
 	else
 	{
-		Font::StrDraw(L"ゲームスタート", 280, 300, 32, c);
-		Font::StrDraw(L"ゲーム終了", 280, 340, 32, c);
+		Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
+		Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
 	}
 
 

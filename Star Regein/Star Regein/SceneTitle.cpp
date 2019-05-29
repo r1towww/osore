@@ -36,7 +36,7 @@ void CSceneTitle::InitScene()
 
 	Audio::Start(3);
 	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_512);
-
+	Draw::LoadImageW(L"ゲームロゴ.png", 2, TEX_SIZE_2048);
 
 	//タイトルオブジェクト作成
 	CObjTitle* obj = new CObjTitle();
