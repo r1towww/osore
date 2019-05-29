@@ -33,11 +33,10 @@ void CObjTextBox::Action()
 		if (m_f == false)
 		{
 			//チュートリアルフラグがオンのとき
-			if (g_tutorial_flag == true)
+			if (g_tutorial_flag == true || g_Voice_flag == true)
 			{
 				Audio::Start(1);
 				g_tutorial_next_flag = false;
-
 				m_text++;//テキストを進める
 				m_f = true;
 			}
@@ -70,19 +69,21 @@ void CObjTextBox::Draw()
 			;
 		else if (g_Boss_Spawn == true)
 			Font::StrDraw(L"Xキーで天の声を無視する", 350, 370, 32, c);
-		
-
+	
 	}
+
+	
 	//チュートリアルフラグがオフで終了する
 	if (g_tutorial_flag == false)
 	{
-		;
+		m_text = 0;
 	}
 	//地球
 	else if (g_tutorial_flag == true)
 	{
 		if (g_stage == EarthStar || g_stage == Space)
 		{
+			//ラスボス撃破後
 			if (g_Voice_flag == true)
 			{
 				if (m_text == 0)
@@ -99,9 +100,11 @@ void CObjTextBox::Draw()
 				{
 					Font::StrDraw(L"おしまい", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					g_End_flag = true;
+					
 				}
+			
 			}
-			//ラスボス出現時
+			//ラスボス出現時（地球）
 			else if (g_stage == EarthStar && g_Boss_Spawn == true)
 			{
 				if (m_text == 0)
@@ -132,11 +135,10 @@ void CObjTextBox::Draw()
 				{
 					Font::StrDraw(L"地球の命運はあなたに掛かっています！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					Font::StrDraw(L"ご武運を！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-
+					g_tutorial_flag = false;
 				}
-
 			}
-			else if (g_Sun_clear == true)
+			else if (g_Sun_clear == true)//ラスボス出現時（ステージ選択画面）
 			{
 				if (m_text == 0)
 				{
@@ -149,7 +151,7 @@ void CObjTextBox::Draw()
 					Font::StrDraw(L"繰り返します……", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				}
 			}
-			else
+			else//チュートリアル
 			{
 				if (m_text == 0)
 				{
