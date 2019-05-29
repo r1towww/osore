@@ -107,7 +107,7 @@ void CObjTextBox::Draw()
 				if (m_text == 0)
 				{
 					Font::StrDraw(L"本部より通達です！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
-					Font::StrDraw(L"地球に侵入したのはへびつかい座と思われます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
+					Font::StrDraw(L"地球に侵攻してきたのはへびつかい座と思われます！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				}
 				else if (m_text == 1)
 				{
