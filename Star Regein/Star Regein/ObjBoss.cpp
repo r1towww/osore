@@ -631,6 +631,7 @@ void CObjBoss::Action()
 	}
 	if (g_End_flag == true)//天の声（クリア用）が終わったらフェードインを作成し、EDに移行
 	{
+		g_tutorial_flag = false;
 		CObjFadein *objfade = new CObjFadein();
 		Objs::InsertObj(objfade, OBJ_FADE_IN, 150);//フェードインオブジェクト作成
 	}
