@@ -135,7 +135,7 @@ void CObjTextBox::Draw()
 				{
 					Font::StrDraw(L"地球の命運はあなたに掛かっています！", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					Font::StrDraw(L"ご武運を！", TEXT_X, TEXT_Y2, TEXTSIZE, c);
-					g_tutorial_flag = false;
+					
 				}
 			}
 			else if (g_Sun_clear == true)//ラスボス出現時（ステージ選択画面）
