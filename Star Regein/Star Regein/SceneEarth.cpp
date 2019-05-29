@@ -117,7 +117,7 @@ void CSceneEarth::InitScene()
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
 	Draw::LoadImageW(L"リザルトスターエフェクト.png", 71, TEX_SIZE_1024);
 
-	Draw::LoadImageW(L"Fadein.png", 99, TEX_SIZE_512);
+	Draw::LoadImageW(L"Fadein.png", 89, TEX_SIZE_512);
 
 
 	//Audio
@@ -147,7 +147,8 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(21, L"AランクSE.wav", EFFECT);
 	Audio::LoadAudio(22, L"BCランクSE.wav", EFFECT);
 
-	Audio::LoadAudio(20, L"ボス・ビーム攻撃SE.wav", EFFECT);
+
+	Audio::LoadAudio(31, L"ボス・ビーム攻撃SE.wav", EFFECT);
 	Audio::LoadAudio(30, L"毒SE.wav", EFFECT);
 
 
