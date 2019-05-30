@@ -24,6 +24,7 @@ void CObjStageClear::Init()
 	m_end_s_f = false;
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
+	m_ani_flag = false;
 
 	m_cnt_f = true;	//評価数をカウントするかどうかのフラグ
 	//地球以外の場合
