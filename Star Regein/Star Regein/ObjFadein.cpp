@@ -22,8 +22,6 @@ void CObjFadein::Init()
 //アクション
 void CObjFadein::Action()
 {
-
-
 	m_ani_time += 1;
 
 	if (m_ani_time > m_ani_max_time)
@@ -35,7 +33,6 @@ void CObjFadein::Action()
 	{
 		Scene::SetScene(new  CSceneED());
 	}
-
 }
 
 //ドロー
