@@ -141,23 +141,22 @@ void CObjSnake::Action()
 
 	//行動が制御されている場合（メニュー画面）
 	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
+	{
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+	}
 
 
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
 		m_ani_time = 0;
-	}
+	} 
 
 	if (m_ani_frame == 3)
 	{
 		m_ani_frame = 1;
 	}
-
-	//行動が制御されている場合（メニュー画面）
-	if (g_move_stop_flag == true || g_tutorial_flag == true)
-		return;	//行動を制御
 
 
 				//ブロックとの当たり判定実行
@@ -542,8 +541,7 @@ void CObjSnake::Action()
 	{
 		m_snake_delete = true;
 		hit->SetInvincibility(true);
-
-	};
+	}
 	//移動アニメーション
 	if (m_ani_time > m_ani_max_time)
 	{
