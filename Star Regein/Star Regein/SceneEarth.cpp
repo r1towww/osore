@@ -119,6 +119,8 @@ void CSceneEarth::InitScene()
 
 	Draw::LoadImageW(L"Fadein.png", 89, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"回復12.png", 90, TEX_SIZE_1024);
+
 
 	//Audio
 	Audio::LoadAudio(1, L"ピコ！.wav", EFFECT);
@@ -153,7 +155,7 @@ void CSceneEarth::InitScene()
 
 
 
-	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
+	Audio::LoadAudio(23, L"ステージクリアBGM.wav", BACK_MUSIC);
 
 	//ボスわいたらBGM変更
 	if (g_Boss_Spawn != true)

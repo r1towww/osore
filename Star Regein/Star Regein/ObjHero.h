@@ -46,12 +46,17 @@ class CObjHero :public CObj
 		int	 m_ani;			//アニメーション用
 		int  m_ani2;
 		int  m_ani3;
+		int  m_heal_ani;
 		int	 m_eff_time;	//アニメーション間隔タイム
 		int  m_eff_time2;
 		int  m_eff_time3;
+		int m_heal_time;
 		RECT_F m_eff;		//エフェクト描画用
 		RECT_F m_eff2;		//獅子攻撃エフェクト描画用
 		RECT_F m_eff3;		//主人公死亡エフェクト描画用
+		RECT_F m_ani_heal;
+
+		bool m_heal_eff_f;//回復エフェクト描画フラグ
 
 		bool m_libra_eff_f;	//天秤座スキルエフェクト用フラグ
 		bool m_menu_key_f;	//メニューキー用の制御フラグ
@@ -74,6 +79,8 @@ class CObjHero :public CObj
 		bool m_dash_eff_f;	//ダッシュエフェクト音のフラグ
 
 		bool m_a_flag;//攻撃制御用
+
+		bool m_se_f;//SE制御用
 
 		bool m_burn_f;//火傷時主人公カラー変更用フラグ
 		bool m_poison_f;//火傷時主人公カラー変更用フラグ

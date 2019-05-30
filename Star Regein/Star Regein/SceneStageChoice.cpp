@@ -48,7 +48,7 @@ void CSceneStageChoice::InitScene()
 	Draw::LoadImageW(L"テキストボックス 透過.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"名前用枠.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"リザルトスター.png", 70, TEX_SIZE_1024);
-	Draw::LoadImageW(L"WORNING!!.png", 50, TEX_SIZE_2048);
+	Draw::LoadImageW(L"WARNING!!.png", 50, TEX_SIZE_2048);
 	Draw::LoadImageW(L"!.png", 51, TEX_SIZE_2048);
 
 
