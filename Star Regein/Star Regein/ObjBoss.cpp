@@ -306,7 +306,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = 36; i < 360; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -315,7 +315,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = 18; i < 342; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -324,7 +324,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = -0; i < 324; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -333,7 +333,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = -18; i < 306; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 							m_attack_f = false;
@@ -556,8 +556,8 @@ void CObjBoss::Action()
 		m_time = 30;
 	}
 	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
+	m_px += m_vx*1.0f;
+	m_py += m_vy*1.0f;
 
 	//HPが0になったら破棄
 	if (m_dead_end != true)

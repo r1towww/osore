@@ -25,7 +25,7 @@ class CObjMiniMap : public CObj
 
 		bool m_hint_f;		//ヒント表示用フラグ
 
-		int m_f;//キー入力制御
+		bool m_f;//キー入力制御
 
 		int count;
 		

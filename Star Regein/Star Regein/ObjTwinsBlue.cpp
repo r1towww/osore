@@ -186,8 +186,8 @@ void CObjTwinsBlue::Action()
 				}
 
 				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 1;
-				m_vy = sin(3.14 / 180 * ar) * 1;
+				m_vx = cos(3.14f / 180.0f * ar) * 1.0f;
+				m_vy = sin(3.14f / 180.0f * ar) * 1.0f;
 			}
 		}
 		else
@@ -455,8 +455,8 @@ void CObjTwinsBlue::Action()
 
 
 	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
+	m_px += m_vx*1.0f;
+	m_py += m_vy*1.0f;
 
 
 	//HPが0になったら破棄
