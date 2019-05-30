@@ -177,31 +177,31 @@ void CObjHero::Action()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 
-		//デバック用
-		if (Input::GetVKey('L'))
-		{
-			g_hp -= 1.0f;
-		}
-		//デバック用
-		if (Input::GetVKey('K'))
-		{
-			g_hp += 1.0f;
-		}
-		//デバック用
-		if (Input::GetVKey('J'))
-		{
-			g_mp += 1.0f;
-		}
-		if (Input::GetVKey('W'))
-		{
-			//オブジェクト作成
-			CObjStageClear* objs = new CObjStageClear();
-			Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
-		}
-		if (Input::GetVKey('T'))
-		{
-			g_mp -= 1.0f;
-		}
+		////デバック用
+		//if (Input::GetVKey('L'))
+		//{
+		//	g_hp -= 1.0f;
+		//}
+		////デバック用
+		//if (Input::GetVKey('K'))
+		//{
+		//	g_hp += 1.0f;
+		//}
+		////デバック用
+		//if (Input::GetVKey('J'))
+		//{
+		//	g_mp += 1.0f;
+		//}
+		//if (Input::GetVKey('W'))
+		//{
+		//	//オブジェクト作成
+		//	CObjStageClear* objs = new CObjStageClear();
+		//	Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+		//}
+		//if (Input::GetVKey('T'))
+		//{
+		//	g_mp -= 1.0f;
+		//}
 
 		//移動系統情報--------------------------------------------------
 
