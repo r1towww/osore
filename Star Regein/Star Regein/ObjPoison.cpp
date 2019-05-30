@@ -92,7 +92,7 @@ void CObjPoison::Action()
 
 	}
 	//ブロックオブジェクトと接触か一定時間で弾丸削除
-	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || m_time <= 0)
+	if (hit->CheckElementHit(ELEMENT_BLOCK) == true || m_time <= 0 || g_dead_flag == true)
 	{
 		this->SetStatus(false);    //自身に削除命令を出す
 		Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する

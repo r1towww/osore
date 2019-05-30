@@ -252,31 +252,6 @@ void ObjStageChoiceHero::Action()
 			Objs::InsertObj(per, OBJ_PERFORMANCE_ROOM, 20);
 
 		}
-		////ショートカット
-		//else if (g_stage_px >= 50 && g_stage_px <= 100 && g_stage_py >= 50 && g_stage_py <= 100)
-		//{
-		//	Audio::Start(1);
-
-		//	g_key_flag = false;	//キーフラグをオフ
-		//	g_Earth_clear = true;	//地球	
-		//	g_Venus_clear = true;	//金星
-		//	g_Mercury_clear = true;	//水星
-		//	g_Sun_clear = true;	//太陽
-
-		//	g_Taurus_clear = true;	//牡牛座	
-		//	g_Libra_clear = true;	//天秤座
-		//	g_Gemini_clear = true;	//双子座
-		//	g_Virgo_clear = true;	//乙女座
-		//	g_Leo_clear = true;	//獅子座
-		//	g_Boss_Spawn = true;
-		//	g_Taurus = true;	//牡牛座	
-		//	g_Libra = true;	//天秤座
-		//	g_Gemini = true;	//双子座
-		//	g_Virgo = true;	//乙女座
-		//	g_Leo = true;	//獅子座
-
-		//}
-
 	}
 
 	//位置の更新
