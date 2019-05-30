@@ -719,13 +719,22 @@ void CObjHero::Action()
 			if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
 				g_mp -= 25.0f;
 
-				//ダメージ音を鳴らす
-				Audio::Start(5);
-				g_no_damage = true;	//ノーダメージフラグをオンにする
+			//ボスのビームに当たった場合体力5ゲージ減少
+			if (hit->CheckObjNameHit(OBJ_BEAM) != nullptr)
+			{
+				g_hp -= 50.0f;
+			}
+			else
+			{
 				g_hp -= 10.0f;
-				m_f = true;
-				m_key_f = true;
-				m_invincible_flag = true;
+			}
+
+			//ダメージ音を鳴らす
+			Audio::Start(5);
+			g_no_damage = true;	//ノーダメージフラグをオンにする
+			m_f = true;
+			m_key_f = true;
+			m_invincible_flag = true;
 			}
 		}
 
@@ -765,6 +774,8 @@ void CObjHero::Action()
 			m_burn_f = false;
 		}
 	}
+
+
 
 	//毒弾と当たった場合毒状態を付与
 	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
@@ -1062,8 +1073,8 @@ void CObjHero::Draw()
 		//エフェクト用表示位置の設定
 		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
 		dst.m_left = 0.0f + m_px;
-		dst.m_right = 94.0f + m_px;
-		dst.m_bottom = 94.0f + m_py;
+		dst.m_right = 120.0f + m_px;
+		dst.m_bottom = 120.0f + m_py;
 		//描画
 		Draw::Draw(90, &m_ani_heal, &dst, c, 90.0f);
 	}
