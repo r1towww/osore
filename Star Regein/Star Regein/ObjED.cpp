@@ -21,6 +21,10 @@ void CObjED::Init()
 	//キーフラグの初期化
 	m_key_f = false;
 	flag = false;
+	
+
+	g_End_flag = false;
+	g_Voice_flag = false;
 }
 
 //アクション
