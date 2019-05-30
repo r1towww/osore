@@ -25,12 +25,17 @@ bool g_Virgo_clear= CLEARF;	//乙女座
 bool g_Leo_clear= CLEARF;	//獅子座
 bool g_Boss_Spawn = CLEARF;
 
-bool g_geminiattack_check = false;
+bool g_geminiattack_check = false;	
 bool g_gemini_bullet_check = false;
 bool g_gemini_move = false;
 bool g_gemini_check = false;
-bool g_tutorial_flag = false;
-bool g_move_stop_flag = false;
+
+bool g_tutorial_flag = false;	//主人公の入力制御フラグ
+bool g_move_stop_flag = false;	//主人公の入力制御フラグ
+
+int g_second = 0;		//秒
+int g_minute = 0;		//分
+
 
 //使用するネームスペース
 using namespace GameL;
@@ -69,6 +74,7 @@ bool g_no_damage = false;	//ノーダメージクリア用変数の初期化
 //イニシャライズ
 void CObjTitle::Init()
 {
+	g_stage = Space;	//ステージ値の初期化
 	m_up=false;
 	m_down=false;
 	m_start=false;
@@ -78,7 +84,7 @@ void CObjTitle::Init()
 	m_key_flag =true;	//キー制御フラグ
 	m_Allclear = false;
 	m_f = true;
-
+	g_move_stop_flag = false;
 }
 
 //アクション

@@ -87,7 +87,12 @@ void CObjSkillLibra::Action()
 	if (m_persist_time > 25)
 	{
 		m_persist_time = 0;
-		g_mp -= 1.0f;
+
+		//ボスを倒していたら主人公のMPを減らないようにする
+		if (g_boss_hp <= 0)
+			;
+		else
+			g_mp -= 1.0f;
 	}
 
 	//MPが0になるか別のスキルが選択されたら

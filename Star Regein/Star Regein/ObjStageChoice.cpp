@@ -46,6 +46,7 @@ void CObjStageChoice::Action()
 void CObjStageChoice::Draw()
 {
 	//描画カラー情報
+	float a[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float c[4] = { 1.0f,1.0f,1.0f,m_alpha };
 	float y[4] = { 1.0f,1.0f,0.0f,m_alpha };
 	float r[4] = { 1.0f,0.0f,0.0f,m_alpha };
@@ -55,6 +56,8 @@ void CObjStageChoice::Draw()
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
+
+
 
 	//背景------------------------------------
 	//切り取り位置の設定

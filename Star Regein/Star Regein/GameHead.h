@@ -345,6 +345,9 @@ extern int g_LeRank;		//ランク管理用
 
 extern float g_boss_hp;//ボスHP
 
+//タイムカウント用
+extern int g_second;		//秒
+extern int g_minute;		//分
 
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
