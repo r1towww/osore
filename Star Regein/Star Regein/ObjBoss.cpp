@@ -602,6 +602,8 @@ void CObjBoss::Action()
 				m_dead_end = true;
 				hit->SetInvincibility(true);
 				Audio::Stop(8);
+				Audio::Start(23);
+
 			}
 		}
 		else

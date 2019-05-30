@@ -15,6 +15,7 @@ using namespace GameL;
 
 ObjStageChoiceHero::ObjStageChoiceHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
+
 	g_stage_px = x;
 	g_stage_py = y;
 }

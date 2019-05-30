@@ -78,7 +78,7 @@ void CObjTitle::Init()
 	m_key_flag =true;	//キー制御フラグ
 	m_Allclear = false;
 	m_f = true;
-
+	g_move_stop_flag = true;
 }
 
 //アクション

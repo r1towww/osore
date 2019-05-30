@@ -97,6 +97,7 @@ void CObjTextBox::Draw()
 			{
 				if (m_text == 0)
 				{
+
 					Font::StrDraw(L"すべての星座の力を集め、", TEXT_X, TEXT_Y1, TEXTSIZE, c);
 					Font::StrDraw(L"敵を倒したことで地球に平和が訪れました。", TEXT_X, TEXT_Y2, TEXTSIZE, c);
 				}
