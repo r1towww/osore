@@ -78,6 +78,9 @@ void CObjHero::Init()
 	//HPリジェネカウント用初期化
 	m_hp_regene_time = 0;
 
+	//ボス戦リジェネSE用
+	m_se_f = true;
+
 	//火傷継続時間
 	m_burn_time = 0;
 	//火傷合計継続時間
@@ -101,6 +104,9 @@ void CObjHero::Init()
 	//死亡フラグ
 	dead_flag = false;
 
+	//回復エフェクト描画フラグ
+	m_heal_eff_f = false;
+
 	//獅子攻撃ヒットフラグ
 	m_eff_flag = false;
 	m_libra_eff_f = false;
@@ -117,22 +123,32 @@ void CObjHero::Init()
 	m_ani = 0;			//アニメーション用
 	m_ani2 = 0;
 	m_ani3 = 0;
+	m_heal_ani = 0;
 	m_ani_time = 0;		//アニメーション間隔タイム
 	m_eff_time = 0;
 	m_eff_time2 = 0;
 	m_eff_time3 = 0;
+	m_heal_time = 0;
+
 	m_eff.m_top    = 0;		//エフェクトの初期化
 	m_eff.m_left   = 0;	
 	m_eff.m_right  = 240;
 	m_eff.m_bottom = 240;
+
 	m_eff2.m_top = 0;		//エフェクトの初期化
 	m_eff2.m_left = 0;
 	m_eff2.m_right = 192;
 	m_eff2.m_bottom = 192;
+
 	m_eff3.m_top = 0;		//死亡エフェクトの初期化
 	m_eff3.m_left = 0;
 	m_eff3.m_right = 192;
 	m_eff3.m_bottom = 192;
+
+	m_ani_heal.m_top = 0;		//死亡エフェクトの初期化
+	m_ani_heal.m_left = 0;
+	m_ani_heal.m_right = 192;
+	m_ani_heal.m_bottom = 192;
 
 }
 
@@ -167,7 +183,7 @@ void CObjHero::Action()
 	//ステージクリアの情報を持ってくる
 	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
-	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr)
+	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr || g_Earth_BossKill == true)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -246,7 +262,7 @@ void CObjHero::Action()
 	//通常攻撃情報---------------------------------------------------
 
 	//Zキーが入力された場合	
-	if (Input::GetVKey('Z'))
+	if (Input::GetVKey('Z') && g_Earth_BossKill == false)
 	{
 		if (m_a_flag == true)
 		{
@@ -373,7 +389,7 @@ void CObjHero::Action()
 	}
 
 	//Xキーが入力された場合、スキルを使用
-	if (Input::GetVKey('X'))
+	if (Input::GetVKey('X') && g_Earth_BossKill ==false)
 	{
 		if (m_key_f == true)
 		{
@@ -451,18 +467,75 @@ void CObjHero::Action()
 
 			if (g_hp < 100.0f)
 			{
-
 				m_hp_regene_time++;
 				if (m_hp_regene_time > 15)
 				{
+					m_heal_eff_f = true;
 					m_hp_regene_time = 0;
 					g_hp += 1.0f;
-					Audio::Start(24);
+					if (m_se_f == true)
+					{
+						Audio::Start(24);
+						m_se_f = false;
+					}
+
+					//回復エフェクト描画
+					if (m_heal_eff_f == true)
+					{
+						//エフェクト用画像の切り取り
+						RECT_F ani_heal[15] =
+						{
+							{ 0,   0, 192, 192 },
+							{ 0, 192, 384, 192 },
+							{ 0, 384, 576, 192 },
+							{ 0, 576, 768, 192 },
+							{ 0, 768, 960, 192 },
+							{ 192,   0, 192, 384 },
+							{ 192, 192, 384, 384 },
+							{ 192, 384, 576, 384 },
+							{ 192, 576, 768, 384 },
+							{ 192, 768, 960, 384 },
+							{ 384,   0, 192, 576 },
+							{ 384, 192, 384, 576 },
+							{ 384, 384, 576, 576 },
+							{ 384, 576, 768, 576 },
+							{ 384, 768, 960, 576 },
+						};
+
+						//アニメーションのコマ間隔制御
+						if (m_heal_time > 1)	//タイムが１より大きい場合
+						{
+							m_heal_ani++;		//アニメーションのコマを1つ進める
+							m_heal_time = 0;	//タイムを0に戻す
+
+							m_ani_heal = ani_heal[m_heal_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+						}
+						else	//それ以外の場合
+						{
+							m_heal_time++;		//タイムをプラス
+						}
+						//画像最後まで進んだら、0番目に戻す
+						if (m_heal_ani == 14)
+						{
+							m_heal_time = 0;
+							m_heal_ani = 0;
+						}
+					}
 
 				}
 			}
+			else
+			{
+				m_heal_eff_f = false;
+			}
+		}
+		else
+		{
+			m_se_f = true;
+			m_heal_eff_f = false;
 		}
 	}
+
 
 
 	//HPが最大を超えないようにする（回復スキル）
@@ -980,6 +1053,17 @@ void CObjHero::Draw()
 		dst.m_bottom = 94.0f + m_py;
 		//描画
 		Draw::Draw(35, &m_eff3, &dst, c3, 90.0f);
+	}
+
+	if (m_heal_eff_f == true)
+	{
+		//エフェクト用表示位置の設定
+		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 0.0f + m_px;
+		dst.m_right = 94.0f + m_px;
+		dst.m_bottom = 94.0f + m_py;
+		//描画
+		Draw::Draw(90, &m_ani_heal, &dst, c, 90.0f);
 	}
 
 }
