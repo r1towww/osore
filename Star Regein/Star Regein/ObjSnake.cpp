@@ -540,7 +540,6 @@ void CObjSnake::Action()
 	//HP‚ª0‚É‚È‚é‚©ƒ{ƒX‚ªŽ€‚ñ‚¾‚ç”jŠü
 	if (m_hp <= 0 || g_dead_flag == true)
 	{
-	
 		m_snake_delete = true;
 		hit->SetInvincibility(true);
 
