@@ -152,6 +152,7 @@ void CSceneEarth::InitScene()
 	Audio::LoadAudio(30, L"毒SE.wav", EFFECT);
 
 
+
 	Audio::LoadAudio(23, L"ステージクリアBGM.wav", SOUND_TYPE::BACK_MUSIC);
 
 	//ボスわいたらBGM変更
