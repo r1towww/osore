@@ -107,7 +107,7 @@ void CObjGameOver::Draw()
 	//Zキーが押されたら徐々に暗転しながらシーン移行
 	if (m_push_flag == true)
 	{
-		m_Tra -= 0.03;
+		m_Tra -= 0.03f;
 		if (m_Tra <= 0.0f)
 		{
 			if (m_Right == true)

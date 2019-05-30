@@ -146,7 +146,7 @@ void CObjHero::Action()
 	}
 	else
 	{
-		m_alpha += 0.03;
+		m_alpha += 0.03f;
 	}
 
 	//ブラックホールの数を入れる
@@ -368,6 +368,7 @@ void CObjHero::Action()
 	}
 	else
 	{
+		g_attack_power = 1; //攻撃力をもとに戻す
 		m_libra_eff_f = false;	//フラグを戻す
 	}
 
@@ -816,6 +817,10 @@ void CObjHero::Action()
 	//HPが０になったら削除
 	if (g_hp <= 0.0f)
 	{
+		//動きを止める
+		m_vx = 0.0f;
+		m_vy = 0.0f;
+
 		m_alpha = 0.0f;
 		dead_flag = true;
 		m_SE_on++ ;

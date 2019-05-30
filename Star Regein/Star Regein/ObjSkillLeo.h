@@ -10,15 +10,15 @@ using namespace GameL;
 class CObjSkillLeo : public CObj
 {
 public:
-	CObjSkillLeo(int x, int y);
+	CObjSkillLeo(float x, float y);
 	~CObjSkillLeo() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
 
 private:
-	int m_x;		//位置
-	int m_y;
+	float m_x;		//位置
+	float m_y;
 
 	float m_time; //時間カウント
 

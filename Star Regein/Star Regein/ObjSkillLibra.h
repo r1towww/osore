@@ -10,15 +10,15 @@ using namespace GameL;
 class CObjSkillLibra : public CObj
 {
 	public:
-		CObjSkillLibra(int x,int y);
+		CObjSkillLibra(float x, float y);
 		~CObjSkillLibra() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
 
 	private:
-		int m_x;		//位置
-		int m_y;
+		float m_x;		//位置
+		float m_y;
 
 		bool m_f;		//エフェクト音用フラグ
 		int	 m_ani;			//アニメーション用
