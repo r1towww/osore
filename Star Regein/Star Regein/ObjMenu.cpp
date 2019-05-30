@@ -84,12 +84,11 @@ void CObjMenu::Action()
 		
 		
 		m_Tra += 0.03f;
-		if (m_Tra >= 1)
+		if (m_Tra >= 1.0f)
 		{
 			if (g_stage == Space)
 			{
 				Scene::SetScene(new CSceneTitle());	//タイトル選択へ戻る
-
 			}
 			else
 			{

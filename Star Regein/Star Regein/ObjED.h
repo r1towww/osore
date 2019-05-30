@@ -28,4 +28,6 @@ private:
 	int m_key; //フォント描画
 	bool m_key_f;//複数回押さないため
 	bool flag;//アニメーションのフラグ
+
+	bool m_f;	//オブジェクト作成用フラグ
 };

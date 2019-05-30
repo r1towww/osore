@@ -319,6 +319,7 @@ void CObjStarChoice::Draw()
 				//戻るコマンド表示
 	Font::StrDraw(L"戻る", BACK_POSX, BACK_POSY, BACK_FONTSIZE, down);
 
+	
 
 	if (m_push_flag == true)
 	{
