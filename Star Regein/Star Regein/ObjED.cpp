@@ -21,7 +21,8 @@ void CObjED::Init()
 	//キーフラグの初期化
 	m_key_f = false;
 	flag = false;
-	
+	m_f = true;		//オブジェクト作成用フラグ
+
 
 	g_End_flag = false;
 	g_Voice_flag = false;
@@ -30,7 +31,6 @@ void CObjED::Init()
 //アクション
 void CObjED::Action()
 {
-	g_stage = Space;
 
 	float p[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
@@ -96,9 +96,12 @@ void CObjED::Action()
 	}
 	//------------------------
 
-	if (m_key == 4)
+	if (m_key == 4 && m_f == true)
 	{
-		Scene::SetScene(new CSceneTitle());
+		//オブジェクト作成
+		CObjStageClear* objs = new CObjStageClear();	//実績の表示
+		Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
+		m_f = false;
 	}
 
 }

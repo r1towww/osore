@@ -74,14 +74,14 @@ void CObjMessage::Draw()
 
 
 	//m_time_mes‚©‚ç•`•ª‚ğ‹‚ß‚é
-	m_second = (m_time_mes / 60) % 60;	//•b
-	m_minute = (m_time_mes / 60) / 60;	//•ª
+	g_second = (m_time_mes / 60) % 60;	//•b
+	g_minute = (m_time_mes / 60) / 60;	//•ª
 
 	//•ªF•b‚Ì’l‚ğ•¶š—ñ‰»
-	if (m_second<10)
-		swprintf_s(TIME, L"%d•ª0%d•b", m_minute, m_second);//•b‚Ì1Œ…–Ú‚É0‚ğ—pˆÓ
+	if (g_second<10)
+		swprintf_s(TIME, L"%d•ª0%d•b", g_minute, g_second);//•b‚Ì1Œ…–Ú‚É0‚ğ—pˆÓ
 	else
-		swprintf_s(TIME, L"%d•ª%d•b", m_minute, m_second);
+		swprintf_s(TIME, L"%d•ª%d•b", g_minute, g_second);
 
 	Font::StrDraw(TIME, 10, 250, 20, c);	//ƒ^ƒCƒ€‚Ì•\¦
 

@@ -23,15 +23,11 @@ class CObjMessage :public CObj
 		void Action();	//アクション
 		void Draw();	//ドロー
 
-		int GetSECOND() { return m_second; }	//秒の取得
-		int GetMINUTE() { return m_minute; }	//分の取得
 
 	private:
 		int m_memory;	//星の数の加算を計る変数
 		int m_time;	//メッセージ表示時間
 
-		int m_minute;//分
-		int m_second;//秒
 		int m_time_mes;	//タイムカウント用
 		bool m_f;		//タイムカウント用フラグ
 		int m_MaxStar;	//星の最大の数

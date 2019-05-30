@@ -40,7 +40,7 @@ void CObjStageClear::Init()
 		else
 			m_kill_grade = 1;
 	}
-	else if (g_stage == EarthStar && g_Boss_Spawn == false)//地球
+	else if (g_stage == EarthStar)//地球
 	{
 		m_kill_grade = 3;
 	}
@@ -51,13 +51,13 @@ void CObjStageClear::Init()
 	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 
 	//クリアタイムの評価基準
-	if (objmes->GetMINUTE() < 1)
+	if (g_minute < 1)		//1分以内にクリア
 		m_time_grade = 3;
-	else if(objmes->GetMINUTE() < 2)
+	else if(g_minute < 2)	//2分以内にクリア
 		m_time_grade = 2;
-	else if (objmes->GetMINUTE() < 3)
+	else if (g_minute < 3)	//3分以内にクリア
 		m_time_grade = 1;
-	else
+	else					//それ以外の場合
 		m_time_grade = 0;
 
 	m_time_star_cnt = 0;		//タイムグレード数用のカウント
@@ -67,8 +67,10 @@ void CObjStageClear::Init()
 	//	g_no_damage = true;
 
 
-	//ダメージの評価基準
-	if (g_no_damage == false)
+	//ダメージの評価基準	
+	if (g_stage == EarthStar)	//地球の場合
+		m_damage_grade = 3;
+	else if (g_no_damage == false)	//ダメージを受けていない場合
 		m_damage_grade = 3;
 	else
 		m_damage_grade = 0;
@@ -88,10 +90,12 @@ void CObjStageClear::Init()
 	m_eff.m_right = 192;
 	m_eff.m_bottom = 192;
 
-
-	Audio::Stop(8);		//戦闘BGMを止める
-
-	Audio::Start(23);	//クリアBGMを鳴らす
+	//ボス戦以外の場合
+	if (g_Boss_Spawn == false)
+	{
+		Audio::Stop(8);		//戦闘BGMを止める
+		Audio::Start(23);	//クリアBGMを鳴らす
+	}
 }
 
 //アクション
@@ -196,7 +200,11 @@ void CObjStageClear::Action()
 		//暗転の透過度が1.0fを超えた場合
 		if (m_Tra >= 1.0f)
 		{
-			Scene::SetScene(new CSceneStageChoice());//ステージ選択画面に戻す
+			//ボス戦後の場合
+			if(g_Boss_Spawn == true)
+				Scene::SetScene(new CSceneTitle());	//タイトルに戻す
+			else //それ以外の場合
+				Scene::SetScene(new CSceneStageChoice());//ステージ選択画面に戻す
 			g_stage = Space;		//ステージの値をSpace（ステージ選択）に変更
 			g_stage_clear = false;		//星座取得フラグを戻す
 			g_move_stop_flag = false;	//入力制御フラグを戻す
@@ -260,9 +268,9 @@ void CObjStageClear::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,m_Tra };
 	float Stage[4] = { 0.5f,0.5f,0.5f,1.0f };
 	float effc[4] = { 1.0f,1.0f,1.0f,m_Eff_Tra };
-	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };	//星座クリアメッセージカラー
-	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };	//取得スキルメッセージカラー
 	float c3[4] = { 1.0f,1.0f,1.0f,m_alpha[2] };	//クリアタイムメッセージカラー
+	float c3y[4] = { 1.0f,1.0f,0.0f,m_alpha[2] };	//クリアタイムメッセージカラー（黄）
+	float c3r[4] = { 1.0f,0.0f,0.0f,m_alpha[2] };	//クリアタイムメッセージカラー（赤）
 	float c4[4] = { 1.0f,1.0f,1.0f,m_alpha[3] };	//敵殲滅数メッセージカラー
 	float c4y[4] = { 1.0f,1.0f,0.0f,m_alpha[3] };	//敵殲滅数メッセージカラー（黄）
 	float c4r[4] = { 1.0f,0.0f,0.0f,m_alpha[3] };	//敵殲滅数メッセージカラー（赤）
@@ -299,8 +307,6 @@ void CObjStageClear::Draw()
 
 	Font::StrDraw(L"Zキーでステージ選択へ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
 
-	//メッセージの情報を持ってくる
-	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	//クリア情報
 	wchar_t KILLCNT[128];	//キルカウント表示用
 	wchar_t TIME[128];	//タイムの描画
@@ -308,16 +314,22 @@ void CObjStageClear::Draw()
 
 	//m_time_mesから秒分を求める
 	//分：秒の値を文字列化
-	if (objmes->GetSECOND() < 10)
-		swprintf_s(TIME, L"クリアタイム：%d分0%d秒", objmes->GetMINUTE(), objmes->GetSECOND());//秒の1桁目に0を用意
+	if (g_second < 10)
+		swprintf_s(TIME, L"クリアタイム：%d分0%d秒", g_minute, g_second);//秒の1桁目に0を用意
 	else
-		swprintf_s(TIME, L"クリアタイム：%d分%d秒", objmes->GetMINUTE(), objmes->GetSECOND());
+		swprintf_s(TIME, L"クリアタイム：%d分%d秒", g_minute, g_second);
 
 	swprintf_s(KILLCNT, L"敵を%.0f体倒した！", g_kill_cnt);
 
 	Star_clear();//リザルトスターエフェクトの表示
 
-	Font::StrDraw(TIME, PER_ALL_X, FIRST_Y, PER_ALL_SIZE, c3);
+	if(m_time_grade == 3)
+		Font::StrDraw(TIME, PER_ALL_X, FIRST_Y, PER_ALL_SIZE, c3y);
+	else if(m_time_grade == 2)
+		Font::StrDraw(TIME, PER_ALL_X, FIRST_Y, PER_ALL_SIZE, c3);
+	else 
+		Font::StrDraw(TIME, PER_ALL_X, FIRST_Y, PER_ALL_SIZE, c3r);
+
 
 
 	//星切り取り位置の設定
@@ -335,8 +347,27 @@ void CObjStageClear::Draw()
 
 	//-----------------------------------------------------------------
 
-	//チュートリアル中の場合
-	if (g_stage == EarthStar)
+	//ボス戦後の場合
+	if (g_stage == EarthStar && g_Boss_Spawn == true)
+	{
+		//１番目のメッセージ
+		Font::StrDraw(L"地球を危機から救った！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
+		ani_flag();		//アニメーションのオンオフ切り替え用
+		//各評価のエフェクトの描画
+		Star_grade_eff(m_ani_flag, m_kill_star_cnt, m_grade_f[1], m_grade_f[2], 220.0f, 310.0f);
+		//各評価の数分スターを描画
+		Star_grade_draw(m_kill_star_f, m_kill_star_cnt, 245.0f, 335.0f);
+
+		//２番目のメッセージ
+		Font::StrDraw(L"君は英雄だ！", PER_ALL_X, THIRD_Y, PER_ALL_SIZE, c5y);
+
+		ani_flag();		//アニメーションのオンオフ切り替え用
+		//各評価のエフェクトの描画
+		Star_grade_eff(m_ani_flag, m_damage_star_cnt, m_grade_f[2], m_grade_f[3], 220.0f, 340.0f);
+		//各評価の数分スターを描画
+		Star_grade_draw(m_damage_star_f, m_damage_star_cnt, 245.0f, 365.0f);
+	}
+	else if (g_stage == EarthStar)
 	{
 		Font::StrDraw(L"移動方法を覚えた！", PER_ALL_X, SECOND_Y, PER_ALL_SIZE, c4y);
 		ani_flag();		//アニメーションのオンオフ切り替え用
@@ -346,8 +377,7 @@ void CObjStageClear::Draw()
 		Star_grade_draw(m_kill_star_f, m_kill_star_cnt, 245.0f, 335.0f);
 
 		//チュートリアル中の場合
-		if (g_Boss_Spawn == false || g_stage == EarthStar)
-			Font::StrDraw(L"チュートリアルクリア！", PER_ALL_X, THIRD_Y, PER_ALL_SIZE, c5y);
+		Font::StrDraw(L"チュートリアルクリア！", PER_ALL_X, THIRD_Y, PER_ALL_SIZE, c5y);
 
 		ani_flag();		//アニメーションのオンオフ切り替え用
 		//各評価のエフェクトの描画
@@ -775,6 +805,7 @@ void CObjStageClear::Star_clear()
 {
 	//描画カラー情報
 	float c1[4] = { 1.0f,1.0f,1.0f,m_alpha[0] };	//星座クリアメッセージカラー
+	float c1y[4] = { 1.0f,1.0f,0.0f,m_alpha[0] };	//星座クリアメッセージカラー（黄）
 	float c2[4] = { 1.0f,1.0f,1.0f,m_alpha[1] };	//取得スキルメッセージカラー												
 	float effc[4] = { 1.0f,1.0f,1.0f,m_Eff_Tra };
 
@@ -787,8 +818,13 @@ void CObjStageClear::Star_clear()
 	src.m_right = 184.0f;
 	src.m_bottom = 175.0f;
 
-	//各星座ごとのメッセージ
-	if (g_stage == EarthStar)
+	//各星座ごとのメッセージ 
+	if (g_stage == EarthStar && g_Boss_Spawn)	//地球（ボス出現時）
+	{
+		Font::StrDraw(L"ボスを撃破！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1y);
+		//Font::StrDraw(L"", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
+	}
+	else if (g_stage == EarthStar)		//地球（チュートリアル時）
 	{
 		Font::StrDraw(L"地球をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
 		Font::StrDraw(L"取得したスキル：無し", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
@@ -801,27 +837,21 @@ void CObjStageClear::Star_clear()
 	if (g_stage == VenusLibra)
 	{
 		Font::StrDraw(L"天秤座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
-
 		Font::StrDraw(L"取得したスキル：天秤座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == MercuryGemini)
 	{
 		Font::StrDraw(L"双子座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
-
 		Font::StrDraw(L"取得したスキル：双子座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == MercuryVirgo)
 	{
 		Font::StrDraw(L"乙女座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
-
-
 		Font::StrDraw(L"取得したスキル：乙女座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 	if (g_stage == SunLeo)
 	{
 		Font::StrDraw(L"獅子座をクリアした！", PER_ALL_X, PER_CLEAR_1, PER_ALL_SIZE, c1);
-
-
 		Font::StrDraw(L"取得したスキル：獅子座", PER_ALL_X, PER_CLEAR_2, PER_ALL_SIZE, c2);
 	}
 
