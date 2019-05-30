@@ -50,38 +50,38 @@ void CObjSkillVirgo::Init()
 	m_ani_stop = 0;
 
 	//主人公の向きによってハート弾を出す方向，向きを変える
-	if (g_posture == 3)	//下
+	if (g_posture == 3.0f)	//下
 	{
 		m_angle = 90.0f;	//角度調整
 		m_pos_x = 20.0f;		//X軸調整
 		m_pos_y = 45.0f;	//Y軸調整
 	}
-	if (g_posture == 4)	//右
+	if (g_posture == 4.0f)	//右
 	{
 		m_angle = 180.0f;		//角度調整
 		m_pos_x = 38.0f;	//X軸調整
 		m_pos_y = 14.0f;		//Y軸調整
 	}
-	if (g_posture == 2)	//左
+	if (g_posture == 2.0f)	//左
 	{
 		m_angle = 0.0f;	//角度調整
 		m_pos_x = -28.0f;	//X軸調整
 		m_pos_y = 24.0f;		//Y軸調整
 	}
-	if (g_posture == 1)	//上
+	if (g_posture == 1.0f)	//上
 	{
 		m_angle = 270.0f;	//角度調整
 		m_pos_x = 10.0f;		//X軸調整
 		m_pos_y = -25.0f;	//Y軸調整
 	}
 	//当たり判定をセット
-	if (g_posture == 1)  //上
+	if (g_posture == 1.0f)  //上
 		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
-	else if (g_posture == 2) //左
+	else if (g_posture == 2.0f) //左
 		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
-	else if (g_posture == 3) //下
+	else if (g_posture == 3.0f) //下
 		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
-	else if (g_posture == 4) //右
+	else if (g_posture == 4.0f) //右
 		Hits::SetHitBox(this, m_x + m_pos_x, m_y + m_pos_y, 32, 28, ELEMENT_SKILL_VIRGO, OBJ_SKILL_VIRGO, 1);
 
 }

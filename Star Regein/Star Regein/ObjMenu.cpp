@@ -83,7 +83,7 @@ void CObjMenu::Action()
 		}
 		
 		
-		m_Tra += 0.03;
+		m_Tra += 0.03f;
 		if (m_Tra >= 1)
 		{
 			if (g_stage == Space)

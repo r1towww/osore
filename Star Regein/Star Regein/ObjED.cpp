@@ -21,11 +21,17 @@ void CObjED::Init()
 	//キーフラグの初期化
 	m_key_f = false;
 	flag = false;
+	
+
+	g_End_flag = false;
+	g_Voice_flag = false;
 }
 
 //アクション
 void CObjED::Action()
 {
+	g_stage = Space;
+
 	float p[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	//フォント描画-------------------------------------------
@@ -40,8 +46,8 @@ void CObjED::Action()
 	}
 	if (m_key == 2)
 	{
-		Font::StrDraw(L"チーム名", GAME_CLEAR_X -10, GAME_CLEAR_Y -10, GAME_CLEAR_FONT_SIZE + 60, c);
-		Font::StrDraw(L"恐れすぎた幽鬼", GAME_CLEAR_X -140, GAME_CLEAR_Y + 200, GAME_CLEAR_FONT_SIZE + 60, c);
+		Font::StrDraw(L"音楽提供", GAME_CLEAR_X -10, GAME_CLEAR_Y -10, GAME_CLEAR_FONT_SIZE + 60, c);
+		Font::StrDraw(L"魔王魂様", GAME_CLEAR_X -10, GAME_CLEAR_Y + 200, GAME_CLEAR_FONT_SIZE + 60, c);
 	}
 	if (m_key == 3)
 	{

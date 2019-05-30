@@ -100,7 +100,11 @@ void CObjMessage::Draw()
 
 	//金星のどちらかのスキルがオンの際描画する
 	if (g_Taurus == true || g_Libra == true) {
-		Font::StrDraw(L"スキル切り替え", 580, 400, 20, ca);	//スキル切り替えキー
+		if (g_Voice_flag == true) {
+			; //ラスボス撃破後のメッセージが表示されているときは表示しない
+		}
+		else
+			Font::StrDraw(L"スキル切り替え", 580, 400, 20, ca);	//スキル切り替えキー
 		Font::StrDraw(L"Cで左へ、Vで右へ", 570, 420, 21, ca);	//スキル切り替えキー
 	}
 	//切り取り位置の設定

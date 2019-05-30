@@ -21,6 +21,7 @@ float* g_boss_y;
 bool g_dead_flag = false;
 bool g_Voice_flag = false;
 bool g_End_flag = false;
+float g_boss_hp;
 
 CObjBoss::CObjBoss(float x, float y)
 {
@@ -31,7 +32,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	m_hp = 1;        //体力（初期40）
+	g_boss_hp = 1;        //体力（初期40）
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -153,7 +154,7 @@ void CObjBoss::Action()
 	CObjBeam* beam = (CObjBeam*)Objs::GetObj(OBJ_BEAM);
 
 	//時間経過でランダムにワープ
-	if (m_warp_time <= 0 && m_hp > 0)
+	if (m_warp_time <= 0 && g_boss_hp > 0)
 	{
 		m_warp_flag = true;
 	
@@ -305,7 +306,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = 36; i < 360; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -314,7 +315,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = 18; i < 342; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -323,7 +324,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = -0; i < 324; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 						}
@@ -332,7 +333,7 @@ void CObjBoss::Action()
 							//毒弾丸18発同時発射
 							for (int i = -18; i < 306; i += 18)
 							{
-								CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+								CObjPoison* poison = new CObjPoison(m_px + 55.0f, m_py + 55.0f, i, 4.0f);//オブジェクト作成
 								Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 							}
 							m_attack_f = false;
@@ -490,7 +491,7 @@ void CObjBoss::Action()
 	{
 		if (hit->CheckElementHit(ELEMENT_BEAMSABER) == true)
 		{
-			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			g_boss_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
@@ -499,7 +500,7 @@ void CObjBoss::Action()
 		//ELEMENT_VIRGO_SKILLを持つオブジェクトと接触したら
 		if (hit->CheckElementHit(ELEMENT_SKILL_VIRGO) == true)
 		{
-			m_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
+			g_boss_hp -= g_attack_power;	//hpを主人公の攻撃力分減らす
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
@@ -508,7 +509,7 @@ void CObjBoss::Action()
 		//ELEMENT_SUBを持つオブジェクトと接触したら
 		if (hit->CheckElementHit(ELEMENT_SUB) == true)
 		{
-			m_hp -= 1;
+			g_boss_hp -= 1;
 			m_f = true;
 			m_invincible_flag = true;
 			m_key_f = true;
@@ -555,13 +556,13 @@ void CObjBoss::Action()
 		m_time = 30;
 	}
 	//位置の更新
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
+	m_px += m_vx*1.0f;
+	m_py += m_vy*1.0f;
 
 	//HPが0になったら破棄
 	if (m_dead_end != true)
 	{
-		if (m_hp <= 0)
+		if (g_boss_hp <= 0)
 		{
 			//敵削除
 			m_alpha = 0.0f;

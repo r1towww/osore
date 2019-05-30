@@ -12,7 +12,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjSkillLeo::CObjSkillLeo(int x, int y)
+CObjSkillLeo::CObjSkillLeo(float x, float y)
 {
 	m_x = x;
 	m_y = y;

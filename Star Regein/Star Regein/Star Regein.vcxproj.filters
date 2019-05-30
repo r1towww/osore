@@ -231,7 +231,7 @@
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClCompile>
     <ClCompile Include="ObjFadein.cpp">
-      <Filter>ソースファイル</Filter>
+      <Filter>ソースファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -471,7 +471,7 @@
       <Filter>ソースファイル\ステージ選択</Filter>
     </ClInclude>
     <ClInclude Include="ObjFadein.h">
-      <Filter>ソースファイル</Filter>
+      <Filter>ソースファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

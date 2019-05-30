@@ -11,7 +11,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjSkillLibra::CObjSkillLibra(int x, int y)
+CObjSkillLibra::CObjSkillLibra(float x, float y)
 {
 	m_x = x;
 	m_y = y;

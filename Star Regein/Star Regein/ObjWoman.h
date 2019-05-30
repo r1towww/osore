@@ -47,7 +47,7 @@ private:
 
 	int m_time;//–³“GŠÔ‘ª’è
 	int m_bullet_time;//ƒn[ƒg’e”­ËŠÔ‘ª’è
-	int m_f;//–³“GŠÔ
+	bool m_f;//–³“GŠÔ
 	int m_key_f;//–³“GŠÔs“®§Œä
 	int count;
 	int e_time;//“Gs“®ŠÔ
