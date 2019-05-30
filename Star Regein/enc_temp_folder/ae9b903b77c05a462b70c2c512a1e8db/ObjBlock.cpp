@@ -311,7 +311,6 @@ void CObjBlock::Init()
 
 					m_star_c++;
 
-
 				}
 
 			}

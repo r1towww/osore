@@ -181,8 +181,8 @@ void CObjLibra::Action()
 				}
 
 				//主人公機と敵角度があんまりにもかけ離れたら
-				m_vx = cos(3.14 / 180 * ar) * 2;
-				m_vy = sin(3.14 / 180 * ar) * 2;
+				m_vx = cos(3.14f / 180.0f * ar) * 2.0f;
+				m_vy = sin(3.14f / 180.0f * ar) * 2.0f;
 
 
 			}
@@ -265,8 +265,8 @@ void CObjLibra::Action()
 		if (g_move_libra_flag[m_libra_id] == true)
 		{
 			//位置の更新
-			m_px += m_vx*2.0;
-			m_py += m_vy*2.0;
+			m_px += m_vx*2.0f;
+			m_py += m_vy*2.0f;
 
 		}
 		else

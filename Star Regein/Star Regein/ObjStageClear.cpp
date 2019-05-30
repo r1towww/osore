@@ -24,6 +24,7 @@ void CObjStageClear::Init()
 	m_end_s_f = false;
 	m_ani = 0;			//チャージアニメーション用
 	m_ani_time = 0;	//チャージアニメーション間隔タイム
+	m_ani_flag = false;
 
 	m_cnt_f = true;	//評価数をカウントするかどうかのフラグ
 	//地球以外の場合
@@ -302,7 +303,6 @@ void CObjStageClear::Draw()
 	CObjMessage* objmes = (CObjMessage*)Objs::GetObj(OBJ_MESSAGE);
 	//クリア情報
 	wchar_t KILLCNT[128];	//キルカウント表示用
-	wchar_t DAMAGECNT[128];	//被ダメージの描画
 	wchar_t TIME[128];	//タイムの描画
 
 
@@ -850,7 +850,6 @@ void CObjStageClear::Star_grade_eff(bool ani,int starcnt, bool grade1, bool grad
 	//描画カラー情報
 	float effc[4] = { 1.0f,1.0f,1.0f,m_Eff_Tra };
 
-	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
 	if (ani == true && starcnt == 0 && grade1 == true && grade2 == false

@@ -21,7 +21,7 @@ using namespace GameL;
 CSceneVenusTaurus::CSceneVenusTaurus()
 {
 	g_StarCount = 0;	//¯‚ğ”‚¦‚é•Ï”‚Ì‰Šú‰»
-	m_clear_f == false;
+	m_clear_f = false;
 	Item_cnt = 0.0f;
 	g_Make_Item = false;
 	g_Taurus_Max = false;

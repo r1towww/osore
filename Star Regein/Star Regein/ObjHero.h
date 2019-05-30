@@ -25,7 +25,7 @@ class CObjHero :public CObj
 		void SetY(float y) { m_py = y; }
 		void SetVY(float vy) { m_vy = vy; }
 		void SetVX(float vx) { m_vx = vx; }
-		float GetDashF() { return m_dash_flag; } //ダッシュフラグの取得
+		bool GetDashF() { return m_dash_flag; } //ダッシュフラグの取得
 
 	
 	private:
@@ -60,7 +60,7 @@ class CObjHero :public CObj
 
 		bool m_libra_eff_f;	//天秤座スキルエフェクト用フラグ
 		bool m_menu_key_f;	//メニューキー用の制御フラグ
-		int m_f;//攻撃制御用
+		bool m_f;//攻撃制御用
 		bool m_key_f;
 		bool m_help_key_f;	//helpキー用の制御フラグ
 

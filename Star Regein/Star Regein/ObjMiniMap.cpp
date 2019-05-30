@@ -238,7 +238,7 @@ void CObjMiniMap::Draw()
 						//表示位置の設定
 						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
 						dst.m_left = j*m_blocksize + m_uisize_x;
-						dst.m_right = dst.m_left + m_blocksize * 2.8;
+						dst.m_right = dst.m_left + m_blocksize * 2.8f;
 						dst.m_bottom = dst.m_top + m_blocksize * 2.0f;
 
 						//描画
@@ -255,8 +255,8 @@ void CObjMiniMap::Draw()
 						//表示位置の設定
 						dst.m_top = i*m_blocksize + m_uisize_y + 2.0f;
 						dst.m_left = j*m_blocksize + m_uisize_x + 4.0f;
-						dst.m_right = dst.m_left + m_blocksize * 1.8;
-						dst.m_bottom = dst.m_top + m_blocksize * 1.8;
+						dst.m_right = dst.m_left + m_blocksize * 1.8f;
+						dst.m_bottom = dst.m_top + m_blocksize * 1.8f;
 
 						//描画
 						Draw::Draw(9, &src, &dst, c, 0.0f);

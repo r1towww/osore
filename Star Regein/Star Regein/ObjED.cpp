@@ -31,6 +31,7 @@ void CObjED::Init()
 void CObjED::Action()
 {
 	g_stage = Space;
+
 	float p[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	//ƒtƒHƒ“ƒg•`‰æ-------------------------------------------

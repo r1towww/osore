@@ -539,8 +539,8 @@ void CObjBoss::Action()
 		m_time = 30;
 	}
 	//ˆÊ’u‚ÌXV
-	m_px += m_vx*1.0;
-	m_py += m_vy*1.0;
+	m_px += m_vx*1.0f;
+	m_py += m_vy*1.0f;
 
 	//HP‚ª0‚É‚È‚Á‚½‚ç”jŠü
 	if (m_dead_end != true)

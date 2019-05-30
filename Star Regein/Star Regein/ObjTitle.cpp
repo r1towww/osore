@@ -222,7 +222,7 @@ void CObjTitle::Draw()
 			Audio::Start(2);
 			m_time = false;
 		}
-		m_Tra -= 0.03;
+		m_Tra -= 0.03f;
 		if (m_Tra <= 0.0f)
 		{
 			Scene::SetScene(new CSceneStageChoice());
@@ -236,7 +236,7 @@ void CObjTitle::Draw()
 			Audio::Start(2);
 			m_time = false;
 		}
-		m_Tra -= 0.03;
+		m_Tra -= 0.03f;
 		if (m_Tra <= 0.0f)
 		{
 			exit(4);
