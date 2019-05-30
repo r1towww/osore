@@ -37,6 +37,8 @@ void CObjBeam::Init()
 
 	m_time = 0;
 
+	m_se_f = true;
+
 	m_d_beam_flag = false;
 
 	m_eff.m_top = 0;
@@ -98,7 +100,6 @@ void CObjBeam::Action()
 		{
 			m_ani = 0;
 			m_beam_flag = true;
-			Audio::Start(31);
 			m_ani_flag = false;
 		}
 	}
@@ -150,9 +151,14 @@ void CObjBeam::Action()
 		{
 			m_time++;
 			hit->SetInvincibility(false);
+			if (m_se_f == true)
+			{
+				Audio::Start(31);
+				m_se_f = false;
+			}
+
 			m_beam_flag = false;
 		}
-
 		//フラグがオフかつm_timeが100以上のときコマの進行を少し遅くする
 		if (m_beam_flag == false && m_time >= 100)
 		{
