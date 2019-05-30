@@ -30,6 +30,9 @@ private:
 	int	 m_beam_ani_time;		//ワープアニメーション間隔タイム
 	int m_beam_time;			//ワープ時間測定
 	int m_time;					//アニメーション溜め用カウント
+
+	int m_se_f;
+
 	bool m_beam_flag;
 
 	bool m_d_beam_flag;
