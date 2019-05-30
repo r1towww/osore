@@ -32,7 +32,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	g_boss_hp = 1;        //体力（初期40）
+	g_boss_hp = 10;        //体力（初期40）
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -571,6 +571,7 @@ void CObjBoss::Action()
 			g_All_Killcnt++;		   //キルカウントを+する
 			g_Earth_BossKill = true;
 			g_dead_flag = true;
+			g_move_stop_flag = true;
 		}
 	}
 	//HPが０以下でエフェクト開始
