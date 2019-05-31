@@ -570,6 +570,7 @@ void CObjBoss::Action()
 			g_Earth_BossKill = true;
 			g_dead_flag = true;
 			g_move_stop_flag = true;
+			g_last_key_f = true;
 		}
 	}
 	//HPが０以下でエフェクト開始

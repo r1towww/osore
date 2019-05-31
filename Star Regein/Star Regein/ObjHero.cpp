@@ -14,6 +14,7 @@ using namespace GameL;
 float g_posture;
 int g_skill = NoSkill;
 int g_attack_power = 1;
+bool g_last_key_f = false;//ボス討伐後の主人公制御
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -183,7 +184,7 @@ void CObjHero::Action()
 	//ステージクリアの情報を持ってくる
 	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
-	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr || g_Earth_BossKill == true)
+	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr || g_last_key_f == true)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -192,32 +193,6 @@ void CObjHero::Action()
 	//移動ベクトルの破棄
 	m_vx = 0.0f;
 	m_vy = 0.0f;
-
-		////デバック用
-		//if (Input::GetVKey('L'))
-		//{
-		//	g_hp -= 1.0f;
-		//}
-		////デバック用
-		//if (Input::GetVKey('K'))
-		//{
-		//	g_hp += 1.0f;
-		//}
-		////デバック用
-		//if (Input::GetVKey('J'))
-		//{
-		//	g_mp += 1.0f;
-		//}
-		//if (Input::GetVKey('W'))
-		//{
-		//	//オブジェクト作成
-		//	CObjStageClear* objs = new CObjStageClear();
-		//	Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
-		//}
-		//if (Input::GetVKey('T'))
-		//{
-		//	g_mp -= 1.0f;
-		//}
 
 		//移動系統情報--------------------------------------------------
 
@@ -262,7 +237,7 @@ void CObjHero::Action()
 	//通常攻撃情報---------------------------------------------------
 
 	//Zキーが入力された場合	
-	if (Input::GetVKey('Z') && g_Earth_BossKill == false)
+	if (Input::GetVKey('Z') && g_last_key_f == false)
 	{
 		if (m_a_flag == true)
 		{
@@ -389,7 +364,7 @@ void CObjHero::Action()
 	}
 
 	//Xキーが入力された場合、スキルを使用
-	if (Input::GetVKey('X') && g_Earth_BossKill ==false)
+	if (Input::GetVKey('X') && g_last_key_f ==false)
 	{
 		if (m_key_f == true)
 		{
