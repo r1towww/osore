@@ -23,9 +23,12 @@ void CObjED::Init()
 	flag = false;
 	m_f = true;		//オブジェクト作成用フラグ
 
-
+	//２週目系統
 	g_End_flag = false;
 	g_Voice_flag = false;
+	g_count = 0;
+	g_last_key_f = false;	//２週目の主人公が動かす用
+
 }
 
 //アクション

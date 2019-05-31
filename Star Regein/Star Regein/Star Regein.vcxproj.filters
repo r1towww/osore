@@ -275,10 +275,10 @@
       <Filter>リソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
-      <Filter>ヘッダーファイル</Filter>
+      <Filter>ソースファイル\UI\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameHead.h">
-      <Filter>ヘッダーファイル</Filter>
+      <Filter>ソースファイル\UI\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="ObjBlock.h">
       <Filter>ソースファイル\マップ</Filter>
@@ -478,9 +478,6 @@
     <Filter Include="リソースファイル">
       <UniqueIdentifier>{7010ca8f-a8cd-4053-a484-7582e8ce0ff8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダーファイル">
-      <UniqueIdentifier>{8a6186d3-2388-4354-b944-e539b04ac524}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソースファイル">
       <UniqueIdentifier>{a8c5a240-1e94-4333-b0e2-fbece331f47e}</UniqueIdentifier>
     </Filter>
@@ -579,6 +576,9 @@
     </Filter>
     <Filter Include="ソースファイル\惑星\金星">
       <UniqueIdentifier>{8dba6e15-1c58-4484-848e-1a4a509fce81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソースファイル\UI\ヘッダーファイル">
+      <UniqueIdentifier>{8a6186d3-2388-4354-b944-e539b04ac524}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
