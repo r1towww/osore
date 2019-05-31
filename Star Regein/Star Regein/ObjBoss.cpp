@@ -251,7 +251,6 @@ void CObjBoss::Action()
 		if (m_imposition_t >= 100)
 		{
 			m_imposition_t = 0;
-
 			if (g_beam_f == false)
 			{
 				//攻撃パターン決定
@@ -268,17 +267,14 @@ void CObjBoss::Action()
 				if (m_attack_pattern == 1)
 				{
 					m_poison_f = true;
-
 				}
 			}
 			else
 			{
 				m_beam_f = true;
 			}
-		}
-		else
-		{
-			m_imposition_t++;
+
+			m_attack_f = false;
 		}
 	}
 
@@ -330,10 +326,9 @@ void CObjBoss::Action()
 	//毒弾幕
 	if (m_poison_f == true)
 	{
-		m_ctime++;
-
-		if (count <= 3)
+		if (count <= 2)
 		{
+			m_ctime++;
 			if (m_ctime >= 20)
 			{
 				//毒弾丸20発同時発射
@@ -343,17 +338,16 @@ void CObjBoss::Action()
 					Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 				}
 				//3回発射で終了
-				if (count >= 3)
+				if (count >= 2)
 				{
 					m_ctime = 0;
 					count = 0;
+					m_poison_f = false;
 				}
 				count++;
 				m_ctime = 0;
 			}
 		}
-
-		m_poison_f = false;
 	}
 
 	//ビーム

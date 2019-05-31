@@ -1046,12 +1046,12 @@ void CObjHero::Draw()
 	if (m_heal_eff_f == true)
 	{
 		//エフェクト用表示位置の設定
-		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
-		dst.m_left = 0.0f + m_px;
-		dst.m_right = 120.0f + m_px;
-		dst.m_bottom = 120.0f + m_py;
+		dst.m_top = -10.0f + m_py;	//描画に対してスクロールの影響を加える
+		dst.m_left = 90.0f + m_px;
+		dst.m_right = -10.0f + m_px;
+		dst.m_bottom = 90.0f + m_py;
 		//描画
-		Draw::Draw(90, &m_ani_heal, &dst, c, 90.0f);
+		Draw::Draw(90, &m_ani_heal, &dst, c, 0.0f);
 	}
 
 }
