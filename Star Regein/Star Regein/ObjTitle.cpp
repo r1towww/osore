@@ -283,7 +283,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"→ゲームスタート", 300, 380, 32, c);
 			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
-			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 460, 32, c);
 
 			//Ｚキーで始める
 			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
@@ -296,7 +296,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
 			Font::StrDraw(L"→ゲーム終了", 300, 420, 32, c);
-			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 460, 32, c);
 
 			//Zキーで終わる
 			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
@@ -310,7 +310,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
 			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
-			Font::StrDraw(L"→これまでの記録をリセットする", 300, 450, 32, c);
+			Font::StrDraw(L"→これまでの記録をリセットする", 300, 460, 32, c);
 			//Zキーで終わる
 			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
 			{
@@ -323,7 +323,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
 			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
-			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 460, 32, c);
 
 		}
 	}
@@ -381,7 +381,7 @@ void CObjTitle::Draw()
 
 		//表示
 		Draw::Draw(3, &src, &dst, c, 0.0f);
-		Font::StrDraw(L"これまでの記録をすべてリセットしますか？", 100, 450, 32, r);
+		Font::StrDraw(L"これまでの記録をすべてリセットしますか？", 100, 460, 32, r);
 
 		m_time = false;
 	}
@@ -418,7 +418,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"はい", 100, 500, 32, c);
 			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
-			if (Input::GetVKey('Z'))
+			if (Input::GetVKey('Z')||Input::GetVKey(VK_RETURN))
 			{
 				Audio::Start(2);
 				m_Riset_f = false;
@@ -431,7 +431,7 @@ void CObjTitle::Draw()
 		{
 			Font::StrDraw(L"→はい", 100, 500, 32, c);
 			Font::StrDraw(L"いいえ", 250, 500, 32, c);
-			if (Input::GetVKey('Z'))
+			if (Input::GetVKey('Z') || Input::GetVKey(VK_RETURN))
 			{
 				Audio::Start(2);
 				m_RESET = true;
