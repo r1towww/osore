@@ -27,5 +27,6 @@ private:
 	bool m_RESET;
 	bool m_LEFT;
 	bool m_RIGHT;
+	int m_se_f;
 	
 };

@@ -88,12 +88,15 @@ void CObjTitle::Init()
 	m_RESET = false;
 	m_LEFT = false;
 	m_RIGHT = false;
+	m_loadtime = 0;
+	m_se_f = 0;
 
 }
 
 //アクション
 void CObjTitle::Action()
 {
+	m_loadtime++;
 	//チュートリアル
 	if (g_Earth_BossKill == true)
 	{
@@ -123,6 +126,7 @@ void CObjTitle::Draw()
 {
 	float c[4] = { 1,1,1,m_Tra };
 	float t[4] = { 0,1,0,m_Tra };
+	float r[4] = { 1,0,0,m_Tra };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -221,133 +225,6 @@ void CObjTitle::Draw()
 		g_Virgo = true;	//乙女座
 		g_Leo = true;	//獅子座
 	}
-	//ゲーム開始
-	if (m_start == true)
-	{
-		if (m_time == true)
-		{
-			Audio::Start(2);
-			m_time = false;
-		}
-		m_Tra -= 0.03f;
-		if (m_Tra <= 0.0f)
-		{
-			Scene::SetScene(new CSceneStageChoice());
-		}
-	}
-	//ゲーム終了
-	if (m_end == true)
-	{
-		if (m_time == true)
-		{
-			Audio::Start(2);
-
-			m_time = false;
-		}
-		m_Tra -= 0.03f;
-		if (m_Tra <= 0.0f)
-		{
-			exit(4);
-		}
-	}
-	//リセットするか否かのテキスト表示
-	if (m_Riset_f == true)
-	{
-		if (m_time == true)
-		{
-			Audio::Start(2);
-
-		}
-
-		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 822.0f;
-		src.m_bottom = 218.0f;
-
-		//表示位置の設定
-		dst.m_top = 422.0f;
-		dst.m_left = 10.0f;
-		dst.m_right = 785.0f;
-		dst.m_bottom = 600.0f;
-
-
-		//表示
-		Draw::Draw(3, &src, &dst, c, 0.0f);
-		Font::StrDraw(L"これまでの記録をすべてリセットしますか？", 100, 450, 32, c);
-
-		m_time = false;
-	}
-	else
-	{
-		m_time = true;
-	}
-	//リセットフラグ処理
-	if (m_Riset_f == true)
-	{
-		//左を選択時
-		if (Input::GetVKey(VK_RIGHT))
-		{
-			m_RIGHT = true;
-			m_LEFT = false;
-
-			if (m_time == true)
-			{
-				Audio::Start(1);
-				m_time = false;
-			}
-		}
-		//右を選択時
-		else if (Input::GetVKey(VK_LEFT))
-		{
-			m_RIGHT = false;
-			m_LEFT = true;
-
-			if(m_time==true)
-			{
-				Audio::Start(1);
-				m_time = false;
-			}
-		}
-		if (m_RIGHT == true)
-		{
-			Font::StrDraw(L"はい", 100, 500, 32, c);
-			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
-			if (Input::GetVKey('Z'))
-			{
-				Audio::Start(2);
-				m_Riset_f = false;
-				m_RIGHT = false;
-				m_key_flag = false;
-			}
-		}
-		else if (m_LEFT == true)
-		{
-			Font::StrDraw(L"→はい", 100, 500, 32, c);
-			Font::StrDraw(L"いいえ", 250, 500, 32, c);
-			if (Input::GetVKey('Z'))
-			{
-				Audio::Start(2);
-				m_RESET = true;
-				m_LEFT = false;
-				m_Riset_f = false;
-				m_key_flag = false;
-
-			}
-
-		}
-		else
-		{
-			Font::StrDraw(L"はい", 100, 500, 32, c);
-			Font::StrDraw(L"いいえ", 250, 500, 32, c);
-		}
-
-	}
-	else
-	{
-		m_time = true;
-	}
-
 	//すべての記録をリセットさせる
 	if (m_RESET == true)
 	{
@@ -409,7 +286,7 @@ void CObjTitle::Draw()
 			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
 
 			//Ｚキーで始める
-			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
 			{
 				m_start = true;
 			}
@@ -422,7 +299,7 @@ void CObjTitle::Draw()
 			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
 
 			//Zキーで終わる
-			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
 			{
 				m_end = true;
 			}
@@ -435,7 +312,7 @@ void CObjTitle::Draw()
 			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
 			Font::StrDraw(L"→これまでの記録をリセットする", 300, 450, 32, c);
 			//Zキーで終わる
-			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			if (Input::GetVKey('Z') == true && m_loadtime>25 || Input::GetVKey(VK_RETURN) == true && m_loadtime>25)
 			{
 				m_Riset_f = true;
 			}
@@ -450,5 +327,127 @@ void CObjTitle::Draw()
 
 		}
 	}
+	//ゲーム開始
+	if (m_start == true)
+	{
+		if (m_time == true)
+		{
+			Audio::Start(2);
+			m_time = false;
+		}
+		m_Tra -= 0.03f;
+		if (m_Tra <= 0.0f)
+		{
+			Scene::SetScene(new CSceneStageChoice());
+		}
+	}
 
+	//ゲーム終了
+	if (m_end == true)
+	{
+		if (m_time == true)
+		{
+			Audio::Start(2);
+
+			m_time = false;
+		}
+		m_Tra -= 0.03f;
+		if (m_Tra <= 0.0f)
+		{
+			exit(4);
+		}
+	}
+	//リセットするか否かのテキスト表示
+	if (m_Riset_f == true)
+	{
+		if (m_time == true)
+		{
+			Audio::Start(2);
+
+		}
+
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 822.0f;
+		src.m_bottom = 218.0f;
+
+		//表示位置の設定
+		dst.m_top = 422.0f;
+		dst.m_left = 10.0f;
+		dst.m_right = 785.0f;
+		dst.m_bottom = 600.0f;
+
+
+		//表示
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+		Font::StrDraw(L"これまでの記録をすべてリセットしますか？", 100, 450, 32, r);
+
+		m_time = false;
+	}
+	//リセットフラグ処理
+	if (m_Riset_f == true)
+	{
+		//左を選択時
+		if (Input::GetVKey(VK_RIGHT))
+		{
+			if (m_se_f == 0)
+			{
+				Audio::Start(1);
+				m_se_f = 1;
+			}
+			m_RIGHT = true;
+			m_LEFT = false;
+
+		}
+		//右を選択時
+		else if (Input::GetVKey(VK_LEFT))
+		{
+			if (m_se_f == 1)
+			{
+				Audio::Start(1);
+				m_se_f = 0;
+			}
+
+			m_RIGHT = false;
+			m_LEFT = true;
+
+		}
+		//左を選択状態で決定で戻る
+		if (m_RIGHT == true)
+		{
+			Font::StrDraw(L"はい", 100, 500, 32, c);
+			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
+			if (Input::GetVKey('Z'))
+			{
+				Audio::Start(2);
+				m_Riset_f = false;
+				m_RIGHT = false;
+				m_loadtime = 0;
+			}
+		}
+		//右を選択状態で
+		else if (m_LEFT == true)
+		{
+			Font::StrDraw(L"→はい", 100, 500, 32, c);
+			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+			if (Input::GetVKey('Z'))
+			{
+				Audio::Start(2);
+				m_RESET = true;
+				m_LEFT = false;
+				m_Riset_f = false;
+				m_loadtime = 0;
+
+			}
+
+		}
+		else
+		{
+			Font::StrDraw(L"はい", 100, 500, 32, c);
+			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+		}
+
+	}
+	
 }
