@@ -63,6 +63,8 @@ void CObjBoss::Init()
 
 	m_attack_pattern = 0;
 
+	m_ctime = 0;
+
 	m_snake_c = 0;
 
 	m_imposition_t = 0;
@@ -304,7 +306,7 @@ void CObjBoss::Action()
 
 						if (count <= 3)
 						{
-							if (count == 0)
+							if (m_ctime >= 100)
 							{
 								//毒弾丸20発同時発射
 								for (int i = 0; i < 360; i += 18)
@@ -312,32 +314,19 @@ void CObjBoss::Action()
 									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
 									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
 								}
-							}
-							else if (count == 1)
-							{
-								//毒弾丸20発同時発射
-								for (int i = 0; i < 360; i += 18)
+								m_ctime = 0;
+								count++;
+								//3回発射で終了
+								if (count >= 3)
 								{
-									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
-									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+									m_attack_f = false;
+									count = 0;
 								}
 							}
-							else if (count == 2)
+							else
 							{
-								//毒弾丸20発同時発射
-								for (int i = 0; i < 360; i += 18)
-								{
-									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
-									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
-								}
+								m_ctime++;
 							}
-							count++;
-						}
-						//3回発射で終了
-						if (count == 3)
-						{
-							m_attack_f = false;
-							count = 0;
 						}
 					}
 					m_attack_key_f = false;
