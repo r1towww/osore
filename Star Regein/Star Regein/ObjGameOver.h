@@ -21,4 +21,5 @@ private:
 	bool m_Left;
 	float m_Tra;
 	bool m_push_flag;
+	bool m_key_flag;
 }; 

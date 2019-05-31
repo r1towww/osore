@@ -34,8 +34,10 @@ void CSceneGameOver::InitScene()
 {
 	Draw::LoadImageW(L"宇宙背景.png", 1, TEX_SIZE_1024);
 
+	//Audio
 	Audio::LoadAudio(1, L"ゲームオーバー.wav", EFFECT);
-
+	Audio::LoadAudio(2, L"ピコ！.wav", EFFECT);
+	Audio::LoadAudio(3, L"決定音.wav", EFFECT);
 
 	//クリアオブジェクト作成
 	CObjGameOver* o = new CObjGameOver();
