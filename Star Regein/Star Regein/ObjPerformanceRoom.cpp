@@ -51,6 +51,7 @@ void CObjPerformanceRoom::Init()
 	m_page = 0;
 	m_next_f = false;
 	m_back_f = false;
+
 }
 
 //ƒAƒNƒVƒ‡ƒ“
