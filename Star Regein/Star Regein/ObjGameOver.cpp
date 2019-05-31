@@ -19,6 +19,7 @@ void CObjGameOver::Init()
 	Audio::Start(1);
 	m_Tra = 1.0f;
 	m_push_flag = false;
+	m_key_flag = true;
 }
 
 //アクション
@@ -64,15 +65,31 @@ void CObjGameOver::Draw()
 	//右キー入力
 	if (Input::GetVKey(VK_RIGHT) == true)
 	{
+		//SE
+		if (m_key_flag == true)
+		{
+			Audio::Start(2);
+			m_key_flag = false;
+		}
 		m_Right = true;
 		m_Left = false;
 	}
 	//左キー入力
-	if (Input::GetVKey(VK_LEFT) == true)
+	else if (Input::GetVKey(VK_LEFT) == true)
 	{
+		//SE
+		if (m_key_flag == true)
+		{
+			Audio::Start(2);
+			m_key_flag = false;
+		}
+		
 		m_Right = false;
 		m_Left = true;
 	}
+	else
+		m_key_flag = true;
+
 	//右キー入力でフォント切り替え
 	if (m_Right == true)
 	{
@@ -80,6 +97,7 @@ void CObjGameOver::Draw()
 		//この状態でＺキーでステージ選択へ
 		if ((Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
+			Audio::Start(3);
 			m_push_flag = true;
 		}
 	}
@@ -91,10 +109,12 @@ void CObjGameOver::Draw()
 	//左キー入力でフォント切り替え
 	if (m_Left == true)
 	{
+		
 		Font::StrDraw(L"◇タイトルに戻る", 100, 400, 32, c);
 		//この状態でＺキーでタイトルへ
 		if ((Input::GetVKey('Z') == true||Input::GetVKey(VK_RETURN)==true) && m_keytime == TIMELIMIT)	//キー入力タイムが一定に達した場合、キー入力を許可する
 		{
+			Audio::Start(3);
 			m_push_flag = true;
 		}
 	}
