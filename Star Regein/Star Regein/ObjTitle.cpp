@@ -285,41 +285,56 @@ void CObjTitle::Draw()
 	//リセットフラグ処理
 	if (m_Riset_f == true)
 	{
+		//左を選択時
 		if (Input::GetVKey(VK_RIGHT))
 		{
-			Font::StrDraw(L"はい", 100, 500, 32, c);
-			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
+			m_RIGHT = true;
+			m_LEFT = false;
 
 			if (m_time == true)
 			{
 				Audio::Start(1);
 				m_time = false;
 			}
-			if (Input::GetVKey('Z'))
-			{
-				Audio::Start(2);
-
-				m_RIGHT = true;
-				m_LEFT = false;
-			}
 		}
+		//右を選択時
 		else if (Input::GetVKey(VK_LEFT))
 		{
-			Font::StrDraw(L"→はい", 100, 500, 32, c);
-			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+			m_RIGHT = false;
+			m_LEFT = true;
 
 			if(m_time==true)
 			{
 				Audio::Start(1);
 				m_time = false;
 			}
+		}
+		if (m_RIGHT == true)
+		{
+			Font::StrDraw(L"はい", 100, 500, 32, c);
+			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
 			if (Input::GetVKey('Z'))
 			{
 				Audio::Start(2);
-
+				m_Riset_f = false;
 				m_RIGHT = false;
-				m_LEFT = true;
+				m_key_flag = false;
 			}
+		}
+		else if (m_LEFT == true)
+		{
+			Font::StrDraw(L"→はい", 100, 500, 32, c);
+			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+			if (Input::GetVKey('Z'))
+			{
+				Audio::Start(2);
+				m_RESET = true;
+				m_LEFT = false;
+				m_Riset_f = false;
+				m_key_flag = false;
+
+			}
+
 		}
 		else
 		{
@@ -331,17 +346,6 @@ void CObjTitle::Draw()
 	else
 	{
 		m_time = true;
-	}
-	if (m_RIGHT == true)
-	{
-		m_Riset_f = false;
-		m_RIGHT = false;
-	}
-	else if (m_LEFT == true)
-	{
-		m_RESET = true;
-		m_LEFT = false;
-		m_Riset_f = false;
 	}
 
 	//すべての記録をリセットさせる
