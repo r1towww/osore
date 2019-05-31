@@ -22,4 +22,6 @@ private:
 	float m_Tra;
 	bool m_push_flag;
 	bool m_key_flag;
+	bool m_up;
+	bool m_down;
 }; 

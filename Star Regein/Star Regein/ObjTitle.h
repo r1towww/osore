@@ -27,5 +27,7 @@ private:
 	bool m_RESET;
 	bool m_LEFT;
 	bool m_RIGHT;
-	
+	bool m_up;
+	bool m_down;
+
 };
