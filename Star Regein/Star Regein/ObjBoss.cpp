@@ -604,7 +604,7 @@ void CObjBoss::Action()
 				hit->SetInvincibility(true);
 				Audio::Stop(8);
 				Audio::Start(23);
-
+				g_new_Performance = true;
 			}
 		}
 		else
