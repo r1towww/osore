@@ -305,10 +305,10 @@ void CObjStageClear::Draw()
 
 	Font::StrDraw(L"STAGE CLEAR", CLEAR_X, CLEAR_Y, CLEAR_SIZE, y);
 
-	if(g_Earth_BossKill!=true)
-		Font::StrDraw(L"Zキーでステージ選択へ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
-	else
+	if(g_count==1)
 		Font::StrDraw(L"Zキーでタイトルへ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
+	else
+		Font::StrDraw(L"Zキーでステージ選択へ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
 
 	//クリア情報
 	wchar_t KILLCNT[128];	//キルカウント表示用

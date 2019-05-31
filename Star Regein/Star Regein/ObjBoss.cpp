@@ -33,7 +33,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	g_boss_hp = 60; //体力（初期60）
+	g_boss_hp = 1; //体力（初期60）
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)

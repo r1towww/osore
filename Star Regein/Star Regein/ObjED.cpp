@@ -26,7 +26,6 @@ void CObjED::Init()
 	//‚QT–ÚŒn“
 	g_End_flag = false;
 	g_Voice_flag = false;
-	g_count = 0;
 	g_last_key_f = false;	//‚QT–Ú‚ÌålŒö‚ª“®‚©‚·—p
 
 }
