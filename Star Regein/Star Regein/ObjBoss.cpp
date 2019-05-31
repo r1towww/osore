@@ -326,7 +326,7 @@ void CObjBoss::Action()
 	//“Å’e–‹
 	if (m_poison_f == true)
 	{
-		if (count <= 2)
+		if (count <= 3)
 		{
 			m_ctime++;
 			if (m_ctime >= 20)
@@ -338,7 +338,7 @@ void CObjBoss::Action()
 					Objs::InsertObj(poison, OBJ_POISON, 11);//ƒ}ƒl[ƒWƒƒ‚É“o˜^
 				}
 				//3‰ñ”­ŽË‚ÅI—¹
-				if (count >= 2)
+				if (count >= 3)
 				{
 					m_ctime = 0;
 					count = 0;
