@@ -75,8 +75,6 @@ bool g_no_damage = false;	//ノーダメージクリア用変数の初期化
 void CObjTitle::Init()
 {
 	g_stage = Space;	//ステージ値の初期化
-	m_up=false;
-	m_down=false;
 	m_start=false;
 	m_end=false;
 	m_time = true;
@@ -85,12 +83,39 @@ void CObjTitle::Init()
 	m_Allclear = false;
 	m_f = true;
 	g_move_stop_flag = false;
+	m_Riset_f=false;
+	m_cnt = false;
+	m_RESET = false;
+	m_LEFT = false;
+	m_RIGHT = false;
+
 }
 
 //アクション
 void CObjTitle::Action()
 {
+	//チュートリアル
+	if (g_Earth_BossKill == true)
+	{
+		//惑星クリア状況
+		g_Earth_clear = true;	//地球	
+		g_Venus_clear = false;	//金星
+		g_Mercury_clear = false;	//水星
+		g_Sun_clear = false;	//太陽
+		g_Taurus_clear = false;	//牡牛座	
+		g_Libra_clear = false;	//天秤座
+		g_Gemini_clear = false;	//双子座
+		g_Virgo_clear = false;	//乙女座
+		g_Leo_clear = false;	//獅子座
+		g_Boss_Spawn = false;
+		//スキル
+		g_Taurus = false;	//牡牛座	
+		g_Libra = false;	//天秤座
+		g_Gemini = false;	//双子座
+		g_Virgo = false;	//乙女座
+		g_Leo = false;	//獅子座
 
+	}
 }
 
 //ドロー
@@ -153,27 +178,24 @@ void CObjTitle::Draw()
 	}
 
 	//上キーを押したとき
-	if (Input::GetVKey(VK_UP) == true)
+	if (Input::GetVKey(VK_UP) == true&&m_cnt!=0)
 	{
 		if (m_key_flag == true)
 		{
-
+			m_cnt--;
 			Audio::Start(1);
 			m_key_flag = false;
-			m_up = true;
-			m_down = false;
 		}
 
 	}
 	//下キーを押したとき
-	else if (Input::GetVKey(VK_DOWN) == true)
+	else if (Input::GetVKey(VK_DOWN) == true&&m_cnt!=2)
 	{
 		if (m_key_flag == true)
 		{
+			m_cnt++;
 			Audio::Start(1);
 			m_key_flag = false;
-			m_down = true;
-			m_up = false;
 		}
 	}
 	else
@@ -199,27 +221,6 @@ void CObjTitle::Draw()
 		g_Virgo = true;	//乙女座
 		g_Leo = true;	//獅子座
 	}
-	else
-	{
-		g_Earth_clear = false;	//地球	
-		g_Venus_clear = false;	//金星
-		g_Mercury_clear = false;	//水星
-		g_Sun_clear = false;	//太陽
-
-		g_Taurus_clear = false;	//牡牛座	
-		g_Libra_clear = false;	//天秤座
-		g_Gemini_clear = false;	//双子座
-		g_Virgo_clear = false;	//乙女座
-		g_Leo_clear = false;	//獅子座
-		g_Boss_Spawn = false;
-		g_Taurus = false;	//牡牛座	
-		g_Libra = false;	//天秤座
-		g_Gemini = false;	//双子座
-		g_Virgo = false;	//乙女座
-		g_Leo = false;	//獅子座
-
-	}
-
 	//ゲーム開始
 	if (m_start == true)
 	{
@@ -240,6 +241,7 @@ void CObjTitle::Draw()
 		if (m_time == true)
 		{
 			Audio::Start(2);
+
 			m_time = false;
 		}
 		m_Tra -= 0.03f;
@@ -248,36 +250,205 @@ void CObjTitle::Draw()
 			exit(4);
 		}
 	}
-	//カーソルが動く
-	if (m_up == true)
+	//リセットするか否かのテキスト表示
+	if (m_Riset_f == true)
 	{
-		Font::StrDraw(L"→ゲームスタート", 300, 380, 32, c);
-		Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
-		//Ｚキーで始める
-		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+		if (m_time == true)
 		{
-			m_start = true;
+			Audio::Start(2);
+
 		}
 
-	}
-	else if (m_down == true)
-	{
-		Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
-		Font::StrDraw(L"→ゲーム終了", 300, 420, 32, c);
-		//Zキーで終わる
-		if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
-		{
-			m_end = true;
-		}
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 822.0f;
+		src.m_bottom = 218.0f;
+
+		//表示位置の設定
+		dst.m_top = 422.0f;
+		dst.m_left = 10.0f;
+		dst.m_right = 785.0f;
+		dst.m_bottom = 600.0f;
 
 
+		//表示
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+		Font::StrDraw(L"これまでの記録をすべてリセットしますか？", 100, 450, 32, c);
+
+		m_time = false;
 	}
-	//始めはこの状態
 	else
 	{
-		Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
-		Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
+		m_time = true;
+	}
+	//リセットフラグ処理
+	if (m_Riset_f == true)
+	{
+		//左を選択時
+		if (Input::GetVKey(VK_RIGHT))
+		{
+			m_RIGHT = true;
+			m_LEFT = false;
+
+			if (m_time == true)
+			{
+				Audio::Start(1);
+				m_time = false;
+			}
+		}
+		//右を選択時
+		else if (Input::GetVKey(VK_LEFT))
+		{
+			m_RIGHT = false;
+			m_LEFT = true;
+
+			if(m_time==true)
+			{
+				Audio::Start(1);
+				m_time = false;
+			}
+		}
+		if (m_RIGHT == true)
+		{
+			Font::StrDraw(L"はい", 100, 500, 32, c);
+			Font::StrDraw(L"→いいえ", 250, 500, 32, c);
+			if (Input::GetVKey('Z'))
+			{
+				Audio::Start(2);
+				m_Riset_f = false;
+				m_RIGHT = false;
+				m_key_flag = false;
+			}
+		}
+		else if (m_LEFT == true)
+		{
+			Font::StrDraw(L"→はい", 100, 500, 32, c);
+			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+			if (Input::GetVKey('Z'))
+			{
+				Audio::Start(2);
+				m_RESET = true;
+				m_LEFT = false;
+				m_Riset_f = false;
+				m_key_flag = false;
+
+			}
+
+		}
+		else
+		{
+			Font::StrDraw(L"はい", 100, 500, 32, c);
+			Font::StrDraw(L"いいえ", 250, 500, 32, c);
+		}
+
+	}
+	else
+	{
+		m_time = true;
 	}
 
+	//すべての記録をリセットさせる
+	if (m_RESET == true)
+	{
+		g_Earth_clear = false;	//地球	
+		g_Venus_clear = false;	//金星
+		g_Mercury_clear = false;	//水星
+		g_Sun_clear = false;	//太陽
+		g_Taurus_clear = false;	//牡牛座	
+		g_Libra_clear = false;	//天秤座
+		g_Gemini_clear = false;	//双子座
+		g_Virgo_clear = false;	//乙女座
+		g_Leo_clear = false;	//獅子座
+		g_Boss_Spawn = false;
+		g_Taurus = false;	//牡牛座	
+		g_Libra = false;	//天秤座
+		g_Gemini = false;	//双子座
+		g_Virgo = false;	//乙女座
+		g_Leo = false;	//獅子座
+
+		//敵をすべて倒した------------------
+		g_Taurus_Enemy_AllKill = false;
+		g_Libra_Enemy_AllKill = false;
+		g_Gemini_Enemy_AllKill = false;
+		g_Viego_Enemy_AllKill = false;
+		g_Leo_Enemy_AllKill = false;
+		//ノーダメージクリア----------------
+		g_Taurus_NoDamage_Clear = false;
+		g_Libra_NoDamage_Clear = false;
+		g_Gemini_NoDamage_Clear = false;
+		g_Viego_NoDamage_Clear = false;
+		g_Leo_NoDamage_Clear = false;
+		//その他
+		g_All_Killcnt = 0;
+		g_Death_cnt = 0;
+		g_Taurus_Grade = 0;
+		g_Libra_Grade = 0;
+		g_Gemini_Grade = 0;
+		g_Viego_Grade = 0;
+		g_Leo_Grade = 0;
+
+	//シークレット系
+		g_Tutorial_Clear = false; //チュートリアルクリア
+		g_Earth_BossKill = false; //ラスボスを倒した
+		g_All_Skill_Get = false;  //すべてのスキルを獲得
+		g_TRank = None;
+		g_LiRank = None;		//ランク管理用
+		g_GRank = None;		//ランク管理用
+		g_VRank = None;		//ランク管理用
+		g_LeRank = None;		//ランク管理用
+
+	}
+	//カーソルが動く
+	if (m_Riset_f != true)
+	{
+		if (m_cnt == 0)
+		{
+			Font::StrDraw(L"→ゲームスタート", 300, 380, 32, c);
+			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+
+			//Ｚキーで始める
+			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			{
+				m_start = true;
+			}
+
+		}
+		else if (m_cnt == 1)
+		{
+			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
+			Font::StrDraw(L"→ゲーム終了", 300, 420, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+
+			//Zキーで終わる
+			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			{
+				m_end = true;
+			}
+
+
+		}
+		else if (m_cnt == 2)
+		{
+			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
+			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
+			Font::StrDraw(L"→これまでの記録をリセットする", 300, 450, 32, c);
+			//Zキーで終わる
+			if (Input::GetVKey('Z') == true || Input::GetVKey(VK_RETURN) == true)
+			{
+				m_Riset_f = true;
+			}
+
+		}
+		//始めはこの状態
+		else
+		{
+			Font::StrDraw(L"ゲームスタート", 300, 380, 32, c);
+			Font::StrDraw(L"ゲーム終了", 300, 420, 32, c);
+			Font::StrDraw(L"これまでの記録をリセットする", 300, 450, 32, c);
+
+		}
+	}
 
 }
