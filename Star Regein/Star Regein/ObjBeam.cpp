@@ -179,6 +179,7 @@ void CObjBeam::Action()
 			{
 				m_time = 0;
 				m_beam_ani_time = 0;
+				g_beam_f = false;
 				this->SetStatus(false);    //自身に削除命令を出す
 				Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxに削除する
 			}

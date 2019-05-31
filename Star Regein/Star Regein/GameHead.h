@@ -319,6 +319,7 @@ extern bool g_last_key_f;//ボス討伐後の主人公制御
 
 extern float g_boss_hp;//ボスHP
 
+extern bool g_beam_f;
 extern int g_count;//ボスイベント回数制御
 /*実績達成状況*/
 //新しく実績を解除したとき----------

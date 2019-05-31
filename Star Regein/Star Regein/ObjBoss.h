@@ -84,10 +84,13 @@ private:
 	bool m_movey;//上下
 
 	bool m_f;//無敵時間
-
-	bool m_beam_f;//ビームフラグ
 	bool m_attack_f;
 	bool m_attack_key_f;
+
+	//攻撃パターンフラグ
+	bool m_snake_f;
+	bool m_poison_f;
+	bool m_beam_f;
 
 	bool m_do_f;//敵攻撃フラグ
 
