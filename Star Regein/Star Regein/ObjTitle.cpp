@@ -90,7 +90,7 @@ void CObjTitle::Init()
 	m_RIGHT = false;
 	m_loadtime = 0;
 	m_se_f = 0;
-	g_count = 0;
+	g_End_flag = false;
 
 
 }

@@ -305,7 +305,7 @@ void CObjStageClear::Draw()
 
 	Font::StrDraw(L"STAGE CLEAR", CLEAR_X, CLEAR_Y, CLEAR_SIZE, y);
 
-	if(g_count==1)
+	if(g_End_flag==true)
 		Font::StrDraw(L"Zキーでタイトルへ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
 	else
 		Font::StrDraw(L"Zキーでステージ選択へ戻る", BACK_X, BACK_Y, BACK_SIZE, y);
