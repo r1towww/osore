@@ -21,7 +21,6 @@ float* g_boss_y;
 bool g_dead_flag = false;
 bool g_Voice_flag = false;
 bool g_End_flag = false;
-float g_boss_hp;
 bool g_beam_f = false;
 
 CObjBoss::CObjBoss(float x, float y)
@@ -34,7 +33,7 @@ CObjBoss::CObjBoss(float x, float y)
 void CObjBoss::Init()
 {
 
-	g_boss_hp = 60; //体力（初期60）
+
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
