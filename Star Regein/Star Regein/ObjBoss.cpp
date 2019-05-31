@@ -32,7 +32,7 @@ CObjBoss::CObjBoss(float x, float y)
 //イニシャライズ
 void CObjBoss::Init()
 {
-	g_boss_hp = 10;        //体力（初期40）
+	g_boss_hp = 1;        //体力（初期60）
 	m_vx = 0.0f;	//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 0.0f;//正面(0.0f) 左(1.0f) 右(2.0f) 背面(3.0f)
@@ -95,7 +95,6 @@ void CObjBoss::Init()
 
 	m_warp_flag = false;
 	m_warp_time = 200;
-	m_beam_pattern = 0;
 
 	//死亡エフェクト
 	m_dead_eff.m_top = 0;
@@ -189,44 +188,38 @@ void CObjBoss::Action()
 		{
 			int count = 0;
 
-			//攻撃パターン決定
-			srand(time(NULL));
-			m_beam_pattern = rand() % 4;
-
-			if (m_beam_pattern <= 2)
+			//どこかの星に主人公が接触していた場合、そこにワープ
+			for (int i = 0; i <= 4; i++)
 			{
-				//どこかの星に主人公が接触していた場合、そこにワープ
-				for (int i = 0; i <= 4; i++)
+				if (g_contact_star_f[i] == true)
 				{
-					if (g_contact_star_f[i] == true)
-					{
-						Audio::Start(17); //ワープ音
-						m_px = g_star_x[i] - 20;
-						m_py = g_star_y[i] - 20;
-						break;
-					}
-					count++;
+					Audio::Start(17); //ワープ音
+					m_px = g_star_x[i] - 20;
+					m_py = g_star_y[i] - 20;
+					break;
 				}
-
-				//どの星にも接触していなかった場合はランダムにワープ
-				if (count == 5)
-				{
-					srand(time(NULL));
-					//マップのランダム処理の初期化
-					m_rand = rand() % 5;
-
-					if (m_rand <= 4)
-					{
-						Audio::Start(17); //ワープ音
-						m_px = g_star_x[m_rand] - 20;
-						m_py = g_star_y[m_rand] - 20;
-					}
-				}
+				count++;
 			}
-			else if (m_beam_pattern == 3)
+
+			//どの星にも接触していなかった場合はランダムにワープ
+			if (count == 5)
 			{
+				srand(time(NULL));
+				//マップのランダム処理の初期化
+				m_rand = rand() % 6;
+
+				if (m_rand <= 4)
+				{
+					Audio::Start(17); //ワープ音
+					m_px = g_star_x[m_rand] - 20;
+					m_py = g_star_y[m_rand] - 20;
+				}
+				else if (m_rand == 5)
 				{
 					m_beam_f = true;
+					hit->SetInvincibility(true);
+					g_boss_d_flag = false;
+					m_alpha = 0.0f;
 				}
 			}
 		}
@@ -256,7 +249,6 @@ void CObjBoss::Action()
 					//攻撃パターン決定
 					srand(time(NULL));
 					m_attack_pattern = rand() % 2;
-					//m_attack_pattern = 1;
 
 					CObjSnake* snake = (CObjSnake*)Objs::GetObj(OBJ_SNAKE);
 
@@ -302,36 +294,59 @@ void CObjBoss::Action()
 							if (m_snake_c == 20)
 								break;
 						}
-					}
-				}
-
-				//毒弾幕
-				if (m_attack_pattern == 1)
-				{
-					m_imposition_t = 0;
-					if (count <= 3)
-					{
-						//毒弾丸18発同時発射
-						for (int i = 0; i < 360; i += 18)
-						{
-							CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
-							Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
-						} 
-						count++;
-					}
-					if (count == 3)
-					{
 						m_attack_f = false;
-						count = 0;
 					}
+
+					//毒弾幕
+					if (m_attack_pattern == 1)
+					{
+						m_imposition_t = 0;
+
+						if (count <= 3)
+						{
+							if (count == 0)
+							{
+								//毒弾丸20発同時発射
+								for (int i = 0; i < 360; i += 18)
+								{
+									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+								}
+							}
+							else if (count == 1)
+							{
+								//毒弾丸20発同時発射
+								for (int i = 0; i < 360; i += 18)
+								{
+									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+								}
+							}
+							else if (count == 2)
+							{
+								//毒弾丸20発同時発射
+								for (int i = 0; i < 360; i += 18)
+								{
+									CObjPoison* poison = new CObjPoison(m_px + 55, m_py + 55, i, 4.0f);//オブジェクト作成
+									Objs::InsertObj(poison, OBJ_POISON, 11);//マネージャに登録
+								}
+							}
+							count++;
+						}
+						//3回発射で終了
+						if (count == 3)
+						{
+							m_attack_f = false;
+							count = 0;
+						}
+					}
+					m_attack_key_f = false;
 				}
-				m_attack_key_f = false;
 			}
 			else
 			{
 				if (beam == nullptr)
 				{
-					g_boss_d_flag = false;
 					CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 					float hx = hero->GetX();
@@ -340,13 +355,10 @@ void CObjBoss::Action()
 					//ビームオブジェクト作成
 					CObjBeam* beam = new CObjBeam(hx - 135 - pb->GetScrollx(), 275);//オブジェクト作成
 					Objs::InsertObj(beam, OBJ_BEAM, 11);//マネージャに登録
-
-					m_px = g_star_x[m_rand] - 20;
-					m_py = g_star_y[m_rand] - 20;
 				}
-				hit->SetInvincibility(true);
-				m_alpha = 0.0f;
+
 				m_beam_f = false;
+				m_attack_f = false;
 				m_imposition_t = 0;
 			}
 		}
@@ -356,11 +368,14 @@ void CObjBoss::Action()
 		}
 	}
 
-	if (beam == nullptr)
+	if (m_beam_f == false)
 	{
-		g_boss_d_flag = true;
-		hit->SetInvincibility(false);
-		m_alpha = 1.0f;
+		if (beam == nullptr)
+		{
+			g_boss_d_flag = true;
+			hit->SetInvincibility(false);
+			m_alpha = 1.0f;
+		}
 	}
 
 	//主人公とBLOCK系統との当たり判定
@@ -555,6 +570,7 @@ void CObjBoss::Action()
 			g_Earth_BossKill = true;
 			g_dead_flag = true;
 			g_move_stop_flag = true;
+			g_last_key_f = true;
 		}
 	}
 	//HPが０以下でエフェクト開始

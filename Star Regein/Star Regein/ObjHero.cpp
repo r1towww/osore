@@ -14,6 +14,7 @@ using namespace GameL;
 float g_posture;
 int g_skill = NoSkill;
 int g_attack_power = 1;
+bool g_last_key_f = false;//ボス討伐後の主人公制御
 
 CObjHero::CObjHero(float x, float y)
 {//オブジェ作成時に渡されたx,y座標をメンバ変数に代入
@@ -64,7 +65,7 @@ void CObjHero::Init()
 	//無敵フラグ初期化
 	m_invincible_flag = false;
 	//無敵時間初期化
-	m_time = 100;
+	m_time = 70;
 
 	//透明度初期化
 	m_alpha = ALPHAORIGIN;
@@ -183,7 +184,7 @@ void CObjHero::Action()
 	//ステージクリアの情報を持ってくる
 	CObjStageClear* objclear = (CObjStageClear*)Objs::GetObj(OBJ_STAGECLEAR);
 	//チュートリアルフラグ、操作制御用フラグが立っていないとき動くようにする
-	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr || g_Earth_BossKill == true)
+	if (g_tutorial_flag == true || g_move_stop_flag == true || objclear != nullptr || g_last_key_f == true)
 	{
 		m_vx = 0.0f;
 		m_vy = 0.0f;
@@ -192,32 +193,6 @@ void CObjHero::Action()
 	//移動ベクトルの破棄
 	m_vx = 0.0f;
 	m_vy = 0.0f;
-
-		////デバック用
-		//if (Input::GetVKey('L'))
-		//{
-		//	g_hp -= 1.0f;
-		//}
-		////デバック用
-		//if (Input::GetVKey('K'))
-		//{
-		//	g_hp += 1.0f;
-		//}
-		////デバック用
-		//if (Input::GetVKey('J'))
-		//{
-		//	g_mp += 1.0f;
-		//}
-		//if (Input::GetVKey('W'))
-		//{
-		//	//オブジェクト作成
-		//	CObjStageClear* objs = new CObjStageClear();
-		//	Objs::InsertObj(objs, OBJ_STAGECLEAR, 130);
-		//}
-		//if (Input::GetVKey('T'))
-		//{
-		//	g_mp -= 1.0f;
-		//}
 
 		//移動系統情報--------------------------------------------------
 
@@ -262,7 +237,7 @@ void CObjHero::Action()
 	//通常攻撃情報---------------------------------------------------
 
 	//Zキーが入力された場合	
-	if (Input::GetVKey('Z') && g_Earth_BossKill == false)
+	if (Input::GetVKey('Z') && g_last_key_f == false)
 	{
 		if (m_a_flag == true)
 		{
@@ -389,7 +364,7 @@ void CObjHero::Action()
 	}
 
 	//Xキーが入力された場合、スキルを使用
-	if (Input::GetVKey('X') && g_Earth_BossKill ==false)
+	if (Input::GetVKey('X') && g_last_key_f ==false)
 	{
 		if (m_key_f == true)
 		{
@@ -479,48 +454,7 @@ void CObjHero::Action()
 						m_se_f = false;
 					}
 
-					//回復エフェクト描画
-					if (m_heal_eff_f == true)
-					{
-						//エフェクト用画像の切り取り
-						RECT_F ani_heal[15] =
-						{
-							{ 0,   0, 192, 192 },
-							{ 0, 192, 384, 192 },
-							{ 0, 384, 576, 192 },
-							{ 0, 576, 768, 192 },
-							{ 0, 768, 960, 192 },
-							{ 192,   0, 192, 384 },
-							{ 192, 192, 384, 384 },
-							{ 192, 384, 576, 384 },
-							{ 192, 576, 768, 384 },
-							{ 192, 768, 960, 384 },
-							{ 384,   0, 192, 576 },
-							{ 384, 192, 384, 576 },
-							{ 384, 384, 576, 576 },
-							{ 384, 576, 768, 576 },
-							{ 384, 768, 960, 576 },
-						};
-
-						//アニメーションのコマ間隔制御
-						if (m_heal_time > 1)	//タイムが１より大きい場合
-						{
-							m_heal_ani++;		//アニメーションのコマを1つ進める
-							m_heal_time = 0;	//タイムを0に戻す
-
-							m_ani_heal = ani_heal[m_heal_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
-						}
-						else	//それ以外の場合
-						{
-							m_heal_time++;		//タイムをプラス
-						}
-						//画像最後まで進んだら、0番目に戻す
-						if (m_heal_ani == 14)
-						{
-							m_heal_time = 0;
-							m_heal_ani = 0;
-						}
-					}
+					
 
 				}
 			}
@@ -533,6 +467,49 @@ void CObjHero::Action()
 		{
 			m_se_f = true;
 			m_heal_eff_f = false;
+		}
+	}
+
+	//回復エフェクト描画
+	if (m_heal_eff_f == true)
+	{
+		//エフェクト用画像の切り取り
+		RECT_F ani_heal[15] =
+		{
+			{ 0,   0, 192, 192 },
+			{ 0, 192, 384, 192 },
+			{ 0, 384, 576, 192 },
+			{ 0, 576, 768, 192 },
+			{ 0, 768, 960, 192 },
+			{ 192,   0, 192, 384 },
+			{ 192, 192, 384, 384 },
+			{ 192, 384, 576, 384 },
+			{ 192, 576, 768, 384 },
+			{ 192, 768, 960, 384 },
+			{ 384,   0, 192, 576 },
+			{ 384, 192, 384, 576 },
+			{ 384, 384, 576, 576 },
+			{ 384, 576, 768, 576 },
+			{ 384, 768, 960, 576 },
+		};
+
+		//アニメーションのコマ間隔制御
+		if (m_heal_time > 1)	//タイムが１より大きい場合
+		{
+			m_heal_ani++;		//アニメーションのコマを1つ進める
+			m_heal_time = 0;	//タイムを0に戻す
+
+			m_ani_heal = ani_heal[m_heal_ani];//アニメーションのRECT配列からm_ani番目のRECT情報取得
+		}
+		else	//それ以外の場合
+		{
+			m_heal_time++;		//タイムをプラス
+		}
+		//画像最後まで進んだら、0番目に戻す
+		if (m_heal_ani == 14)
+		{
+			m_heal_time = 0;
+			m_heal_ani = 0;
 		}
 	}
 
@@ -717,13 +694,22 @@ void CObjHero::Action()
 			if (hit->CheckObjNameHit(OBJ_HOMING_HEART) != nullptr)
 				g_mp -= 25.0f;
 
-				//ダメージ音を鳴らす
-				Audio::Start(5);
-				g_no_damage = true;	//ノーダメージフラグをオンにする
+			//ボスのビームに当たった場合体力5ゲージ減少
+			if (hit->CheckObjNameHit(OBJ_BEAM) != nullptr)
+			{
+				g_hp -= 50.0f;
+			}
+			else
+			{
 				g_hp -= 10.0f;
-				m_f = true;
-				m_key_f = true;
-				m_invincible_flag = true;
+			}
+
+			//ダメージ音を鳴らす
+			Audio::Start(5);
+			g_no_damage = true;	//ノーダメージフラグをオンにする
+			m_f = true;
+			m_key_f = true;
+			m_invincible_flag = true;
 			}
 		}
 
@@ -763,6 +749,8 @@ void CObjHero::Action()
 			m_burn_f = false;
 		}
 	}
+
+
 
 	//毒弾と当たった場合毒状態を付与
 	if (hit->CheckObjNameHit(OBJ_POISON) != nullptr)
@@ -862,7 +850,7 @@ void CObjHero::Action()
 		m_invincible_flag = false;
 		m_alpha = ALPHAORIGIN;
 
-		m_time = 100;
+		m_time = 70;
 	}
 
 	//移動アニメーション用
@@ -1060,8 +1048,8 @@ void CObjHero::Draw()
 		//エフェクト用表示位置の設定
 		dst.m_top = 0.0f + m_py;	//描画に対してスクロールの影響を加える
 		dst.m_left = 0.0f + m_px;
-		dst.m_right = 94.0f + m_px;
-		dst.m_bottom = 94.0f + m_py;
+		dst.m_right = 120.0f + m_px;
+		dst.m_bottom = 120.0f + m_py;
 		//描画
 		Draw::Draw(90, &m_ani_heal, &dst, c, 90.0f);
 	}
