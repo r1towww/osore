@@ -183,11 +183,13 @@ typedef enum Rank
 	S,
 }Rank;
 
+extern int   g_StarCount;	//星を数える変数
+extern float g_posture; //主人公の向き
+
+//各キャラ位置管理--------------------------
 extern float g_stage_px;  //ステージ選択時の位置X
 extern float g_stage_py;  //ステージ選択時の位置Y
 
-extern int   g_StarCount;	//星を数える変数
-extern float g_posture; //主人公の向き
 extern float* g_cow_x[20];//全ての牛のX位置を把握する
 extern float* g_cow_y[20];//全ての牛のY位置を把握する
 extern float* g_twinsblue_x[20];//全ての双子（青）のX位置を把握する
@@ -211,21 +213,25 @@ extern float* g_blackhole_x[10];	//ブラックホールのX座標を把握する
 extern float* g_blackhole_y[10];	//ブラックホールのY座標を把握する
 extern float* g_whitehole_x[10];	//ホワイトホールのX座標を把握する
 extern float* g_whitehole_y[10];	//ホワイトホールのY座標を把握する
+
 extern int    g_blackhole_cnt;		//ブラックホールのカウント用
 extern int    g_whitehole_cnt;
+
+extern bool g_gemini_move;//双子座ブラックホール移動
+
+//主人公ステータス管理-------------------
 extern float  g_hp;     //今のＨＰ
 extern float  g_max_hp; //最大ＨＰ
 extern float  g_mp;     //今のＭＰ
 extern float  g_max_mp; //最大ＭＰ
 extern int    g_attack_power;	//主人公の攻撃力
 
-
 extern bool g_key_flag;	//キー入力制御フラグ
-extern bool g_gemini_move;//双子座ブラックホール移動
 
-extern int g_count;//ボスイベント回数制御
+extern int g_stage;		   //今いるステージの値
+extern int g_skill;		   //各星座スキルの値
 
-
+//ミニマップ用敵生存確認------------------
 extern bool g_cow_d_flag[20];//牛削除フラグ
 extern bool g_blue_d_flag[20];//双子（青）削除フラグ
 extern bool g_red_d_flag[20];//双子（赤）削除フラグ
@@ -235,20 +241,7 @@ extern bool g_leo_d_flag[60];//獅子削除フラグ
 extern bool g_boss_d_flag;//ボス削除フラグ
 extern bool g_snake_d_flag[20];//蛇削除フラグ
 
-extern int g_asteroid;		//マップのランダム化用変数（小惑星）
-extern int g_block;			//マップのランダム化用変数（隕石ブロック）
-
-extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
-extern int g_mapsize;	   //マップのサイズ
-extern int g_stage;		   //今いるステージの値
-extern int g_skill;		   //各星座スキルの値
-
-extern bool g_gemini_check;       //サブ機の生成の為の値
-extern bool g_gemini_bullet_check;//双子座スキル弾丸
-extern bool g_geminiattck_check;  //双子座スキル弾丸制御
-extern bool g_gemini_check;       //サブ機の弾丸生成の為の値
-extern bool g_skill_item_flag;    //スキルアイテム所持フラグ
-
+//敵スタン管理-----------------------
 extern float  g_Leo_cnt;//獅子座スタンカウント
 extern bool g_stan_cow_flag[20];//スタン牛個別認識用
 extern bool g_stan_blue_flag[20];//スタン双子（青）個別認識用
@@ -259,6 +252,19 @@ extern bool g_stan_leo_flag[60];//スタン獅子個別認識用
 extern bool g_stan_boss_flag;//スタンボス用
 extern bool g_stan_snake_flag[20];//スタン蛇個別認識用
 extern bool g_move_libra_flag[20];//天秤座動かすためのもの
+
+extern int g_asteroid;		//マップのランダム化用変数（小惑星）
+extern int g_block;			//マップのランダム化用変数（隕石ブロック）
+
+extern int g_map[MAPSIZE][MAPSIZE]; //ミニマップ情報
+extern int g_mapsize;	   //マップのサイズ
+
+//スキル関連--------------------
+extern bool g_gemini_check;       //サブ機の生成の為の値
+extern bool g_gemini_bullet_check;//双子座スキル弾丸
+extern bool g_geminiattck_check;  //双子座スキル弾丸制御
+extern bool g_gemini_check;       //サブ機の弾丸生成の為の値
+extern bool g_skill_item_flag;    //スキルアイテム所持フラグ
 
 //各星座の取得情報
 extern bool g_stage_clear;
@@ -283,6 +289,7 @@ extern bool g_Gemini_clear;	//双子座
 extern bool g_Virgo_clear;	//乙女座
 extern bool g_Leo_clear;	//獅子座
 
+//チュートリアル制御
 extern bool g_tutorial_flag;//チュートリアルの表示制御用
 extern bool g_tutorial_next_flag;//チュートリアルのページ制御用
 extern bool g_move_stop_flag;//主人公の操作制御用フラグ
@@ -301,14 +308,18 @@ extern float g_enemy_cnt;	//敵の総数のカウント用
 extern float g_kill_cnt;	//敵を倒した数
 extern bool g_no_damage;	//攻撃を受けたかどうかのフラグ
 
-extern int g_cow_id[20];//牛の識別ID
-
 extern bool g_hero_hit;
 
+//ボス管理----------------
 extern bool g_Boss_Spawn;
 extern bool g_dead_flag;  //ボスが死んだかどうかのフラグ
 extern bool g_Voice_flag; //ボス撃破後の天の声フラグ
 extern bool g_End_flag;   //天の声が終わったかどうかのフラグ
+extern bool g_last_key_f;//ボス討伐後の主人公制御
+
+extern float g_boss_hp;//ボスHP
+
+extern int g_count;//ボスイベント回数制御
 /*実績達成状況*/
 //新しく実績を解除したとき----------
 extern bool g_new_Performance;
@@ -336,15 +347,12 @@ extern int g_Leo_Grade;
 //シークレット系
 extern bool g_Tutorial_Clear; //チュートリアルクリア
 extern bool g_Earth_BossKill; //ラスボスを倒した
-extern bool g_last_key_f;//ボス討伐後の主人公制御
 extern bool g_All_Skill_Get;  //すべてのスキルを獲得
 extern int g_TRank;		//ランク管理用
 extern int g_LiRank;		//ランク管理用
 extern int g_GRank;		//ランク管理用
 extern int g_VRank;		//ランク管理用
 extern int g_LeRank;		//ランク管理用
-
-extern float g_boss_hp;//ボスHP
 
 //タイムカウント用
 extern int g_second;		//秒
