@@ -63,6 +63,7 @@ private:
 	int m_time;//–³“GŠÔ‘ª’è
 	int m_key_f;//–³“GŠÔs“®§Œä
 	int m_imposition_t;//UŒ‚”­“®ŠÔ’²®—p
+	int m_ctime;
 	int count;
 	int e_time;//“Gs“®ŠÔ
 	int enemy_move;//“GˆÚ“®
