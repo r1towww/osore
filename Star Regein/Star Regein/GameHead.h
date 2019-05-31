@@ -336,6 +336,7 @@ extern int g_Leo_Grade;
 //シークレット系
 extern bool g_Tutorial_Clear; //チュートリアルクリア
 extern bool g_Earth_BossKill; //ラスボスを倒した
+extern bool g_last_key_f;//ボス討伐後の主人公制御
 extern bool g_All_Skill_Get;  //すべてのスキルを獲得
 extern int g_TRank;		//ランク管理用
 extern int g_LiRank;		//ランク管理用
